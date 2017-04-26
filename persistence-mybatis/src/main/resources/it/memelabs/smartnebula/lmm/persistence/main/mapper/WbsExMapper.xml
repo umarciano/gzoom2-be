@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.memelabs.smartnebula.lmm.persistence.main.mapper.WbsExMapper">
+
+
+    <resultMap id="BaseResultMap" type="it.memelabs.smartnebula.lmm.persistence.main.dto.WbsEx"
+               extends="it.memelabs.smartnebula.lmm.persistence.main.mapper.WbsMapper.BaseResultMap">
+        <association property="jobOrder" javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.JobOrder"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.JobOrderMapper.BaseResultMap"
+                     columnPrefix="j_"/>
+        <association property="constructionSite" javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.ConstructionSite"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.ConstructionSiteMapper.BaseResultMap"
+                     columnPrefix="cs_"/>
+    </resultMap>
+
+    <sql id="Min_Alias_Column_List">
+        ${tableAlias}code AS ${fieldAlias}code, 
+        ${tableAlias}description AS ${fieldAlias}description 
+    </sql>
+
+    <select id="selectByPrimaryKeyEx" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select        
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.WbsMapper.Alias_Column_List">
+            <property name="tableAlias" value="w."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.ConstructionSiteMapper.Alias_Column_List">
+            <property name="tableAlias" value="cs."/>
+            <property name="fieldAlias" value="cs_"/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.JobOrderMapper.Alias_Column_List">
+            <property name="tableAlias" value="j."/>
+            <property name="fieldAlias" value="j_"/>
+        </include>
+        from wbs w
+        left join construction_site cs on w.construction_site_id = cs.id
+        left join job_order j on w.job_order_id = j.id
+        where w.id = #{id,jdbcType=BIGINT}
+    </select>
+    
+    <select id="selectByFilterWithRowboundsEx"
+            parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.ConstructionSiteExExample" resultMap="BaseResultMap">
+        select * from (
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.WbsMapper.Alias_Column_List">
+            <property name="tableAlias" value="w."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.ConstructionSiteMapper.Alias_Column_List">
+            <property name="tableAlias" value="cs."/>
+            <property name="fieldAlias" value="cs_"/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.JobOrderMapper.Alias_Column_List">
+            <property name="tableAlias" value="j."/>
+            <property name="fieldAlias" value="j_"/>
+        </include>
+        
+        from wbs w
+        left join construction_site cs on w.construction_site_id = cs.id
+        left join job_order j on w.job_order_id = j.id
+        ) t
+        <if test="_parameter != null">
+            <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.WbsMapper.Example_Where_Clause"/>
+        </if> 
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>        
+    </select>
+    
+    <select id="countByFilterEx" resultType="java.lang.Integer">
+        select count(*) from (
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.WbsMapper.Alias_Column_List">
+            <property name="tableAlias" value="w."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.ConstructionSiteMapper.Alias_Column_List">
+            <property name="tableAlias" value="cs."/>
+            <property name="fieldAlias" value="cs_"/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.JobOrderMapper.Alias_Column_List">
+            <property name="tableAlias" value="j."/>
+            <property name="fieldAlias" value="j_"/>
+        </include>
+        
+        from wbs w
+        left join construction_site cs on w.construction_site_id = cs.id
+        left join job_order j on w.job_order_id = j.id
+        ) t
+        <if test="_parameter != null">
+            <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.WbsMapper.Example_Where_Clause"/>
+        </if> 
+    </select>
+        
+</mapper>

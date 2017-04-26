@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.memelabs.smartnebula.lmm.persistence.main.mapper.AntimafiaProcessPhaseTypeExMapper">
+
+    <sql id="Min_Alias_Column_List">
+		${tableAlias}description AS ${fieldAlias}description,
+		${tableAlias}name AS ${fieldAlias}name,
+		${tableAlias}ordinal AS ${fieldAlias}ordinal,
+		${tableAlias}label_start_date AS ${fieldAlias}label_start_date,
+		${tableAlias}label_end_date AS ${fieldAlias}label_end_date,
+		${tableAlias}label_protocol_number AS ${fieldAlias}label_protocol_number
+	</sql>
+
+</mapper>

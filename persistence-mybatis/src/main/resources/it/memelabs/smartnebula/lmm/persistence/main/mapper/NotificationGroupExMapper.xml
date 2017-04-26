@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="it.memelabs.smartnebula.lmm.persistence.main.mapper.NotificationGroupExMapper">
+
+    <resultMap id="BaseResultMap" type="it.memelabs.smartnebula.lmm.persistence.main.dto.NotificationGroupEx"
+               extends="it.memelabs.smartnebula.lmm.persistence.main.mapper.NotificationGroupMapper.BaseResultMap">
+        <collection property="users" javaType="ArrayList" column="id"
+                    ofType="it.memelabs.smartnebula.lmm.persistence.main.dto.UserLogin"
+                    select="selectUserByNotificationGroup"/>
+        <collection property="events" javaType="ArrayList" column="id"
+                    ofType="it.memelabs.smartnebula.lmm.persistence.main.dto.NotificationEvent"
+                    select="it.memelabs.smartnebula.lmm.persistence.main.mapper.NotificationEventExMapper.selectByNotificationGroup"/>
+    </resultMap>
+
+    <select id="selectUserByNotificationGroup"
+            resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.UserLoginPersistentMapper.BaseResultMap"
+            parameterType="long">
+        SELECT
+        <include
+                refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.UserLoginPersistentMapper.Base_Column_List"/>
+        FROM user_login
+        INNER JOIN notification_group_user_assoc
+        ON notification_group_user_assoc.user_id = user_login.id
+        WHERE notification_group_user_assoc.notification_group_id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByPrimaryKeyEx"
+            resultMap="BaseResultMap"
+            parameterType="java.lang.Long">
+        select
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.NotificationGroupMapper.Base_Column_List"/>
+        from notification_group
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+
+    <select id="selectExByExample" resultMap="BaseResultMap"
+            parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.NotificationGroupExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.NotificationGroupMapper.Base_Column_List"/>
+        from notification_group
+        <if test="_parameter != null">
+            <include
+                    refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.NotificationGroupMapper.Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select resultMap="BaseResultMap"
+            parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.NotificationGroupExample"
+            id="selectExByExampleWithRowbounds">
+
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.NotificationGroupMapper.Base_Column_List"/>
+        from notification_group
+        <if test="_parameter != null">
+            <include
+                    refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.NotificationGroupMapper.Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <insert id="insertUserAssoc"
+            useGeneratedKeys="false">
+        INSERT INTO notification_group_user_assoc
+        (
+        user_id, notification_group_id, owner_node_id
+        )
+        VALUES
+        <foreach collection="users" item="model" separator=",">
+            (
+            #{model}, #{notificationGroupId}, #{ownerNodeId}
+            )
+        </foreach>
+    </insert>
+
+
+    <delete id="deleteUserAssocByNotificationGroupId" parameterType="long">
+        DELETE FROM notification_group_user_assoc WHERE notification_group_id=#{notificationGroupId,jdbcType=BIGINT}
+    </delete>
+
+    <select id="selectRecipients" resultType="java.lang.String">
+        select distinct U.email
+        from user_login U
+        inner join notification_group_user_assoc ASS on ASS.user_id=U.id
+        inner join notification_event E on ASS.notification_group_id=E.notification_group_id
+        inner join notification_group N on ASS.notification_group_id=N.id
+        where E.enabled=true
+        <if test="eventId!=null">
+            and E.event_id= #{eventId,jdbcType=VARCHAR}
+        </if>
+        <if test="notificationGroupId!=null">
+            and N.id= #{notificationGroupId,jdbcType=BIGINT}
+        </if>
+        <if test="ownerNodeId!=null">
+            and N.owner_node_id= #{ownerNodeId,jdbcType=BIGINT}
+        </if>
+    </select>
+</mapper>

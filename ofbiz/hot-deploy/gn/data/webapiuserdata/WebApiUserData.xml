@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+    <!-- ========== Webapi admin ============ -->
+    <Party partyId="USER_WEBAPIADMIN" partyTypeId="PERSON"/>
+    <Person partyId="USER_WEBAPIADMIN" lastName="web API" firstName="Amministratore "/>
+    <UserLogin userLoginId="webapiadmin" partyId="USER_WEBAPIADMIN"
+               currentPassword="{SHA}10119e246afc3eb138b2e2f5d1174b4eb83a4d49" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="webapiadmin" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="USER_WEBAPIADMIN" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="webapiadmin" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="cm_webapiadmin" contactMechTypeId="EMAIL_ADDRESS" infoString="support@greennebula.it"/>
+    <PartyContactMech partyId="USER_WEBAPIADMIN" contactMechId="cm_webapiadmin" fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="USER_WEBAPIADMIN" contactMechId="cm_webapiadmin"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="USER_WEBAPIADMIN" partyIdTo="GN_MEMELABS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (webapiadmin) impiegato in azienda (Memelabs)"/>
+
+    <!-- ========== Magnis srl ============ -->
+
+    <!--Company -->
+    <Party partyId="GN_MAGNIS" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="Magnis s.r.l."/>
+    <PartyGroup partyId="GN_MAGNIS" groupName="Magnis s.r.l."/>
+    <GnPartyNode partyId="GN_MAGNIS" nodeKey="GN_MAGNIS@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY"
+                 taxIdentificationNumber="01324320520" VATnumber="01324320520"
+                 name="Magnis s.r.l."/>
+    <PartyRole partyId="GN_MAGNIS" roleTypeId="GN_COMPANY"/>
+    <PartyRole partyId="GN_MAGNIS" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_MAGNIS" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <PartyAttribute partyId="GN_MAGNIS" attrName="ROOT_PUBLISH" attrValue="N"/>
+    <PartyAttribute partyId="GN_MAGNIS" attrName="PRIVATE_AUTH_PUBLISH" attrValue="Y"/>
+
+    <!--Company Base (registered office) -->
+    <Party partyId="GN_MAGNIS_SI" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="Magnis srl - Poggibonsi (SI)"/>
+    <PartyGroup partyId="GN_MAGNIS_SI" groupName="Magnis srl - Poggibonsi (SI)"/>
+    <GnPartyNode partyId="GN_MAGNIS_SI" nodeKey="GN_MAGNIS_SI@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber="138455"
+                 registeredOffice="Y" authorizationOwner="N"/>
+    <PartyRole partyId="GN_MAGNIS_SI" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_MAGNIS_SI" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_MAGNIS_SI" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_MAGNIS_SI" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_MAGNIS_SI"
+                      contactMechId="CM_MAGNIS_SI"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_MAGNIS_SI"
+                   toName="Magnis srl - Poggibonsi (SI)"
+                   address1="Via Salceto"
+                   streetNumber="87"
+                   village=""
+                   city="Poggibonsi"
+                   postalCode="53036"
+                   postalCodeGeoId="IT-GN-CAP-53036"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-TOSCANA"
+                   stateProvinceGeoId="IT-GN-052"
+                   municipalityGeoId="IT-GN-052022"/>
+
+    <!-- web API user -->
+    <Party partyId="USER_MAGNISWEBAPI" partyTypeId="PERSON"/>
+    <Person partyId="USER_MAGNISWEBAPI" lastName="utente web API" firstName="Magnis - "/>
+    <UserLogin userLoginId="magniswebapi" partyId="USER_MAGNISWEBAPI"
+               currentPassword="{SHA}5c60f1d6697bdcd74ef50bd7ebb7a3097237491e" originId="GN_AUTH_ORG_APP"/>
+    <GnUserLoginSource userLoginId="magniswebapi" enumId="GN_LOG_SRC_WEB_API"/>
+    <PartyRole partyId="USER_MAGNISWEBAPI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="magniswebapi" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="cm_magnis_gn_webapi" contactMechTypeId="EMAIL_ADDRESS" infoString="rossetti@magnis.it"/>
+    <PartyContactMech partyId="USER_MAGNISWEBAPI" contactMechId="cm_magnis_gn_webapi" fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="USER_MAGNISWEBAPI" contactMechId="cm_magnis_gn_webapi"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <!-- relationships -->
+    <PartyRelationship partyIdFrom="USER_MAGNISWEBAPI" partyIdTo="GN_MAGNIS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (magniswebapi) impiegato in azienda (Magnis)"/>
+
+    <PartyRelationship partyIdFrom="GN_MAGNIS" partyIdTo="GN_MAGNIS_SI"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: Magnis detiene Magnis Poggibonsi"/>
+    <PartyRelationship partyIdFrom="GN_MAGNIS_SI" partyIdTo="GN_MAGNIS"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: Magnis Poggibonsi appartiene a Magnis"/>
+
+    <!-- ========== Studio Software Sgaravatti s.a.s. ============ -->
+
+    <!--Company -->
+    <Party partyId="GN_SGARAVATTI" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="Studio Software Sgaravatti s.a.s."/>
+    <PartyGroup partyId="GN_SGARAVATTI" groupName="Studio Software Sgaravatti s.a.s."/>
+    <GnPartyNode partyId="GN_SGARAVATTI" nodeKey="GN_SGARAVATTI@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY"
+                 taxIdentificationNumber="02686480282" VATnumber="02686480282"
+                 name="Studio Software Sgaravatti s.a.s."/>
+    <PartyRole partyId="GN_SGARAVATTI" roleTypeId="GN_COMPANY"/>
+    <PartyRole partyId="GN_SGARAVATTI" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_SGARAVATTI" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <PartyAttribute partyId="GN_SGARAVATTI" attrName="ROOT_PUBLISH" attrValue="N"/>
+    <PartyAttribute partyId="GN_SGARAVATTI" attrName="PRIVATE_AUTH_PUBLISH" attrValue="Y"/>
+
+    <!--Company Base (registered office) -->
+    <Party partyId="GN_SGARAVATTI_PN" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="Studio Software Sgaravatti s.a.s. - San Vito al Tagliamento (PN)"/>
+    <PartyGroup partyId="GN_SGARAVATTI_PN" groupName="Studio Software Sgaravatti s.a.s. - San Vito al Tagliamento (PN)"/>
+    <GnPartyNode partyId="GN_SGARAVATTI_PN" nodeKey="GN_SGARAVATTI_PN@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber=""
+                 registeredOffice="Y" authorizationOwner="N"/>
+    <PartyRole partyId="GN_SGARAVATTI_PN" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_SGARAVATTI_PN" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_SGARAVATTI_PN" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_SGARAVATTI_PN" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_SGARAVATTI_PN"
+                      contactMechId="CM_SGARAVATTI_PN"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_SGARAVATTI_PN"
+                   toName="Studio Software Sgaravatti s.a.s. - San Vito al Tagliamento (PN)"
+                   address1="Via Cesarini"
+                   streetNumber="16"
+                   village=""
+                   city="San Vito al Tagliamento"
+                   postalCode="33078"
+                   postalCodeGeoId="IT-GN-CAP-33078"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-FRIULI"
+                   stateProvinceGeoId="IT-GN-093"
+                   municipalityGeoId="IT-GN-093041"/>
+
+    <!-- web API user -->
+    <Party partyId="USER_SGARAVATTIWAPI" partyTypeId="PERSON"/>
+    <Person partyId="USER_SGARAVATTIWAPI" lastName="utente web API" firstName="Studio Sgaravatti - "/>
+    <UserLogin userLoginId="sgaravattiwapi" partyId="USER_SGARAVATTIWAPI"
+               currentPassword="{SHA}ee05ec769f9fdfee1b3c318502b05bf8902c1a12" originId="GN_AUTH_ORG_APP"
+               loginSourceId="GN_LOG_SRC_WEB_API"/>
+    <GnUserLoginSource userLoginId="sgaravattiwapi" enumId="GN_LOG_SRC_WEB_API"/>
+    <PartyRole partyId="USER_SGARAVATTIWAPI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="sgaravattiwapi" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="cm_sgaravatti_wapi" contactMechTypeId="EMAIL_ADDRESS" infoString="sgaravatti@studiosgaravatti.com"/>
+    <PartyContactMech partyId="USER_SGARAVATTIWAPI" contactMechId="cm_sgaravatti_wapi" fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="USER_SGARAVATTIWAPI" contactMechId="cm_sgaravatti_wapi"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <!-- relationships -->
+    <PartyRelationship partyIdFrom="USER_SGARAVATTIWAPI" partyIdTo="GN_SGARAVATTI"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (sgaravattiwapi) impiegato in azienda (Sgaravatti)"/>
+
+    <PartyRelationship partyIdFrom="GN_SGARAVATTI" partyIdTo="GN_SGARAVATTI_PN"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: Sgaravatti detiene Sgaravatti Pordenone"/>
+    <PartyRelationship partyIdFrom="GN_SGARAVATTI_PN" partyIdTo="GN_SGARAVATTI"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: Sgaravatti Pordenone appartiene a Sgaravatti"/>
+
+    <!-- ========== Ambiente.it srl ============ -->
+
+    <!--Company -->
+    <Party partyId="GN_AMBIENTEIT" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="Ambiente.it s.r.l."/>
+    <PartyGroup partyId="GN_AMBIENTEIT" groupName="Ambiente.it s.r.l."/>
+    <GnPartyNode partyId="GN_AMBIENTEIT" nodeKey="GN_AMBIENTEIT@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY"
+                 taxIdentificationNumber="02224150272" VATnumber="02224150272"
+                 name="Ambiente.it s.r.l."/>
+    <PartyRole partyId="GN_AMBIENTEIT" roleTypeId="GN_COMPANY"/>
+    <PartyRole partyId="GN_AMBIENTEIT" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_AMBIENTEIT" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <PartyAttribute partyId="GN_AMBIENTEIT" attrName="ROOT_PUBLISH" attrValue="N"/>
+    <PartyAttribute partyId="GN_AMBIENTEIT" attrName="PRIVATE_AUTH_PUBLISH" attrValue="Y"/>
+
+    <!--Company Base (registered office) -->
+    <Party partyId="GN_AMBIENTEIT_PO" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="Ambiente.it srl - Poggibonsi (SI)"/>
+    <PartyGroup partyId="GN_AMBIENTEIT_PO" groupName="Ambiente.it srl - Poggibonsi (SI)"/>
+    <GnPartyNode partyId="GN_AMBIENTEIT_PO" nodeKey="GN_AMBIENTEIT_PO@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber=""
+                 registeredOffice="Y" authorizationOwner="N"/>
+    <PartyRole partyId="GN_AMBIENTEIT_PO" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_AMBIENTEIT_PO" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_AMBIENTEIT_PO" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_AMBIENTEIT_PO" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_AMBIENTEIT_PO"
+                      contactMechId="CM_AMBIENTEIT_PO"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_AMBIENTEIT_PO"
+                   toName="Ambiente.it srl - Prato"
+                   address1="Via Traversa del beccarello"
+                   streetNumber="4"
+                   village=""
+                   city="Prato"
+                   postalCode="59100"
+                   postalCodeGeoId="IT-GN-CAP-59100"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-TOSCANA"
+                   stateProvinceGeoId="IT-GN-100"
+                   municipalityGeoId="IT-GN-100005"/>
+
+    <!-- web API user -->
+    <Party partyId="USER_AMBIENTEWEBAPI" partyTypeId="PERSON"/>
+    <Person partyId="USER_AMBIENTEWEBAPI" lastName="utente web API" firstName="Ambiente.it - "/>
+    <UserLogin userLoginId="ambientewebapi" partyId="USER_AMBIENTEWEBAPI"
+               currentPassword="{SHA}82c2b10018a2de0456030efee872d4e367fc282e" originId="GN_AUTH_ORG_APP"
+               loginSourceId="GN_LOG_SRC_WEB_API"/>
+    <GnUserLoginSource userLoginId="ambientewebapi" enumId="GN_LOG_SRC_WEB_API"/>
+    <PartyRole partyId="USER_AMBIENTEWEBAPI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="ambientewebapi" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="cm_ambientewebapi" contactMechTypeId="EMAIL_ADDRESS" infoString=""/>
+    <PartyContactMech partyId="USER_AMBIENTEWEBAPI" contactMechId="cm_ambientewebapi" fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="USER_AMBIENTEWEBAPI" contactMechId="cm_ambientewebapi"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <!-- relationships -->
+    <PartyRelationship partyIdFrom="USER_AMBIENTEWEBAPI" partyIdTo="GN_AMBIENTEIT"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (ambientewebapi) impiegato in azienda (Ambiente.it)"/>
+
+    <PartyRelationship partyIdFrom="GN_AMBIENTEIT" partyIdTo="GN_AMBIENTEIT_PO"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: Ambiente.it detiene Ambiente.it Prato"/>
+    <PartyRelationship partyIdFrom="GN_AMBIENTEIT_PO" partyIdTo="GN_AMBIENTEIT"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: Ambiente.it Prato appartiene a Ambiente.it"/>
+					   
+					   
+    <!-- ================================================================================================= -->
+    <!--                                Company AMSA S.p.A.                                                -->
+    <!-- ================================================================================================= -->
+    <Party partyId="GN_AMSA" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="AMSA SPA - AZIENDA MILANESE SERVIZI AMBIENTALI"/>
+    <PartyGroup partyId="GN_AMSA" groupName="AMSA SPA - AZIENDA MILANESE SERVIZI AMBIENTALI"/>
+    <GnPartyNode partyId="GN_AMSA" nodeKey="GN_AMSA@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY"
+                 taxIdentificationNumber="05908960965" VATnumber="05908960965"
+                 name="AMSA SPA - AZIENDA MILANESE SERVIZI AMBIENTALI"/>
+    <PartyRole partyId="GN_AMSA" roleTypeId="GN_COMPANY"/>
+    <PartyRole partyId="GN_AMSA" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_AMSA" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <PartyAttribute partyId="GN_AMSA" attrName="ROOT_PUBLISH" attrValue="N"/>
+    <PartyAttribute partyId="GN_AMSA" attrName="PRIVATE_AUTH_PUBLISH" attrValue="Y"/>
+    <!-- ================================================-->
+    <!-- Main company base AMSA S.p.A. Milano            -->
+    <!-- ================================================-->
+    <Party partyId="GN_AMSA_MI" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="AMSA S.p.A. - Milano"/>
+    <PartyGroup partyId="GN_AMSA_MI" groupName="AMSA S.p.A. - Milano"/>
+    <GnPartyNode partyId="GN_AMSA_MI" nodeKey="GN_AMSA_MI@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber=""
+                 registeredOffice="Y" authorizationOwner="N"/>
+    <PartyRole partyId="GN_AMSA_MI" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_AMSA_MI" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_AMSA_MI" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_AMSA_MI" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_AMSA_MI"
+                      contactMechId="CM_AMSA_MI"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_AMSA_MI"
+                   toName="AMSA S.p.A. - Milano"
+                   address1="VIA OLGETTINA"
+                   streetNumber="25"
+                   village=""
+                   city="Milano"
+                   postalCode="20132"
+                   postalCodeGeoId="IT-GN-CAP-20132"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-LOMBARDIA"
+                   stateProvinceGeoId="IT-GN-015"
+                   municipalityGeoId="IT-GN-015146"/>
+
+    <PartyRelationship partyIdFrom="GN_AMSA" partyIdTo="GN_AMSA_MI"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: AMSA detiene AMSA Milano"/>
+    <PartyRelationship partyIdFrom="GN_AMSA_MI" partyIdTo="GN_AMSA"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: AMSA Milano appartiene a AMSA"/>
+
+    <!-- ========================= -->
+    <!--     AMSA users            -->
+    <!-- ========================= -->
+	
+    <!--user  amsauser / pw: AmsaUser -->
+    <Party partyId="U_AMSA_USER" partyTypeId="PERSON"/>
+    <Person partyId="U_AMSA_USER" lastName="AMSA" firstName="Utente "/>
+    <UserLogin userLoginId="amsauser" partyId="U_AMSA_USER"
+               currentPassword="{SHA}1068a79a36452ae7e58ab8e3131d004846764c9d" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="amsauser" enumId="GN_LOG_SRC_WEB_UI"/>
+	<GnUserLoginSource userLoginId="amsauser" enumId="GN_LOG_SRC_MOBILE"/>
+    <PartyRole partyId="U_AMSA_USER" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="amsauser" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_AMSA_USER" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="gn1demo@gmail.com"/>
+    <PartyContactMech partyId="U_AMSA_USER" contactMechId="CM_AMSA_USER"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_AMSA_USER" contactMechId="CM_AMSA_USER"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_AMSA_USER" partyIdTo="GN_AMSA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (amsauser) impiegato in azienda (AMSA)"/>	
+
+       <!-- AMSA web API users -->
+    <Party partyId="U_AMSA_WEBAPI" partyTypeId="PERSON"/>
+    <Person partyId="U_AMSA_WEBAPI" lastName="utente web API" firstName="AMSA "/>
+    <UserLogin userLoginId="amsatestwebapi" partyId="U_AMSA_WEBAPI"
+               currentPassword="{SHA}2d990b8eab37bfd73d97e2468bec6d467577f307" originId="GN_AUTH_ORG_APP"/>
+    <GnUserLoginSource userLoginId="amsatestwebapi" enumId="GN_LOG_SRC_WEB_API"/>
+    <PartyRole partyId="U_AMSA_WEBAPI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="amsatestwebapi" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="cm_amsatestwebapi" contactMechTypeId="EMAIL_ADDRESS" infoString=""/>
+    <PartyContactMech partyId="U_AMSA_WEBAPI" contactMechId="cm_amsatestwebapi" fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_AMSA_WEBAPI" contactMechId="cm_amsatestwebapi"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+							 
+    <PartyRelationship partyIdFrom="U_AMSA_WEBAPI" partyIdTo="GN_AMSA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (amsatestwebapi) impiegato in azienda (AMSA)"/>
+					   
+    <Party partyId="GN_NICA" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="Nica S.r.l."/>
+    <PartyGroup partyId="GN_NICA" groupName="Nica S.r.l."/>
+    <GnPartyNode partyId="GN_NICA" nodeKey="GN_NICA@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY"
+                 taxIdentificationNumber="05669600636" VATnumber="02732221219"
+                 name="Nica S.r.l."/>
+    <PartyRole partyId="GN_NICA" roleTypeId="GN_COMPANY"/>
+    <PartyRole partyId="GN_NICA" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_NICA" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <PartyAttribute partyId="GN_NICA" attrName="ROOT_PUBLISH" attrValue="N"/>
+    <PartyAttribute partyId="GN_NICA" attrName="PRIVATE_AUTH_PUBLISH" attrValue="Y"/>
+    <!-- ================================================-->
+    <!-- Main company base Nica S.r.l. Napoli            -->
+    <!-- ================================================-->
+    <Party partyId="GN_NICA_NA" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="Nica S.r.l. - Napoli"/>
+    <PartyGroup partyId="GN_NICA_NA" groupName="Nica S.r.l. - Napoli"/>
+    <GnPartyNode partyId="GN_NICA_NA" nodeKey="GN_NICA_NA@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber=""
+                 registeredOffice="Y" authorizationOwner="N"/>
+    <PartyRole partyId="GN_NICA_NA" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_NICA_NA" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_NICA_NA" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_NICA_NA" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_NICA_NA"
+                      contactMechId="CM_NICA_NA"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_NICA_NA"
+                   toName="Nica S.r.l. - Napoli"
+                   address1="Corso Umberto I"
+                   streetNumber="593"
+                   village=""
+                   city="Marigliano"
+                   postalCode="80034"
+                   postalCodeGeoId="IT-GN-CAP-80034"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-CAMPANIA"
+                   stateProvinceGeoId="IT-GN-063"
+                   municipalityGeoId="IT-GN-063043"/>
+
+    <PartyRelationship partyIdFrom="GN_NICA" partyIdTo="GN_NICA_NA"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: Nica detiene Nica Napoli"/>
+    <PartyRelationship partyIdFrom="GN_NICA_NA" partyIdTo="GN_NICA"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: Nica Napoli appartiene a Nica"/>
+
+    <!-- ========================= -->
+    <!--     Nica users            -->
+    <!-- ========================= -->	
+
+       <!-- Nica web API users -->
+    <Party partyId="U_NICA_WEBAPI" partyTypeId="PERSON"/>
+    <Person partyId="U_NICA_WEBAPI" lastName="utente web API" firstName="Nica "/>
+    <UserLogin userLoginId="nicatestwebapi" partyId="U_NICA_WEBAPI"
+               currentPassword="{SHA}3017fb8f180ac6a1e39c868b510ba89b3bd5fd32" originId="GN_AUTH_ORG_APP"/>
+    <GnUserLoginSource userLoginId="nicatestwebapi" enumId="GN_LOG_SRC_WEB_API"/>
+    <PartyRole partyId="U_NICA_WEBAPI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="nicatestwebapi" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="cm_nicatestwebapi" contactMechTypeId="EMAIL_ADDRESS" infoString=""/>
+    <PartyContactMech partyId="U_NICA_WEBAPI" contactMechId="cm_nicatestwebapi" fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_NICA_WEBAPI" contactMechId="cm_nicatestwebapi"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+							 
+    <PartyRelationship partyIdFrom="U_NICA_WEBAPI" partyIdTo="GN_NICA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (nicatestwebapi) impiegato in azienda (Nica)"/>					   
+
+</entity-engine-xml>

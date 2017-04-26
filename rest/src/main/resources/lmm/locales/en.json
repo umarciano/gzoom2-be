@@ -1,0 +1,27 @@
+{
+  "translations": {
+    "TIMESHEET_EVENT_ERROR_CONSTRUCTION_SITE_NOT_FOUND": "Construction Site not found",
+    "TIMESHEET_EVENT_ERROR_WBS_NOT_FOUND": "WBS not found",
+    "TIMESHEET_EVENT_ERROR_EMPLOYMENT_NOT_FOUND": "Employment not found",
+    "TIMESHEET_EVENT_ERROR_INVALID_PERSON_EMPLOYMENT_PERIOD": "Person Employment period is not valid",
+    "TIMESHEET_EVENT_ERROR_PERSON_EMPLOYMENT_NOT_AUTHORIZED": "Person Employment not authorized",
+    "TIMESHEET_EVENT_ERROR_PERSON_EMPLOYMENT_ACCIDENT_PRESENT": "An accident is present for Person Employment",
+    "TIMESHEET_EVENT_ERROR_PERSON_EMPLOYMENT_COMPANY_NOT_AUTHORIZED": "Person Employment Company not authorized",
+    "TIMESHEET_EVENT_ERROR_INVALID_EQUIPMENT_EMPLOYMENT_PERIOD": "Equipment Employment period not valid",
+    "TIMESHEET_EVENT_ERROR_EQUIPMENT_EMPLOYMENT_NOT_AUTHORIZED": "Equipment Employment not authorized",
+    "TIMESHEET_EVENT_ERROR_EQUIPMENT_EMPLOYMENT_COMPANY_NOT_AUTHORIZED": "Equipment Employment Company not authorized",
+    "TIMESHEET_EVENT_ERROR_WORK_LOG_COMPLETED": "WorkLog completed",
+    "cannot_update_construction_site_log_missing_work_log": "Cannot set Construction Site Log as 'Completed' because Work Log with same date and constructionSite not exist",
+    "cannot_update_construction_site_log_work_log_is_not_completed": "Cannot set Construction Site Log as 'Completed' because Work Log with same date and constructionSite is not completed"
+  },
+  "formats": {
+    "first-day": 1,
+    "timestamp": "lll",
+    "date-short": "MM/DD/YYYY",
+    "date-long": "MMM D YYYY",
+    "date-range-short": "%d - %d",
+    "date-range-long": "From %D to %D",
+    "date-time-short": "MM-MM-YYYY, LT",
+    "date-time-long": "MMMM D YYYY - LT"
+  }
+}

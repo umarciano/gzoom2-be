@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="it.memelabs.smartnebula.lmm.persistence.main.mapper.GeoExMapper">
+
+    <select id="selectPostalCodes"
+            resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.GeoMapper.BaseResultMap"
+            parameterType="java.lang.String">
+        select distinct
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.GeoMapper.Alias_Column_List">
+            <property name="tableAlias" value="PC."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        from geo as PC INNER JOIN geo_assoc GA ON GA.geo_id_to=PC.geo_id
+        WHERE GA.geo_id=#{municipalityId,jdbcType=VARCHAR}
+        AND PC.geo_type_id ='POSTAL_CODE' AND GA.geo_assoc_type_id = 'POSTAL_CODE'
+        ORDER BY PC.geo_name ASC
+    </select>
+
+    <select id="selectExByExample" parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.GeoExample"
+            resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.GeoMapper.BaseResultMap">
+        select * from (
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.GeoMapper.Alias_Column_List">
+            <property name="tableAlias" value="GEO."/>
+            <property name="fieldAlias" value=""/>
+        </include>,
+        GEO_ASS.geo_id as GEO_ASS_GEO_ID,
+        GEO_ASS.geo_id_to as GEO_ASS_GEO_ID_TO
+        from geo AS GEO LEFT JOIN geo_assoc GEO_ASS on GEO.geo_id = GEO_ASS.geo_id
+        ) t
+        <if test="_parameter != null">
+            <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.GeoMapper.Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+</mapper>

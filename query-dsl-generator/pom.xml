@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>it.mapsgroup.gzoom</groupId>
+        <artifactId>gzoom2</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+
+    <artifactId>query-dsl-generator</artifactId>
+    <name>GZoom QueryDsl Generator</name>
+    <description>GZoom QueryDsl Services</description>
+
+    <properties>
+        <querydsl.version>4.1.4</querydsl.version>
+    </properties>
+
+
+    <dependencies>
+
+        <!--enum  from persistence-->
+        <dependency>
+            <groupId>it.mapsgroup.gzoom</groupId>
+            <artifactId>persistence</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>it.mapsgroup.gzoom</groupId>
+            <artifactId>query-dsl</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+
+        <!-- Apache Commons -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-sql-codegen</artifactId>
+            <version>${querydsl.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>it.mapsgroup.gzoom</groupId>
+            <artifactId>jdbc-repo</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+
+    </dependencies>
+
+
+    <build>
+        <plugins>
+           <!-- <plugin>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-maven-plugin</artifactId>
+                <version>${querydsl.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>export</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jdbcDriver>org.postgresql.Driver</jdbcDriver>
+                    <jdbcUrl>jdbc:postgresql://localhost:5432/ltprod</jdbcUrl>
+                    <jdbcUser>lmm</jdbcUser>
+                    <jdbcPassword>lmm</jdbcPassword>
+                    <packageName>it.memelabs.smartnebula.lmm.querydsl.generated</packageName>
+                    <targetFolder>${project.basedir}/src/main/java</targetFolder>
+                    <exportBeans>true</exportBeans>
+                    <columnAnnotations>true</columnAnnotations>-->
+                    <!--
+                      optional elements :
+                      * jdbcUser = connection user
+                      * jdbcPassword = connection password
+                      * namePrefix = name prefix for generated query classes (default: Q)
+                      * schemaPattern = ant style pattern to restrict code generation to certain schemas (default: null)
+                      * tableNamePattern = ant style pattern to restrict code generation to certain tables (default: null)
+                      * exportBeans = set to true to generate beans as well, see section 2.14.13 (default: false)
+                      * innerClassesForKeys = set to true to generate inner classes for keys (default: false)
+                      * validationAnnotations = set to false to disable serialization of validation annotations (default: true)
+                    -->
+               <!-- </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>${postgres.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>-->
+
+        </plugins>
+    </build>
+</project>

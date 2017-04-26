@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Gn Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="gnCreateUpdateContext" engine="java" auth="true"
+             location="it.memelabs.gn.services.user.GnContextServices" invoke="gnCreateUpdateContext"
+             export="true">
+        <description>Create Update Context</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="CREATE"/>
+
+            <permission-service service-name="gnAdminPermissionCheck" main-action="UPDATE"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="UPDATE"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="UPDATE"/>
+        </required-permissions>
+
+        <implements service="gnAuditEventInterface"/>
+
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+        <attribute name="description" type="String" mode="IN" optional="false"/>
+
+        <attribute name="securityGroupIds" type="java.util.List" mode="IN" optional="false">
+            <description>roles-->groupId</description>
+        </attribute>
+        <attribute name="partyNodeId" type="java.lang.String" mode="IN" optional="true">
+            <description>Node-->partyId</description>
+        </attribute>
+        <attribute name="partyNodeKey" type="java.lang.String" mode="IN" optional="true">
+            <description>partyNodeKey-->partyNodeId</description>
+        </attribute>
+        <attribute name="companyBaseIds" type="java.util.List" mode="IN" optional="true">
+            <description>companyBases-->partyId</description>
+        </attribute>
+        <attribute name="companyBaseKeys" type="java.util.List" mode="IN" optional="true">
+            <description>companyBases-->companyBaseIds</description>
+        </attribute>
+        <attribute name="userLoginIds" type="java.util.List" mode="IN" optional="false">
+            <description>users-->userLoginId</description>
+        </attribute>
+
+        <attribute name="partyId" type="java.lang.String" mode="OUT" optional="false">
+            <description>GnContext Id</description>
+        </attribute>
+    </service>
+
+    <service name="gnCreateContext" engine="java" auth="true"
+             location="it.memelabs.gn.services.user.GnContextServices" invoke="gnCreateContext"
+             export="false">
+        <description>Create Context</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="CREATE"/>
+        </required-permissions>
+
+        <implements service="gnAuditEventInterface"/>
+
+        <attribute name="description" type="String" mode="IN" optional="false"/>
+
+        <attribute name="securityGroupIds" type="java.util.List" mode="IN" optional="false">
+            <description>roles-->groupId</description>
+        </attribute>
+        <attribute name="partyNodeId" type="java.lang.String" mode="IN" optional="false">
+            <description>Node-->partyId</description>
+        </attribute>
+        <attribute name="companyBaseIds" type="java.util.List" mode="IN" optional="false">
+            <description>companyBases-->partyId</description>
+        </attribute>
+        <attribute name="userLoginIds" type="java.util.List" mode="IN" optional="false">
+            <description>users-->userLoginId</description>
+        </attribute>
+
+        <attribute name="partyId" type="java.lang.String" mode="OUT" optional="false">
+            <description>GnContext Id</description>
+        </attribute>
+    </service>
+
+    <service name="gnUpdateContext" engine="java" auth="true"
+             location="it.memelabs.gn.services.user.GnContextServices" invoke="gnUpdateContext"
+             export="false">
+        <description>Update Context</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="UPDATE"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="UPDATE"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="UPDATE"/>
+        </required-permissions>
+
+        <implements service="gnAuditEventInterface"/>
+
+        <attribute name="partyId" type="String" mode="IN" optional="false"/>
+        <attribute name="description" type="String" mode="IN" optional="false"/>
+
+        <attribute name="securityGroupIds" type="java.util.List" mode="IN" optional="false">
+            <description>roles-->groupId</description>
+        </attribute>
+        <attribute name="companyBaseIds" type="java.util.List" mode="IN" optional="false">
+            <description>companyBases-->partyId</description>
+        </attribute>
+        <attribute name="userLoginIds" type="java.util.List" mode="IN" optional="false">
+            <description>users-->userLoginId</description>
+        </attribute>
+
+        <attribute name="partyId" type="java.lang.String" mode="OUT" optional="false">
+            <description>GnContext Id</description>
+        </attribute>
+
+    </service>
+
+    <service name="gnDeleteContext" engine="java" auth="true"
+             location="it.memelabs.gn.services.user.GnContextServices" invoke="gnDeleteContext"
+             export="true">
+        <description>Delete Context</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="UPDATE"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="UPDATE"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="UPDATE"/>
+        </required-permissions>
+
+        <implements service="gnAuditEventInterface"/>
+
+        <attribute name="partyId" type="String" mode="IN" optional="false"/>
+    </service>
+
+    <service name="gnFindContextByUserLoginPartyNodeAndPermission" engine="java" auth="true"
+             location="it.memelabs.gn.services.user.GnContextServices"
+             invoke="gnFindContextByUserLoginPartyNodeAndPermission"
+             export="false">
+        <description>Find context Context</description>
+        <attribute name="userLoginId" type="String" mode="IN" optional="false">
+            <description>User memeber of context</description>
+        </attribute>
+        <attribute name="partyNodeId" type="String" mode="IN" optional="false">
+            <description>GnContext partyNode</description>
+        </attribute>
+        <attribute name="permissionId" type="String" mode="IN" optional="false">
+            <description>GnContext permission</description>
+        </attribute>
+        <attribute name="loadContext" type="String" mode="IN" optional="false">
+            <description>N=only ids are loaded, Y=all fields are loaded</description>
+        </attribute>
+        <attribute name="contextList" type="List" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="gnFindContextWithUserLoginByPartyNodeAndPermission" engine="java" auth="true"
+             location="it.memelabs.gn.services.user.GnContextServices"
+             invoke="gnFindContextWithUserLoginByPartyNodeAndPermission"
+             export="false">
+        <description>Find context Context</description>
+        <attribute name="partyNodeId" type="String" mode="IN" optional="false">
+            <description>GnContext partyNode</description>
+        </attribute>
+        <attribute name="permissionId" type="String" mode="IN" optional="false">
+            <description>GnContext permission</description>
+        </attribute>
+        <attribute name="contextList" type="List" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="gnAddCompanyBaseToContext" engine="java" auth="true"
+             location="it.memelabs.gn.services.user.GnContextServices"
+             invoke="gnAddCompanyBaseToContext" export="false">
+        <description>Add CompanyBase to GnContext</description>
+        <attribute name="contextId" type="String" mode="IN" optional="false">
+            <description>GnContextId</description>
+        </attribute>
+        <attribute name="partyId" type="String" mode="IN" optional="false">
+            <description>CompanyBase partyId</description>
+        </attribute>
+    </service>
+
+
+</services>

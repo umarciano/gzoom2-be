@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Gn Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="gnCreateJob" engine="java" auth="true"
+             location="it.memelabs.gn.services.job.JobServices" invoke="gnCreateJob"
+             export="false">
+        <description>Create an activityJob</description>
+        <attribute name="jobStatusId" type="java.lang.String" mode="IN" optional="true"/>
+        <attribute name="jobTypeId" type="java.lang.String" mode="IN" optional="false"/>
+        <attribute name="commitRequired" type="java.lang.String" mode="IN" optional="false"/>
+        <attribute name="referenceKey" type="java.lang.String" mode="IN" optional="true"/>
+        <attribute name="expectedAck" type="java.lang.Long" mode="IN" optional="true"/>
+        <attribute name="scheduled" type="java.sql.Timestamp" mode="IN" optional="false"/>
+        <attribute name="attributes" type="java.util.Map" mode="IN" optional="true"/>
+        <attribute name="jobId" type="java.lang.String" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="gnConsumeJobs" engine="java" auth="true"
+             location="it.memelabs.gn.services.job.JobServices" invoke="gnConsumeJobs"
+             export="true" transaction-timeout="600">
+    <description>Consume jobs</description>
+        <attribute name="jobToConsume" type="java.lang.Long" mode="IN" optional="false"/>
+        <attribute name="consumedJobList" type="java.util.List" mode="OUT" optional="false"/>
+        <attribute name="consumedJobListSize" type="java.lang.Integer" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="gnConsumeJob" engine="java" auth="true"
+             location="it.memelabs.gn.services.job.JobConsumerServices" invoke="gnConsumeJob"
+             export="true" transaction-timeout="600">
+    <description>Consume jobs</description>
+        <attribute name="jobId" type="String" mode="IN" optional="false"/>
+        <auto-attributes mode="OUT" entity-name="GnActivityJob" optional="true"/>
+        <attribute name="attributes" type="java.util.Map" mode="OUT" optional="true"/>
+        <attribute name="eventList" type="java.util.List" mode="OUT" optional="true"/>
+
+        <attribute name="createdStamp" type="java.sql.Timestamp" mode="OUT" optional="true"/>
+        <attribute name="createdTxStamp" type="java.sql.Timestamp" mode="OUT" optional="true"/>
+        <attribute name="lastUpdatedStamp" type="java.sql.Timestamp" mode="OUT" optional="true"/>
+        <attribute name="lastUpdatedTxStamp" type="java.sql.Timestamp" mode="OUT" optional="true"/>
+
+    </service>
+
+    <service name="gnUpdateJobStatusByReferenceKey" engine="java" auth="true"
+             location="it.memelabs.gn.services.job.JobServices" invoke="gnUpdateJobStatusByReferenceKey"
+             export="false">
+        <description>Update job status</description>
+        <attribute name="jobStatusId" type="java.lang.String" mode="IN" optional="false"/>
+        <attribute name="referenceKey" type="java.lang.String" mode="IN" optional="false"/>
+        <attribute name="failMessage" type="java.lang.String" mode="IN" optional="true"/>
+        <attribute name="scheduledOnly" type="java.lang.String" mode="IN" optional="false"/>
+    </service>
+
+    <service name="gnNotifyResult" engine="java" auth="true"
+             location="it.memelabs.gn.services.job.JobServices" invoke="gnNotifyResult"
+             export="false">
+        <description>Notifiy job result</description>
+        <attribute name="jobId" type="java.lang.String" mode="IN" optional="false"/>
+        <attribute name="jobResultId" type="java.lang.String" mode="IN" optional="false"/>
+        <attribute name="failMessage" type="java.lang.String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="gnFindJobs" engine="java" auth="true"
+             location="it.memelabs.gn.services.job.JobServices" invoke="gnFindJobs"
+             export="false">
+        <description>find jobs job result</description>
+        <attribute name="jobId" type="java.lang.String" mode="IN" optional="true"/>
+        <attribute name="jobStatusId" type="java.lang.String" mode="IN" optional="true"/>
+        <attribute name="referenceKey" type="java.lang.String" mode="IN" optional="true"/>
+        <attribute name="jobTypeId" type="java.lang.String" mode="IN" optional="true"/>
+        <attribute name="fetchJobAttributes" type="java.lang.String" mode="IN" optional="true" default-value="N"/>
+
+        <attribute name="jobList" type="java.util.List" mode="OUT" optional="false"/>
+        <attribute name="jobListSize" type="java.lang.Integer" mode="OUT" optional="false"/>
+    </service>
+
+
+</services>

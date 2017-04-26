@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.memelabs.smartnebula.lmm.persistence.main.mapper.IdentifiableMapper">
+
+	<resultMap id="BaseResultMap"
+		type="it.memelabs.smartnebula.lmm.persistence.main.dto.Identifiable"
+		extends="it.memelabs.smartnebula.lmm.persistence.main.mapper.IdentityMapper.BaseResultMap">
+		<result column="description" jdbcType="VARCHAR" property="description" />
+	</resultMap>
+
+	<sql id="Alias_Column_List">
+		${tableAlias}id AS ${fieldAlias}id,
+		${tableAlias}description AS ${fieldAlias}description
+	</sql>
+
+</mapper>

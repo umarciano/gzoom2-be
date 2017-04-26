@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="logImpl" value="SLF4J"/>
+        <!--<setting name="logImpl" value="COMMONS_LOGGING"/>-->
+    </settings>
+    <typeHandlers>
+        <!-- mybatis-config.xml -->
+
+
+        <!--
+                <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler"
+                             javaType="it.memelabs.smartnebula.lmm.persistence.main.enumeration.WorkLogEventOrigin"/>
+        -->
+
+        <typeHandler handler="com.github.javaplugs.mybatis.InstantTypeHandler"/>
+        <typeHandler handler="com.github.javaplugs.mybatis.LocalDateTypeHandler"/>
+        <typeHandler handler="com.github.javaplugs.mybatis.LocalDateTimeTypeHandler"/>
+        <typeHandler handler="com.github.javaplugs.mybatis.LocalTimeTypeHandler"/>
+        <typeHandler handler="com.github.javaplugs.mybatis.OffsetDateTimeTypeHandler"/>
+        <typeHandler handler="com.github.javaplugs.mybatis.ZonedDateTimeTypeHandler"/>
+
+    </typeHandlers>
+    <!-- mybatis-config.xml -->
+    <!--<plugins>
+        <plugin interceptor="it.memelabs.smartnebula.lmm.persistence.main.mapper.ExamplePlugin">
+            <property name="someProperty" value="100"/>
+        </plugin>
+    </plugins>-->
+</configuration>

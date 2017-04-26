@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.memelabs.smartnebula.lmm.persistence.main.mapper.WeeklyWorkLogChangeMapper">
+
+    <sql id="In_List">
+        <foreach open="(" separator="," close=")" collection="idList" item="listItem">
+            #{listItem}
+        </foreach>
+    </sql>
+
+    <select id="selectCompanyByIds" parameterType="java.util.Collection"
+            resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyMapper.BaseResultMap">
+        select id, business_name, vat_number
+        from company
+        where id in
+        <include refid="In_List"/>
+    </select>
+
+    <select id="selectPersonByEmplIds" parameterType="java.util.Collection"
+            resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.PersonMapper.BaseResultMap">
+        select pe.id, p.first_name, p.last_name
+        from person_employment pe
+        inner join person p on pe.person_id = p.id
+        where pe.id in
+        <include refid="In_List"/>
+    </select>
+
+    <select id="selectEquipmentByEmplIds" parameterType="java.util.Collection"
+            resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.EquipmentMapper.BaseResultMap">
+        select ee.id, e.registration_number
+        from equipment_employment ee
+        inner join equipment e on ee.equipment_id = e.id
+        where ee.id in
+        <include refid="In_List"/>
+    </select>
+
+    <select id="selectPersonEmplByIds" parameterType="java.util.Collection"
+            resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.PersonEmploymentExMapper.BaseResultMap">
+        select pe.id,
+        p.first_name as person_first_name, p.last_name as person_last_name,
+        c.id as company_id,
+        c.business_name as company_business_name,
+        c.vat_number as company_vat_number
+        from person_employment pe
+        inner join person p on pe.person_id = p.id
+        inner join company c on pe.company_id = c.id
+        where pe.id in
+        <include refid="In_List"/>
+    </select>
+
+    <select id="selectEquipmentEmplByIds" parameterType="java.util.Collection"
+            resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.EquipmentEmploymentExMapper.BaseResultMap">
+        select pe.id,
+        p.registration_number as equipment_registration_number,
+        c.id as company_id,
+        c.business_name as company_business_name,
+        c.vat_number as company_vat_number
+        from equipment_employment pe
+        inner join equipment p on pe.equipment_id = p.id
+        inner join company c on pe.company_id = c.id
+        where pe.id in
+        <include refid="In_List"/>
+    </select>
+
+
+</mapper>

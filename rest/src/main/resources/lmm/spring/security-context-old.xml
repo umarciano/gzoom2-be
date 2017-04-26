@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:ctx="http://www.springframework.org/schema/context"
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <ctx:annotation-config/>
+    <ctx:component-scan base-package="it.memelabs.smartnebula.lmm.security"/>
+
+
+    <!--<sec:global-method-security pre-post-annotations="enabled"/>-->
+
+    <!-- =================================================================== -->
+    <!-- Custom permission evaluator                                         -->
+    <!-- =================================================================== -->
+
+
+    <sec:global-method-security pre-post-annotations="enabled">
+        <sec:expression-handler ref="expressionHandler"/>
+    </sec:global-method-security>
+
+    <bean class="it.memelabs.smartnebula.lmm.security.evaluator.AttachmentPermissionEvaluator"
+          id="attachmentPermissionEvaluator"/>
+
+    <bean class="it.memelabs.smartnebula.lmm.security.evaluator.CommentPermissionEvaluator"
+          id="commentPermissionEvaluator"/>
+
+
+    <bean class="it.memelabs.smartnebula.lmm.security.evaluator.LmmPermissionEvaluator" id="lmmPermissionEvaluator"/>
+
+
+    <bean id="expressionHandler"
+          class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler">
+        <property name="permissionEvaluator" ref="lmmPermissionEvaluator"/>
+    </bean>
+
+
+    <!-- =================================================================== -->
+    <!-- Authentication managers                                             -->
+    <!-- =================================================================== -->
+
+    <bean id="jwtLoginProviders" class="it.memelabs.smartnebula.lmm.security.ProvidersFilterFactory">
+        <constructor-arg>
+            <list>
+                <ref bean="jwtDbLoginAuthenticationProvider"/>
+                <ref bean="jwtADLoginAuthenticationProvider"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="loginAuthenticationManager" class="org.springframework.security.authentication.ProviderManager">
+        <constructor-arg index="0" ref="jwtLoginProviders"/>
+    </bean>
+
+    <!-- don't use the id property here as a default security manager must be provided -->
+    <sec:authentication-manager alias="jwtAuthenticationManager">
+        <sec:authentication-provider ref="jwtTokenAuthenticationProvider"/>
+    </sec:authentication-manager>
+
+
+    <!-- =================================================================== -->
+    <!-- Login, logout and token filters                                     -->
+    <!-- =================================================================== -->
+
+    <bean id="tokenFilter" class="it.memelabs.smartnebula.lmm.security.JwtTokenFilter">
+        <constructor-arg index="0" ref="jwtAuthenticationManager"/>
+        <constructor-arg index="1" ref="restAuthenticationEntryPoint"/>
+        <constructor-arg index="2" ref="objectMapper"/>
+    </bean>
+
+    <bean id="logoutFilter" class="it.memelabs.smartnebula.lmm.security.JwtLogoutFilter">
+        <constructor-arg index="0" ref="restAuthenticationEntryPoint"/>
+        <constructor-arg index="1" ref="permitsStorage"/>
+        <constructor-arg index="2" ref="objectMapper"/>
+    </bean>
+
+    <bean id="loginFilter" class="it.memelabs.smartnebula.lmm.security.JwtLoginFilter">
+        <constructor-arg index="0" ref="loginAuthenticationManager"/>
+        <constructor-arg index="1" ref="objectMapper"/>
+    </bean>
+
+
+    <!-- =================================================================== -->
+    <!-- Filters' application patterns                                       -->
+    <!-- =================================================================== -->
+
+    <sec:http pattern="/login" entry-point-ref="restAuthenticationEntryPoint">
+        <sec:custom-filter ref="loginFilter" position="PRE_AUTH_FILTER"/>
+        <sec:csrf disabled="true"/>
+    </sec:http>
+
+    <sec:http pattern="/logout" entry-point-ref="restAuthenticationEntryPoint">
+        <sec:custom-filter ref="logoutFilter" position="LOGOUT_FILTER"/>
+        <sec:csrf disabled="true"/>
+    </sec:http>
+
+    <sec:http pattern="/profile/i18n" security="none"/>
+
+    <sec:http pattern="/**" entry-point-ref="http403ForbiddenEntryPoint">
+        <sec:csrf disabled="true"/>
+        <sec:custom-filter ref="tokenFilter" position="PRE_AUTH_FILTER"/>
+    </sec:http>
+
+    <bean id="http403ForbiddenEntryPoint"
+          class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint"/>
+
+</beans>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.memelabs.smartnebula.lmm.persistence.main.mapper.IdentityMapper">
+
+	<resultMap id="BaseResultMap" type="it.memelabs.smartnebula.lmm.persistence.main.dto.Identity">
+		<id column="id" jdbcType="BIGINT" property="id" />
+	</resultMap>
+
+	<select id="selectMaxByNode" parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.NodeSequenceGeneratorParam" resultType="java.lang.Long">
+		select max(${columnName}) as max_value
+		from ${tableName}
+		where owner_node_id=#{ownerNodeId}
+	</select>
+
+</mapper>

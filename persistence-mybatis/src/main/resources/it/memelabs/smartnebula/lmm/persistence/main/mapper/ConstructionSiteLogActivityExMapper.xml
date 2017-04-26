@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="it.memelabs.smartnebula.lmm.persistence.main.mapper.ConstructionSiteLogActivityExMapper">
+    <resultMap id="BaseResultMap" type="it.memelabs.smartnebula.lmm.persistence.main.dto.ConstructionSiteLogActivityEx"
+               extends="it.memelabs.smartnebula.lmm.persistence.main.mapper.ConstructionSiteLogActivityMapper.BaseResultMap">
+        <association property="company" javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.Company"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyMapper.BaseResultMap"
+                     columnPrefix="C_">
+        </association>
+        <association property="wbs" javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.Wbs"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.WbsMapper.BaseResultMap"
+                     columnPrefix="WBS_">
+        </association>
+        <association property="constructionSiteLog"
+                     javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.ConstructionSiteLog"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.ConstructionSiteLogExMapper.BaseResultMap"
+                     columnPrefix="CSL_">
+        </association>
+    </resultMap>
+
+    <sql id="Select_Joined_Column_List">
+        <include
+                refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.ConstructionSiteLogActivityMapper.Alias_Column_List">
+            <property name="tableAlias" value="A."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyExMapper.Min_Alias_Column_List">
+            <property name="tableAlias" value="C."/>
+            <property name="fieldAlias" value="C_"/>
+        </include>
+        ,
+        C.id as C_id ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.WbsExMapper.Min_Alias_Column_List">
+            <property name="tableAlias" value="WBS."/>
+            <property name="fieldAlias" value="WBS_"/>
+        </include>
+        ,
+        <include
+                refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.ConstructionSiteLogExMapper.Min_Alias_Column_List">
+            <property name="tableAlias" value="CSL."/>
+            <property name="fieldAlias" value="CSL_"/>
+        </include>
+        ,
+        <include
+                refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.ConstructionSiteExMapper.Min_Alias_Column_List">
+            <property name="tableAlias" value="CS."/>
+            <property name="fieldAlias" value="CSL_CS_"/>
+        </include>
+    </sql>
+
+    <sql id="Select_Joined_Tables">
+         left join company C on A.company_id = C.id
+         left join wbs WBS on A.wbs_id = WBS.id
+         left JOIN construction_site_log CSL on A.construction_site_log_id=CSL.id
+         left JOIN construction_site CS on CSL.construction_site_id = CS.id
+    </sql>
+
+    <select id="selectExByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Select_Joined_Column_List"/>
+        from construction_site_log_activity A
+        <include refid="Select_Joined_Tables"/>
+        where A.id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectExByExampleWithRowbounds"
+            parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.ConstructionSiteLogActivityExample"
+            resultMap="BaseResultMap">
+        select * from (
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Select_Joined_Column_List"/>
+        from construction_site_log_activity A
+        <include refid="Select_Joined_Tables"/>
+        ) t
+        <if test="_parameter != null">
+            <include
+                    refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.ConstructionSiteLogActivityMapper.Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectExByExample"
+            parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.ConstructionSiteLogActivityExample"
+            resultMap="BaseResultMap">
+        select * from (
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Select_Joined_Column_List"/>
+        from construction_site_log_activity A
+        <include refid="Select_Joined_Tables"/>
+        ) t
+        <if test="_parameter != null">
+            <include
+                    refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.ConstructionSiteLogActivityMapper.Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+</mapper>

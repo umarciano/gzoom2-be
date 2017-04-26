@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Gn Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+
+    <service name="gnCreateUpdatePartyNode" default-entity-name="GnPartyNode" engine="java"
+             location="it.memelabs.gn.services.node.NodeServices" invoke="gnCreateUpdatePartyNode"
+             auth="true" export="true">
+        <description>Create or update an Abstract Node</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="CREATE"/>
+
+            <permission-service service-name="gnAdminPermissionCheck" main-action="UPDATE"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="UPDATE"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="UPDATE"/>
+
+            <permission-service service-name="gnCompanyPermissionCheck" main-action="UPDATE"/>
+            <permission-service service-name="gnCompanyTreePermissionCheck" main-action="UPDATE"/>
+
+            <permission-service service-name="gnCompanyPermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnCompanyTreePermissionCheck" main-action="CREATE"/>
+        </required-permissions>
+
+        <implements service="gnAuditEventInterface"/>
+
+
+        <!--
+        lastModifiedDate			java.sql.Timestamp, TIMESTAMPTZ
+        groupName					String, TEXT
+        description					String, TEXT
+        lastModifiedByUserLogin		String, TEXT
+        partyId*					String, TEXT
+        validator					String, CHAR(1)
+        baseEndpointUrl				String, TEXT
+        remote						String, CHAR(1)
+        nodeType					String, TEXT
+        code						String, TEXT
+        taxIdentificationNumber		String, TEXT
+        VATnumber					String, TEXT
+        name						String, TEXT
+        activityNumber				String, TEXT
+        registeredOffice			String, CHAR(1)
+        authorizationOwner			String, CHAR(1)
+        reaNumber					String, TEXT
+        -->
+        <auto-attributes include="all" mode="IN" optional="true" entity-name="GnPartyGroupPartyNode">
+            <exclude field-name="lastModifiedDate"/>
+            <exclude field-name="lastModifiedByUserLogin"/>
+        </auto-attributes>
+        <attribute name="address" type="java.util.Map" mode="IN" optional="true"/>
+        <attribute name="contact" type="java.util.Map" mode="IN" optional="true"/>
+        <attribute name="partyRelationships" type="java.util.Collection" mode="IN" optional="true"/>
+
+        <attribute name="partyId" type="String" mode="OUT" optional="false"/>
+        <attribute name="nodeKey" type="String" mode="OUT" optional="false"/>
+        <attribute name="companyBase" type="java.util.Map" mode="OUT" optional="true"/>
+        <attribute name="partyRelationshipIds" type="java.util.Collection" mode="OUT" optional="true"/>
+        <attribute name="reversePartyRelationshipIds" type="java.util.Collection" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnUpdatePartyNode" default-entity-name="GnPartyNode" engine="java"
+             location="it.memelabs.gn.services.node.NodeServices" invoke="gnUpdatePartyNode"
+             auth="true" export="false">
+
+        <description>Update an Abstract Node</description>
+        <implements service="gnInternalUpdatePartyNode"/>
+        <implements service="gnAuditEventInterface"/>
+        <attribute name="internal" type="java.lang.Boolean" mode="IN" default-value="false"/>
+    </service>
+
+    <service name="gnInternalUpdatePartyNode" default-entity-name="GnPartyNode" engine="java"
+             location="it.memelabs.gn.services.node.NodeServices" invoke="gnUpdatePartyNode"
+             auth="true" export="false">
+        <description>Update an Abstract Node</description>
+        <implements service="gnAuditEventInterface"/>
+
+        <auto-attributes include="all" mode="IN" optional="true" entity-name="GnPartyGroupPartyNode">
+            <exclude field-name="lastModifiedDate"/>
+            <exclude field-name="lastModifiedByUserLogin"/>
+        </auto-attributes>
+
+        <attribute name="internal" type="java.lang.Boolean" mode="IN" default-value="true"/>
+        <attribute name="address" type="java.util.Map" mode="IN" optional="true"/>
+        <attribute name="contact" type="java.util.Map" mode="IN" optional="true"/>
+        <attribute name="ownerNodeKey" type="String" mode="IN" optional="true"/>
+        <attribute name="sourceNodeKey" type="String" mode="IN" optional="true"/>
+        <attribute name="partyId" type="String" mode="OUT" optional="true"/>
+        <attribute name="nodeKey" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnCreatePartyNode" default-entity-name="GnPartyNode" engine="java"
+             location="it.memelabs.gn.services.node.NodeServices" invoke="gnCreatePartyNode"
+             auth="true" export="false">
+
+        <description>Create a PartyNode</description>
+        <implements service="gnInternalCreatePartyNode"/>
+        <implements service="gnAuditEventInterface"/>
+
+        <attribute name="internal" type="java.lang.Boolean" mode="IN" default-value="false"/>
+    </service>
+
+    <service name="gnInternalCreatePartyNode" default-entity-name="GnPartyNode" engine="java"
+             location="it.memelabs.gn.services.node.NodeServices" invoke="gnCreatePartyNode"
+             auth="false" export="false">
+
+        <description>Create a PartyNode</description>
+        <implements service="gnAuditEventInterface"/>
+
+        <auto-attributes include="nonpk" mode="IN" optional="true" entity-name="GnPartyGroupPartyNode">
+            <exclude field-name="lastModifiedDate"/>
+            <exclude field-name="lastModifiedByUserLogin"/>
+        </auto-attributes>
+        <attribute name="internal" type="java.lang.Boolean" mode="IN" default-value="true"/>
+        <attribute name="address" type="java.util.Map" mode="IN" optional="true"/>
+        <attribute name="contact" type="java.util.Map" mode="IN" optional="true"/>
+        <attribute name="partyRelationships" type="java.util.Collection" mode="IN" optional="true"/>
+        <attribute name="ownerNodeKey" type="String" mode="IN" optional="true"/>
+        <attribute name="sourceNodeKey" type="String" mode="IN" optional="true"/>
+
+        <attribute name="partyId" type="String" mode="OUT" optional="false"/>
+        <attribute name="nodeKey" type="String" mode="OUT" optional="false"/>
+        <attribute name="partyRelationshipIds" type="java.util.Collection" mode="OUT" optional="true"/>
+        <attribute name="reversePartyRelationshipIds" type="java.util.Collection" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnFindPartyNodeById" default-entity-name="" engine="java"
+             location="it.memelabs.gn.services.node.NodeServices"
+             invoke="gnFindPartyNodeById"
+             auth="true" export="true">
+        <description>fin PartyNode by id</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="VIEW"/>
+        </required-permissions>
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+        <attribute name="nodeKey" type="String" mode="IN" optional="true"/>
+        <attribute name="findRelationships" type="String" mode="IN" optional="true" default-value="Y"/>
+        <attribute name="partyNode" type="java.util.Map" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnInternalFindPartyNodeById" default-entity-name="" engine="java"
+             location="it.memelabs.gn.services.node.NodeServices"
+             invoke="gnFindPartyNodeById"
+             auth="true" export="false" use-transaction="true">
+        <description>fin PartyNode by id</description>
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+        <attribute name="nodeKey" type="String" mode="IN" optional="true"/>
+        <attribute name="findRelationships" type="String" mode="IN" optional="true" default-value="Y"/>
+        <attribute name="partyNode" type="java.util.Map" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnFindExtendedNodeByIdInterface" default-entity-name="" engine="interface"
+             location="" invoke="">
+        <description>find extended PartyNode by id</description>
+
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+        <attribute name="nodeKey" type="String" mode="IN" optional="true"/>
+        <attribute name="partyNode" type="java.util.Map" mode="OUT" optional="true"/>
+        <attribute name="contexts" type="java.util.Collection" mode="OUT" optional="true"/>
+        <attribute name="contactLists" type="java.util.Collection" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnFindExtendedNodeById" default-entity-name="" engine="java"
+             location="it.memelabs.gn.services.node.NodeServices"
+             invoke="gnFindExtendedNodeById"
+             auth="true" export="true">
+        <description>find extended PartyNode by id</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="VIEW"/>
+        </required-permissions>
+
+        <implements service="gnFindExtendedNodeByIdInterface"/>
+    </service>
+
+    <service name="gnFindCompanyNodeById" default-entity-name="" engine="java"
+             location="it.memelabs.gn.services.node.NodeServices"
+             invoke="gnFindCompanyNodeById"
+             auth="true" export="true">
+        <description>find extended PartyNode by id</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnCompanyPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnCompanyTreePermissionCheck" main-action="VIEW"/>
+        </required-permissions>
+        <implements service="gnFindExtendedNodeByIdInterface"/>
+    </service>
+
+    <service name="gnFindCompanyNodeByTaxIdentificationNumber" default-entity-name="GnPartyNode" engine="java"
+             location="it.memelabs.gn.services.node.NodeServices"
+             invoke="gnFindCompanyNodeByTaxIdentificationNumber"
+             auth="true" export="false">
+        <description>find Company by taxIdentificationNumber</description>
+        <attribute name="taxIdentificationNumber" type="java.lang.String" mode="IN" optional="false"/>
+        <attribute name="partyNode" type="java.util.Map" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnFindCompanyBaseNodeById" default-entity-name="" engine="java"
+             location="it.memelabs.gn.services.node.NodeServices"
+             invoke="gnFindCompanyBaseNodeById"
+             auth="true" export="true">
+        <description>find extended PartyNode by id</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnCompanyPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnCompanyTreePermissionCheck" main-action="VIEW"/>
+        </required-permissions>
+        <implements service="gnFindExtendedNodeByIdInterface"/>
+    </service>
+
+    <service name="gnFindPartyRelationships" default-entity-name="PartyRelationships" engine="java"
+             location="it.memelabs.gn.services.node.PartyRelationshipService"
+             invoke="gnFindPartyRelationships"
+             auth="true" export="true">
+        <description>Find PartyRelationships</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="VIEW"/>
+        </required-permissions>
+
+        <attribute name="partyIdsFrom" type="java.util.Collection" mode="IN" optional="true"/>
+        <attribute name="roleTypeIdsFrom" type="java.util.Collection" mode="IN" optional="true"/>
+        <attribute name="partyRelationshipTypeIds" type="java.util.Collection" mode="IN" optional="true"/>
+        <attribute name="partyIdsTo" type="java.util.Collection" mode="IN" optional="true"/>
+        <attribute name="roleTypeIdsTo" type="java.util.Collection" mode="IN" optional="true"/>
+
+        <attribute name="validOnly" type="java.lang.String" mode="IN" default-value="Y" optional="false"/>
+
+        <attribute name="partyRelationships" type="java.util.Collection" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnFindPartyRelationshipById" default-entity-name="PartyRelationships" engine="java"
+             location="it.memelabs.gn.services.node.PartyRelationshipService"
+             invoke="gnFindPartyRelationshipById"
+             auth="true" export="true">
+        <description>Find PartyRelationship by primary key</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="VIEW"/>
+        </required-permissions>
+
+        <attribute name="partyIdFrom" type="String" mode="IN" optional="true"/>
+        <attribute name="roleTypeIdFrom" type="String" mode="IN" optional="true"/>
+        <attribute name="fromDate" type="java.sql.Timestamp" mode="IN" optional="true"/>
+        <attribute name="partyIdTo" type="String" mode="IN" optional="true"/>
+        <attribute name="roleTypeIdTo" type="String" mode="IN" optional="true"/>
+
+        <attribute name="partyRelationshipId" type="String" mode="IN" optional="true"/>
+
+        <attribute name="partyRelationship" type="java.util.Map" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnCreatePartyNodeRelationship" default-entity-name="PartyRelationship" engine="java"
+             location="it.memelabs.gn.services.node.PartyRelationshipService"
+             invoke="gnCreatePartyNodeRelationship"
+             auth="true" export="true" debug="true">
+        <description>Create a node relationship</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="CREATE"/>
+        </required-permissions>
+        <implements service="gnInternalCreatePartyNodeRelationship"/>
+        <implements service="gnAuditEventInterface"/>
+    </service>
+
+
+    <service name="gnInternalCreatePartyNodeRelationship" default-entity-name="PartyRelationship" engine="java"
+             location="it.memelabs.gn.services.node.PartyRelationshipService"
+             invoke="gnCreatePartyNodeRelationship"
+             auth="true" export="false" debug="true">
+        <description>Create a node relationship</description>
+        <implements service="gnAuditEventInterface"/>
+        <attribute name="partyIdFrom" type="String" mode="IN" optional="true"/>
+        <attribute name="partyIdTo" type="String" mode="IN" optional="true"/>
+        <attribute name="nodeKeyFrom" type="String" mode="IN" optional="true"/>
+        <attribute name="nodeKeyTo" type="String" mode="IN" optional="true"/>
+        <attribute name="partyRelationshipTypeId" type="String" mode="IN" optional="false"/>
+        <attribute name="relationshipName" type="String" mode="IN" optional="true"/>
+        <attribute name="validationRequired" type="String" mode="IN" optional="true" default-value="N"/>
+        <attribute name="synchronizationAllowed" type="String" mode="IN" optional="true" default-value="N"/>
+        <attribute name="acceptAllIfEmptyFilters" type="String" mode="IN" optional="true" default-value="N"/>
+        <attribute name="createReverse" type="String" mode="IN" optional="true" default-value="Y"/>
+        <attribute name="fromDate" type="java.sql.Timestamp" mode="IN" optional="true"/>
+
+        <attribute name="partyRelationshipId" type="java.lang.String" mode="OUT" optional="false"/>
+        <attribute name="reversePartyRelationshipId" type="java.lang.String" mode="OUT" optional="true"/>
+    </service>
+
+
+    <service name="gnUpdatePartyNodeRelationship" default-entity-name="PartyRelationship" engine="java"
+             location="it.memelabs.gn.services.node.PartyRelationshipService"
+             invoke="gnUpdatePartyNodeRelationship"
+             auth="true" export="true" debug="true">
+        <description>Update a node relationship</description>
+        <implements service="gnAuditEventInterface"/>
+        <attribute name="partyRelationshipTypeId" type="String" mode="IN" optional="true"/>
+        <attribute name="validationRequired" type="String" mode="IN" optional="true" default-value="N"/>
+        <attribute name="synchronizationAllowed" type="String" mode="IN" optional="true" default-value="N"/>
+        <attribute name="acceptAllIfEmptyFilters" type="String" mode="IN" optional="true" default-value="N"/>
+        <attribute name="filters" type="java.util.List" mode="IN" optional="true"/>
+        <attribute name="slicingFilters" type="java.util.List" mode="IN" optional="true"/>
+        <attribute name="partyRelationshipId" type="String" mode="IN" optional="false"/>
+        <attribute name="partyRelationship" type="java.util.Map" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="gnCreatePartyNodeRelationships" default-entity-name="PartyRelationship" engine="java"
+             location="it.memelabs.gn.services.node.PartyRelationshipService"
+             invoke="gnCreatePartyNodeRelationships"
+             auth="true" export="true" debug="false">
+        <description>Create node relationships</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="CREATE"/>
+        </required-permissions>
+        <implements service="gnAuditEventInterface"/>
+        <!--<attribute name="partyIdFrom" type="String" mode="IN" optional="false"/>-->
+        <!--<attribute name="partyIdTo" type="String" mode="IN" optional="false"/>-->
+        <!--<attribute name="partyRelationshipTypeId" type="String" mode="IN" optional="false"/>-->
+        <!--<attribute name="relationshipName" type="String" mode="IN" optional="true"/>-->
+        <attribute name="partyRelationships" type="java.util.Collection" mode="IN" optional="false"/>
+        <attribute name="createReverse" type="String" mode="IN" optional="true" default-value="Y"/>
+        <attribute name="fromDate" type="java.sql.Timestamp" mode="IN" optional="true"/>
+
+        <attribute name="partyRelationshipIds" type="java.util.Collection" mode="OUT" optional="false"/>
+        <attribute name="reversePartyRelationshipIds" type="java.util.Collection" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="gnFindFreeCompaniesAndBases" default-entity-name="" engine="java"
+             location="it.memelabs.gn.services.node.NodeServices"
+             invoke="gnFindFreeCompaniesAndBases"
+             auth="true" export="true">
+        <description>returns a flat view of not already linked companies or company bases
+            starting from the company of the user with relationship kind from partyRelationshipTypeId
+        </description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="VIEW"/>
+        </required-permissions>
+        <attribute name="userLoginId" type="String" mode="IN" optional="true">
+            <description>if no passed, service use current userLogin</description>
+        </attribute>
+        <attribute name="partyRelationshipTypeId" type="java.lang.String" mode="IN" optional="false"/>
+        <attribute name="partyNodes" type="java.util.Collection" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="gnUserProfileFindCompanyBases" default-entity-name="" engine="java"
+             location="it.memelabs.gn.services.node.NodeServices"
+             invoke="gnUserProfileFindCompanyBases"
+             auth="true" export="true">
+        <description>....
+        </description>
+        <permission-service service-name="gnCheckUserLoginContextValidity" main-action="VIEW"/>
+        <attribute name="partyId" type="java.lang.String" mode="IN" optional="true">
+            <description>owner companyId</description>
+        </attribute>
+        <attribute name="nodeKey" type="java.lang.String" mode="IN" optional="true">
+            <description>owner companyId</description>
+        </attribute>
+        <!--<attribute name="companyBaseListSize" type="java.lang.Integer" mode="OUT" optional="false"/>-->
+        <attribute name="partyNodes" type="java.util.List" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="gnGetPartyIdFromNodeKey" default-entity-name="" engine="java"
+             location="it.memelabs.gn.services.node.NodeServices"
+             invoke="gnGetPartyIdFromNodeKey" auth="true" export="false">
+        <description>Retrieve partyId from nodeKey.</description>
+        <attribute name="nodeKey" type="java.lang.String" mode="IN" optional="false"/>
+        <attribute name="partyId" type="java.lang.String" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnGetNodeKeyFromPartyId" default-entity-name="" engine="java"
+             location="it.memelabs.gn.services.node.NodeServices"
+             invoke="gnGetNodeKeyFromPartyId" auth="true" export="false">
+        <description>Retrieve nodeKey from partyId.</description>
+        <attribute name="partyId" type="java.lang.String" mode="IN" optional="false"/>
+        <attribute name="nodeKey" type="java.lang.String" mode="OUT" optional="true"/>
+    </service>
+
+
+    <service name="gnCreateUpdatedAuthorizationFilters" engine="java" auth="true"
+             location="it.memelabs.gn.services.authorization.FilterService"
+             invoke="gnCreateUpdatedAuthorizationFilters" export="false">
+        <description>Create Update Filter</description>
+        <attribute name="filters" type="java.util.List" mode="IN" optional="false"/>
+        <attribute name="agreementTypeId" type="String" mode="IN" optional="false"/>
+        <attribute name="relationshipKey" type="java.util.Map" mode="IN" optional="false"/>
+        <attribute name="filterIds" type="java.util.List" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="gnFindAuthorizationFilterByRelationship" engine="java" auth="true"
+             location="it.memelabs.gn.services.authorization.FilterService"
+             invoke="gnFindAuthorizationFilterByRelationship" export="false">
+        <description>Create Update Filter</description>
+        <attribute name="partyIdFrom" type="String" mode="IN" optional="false"/>
+        <attribute name="roleTypeIdFrom" type="String" mode="IN" optional="false"/>
+        <attribute name="fromDate" type="java.sql.Timestamp" mode="IN" optional="false"/>
+        <attribute name="partyIdTo" type="String" mode="IN" optional="false"/>
+        <attribute name="roleTypeIdTo" type="String" mode="IN" optional="false"/>
+        <attribute name="loadInfoHolderConstraint" type="String" mode="IN" optional="true"/>
+        <attribute name="agreementTypeId" type="String" mode="IN" optional="false"/>
+
+        <attribute name="filters" type="java.util.List" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="gnFindOwnerCompanyByCompanyBaseId" engine="java" auth="true"
+             location="it.memelabs.gn.services.node.NodeServices"
+             invoke="gnFindOwnerCompanyByCompanyBaseId" export="false">
+        <description>Find belonging to company/privateCompany of a companyBase/privateCompanyBase</description>
+        <attribute name="companyBasePartyId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="companyBaseNodeKey" type="String" mode="OUT" optional="false"/>
+        <attribute name="companyPartyId" type="String" mode="OUT" optional="false"/>
+        <attribute name="companyNodeKey" type="String" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="gnFindPublicCompanyBases" default-entity-name="" engine="java"
+             location="it.memelabs.gn.services.node.NodeServices"
+             invoke="gnFindPublicCompanyBases"
+             auth="true" export="false">
+        <description>Find company bases from taxIdentificationNumber of company</description>
+
+        <attribute name="taxIdentificationNumber" type="String" mode="IN" optional="false"/>
+
+        <attribute name="partyNodes" type="List" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnFindCompanyBasesByAddress" engine="java"
+             location="it.memelabs.gn.services.node.NodeServices"
+             invoke="gnFindCompanyBasesByAddress"
+             auth="true" export="true">
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnCompanyPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnCompanyTreePermissionCheck" main-action="VIEW"/>
+        </required-permissions>
+
+        <attribute name="address" type="java.util.Map" mode="IN" optional="false"/>
+        <attribute name="nodeKeyToExclude" type="String" mode="IN" optional="true"/>
+        <attribute name="parentNodeKey" type="String" mode="IN" optional="true"/>
+        <attribute name="companyBases" mode="OUT" type="java.util.List" optional="true"/>
+    </service>
+
+    <service name="gnFilterApertureManage" default-entity-name="" engine="java"
+             location="it.memelabs.gn.services.node.filter.FilterService"
+             invoke="gnFilterApertureManage" auth="true" export="false">
+        <description>Manage filter aperture and create eventually events</description>
+        <attribute name="partyRelationship" type="java.util.Map" mode="IN" optional="false"/>
+        <attribute name="taxIdentificationNumber" type="String" mode="IN" optional="false"/>
+    </service>
+
+    <service name="gnFilterApertureSendToEM" default-entity-name="" engine="java"
+             location="it.memelabs.gn.services.node.filter.FilterService"
+             invoke="gnFilterApertureSendToEM" auth="true" export="false">
+        <description>Manage EventMessageFilterApertureSend and create eventually events</description>
+        <attribute name="type" type="java.lang.Object" mode="IN" optional="false"/>
+        <attribute name="direction" type="String" mode="IN" optional="false"/>
+        <attribute name="nodeKey" type="String" mode="IN" optional="false"/>
+        <attribute name="senderNodeKey" type="String" mode="IN" optional="true"/>
+        <attribute name="senderPartyId" type="String" mode="IN" optional="true"/>
+        <attribute name="taxIdentificationNumber" type="String" mode="IN" optional="false"/>
+    </service>
+</services>

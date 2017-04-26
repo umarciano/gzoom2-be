@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.memelabs.smartnebula.lmm.persistence.main.mapper.SecurityRoleExMapper">
+    <resultMap id="BaseResultMap" type="it.memelabs.smartnebula.lmm.persistence.main.dto.SecurityRoleEx"
+               extends="it.memelabs.smartnebula.lmm.persistence.main.mapper.SecurityRoleMapper.BaseResultMap">
+        <collection property="permissions"
+                    ofType="it.memelabs.smartnebula.lmm.persistence.main.dto.SecurityRolePermission"
+                    columnPrefix="SRP_"
+                    resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.SecurityRolePermissionMapper.BaseResultMap">
+        </collection>
+    </resultMap>
+
+    <resultMap id="UserResultMap" type="it.memelabs.smartnebula.lmm.persistence.main.dto.SecurityUserRole"
+               extends="it.memelabs.smartnebula.lmm.persistence.main.mapper.SecurityRoleMapper.BaseResultMap">
+        <result column="node_id" jdbcType="BIGINT" property="nodeId"/>
+    </resultMap>
+
+    <select id="selectByExampleWithRowboundsEx"
+            parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.SecurityRoleExample"
+            resultMap="BaseResultMap">
+        select * from (
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.SecurityRoleMapper.Alias_Column_List">
+            <property name="tableAlias" value="SR."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        ,
+        <include
+                refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.SecurityRolePermissionMapper.Alias_Column_List">
+            <property name="tableAlias" value="SRP."/>
+            <property name="fieldAlias" value="SRP_"/>
+        </include>
+        from security_role SR
+        left join security_role_permission SRP on SRP.role_id =SR.id
+        ) t
+        <if test="_parameter != null">
+            <include
+                    refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.SecurityRoleMapper.Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKeyEx" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select DISTINCT
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.SecurityRoleMapper.Alias_Column_List">
+            <property name="tableAlias" value="SR."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        ,
+        <include
+                refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.SecurityRolePermissionMapper.Alias_Column_List">
+            <property name="tableAlias" value="SRP."/>
+            <property name="fieldAlias" value="SRP_"/>
+        </include>
+        from security_role SR
+        left join security_role_permission SRP on SRP.role_id =SR.id
+        where id = #{id,jdbcType=BIGINT}
+        order by SRP.entity_id
+    </select>
+
+    <select id="selectByUserLoginId" parameterType="java.lang.Long"
+            resultMap="UserResultMap">
+        select
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.SecurityRoleMapper.Alias_Column_List">
+            <property name="tableAlias" value="SR."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        ,
+        ASS.node_id
+        from user_login USR
+        join user_login_security_role_assoc ASS on ASS.user_login_id=USR.id
+        join security_role SR on SR.id=ASS.security_role_id
+        WHERE USR.id=#{userLoginId,jdbcType=BIGINT}
+    </select>
+</mapper>

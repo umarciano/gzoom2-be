@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="it.memelabs.smartnebula.lmm.persistence.main.mapper.UserLoginMapper">
+    <resultMap id="FullResultMap" type="it.memelabs.smartnebula.lmm.persistence.main.dto.UserLogin"
+               extends="it.memelabs.smartnebula.lmm.persistence.main.mapper.UserLoginPersistentMapper.BaseResultMap">
+        <collection property="nodes" ofType="it.memelabs.smartnebula.lmm.persistence.main.dto.Node"
+                    columnPrefix="su_">
+            <id column="id" property="id" jdbcType="BIGINT"/>
+            <result column="description" property="description" jdbcType="VARCHAR"/>
+            <result column="modified_stamp" property="modifiedStamp" jdbcType="TIMESTAMP"/>
+            <result column="created_stamp" property="createdStamp" jdbcType="TIMESTAMP"/>
+            <result column="created_by_user_id" property="createdByUserId" jdbcType="BIGINT"/>
+            <result column="modified_by_user_id" property="modifiedByUserId" jdbcType="BIGINT"/>
+        </collection>
+
+        <collection property="roles" javaType="ArrayList" column="id"
+                    ofType="it.memelabs.smartnebula.lmm.persistence.main.dto.SecurityUserRole"
+                    select="it.memelabs.smartnebula.lmm.persistence.main.mapper.SecurityRoleExMapper.selectByUserLoginId"/>
+    </resultMap>
+
+
+    <resultMap id="BaseResultMap" type="it.memelabs.smartnebula.lmm.persistence.main.dto.UserLogin"
+               extends="it.memelabs.smartnebula.lmm.persistence.main.mapper.UserLoginPersistentMapper.BaseResultMap">
+        <collection property="nodes" ofType="it.memelabs.smartnebula.lmm.persistence.main.dto.Node"
+                    columnPrefix="su_"
+                    resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.NodeMapper.BaseResultMap">
+        </collection>
+    </resultMap>
+
+
+    <select id="selectByUsername"
+            resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.UserLoginPersistentMapper.BaseResultMap"
+            parameterType="java.lang.String">
+        select
+        <include
+                refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.UserLoginPersistentMapper.Base_Column_List"/>
+        from user_login
+        where username = #{username,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectCountByUsername" resultType="int" parameterType="java.lang.String">
+        select
+        count (id)
+        from user_login
+        where username = #{username,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectCountByEmail" resultType="int" parameterType="java.lang.String">
+        select
+        count (email)
+        from user_login
+        where email = #{email,jdbcType=VARCHAR}       
+    </select>
+
+    <select id="selectCountByEmailAndNotUsername" resultType="int" parameterType="java.lang.String">
+        select
+        count (email)
+        from user_login
+        where email = #{email,jdbcType=VARCHAR} 
+        AND username not like #{username,jdbcType=VARCHAR}        
+    </select>
+
+
+    <select id="selectProfile" resultMap="FullResultMap">
+        <include refid="Profile_Select"/>
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="id!=null and id>0">
+                AND UL.id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="username!=null">
+                AND UL.username = #{username,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </select>
+
+
+    <select id="selectNodeAssicIds" resultType="java.lang.Long">
+        SELECT node_id FROM user_login_node_assoc WHERE user_login_id=#{userLoginId,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteNodeAssocByUserLoginId" parameterType="long">
+        DELETE FROM user_login_node_assoc WHERE user_login_id=#{userLoginId,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteNodeAssocByPrimaryKey">
+        DELETE FROM user_login_node_assoc WHERE user_login_id=#{userLoginId,jdbcType=BIGINT} AND node_id=#{nodeId,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insertNodeAssocBatch"
+            useGeneratedKeys="false">
+        INSERT INTO user_login_node_assoc
+        (
+        node_id, user_login_id
+        )
+        VALUES
+        <foreach collection="nodes" item="model" separator=",">
+            (
+            #{model}, #{userLoginId}
+            )
+        </foreach>
+    </insert>
+    <insert id="insertNodeAssoc"
+            useGeneratedKeys="false">
+        INSERT INTO user_login_node_assoc
+        (node_id, user_login_id)
+        VALUES (#{nodeId}, #{userLoginId})
+    </insert>
+
+
+    <insert id="insertEx" parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.UserLoginPersistent">
+        <selectKey keyProperty="id" order="BEFORE" resultType="long">
+            SELECT nextval('user_login_id_seq');
+        </selectKey>
+        insert into user_login (id, description, modified_stamp,
+        created_stamp, created_by_user_id, modified_by_user_id,
+        username, name, surname,
+        email, phone, authentication_type,
+        salt, password, permissions,
+        enabled, receivenotifications)
+        values (#{id,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, #{modifiedStamp,jdbcType=TIMESTAMP},
+        #{createdStamp,jdbcType=TIMESTAMP}, #{createdByUserId,jdbcType=BIGINT}, #{modifiedByUserId,jdbcType=BIGINT},
+        #{username,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{surname,jdbcType=VARCHAR},
+        #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{authenticationType,jdbcType=VARCHAR},
+        #{salt,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{permissions,jdbcType=VARCHAR},
+        #{enabled,jdbcType=BIT}, #{receivenotifications,jdbcType=BIT})
+        WHERE NOT EXISTS (SELECT (1) FROM user_login WHERE username = #{username,jdbcType=VARCHAR})
+    </insert>
+
+
+    <sql id="Profile_Select">
+        select
+        UL.id as id, UL.description as description, UL.modified_stamp as modified_stamp, UL.created_stamp as
+        created_stamp,
+        UL.created_by_user_id as created_by_user_id, UL.modified_by_user_id as modified_by_user_id,
+        UL.username as username, UL.name as name, UL.surname as surname, UL.email as email,
+        UL.phone as phone, UL.authentication_type as authentication_type, UL.salt as salt, UL.password as password,
+        UL.permissions as permissions, UL.enabled as enabled,
+
+        SU.id as su_id,
+        SU.description as su_description,
+        SU.modified_stamp as su_modified_stamp,
+        SU.created_stamp as su_created_stamp,
+        SU.created_by_user_id as su_created_by_user_id,
+        SU.modified_by_user_id as su_modified_by_user_id
+        from user_login UL
+        left outer join user_login_node_assoc ASS on UL.id=ASS.user_login_id
+        left outer join node SU on ASS.node_id = SU.id
+    </sql>
+
+
+    <select id="selectUsersWithRowbounds" resultMap="FullResultMap"
+            parameterType="it.memelabs.smartnebula.lmm.persistence.main.dao.UserLoginFilter">
+
+        <include refid="Profile_Select"/>
+
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="filterText!=null">
+                AND (
+                lower (UL.username) LIKE lower(CONCAT('%', #{filterText,jdbcType=VARCHAR},'%'))
+                OR  lower (UL.name) LIKE lower(CONCAT('%', #{filterText,jdbcType=VARCHAR},'%'))
+                OR  lower (UL.surname) LIKE lower(CONCAT('%', #{filterText,jdbcType=VARCHAR},'%') )
+                )
+            </if>
+            <if test="nodeId!=null">
+                AND SU.id = #{nodeId}
+            </if>
+        </trim>
+
+        ORDER BY UL.username
+    </select>
+
+    <select id="countUsers" resultType="int"
+            parameterType="it.memelabs.smartnebula.lmm.persistence.main.dao.UserLoginFilter">
+        SELECT COUNT (1)
+        from user_login UL
+        <if test="nodeId!=null">
+            join user_login_node_assoc ASS on UL.id=ASS.user_login_id
+            join node SU on ASS.node_id = SU.id
+        </if>
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="filterText!=null">
+                AND (
+                    lower (UL.username) LIKE lower(CONCAT('%', #{filterText,jdbcType=VARCHAR},'%'))
+                OR  lower (UL.name) LIKE lower(CONCAT('%', #{filterText,jdbcType=VARCHAR},'%'))
+                OR  lower (UL.surname) LIKE lower(CONCAT('%', #{filterText,jdbcType=VARCHAR},'%') )
+                )
+            </if>
+            <if test="nodeId!=null">
+                AND SU.id = #{nodeId}
+            </if>
+        </trim>
+    </select>
+
+
+    <update id="updateUser" parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.UserLoginPersistent">
+        update user_login
+        set description = #{description,jdbcType=VARCHAR},
+        modified_stamp = #{modifiedStamp,jdbcType=TIMESTAMP},
+        modified_by_user_id = #{modifiedByUserId,jdbcType=BIGINT},
+        name = #{name,jdbcType=VARCHAR},
+        surname = #{surname,jdbcType=VARCHAR},
+        email = #{email,jdbcType=VARCHAR},
+        phone = #{phone,jdbcType=VARCHAR},
+        authentication_type = #{authenticationType,jdbcType=VARCHAR},
+        <if test="password!=null">
+            salt = #{salt,jdbcType=VARCHAR},
+            password = #{password,jdbcType=VARCHAR},
+        </if>
+        permissions = #{permissions,jdbcType=VARCHAR},
+        enabled = #{enabled,jdbcType=BOOLEAN}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+
+    <select id="selectBaseProfile" resultMap="BaseResultMap">
+        SELECT
+        <include
+                refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.UserLoginPersistentMapper.Alias_Column_List">
+            <property name="tableAlias" value="UL."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        ,
+        <include
+                refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.NodeMapper.Alias_Column_List">
+            <property name="tableAlias" value="su."/>
+            <property name="fieldAlias" value="su_"/>
+        </include>
+
+        from user_login UL
+        left outer join user_login_node_assoc ASS on UL.id=ASS.user_login_id
+        left outer join node SU on ASS.node_id = SU.id
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="id!=null and id>0">
+                AND UL.id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="username!=null">
+                AND UL.username = #{username,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </select>
+</mapper>

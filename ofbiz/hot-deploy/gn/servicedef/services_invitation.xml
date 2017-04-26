@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Gn Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="gnCreatePartyInvitation" engine="java" auth="true"
+             location="it.memelabs.gn.services.node.InvitationService"
+             invoke="gnCreatePartyInvitation"
+             export="true" default-entity-name="PartyInvitation">
+        <description>Create partyInvitation</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnInviterCheck" main-action="CREATE"/>
+        </required-permissions>
+
+        <auto-attributes mode="IN" optional="true"/>
+        <attribute mode="IN" name="expirationDate" type="java.sql.Timestamp" optional="true"/>
+        <attribute mode="IN" name="emails" type="java.util.List" optional="true"/>
+        <attribute mode="IN" name="partyNode" type="java.util.Map" optional="true"/>
+        <attribute mode="IN" name="nodeKeyFrom" type="String" optional="true"/>
+        <attribute mode="IN" name="geoCode" type="String" optional="true"/>
+
+        <attribute mode="OUT" name="partyInvitationId" type="String" optional="true"/>
+        <attribute mode="OUT" name="uuid" type="String" optional="true"/>
+        <attribute mode="OUT" name="statusId" type="String" optional="true"/>
+        <attribute mode="OUT" name="inviterName" type="String" optional="true"/>
+        <attribute mode="OUT" name="userLoginIdFrom" type="String" optional="true"/>
+        <attribute mode="OUT" name="companyStatusId" type="String" optional="true"/>
+        <attribute mode="OUT" name="emails" type="java.util.List" optional="true"/>
+    </service>
+
+    <service name="gnFindPartyInvitationById" engine="java" auth="true"
+             location="it.memelabs.gn.services.node.InvitationService"
+             invoke="gnFindPartyInvitationById"
+             export="true" default-entity-name="PartyInvitation">
+        <description>Find PartyInvitation by uuid or partyInvitationId</description>
+        <permission-service service-name="gnInvitationAdminPermissionCheck"/>
+        <attribute mode="IN" name="partyInvitationId" type="String" optional="true"/>
+        <attribute mode="IN" name="uuid" type="String" optional="true"/>
+
+        <attribute mode="OUT" name="partyInvitation" type="Map" optional="false"/>
+    </service>
+
+    <service name="gnInternalFindPartyInvitationById" engine="java" auth="true"
+             location="it.memelabs.gn.services.node.InvitationService"
+             invoke="gnInternalFindPartyInvitationById"
+             export="false" default-entity-name="PartyInvitation">
+        <description>Find PartyInvitation by uuid or partyInvitationId</description>
+        <attribute mode="IN" name="partyInvitationId" type="String" optional="true"/>
+        <attribute mode="IN" name="uuid" type="String" optional="true"/>
+
+        <attribute mode="OUT" name="partyInvitation" type="Map" optional="false"/>
+    </service>
+
+    <service name="gnFindPartyInvitation" engine="java" auth="true"
+             location="it.memelabs.gn.services.node.InvitationService"
+             invoke="gnFindInvitation"
+             export="true" default-entity-name="PartyInvitation">
+        <description>find partyInvitation by status</description>
+        <attribute mode="IN" name="statusId" type="String" optional="true"/>
+        <attribute mode="IN" name="invitedNameContent" type="String" optional="true"/>
+        <attribute mode="IN" name="companyInvitationState" type="String" optional="true"/>
+
+        <attribute mode="OUT" name="partyInvitations" type="java.util.List" optional="false"/>
+        <attribute mode="OUT" name="partyInvitationsSize" type="java.lang.Integer" optional="false"/>
+    </service>
+
+    <service name="gnUpdateInvitationState" engine="java" auth="true"
+             location="it.memelabs.gn.services.node.InvitationService"
+             invoke="gnUpdateInvitationState"
+             export="true" default-entity-name="PartyInvitation">
+        <description>find partyInvitation by status</description>
+        <permission-service service-name="gnInvitationAdminPermissionCheck"/>
+        <attribute mode="IN" name="statusId" type="String" optional="false"/>
+        <attribute mode="IN" name="partyInvitationId" type="String" optional="true"/>
+        <attribute mode="IN" name="uuid" type="String" optional="true"/>
+    </service>
+
+
+    <service name="gnAcceptPartyInvitation" engine="java" auth="true"
+             location="it.memelabs.gn.services.node.InvitationService"
+             invoke="gnAcceptPartyInvitation"
+             export="true" default-entity-name="PartyInvitation">
+        <description>Accept partyInvitation</description>
+        <permission-service service-name="gnInvitationAdminPermissionCheck"/>
+        <attribute mode="IN" name="uuid" type="String" optional="false"/>
+        <attribute mode="IN" name="invitedUserLogin" type="java.util.Map" optional="false"/>
+        <attribute mode="IN" name="password" type="String" optional="false"/>
+        <attribute mode="IN" name="companyBase" type="java.util.Map" optional="false"/>
+        <attribute mode="IN" name="companyName" type="java.lang.String" optional="false"/>
+
+        <attribute mode="OUT" name="rootContextId" type="String" optional="true"/>
+        <attribute mode="OUT" name="companyContextId" type="String" optional="true"/>
+        <attribute mode="OUT" name="companyId" type="String" optional="true"/>
+        <attribute mode="OUT" name="companyBase" type="java.util.Map" optional="true"/>
+    </service>
+
+    <service name="gnInvitationFindCountries" engine="java" auth="true"
+             location="it.memelabs.gn.services.node.InvitationService"
+             invoke="gnInvitationFindCountries"
+             export="true" default-entity-name="">
+        <description></description>
+        <permission-service service-name="gnInvitationAdminPermissionCheck"/>
+        <attribute mode="IN" name="uuid" type="String" optional="false"/>
+        <attribute name="countries" type="java.util.List" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="gnManageOldPartyInvitation" engine="java" auth="true"
+             location="it.memelabs.gn.services.node.InvitationService"
+             invoke="gnManageOldPartyInvitation"
+             export="false" default-entity-name="">
+        <description>gnManageOldPartyInvitation</description>
+    </service>
+
+    <service name="gnScheduleJobsAuthorizationPublicationReminderForInvitedCompany" engine="java" auth="true"
+             location="it.memelabs.gn.services.node.InvitationService"
+             invoke="gnScheduleJobsAuthorizationPublicationReminderForInvitedCompany"
+             export="false" default-entity-name="">
+        <description>gnScheduleJobsAuthorizationPublicationReminderForInvitedCompany</description>
+    </service>
+
+    <service name="gnCreateUpdateInvitationDefaultMessage" engine="java" auth="true"
+             location="it.memelabs.gn.services.node.MessageTemplateServices"
+             invoke="gnCreateUpdateInvitationDefaultMessage"
+             export="true" default-entity-name="GnMessageTemplateSetting">
+        <description>gnCreateUpdateInvitationDefaultMessage</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnInviterCheck" main-action="CREATE"/>
+        </required-permissions>
+        <auto-attributes mode="IN" entity-name="GnMessageTemplateSetting" optional="true"/>
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+        <attribute name="messageTemplateSettingId" type="String" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="gnFindInvitationMessageTemplateSetting" engine="java" auth="true"
+             location="it.memelabs.gn.services.node.MessageTemplateServices"
+             invoke="gnFindInvitationMessageTemplateSetting"
+             export="true" default-entity-name="GnMessageTemplateSetting">
+        <description>gnFindInvitationMessageTemplateSetting</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnInviterCheck" main-action="CREATE"/>
+        </required-permissions>
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+        <attribute name="messageTemplateSetting" type="java.util.Map" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnDeleteInvitationMessageTemplateSetting" engine="java" auth="true"
+             location="it.memelabs.gn.services.node.MessageTemplateServices"
+             invoke="gnDeleteInvitationMessageTemplateSetting"
+             export="true" default-entity-name="GnMessageTemplateSetting">
+        <description>gnDeleteInvitationMessageTemplateSetting</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnInviterCheck" main-action="CREATE"/>
+        </required-permissions>
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+        <attribute name="messageTemplateSettingId" type="String" mode="IN" optional="false"/>
+    </service>
+
+</services>

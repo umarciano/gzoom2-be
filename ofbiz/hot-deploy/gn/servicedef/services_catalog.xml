@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Gn Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="gnFindWasteCerCodes" engine="simple" auth="true"
+             location="component://gn/script/it/memelabs/gn/catalog/CatalogServices.xml"
+             invoke="gnFindWasteCerCodes" export="true">
+        <description>return WasteCerCodes catalog.</description>
+        <attribute name="wasteCerCodes" type="java.util.List" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="gnFindOperations" engine="simple" auth="true"
+             location="component://gn/script/it/memelabs/gn/catalog/CatalogServices.xml"
+             invoke="gnFindOperations" export="true">
+        <description>return Operation catalog.</description>
+        <attribute name="operations" type="java.util.List" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="gnFindIssuers" engine="simple" auth="true"
+             location="component://gn/script/it/memelabs/gn/catalog/CatalogServices.xml"
+             invoke="gnFindIssuers" export="true">
+        <description>return Issuer+IssuerBases catalog.</description>
+        <attribute name="partyNodes" type="java.util.List" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="gnFindPackaging" engine="simple" auth="true"
+             location="component://gn/script/it/memelabs/gn/catalog/CatalogServices.xml"
+             invoke="gnFindPackaging" export="true">
+        <description>return Issuer+IssuerBases catalog.</description>
+        <attribute name="packagings" type="java.util.List" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="gnFindCountries" engine="java" auth="true"
+             location="it.memelabs.gn.services.catalog.CatalogServices"
+             invoke="gnFindCountries" export="true">
+        <description>return Issuer+IssuerBases catalog.</description>
+        <attribute name="countries" type="java.util.List" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="gnFindCategoriesAndClasses" engine="simple" auth="true"
+             location="component://gn/script/it/memelabs/gn/catalog/CatalogServices.xml"
+             invoke="gnFindCategoriesAndClasses" export="true">
+        <description>return Categories and Classes catalog.</description>
+        <attribute name="categoriesAndClasses" type="java.util.List" mode="OUT" optional="false"/>
+    </service>
+
+</services>

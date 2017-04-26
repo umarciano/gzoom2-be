@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+        namespace="it.memelabs.smartnebula.lmm.persistence.main.mapper.EquipmentExMapper">
+
+    <resultMap id="BaseResultMap"
+               type="it.memelabs.smartnebula.lmm.persistence.main.dto.EquipmentEx"
+               extends="it.memelabs.smartnebula.lmm.persistence.main.mapper.EquipmentMapper.BaseResultMap">
+        <result column="equipment_category_desc" property="equipmentCategoryDesc" jdbcType="VARCHAR"/>
+        <result column="equipment_type_desc" property="equipmentTypeDesc" jdbcType="VARCHAR"/>
+        <result column="ee_state_description" jdbcType="VARCHAR" property="eeStateDescription"/>
+        <result column="ee_state_tag" jdbcType="VARCHAR" property="eeStateTag"/>
+        <result column="comp_business_name" jdbcType="VARCHAR" property="compDescription"/>
+        <result column="ee_badge_number" jdbcType="VARCHAR" property="peBadgeNumber"/>
+        <result column="ee_card_number" jdbcType="BIGINT" property="peCardNumber"/>
+        <result column="ee_start_date" jdbcType="DATE" property="startDate"/>
+        <result column="ee_end_date" jdbcType="DATE" property="endDate"/>
+
+        <result column="company_state_description" jdbcType="VARCHAR" property="companyStateDescription"/>
+        <result column="company_state_tag" jdbcType="VARCHAR" property="companyStateTag"/>
+
+    </resultMap>
+
+    <sql id="Min_Alias_Column_List">
+    ${tableAlias}registration_number AS
+    ${fieldAlias}registration_number
+  </sql>
+
+    <sql id="Example_Where_Clause">
+        <trim prefix="WHERE" prefixOverrides="and |or ">
+            <trim prefix="and (" suffix=")" prefixOverrides="WHERE">
+                <include
+                        refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.EquipmentMapper.Example_Where_Clause"/>
+                <if test="filterCompanyId != null">
+                    and ee_company_id=#{filterCompanyId,jdbcType=BIGINT}
+                </if>
+                <if test="filterStatusId!=null">
+                    and ee_state_id=#{filterStatusId,jdbcType=BIGINT}
+                </if>
+                <if test="filterBadgeNumber!=null">
+                    and lower(ee_badge_number) like #{filterBadgeNumber,jdbcType=VARCHAR}
+                </if>
+                <if test="filterTimeCardNumber!=null">
+                    and ee_card_number = #{filterTimeCardNumber,jdbcType=BIGINT}
+                </if>
+                <if test="filterCompanyStatusId != null">
+                    and company_state_id=#{filterCompanyStatusId}
+                </if>
+            </trim>
+        </trim>
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long"
+            resultMap="BaseResultMap">
+        select
+        <include
+                refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.EquipmentMapper.Alias_Column_List">
+            <property name="tableAlias" value="e."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        , ec.description as equipment_category_desc
+        , et.description as equipment_type_desc
+        from equipment e
+        left join equipment_category ec on e.equipment_category_id=ec.id
+        left join equipment_type et on e.equipment_type_id=et.id
+        where e.id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="countByExample"
+            parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.EquipmentExExample"
+            resultType="java.lang.Integer">
+        select count(1) from (
+        SELECT
+        <if test="distinct">
+            distinct
+        </if>
+        <include
+                refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.EquipmentMapper.Alias_Column_List">
+            <property name="tableAlias" value="e."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        <if test="filterCompanyId != null or filterStatusId != null or (filterType != null and filterType == 'equipments')  or filterCompanyStatusId != null">
+            ,
+            <include
+                    refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.EquipmentEmploymentMapper.Alias_Column_List">
+                <property name="tableAlias" value="ee."/>
+                <property name="fieldAlias" value="ee_"/>
+            </include>
+        </if>
+        <if test="filterType != null and filterType == 'equipments'">
+            , es.description AS ee_state_description, ee.state_tag AS ee_state_tag, es.id AS es_id
+            ,c.business_name AS comp_business_name , c.id AS comp_id
+            , c.state_id as company_state_id
+            , company_state.description as company_state_description
+            , company_state.tag as company_state_tag
+        </if>
+        from equipment e
+        <if test="_parameter != null">
+            <if test="filterCompanyId!=null or filterStatusId!=null or (filterType != null and filterType == 'equipments')  or filterCompanyStatusId != null">
+                left join equipment_employment ee ON e.id = ee.equipment_id
+            </if>
+            <if test="filterType != null and filterType == 'equipments' or filterCompanyStatusId != null">
+                left join entity_state es on es.id=ee.state_id
+                left join company c on c.id=ee.company_id
+                LEFT JOIN entity_state company_state on company_state.id = c.state_id
+            </if>
+        </if>
+        ) t
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+
+    </select>
+
+    <select id="selectByExampleWithRowbounds"
+            parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.EquipmentExample"
+            resultMap="BaseResultMap">
+        select * from (
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include
+                refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.EquipmentMapper.Alias_Column_List">
+            <property name="tableAlias" value="e."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        , ec.description as equipment_category_desc
+        , et.description as equipment_type_desc
+        , c.state_id as company_state_id
+        , company_state.description as company_state_description
+        , company_state.tag as company_state_tag
+        <if test="filterCompanyId != null or filterStatusId != null or (filterType != null and filterType == 'equipments')">
+            ,
+            <include
+                    refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.EquipmentEmploymentMapper.Alias_Column_List">
+                <property name="tableAlias" value="ee."/>
+                <property name="fieldAlias" value="ee_"/>
+            </include>
+        </if>
+        <if test="filterType != null and filterType == 'equipments'">
+            , es.description AS ee_state_description, es.tag AS es_state_tag, es.id AS es_id
+            ,c.business_name AS comp_business_name , c.id AS comp_id
+        </if>
+        from equipment e
+        left join equipment_category ec
+        on e.equipment_category_id=ec.id
+        left join equipment_type et on
+        e.equipment_type_id=et.id
+        <if test="_parameter != null">
+            <if test="filterCompanyId!=null or filterStatusId!=null or (filterType != null and filterType == 'equipments') or filterCompanyStatusId != null">
+                left join equipment_employment ee ON e.id = ee.equipment_id
+            </if>
+            <if test="(filterType != null and filterType == 'equipments') or filterCompanyStatusId != null">
+                left join entity_state es on es.id=ee.state_id
+                left join company c on c.id=ee.company_id
+                LEFT JOIN entity_state company_state on company_state.id = c.state_id
+            </if>
+        </if>
+        ) t
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByWorkLogIdWithRowbounds"
+            resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.EquipmentMapper.BaseResultMap">
+        select
+        distinct
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.EquipmentMapper.Alias_Column_List">
+            <property name="tableAlias" value="e."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        from work_log_equipment_event ev
+        join equipment_employment ee on ev.equipment_empl_id = ee.id
+        join equipment e on ee.equipment_id=e.id
+        <where>
+            <if test="filterText != null">
+                and (
+                lower(e.registration_number) like lower(#{filterText})
+                or
+                lower(e.brand) like lower(#{filterText})
+                or
+                lower(e.model) like lower(#{filterText})
+                )
+            </if>
+            <if test="workLogId != null">
+                and ev.work_log_id = #{workLogId}
+            </if>
+        </where>
+        order by e.registration_number
+    </select>
+
+    <select id="countByWorkLogId" resultType="java.lang.Integer">
+        select COUNT (DISTINCT e.id)
+        from work_log_equipment_event ev
+        join equipment_employment ee on ev.equipment_empl_id = ee.id
+        join equipment e on ee.equipment_id=e.id
+        <where>
+            <if test="filterText != null">
+                and (
+                lower(e.registration_number) like lower(#{filterText})
+                or
+                lower(e.brand) like lower(#{filterText})
+                or
+                lower(e.model) like lower(#{filterText})
+                )
+            </if>
+            <if test="workLogId != null">
+                and ev.work_log_id = #{workLogId}
+            </if>
+        </where>
+    </select>
+
+</mapper>

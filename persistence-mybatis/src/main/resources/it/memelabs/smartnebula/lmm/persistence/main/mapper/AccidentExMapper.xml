@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="it.memelabs.smartnebula.lmm.persistence.main.mapper.AccidentExMapper">
+    <resultMap id="BaseResultMap" type="it.memelabs.smartnebula.lmm.persistence.main.dto.AccidentEx"
+               extends="it.memelabs.smartnebula.lmm.persistence.main.mapper.AccidentMapper.BaseResultMap">
+        <association property="constructionSite"
+                     javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.ConstructionSite"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.ConstructionSiteMapper.BaseResultMap"
+                     columnPrefix="cs_"/>
+        <association property="personEmployment"
+                     javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.PersonEmploymentEx"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.PersonEmploymentExMapper.BaseResultMap"
+                     columnPrefix="pe_"/>
+    </resultMap>
+
+    <sql id="Select_Joined_Column_List">
+        <include
+                refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.AccidentMapper.Alias_Column_List">
+            <property name="tableAlias" value="acc."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        ,
+        <include
+                refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.ConstructionSiteExMapper.Min_Alias_Column_List">
+            <property name="tableAlias" value="cs."/>
+            <property name="fieldAlias" value="cs_"/>
+        </include>
+        ,
+        acc.construction_site_id as cs_id
+        ,
+        <include
+                refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.PersonEmploymentMapper.Alias_Column_List">
+            <property name="tableAlias" value="pe."/>
+            <property name="fieldAlias" value="pe_"/>
+        </include>
+        ,
+        <include
+                refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.PersonExMapper.Min_Alias_Column_List">
+            <property name="tableAlias" value="p."/>
+            <property name="fieldAlias" value="pe_person_"/>
+        </include>
+        ,
+        <include
+                refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyExMapper.Min_Alias_Column_List">
+            <property name="tableAlias" value="co."/>
+            <property name="fieldAlias" value="pe_company_"/>
+        </include>
+    </sql>
+
+    <select id="selectExByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Select_Joined_Column_List"/>
+        from accident acc
+        LEFT JOIN construction_site cs on cs.id = acc.construction_site_id
+        LEFT JOIN person_employment pe on pe.id = acc.person_employment_id
+        LEFT JOIN company co on co.id = pe.company_id
+        LEFT JOIN person p on p.id = pe.person_id
+        where acc.id = #{id,jdbcType=BIGINT}
+    </select>
+
+
+    <select id="selectExByExampleWithRowbounds" resultMap="BaseResultMap"
+            parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.AccidentExample">
+        select * from (
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Select_Joined_Column_List"/>
+        from accident acc
+        LEFT JOIN construction_site cs on cs.id = acc.construction_site_id
+        LEFT JOIN person_employment pe on pe.id = acc.person_employment_id
+        LEFT JOIN company co on co.id = pe.company_id
+        LEFT JOIN person p on p.id = pe.person_id
+        ) t
+        <if test="_parameter != null">
+            <include
+                    refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.AccidentMapper.Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="searchOverlap" parameterType="it.memelabs.smartnebula.lmm.persistence.main.dao.AccidentFilter"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Select_Joined_Column_List"/>
+        from accident acc
+        LEFT JOIN construction_site cs on cs.id = acc.construction_site_id
+        JOIN person_employment pe on pe.id = acc.person_employment_id
+        LEFT JOIN company co on co.id = pe.company_id
+        JOIN person p on p.id = pe.person_id
+        where acc.owner_node_id = #{ownerNodeId,jdbcType=BIGINT}
+        AND p.id = #{personId,jdbcType=BIGINT}
+        AND
+        <![CDATA[ acc.since <= #{until,jdbcType=DATE}]]>
+        AND
+        <![CDATA[ acc.until >= #{since,jdbcType=DATE}]]>
+        <if test="id != null">
+            AND
+            <![CDATA[ acc.id <> #{id,jdbcType=BIGINT}]]>
+        </if>
+    </select>
+
+    <select id="countByWorkLogPersonEvents" resultType="java.lang.Integer">
+        select count(ACC.id)
+        from work_log_person_event EV
+        join accident ACC on ACC.person_employment_id=EV.person_empl_id
+        <where>
+            (
+            <![CDATA[ ACC.since <= (to_date(EV.event_timestamp::text, 'YYYY-MM-DD') + INTERVAL '-1 days')
+            and ACC.until >=  to_date(EV.event_timestamp::text, 'YYYY-MM-DD') ]]>
+            and EV.id in
+            <foreach item="item" index="index" collection="events"
+                     open="(" separator="," close=")">
+                #{item}
+            </foreach>
+            )
+        </where>
+    </select>
+
+
+</mapper>

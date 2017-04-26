@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.memelabs.smartnebula.lmm.persistence.main.mapper.AntimafiaProcessPhaseExMapper">
+
+	<resultMap id="BaseResultMap" type="it.memelabs.smartnebula.lmm.persistence.main.dto.AntimafiaProcessPhaseEx" extends="it.memelabs.smartnebula.lmm.persistence.main.mapper.AntimafiaProcessPhaseMapper.BaseResultMap">
+		<association property="state" columnPrefix="state_" resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.EntityStateMapper.BaseResultMap" />
+		<association property="type" columnPrefix="type_" resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.AntimafiaProcessPhaseTypeMapper.BaseResultMap" />
+	</resultMap>
+
+	<sql id="Select_Joined_Column_List">
+		,
+		<include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.EntityStateExMapper.Min_Alias_Column_List">
+			<property name="tableAlias" value="es." />
+			<property name="fieldAlias" value="state_" />
+		</include>
+		,
+		<include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.AntimafiaProcessPhaseTypeMapper.Alias_Column_List">
+			<property name="tableAlias" value="type." />
+			<property name="fieldAlias" value="type_" />
+		</include>
+	</sql>
+
+	<sql id="Select_Joined_Tables">
+		left join entity_state es on app.state_id=es.id
+		left join antimafia_process_phase_type type on app.phase_type_id=type.id
+	</sql>
+
+	<select id="selectExByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select
+		<include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.AntimafiaProcessPhaseMapper.Alias_Column_List">
+			<property name="tableAlias" value="app." />
+			<property name="fieldAlias" value="" />
+		</include>
+		<include refid="Select_Joined_Column_List" />
+		from antimafia_process_phase app
+		<include refid="Select_Joined_Tables" />
+		where app.id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<select id="selectExByExample" parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.AntimafiaProcessPhaseExample" resultMap="BaseResultMap">
+		select * from (
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.AntimafiaProcessPhaseMapper.Alias_Column_List">
+			<property name="tableAlias" value="app." />
+			<property name="fieldAlias" value="" />
+		</include>
+		<include refid="Select_Joined_Column_List" />
+		from antimafia_process_phase app
+		<include refid="Select_Joined_Tables" />
+		) t
+		<if test="_parameter != null">
+			<include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.AntimafiaProcessPhaseMapper.Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	
+	
+	 <select id="selectCountByUniquePhaseType" resultType="int" parameterType="java.lang.Long">
+        select
+        count (phase_type_id)
+        from antimafia_process_phase
+        where phase_type_id = #{phase_type_id,jdbcType=BIGINT}
+        AND antimafia_process_id = #{antimafia_process_id,jdbcType=BIGINT}
+    </select>
+
+</mapper>

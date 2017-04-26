@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+
+    <!--packaging-->
+    <GnPackaging description="Big bag" packagingId="BIGBAG"/>
+    <GnPackaging description="Cassone" packagingId="CASSONE"/>
+    <GnPackaging description="Cisterna" packagingId="CISTERNA"/>
+    <GnPackaging description="Fusto" packagingId="FUSTO"/>
+    <GnPackaging description="Pallet" packagingId="PALLET"/>
+    <GnPackaging description="Sfuso" packagingId="SFUSO"/>
+    <GnPackaging description="Altro" packagingId="ALTRO"/>
+
+</entity-engine-xml>

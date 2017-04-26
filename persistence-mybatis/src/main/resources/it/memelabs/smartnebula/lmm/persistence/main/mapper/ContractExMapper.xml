@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractExMapper">
+
+    <resultMap id="BaseResultMap" type="it.memelabs.smartnebula.lmm.persistence.main.dto.ContractEx"
+               extends="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractMapper.BaseResultMap">
+        <association property="company" javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.Company"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyMapper.BaseResultMap"
+                     columnPrefix="C_">
+        </association>
+        <association property="performingCompany" javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.Company"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyMapper.BaseResultMap"
+                     columnPrefix="PC_">
+        </association>
+        <association property="referenceContract" javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.Contract"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractMapper.BaseResultMap"
+                     columnPrefix="RC_">
+        </association>
+        <association property="antimafiaProcess"
+                     javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.AntimafiaProcessEx"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.AntimafiaProcessExMapper.BaseResultMap"
+                     columnPrefix="AP_">
+        </association>
+        <association property="contractType" javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.ContractCatalog"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractCatalogMapper.BaseResultMap"
+                     columnPrefix="TY_">
+        </association>
+        <association property="lot" javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.Lot"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.LotMapper.BaseResultMap"
+                     columnPrefix="LOT_">
+        </association>
+        <association property="contractExtension" javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.Contract"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractMapper.BaseResultMap"
+                     columnPrefix="CE_">
+        </association>
+        <association property="state" javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.EntityState"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.EntityStateMapper.BaseResultMap"
+                     columnPrefix="ES_">
+        </association>
+        <association property="contractAuthorization"
+                     javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.ContractCatalog"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractCatalogMapper.BaseResultMap"
+                     columnPrefix="AUTH_">
+        </association>
+        <association property="contractCommitmentMode"
+                     javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.ContractCatalog"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractCatalogMapper.BaseResultMap"
+                     columnPrefix="CM_">
+        </association>
+    </resultMap>
+
+    <resultMap id="MgoResultMap" type="it.memelabs.smartnebula.lmm.persistence.main.dto.ContractExMgo"
+               extends="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractMapper.BaseResultMap">
+        <association property="company" javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.CompanyEx"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyExMapper.BaseResultMap"
+                     columnPrefix="C_">
+        </association>
+        <association property="performingCompany" javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.CompanyEx"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyExMapper.BaseResultMap"
+                     columnPrefix="PC_">
+        </association>
+        <association property="referenceContract" javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.Contract"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractMapper.BaseResultMap"
+                     columnPrefix="RC_">
+        </association>
+        <association property="antimafiaProcess"
+                     javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.AntimafiaProcessEx"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.AntimafiaProcessExMapper.BaseResultMap"
+                     columnPrefix="AP_">
+        </association>
+        <association property="contractType" javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.ContractCatalog"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractCatalogMapper.BaseResultMap"
+                     columnPrefix="TY_">
+        </association>
+        <association property="lot" javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.Lot"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.LotMapper.BaseResultMap"
+                     columnPrefix="LOT_">
+        </association>
+        <association property="contractExtension" javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.Contract"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractMapper.BaseResultMap"
+                     columnPrefix="CE_">
+        </association>
+        <association property="state" javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.EntityState"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.EntityStateMapper.BaseResultMap"
+                     columnPrefix="ES_">
+        </association>
+        <association property="contractAuthorization"
+                     javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.ContractCatalog"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractCatalogMapper.BaseResultMap"
+                     columnPrefix="AUTH_">
+        </association>
+        <association property="contractCommitmentMode"
+                     javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.ContractCatalog"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractCatalogMapper.BaseResultMap"
+                     columnPrefix="CM_">
+        </association>
+        <collection property="constructionSites" javaType="ArrayList" column="id"
+                    ofType="it.memelabs.smartnebula.lmm.persistence.main.dto.ConstructionSite"
+                    select="it.memelabs.smartnebula.lmm.persistence.main.mapper.ConstructionSiteExMapper.selectByContract"/>
+    </resultMap>
+
+    <resultMap id="ExResultMap" type="it.memelabs.smartnebula.lmm.persistence.main.dto.ContractEx"
+               extends="BaseResultMap">
+        <collection property="constructionSites" javaType="ArrayList" column="id"
+                    ofType="it.memelabs.smartnebula.lmm.persistence.main.dto.ConstructionSite"
+                    select="it.memelabs.smartnebula.lmm.persistence.main.mapper.ConstructionSiteExMapper.selectByContract"/>
+    </resultMap>
+
+    <sql id="Min_Alias_Column_List">
+		${tableAlias}description AS ${fieldAlias}description,
+		${tableAlias}contract_number AS ${fieldAlias}contract_number
+	</sql>
+
+    <sql id="Select_Joined_Column_List">
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractMapper.Alias_Column_List">
+            <property name="tableAlias" value="CT."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyMapper.Alias_Column_List">
+            <property name="tableAlias" value="C."/>
+            <property name="fieldAlias" value="C_"/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyMapper.Alias_Column_List">
+            <property name="tableAlias" value="PC."/>
+            <property name="fieldAlias" value="PC_"/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractMapper.Alias_Column_List">
+            <property name="tableAlias" value="RC."/>
+            <property name="fieldAlias" value="RC_"/>
+        </include>
+        , AP.id as AP_id
+        , APP.id as AP_prefecture_id
+        , APP.description as AP_prefecture_description
+        , APL.id as AP_lot_id
+        , AP.created_stamp as AP_created_stamp
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.LotExMapper.Min_Alias_Column_List">
+            <property name="tableAlias" value="APL."/>
+            <property name="fieldAlias" value="AP_lot_"/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyExMapper.Min_Alias_Column_List">
+            <property name="tableAlias" value="APC."/>
+            <property name="fieldAlias" value="AP_company_"/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractCatalogMapper.Alias_Column_List">
+            <property name="tableAlias" value="TY."/>
+            <property name="fieldAlias" value="TY_"/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.LotExMapper.Min_Alias_Column_List">
+            <property name="tableAlias" value="LOT."/>
+            <property name="fieldAlias" value="LOT_"/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractMapper.Alias_Column_List">
+            <property name="tableAlias" value="CE."/>
+            <property name="fieldAlias" value="CE_"/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.EntityStateMapper.Alias_Column_List">
+            <property name="tableAlias" value="ES."/>
+            <property name="fieldAlias" value="ES_"/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractCatalogMapper.Alias_Column_List">
+            <property name="tableAlias" value="AUTH."/>
+            <property name="fieldAlias" value="AUTH_"/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractCatalogMapper.Alias_Column_List">
+            <property name="tableAlias" value="CM."/>
+            <property name="fieldAlias" value="CM_"/>
+        </include>
+
+    </sql>
+
+    <sql id="Select_Joined_Tables">
+		left join company C on CT.company_id = C.id
+		left join company PC on CT.performing_company_id = PC.id
+		left join contract RC on CT.reference_contract_id= RC.id
+		left join antimafia_process AP on CT.antimafia_process_id = AP.id
+		left join lot APL on AP.lot_id = APL.id
+		left join company APC on AP.company_id = APC.id
+		left join prefecture APP on AP.prefecture_id = APP.id
+		left join contract_catalog TY on CT.contract_type_id = TY.id
+		left join lot LOT on CT.lot_id = LOT.id
+		left join contract CE on CT.contract_extension_id = CE.id
+		left join entity_state ES on CT.state_id = ES.id
+		left join contract_catalog AUTH on CT.contract_authorization_id = AUTH.id
+		left join contract_catalog CM on CT.contract_commitment_mode_id = CM.id
+	</sql>
+
+    <sql id="Example_Where_Clause">
+        <trim prefix="WHERE" prefixOverrides="and |or ">
+            <trim prefix="and (" suffix=")" prefixOverrides="WHERE">
+                <include
+                        refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractMapper.Example_Where_Clause"/>
+            </trim>
+            <if test="filterText != null">
+                and (
+                lower(contract_number) like lower(#{filterText})
+                or lower(description) like lower(#{filterText})
+                )
+            </if>
+            <if test="cup != null">
+                and (
+                lower(cs_cup) like lower(#{cup})
+                )
+            </if>
+        </trim>
+    </sql>
+
+    <sql id="Select_For_Reference_Contracts">
+		select CT.*
+		from contract CT
+		left join company_composition CC on CT.performing_company_id = CC.parent_company_id
+			and CC.company_id = #{performingCompanyId,jdbcType=BIGINT}
+		where CT.performing_company_id = #{performingCompanyId,jdbcType=BIGINT}
+			or CC.company_id is not null
+	</sql>
+
+    <select id="countByExample" parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.ContractExExample"
+            resultType="java.lang.Integer">
+        select count(id) FROM
+        ( select contract.*
+        <if test="cup != null">
+            , CS.cup as CS_cup
+        </if>
+        from contract
+        <if test="cup!=null">
+            JOIN contract_construction_site AS CCS on CCS.contract_id = contract.id
+            JOIN construction_site AS CS on CS.id = CCS.construction_site_id
+        </if>
+        ) t
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+
+
+    <select id="selectByExampleWithRowboundsEx"
+            parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.ContractExExample" resultMap="ExResultMap">
+        select * from (
+
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Select_Joined_Column_List"/>
+        , pccm.business_name as PC_cm_business_name
+        , pccm.id as PC_cm_id
+        , ccm.business_name as C_cm_business_name
+        , ccm.id as C_cm_id
+        <if test="cup != null">
+            , CS.cup as cs_cup
+        </if>
+        from contract CT
+        <include refid="Select_Joined_Tables"/>
+        LEFT JOIN company AS pccm on PC.consortium_membership_id = pccm.id
+        LEFT JOIN company AS ccm on C.consortium_membership_id = ccm.id
+        <if test="cup!=null">
+            JOIN contract_construction_site AS CCS on CCS.contract_id = CT.id
+            JOIN construction_site AS CS on CS.id = CCS.construction_site_id
+        </if>
+        ) t
+
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectMissingMgoData"
+            resultMap="BaseResultMap">
+        select * from (
+
+        select
+        distinct
+        <include refid="Select_Joined_Column_List"/>
+        , pccm.business_name as PC_cm_business_name
+        , pccm.id as PC_cm_id
+        , ccm.business_name as C_cm_business_name
+        , ccm.id as C_cm_id
+        from contract CT
+        <include refid="Select_Joined_Tables"/>
+        LEFT JOIN company AS pccm on PC.consortium_membership_id = pccm.id
+        LEFT JOIN company AS ccm on C.consortium_membership_id = ccm.id
+        ) t
+        WHERE
+        subject_to_mgo = true AND (state_tag = 'TO_BE_VALIDATED' OR state_tag='VALIDATED') AND (
+        (company_iban IS NULL OR company_bank IS NULL)
+        OR (letter_of_indemnity = true AND letter_of_indemnity_delivery_date IS NULL)
+        OR (letter_of_indemnity = true AND letter_of_indemnity_delivery_date IS NOT NULL
+        AND ( SELECT COUNT(1) FROM attachment WHERE attachment.contract_id = t.id AND
+        attachment.entity='CONTRACT_TRACEABILITY'
+        AND attachment.type_id in (select id from attachment_type
+        where LOWER(description) = LOWER('Lettera di Manleva'))) = 0
+        )
+        ) AND owner_node_id = #{ownerNodeId,jdbcType=BIGINT}
+        <if test="modifiedStateStampFrom != null ">
+            AND <![CDATA[ modified_state_stamp >= #{modifiedStateStampFrom,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="modifiedStateStampTo !=null">
+            AND <![CDATA[ modified_state_stamp <= #{modifiedStateStampTo,jdbcType=TIMESTAMP}]]>
+        </if>
+    </select>
+
+    <select id="selectByExampleWithRowboundsExMgo"
+            parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.ContractExExample" resultMap="MgoResultMap">
+        select * from (
+
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Select_Joined_Column_List"/>
+        , pccm.business_name as PC_cm_business_name
+        , pccm.id as PC_cm_id
+        , ccm.business_name as C_cm_business_name
+        , ccm.id as C_cm_id
+        <if test="cup != null">
+            , CS.cup as cs_cup
+        </if>
+        from contract CT
+        <include refid="Select_Joined_Tables"/>
+        LEFT JOIN company AS pccm on PC.consortium_membership_id = pccm.id
+        LEFT JOIN company AS ccm on C.consortium_membership_id = ccm.id
+        <if test="cup!=null">
+            JOIN contract_construction_site AS CCS on CCS.contract_id = CT.id
+            JOIN construction_site AS CS on CS.id = CCS.construction_site_id
+        </if>
+        ) t
+
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKeyEx" parameterType="java.lang.Long" resultMap="MgoResultMap">
+        select
+        <include refid="Select_Joined_Column_List"/>
+        , pccm.business_name as PC_cm_business_name
+        , pccm.id as PC_cm_id,
+        ccm.business_name as C_cm_business_name
+        , ccm.id as C_cm_id
+        from contract CT
+        <include refid="Select_Joined_Tables"/>
+        LEFT JOIN company AS pccm on PC.consortium_membership_id = pccm.id
+        LEFT JOIN company AS ccm on C.consortium_membership_id = ccm.id
+        where CT.id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="countForReferenceContracts"
+            parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.ContractExExample"
+            resultType="java.lang.Integer">
+        select count(*) from (
+        <include refid="Select_For_Reference_Contracts"/>
+        ) t
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+
+    <select id="lookForReferenceContracts"
+            parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.ContractExExample"
+            resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractMapper.BaseResultMap">
+        select * from (
+        <include refid="Select_For_Reference_Contracts"/>
+        ) t
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+
+    <select id="selectByExampleWithRowboundsExForTree"
+            parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.ContractExExample"
+            resultMap="BaseResultMap">
+        select * from (
+
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.ContractMapper.Alias_Column_List">
+            <property name="tableAlias" value="CT."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        ,
+        C.business_name AS C_business_name,
+        C.vat_number AS C_vat_number,
+        PC.business_name AS PC_business_name,
+        PC.vat_number AS PC_vat_number
+        from contract CT
+        left join company C on CT.company_id = C.id
+        left join company PC on CT.performing_company_id = PC.id
+        ) t
+
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+</mapper>

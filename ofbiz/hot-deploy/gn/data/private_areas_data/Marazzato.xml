@@ -1,0 +1,207 @@
+    <!-- ================================================================================================= -->
+    <!--                                Company MARAZZATO SOLUZIONI AMBIENTALI SRL                         -->
+    <!-- ================================================================================================= -->
+    <Party partyId="GN_MSA" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="MARAZZATO SOLUZIONI AMBIENTALI SRL"/>
+    <PartyGroup partyId="GN_MSA" groupName="MARAZZATO SOLUZIONI AMBIENTALI SRL"/>
+    <GnPartyNode partyId="GN_MSA" nodeKey="GN_MSA@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY"
+                 taxIdentificationNumber="00468910070" VATnumber="00468910070"
+                 name="MARAZZATO SOLUZIONI AMBIENTALI SRL"/>
+    <PartyRole partyId="GN_MSA" roleTypeId="GN_COMPANY"/>
+    <PartyRole partyId="GN_MSA" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_MSA" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <PartyAttribute partyId="GN_MSA" attrName="ROOT_PUBLISH" attrValue="Y"/>
+    <PartyAttribute partyId="GN_MSA" attrName="PRIVATE_AUTH_PUBLISH" attrValue="Y"/>
+	
+    <PartyRelationship partyIdFrom="GN_MSA" partyIdTo="GN_ROOT"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_ROOT"
+                       partyRelationshipTypeId="GN_PUBLISHES_TO_ROOT" fromDate="2000-01-01 00:00:00.000"
+                       validationRequired="N"
+                       relationshipName="Pubblicazione: Marazzato pubblica su root"/>
+
+    <!-- ==========================================================================-->
+    <!-- Main company base MARAZZATO SOLUZIONI AMBIENTALI SRL Borgo Vercelli       -->
+    <!-- ==========================================================================-->
+    <Party partyId="GN_MSA_VC" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="MARAZZATO SOLUZIONI AMBIENTALI SRL - Borgo Vercelli"/>
+    <PartyGroup partyId="GN_MSA_VC" groupName="MARAZZATO SOLUZIONI AMBIENTALI SRL - Borgo Vercelli"/>
+    <GnPartyNode partyId="GN_MSA_VC" nodeKey="GN_MSA_VC@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber="1063068"
+                 registeredOffice="N" authorizationOwner="Y"/>
+    <PartyRole partyId="GN_MSA_VC" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_MSA_VC" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_MSA_VC" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_MSA_VC" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_MSA_VC"
+                      contactMechId="CM_MSA_VC"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_MSA_VC"
+                   toName="MARAZZATO SOLUZIONI AMBIENTALI SRL - Borgo Vercelli"
+                   address1="Via Boschetto"
+                   streetNumber="21"
+                   village=""
+                   city="Borgo Vercelli"
+                   postalCode="13012"
+                   postalCodeGeoId="IT-GN-CAP-13012_1"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-PIEMONTE"
+                   stateProvinceGeoId="IT-GN-002"
+                   municipalityGeoId="IT-GN-002017"/>
+
+    <PartyRelationship partyIdFrom="GN_MSA" partyIdTo="GN_MSA_VC"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: Marazzato detiene Marazzato Borgo Vercelli"/>
+    <PartyRelationship partyIdFrom="GN_MSA_VC" partyIdTo="GN_MSA"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: Marazzato Borgo Vercelli appartiene a Marazzato"/>
+
+    <!-- ========================= -->
+    <!--     Marazzato users       -->
+    <!-- ========================= -->
+
+    <!--user giuseppe.marazzato@gruppomarazzato.com / pw: msamarazzato-->
+    <Party partyId="U_MSA_MARAZZATO" partyTypeId="PERSON"/>
+    <Person partyId="U_MSA_MARAZZATO" lastName="Marazzato" firstName="Giuseppe "/>
+    <UserLogin userLoginId="giuseppe.marazzato@gruppomarazzato.com" partyId="U_MSA_MARAZZATO"
+               currentPassword="{SHA}aca8fd53a76237bbee3424a7771e15251c86be71" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="giuseppe.marazzato@gruppomarazzato.com" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="U_MSA_MARAZZATO" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="giuseppe.marazzato@gruppomarazzato.com" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_MSA_MARAZZATO" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="giuseppe.marazzato@gruppomarazzato.com"/>
+    <PartyContactMech partyId="U_MSA_MARAZZATO" contactMechId="CM_MSA_MARAZZATO"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_MSA_MARAZZATO" contactMechId="CM_MSA_MARAZZATO"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_MSA_MARAZZATO" partyIdTo="GN_MSA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (giuseppe.marazzato@gruppomarazzato.com) impiegato in azienda (Marazzato)"/>
+					   
+    <!--user davide.cairola@gruppomarazzato.com / pw: msacairola-->
+    <Party partyId="U_MSA_CAIROLA" partyTypeId="PERSON"/>
+    <Person partyId="U_MSA_CAIROLA" lastName="Cairola" firstName="Davide "/>
+    <UserLogin userLoginId="davide.cairola@gruppomarazzato.com" partyId="U_MSA_CAIROLA"
+               currentPassword="{SHA}163e7e474390d565b64d9f92dbba4bd651fd6f85" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="davide.cairola@gruppomarazzato.com" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="U_MSA_CAIROLA" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="davide.cairola@gruppomarazzato.com" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_MSA_CAIROLA" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="davide.cairola@gruppomarazzato.com"/>
+    <PartyContactMech partyId="U_MSA_CAIROLA" contactMechId="CM_MSA_CAIROLA"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_MSA_CAIROLA" contactMechId="CM_MSA_CAIROLA"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_MSA_CAIROLA" partyIdTo="GN_MSA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (davide.cairola@gruppomarazzato.com) impiegato in azienda (Marazzato)"/>
+
+    <!--user viviana.inselvini@gruppomarazzato.com / pw: msainselvini-->
+    <Party partyId="U_MSA_INSELVINI" partyTypeId="PERSON"/>
+    <Person partyId="U_MSA_INSELVINI" lastName="Inselvini" firstName="Viviana "/>
+    <UserLogin userLoginId="viviana.inselvini@gruppomarazzato.com" partyId="U_MSA_INSELVINI"
+               currentPassword="{SHA}234c8f8638a92fc529ef169ff179918bb48ec1cb" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="viviana.inselvini@gruppomarazzato.com" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="U_MSA_INSELVINI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="viviana.inselvini@gruppomarazzato.com" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_MSA_INSELVINI" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="viviana.inselvini@gruppomarazzato.com"/>
+    <PartyContactMech partyId="U_MSA_INSELVINI" contactMechId="CM_MSA_INSELVINI"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_MSA_INSELVINI" contactMechId="CM_MSA_INSELVINI"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_MSA_INSELVINI" partyIdTo="GN_MSA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (viviana.inselvini@gruppomarazzato.com) impiegato in azienda (Marazzato)"/>
+
+    <!--user paolo.fiore@gruppomarazzato.com / pw: msafiore-->
+    <Party partyId="U_MSA_FIORE" partyTypeId="PERSON"/>
+    <Person partyId="U_MSA_FIORE" lastName="Fiore" firstName="Paolo "/>
+    <UserLogin userLoginId="paolo.fiore@gruppomarazzato.com" partyId="U_MSA_FIORE"
+               currentPassword="{SHA}27b70b485398bf5e399e6cb70c587d67c06d6a62" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="paolo.fiore@gruppomarazzato.com" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="U_MSA_FIORE" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="paolo.fiore@gruppomarazzato.com" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_MSA_FIORE" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="paolo.fiore@gruppomarazzato.com"/>
+    <PartyContactMech partyId="U_MSA_FIORE" contactMechId="CM_MSA_FIORE"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_MSA_FIORE" contactMechId="CM_MSA_FIORE"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_MSA_FIORE" partyIdTo="GN_MSA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (paolo.fiore@gruppomarazzato.com) impiegato in azienda (Marazzato)"/>
+					   
+    <!--user support.marazzato / pw: 1bCOlJwQ-9-->
+	<Party partyId="U_MSA_SUPPORT" partyTypeId="PERSON"/>
+    <Person partyId="U_MSA_SUPPORT" lastName="Marazzato" firstName="Supporto "/>
+    <UserLogin userLoginId="support.marazzato" partyId="U_MSA_SUPPORT"
+               currentPassword="{SHA}3c5e332bf4ebfcab832cf7369c32aa144ae91c0b" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="support.marazzato" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="U_MSA_SUPPORT" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="support.marazzato" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_MSA_SUPPORT" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="support@greennebula.it"/>
+    <PartyContactMech partyId="U_MSA_SUPPORT" contactMechId="CM_MSA_SUPPORT"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_MSA_SUPPORT" contactMechId="CM_MSA_SUPPORT"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_MSA_SUPPORT" partyIdTo="GN_MSA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (support.marazzato) impiegato in azienda (Marazzato)"/>
+
+       <!-- Marazzato web API users -->
+    <Party partyId="U_MSA_WEBAPI" partyTypeId="PERSON"/>
+    <Person partyId="U_MSA_WEBAPI" lastName="utente web API" firstName="Marazzato "/>
+    <UserLogin userLoginId="marazzatowebapi" partyId="U_MSA_WEBAPI"
+               currentPassword="{SHA}6770f9d06d56810887cd41f3b1503db7b0bb4ee8" originId="GN_AUTH_ORG_APP"/>
+    <GnUserLoginSource userLoginId="marazzatowebapi" enumId="GN_LOG_SRC_WEB_API"/>
+    <PartyRole partyId="U_MSA_WEBAPI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="marazzatowebapi" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="cm_marazzatowebapi" contactMechTypeId="EMAIL_ADDRESS" infoString=""/>
+    <PartyContactMech partyId="U_MSA_WEBAPI" contactMechId="cm_marazzatowebapi" fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_MSA_WEBAPI" contactMechId="cm_marazzatowebapi"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+							 
+    <PartyRelationship partyIdFrom="U_MSA_WEBAPI" partyIdTo="GN_MSA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (marazzatowebapi) impiegato in azienda (Marazzato)"/>
+       <!-- Marazzato web API users end -->
+    <!--     Marazzato users end     -->
+
+    <!-- ================================================================================================= -->
+    <!--                                       Company MARAZZATO SOLUZIONI AMBIENTALI SRL                  -->
+    <!-- ================================================================================================= -->

@@ -1,0 +1,1417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+
+    <!--Continued from GnGeoData7.xml-->
+
+    <!-- Cities with multiple postal codes and related associations-->
+    <Geo geoCode="15121" geoId="IT-GN-CAP-15121" geoName="15121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="15122" geoId="IT-GN-CAP-15122" geoName="15122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="60121" geoId="IT-GN-CAP-60121" geoName="60121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="60122" geoId="IT-GN-CAP-60122" geoName="60122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="60123" geoId="IT-GN-CAP-60123" geoName="60123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="60124" geoId="IT-GN-CAP-60124" geoName="60124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="60125" geoId="IT-GN-CAP-60125" geoName="60125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="60126" geoId="IT-GN-CAP-60126" geoName="60126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="60127" geoId="IT-GN-CAP-60127" geoName="60127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="60128" geoId="IT-GN-CAP-60128" geoName="60128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="60129" geoId="IT-GN-CAP-60129" geoName="60129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="60130" geoId="IT-GN-CAP-60130" geoName="60130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="60131" geoId="IT-GN-CAP-60131" geoName="60131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="70121" geoId="IT-GN-CAP-70121" geoName="70121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="70122" geoId="IT-GN-CAP-70122" geoName="70122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="70123" geoId="IT-GN-CAP-70123" geoName="70123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="70124" geoId="IT-GN-CAP-70124" geoName="70124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="70125" geoId="IT-GN-CAP-70125" geoName="70125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="70126" geoId="IT-GN-CAP-70126" geoName="70126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="70127" geoId="IT-GN-CAP-70127" geoName="70127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="70128" geoId="IT-GN-CAP-70128" geoName="70128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="70129" geoId="IT-GN-CAP-70129" geoName="70129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="70130" geoId="IT-GN-CAP-70130" geoName="70130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="70131" geoId="IT-GN-CAP-70131" geoName="70131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="70132" geoId="IT-GN-CAP-70132" geoName="70132" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="24121" geoId="IT-GN-CAP-24121" geoName="24121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="24122" geoId="IT-GN-CAP-24122" geoName="24122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="24123" geoId="IT-GN-CAP-24123" geoName="24123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="24124" geoId="IT-GN-CAP-24124" geoName="24124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="24125" geoId="IT-GN-CAP-24125" geoName="24125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="24126" geoId="IT-GN-CAP-24126" geoName="24126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="24127" geoId="IT-GN-CAP-24127" geoName="24127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="24128" geoId="IT-GN-CAP-24128" geoName="24128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="24129" geoId="IT-GN-CAP-24129" geoName="24129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="40121" geoId="IT-GN-CAP-40121" geoName="40121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="40122" geoId="IT-GN-CAP-40122" geoName="40122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="40123" geoId="IT-GN-CAP-40123" geoName="40123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="40124" geoId="IT-GN-CAP-40124" geoName="40124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="40125" geoId="IT-GN-CAP-40125" geoName="40125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="40126" geoId="IT-GN-CAP-40126" geoName="40126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="40127" geoId="IT-GN-CAP-40127" geoName="40127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="40128" geoId="IT-GN-CAP-40128" geoName="40128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="40129" geoId="IT-GN-CAP-40129" geoName="40129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="40130" geoId="IT-GN-CAP-40130" geoName="40130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="40131" geoId="IT-GN-CAP-40131" geoName="40131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="40132" geoId="IT-GN-CAP-40132" geoName="40132" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="40133" geoId="IT-GN-CAP-40133" geoName="40133" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="40134" geoId="IT-GN-CAP-40134" geoName="40134" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="40135" geoId="IT-GN-CAP-40135" geoName="40135" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="40136" geoId="IT-GN-CAP-40136" geoName="40136" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="40137" geoId="IT-GN-CAP-40137" geoName="40137" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="40138" geoId="IT-GN-CAP-40138" geoName="40138" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="40139" geoId="IT-GN-CAP-40139" geoName="40139" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="40140" geoId="IT-GN-CAP-40140" geoName="40140" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="40141" geoId="IT-GN-CAP-40141" geoName="40141" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="25121" geoId="IT-GN-CAP-25121" geoName="25121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="25122" geoId="IT-GN-CAP-25122" geoName="25122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="25123" geoId="IT-GN-CAP-25123" geoName="25123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="25124" geoId="IT-GN-CAP-25124" geoName="25124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="25125" geoId="IT-GN-CAP-25125" geoName="25125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="25126" geoId="IT-GN-CAP-25126" geoName="25126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="25127" geoId="IT-GN-CAP-25127" geoName="25127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="25128" geoId="IT-GN-CAP-25128" geoName="25128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="25129" geoId="IT-GN-CAP-25129" geoName="25129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="25130" geoId="IT-GN-CAP-25130" geoName="25130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="25131" geoId="IT-GN-CAP-25131" geoName="25131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="25132" geoId="IT-GN-CAP-25132" geoName="25132" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="25133" geoId="IT-GN-CAP-25133" geoName="25133" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="25134" geoId="IT-GN-CAP-25134" geoName="25134" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="25135" geoId="IT-GN-CAP-25135" geoName="25135" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="25136" geoId="IT-GN-CAP-25136" geoName="25136" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="09121" geoId="IT-GN-CAP-09121" geoName="09121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="09122" geoId="IT-GN-CAP-09122" geoName="09122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="09123" geoId="IT-GN-CAP-09123" geoName="09123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="09124" geoId="IT-GN-CAP-09124" geoName="09124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="09125" geoId="IT-GN-CAP-09125" geoName="09125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="09126" geoId="IT-GN-CAP-09126" geoName="09126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="09127" geoId="IT-GN-CAP-09127" geoName="09127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="09128" geoId="IT-GN-CAP-09128" geoName="09128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="09129" geoId="IT-GN-CAP-09129" geoName="09129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="09130" geoId="IT-GN-CAP-09130" geoName="09130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="09131" geoId="IT-GN-CAP-09131" geoName="09131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="09132" geoId="IT-GN-CAP-09132" geoName="09132" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="09133" geoId="IT-GN-CAP-09133" geoName="09133" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="09134" geoId="IT-GN-CAP-09134" geoName="09134" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="95121" geoId="IT-GN-CAP-95121" geoName="95121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="95122" geoId="IT-GN-CAP-95122" geoName="95122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="95123" geoId="IT-GN-CAP-95123" geoName="95123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="95124" geoId="IT-GN-CAP-95124" geoName="95124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="95125" geoId="IT-GN-CAP-95125" geoName="95125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="95126" geoId="IT-GN-CAP-95126" geoName="95126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="95127" geoId="IT-GN-CAP-95127" geoName="95127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="95128" geoId="IT-GN-CAP-95128" geoName="95128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="95129" geoId="IT-GN-CAP-95129" geoName="95129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="95130" geoId="IT-GN-CAP-95130" geoName="95130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="95131" geoId="IT-GN-CAP-95131" geoName="95131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="47521" geoId="IT-GN-CAP-47521" geoName="47521" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="47522" geoId="IT-GN-CAP-47522" geoName="47522" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="44121" geoId="IT-GN-CAP-44121" geoName="44121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="44122" geoId="IT-GN-CAP-44122" geoName="44122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="44123" geoId="IT-GN-CAP-44123" geoName="44123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="44124" geoId="IT-GN-CAP-44124" geoName="44124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50121" geoId="IT-GN-CAP-50121" geoName="50121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50122" geoId="IT-GN-CAP-50122" geoName="50122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50123" geoId="IT-GN-CAP-50123" geoName="50123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50124" geoId="IT-GN-CAP-50124" geoName="50124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50125" geoId="IT-GN-CAP-50125" geoName="50125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50126" geoId="IT-GN-CAP-50126" geoName="50126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50127" geoId="IT-GN-CAP-50127" geoName="50127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50128" geoId="IT-GN-CAP-50128" geoName="50128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50129" geoId="IT-GN-CAP-50129" geoName="50129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50130" geoId="IT-GN-CAP-50130" geoName="50130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50131" geoId="IT-GN-CAP-50131" geoName="50131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50132" geoId="IT-GN-CAP-50132" geoName="50132" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50133" geoId="IT-GN-CAP-50133" geoName="50133" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50134" geoId="IT-GN-CAP-50134" geoName="50134" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50135" geoId="IT-GN-CAP-50135" geoName="50135" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50136" geoId="IT-GN-CAP-50136" geoName="50136" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50137" geoId="IT-GN-CAP-50137" geoName="50137" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50138" geoId="IT-GN-CAP-50138" geoName="50138" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50139" geoId="IT-GN-CAP-50139" geoName="50139" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50140" geoId="IT-GN-CAP-50140" geoName="50140" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50141" geoId="IT-GN-CAP-50141" geoName="50141" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50142" geoId="IT-GN-CAP-50142" geoName="50142" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50143" geoId="IT-GN-CAP-50143" geoName="50143" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50144" geoId="IT-GN-CAP-50144" geoName="50144" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="50145" geoId="IT-GN-CAP-50145" geoName="50145" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="71121" geoId="IT-GN-CAP-71121" geoName="71121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="71122" geoId="IT-GN-CAP-71122" geoName="71122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="47121" geoId="IT-GN-CAP-47121" geoName="47121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="47122" geoId="IT-GN-CAP-47122" geoName="47122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16121" geoId="IT-GN-CAP-16121" geoName="16121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16122" geoId="IT-GN-CAP-16122" geoName="16122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16123" geoId="IT-GN-CAP-16123" geoName="16123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16124" geoId="IT-GN-CAP-16124" geoName="16124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16125" geoId="IT-GN-CAP-16125" geoName="16125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16126" geoId="IT-GN-CAP-16126" geoName="16126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16127" geoId="IT-GN-CAP-16127" geoName="16127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16128" geoId="IT-GN-CAP-16128" geoName="16128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16129" geoId="IT-GN-CAP-16129" geoName="16129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16130" geoId="IT-GN-CAP-16130" geoName="16130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16131" geoId="IT-GN-CAP-16131" geoName="16131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16132" geoId="IT-GN-CAP-16132" geoName="16132" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16133" geoId="IT-GN-CAP-16133" geoName="16133" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16134" geoId="IT-GN-CAP-16134" geoName="16134" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16135" geoId="IT-GN-CAP-16135" geoName="16135" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16136" geoId="IT-GN-CAP-16136" geoName="16136" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16137" geoId="IT-GN-CAP-16137" geoName="16137" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16138" geoId="IT-GN-CAP-16138" geoName="16138" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16139" geoId="IT-GN-CAP-16139" geoName="16139" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16140" geoId="IT-GN-CAP-16140" geoName="16140" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16141" geoId="IT-GN-CAP-16141" geoName="16141" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16142" geoId="IT-GN-CAP-16142" geoName="16142" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16143" geoId="IT-GN-CAP-16143" geoName="16143" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16144" geoId="IT-GN-CAP-16144" geoName="16144" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16145" geoId="IT-GN-CAP-16145" geoName="16145" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16146" geoId="IT-GN-CAP-16146" geoName="16146" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16147" geoId="IT-GN-CAP-16147" geoName="16147" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16148" geoId="IT-GN-CAP-16148" geoName="16148" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16149" geoId="IT-GN-CAP-16149" geoName="16149" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16150" geoId="IT-GN-CAP-16150" geoName="16150" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16151" geoId="IT-GN-CAP-16151" geoName="16151" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16152" geoId="IT-GN-CAP-16152" geoName="16152" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16153" geoId="IT-GN-CAP-16153" geoName="16153" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16154" geoId="IT-GN-CAP-16154" geoName="16154" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16155" geoId="IT-GN-CAP-16155" geoName="16155" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16156" geoId="IT-GN-CAP-16156" geoName="16156" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16157" geoId="IT-GN-CAP-16157" geoName="16157" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16158" geoId="IT-GN-CAP-16158" geoName="16158" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16159" geoId="IT-GN-CAP-16159" geoName="16159" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16160" geoId="IT-GN-CAP-16160" geoName="16160" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16161" geoId="IT-GN-CAP-16161" geoName="16161" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16162" geoId="IT-GN-CAP-16162" geoName="16162" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16163" geoId="IT-GN-CAP-16163" geoName="16163" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16164" geoId="IT-GN-CAP-16164" geoName="16164" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16165" geoId="IT-GN-CAP-16165" geoName="16165" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16166" geoId="IT-GN-CAP-16166" geoName="16166" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="16167" geoId="IT-GN-CAP-16167" geoName="16167" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="19121" geoId="IT-GN-CAP-19121" geoName="19121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="19122" geoId="IT-GN-CAP-19122" geoName="19122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="19123" geoId="IT-GN-CAP-19123" geoName="19123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="19124" geoId="IT-GN-CAP-19124" geoName="19124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="19125" geoId="IT-GN-CAP-19125" geoName="19125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="19126" geoId="IT-GN-CAP-19126" geoName="19126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="19127" geoId="IT-GN-CAP-19127" geoName="19127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="19128" geoId="IT-GN-CAP-19128" geoName="19128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="19129" geoId="IT-GN-CAP-19129" geoName="19129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="19130" geoId="IT-GN-CAP-19130" geoName="19130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="19131" geoId="IT-GN-CAP-19131" geoName="19131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="19132" geoId="IT-GN-CAP-19132" geoName="19132" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="19133" geoId="IT-GN-CAP-19133" geoName="19133" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="19134" geoId="IT-GN-CAP-19134" geoName="19134" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="19135" geoId="IT-GN-CAP-19135" geoName="19135" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="19136" geoId="IT-GN-CAP-19136" geoName="19136" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="19137" geoId="IT-GN-CAP-19137" geoName="19137" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="57121" geoId="IT-GN-CAP-57121" geoName="57121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="57122" geoId="IT-GN-CAP-57122" geoName="57122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="57123" geoId="IT-GN-CAP-57123" geoName="57123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="57124" geoId="IT-GN-CAP-57124" geoName="57124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="57125" geoId="IT-GN-CAP-57125" geoName="57125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="57126" geoId="IT-GN-CAP-57126" geoName="57126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="57127" geoId="IT-GN-CAP-57127" geoName="57127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="57128" geoId="IT-GN-CAP-57128" geoName="57128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98121" geoId="IT-GN-CAP-98121" geoName="98121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98122" geoId="IT-GN-CAP-98122" geoName="98122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98123" geoId="IT-GN-CAP-98123" geoName="98123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98124" geoId="IT-GN-CAP-98124" geoName="98124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98125" geoId="IT-GN-CAP-98125" geoName="98125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98126" geoId="IT-GN-CAP-98126" geoName="98126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98127" geoId="IT-GN-CAP-98127" geoName="98127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98128" geoId="IT-GN-CAP-98128" geoName="98128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98129" geoId="IT-GN-CAP-98129" geoName="98129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98130" geoId="IT-GN-CAP-98130" geoName="98130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98131" geoId="IT-GN-CAP-98131" geoName="98131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98132" geoId="IT-GN-CAP-98132" geoName="98132" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98133" geoId="IT-GN-CAP-98133" geoName="98133" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98134" geoId="IT-GN-CAP-98134" geoName="98134" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98135" geoId="IT-GN-CAP-98135" geoName="98135" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98136" geoId="IT-GN-CAP-98136" geoName="98136" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98137" geoId="IT-GN-CAP-98137" geoName="98137" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98138" geoId="IT-GN-CAP-98138" geoName="98138" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98139" geoId="IT-GN-CAP-98139" geoName="98139" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98140" geoId="IT-GN-CAP-98140" geoName="98140" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98141" geoId="IT-GN-CAP-98141" geoName="98141" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98142" geoId="IT-GN-CAP-98142" geoName="98142" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98143" geoId="IT-GN-CAP-98143" geoName="98143" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98144" geoId="IT-GN-CAP-98144" geoName="98144" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98145" geoId="IT-GN-CAP-98145" geoName="98145" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98146" geoId="IT-GN-CAP-98146" geoName="98146" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98147" geoId="IT-GN-CAP-98147" geoName="98147" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98148" geoId="IT-GN-CAP-98148" geoName="98148" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98149" geoId="IT-GN-CAP-98149" geoName="98149" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98150" geoId="IT-GN-CAP-98150" geoName="98150" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98151" geoId="IT-GN-CAP-98151" geoName="98151" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98152" geoId="IT-GN-CAP-98152" geoName="98152" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98153" geoId="IT-GN-CAP-98153" geoName="98153" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98154" geoId="IT-GN-CAP-98154" geoName="98154" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98155" geoId="IT-GN-CAP-98155" geoName="98155" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98156" geoId="IT-GN-CAP-98156" geoName="98156" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98157" geoId="IT-GN-CAP-98157" geoName="98157" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98158" geoId="IT-GN-CAP-98158" geoName="98158" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98159" geoId="IT-GN-CAP-98159" geoName="98159" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98160" geoId="IT-GN-CAP-98160" geoName="98160" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98161" geoId="IT-GN-CAP-98161" geoName="98161" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98162" geoId="IT-GN-CAP-98162" geoName="98162" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98163" geoId="IT-GN-CAP-98163" geoName="98163" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98164" geoId="IT-GN-CAP-98164" geoName="98164" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98165" geoId="IT-GN-CAP-98165" geoName="98165" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98166" geoId="IT-GN-CAP-98166" geoName="98166" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98167" geoId="IT-GN-CAP-98167" geoName="98167" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="98168" geoId="IT-GN-CAP-98168" geoName="98168" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20121" geoId="IT-GN-CAP-20121" geoName="20121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20122" geoId="IT-GN-CAP-20122" geoName="20122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20123" geoId="IT-GN-CAP-20123" geoName="20123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20124" geoId="IT-GN-CAP-20124" geoName="20124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20125" geoId="IT-GN-CAP-20125" geoName="20125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20126" geoId="IT-GN-CAP-20126" geoName="20126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20127" geoId="IT-GN-CAP-20127" geoName="20127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20128" geoId="IT-GN-CAP-20128" geoName="20128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20129" geoId="IT-GN-CAP-20129" geoName="20129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20130" geoId="IT-GN-CAP-20130" geoName="20130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20131" geoId="IT-GN-CAP-20131" geoName="20131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20132" geoId="IT-GN-CAP-20132" geoName="20132" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20133" geoId="IT-GN-CAP-20133" geoName="20133" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20134" geoId="IT-GN-CAP-20134" geoName="20134" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20135" geoId="IT-GN-CAP-20135" geoName="20135" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20136" geoId="IT-GN-CAP-20136" geoName="20136" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20137" geoId="IT-GN-CAP-20137" geoName="20137" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20138" geoId="IT-GN-CAP-20138" geoName="20138" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20139" geoId="IT-GN-CAP-20139" geoName="20139" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20140" geoId="IT-GN-CAP-20140" geoName="20140" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20141" geoId="IT-GN-CAP-20141" geoName="20141" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20142" geoId="IT-GN-CAP-20142" geoName="20142" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20143" geoId="IT-GN-CAP-20143" geoName="20143" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20144" geoId="IT-GN-CAP-20144" geoName="20144" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20145" geoId="IT-GN-CAP-20145" geoName="20145" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20146" geoId="IT-GN-CAP-20146" geoName="20146" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20147" geoId="IT-GN-CAP-20147" geoName="20147" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20148" geoId="IT-GN-CAP-20148" geoName="20148" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20149" geoId="IT-GN-CAP-20149" geoName="20149" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20150" geoId="IT-GN-CAP-20150" geoName="20150" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20151" geoId="IT-GN-CAP-20151" geoName="20151" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20152" geoId="IT-GN-CAP-20152" geoName="20152" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20153" geoId="IT-GN-CAP-20153" geoName="20153" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20154" geoId="IT-GN-CAP-20154" geoName="20154" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20155" geoId="IT-GN-CAP-20155" geoName="20155" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20156" geoId="IT-GN-CAP-20156" geoName="20156" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20157" geoId="IT-GN-CAP-20157" geoName="20157" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20158" geoId="IT-GN-CAP-20158" geoName="20158" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20159" geoId="IT-GN-CAP-20159" geoName="20159" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20160" geoId="IT-GN-CAP-20160" geoName="20160" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20161" geoId="IT-GN-CAP-20161" geoName="20161" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="20162" geoId="IT-GN-CAP-20162" geoName="20162" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="41121" geoId="IT-GN-CAP-41121" geoName="41121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="41122" geoId="IT-GN-CAP-41122" geoName="41122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="41123" geoId="IT-GN-CAP-41123" geoName="41123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="41124" geoId="IT-GN-CAP-41124" geoName="41124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="41125" geoId="IT-GN-CAP-41125" geoName="41125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="41126" geoId="IT-GN-CAP-41126" geoName="41126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80121" geoId="IT-GN-CAP-80121" geoName="80121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80122" geoId="IT-GN-CAP-80122" geoName="80122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80123" geoId="IT-GN-CAP-80123" geoName="80123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80124" geoId="IT-GN-CAP-80124" geoName="80124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80125" geoId="IT-GN-CAP-80125" geoName="80125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80126" geoId="IT-GN-CAP-80126" geoName="80126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80127" geoId="IT-GN-CAP-80127" geoName="80127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80128" geoId="IT-GN-CAP-80128" geoName="80128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80129" geoId="IT-GN-CAP-80129" geoName="80129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80130" geoId="IT-GN-CAP-80130" geoName="80130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80131" geoId="IT-GN-CAP-80131" geoName="80131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80132" geoId="IT-GN-CAP-80132" geoName="80132" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80133" geoId="IT-GN-CAP-80133" geoName="80133" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80134" geoId="IT-GN-CAP-80134" geoName="80134" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80135" geoId="IT-GN-CAP-80135" geoName="80135" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80136" geoId="IT-GN-CAP-80136" geoName="80136" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80137" geoId="IT-GN-CAP-80137" geoName="80137" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80138" geoId="IT-GN-CAP-80138" geoName="80138" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80139" geoId="IT-GN-CAP-80139" geoName="80139" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80140" geoId="IT-GN-CAP-80140" geoName="80140" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80141" geoId="IT-GN-CAP-80141" geoName="80141" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80142" geoId="IT-GN-CAP-80142" geoName="80142" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80143" geoId="IT-GN-CAP-80143" geoName="80143" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80144" geoId="IT-GN-CAP-80144" geoName="80144" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80145" geoId="IT-GN-CAP-80145" geoName="80145" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80146" geoId="IT-GN-CAP-80146" geoName="80146" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="80147" geoId="IT-GN-CAP-80147" geoName="80147" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35121" geoId="IT-GN-CAP-35121" geoName="35121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35122" geoId="IT-GN-CAP-35122" geoName="35122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35123" geoId="IT-GN-CAP-35123" geoName="35123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35124" geoId="IT-GN-CAP-35124" geoName="35124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35125" geoId="IT-GN-CAP-35125" geoName="35125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35126" geoId="IT-GN-CAP-35126" geoName="35126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35127" geoId="IT-GN-CAP-35127" geoName="35127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35128" geoId="IT-GN-CAP-35128" geoName="35128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35129" geoId="IT-GN-CAP-35129" geoName="35129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35130" geoId="IT-GN-CAP-35130" geoName="35130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35131" geoId="IT-GN-CAP-35131" geoName="35131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35132" geoId="IT-GN-CAP-35132" geoName="35132" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35133" geoId="IT-GN-CAP-35133" geoName="35133" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35134" geoId="IT-GN-CAP-35134" geoName="35134" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35135" geoId="IT-GN-CAP-35135" geoName="35135" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35136" geoId="IT-GN-CAP-35136" geoName="35136" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35137" geoId="IT-GN-CAP-35137" geoName="35137" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35138" geoId="IT-GN-CAP-35138" geoName="35138" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35139" geoId="IT-GN-CAP-35139" geoName="35139" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35140" geoId="IT-GN-CAP-35140" geoName="35140" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35141" geoId="IT-GN-CAP-35141" geoName="35141" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35142" geoId="IT-GN-CAP-35142" geoName="35142" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="35143" geoId="IT-GN-CAP-35143" geoName="35143" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90121" geoId="IT-GN-CAP-90121" geoName="90121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90122" geoId="IT-GN-CAP-90122" geoName="90122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90123" geoId="IT-GN-CAP-90123" geoName="90123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90124" geoId="IT-GN-CAP-90124" geoName="90124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90125" geoId="IT-GN-CAP-90125" geoName="90125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90126" geoId="IT-GN-CAP-90126" geoName="90126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90127" geoId="IT-GN-CAP-90127" geoName="90127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90128" geoId="IT-GN-CAP-90128" geoName="90128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90129" geoId="IT-GN-CAP-90129" geoName="90129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90130" geoId="IT-GN-CAP-90130" geoName="90130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90131" geoId="IT-GN-CAP-90131" geoName="90131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90132" geoId="IT-GN-CAP-90132" geoName="90132" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90133" geoId="IT-GN-CAP-90133" geoName="90133" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90134" geoId="IT-GN-CAP-90134" geoName="90134" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90135" geoId="IT-GN-CAP-90135" geoName="90135" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90136" geoId="IT-GN-CAP-90136" geoName="90136" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90137" geoId="IT-GN-CAP-90137" geoName="90137" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90138" geoId="IT-GN-CAP-90138" geoName="90138" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90139" geoId="IT-GN-CAP-90139" geoName="90139" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90140" geoId="IT-GN-CAP-90140" geoName="90140" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90141" geoId="IT-GN-CAP-90141" geoName="90141" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90142" geoId="IT-GN-CAP-90142" geoName="90142" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90143" geoId="IT-GN-CAP-90143" geoName="90143" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90144" geoId="IT-GN-CAP-90144" geoName="90144" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90145" geoId="IT-GN-CAP-90145" geoName="90145" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90146" geoId="IT-GN-CAP-90146" geoName="90146" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90147" geoId="IT-GN-CAP-90147" geoName="90147" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90148" geoId="IT-GN-CAP-90148" geoName="90148" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90149" geoId="IT-GN-CAP-90149" geoName="90149" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90150" geoId="IT-GN-CAP-90150" geoName="90150" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="90151" geoId="IT-GN-CAP-90151" geoName="90151" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="43121" geoId="IT-GN-CAP-43121" geoName="43121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="43122" geoId="IT-GN-CAP-43122" geoName="43122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="43123" geoId="IT-GN-CAP-43123" geoName="43123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="43124" geoId="IT-GN-CAP-43124" geoName="43124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="43125" geoId="IT-GN-CAP-43125" geoName="43125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="43126" geoId="IT-GN-CAP-43126" geoName="43126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="06121" geoId="IT-GN-CAP-06121" geoName="06121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="06122" geoId="IT-GN-CAP-06122" geoName="06122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="06123" geoId="IT-GN-CAP-06123" geoName="06123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="06124" geoId="IT-GN-CAP-06124" geoName="06124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="06125" geoId="IT-GN-CAP-06125" geoName="06125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="06126" geoId="IT-GN-CAP-06126" geoName="06126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="06127" geoId="IT-GN-CAP-06127" geoName="06127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="06128" geoId="IT-GN-CAP-06128" geoName="06128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="06129" geoId="IT-GN-CAP-06129" geoName="06129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="06130" geoId="IT-GN-CAP-06130" geoName="06130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="06131" geoId="IT-GN-CAP-06131" geoName="06131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="06132" geoId="IT-GN-CAP-06132" geoName="06132" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="06133" geoId="IT-GN-CAP-06133" geoName="06133" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="06134" geoId="IT-GN-CAP-06134" geoName="06134" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="06135" geoId="IT-GN-CAP-06135" geoName="06135" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="61121" geoId="IT-GN-CAP-61121" geoName="61121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="61122" geoId="IT-GN-CAP-61122" geoName="61122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="65121" geoId="IT-GN-CAP-65121" geoName="65121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="65122" geoId="IT-GN-CAP-65122" geoName="65122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="65123" geoId="IT-GN-CAP-65123" geoName="65123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="65124" geoId="IT-GN-CAP-65124" geoName="65124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="65125" geoId="IT-GN-CAP-65125" geoName="65125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="65126" geoId="IT-GN-CAP-65126" geoName="65126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="65127" geoId="IT-GN-CAP-65127" geoName="65127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="65128" geoId="IT-GN-CAP-65128" geoName="65128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="65129" geoId="IT-GN-CAP-65129" geoName="65129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="29121" geoId="IT-GN-CAP-29121" geoName="29121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="29122" geoId="IT-GN-CAP-29122" geoName="29122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="56121" geoId="IT-GN-CAP-56121" geoName="56121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="56122" geoId="IT-GN-CAP-56122" geoName="56122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="56123" geoId="IT-GN-CAP-56123" geoName="56123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="56124" geoId="IT-GN-CAP-56124" geoName="56124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="56125" geoId="IT-GN-CAP-56125" geoName="56125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="56126" geoId="IT-GN-CAP-56126" geoName="56126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="56127" geoId="IT-GN-CAP-56127" geoName="56127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="56128" geoId="IT-GN-CAP-56128" geoName="56128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="48121" geoId="IT-GN-CAP-48121" geoName="48121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="48122" geoId="IT-GN-CAP-48122" geoName="48122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="48123" geoId="IT-GN-CAP-48123" geoName="48123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="48124" geoId="IT-GN-CAP-48124" geoName="48124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="48125" geoId="IT-GN-CAP-48125" geoName="48125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="89121" geoId="IT-GN-CAP-89121" geoName="89121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="89122" geoId="IT-GN-CAP-89122" geoName="89122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="89123" geoId="IT-GN-CAP-89123" geoName="89123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="89124" geoId="IT-GN-CAP-89124" geoName="89124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="89125" geoId="IT-GN-CAP-89125" geoName="89125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="89126" geoId="IT-GN-CAP-89126" geoName="89126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="89127" geoId="IT-GN-CAP-89127" geoName="89127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="89128" geoId="IT-GN-CAP-89128" geoName="89128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="89129" geoId="IT-GN-CAP-89129" geoName="89129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="89130" geoId="IT-GN-CAP-89130" geoName="89130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="89131" geoId="IT-GN-CAP-89131" geoName="89131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="89132" geoId="IT-GN-CAP-89132" geoName="89132" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="89133" geoId="IT-GN-CAP-89133" geoName="89133" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="89134" geoId="IT-GN-CAP-89134" geoName="89134" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="89135" geoId="IT-GN-CAP-89135" geoName="89135" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="42121" geoId="IT-GN-CAP-42121" geoName="42121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="42122" geoId="IT-GN-CAP-42122" geoName="42122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="42123" geoId="IT-GN-CAP-42123" geoName="42123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="42124" geoId="IT-GN-CAP-42124" geoName="42124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="47921" geoId="IT-GN-CAP-47921" geoName="47921" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="47922" geoId="IT-GN-CAP-47922" geoName="47922" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="47923" geoId="IT-GN-CAP-47923" geoName="47923" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="47924" geoId="IT-GN-CAP-47924" geoName="47924" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00118" geoId="IT-GN-CAP-00118" geoName="00118" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00119" geoId="IT-GN-CAP-00119" geoName="00119" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00120" geoId="IT-GN-CAP-00120" geoName="00120" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00121" geoId="IT-GN-CAP-00121" geoName="00121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00122" geoId="IT-GN-CAP-00122" geoName="00122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00123" geoId="IT-GN-CAP-00123" geoName="00123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00124" geoId="IT-GN-CAP-00124" geoName="00124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00125" geoId="IT-GN-CAP-00125" geoName="00125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00126" geoId="IT-GN-CAP-00126" geoName="00126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00127" geoId="IT-GN-CAP-00127" geoName="00127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00128" geoId="IT-GN-CAP-00128" geoName="00128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00129" geoId="IT-GN-CAP-00129" geoName="00129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00130" geoId="IT-GN-CAP-00130" geoName="00130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00131" geoId="IT-GN-CAP-00131" geoName="00131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00132" geoId="IT-GN-CAP-00132" geoName="00132" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00133" geoId="IT-GN-CAP-00133" geoName="00133" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00134" geoId="IT-GN-CAP-00134" geoName="00134" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00135" geoId="IT-GN-CAP-00135" geoName="00135" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00136" geoId="IT-GN-CAP-00136" geoName="00136" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00137" geoId="IT-GN-CAP-00137" geoName="00137" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00138" geoId="IT-GN-CAP-00138" geoName="00138" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00139" geoId="IT-GN-CAP-00139" geoName="00139" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00140" geoId="IT-GN-CAP-00140" geoName="00140" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00141" geoId="IT-GN-CAP-00141" geoName="00141" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00142" geoId="IT-GN-CAP-00142" geoName="00142" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00143" geoId="IT-GN-CAP-00143" geoName="00143" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00144" geoId="IT-GN-CAP-00144" geoName="00144" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00145" geoId="IT-GN-CAP-00145" geoName="00145" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00146" geoId="IT-GN-CAP-00146" geoName="00146" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00147" geoId="IT-GN-CAP-00147" geoName="00147" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00148" geoId="IT-GN-CAP-00148" geoName="00148" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00149" geoId="IT-GN-CAP-00149" geoName="00149" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00150" geoId="IT-GN-CAP-00150" geoName="00150" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00151" geoId="IT-GN-CAP-00151" geoName="00151" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00152" geoId="IT-GN-CAP-00152" geoName="00152" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00153" geoId="IT-GN-CAP-00153" geoName="00153" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00154" geoId="IT-GN-CAP-00154" geoName="00154" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00155" geoId="IT-GN-CAP-00155" geoName="00155" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00156" geoId="IT-GN-CAP-00156" geoName="00156" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00157" geoId="IT-GN-CAP-00157" geoName="00157" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00158" geoId="IT-GN-CAP-00158" geoName="00158" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00159" geoId="IT-GN-CAP-00159" geoName="00159" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00160" geoId="IT-GN-CAP-00160" geoName="00160" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00161" geoId="IT-GN-CAP-00161" geoName="00161" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00162" geoId="IT-GN-CAP-00162" geoName="00162" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00163" geoId="IT-GN-CAP-00163" geoName="00163" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00164" geoId="IT-GN-CAP-00164" geoName="00164" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00165" geoId="IT-GN-CAP-00165" geoName="00165" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00166" geoId="IT-GN-CAP-00166" geoName="00166" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00167" geoId="IT-GN-CAP-00167" geoName="00167" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00168" geoId="IT-GN-CAP-00168" geoName="00168" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00169" geoId="IT-GN-CAP-00169" geoName="00169" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00170" geoId="IT-GN-CAP-00170" geoName="00170" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00171" geoId="IT-GN-CAP-00171" geoName="00171" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00172" geoId="IT-GN-CAP-00172" geoName="00172" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00173" geoId="IT-GN-CAP-00173" geoName="00173" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00174" geoId="IT-GN-CAP-00174" geoName="00174" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00175" geoId="IT-GN-CAP-00175" geoName="00175" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00176" geoId="IT-GN-CAP-00176" geoName="00176" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00177" geoId="IT-GN-CAP-00177" geoName="00177" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00178" geoId="IT-GN-CAP-00178" geoName="00178" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00179" geoId="IT-GN-CAP-00179" geoName="00179" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00180" geoId="IT-GN-CAP-00180" geoName="00180" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00181" geoId="IT-GN-CAP-00181" geoName="00181" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00182" geoId="IT-GN-CAP-00182" geoName="00182" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00183" geoId="IT-GN-CAP-00183" geoName="00183" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00184" geoId="IT-GN-CAP-00184" geoName="00184" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00185" geoId="IT-GN-CAP-00185" geoName="00185" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00186" geoId="IT-GN-CAP-00186" geoName="00186" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00187" geoId="IT-GN-CAP-00187" geoName="00187" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00188" geoId="IT-GN-CAP-00188" geoName="00188" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00189" geoId="IT-GN-CAP-00189" geoName="00189" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00190" geoId="IT-GN-CAP-00190" geoName="00190" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00191" geoId="IT-GN-CAP-00191" geoName="00191" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00192" geoId="IT-GN-CAP-00192" geoName="00192" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00193" geoId="IT-GN-CAP-00193" geoName="00193" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00194" geoId="IT-GN-CAP-00194" geoName="00194" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00195" geoId="IT-GN-CAP-00195" geoName="00195" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00196" geoId="IT-GN-CAP-00196" geoName="00196" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00197" geoId="IT-GN-CAP-00197" geoName="00197" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00198" geoId="IT-GN-CAP-00198" geoName="00198" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="00199" geoId="IT-GN-CAP-00199" geoName="00199" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="84121" geoId="IT-GN-CAP-84121" geoName="84121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="84122" geoId="IT-GN-CAP-84122" geoName="84122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="84123" geoId="IT-GN-CAP-84123" geoName="84123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="84124" geoId="IT-GN-CAP-84124" geoName="84124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="84125" geoId="IT-GN-CAP-84125" geoName="84125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="84126" geoId="IT-GN-CAP-84126" geoName="84126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="84127" geoId="IT-GN-CAP-84127" geoName="84127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="84128" geoId="IT-GN-CAP-84128" geoName="84128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="84129" geoId="IT-GN-CAP-84129" geoName="84129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="84130" geoId="IT-GN-CAP-84130" geoName="84130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="84131" geoId="IT-GN-CAP-84131" geoName="84131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="84132" geoId="IT-GN-CAP-84132" geoName="84132" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="84133" geoId="IT-GN-CAP-84133" geoName="84133" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="84134" geoId="IT-GN-CAP-84134" geoName="84134" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="84135" geoId="IT-GN-CAP-84135" geoName="84135" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="74121" geoId="IT-GN-CAP-74121" geoName="74121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="74122" geoId="IT-GN-CAP-74122" geoName="74122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="74123" geoId="IT-GN-CAP-74123" geoName="74123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10121" geoId="IT-GN-CAP-10121" geoName="10121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10122" geoId="IT-GN-CAP-10122" geoName="10122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10123" geoId="IT-GN-CAP-10123" geoName="10123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10124" geoId="IT-GN-CAP-10124" geoName="10124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10125" geoId="IT-GN-CAP-10125" geoName="10125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10126" geoId="IT-GN-CAP-10126" geoName="10126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10127" geoId="IT-GN-CAP-10127" geoName="10127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10128" geoId="IT-GN-CAP-10128" geoName="10128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10129" geoId="IT-GN-CAP-10129" geoName="10129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10130" geoId="IT-GN-CAP-10130" geoName="10130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10131" geoId="IT-GN-CAP-10131" geoName="10131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10132" geoId="IT-GN-CAP-10132" geoName="10132" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10133" geoId="IT-GN-CAP-10133" geoName="10133" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10134" geoId="IT-GN-CAP-10134" geoName="10134" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10135" geoId="IT-GN-CAP-10135" geoName="10135" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10136" geoId="IT-GN-CAP-10136" geoName="10136" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10137" geoId="IT-GN-CAP-10137" geoName="10137" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10138" geoId="IT-GN-CAP-10138" geoName="10138" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10139" geoId="IT-GN-CAP-10139" geoName="10139" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10140" geoId="IT-GN-CAP-10140" geoName="10140" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10141" geoId="IT-GN-CAP-10141" geoName="10141" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10142" geoId="IT-GN-CAP-10142" geoName="10142" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10143" geoId="IT-GN-CAP-10143" geoName="10143" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10144" geoId="IT-GN-CAP-10144" geoName="10144" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10145" geoId="IT-GN-CAP-10145" geoName="10145" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10146" geoId="IT-GN-CAP-10146" geoName="10146" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10147" geoId="IT-GN-CAP-10147" geoName="10147" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10148" geoId="IT-GN-CAP-10148" geoName="10148" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10149" geoId="IT-GN-CAP-10149" geoName="10149" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10150" geoId="IT-GN-CAP-10150" geoName="10150" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10151" geoId="IT-GN-CAP-10151" geoName="10151" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10152" geoId="IT-GN-CAP-10152" geoName="10152" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10153" geoId="IT-GN-CAP-10153" geoName="10153" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10154" geoId="IT-GN-CAP-10154" geoName="10154" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10155" geoId="IT-GN-CAP-10155" geoName="10155" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="10156" geoId="IT-GN-CAP-10156" geoName="10156" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="38121" geoId="IT-GN-CAP-38121" geoName="38121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="38122" geoId="IT-GN-CAP-38122" geoName="38122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="38123" geoId="IT-GN-CAP-38123" geoName="38123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34121" geoId="IT-GN-CAP-34121" geoName="34121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34122" geoId="IT-GN-CAP-34122" geoName="34122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34123" geoId="IT-GN-CAP-34123" geoName="34123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34124" geoId="IT-GN-CAP-34124" geoName="34124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34125" geoId="IT-GN-CAP-34125" geoName="34125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34126" geoId="IT-GN-CAP-34126" geoName="34126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34127" geoId="IT-GN-CAP-34127" geoName="34127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34128" geoId="IT-GN-CAP-34128" geoName="34128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34129" geoId="IT-GN-CAP-34129" geoName="34129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34130" geoId="IT-GN-CAP-34130" geoName="34130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34131" geoId="IT-GN-CAP-34131" geoName="34131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34132" geoId="IT-GN-CAP-34132" geoName="34132" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34133" geoId="IT-GN-CAP-34133" geoName="34133" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34134" geoId="IT-GN-CAP-34134" geoName="34134" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34135" geoId="IT-GN-CAP-34135" geoName="34135" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34136" geoId="IT-GN-CAP-34136" geoName="34136" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34137" geoId="IT-GN-CAP-34137" geoName="34137" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34138" geoId="IT-GN-CAP-34138" geoName="34138" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34139" geoId="IT-GN-CAP-34139" geoName="34139" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34140" geoId="IT-GN-CAP-34140" geoName="34140" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34141" geoId="IT-GN-CAP-34141" geoName="34141" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34142" geoId="IT-GN-CAP-34142" geoName="34142" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34143" geoId="IT-GN-CAP-34143" geoName="34143" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34144" geoId="IT-GN-CAP-34144" geoName="34144" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34145" geoId="IT-GN-CAP-34145" geoName="34145" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34146" geoId="IT-GN-CAP-34146" geoName="34146" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34147" geoId="IT-GN-CAP-34147" geoName="34147" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34148" geoId="IT-GN-CAP-34148" geoName="34148" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34149" geoId="IT-GN-CAP-34149" geoName="34149" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34150" geoId="IT-GN-CAP-34150" geoName="34150" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="34151" geoId="IT-GN-CAP-34151" geoName="34151" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30121" geoId="IT-GN-CAP-30121" geoName="30121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30122" geoId="IT-GN-CAP-30122" geoName="30122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30123" geoId="IT-GN-CAP-30123" geoName="30123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30124" geoId="IT-GN-CAP-30124" geoName="30124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30125" geoId="IT-GN-CAP-30125" geoName="30125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30126" geoId="IT-GN-CAP-30126" geoName="30126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30127" geoId="IT-GN-CAP-30127" geoName="30127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30128" geoId="IT-GN-CAP-30128" geoName="30128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30129" geoId="IT-GN-CAP-30129" geoName="30129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30130" geoId="IT-GN-CAP-30130" geoName="30130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30131" geoId="IT-GN-CAP-30131" geoName="30131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30132" geoId="IT-GN-CAP-30132" geoName="30132" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30133" geoId="IT-GN-CAP-30133" geoName="30133" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30134" geoId="IT-GN-CAP-30134" geoName="30134" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30135" geoId="IT-GN-CAP-30135" geoName="30135" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30136" geoId="IT-GN-CAP-30136" geoName="30136" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30137" geoId="IT-GN-CAP-30137" geoName="30137" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30138" geoId="IT-GN-CAP-30138" geoName="30138" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30139" geoId="IT-GN-CAP-30139" geoName="30139" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30140" geoId="IT-GN-CAP-30140" geoName="30140" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30141" geoId="IT-GN-CAP-30141" geoName="30141" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30142" geoId="IT-GN-CAP-30142" geoName="30142" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30143" geoId="IT-GN-CAP-30143" geoName="30143" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30144" geoId="IT-GN-CAP-30144" geoName="30144" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30145" geoId="IT-GN-CAP-30145" geoName="30145" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30146" geoId="IT-GN-CAP-30146" geoName="30146" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30147" geoId="IT-GN-CAP-30147" geoName="30147" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30148" geoId="IT-GN-CAP-30148" geoName="30148" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30149" geoId="IT-GN-CAP-30149" geoName="30149" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30150" geoId="IT-GN-CAP-30150" geoName="30150" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30151" geoId="IT-GN-CAP-30151" geoName="30151" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30152" geoId="IT-GN-CAP-30152" geoName="30152" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30153" geoId="IT-GN-CAP-30153" geoName="30153" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30154" geoId="IT-GN-CAP-30154" geoName="30154" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30155" geoId="IT-GN-CAP-30155" geoName="30155" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30156" geoId="IT-GN-CAP-30156" geoName="30156" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30157" geoId="IT-GN-CAP-30157" geoName="30157" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30158" geoId="IT-GN-CAP-30158" geoName="30158" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30159" geoId="IT-GN-CAP-30159" geoName="30159" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30160" geoId="IT-GN-CAP-30160" geoName="30160" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30161" geoId="IT-GN-CAP-30161" geoName="30161" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30162" geoId="IT-GN-CAP-30162" geoName="30162" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30163" geoId="IT-GN-CAP-30163" geoName="30163" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30164" geoId="IT-GN-CAP-30164" geoName="30164" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30165" geoId="IT-GN-CAP-30165" geoName="30165" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30166" geoId="IT-GN-CAP-30166" geoName="30166" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30167" geoId="IT-GN-CAP-30167" geoName="30167" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30168" geoId="IT-GN-CAP-30168" geoName="30168" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30169" geoId="IT-GN-CAP-30169" geoName="30169" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30170" geoId="IT-GN-CAP-30170" geoName="30170" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30171" geoId="IT-GN-CAP-30171" geoName="30171" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30172" geoId="IT-GN-CAP-30172" geoName="30172" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30173" geoId="IT-GN-CAP-30173" geoName="30173" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30174" geoId="IT-GN-CAP-30174" geoName="30174" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30175" geoId="IT-GN-CAP-30175" geoName="30175" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="30176" geoId="IT-GN-CAP-30176" geoName="30176" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="28921" geoId="IT-GN-CAP-28921" geoName="28921" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="28922" geoId="IT-GN-CAP-28922" geoName="28922" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="28923" geoId="IT-GN-CAP-28923" geoName="28923" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="28924" geoId="IT-GN-CAP-28924" geoName="28924" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="28925" geoId="IT-GN-CAP-28925" geoName="28925" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37121" geoId="IT-GN-CAP-37121" geoName="37121" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37122" geoId="IT-GN-CAP-37122" geoName="37122" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37123" geoId="IT-GN-CAP-37123" geoName="37123" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37124" geoId="IT-GN-CAP-37124" geoName="37124" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37125" geoId="IT-GN-CAP-37125" geoName="37125" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37126" geoId="IT-GN-CAP-37126" geoName="37126" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37127" geoId="IT-GN-CAP-37127" geoName="37127" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37128" geoId="IT-GN-CAP-37128" geoName="37128" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37129" geoId="IT-GN-CAP-37129" geoName="37129" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37130" geoId="IT-GN-CAP-37130" geoName="37130" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37131" geoId="IT-GN-CAP-37131" geoName="37131" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37132" geoId="IT-GN-CAP-37132" geoName="37132" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37133" geoId="IT-GN-CAP-37133" geoName="37133" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37134" geoId="IT-GN-CAP-37134" geoName="37134" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37135" geoId="IT-GN-CAP-37135" geoName="37135" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37136" geoId="IT-GN-CAP-37136" geoName="37136" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37137" geoId="IT-GN-CAP-37137" geoName="37137" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37138" geoId="IT-GN-CAP-37138" geoName="37138" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37139" geoId="IT-GN-CAP-37139" geoName="37139" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37140" geoId="IT-GN-CAP-37140" geoName="37140" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37141" geoId="IT-GN-CAP-37141" geoName="37141" geoTypeId="POSTAL_CODE"/>
+    <Geo geoCode="37142" geoId="IT-GN-CAP-37142" geoName="37142" geoTypeId="POSTAL_CODE"/>
+    <!-- associations -->
+    <GeoAssoc geoId="IT-GN-006003" geoIdTo="IT-GN-CAP-15121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-006003" geoIdTo="IT-GN-CAP-15122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-042002" geoIdTo="IT-GN-CAP-60121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-042002" geoIdTo="IT-GN-CAP-60122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-042002" geoIdTo="IT-GN-CAP-60123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-042002" geoIdTo="IT-GN-CAP-60124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-042002" geoIdTo="IT-GN-CAP-60125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-042002" geoIdTo="IT-GN-CAP-60126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-042002" geoIdTo="IT-GN-CAP-60127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-042002" geoIdTo="IT-GN-CAP-60128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-042002" geoIdTo="IT-GN-CAP-60129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-042002" geoIdTo="IT-GN-CAP-60130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-042002" geoIdTo="IT-GN-CAP-60131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-072006" geoIdTo="IT-GN-CAP-70121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-072006" geoIdTo="IT-GN-CAP-70122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-072006" geoIdTo="IT-GN-CAP-70123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-072006" geoIdTo="IT-GN-CAP-70124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-072006" geoIdTo="IT-GN-CAP-70125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-072006" geoIdTo="IT-GN-CAP-70126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-072006" geoIdTo="IT-GN-CAP-70127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-072006" geoIdTo="IT-GN-CAP-70128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-072006" geoIdTo="IT-GN-CAP-70129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-072006" geoIdTo="IT-GN-CAP-70130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-072006" geoIdTo="IT-GN-CAP-70131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-072006" geoIdTo="IT-GN-CAP-70132" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-016024" geoIdTo="IT-GN-CAP-24121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-016024" geoIdTo="IT-GN-CAP-24122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-016024" geoIdTo="IT-GN-CAP-24123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-016024" geoIdTo="IT-GN-CAP-24124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-016024" geoIdTo="IT-GN-CAP-24125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-016024" geoIdTo="IT-GN-CAP-24126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-016024" geoIdTo="IT-GN-CAP-24127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-016024" geoIdTo="IT-GN-CAP-24128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-016024" geoIdTo="IT-GN-CAP-24129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-037006" geoIdTo="IT-GN-CAP-40121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-037006" geoIdTo="IT-GN-CAP-40122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-037006" geoIdTo="IT-GN-CAP-40123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-037006" geoIdTo="IT-GN-CAP-40124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-037006" geoIdTo="IT-GN-CAP-40125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-037006" geoIdTo="IT-GN-CAP-40126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-037006" geoIdTo="IT-GN-CAP-40127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-037006" geoIdTo="IT-GN-CAP-40128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-037006" geoIdTo="IT-GN-CAP-40129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-037006" geoIdTo="IT-GN-CAP-40130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-037006" geoIdTo="IT-GN-CAP-40131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-037006" geoIdTo="IT-GN-CAP-40132" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-037006" geoIdTo="IT-GN-CAP-40133" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-037006" geoIdTo="IT-GN-CAP-40134" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-037006" geoIdTo="IT-GN-CAP-40135" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-037006" geoIdTo="IT-GN-CAP-40136" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-037006" geoIdTo="IT-GN-CAP-40137" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-037006" geoIdTo="IT-GN-CAP-40138" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-037006" geoIdTo="IT-GN-CAP-40139" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-037006" geoIdTo="IT-GN-CAP-40140" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-037006" geoIdTo="IT-GN-CAP-40141" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-017029" geoIdTo="IT-GN-CAP-25121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-017029" geoIdTo="IT-GN-CAP-25122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-017029" geoIdTo="IT-GN-CAP-25123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-017029" geoIdTo="IT-GN-CAP-25124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-017029" geoIdTo="IT-GN-CAP-25125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-017029" geoIdTo="IT-GN-CAP-25126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-017029" geoIdTo="IT-GN-CAP-25127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-017029" geoIdTo="IT-GN-CAP-25128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-017029" geoIdTo="IT-GN-CAP-25129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-017029" geoIdTo="IT-GN-CAP-25130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-017029" geoIdTo="IT-GN-CAP-25131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-017029" geoIdTo="IT-GN-CAP-25132" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-017029" geoIdTo="IT-GN-CAP-25133" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-017029" geoIdTo="IT-GN-CAP-25134" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-017029" geoIdTo="IT-GN-CAP-25135" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-017029" geoIdTo="IT-GN-CAP-25136" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-092009" geoIdTo="IT-GN-CAP-09121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-092009" geoIdTo="IT-GN-CAP-09122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-092009" geoIdTo="IT-GN-CAP-09123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-092009" geoIdTo="IT-GN-CAP-09124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-092009" geoIdTo="IT-GN-CAP-09125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-092009" geoIdTo="IT-GN-CAP-09126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-092009" geoIdTo="IT-GN-CAP-09127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-092009" geoIdTo="IT-GN-CAP-09128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-092009" geoIdTo="IT-GN-CAP-09129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-092009" geoIdTo="IT-GN-CAP-09130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-092009" geoIdTo="IT-GN-CAP-09131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-092009" geoIdTo="IT-GN-CAP-09132" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-092009" geoIdTo="IT-GN-CAP-09133" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-092009" geoIdTo="IT-GN-CAP-09134" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-087015" geoIdTo="IT-GN-CAP-95121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-087015" geoIdTo="IT-GN-CAP-95122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-087015" geoIdTo="IT-GN-CAP-95123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-087015" geoIdTo="IT-GN-CAP-95124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-087015" geoIdTo="IT-GN-CAP-95125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-087015" geoIdTo="IT-GN-CAP-95126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-087015" geoIdTo="IT-GN-CAP-95127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-087015" geoIdTo="IT-GN-CAP-95128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-087015" geoIdTo="IT-GN-CAP-95129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-087015" geoIdTo="IT-GN-CAP-95130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-087015" geoIdTo="IT-GN-CAP-95131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-040007" geoIdTo="IT-GN-CAP-47521" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-040007" geoIdTo="IT-GN-CAP-47522" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-038008" geoIdTo="IT-GN-CAP-44121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-038008" geoIdTo="IT-GN-CAP-44122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-038008" geoIdTo="IT-GN-CAP-44123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-038008" geoIdTo="IT-GN-CAP-44124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50132" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50133" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50134" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50135" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50136" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50137" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50138" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50139" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50140" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50141" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50142" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50143" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50144" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-048017" geoIdTo="IT-GN-CAP-50145" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-071024" geoIdTo="IT-GN-CAP-71121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-071024" geoIdTo="IT-GN-CAP-71122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-040012" geoIdTo="IT-GN-CAP-47121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-040012" geoIdTo="IT-GN-CAP-47122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16132" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16133" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16134" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16135" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16136" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16137" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16138" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16139" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16140" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16141" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16142" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16143" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16144" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16145" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16146" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16147" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16148" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16149" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16150" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16151" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16152" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16153" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16154" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16155" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16156" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16157" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16158" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16159" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16160" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16161" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16162" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16163" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16164" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16165" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16166" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-010025" geoIdTo="IT-GN-CAP-16167" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-011015" geoIdTo="IT-GN-CAP-19121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-011015" geoIdTo="IT-GN-CAP-19122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-011015" geoIdTo="IT-GN-CAP-19123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-011015" geoIdTo="IT-GN-CAP-19124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-011015" geoIdTo="IT-GN-CAP-19125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-011015" geoIdTo="IT-GN-CAP-19126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-011015" geoIdTo="IT-GN-CAP-19127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-011015" geoIdTo="IT-GN-CAP-19128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-011015" geoIdTo="IT-GN-CAP-19129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-011015" geoIdTo="IT-GN-CAP-19130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-011015" geoIdTo="IT-GN-CAP-19131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-011015" geoIdTo="IT-GN-CAP-19132" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-011015" geoIdTo="IT-GN-CAP-19133" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-011015" geoIdTo="IT-GN-CAP-19134" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-011015" geoIdTo="IT-GN-CAP-19135" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-011015" geoIdTo="IT-GN-CAP-19136" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-011015" geoIdTo="IT-GN-CAP-19137" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-049009" geoIdTo="IT-GN-CAP-57121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-049009" geoIdTo="IT-GN-CAP-57122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-049009" geoIdTo="IT-GN-CAP-57123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-049009" geoIdTo="IT-GN-CAP-57124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-049009" geoIdTo="IT-GN-CAP-57125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-049009" geoIdTo="IT-GN-CAP-57126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-049009" geoIdTo="IT-GN-CAP-57127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-049009" geoIdTo="IT-GN-CAP-57128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98132" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98133" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98134" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98135" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98136" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98137" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98138" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98139" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98140" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98141" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98142" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98143" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98144" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98145" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98146" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98147" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98148" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98149" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98150" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98151" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98152" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98153" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98154" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98155" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98156" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98157" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98158" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98159" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98160" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98161" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98162" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98163" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98164" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98165" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98166" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98167" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-083048" geoIdTo="IT-GN-CAP-98168" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20132" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20133" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20134" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20135" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20136" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20137" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20138" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20139" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20140" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20141" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20142" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20143" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20144" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20145" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20146" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20147" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20148" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20149" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20150" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20151" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20152" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20153" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20154" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20155" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20156" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20157" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20158" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20159" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20160" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20161" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-015146" geoIdTo="IT-GN-CAP-20162" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-036023" geoIdTo="IT-GN-CAP-41121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-036023" geoIdTo="IT-GN-CAP-41122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-036023" geoIdTo="IT-GN-CAP-41123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-036023" geoIdTo="IT-GN-CAP-41124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-036023" geoIdTo="IT-GN-CAP-41125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-036023" geoIdTo="IT-GN-CAP-41126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80132" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80133" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80134" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80135" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80136" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80137" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80138" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80139" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80140" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80141" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80142" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80143" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80144" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80145" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80146" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-063049" geoIdTo="IT-GN-CAP-80147" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35132" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35133" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35134" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35135" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35136" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35137" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35138" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35139" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35140" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35141" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35142" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-028060" geoIdTo="IT-GN-CAP-35143" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90132" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90133" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90134" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90135" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90136" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90137" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90138" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90139" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90140" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90141" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90142" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90143" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90144" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90145" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90146" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90147" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90148" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90149" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90150" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-082053" geoIdTo="IT-GN-CAP-90151" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-034027" geoIdTo="IT-GN-CAP-43121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-034027" geoIdTo="IT-GN-CAP-43122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-034027" geoIdTo="IT-GN-CAP-43123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-034027" geoIdTo="IT-GN-CAP-43124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-034027" geoIdTo="IT-GN-CAP-43125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-034027" geoIdTo="IT-GN-CAP-43126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-054039" geoIdTo="IT-GN-CAP-06121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-054039" geoIdTo="IT-GN-CAP-06122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-054039" geoIdTo="IT-GN-CAP-06123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-054039" geoIdTo="IT-GN-CAP-06124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-054039" geoIdTo="IT-GN-CAP-06125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-054039" geoIdTo="IT-GN-CAP-06126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-054039" geoIdTo="IT-GN-CAP-06127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-054039" geoIdTo="IT-GN-CAP-06128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-054039" geoIdTo="IT-GN-CAP-06129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-054039" geoIdTo="IT-GN-CAP-06130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-054039" geoIdTo="IT-GN-CAP-06131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-054039" geoIdTo="IT-GN-CAP-06132" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-054039" geoIdTo="IT-GN-CAP-06133" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-054039" geoIdTo="IT-GN-CAP-06134" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-054039" geoIdTo="IT-GN-CAP-06135" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-041044" geoIdTo="IT-GN-CAP-61121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-041044" geoIdTo="IT-GN-CAP-61122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-068028" geoIdTo="IT-GN-CAP-65121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-068028" geoIdTo="IT-GN-CAP-65122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-068028" geoIdTo="IT-GN-CAP-65123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-068028" geoIdTo="IT-GN-CAP-65124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-068028" geoIdTo="IT-GN-CAP-65125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-068028" geoIdTo="IT-GN-CAP-65126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-068028" geoIdTo="IT-GN-CAP-65127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-068028" geoIdTo="IT-GN-CAP-65128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-068028" geoIdTo="IT-GN-CAP-65129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-033032" geoIdTo="IT-GN-CAP-29121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-033032" geoIdTo="IT-GN-CAP-29122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-050026" geoIdTo="IT-GN-CAP-56121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-050026" geoIdTo="IT-GN-CAP-56122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-050026" geoIdTo="IT-GN-CAP-56123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-050026" geoIdTo="IT-GN-CAP-56124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-050026" geoIdTo="IT-GN-CAP-56125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-050026" geoIdTo="IT-GN-CAP-56126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-050026" geoIdTo="IT-GN-CAP-56127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-050026" geoIdTo="IT-GN-CAP-56128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-039014" geoIdTo="IT-GN-CAP-48121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-039014" geoIdTo="IT-GN-CAP-48122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-039014" geoIdTo="IT-GN-CAP-48123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-039014" geoIdTo="IT-GN-CAP-48124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-039014" geoIdTo="IT-GN-CAP-48125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-080063" geoIdTo="IT-GN-CAP-89121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-080063" geoIdTo="IT-GN-CAP-89122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-080063" geoIdTo="IT-GN-CAP-89123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-080063" geoIdTo="IT-GN-CAP-89124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-080063" geoIdTo="IT-GN-CAP-89125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-080063" geoIdTo="IT-GN-CAP-89126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-080063" geoIdTo="IT-GN-CAP-89127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-080063" geoIdTo="IT-GN-CAP-89128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-080063" geoIdTo="IT-GN-CAP-89129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-080063" geoIdTo="IT-GN-CAP-89130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-080063" geoIdTo="IT-GN-CAP-89131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-080063" geoIdTo="IT-GN-CAP-89132" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-080063" geoIdTo="IT-GN-CAP-89133" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-080063" geoIdTo="IT-GN-CAP-89134" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-080063" geoIdTo="IT-GN-CAP-89135" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-035033" geoIdTo="IT-GN-CAP-42121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-035033" geoIdTo="IT-GN-CAP-42122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-035033" geoIdTo="IT-GN-CAP-42123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-035033" geoIdTo="IT-GN-CAP-42124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-099014" geoIdTo="IT-GN-CAP-47921" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-099014" geoIdTo="IT-GN-CAP-47922" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-099014" geoIdTo="IT-GN-CAP-47923" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-099014" geoIdTo="IT-GN-CAP-47924" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00118" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00119" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00120" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00132" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00133" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00134" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00135" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00136" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00137" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00138" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00139" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00140" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00141" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00142" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00143" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00144" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00145" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00146" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00147" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00148" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00149" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00150" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00151" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00152" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00153" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00154" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00155" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00156" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00157" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00158" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00159" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00160" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00161" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00162" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00163" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00164" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00165" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00166" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00167" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00168" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00169" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00170" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00171" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00172" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00173" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00174" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00175" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00176" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00177" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00178" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00179" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00180" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00181" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00182" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00183" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00184" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00185" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00186" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00187" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00188" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00189" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00190" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00191" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00192" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00193" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00194" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00195" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00196" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00197" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00198" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-058091" geoIdTo="IT-GN-CAP-00199" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-065116" geoIdTo="IT-GN-CAP-84121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-065116" geoIdTo="IT-GN-CAP-84122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-065116" geoIdTo="IT-GN-CAP-84123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-065116" geoIdTo="IT-GN-CAP-84124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-065116" geoIdTo="IT-GN-CAP-84125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-065116" geoIdTo="IT-GN-CAP-84126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-065116" geoIdTo="IT-GN-CAP-84127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-065116" geoIdTo="IT-GN-CAP-84128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-065116" geoIdTo="IT-GN-CAP-84129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-065116" geoIdTo="IT-GN-CAP-84130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-065116" geoIdTo="IT-GN-CAP-84131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-065116" geoIdTo="IT-GN-CAP-84132" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-065116" geoIdTo="IT-GN-CAP-84133" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-065116" geoIdTo="IT-GN-CAP-84134" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-065116" geoIdTo="IT-GN-CAP-84135" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-073027" geoIdTo="IT-GN-CAP-74121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-073027" geoIdTo="IT-GN-CAP-74122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-073027" geoIdTo="IT-GN-CAP-74123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10132" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10133" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10134" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10135" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10136" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10137" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10138" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10139" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10140" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10141" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10142" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10143" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10144" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10145" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10146" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10147" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10148" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10149" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10150" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10151" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10152" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10153" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10154" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10155" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-001272" geoIdTo="IT-GN-CAP-10156" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-022205" geoIdTo="IT-GN-CAP-38121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-022205" geoIdTo="IT-GN-CAP-38122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-022205" geoIdTo="IT-GN-CAP-38123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34132" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34133" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34134" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34135" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34136" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34137" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34138" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34139" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34140" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34141" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34142" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34143" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34144" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34145" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34146" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34147" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34148" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34149" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34150" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-032006" geoIdTo="IT-GN-CAP-34151" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30132" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30133" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30134" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30135" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30136" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30137" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30138" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30139" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30140" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30141" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30142" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30143" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30144" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30145" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30146" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30147" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30148" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30149" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30150" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30151" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30152" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30153" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30154" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30155" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30156" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30157" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30158" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30159" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30160" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30161" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30162" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30163" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30164" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30165" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30166" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30167" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30168" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30169" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30170" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30171" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30172" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30173" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30174" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30175" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-027042" geoIdTo="IT-GN-CAP-30176" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-103072" geoIdTo="IT-GN-CAP-28921" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-103072" geoIdTo="IT-GN-CAP-28922" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-103072" geoIdTo="IT-GN-CAP-28923" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-103072" geoIdTo="IT-GN-CAP-28924" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-103072" geoIdTo="IT-GN-CAP-28925" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37121" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37122" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37123" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37124" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37125" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37126" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37127" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37128" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37129" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37130" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37131" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37132" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37133" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37134" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37135" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37136" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37137" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37138" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37139" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37140" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37141" geoAssocTypeId="POSTAL_CODE"/>
+    <GeoAssoc geoId="IT-GN-023091" geoIdTo="IT-GN-CAP-37142" geoAssocTypeId="POSTAL_CODE"/>
+
+    <!--End of Geo data-->
+
+</entity-engine-xml>

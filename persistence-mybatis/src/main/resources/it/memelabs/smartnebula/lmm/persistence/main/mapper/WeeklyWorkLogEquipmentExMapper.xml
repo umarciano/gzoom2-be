@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.memelabs.smartnebula.lmm.persistence.main.mapper.WeeklyWorkLogEquipmentExMapper">
+
+    <select id="selectEquipmentEmploymentIds" resultType="java.lang.Long">
+        select DISTINCT EE.equipment_empl_id
+        from weekly_work_log_equipment EE
+        <where>
+            EE.weekly_work_log_id = #{weeklyWorkLogId,jdbcType=BIGINT}
+        </where>
+    </select>
+
+
+    <resultMap id="ExportResultMap" type="it.memelabs.smartnebula.lmm.persistence.main.dto.WeeklyWorkLogEquipmentExport"
+               extends="it.memelabs.smartnebula.lmm.persistence.main.mapper.WeeklyWorkLogEquipmentMapper.BaseResultMap">
+        <result column="ee_equipment_category_desc" jdbcType="VARCHAR" property="equipmentCategoryDescription"/>
+        <result column="ee_equipment_type_desc" jdbcType="VARCHAR" property="equipmentTypeDescription"/>
+        <association property="equipmentEmployment" columnPrefix="ee_"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.EquipmentEmploymentExMapper.BaseResultMap"/>
+    </resultMap>
+
+
+    <sql id="Select_Joined_Column_List">
+        <include
+                refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.EquipmentEmploymentMapper.Alias_Column_List">
+            <property name="tableAlias" value="ee."/>
+            <property name="fieldAlias" value="ee_"/>
+        </include>
+        , es.description as ee_state_description
+        , c.state_tag as ee_company_state_tag
+        , ec.description as ee_equipment_category_desc
+        , et.description as ee_equipment_type_desc
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyExMapper.Min_Alias_Column_List">
+            <property name="tableAlias" value="c."/>
+            <property name="fieldAlias" value="ee_company_"/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.EquipmentMapper.Alias_Column_List">
+            <property name="tableAlias" value="e."/>
+            <property name="fieldAlias" value="ee_equipment_"/>
+        </include>
+    </sql>
+
+
+    <sql id="Select_Joined_Tables">
+        left join equipment_employment ee on ev.equipment_empl_id = ee.id
+        left join entity_state es on ee.state_id=es.id
+        left join company c on ee.company_id=c.id
+        left join equipment e on ee.equipment_id=e.id
+        left join equipment_category ec on e.equipment_category_id=ec.id
+        left join equipment_type et on e.equipment_type_id=et.id
+    </sql>
+
+    <select id="findForExportByExample"
+            parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.WeeklyWorkLogEquipmentExample"
+            resultMap="ExportResultMap">
+        select * from (
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include
+                refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.WeeklyWorkLogEquipmentMapper.Alias_Column_List">
+            <property name="tableAlias" value="ev."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        ,
+        <include refid="Select_Joined_Column_List"/>
+        from weekly_work_log_equipment as ev
+        <include refid="Select_Joined_Tables"/>
+        ) t
+        <if test="_parameter != null">
+            <include
+                    refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.WeeklyWorkLogEquipmentMapper.Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+</mapper>

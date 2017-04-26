@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyExMapper">
+
+    <resultMap id="BaseResultMap" type="it.memelabs.smartnebula.lmm.persistence.main.dto.CompanyEx"
+               extends="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyMapper.BaseResultMap">
+        <result column="classification_desc" property="classificationDesc" jdbcType="VARCHAR"/>
+        <result column="category_desc" property="categoryDesc" jdbcType="VARCHAR"/>
+        <result column="state_desc" property="stateDesc" jdbcType="VARCHAR"/>
+      <!--  <association property="address" fetchType="lazy" column="address_id"
+                     select="it.memelabs.smartnebula.lmm.persistence.main.mapper.PostalAddressExMapper.selectByPrimaryKey"/>-->
+        <association property="address" javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.PostalAddressEx"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.PostalAddressExMapper.BaseResultMap"
+                     columnPrefix="addr_">
+        </association>
+        <association property="consortiumMembership" javaType="it.memelabs.smartnebula.lmm.persistence.main.dto.Company"
+                     resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyMapper.BaseResultMap"
+                     columnPrefix="cm_">
+        </association>
+    </resultMap>
+
+    <sql id="Min_Alias_Column_List">
+		${tableAlias}description AS ${fieldAlias}description,
+		${tableAlias}business_name AS ${fieldAlias}business_name,
+		${tableAlias}tax_identification_number AS ${fieldAlias}tax_identification_number,
+		${tableAlias}vat_number AS ${fieldAlias}vat_number
+	</sql>
+
+    <sql id="Min_White_List_Alias_Column_List">
+		${tableAlias}description AS ${fieldAlias}description,
+		${tableAlias}business_name AS ${fieldAlias}business_name,
+		${tableAlias}tax_identification_number AS ${fieldAlias}tax_identification_number,
+		${tableAlias}vat_number AS ${fieldAlias}vat_number,
+		${tableAlias}white_list_member AS ${fieldAlias}white_list_member,
+		${tableAlias}white_list_membership_start_date AS ${fieldAlias}white_list_membership_start_date,
+        ${tableAlias}white_list_membership_end_date AS ${fieldAlias}white_list_membership_end_date
+	</sql>
+
+    <sql id="Example_Where_Clause">
+        <trim prefix="WHERE" prefixOverrides="and |or ">
+            <trim prefix="and (" suffix=")" prefixOverrides="WHERE">
+                <include
+                        refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyMapper.Example_Where_Clause"/>
+            </trim>
+            <if test="filterText != null">
+                and (
+                lower(business_name) like lower(#{filterText})
+                or lower(tax_identification_number) like lower(#{filterText})
+                or lower(vat_number) like lower(#{filterText})
+                )
+            </if>
+            <if test="filterTaxOrVatNumber">
+                and (
+                lower(tax_identification_number) = lower(#{taxIdentificationNumber})
+                or lower(vat_number) = lower(#{vatNumber})
+                )
+            </if>
+        </trim>
+    </sql>
+
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyMapper.Alias_Column_List">
+            <property name="tableAlias" value="c."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.PostalAddressExMapper.Alias_Column_List">
+            <property name="tableAlias" value="addr."/>
+            <property name="fieldAlias" value="addr_"/>
+        </include>
+        , cm.business_name as cm_business_name
+        , cm.id as cm_id
+        , cls.description as classification_desc
+        , cat.description as category_desc
+        , st.description as state_desc
+        from company c
+        left join
+        company_classification cls on c.classification_id=cls.id
+        left join company_category cat on c.category_id=cat.id
+        left join entity_state st on c.state_id=st.id
+        left join company cm on c.consortium_membership_id=cm.id
+        left join postal_address_view addr on c.address_id = addr.id
+        where c.id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="countByExample" parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.CompanyExExample"
+            resultType="java.lang.Integer">
+        select count(*) from company
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+
+    <select id="selectByExampleWithRowbounds" resultMap="BaseResultMap"
+            parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.CompanyExExample">
+        select * from (
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyMapper.Alias_Column_List">
+            <property name="tableAlias" value="c."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.PostalAddressExMapper.Alias_Column_List">
+            <property name="tableAlias" value="addr."/>
+            <property name="fieldAlias" value="addr_"/>
+        </include>
+        , cm.business_name as cm_business_name
+        , cm.id as cm_id
+        , cls.description as classification_desc
+        , cat.description as category_desc
+        , st.description as state_desc
+        from company c
+        left join company_classification cls on c.classification_id=cls.id
+        left join company_category cat on c.category_id=cat.id
+        left join entity_state st on c.state_id=st.id
+        left join company cm on c.consortium_membership_id=cm.id
+        left join postal_address_view addr on c.address_id = addr.id
+        ) t
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+
+    <!--WEEKLY WORK LOG QUERIES-->
+
+    <sql id="WWL_Where_Clause">
+        <trim prefix="WHERE" prefixOverrides="and |or ">
+            <trim prefix="and (" suffix=")" prefixOverrides="WHERE">
+                <include refid="Example_Where_Clause"/>
+            </trim>
+            <if test="employmentEndDate!=null and employmentStartDate !=null">
+                and ((
+                pe_start_date&lt;=to_date(#{employmentEndDate}, 'YYYY-MM-DD')
+                and (pe_end_date IS NULL OR pe_end_date >= to_date(#{employmentStartDate}, 'YYYY-MM-DD'))
+                <if test="employmentStateTag!=null">and pe_state_tag=#{employmentStateTag}</if>
+                ) or (
+                ee_start_date&lt;=to_date(#{employmentEndDate}, 'YYYY-MM-DD')
+                and (ee_end_date IS NULL OR ee_end_date >= to_date(#{employmentStartDate}, 'YYYY-MM-DD'))
+                <if test="employmentStateTag!=null">and ee_state_tag=#{employmentStateTag}</if>
+                ))
+            </if>
+        </trim>
+    </sql>
+
+    <sql id="wwlUnion">
+        SELECT
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyMapper.Alias_Column_List">
+            <property name="tableAlias" value="CO."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        from company CO join person_employment PE on PE.company_id = CO.id inner join weekly_work_log_person WP on
+        WP.person_empl_id=PE.id
+        where WP.weekly_work_log_id = #{weeklyWorkLogId,jdbcType=BIGINT}
+        union
+        select
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyMapper.Alias_Column_List">
+            <property name="tableAlias" value="CO."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        from company CO join equipment_employment EE on EE.company_id = CO.id inner join weekly_work_log_equipment
+        WP on WP.equipment_empl_id=EE.id
+        where WP.weekly_work_log_id = #{weeklyWorkLogId,jdbcType=BIGINT}
+        union
+    </sql>
+
+    <sql id="wlUnion">
+        SELECT
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyMapper.Alias_Column_List">
+            <property name="tableAlias" value="CO."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        from company CO join person_employment PE on PE.company_id = CO.id inner join work_log_person_event WP on
+        WP.person_empl_id=PE.id
+        where WP.work_log_id = #{workLogId,jdbcType=BIGINT}
+        union
+        select
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyMapper.Alias_Column_List">
+            <property name="tableAlias" value="CO."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        from company CO join equipment_employment EE on EE.company_id = CO.id inner join work_log_equipment_event
+        WP on WP.equipment_empl_id=EE.id
+        where WP.work_log_id = #{workLogId,jdbcType=BIGINT}
+        union
+    </sql>
+
+    <!--to be valid for weekly work log
+     end_date is null or end_date >= first_day_of the week
+     start_date <= last_day_of the week  -->
+    <select id="selectWeekyWorkLogByExampleWithRowbounds"
+            parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.CompanyWwlExample"
+            resultMap="BaseResultMap">
+        <if test="weeklyWorkLogId!=null">
+            <include refid="wwlUnion"/>
+        </if>
+        <if test="workLogId!=null">
+            <include refid="wlUnion"/>
+        </if>
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyMapper.Alias_Column_List">
+            <property name="tableAlias" value=""/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        from (
+        select
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyMapper.Alias_Column_List">
+            <property name="tableAlias" value="co."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.PersonEmploymentMapper.Alias_Column_List">
+            <property name="tableAlias" value="pe."/>
+            <property name="fieldAlias" value="pe_"/>
+        </include>
+        ,
+        <include
+                refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.EquipmentEmploymentMapper.Alias_Column_List">
+            <property name="tableAlias" value="ee."/>
+            <property name="fieldAlias" value="ee_"/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.PostalAddressExMapper.Alias_Column_List">
+            <property name="tableAlias" value="addr."/>
+            <property name="fieldAlias" value="addr_"/>
+        </include>
+        from company co
+        LEFT JOIN person_employment pe ON pe.company_id = co.id
+        LEFT JOIN equipment_employment ee ON ee.company_id = co.id
+        join entity_state st on co.state_id=st.id
+        left join postal_address_view addr on co.address_id = addr.id
+        ) t
+        <if test="_parameter != null">
+            <include refid="WWL_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="countWeekyWorkLogByExample"
+            parameterType="it.memelabs.smartnebula.lmm.persistence.main.dto.CompanyWwlExample"
+            resultType="integer">
+        select count(
+        <if test="distinct">
+            distinct
+        </if>
+        id)
+        /*add UNION id WWL is already saved*/
+        <if test="weeklyWorkLogId!=null">
+            FROM (
+            <include refid="wwlUnion"/>
+            SELECT
+            <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyMapper.Alias_Column_List">
+                <property name="tableAlias" value=""/>
+                <property name="fieldAlias" value=""/>
+            </include>
+        </if>
+        <if test="workLogId!=null">
+            FROM (
+            <include refid="wlUnion"/>
+            SELECT
+            <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyMapper.Alias_Column_List">
+                <property name="tableAlias" value=""/>
+                <property name="fieldAlias" value=""/>
+            </include>
+        </if>
+        from (
+        select
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyMapper.Alias_Column_List">
+            <property name="tableAlias" value="co."/>
+            <property name="fieldAlias" value=""/>
+        </include>
+        ,
+        <include refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.PersonEmploymentMapper.Alias_Column_List">
+            <property name="tableAlias" value="pe."/>
+            <property name="fieldAlias" value="pe_"/>
+        </include>
+        ,
+        <include
+                refid="it.memelabs.smartnebula.lmm.persistence.main.mapper.EquipmentEmploymentMapper.Alias_Column_List">
+            <property name="tableAlias" value="ee."/>
+            <property name="fieldAlias" value="ee_"/>
+        </include>
+        from company co
+        LEFT JOIN person_employment pe ON pe.company_id = co.id
+        LEFT JOIN equipment_employment ee ON ee.company_id = co.id
+        join entity_state st on co.state_id=st.id
+        ) t
+        <if test="_parameter != null">
+            <include refid="WWL_Where_Clause"/>
+        </if>
+        <if test="workLogId!=null">
+            ) s
+        </if>
+        <if test="weeklyWorkLogId!=null">
+            ) r
+        </if>
+    </select>
+
+    <select id="validForWeeklyWorkLog"
+            resultMap="it.memelabs.smartnebula.lmm.persistence.main.mapper.CompanyMapper.BaseResultMap"
+            parameterType="it.memelabs.smartnebula.lmm.persistence.main.dao.CompanyWwlFilter">
+        select distinct CO.id,CO.business_name,ES.tag
+       from company CO
+       join contract CT on CT.performing_company_id = CO.id
+       join entity_state ES on CT.state_id = ES.id
+       join contract_construction_site CCS on CCS.contract_id = CT.id
+       WHERE ES.tag='VALIDATED' and CCS.construction_site_id = #{constructionSiteId};
+    </select>
+
+</mapper>
