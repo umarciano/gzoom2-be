@@ -3,11 +3,8 @@ package it.memelabs.smartnebula.lmm.querydsl;
 import com.querydsl.codegen.BeanSerializer;
 import com.querydsl.sql.Configuration;
 import com.querydsl.sql.PostgreSQLTemplates;
-import com.querydsl.sql.codegen.MetaDataExporter;
-import com.querydsl.sql.types.CharacterType;
 import com.querydsl.sql.types.JSR310LocalDateTimeType;
 import com.querydsl.sql.types.JSR310LocalDateType;
-import com.querydsl.sql.types.UtilDateType;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 
@@ -16,9 +13,6 @@ import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,7 +24,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class QueryDslGenerator {
     private static final Logger LOG = getLogger(QueryDslGenerator.class);
 
-    public static final String TARGET_FOLDER = "/Users/anfo/projects/gzoom/gzoom2/query-dsl/src/generated/java";
+    public static final String TARGET_FOLDER = "/Users/anfo/projects/gzoom/gzoom2/persistence-query-dsl/src/generated/java";
 
     private Connection getConnection() throws SQLException {
     /*    return DriverManager.getConnection("jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle-maps.maps1.mapsengineering.com)(PORT=1521))" +
@@ -48,7 +42,7 @@ public class QueryDslGenerator {
 
 
     public void generate() throws SQLException {
-        MetaDataExporter exporter = new MetaDataExporter();
+        it.memelabs.smartnebula.lmm.querydsl.patch.MetaDataExporter exporter = new it.memelabs.smartnebula.lmm.querydsl.patch.MetaDataExporter();
         exporter.setPackageName("it.memelabs.smartnebula.lmm.querydsl.generated");
         exporter.setTargetFolder(new File(TARGET_FOLDER));
         BeanSerializer beanSerializer = new BeanSerializer();
@@ -62,14 +56,17 @@ public class QueryDslGenerator {
         configuration.register(new JSR310LocalDateTimeType());
         configuration.register(new JSR310LocalDateType());
         configuration.register(new BooleanCharacterType());
-       // configuration.registerType("DATE", LocalDate.class);
+        // configuration.registerType("DATE", LocalDate.class);
         //configuration.registerType("TIMESTAMP(6)", Timestamp.class);
 
         exporter.setBeanSerializer(new CustomSerializer2());
+
         //table to export list
         String tables = getTables();
-       // if (tables != null)
-       //     exporter.setTableNamePattern(tables);
+        if (tables != null)
+            exporter.setTableNamePattern(tables);
+        exporter.setNamingStrategy(new CustomNamingStrategy(tables));
+        exporter.setExportInverseForeignKeys(true);
 
         exporter.export(getConnection().getMetaData());
 

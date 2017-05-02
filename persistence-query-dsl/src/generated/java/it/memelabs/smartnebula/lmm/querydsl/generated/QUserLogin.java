@@ -68,17 +68,13 @@ public class QUserLogin extends com.querydsl.sql.RelationalPathBase<UserLogin> {
 
     public final com.querydsl.sql.PrimaryKey<UserLogin> primary = createPrimaryKey(userLoginId);
 
-    public final com.querydsl.sql.ForeignKey<UserLoginValidPartyRole> _ulvprUlFk = createInvForeignKey(userLoginId, "USER_LOGIN_ID");
+    public final com.querydsl.sql.ForeignKey<Party> userParty = createForeignKey(partyId, "PARTY_ID");
 
-    public final com.querydsl.sql.ForeignKey<UserLoginSession> _userSessionUser = createInvForeignKey(userLoginId, "USER_LOGIN_ID");
+    public final com.querydsl.sql.ForeignKey<Party> _partyCul = createInvForeignKey(userLoginId, "CREATED_BY_USER_LOGIN");
+
+    public final com.querydsl.sql.ForeignKey<Party> _partyLmcul = createInvForeignKey(userLoginId, "LAST_MODIFIED_BY_USER_LOGIN");
 
     public final com.querydsl.sql.ForeignKey<UserLoginSecurityGroup> _userSecgrpUser = createInvForeignKey(userLoginId, "USER_LOGIN_ID");
-
-    public final com.querydsl.sql.ForeignKey<UserLoginHistory> _userLhUser = createInvForeignKey(userLoginId, "USER_LOGIN_ID");
-
-    public final com.querydsl.sql.ForeignKey<UserLoginValidRole> _ulvrUlFk = createInvForeignKey(userLoginId, "USER_LOGIN_ID");
-
-    public final com.querydsl.sql.ForeignKey<UserLoginPasswordHistory> _userLphUser = createInvForeignKey(userLoginId, "USER_LOGIN_ID");
 
     public QUserLogin(String variable) {
         super(UserLogin.class, forVariable(variable), "null", "USER_LOGIN");

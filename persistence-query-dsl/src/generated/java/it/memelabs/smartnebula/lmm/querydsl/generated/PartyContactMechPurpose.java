@@ -1,0 +1,134 @@
+package it.memelabs.smartnebula.lmm.querydsl.generated;
+
+import javax.annotation.Generated;
+import com.querydsl.sql.Column;
+
+/**
+ * PartyContactMechPurpose is a Querydsl bean type
+ */
+@Generated("com.querydsl.codegen.BeanSerializer")
+public class PartyContactMechPurpose {
+
+    @Column("CONTACT_MECH_ID")
+    private String contactMechId;
+
+    @Column("CONTACT_MECH_PURPOSE_TYPE_ID")
+    private String contactMechPurposeTypeId;
+
+    @Column("CREATED_BY_USER_LOGIN")
+    private String createdByUserLogin;
+
+    @Column("CREATED_STAMP")
+    private java.time.LocalDateTime createdStamp;
+
+    @Column("CREATED_TX_STAMP")
+    private java.time.LocalDateTime createdTxStamp;
+
+    @Column("FROM_DATE")
+    private java.time.LocalDateTime fromDate;
+
+    @Column("LAST_MODIFIED_BY_USER_LOGIN")
+    private String lastModifiedByUserLogin;
+
+    @Column("LAST_UPDATED_STAMP")
+    private java.time.LocalDateTime lastUpdatedStamp;
+
+    @Column("LAST_UPDATED_TX_STAMP")
+    private java.time.LocalDateTime lastUpdatedTxStamp;
+
+    @Column("PARTY_ID")
+    private String partyId;
+
+    @Column("THRU_DATE")
+    private java.time.LocalDateTime thruDate;
+
+    public String getContactMechId() {
+        return contactMechId;
+    }
+
+    public void setContactMechId(String contactMechId) {
+        this.contactMechId = contactMechId;
+    }
+
+    public String getContactMechPurposeTypeId() {
+        return contactMechPurposeTypeId;
+    }
+
+    public void setContactMechPurposeTypeId(String contactMechPurposeTypeId) {
+        this.contactMechPurposeTypeId = contactMechPurposeTypeId;
+    }
+
+    public String getCreatedByUserLogin() {
+        return createdByUserLogin;
+    }
+
+    public void setCreatedByUserLogin(String createdByUserLogin) {
+        this.createdByUserLogin = createdByUserLogin;
+    }
+
+    public java.time.LocalDateTime getCreatedStamp() {
+        return createdStamp;
+    }
+
+    public void setCreatedStamp(java.time.LocalDateTime createdStamp) {
+        this.createdStamp = createdStamp;
+    }
+
+    public java.time.LocalDateTime getCreatedTxStamp() {
+        return createdTxStamp;
+    }
+
+    public void setCreatedTxStamp(java.time.LocalDateTime createdTxStamp) {
+        this.createdTxStamp = createdTxStamp;
+    }
+
+    public java.time.LocalDateTime getFromDate() {
+        return fromDate;
+    }
+
+    public void setFromDate(java.time.LocalDateTime fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public String getLastModifiedByUserLogin() {
+        return lastModifiedByUserLogin;
+    }
+
+    public void setLastModifiedByUserLogin(String lastModifiedByUserLogin) {
+        this.lastModifiedByUserLogin = lastModifiedByUserLogin;
+    }
+
+    public java.time.LocalDateTime getLastUpdatedStamp() {
+        return lastUpdatedStamp;
+    }
+
+    public void setLastUpdatedStamp(java.time.LocalDateTime lastUpdatedStamp) {
+        this.lastUpdatedStamp = lastUpdatedStamp;
+    }
+
+    public java.time.LocalDateTime getLastUpdatedTxStamp() {
+        return lastUpdatedTxStamp;
+    }
+
+    public void setLastUpdatedTxStamp(java.time.LocalDateTime lastUpdatedTxStamp) {
+        this.lastUpdatedTxStamp = lastUpdatedTxStamp;
+    }
+
+    public String getPartyId() {
+        return partyId;
+    }
+
+    public void setPartyId(String partyId) {
+        this.partyId = partyId;
+    }
+
+    public java.time.LocalDateTime getThruDate() {
+        return thruDate;
+    }
+
+    public void setThruDate(java.time.LocalDateTime thruDate) {
+        this.thruDate = thruDate;
+    }
+
+}
+

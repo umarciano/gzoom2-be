@@ -13,15 +13,12 @@
     <name>GZoom QueryDsl Generator</name>
     <description>GZoom QueryDsl Services</description>
 
-    <properties>
-        <querydsl.version>4.1.4</querydsl.version>
-    </properties>
 
 
     <dependencies>
 
         <!--enum  from persistence-->
-        <dependency>
+      <!--  <dependency>
             <groupId>it.mapsgroup.gzoom</groupId>
             <artifactId>persistence</artifactId>
             <version>${project.parent.version}</version>
@@ -31,8 +28,13 @@
             <groupId>it.mapsgroup.gzoom</groupId>
             <artifactId>query-dsl</artifactId>
             <version>${project.parent.version}</version>
-        </dependency>
+        </dependency>-->
 
+        <dependency>
+            <groupId>it.mapsgroup.gzoom</groupId>
+            <artifactId>common-persistence</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
 
         <!-- Apache Commons -->
         <dependency>

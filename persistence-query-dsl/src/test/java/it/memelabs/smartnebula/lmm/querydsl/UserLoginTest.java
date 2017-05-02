@@ -2,8 +2,11 @@ package it.memelabs.smartnebula.lmm.querydsl;
 
 import com.querydsl.core.group.GroupBy;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.QBean;
 import com.querydsl.sql.SQLQueryFactory;
 import it.mapsgroup.gzoom.persistence.common.CustomTxManager;
+import it.memelabs.smartnebula.lmm.querydsl.generated.Party;
+import it.memelabs.smartnebula.lmm.querydsl.generated.QParty;
 import it.memelabs.smartnebula.lmm.querydsl.generated.QUserLogin;
 import it.memelabs.smartnebula.lmm.querydsl.generated.UserLogin;
 import org.junit.Test;
@@ -16,11 +19,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.sql.DataSource;
 import java.util.List;
 
+import static com.querydsl.core.types.Projections.bean;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
@@ -63,6 +68,25 @@ public class UserLoginTest {
             System.out.println("TxManager.stamp1 " + ((CustomTxManager) txManager).getStamp());
             return null;
         });
+    }
+
+    @Test
+    @Transactional
+    public void name2() throws Exception {
+        QUserLogin qUserLogin = QUserLogin.userLogin;
+        QParty qParty = QParty.party;
+        QBean<UserLoginEx> userLoginExQBean = bean(UserLoginEx.class, bean(UserLogin.class, qUserLogin.all()).as("userLogin"), bean(Party.class, qParty.all()).as("party"));
+        List<UserLoginEx> ret = queryFactory.select(qUserLogin, qParty).from(qUserLogin).innerJoin(qUserLogin.userParty, qParty)
+                .where(qParty.partyId.isNotNull())
+                .transform(GroupBy.groupBy(qUserLogin.userLoginId).list(userLoginExQBean));
+        ret.size();
+
+      /*  Projections.bean(UserLogin.class);
+        List<UserLogin> ret = queryFactory.select(qUserLogin).from(qUserLogin).where(qUserLogin.userLoginId.isNotNull().and(qUserLogin.enabled.isTrue()))
+                .transform(GroupBy.groupBy(qUserLogin.userLoginId).list(qUserLogin));
+
+        ret.size();*/
+
     }
 
 

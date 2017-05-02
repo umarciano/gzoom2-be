@@ -2,23 +2,15 @@ package it.mapsgroup.gzoom.persistence.common;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.commons.lang3.StringUtils;
-import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.annotation.MapperScan;
-import org.mybatis.spring.transaction.SpringManagedTransactionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.sql.DataSource;
-import java.io.IOException;
 
 /**
  * @author Andrea Fossi.

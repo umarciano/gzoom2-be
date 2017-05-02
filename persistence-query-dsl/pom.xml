@@ -13,10 +13,6 @@
     <name>GZoom QueryDsl</name>
     <description>GZoom QueryDsl Services</description>
 
-    <properties>
-        <querydsl.version>4.1.4</querydsl.version>
-    </properties>
-
 
     <dependencies>
 

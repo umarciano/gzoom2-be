@@ -44,6 +44,8 @@ public class QUserLoginSecurityGroup extends com.querydsl.sql.RelationalPathBase
 
     public final com.querydsl.sql.ForeignKey<UserLogin> userSecgrpUser = createForeignKey(userLoginId, "USER_LOGIN_ID");
 
+    public final com.querydsl.sql.ForeignKey<SecurityGroup> userSecgrpGrp = createForeignKey(groupId, "GROUP_ID");
+
     public QUserLoginSecurityGroup(String variable) {
         super(UserLoginSecurityGroup.class, forVariable(variable), "null", "USER_LOGIN_SECURITY_GROUP");
         addMetadata();

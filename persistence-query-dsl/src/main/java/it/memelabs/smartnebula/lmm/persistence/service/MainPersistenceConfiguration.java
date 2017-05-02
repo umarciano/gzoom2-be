@@ -10,19 +10,12 @@ import com.querydsl.sql.types.JSR310LocalDateType;
 import com.zaxxer.hikari.HikariDataSource;
 import it.mapsgroup.gzoom.persistence.common.CustomTxManager;
 import it.memelabs.smartnebula.lmm.querydsl.BooleanCharacterType;
-import it.memelabs.smartnebula.lmm.querydsl.CustomTxManager;
 import org.apache.commons.lang3.StringUtils;
-import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.annotation.MapperScan;
-import org.mybatis.spring.transaction.SpringManagedTransactionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
@@ -32,7 +25,6 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.inject.Provider;
 import javax.sql.DataSource;
-import java.io.IOException;
 import java.sql.Connection;
 
 /**
@@ -42,8 +34,6 @@ import java.sql.Connection;
 @EnableTransactionManagement
 
 //mybatis dependency
-@MapperScan("it.memelabs.smartnebula.lmm.persistence.main.mapper")
-@ComponentScan({"it.memelabs.smartnebula.lmm.persistence.main.dao", "it.memelabs.smartnebula.lmm.persistence.job.dao"})
 public class MainPersistenceConfiguration implements TransactionManagementConfigurer {
 
     private PlatformTransactionManager txManager;
@@ -111,17 +101,7 @@ public class MainPersistenceConfiguration implements TransactionManagementConfig
         return new SQLQueryFactory(querydslConfiguration(), provider);
     }
 
-    //mybatis dependency
-    @Autowired
-    @Bean(name = "mainSqlSessionFactory")
-    public SqlSessionFactoryBean mainSqlSessionFactory(@Qualifier("mainDataSource") DataSource dataSource) throws IOException {
-        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(dataSource);
-        sqlSessionFactoryBean.setTransactionFactory(new SpringManagedTransactionFactory());
-        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("/it/memelabs/smartnebula/lmm/persistence/main/mapper/**" + "/*.xml"));
-        sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("/META-INF/mybatis-config.xml"));
-        return sqlSessionFactoryBean;
-    }
+
 
     @Override
     public PlatformTransactionManager annotationDrivenTransactionManager() {
