@@ -130,16 +130,6 @@ public class Validators {
             throw new ValidationException(reason);
     }
 
-    public static void assertStateParent(it.memelabs.smartnebula.lmm.persistence.main.dto.EntityState state, Long parentId, String reason) {
-        if (state != null && parentId != null && !parentId.equals(state.getParentId())) {
-            throw new ValidationException(reason);
-        }
-    }
 
-    public static void assertStateEntity(it.memelabs.smartnebula.lmm.persistence.main.dto.EntityState state, String entity, String reason) {
-        if (state != null && entity != null && !entity.equals(state.getEntity())) {
-            throw new ValidationException(reason);
-        }
-    }
 
 }

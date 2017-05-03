@@ -147,7 +147,7 @@
                 <executions>
                     <execution>
                         <id>add-resource</id>
-                        <phase>generate-resources</phase>
+                        <phase>generate-sources</phase>
                         <goals>
                             <goal>add-resource</goal>
                         </goals>
