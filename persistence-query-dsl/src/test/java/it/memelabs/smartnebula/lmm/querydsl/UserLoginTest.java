@@ -5,6 +5,7 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.QBean;
 import com.querydsl.sql.SQLQueryFactory;
 import it.mapsgroup.gzoom.persistence.common.CustomTxManager;
+import it.mapsgroup.gzoom.querydsl.dto.UserLoginEx;
 import it.memelabs.smartnebula.lmm.querydsl.generated.Party;
 import it.memelabs.smartnebula.lmm.querydsl.generated.QParty;
 import it.memelabs.smartnebula.lmm.querydsl.generated.QUserLogin;

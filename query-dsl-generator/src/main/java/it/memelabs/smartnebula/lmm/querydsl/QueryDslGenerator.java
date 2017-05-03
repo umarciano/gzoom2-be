@@ -43,7 +43,7 @@ public class QueryDslGenerator {
 
     public void generate() throws SQLException {
         it.memelabs.smartnebula.lmm.querydsl.patch.MetaDataExporter exporter = new it.memelabs.smartnebula.lmm.querydsl.patch.MetaDataExporter();
-        exporter.setPackageName("it.memelabs.smartnebula.lmm.querydsl.generated");
+        exporter.setPackageName("it.mapsgroup.gzoom.querydsl.dto");
         exporter.setTargetFolder(new File(TARGET_FOLDER));
         BeanSerializer beanSerializer = new BeanSerializer();
         beanSerializer.setAddToString(true);

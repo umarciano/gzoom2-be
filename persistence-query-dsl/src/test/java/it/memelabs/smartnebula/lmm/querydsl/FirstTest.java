@@ -3,6 +3,7 @@ package it.memelabs.smartnebula.lmm.querydsl;
 import com.querydsl.core.group.GroupBy;
 import com.querydsl.core.types.QBean;
 import com.querydsl.sql.*;
+import it.mapsgroup.gzoom.querydsl.dto.UserLoginEx;
 import it.memelabs.smartnebula.lmm.querydsl.ex.PersonEx;
 import it.memelabs.smartnebula.lmm.querydsl.ex.PersonEx2;
 import it.memelabs.smartnebula.lmm.querydsl.generated.Person;
