@@ -50,13 +50,8 @@ public class AuthenticationOfBizClientImpl extends OfBizClient implements Authen
         Map<String, String> paramMap = new HashMap<String, String>();
         paramMap.put("login.username", username);
         paramMap.put("login.password", password);
-        paramMap.put("loginSourceId", loginSourceId);
-        paramMap.put("deviceId", deviceId);
-        paramMap.put("deviceDescription", deviceDescription);
-        paramMap.put("appId", appId);
-        paramMap.put("appVersion", appVersion);
-
-        Map<String, Object> result = execute("gnLogin", paramMap);
+        
+        Map<String, Object> result = execute("gzSimpleLogin", paramMap);
         String sessionId = (String) result.get("sessionId");
         log.debug("Login reply sessionId: {}", sessionId);
         return result;
@@ -73,7 +68,7 @@ public class AuthenticationOfBizClientImpl extends OfBizClient implements Authen
     public String logout(String sessionId) {
         Map<String, String> paramMap = new HashMap<String, String>();
 
-        Map<String, Object> result = execute("gnLogout", sessionId, paramMap);
+        Map<String, Object> result = execute("gzLogout", sessionId, paramMap);
         String resp = (String) result.get("result");
         log.debug("Logout  reply message: {}", resp);
         return resp;
@@ -97,10 +92,8 @@ public class AuthenticationOfBizClientImpl extends OfBizClient implements Authen
     }
 
     public Map<String, Object> rollbackDb() {
-        Map<String, Object> result = execute("gnRollbackDb", new HashMap<String, Object>());
-        String resp = (String) result.get("result");
-        log.debug("rollbackMessage  reply message: {}", resp);
-        return result;
+        
+        return null;
     }
 
 
