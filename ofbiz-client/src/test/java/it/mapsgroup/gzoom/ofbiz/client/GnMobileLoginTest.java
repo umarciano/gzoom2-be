@@ -41,7 +41,7 @@ public class GnMobileLoginTest extends AbstractOfBizTest {
     @Test
     public void testPing() {
         String deviceId = UUID.randomUUID().toString();
-        Map<String, Object> response = loginClient.login("user1", "ofbiz", LoginSourceOfbiz.GN_LOG_SRC_MOBILE.name(), deviceId, "FOX_MOBILE", "UNIT_TEST", "V1");
+        Map<String, Object> response = loginClient.login("admin", "MapsGzoom01", LoginSourceOfbiz.GN_LOG_SRC_MOBILE.name(), deviceId, "FOX_MOBILE", "UNIT_TEST", "V1");
         String sessionId = (String) response.get("sessionId");
         assertThat("returned sessionId", sessionId, is(not(nullValue())));
         // String reply = pingClient.ping(sessionId, "Blah blah blahhhh!!!");
