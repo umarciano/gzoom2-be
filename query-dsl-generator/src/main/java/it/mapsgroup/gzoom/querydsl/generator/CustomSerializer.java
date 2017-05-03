@@ -1,4 +1,4 @@
-package it.memelabs.smartnebula.lmm.querydsl;
+package it.mapsgroup.gzoom.querydsl.generator;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;

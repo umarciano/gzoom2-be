@@ -1,14 +1,14 @@
-package it.memelabs.smartnebula.lmm.querydsl;
+package it.mapsgroup.gzoom.querydsl.generator;
 
 import com.querydsl.core.QueryMetadata;
 import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.SubQueryExpression;
 import com.querydsl.sql.*;
-import it.memelabs.smartnebula.commons.DateUtil;
-import it.memelabs.smartnebula.lmm.persistence.service.MainPersistenceConfiguration;
-import it.memelabs.smartnebula.lmm.querydsl.generated.Person;
-import it.memelabs.smartnebula.lmm.querydsl.generated.QPerson;
+
+import it.mapsgroup.gzoom.querydsl.dto.Person;
+import it.mapsgroup.gzoom.querydsl.dto.QPerson;
+import it.mapsgroup.gzoom.querydsl.persistence.service.MainPersistenceConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -19,7 +19,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import javax.sql.DataSource;
-import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;

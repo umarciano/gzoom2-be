@@ -1,4 +1,4 @@
-package it.memelabs.smartnebula.lmm.querydsl;
+package it.mapsgroup.gzoom.querydsl;
 
 import com.querydsl.core.types.Expression;
 

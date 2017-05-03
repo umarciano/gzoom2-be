@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package it.memelabs.smartnebula.lmm.querydsl.patch;
+package it.mapsgroup.gzoom.querydsl.generator.patch;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -32,7 +32,7 @@ import com.querydsl.sql.codegen.NamingStrategy;
 import com.querydsl.sql.codegen.SQLCodegenModule;
 import com.querydsl.sql.codegen.SpatialSupport;
 import com.querydsl.sql.codegen.support.*;
-import it.memelabs.smartnebula.lmm.querydsl.CustomNamingStrategy;
+import it.mapsgroup.gzoom.querydsl.generator.CustomNamingStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

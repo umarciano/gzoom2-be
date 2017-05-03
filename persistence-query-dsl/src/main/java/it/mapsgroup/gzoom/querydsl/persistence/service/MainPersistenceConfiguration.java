@@ -9,11 +9,12 @@ import com.querydsl.sql.types.JSR310LocalDateTimeType;
 import com.querydsl.sql.types.JSR310LocalDateType;
 import com.zaxxer.hikari.HikariDataSource;
 import it.mapsgroup.gzoom.persistence.common.CustomTxManager;
-import it.memelabs.smartnebula.lmm.querydsl.BooleanCharacterType;
+import it.mapsgroup.gzoom.querydsl.BooleanCharacterType;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -32,7 +33,7 @@ import java.sql.Connection;
  */
 @Configuration
 @EnableTransactionManagement
-
+@ComponentScan("it.mapsgroup.gzoom.querydsl.dao")
 //mybatis dependency
 public class MainPersistenceConfiguration implements TransactionManagementConfigurer {
 
@@ -46,7 +47,7 @@ public class MainPersistenceConfiguration implements TransactionManagementConfig
         dataSource.setJdbcUrl(getNotNullProperty(environment, "persistence.main.url"));
         dataSource.setUsername(getNotNullProperty(environment, "persistence.main.user"));
         dataSource.setPassword(getNotNullProperty(environment, "persistence.main.password"));
-        dataSource.setConnectionTestQuery("SELECT 1");
+        //dataSource.setConnectionTestQuery("SELECT 1");
         dataSource.setMinimumIdle(10);
         dataSource.setMaximumPoolSize(50);
         return dataSource;

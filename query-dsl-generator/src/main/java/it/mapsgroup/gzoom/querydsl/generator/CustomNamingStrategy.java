@@ -1,4 +1,4 @@
-package it.memelabs.smartnebula.lmm.querydsl;
+package it.mapsgroup.gzoom.querydsl.generator;
 
 import com.google.common.collect.ImmutableList;
 import com.querydsl.sql.SchemaAndTable;

@@ -1,4 +1,4 @@
-package it.memelabs.smartnebula.lmm.persistence.main.dto;
+package it.mapsgroup.gzoom.querydsl;
 
 /**
  * @author Andrea Fossi.

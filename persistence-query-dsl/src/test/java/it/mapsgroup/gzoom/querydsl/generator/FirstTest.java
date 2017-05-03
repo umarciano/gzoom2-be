@@ -1,4 +1,4 @@
-package it.memelabs.smartnebula.lmm.querydsl;
+package it.mapsgroup.gzoom.querydsl.generator;
 
 import com.querydsl.core.group.GroupBy;
 import com.querydsl.core.types.QBean;
@@ -27,7 +27,7 @@ import javax.sql.DataSource;
 import java.util.List;
 
 import static com.querydsl.core.types.Projections.bean;
-import static it.memelabs.smartnebula.lmm.querydsl.QBeanUtils.merge;
+import static it.mapsgroup.gzoom.querydsl.QBeanUtils.merge;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**

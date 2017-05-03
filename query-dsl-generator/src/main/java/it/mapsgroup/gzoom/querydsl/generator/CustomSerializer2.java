@@ -1,11 +1,11 @@
-package it.memelabs.smartnebula.lmm.querydsl;
+package it.mapsgroup.gzoom.querydsl.generator;
 
 import com.mysema.codegen.CodeWriter;
 import com.querydsl.codegen.BeanSerializer;
 import com.querydsl.codegen.EntityType;
 import com.querydsl.codegen.Serializer;
 import com.querydsl.codegen.SerializerConfig;
-import it.memelabs.smartnebula.lmm.persistence.main.dto.AbstractIdentity;
+import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 
 import java.io.IOException;
 

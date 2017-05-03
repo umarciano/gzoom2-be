@@ -1,15 +1,12 @@
-package it.memelabs.smartnebula.lmm.querydsl;
+package it.mapsgroup.gzoom.querydsl.generator;
 
 import com.querydsl.core.group.GroupBy;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.QBean;
 import com.querydsl.sql.SQLQueryFactory;
 import it.mapsgroup.gzoom.persistence.common.CustomTxManager;
-import it.mapsgroup.gzoom.querydsl.dto.UserLoginEx;
-import it.memelabs.smartnebula.lmm.querydsl.generated.Party;
-import it.memelabs.smartnebula.lmm.querydsl.generated.QParty;
-import it.memelabs.smartnebula.lmm.querydsl.generated.QUserLogin;
-import it.memelabs.smartnebula.lmm.querydsl.generated.UserLogin;
+import it.mapsgroup.gzoom.querydsl.dto.*;
+import it.mapsgroup.gzoom.querydsl.persistence.service.MainPersistenceConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -33,7 +30,7 @@ import static org.slf4j.LoggerFactory.getLogger;
  * @author Andrea Fossi.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = it.memelabs.smartnebula.lmm.persistence.service.MainPersistenceConfiguration.class)
+@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = MainPersistenceConfiguration.class)
 @TestPropertySource("/gzoom.properties")
 public class UserLoginTest {
     private static final Logger LOG = getLogger(UserLoginTest.class);

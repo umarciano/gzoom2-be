@@ -1,10 +1,12 @@
-package it.memelabs.smartnebula.lmm.querydsl;
+package it.mapsgroup.gzoom.querydsl.generator;
 
 import com.querydsl.codegen.BeanSerializer;
 import com.querydsl.sql.Configuration;
 import com.querydsl.sql.PostgreSQLTemplates;
 import com.querydsl.sql.types.JSR310LocalDateTimeType;
 import com.querydsl.sql.types.JSR310LocalDateType;
+import it.mapsgroup.gzoom.querydsl.BooleanCharacterType;
+import it.mapsgroup.gzoom.querydsl.generator.patch.MetaDataExporter;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 
@@ -42,7 +44,7 @@ public class QueryDslGenerator {
 
 
     public void generate() throws SQLException {
-        it.memelabs.smartnebula.lmm.querydsl.patch.MetaDataExporter exporter = new it.memelabs.smartnebula.lmm.querydsl.patch.MetaDataExporter();
+        MetaDataExporter exporter = new MetaDataExporter();
         exporter.setPackageName("it.mapsgroup.gzoom.querydsl.dto");
         exporter.setTargetFolder(new File(TARGET_FOLDER));
         BeanSerializer beanSerializer = new BeanSerializer();
