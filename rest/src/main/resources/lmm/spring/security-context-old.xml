@@ -22,6 +22,7 @@
     <sec:global-method-security pre-post-annotations="enabled">
         <sec:expression-handler ref="expressionHandler"/>
     </sec:global-method-security>
+<!--
 
     <bean class="it.memelabs.smartnebula.lmm.security.evaluator.AttachmentPermissionEvaluator"
           id="attachmentPermissionEvaluator"/>
@@ -32,6 +33,7 @@
 
     <bean class="it.memelabs.smartnebula.lmm.security.evaluator.LmmPermissionEvaluator" id="lmmPermissionEvaluator"/>
 
+-->
 
     <bean id="expressionHandler"
           class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler">
@@ -43,7 +45,7 @@
     <!-- Authentication managers                                             -->
     <!-- =================================================================== -->
 
-    <bean id="jwtLoginProviders" class="it.memelabs.smartnebula.lmm.security.ProvidersFilterFactory">
+    <bean id="jwtLoginProviders" class="it.mapsgroup.gzoom.security.ProvidersFilterFactory">
         <constructor-arg>
             <list>
                 <ref bean="jwtDbLoginAuthenticationProvider"/>
@@ -66,19 +68,19 @@
     <!-- Login, logout and token filters                                     -->
     <!-- =================================================================== -->
 
-    <bean id="tokenFilter" class="it.memelabs.smartnebula.lmm.security.JwtTokenFilter">
+    <bean id="tokenFilter" class="it.mapsgroup.gzoom.security.JwtTokenFilter">
         <constructor-arg index="0" ref="jwtAuthenticationManager"/>
         <constructor-arg index="1" ref="restAuthenticationEntryPoint"/>
         <constructor-arg index="2" ref="objectMapper"/>
     </bean>
 
-    <bean id="logoutFilter" class="it.memelabs.smartnebula.lmm.security.JwtLogoutFilter">
+    <bean id="logoutFilter" class="it.mapsgroup.gzoom.security.JwtLogoutFilter">
         <constructor-arg index="0" ref="restAuthenticationEntryPoint"/>
         <constructor-arg index="1" ref="permitsStorage"/>
         <constructor-arg index="2" ref="objectMapper"/>
     </bean>
 
-    <bean id="loginFilter" class="it.memelabs.smartnebula.lmm.security.JwtLoginFilter">
+    <bean id="loginFilter" class="it.mapsgroup.gzoom.security.JwtLoginFilter">
         <constructor-arg index="0" ref="loginAuthenticationManager"/>
         <constructor-arg index="1" ref="objectMapper"/>
     </bean>

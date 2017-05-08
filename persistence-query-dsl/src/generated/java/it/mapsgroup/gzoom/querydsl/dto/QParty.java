@@ -66,9 +66,9 @@ public class QParty extends com.querydsl.sql.RelationalPathBase<Party> {
 
     public final com.querydsl.sql.PrimaryKey<Party> primary = createPrimaryKey(partyId);
 
-    public final com.querydsl.sql.ForeignKey<UserLogin> partyLmcul = createForeignKey(lastModifiedByUserLogin, "USER_LOGIN_ID");
+    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> partyLmcul = createForeignKey(lastModifiedByUserLogin, "USER_LOGIN_ID");
 
-    public final com.querydsl.sql.ForeignKey<UserLogin> partyCul = createForeignKey(createdByUserLogin, "USER_LOGIN_ID");
+    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> partyCul = createForeignKey(createdByUserLogin, "USER_LOGIN_ID");
 
     public final com.querydsl.sql.ForeignKey<PartyContactMechPurpose> _partyCmprpParty = createInvForeignKey(partyId, "PARTY_ID");
 
@@ -76,7 +76,7 @@ public class QParty extends com.querydsl.sql.RelationalPathBase<Party> {
 
     public final com.querydsl.sql.ForeignKey<PartyContactMech> _partyCmechParty = createInvForeignKey(partyId, "PARTY_ID");
 
-    public final com.querydsl.sql.ForeignKey<UserLogin> _userParty = createInvForeignKey(partyId, "PARTY_ID");
+    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> _userParty = createInvForeignKey(partyId, "PARTY_ID");
 
     public QParty(String variable) {
         super(Party.class, forVariable(variable), "null", "PARTY");

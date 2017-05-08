@@ -1,0 +1,39 @@
+package it.mapsgroup.gzoom.querydsl.dto;
+
+
+/**
+ * @author Andrea Fossi.
+ */
+public class UserLogin extends UserLoginPersistent {
+    private Party party;
+    private Person person;
+    private String sessionId;
+
+    public String getUsername() {
+        return this.getUserLoginId();
+    }
+
+    public Party getParty() {
+        return party;
+    }
+
+    public void setParty(Party party) {
+        this.party = party;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+}

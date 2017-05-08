@@ -19,8 +19,6 @@
     <ctx:annotation-config/>
     <ctx:component-scan base-package="it.memelabs.smartnebula.lmm.rest"/>
     <ctx:component-scan base-package="it.memelabs.smartnebula.lmm.service"/>
-    <ctx:component-scan base-package="it.memelabs.smartnebula.lmm.export"/>
-    <ctx:component-scan base-package="it.memelabs.smartnebula.lmm.auditing"/>
 
 
 
@@ -31,7 +29,7 @@
         <value>/lmm/locales/it.json</value>
     </util:list>
 
-    <bean id="configuration" class="it.memelabs.smartnebula.lmm.service.ConfigurationImpl"/>
+    <bean id="configuration" class="it.mapsgroup.gzoom.service.ConfigurationImpl"/>
 
     <!-- JSON (de)serialization -->
     <bean id="isoDateFormatter" class="com.fasterxml.jackson.databind.util.ISO8601DateFormat"/>

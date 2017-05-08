@@ -25,6 +25,11 @@ public class CustomNamingStrategy extends DefaultNamingStrategy {
         }
     }
 
+    @Override
+    public String getClassName(String tableName) {
+        if (tableName.equalsIgnoreCase("USER_LOGIN")) return "UserLoginPersistent";
+        return super.getClassName(tableName);
+    }
 
     @Override
     public boolean shouldGenerateForeignKey(SchemaAndTable schemaAndTable, ForeignKeyData foreignKeyData) {

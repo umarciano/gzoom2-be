@@ -5,6 +5,7 @@ import com.querydsl.core.types.QBean;
 import com.querydsl.sql.SQLQueryFactory;
 import it.mapsgroup.gzoom.querydsl.dto.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,16 +24,17 @@ public class UserLoginDao {
         this.queryFactory = queryFactory;
     }
 
-    public UserLoginEx findByUsername(String username) {
-        QUserLogin qUserLogin = QUserLogin.userLogin;
+    @Transactional
+    public UserLogin getUserLogin(String username) {
+        QUserLoginPersistent qUserLogin = QUserLoginPersistent.userLogin;
         QParty qParty = QParty.party;
         QPerson qPerson = QPerson.person;
-        QBean<UserLoginEx> userLoginExQBean = bean(UserLoginEx.class,
+        QBean<UserLogin> userLoginExQBean = bean(UserLogin.class,
                 merge(qUserLogin.all(),
                         bean(Party.class, qParty.all()).as("party"),
                         bean(Person.class, qPerson.all()).as("person")));
 
-        List<UserLoginEx> ret = queryFactory.select(qUserLogin, qParty)
+        List<UserLogin> ret = queryFactory.select(qUserLogin, qParty)
                 .from(qUserLogin)
                 .innerJoin(qUserLogin.userParty, qParty)
                 .innerJoin(qParty._personParty, qPerson)

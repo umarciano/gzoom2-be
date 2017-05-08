@@ -8,7 +8,7 @@ import com.querydsl.sql.*;
 
 import it.mapsgroup.gzoom.querydsl.dto.Person;
 import it.mapsgroup.gzoom.querydsl.dto.QPerson;
-import it.mapsgroup.gzoom.querydsl.persistence.service.MainPersistenceConfiguration;
+import it.mapsgroup.gzoom.querydsl.persistence.service.QueryDslPersistenceConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -29,7 +29,7 @@ import static org.slf4j.LoggerFactory.getLogger;
  * @author Andrea Fossi.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = MainPersistenceConfiguration.class)
+@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = QueryDslPersistenceConfiguration.class)
 @TestPropertySource("/dev.properties")
 public class SecondTest {
     private static final Logger LOG = getLogger(SecondTest.class);

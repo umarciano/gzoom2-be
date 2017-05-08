@@ -1,7 +1,7 @@
 package it.mapsgroup.gzoom.querydsl.dao;
 
-import it.mapsgroup.gzoom.querydsl.dto.UserLoginEx;
-import it.mapsgroup.gzoom.querydsl.persistence.service.MainPersistenceConfiguration;
+import it.mapsgroup.gzoom.querydsl.dto.UserLogin;
+import it.mapsgroup.gzoom.querydsl.persistence.service.QueryDslPersistenceConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import static org.junit.Assert.assertNotNull;
  * @author Andrea Fossi.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = MainPersistenceConfiguration.class)
+@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = QueryDslPersistenceConfiguration.class)
 @TestPropertySource("/gzoom.properties")
 public class UserLoginDaoIT {
     @Autowired
@@ -27,7 +27,7 @@ public class UserLoginDaoIT {
     @Test
     @Transactional
     public void findByUsername() throws Exception {
-        UserLoginEx admin = userLoginDao.findByUsername("admin");
+        UserLogin admin = userLoginDao.getUserLogin("admin");
         assertNotNull(admin);
         assertNotNull(admin.getParty());
         assertNotNull(admin.getPerson());

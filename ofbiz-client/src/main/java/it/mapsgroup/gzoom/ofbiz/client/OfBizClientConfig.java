@@ -16,8 +16,21 @@ public interface OfBizClientConfig {
      * @return
      */
     URL getServerXmlRpcUrl();
-    String getOfbizDefaultUser();
-    String getOfbizDefaultPwd();
-    String getOfbizServiceUser(String ofbizPipelineServiceName);
-    String getOfbizServicePwd(String ofbizPipelineServiceName);
+
+    default String getOfbizDefaultUser() {
+        return null;
+    }
+
+    default String getOfbizDefaultPwd() {
+        return null;
+    }
+
+    default String getOfbizServiceUser() {
+        return null;
+    }
+
+    default String getOfbizServicePwd() {
+        return null;
+    }
+
 }

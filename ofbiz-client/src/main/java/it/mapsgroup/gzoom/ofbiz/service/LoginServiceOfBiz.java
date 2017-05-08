@@ -1,0 +1,30 @@
+package it.mapsgroup.gzoom.ofbiz.service;
+
+import it.mapsgroup.gzoom.ofbiz.client.AuthenticationOfBizClient;
+
+import java.util.Map;
+
+/**
+ * @author Andrea Fossi.
+ */
+public class LoginServiceOfBiz {
+
+    private final AuthenticationOfBizClient loginClient;
+
+    public LoginServiceOfBiz(AuthenticationOfBizClient loginClient) {
+        this.loginClient = loginClient;
+    }
+
+    public LoginResponseOfBiz login(String username, String password) {
+        Map<String, Object> response = loginClient.login(username, password, null);
+//        Map<String, Object> response = loginClient.login("admin", "MapsGzoom01",null);
+        String sessionId = (String) response.get("sessionId");
+        String firstName = (String) response.get("firstName");
+        String lastName = (String) response.get("lastName");
+        LoginResponseOfBiz loginResponse = new LoginResponseOfBiz();
+        loginResponse.setSessionId(sessionId);
+        loginResponse.setFirstName(firstName);
+        loginResponse.setLastName(lastName);
+        return loginResponse;
+    }
+}

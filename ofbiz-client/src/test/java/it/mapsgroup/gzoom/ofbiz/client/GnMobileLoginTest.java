@@ -1,9 +1,9 @@
 package it.mapsgroup.gzoom.ofbiz.client;
 
 import it.mapsgroup.gzoom.ofbiz.client.impl.AuthenticationOfBizClientImpl;
+import it.mapsgroup.gzoom.ofbiz.client.impl.GnPingOfBizClientImpl;
 import it.memelabs.gn.services.OfbizErrors;
 import it.memelabs.gn.services.login.LoginSourceOfbiz;
-import it.mapsgroup.gzoom.ofbiz.client.impl.GnPingOfBizClientImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -41,7 +41,8 @@ public class GnMobileLoginTest extends AbstractOfBizTest {
     @Test
     public void testPing() {
         String deviceId = UUID.randomUUID().toString();
-        Map<String, Object> response = loginClient.login("admin", "MapsGzoom01", LoginSourceOfbiz.GN_LOG_SRC_MOBILE.name(), deviceId, "FOX_MOBILE", "UNIT_TEST", "V1");
+        //Map<String, Object> response = loginClient.login("admin", "MapsGzoom01", LoginSourceOfbiz.GN_LOG_SRC_MOBILE.name(), deviceId, "FOX_MOBILE", "UNIT_TEST", "V1");
+        Map<String, Object> response = loginClient.login("admin", "MapsGzoom01", null);
         String sessionId = (String) response.get("sessionId");
         assertThat("returned sessionId", sessionId, is(not(nullValue())));
         // String reply = pingClient.ping(sessionId, "Blah blah blahhhh!!!");

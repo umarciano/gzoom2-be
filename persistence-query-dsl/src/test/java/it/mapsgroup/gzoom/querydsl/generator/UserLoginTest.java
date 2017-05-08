@@ -6,7 +6,7 @@ import com.querydsl.core.types.QBean;
 import com.querydsl.sql.SQLQueryFactory;
 import it.mapsgroup.gzoom.persistence.common.CustomTxManager;
 import it.mapsgroup.gzoom.querydsl.dto.*;
-import it.mapsgroup.gzoom.querydsl.persistence.service.MainPersistenceConfiguration;
+import it.mapsgroup.gzoom.querydsl.persistence.service.QueryDslPersistenceConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -30,7 +30,7 @@ import static org.slf4j.LoggerFactory.getLogger;
  * @author Andrea Fossi.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = MainPersistenceConfiguration.class)
+@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = QueryDslPersistenceConfiguration.class)
 @TestPropertySource("/gzoom.properties")
 public class UserLoginTest {
     private static final Logger LOG = getLogger(UserLoginTest.class);
@@ -54,9 +54,9 @@ public class UserLoginTest {
         transactionTemplate.execute(status -> {
             System.out.println("TxManager.stamp1 " + ((CustomTxManager) txManager).getStamp());
             transactionTemplate.execute(status2 -> {
-                QUserLogin qUserLogin = QUserLogin.userLogin;
+                QUserLoginPersistent qUserLogin = QUserLoginPersistent.userLogin;
                 Projections.bean(UserLogin.class);
-                List<UserLogin> ret = queryFactory.select(qUserLogin).from(qUserLogin).where(qUserLogin.userLoginId.isNotNull().and(qUserLogin.enabled.isTrue()))
+                List<UserLoginPersistent> ret = queryFactory.select(qUserLogin).from(qUserLogin).where(qUserLogin.userLoginId.isNotNull().and(qUserLogin.enabled.isTrue()))
                         .transform(GroupBy.groupBy(qUserLogin.userLoginId).list(qUserLogin));
 
                 ret.size();
@@ -71,10 +71,10 @@ public class UserLoginTest {
     @Test
     @Transactional
     public void name2() throws Exception {
-        QUserLogin qUserLogin = QUserLogin.userLogin;
+        QUserLoginPersistent qUserLogin = QUserLoginPersistent.userLogin;
         QParty qParty = QParty.party;
-        QBean<UserLoginEx> userLoginExQBean = bean(UserLoginEx.class, bean(UserLogin.class, qUserLogin.all()).as("userLogin"), bean(Party.class, qParty.all()).as("party"));
-        List<UserLoginEx> ret = queryFactory.select(qUserLogin, qParty).from(qUserLogin).innerJoin(qUserLogin.userParty, qParty)
+        QBean<UserLogin> userLoginExQBean = bean(UserLogin.class, bean(UserLogin.class, qUserLogin.all()).as("userLogin"), bean(Party.class, qParty.all()).as("party"));
+        List<UserLogin> ret = queryFactory.select(qUserLogin, qParty).from(qUserLogin).innerJoin(qUserLogin.userParty, qParty)
                 .where(qParty.partyId.isNotNull())
                 .transform(GroupBy.groupBy(qUserLogin.userLoginId).list(userLoginExQBean));
         ret.size();

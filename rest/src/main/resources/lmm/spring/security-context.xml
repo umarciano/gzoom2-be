@@ -17,6 +17,7 @@
     <!-- =================================================================== -->
 
 
+<!--
     <bean class="it.memelabs.smartnebula.lmm.security.evaluator.AttachmentPermissionEvaluator"
           id="attachmentPermissionEvaluator"/>
 
@@ -26,10 +27,11 @@
 
     <bean class="it.memelabs.smartnebula.lmm.security.evaluator.LmmPermissionEvaluator" id="lmmPermissionEvaluator"/>
 
+-->
 
     <bean id="expressionHandler"
           class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler">
-        <property name="permissionEvaluator" ref="lmmPermissionEvaluator"/>
+        <!--<property name="permissionEvaluator" ref="lmmPermissionEvaluator"/>-->
     </bean>
 
 

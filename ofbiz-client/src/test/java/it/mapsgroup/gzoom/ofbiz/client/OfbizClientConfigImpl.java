@@ -35,7 +35,7 @@ public class OfbizClientConfigImpl implements OfBizClientConfig {
     public String getOfbizDefaultPwd() {
         throw new UnsupportedOperationException();
     }
-
+/*
     @Override
     public String getOfbizServiceUser(String ofbizPipelineServiceName) {
         throw new UnsupportedOperationException();
@@ -44,6 +44,6 @@ public class OfbizClientConfigImpl implements OfBizClientConfig {
     @Override
     public String getOfbizServicePwd(String ofbizPipelineServiceName) {
         throw new UnsupportedOperationException();
-    }
+    }*/
 
 }

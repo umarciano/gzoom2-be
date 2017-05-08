@@ -48,9 +48,9 @@ public class QPartyContactMechPurpose extends com.querydsl.sql.RelationalPathBas
 
     public final com.querydsl.sql.PrimaryKey<PartyContactMechPurpose> primary = createPrimaryKey(contactMechId, contactMechPurposeTypeId, fromDate, partyId);
 
-    public final com.querydsl.sql.ForeignKey<ContactMechPurposeType> partyCmprpType = createForeignKey(contactMechPurposeTypeId, "CONTACT_MECH_PURPOSE_TYPE_ID");
-
     public final com.querydsl.sql.ForeignKey<Party> partyCmprpParty = createForeignKey(partyId, "PARTY_ID");
+
+    public final com.querydsl.sql.ForeignKey<ContactMechPurposeType> partyCmprpType = createForeignKey(contactMechPurposeTypeId, "CONTACT_MECH_PURPOSE_TYPE_ID");
 
     public final com.querydsl.sql.ForeignKey<ContactMech> partyCmprpCmech = createForeignKey(contactMechId, "CONTACT_MECH_ID");
 

@@ -27,7 +27,7 @@
         </dependency>
         <dependency>
             <groupId>it.mapsgroup.gzoom</groupId>
-            <artifactId>persistence</artifactId>
+            <artifactId>query-dsl</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
@@ -37,6 +37,11 @@
             <version>${project.parent.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>it.mapsgroup.gzoom</groupId>
+            <artifactId>ofbiz-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
         <!-- Maps commons -->
         <dependency>

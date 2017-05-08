@@ -1,6 +1,6 @@
 import com.fasterxml.jackson.databind.SerializationFeature;
-import it.memelabs.smartnebula.lmm.model.Company;
-import it.memelabs.smartnebula.lmm.security.model.LoginResponse;
+import it.mapsgroup.gzoom.model.Company;
+import it.mapsgroup.gzoom.security.model.LoginResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.ParameterizedTypeReference;
@@ -47,7 +47,7 @@ public class LmmRunIT {
 //        new Result<Company>(new ArrayList<Company>(), 0)
     }
 
-    private static class Result<T> extends it.memelabs.smartnebula.lmm.model.Result<T> {
+    private static class Result<T> extends it.mapsgroup.gzoom.model.Result<T> {
         public Result() {
             super(new ArrayList<T>(), 0);
         }

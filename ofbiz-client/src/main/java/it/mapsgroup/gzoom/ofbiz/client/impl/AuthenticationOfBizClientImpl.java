@@ -37,9 +37,8 @@ public class AuthenticationOfBizClientImpl extends OfBizClient implements Authen
         Map<String, String> paramMap = new HashMap<String, String>();
         paramMap.put("login.username", username);
         paramMap.put("login.password", password);
-        paramMap.put("loginSourceId", loginSourceId);
-
-        Map<String, Object> result = execute("gnLogin", paramMap);
+        //paramMap.put("loginSourceId", loginSourceId);
+        Map<String, Object> result = execute("gzSimpleLogin", paramMap);
         String sessionId = (String) result.get("sessionId");
         log.debug("Login reply sessionId: {}", sessionId);
         return result;
