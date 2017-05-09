@@ -33,11 +33,11 @@ public class CustomNamingStrategy extends DefaultNamingStrategy {
 
     @Override
     public boolean shouldGenerateForeignKey(SchemaAndTable schemaAndTable, ForeignKeyData foreignKeyData) {
-        return tables.contains(foreignKeyData.getTable());
+        return tables.contains(foreignKeyData.getTable().toUpperCase());
     }
 
 
     public boolean shouldGenerateInverseForeignKeys(SchemaAndTable schemaAndTable, InverseForeignKeyData inverseForeignKeyData) {
-        return tables.contains(inverseForeignKeyData.getTable());
+        return tables.contains(inverseForeignKeyData.getTable().toUpperCase());
     }
 }

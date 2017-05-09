@@ -26,7 +26,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class QueryDslGenerator {
     private static final Logger LOG = getLogger(QueryDslGenerator.class);
 
-    public static final String TARGET_FOLDER = "/Users/anfo/projects/gzoom/gzoom2/persistence-query-dsl/src/generated/java";
+    public static final String TARGET_FOLDER = "../persistence-query-dsl/src/generated/java";
 
     private Connection getConnection() throws SQLException {
     /*    return DriverManager.getConnection("jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle-maps.maps1.mapsengineering.com)(PORT=1521))" +
@@ -79,7 +79,11 @@ public class QueryDslGenerator {
             File file = new File(this.getClass().getResource("/tables.txt").getFile());
             List<String> lines = Files.readAllLines(file.toPath());
             if (lines.size() > 0 && StringUtils.isNotEmpty(lines.get(0))) {
-                String tables = lines.stream().map(String::trim).collect(Collectors.joining(","));
+                String tables = lines.stream()
+                        .map(String::trim)
+                        .map(String::toUpperCase)
+                        .filter(s -> s.length() > 0)
+                        .collect(Collectors.joining(","));
                 System.out.println("Follow tables will be processed: \n" + tables);
                 return tables;
             }
