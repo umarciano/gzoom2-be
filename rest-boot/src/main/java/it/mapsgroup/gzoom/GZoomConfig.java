@@ -26,7 +26,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -54,15 +53,12 @@ public class GZoomConfig extends WebSecurityConfigurerAdapter {
 
 
     @Bean
-    public LoginServiceOfBiz loginServiceOfBiz() {
+    @Autowired
+    public LoginServiceOfBiz loginServiceOfBiz(OfBizClientConfig ofBizClientConfig) {
         return new LoginServiceOfBiz(new AuthenticationOfBizClientImpl(new OfBizClientConfig() {
             @Override
             public URL getServerXmlRpcUrl() {
-                try {
-                    return new URL("http://localhost:19079/gzoom/control/xmlrpc");
-                } catch (MalformedURLException e) {
-                    throw new RuntimeException(e);
-                }
+                return ofBizClientConfig.getServerXmlRpcUrl();
             }
         }));
     }

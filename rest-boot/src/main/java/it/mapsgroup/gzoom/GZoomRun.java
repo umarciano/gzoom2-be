@@ -22,11 +22,11 @@ public class GZoomRun {
 
     public static void main(String[] args) throws Exception {
         if (StringUtils.isEmpty(System.getProperty("logging.config")))
-            System.setProperty("logging.config", System.getProperty("lmm.conf.dir") + "/logback.xml");
+            System.setProperty("logging.config", System.getProperty("gzoom.conf.dir") + "/logback.xml");
         LOG.info("logging.config [{}])", System.getProperty("logging.config"));
         //SpringApplication.run(LmmRun.class, args);
         new SpringApplicationBuilder(GZoomRun.class)
-                .initializers(new PropertyApplicationContextInitializer("file:" + System.getProperty("lmm.conf.dir") + "/lmm.properties"))
+                .initializers(new PropertyApplicationContextInitializer("file:" + System.getProperty("gzoom.conf.dir") + "/gzoom.properties"))
                 .run(args);
     }
 

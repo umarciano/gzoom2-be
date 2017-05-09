@@ -46,7 +46,7 @@ public class QueryDslPersistenceConfiguration implements TransactionManagementCo
         dataSource.setDriverClassName(getNotNullProperty(environment, "persistence.main.driver"));
         dataSource.setJdbcUrl(getNotNullProperty(environment, "persistence.main.url"));
         dataSource.setUsername(getNotNullProperty(environment, "persistence.main.user"));
-        dataSource.setPassword(getNotNullProperty(environment, "persistence.main.password"));
+        dataSource.setPassword(environment.getProperty("persistence.main.password"));
         //dataSource.setConnectionTestQuery("SELECT 1");
         dataSource.setMinimumIdle(10);
         dataSource.setMaximumPoolSize(50);

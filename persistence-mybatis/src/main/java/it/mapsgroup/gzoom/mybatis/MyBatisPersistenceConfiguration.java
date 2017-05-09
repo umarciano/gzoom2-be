@@ -26,7 +26,7 @@ import java.io.IOException;
 @Configuration
 @EnableTransactionManagement
 @MapperScan({"it.mapsgroup.gzoom.mybatis.mapper"})
-@ComponentScan({ "it.mapsgroup.gzoom.mybatis.dao"})
+@ComponentScan({"it.mapsgroup.gzoom.mybatis.dao"})
 public class MyBatisPersistenceConfiguration {
 
 
@@ -37,7 +37,7 @@ public class MyBatisPersistenceConfiguration {
         dataSource.setDriverClassName(getNotNullProperty(environment, "persistence.main.driver"));
         dataSource.setJdbcUrl(getNotNullProperty(environment, "persistence.main.url"));
         dataSource.setUsername(getNotNullProperty(environment, "persistence.main.user"));
-        dataSource.setPassword(getNotNullProperty(environment, "persistence.main.password"));
+        dataSource.setPassword(environment.getProperty("persistence.main.password"));
         dataSource.setConnectionTestQuery("SELECT 1");
         dataSource.setMinimumIdle(10);
         dataSource.setMaximumPoolSize(50);
@@ -72,7 +72,7 @@ public class MyBatisPersistenceConfiguration {
         sqlSessionFactoryBean.setDataSource(dataSource);
         sqlSessionFactoryBean.setTransactionFactory(new SpringManagedTransactionFactory());
 
-      //  sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("/it/memelabs/smartnebula/lmm/persistence/main/mapper/**/*.xml"));
+        //  sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("/it/memelabs/smartnebula/lmm/persistence/main/mapper/**/*.xml"));
 
         sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
                 .getResources("/it/mapsgroup/gzoom/mybatis/mapper/**/*.xml"));

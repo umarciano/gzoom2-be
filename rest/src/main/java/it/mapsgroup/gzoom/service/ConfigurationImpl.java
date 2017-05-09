@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -54,10 +55,12 @@ public class ConfigurationImpl implements Configuration, SecurityConfiguration, 
 
     private final String configurationPath;
 
+    private final String ofbizServerXmlrpcUrl;
+
     @Autowired
     public ConfigurationImpl(Environment env) {
         // localization
-        this.localeDirPath = Paths.get(env.getProperty("lmm.conf.dir") + "/locales");
+        this.localeDirPath = Paths.get(env.getProperty("gzoom.conf.dir") + "/locales");
         this.translationResources = Arrays.asList("/lmm/locales/it.json", "/lmm/locales/en.json");
         this.localizations = initLocalization();
 
@@ -101,7 +104,9 @@ public class ConfigurationImpl implements Configuration, SecurityConfiguration, 
         this.deadlineDays = env.getProperty("deadline.days", Integer.class, 5);
 
 
-        this.configurationPath = env.getProperty("lmm.conf.dir");
+        this.configurationPath = env.getProperty("gzoom.conf.dir");
+
+        this.ofbizServerXmlrpcUrl = env.getProperty("ofbiz.server.xmlrpc.url");
     }
 
 
@@ -223,6 +228,12 @@ public class ConfigurationImpl implements Configuration, SecurityConfiguration, 
 
     @Override
     public URL getServerXmlRpcUrl() {
-        return null;
+        try {
+            return new URL(ofbizServerXmlrpcUrl);
+        } catch (MalformedURLException e) {
+            throw new IllegalArgumentException("ofbizServerXmlrpcUrl is wrong");
+        }
     }
+
+
 }
