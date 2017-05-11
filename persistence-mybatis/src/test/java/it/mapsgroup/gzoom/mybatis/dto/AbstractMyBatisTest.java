@@ -18,17 +18,9 @@ import static org.junit.Assert.assertNotNull;
 /**
  * @author Andrea Fossi.
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = {CommonPersistenceConfiguration.class, MyBatisPersistenceConfiguration.class})
+@TestPropertySource("/gzoom.properties")
+public abstract class AbstractMyBatisTest {
 
-public class UserLoginIT extends AbstractMyBatisTest {
-    @Autowired
-    private UserLoginMyBatisDao dao;
-
-
-    @Test
-    @Transactional
-    public void name() throws Exception {
-        UserLoginGZoom ret = dao.findByUserLoginId("admin");
-        assertNotNull(ret);
-        assertEquals("admin", ret.getUserLoginId());
-    }
 }

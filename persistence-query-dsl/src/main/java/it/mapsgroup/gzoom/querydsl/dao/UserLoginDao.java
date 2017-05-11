@@ -4,8 +4,12 @@ import com.querydsl.core.group.GroupBy;
 import com.querydsl.core.types.QBean;
 import com.querydsl.sql.SQLQueryFactory;
 import it.mapsgroup.gzoom.querydsl.dto.*;
+import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.util.List;
 
@@ -26,7 +30,12 @@ public class UserLoginDao {
 
     @Transactional
     public UserLogin getUserLogin(String username) {
-        QUserLoginPersistent qUserLogin = QUserLoginPersistent.userLogin;
+        if (TransactionSynchronizationManager.isActualTransactionActive()) {
+            TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
+
+        }
+
+                QUserLoginPersistent qUserLogin = QUserLoginPersistent.userLogin;
         QParty qParty = QParty.party;
         QPerson qPerson = QPerson.person;
         QBean<UserLogin> userLoginExQBean = bean(UserLogin.class,
