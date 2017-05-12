@@ -2,12 +2,13 @@ package it.mapsgroup.gzoom.querydsl.dto;
 
 import javax.annotation.Generated;
 import com.querydsl.sql.Column;
+import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 
 /**
  * UserLoginSecurityGroup is a Querydsl bean type
  */
 @Generated("com.querydsl.codegen.BeanSerializer")
-public class UserLoginSecurityGroup {
+public class UserLoginSecurityGroup implements AbstractIdentity {
 
     @Column("CREATED_STAMP")
     private java.time.LocalDateTime createdStamp;

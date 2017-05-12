@@ -2,12 +2,13 @@ package it.mapsgroup.gzoom.querydsl.dto;
 
 import javax.annotation.Generated;
 import com.querydsl.sql.Column;
+import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 
 /**
  * Party is a Querydsl bean type
  */
 @Generated("com.querydsl.codegen.BeanSerializer")
-public class Party {
+public class Party implements AbstractIdentity {
 
     @Column("CREATED_BY_USER_LOGIN")
     private String createdByUserLogin;

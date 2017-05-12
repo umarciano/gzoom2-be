@@ -2,12 +2,13 @@ package it.mapsgroup.gzoom.querydsl.dto;
 
 import javax.annotation.Generated;
 import com.querydsl.sql.Column;
+import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 
 /**
  * ContentAssoc is a Querydsl bean type
  */
 @Generated("com.querydsl.codegen.BeanSerializer")
-public class ContentAssoc {
+public class ContentAssoc implements AbstractIdentity {
 
     @Column("CONTENT_ASSOC_PREDICATE_ID")
     private String contentAssocPredicateId;

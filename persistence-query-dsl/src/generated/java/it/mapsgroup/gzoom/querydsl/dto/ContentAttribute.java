@@ -2,12 +2,13 @@ package it.mapsgroup.gzoom.querydsl.dto;
 
 import javax.annotation.Generated;
 import com.querydsl.sql.Column;
+import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 
 /**
  * ContentAttribute is a Querydsl bean type
  */
 @Generated("com.querydsl.codegen.BeanSerializer")
-public class ContentAttribute {
+public class ContentAttribute implements AbstractIdentity {
 
     @Column("ATTR_NAME")
     private String attrName;

@@ -4,7 +4,7 @@ import com.querydsl.core.group.GroupBy;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.QBean;
 import com.querydsl.sql.SQLQueryFactory;
-import it.mapsgroup.gzoom.persistence.common.CustomTxManager;
+import it.mapsgroup.gzoom.querydsl.dao.AbstractDaoTest;
 import it.mapsgroup.gzoom.querydsl.dto.*;
 import it.mapsgroup.gzoom.querydsl.persistence.service.QueryDslPersistenceConfiguration;
 import org.junit.Test;
@@ -16,7 +16,6 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -29,10 +28,8 @@ import static org.slf4j.LoggerFactory.getLogger;
 /**
  * @author Andrea Fossi.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = QueryDslPersistenceConfiguration.class)
-@TestPropertySource("/gzoom.properties")
-public class UserLoginTest {
+
+public class UserLoginTest extends AbstractDaoTest{
     private static final Logger LOG = getLogger(UserLoginTest.class);
 
     @Autowired
@@ -48,25 +45,21 @@ public class UserLoginTest {
     @Autowired
     PlatformTransactionManager txManager;
 
+
     @Test
     public void name() throws Exception {
-        transactionTemplate.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
-        transactionTemplate.execute(status -> {
-            System.out.println("TxManager.stamp1 " + ((CustomTxManager) txManager).getStamp());
-            transactionTemplate.execute(status2 -> {
-                QUserLoginPersistent qUserLogin = QUserLoginPersistent.userLogin;
-                Projections.bean(UserLogin.class);
-                List<UserLoginPersistent> ret = queryFactory.select(qUserLogin).from(qUserLogin).where(qUserLogin.userLoginId.isNotNull().and(qUserLogin.enabled.isTrue()))
-                        .transform(GroupBy.groupBy(qUserLogin.userLoginId).list(qUserLogin));
 
-                ret.size();
-                System.out.println("TxManager.stamp2 " + ((CustomTxManager) txManager).getStamp());
-                return null;
-            });
-            System.out.println("TxManager.stamp1 " + ((CustomTxManager) txManager).getStamp());
+        transactionTemplate.execute(status2 -> {
+            QUserLoginPersistent qUserLogin = QUserLoginPersistent.userLogin;
+            Projections.bean(UserLogin.class);
+            List<UserLoginPersistent> ret = queryFactory.select(qUserLogin).from(qUserLogin).where(qUserLogin.userLoginId.isNotNull().and(qUserLogin.enabled.isTrue()))
+                    .transform(GroupBy.groupBy(qUserLogin.userLoginId).list(qUserLogin));
+
+            ret.size();
             return null;
         });
     }
+
 
     @Test
     @Transactional

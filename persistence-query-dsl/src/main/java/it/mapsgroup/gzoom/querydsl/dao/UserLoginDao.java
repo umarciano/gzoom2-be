@@ -32,7 +32,7 @@ public class UserLoginDao {
     public UserLogin getUserLogin(String username) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
-
+            status.getClass();
         }
 
                 QUserLoginPersistent qUserLogin = QUserLoginPersistent.userLogin;

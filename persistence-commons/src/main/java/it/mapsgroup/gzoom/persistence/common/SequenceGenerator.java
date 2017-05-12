@@ -8,6 +8,8 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * @author Andrea Fossi.
+ *
+ * Class is a port of OfBiz {@link SequenceGenerator}
  */
 public class SequenceGenerator {
     private static final Logger LOG = getLogger(SequenceGenerator.class);
@@ -39,7 +41,7 @@ public class SequenceGenerator {
             throw new IllegalArgumentException("Could not get next sequenced ID for sequence name: " + seqName);
         }
 
-        //TODO
+        //TODO see ofbiz behavior
        /* if (UtilValidate.isNotEmpty(this.getDelegatorInfo().sequencedIdPrefix)) {
             return this.getDelegatorInfo().sequencedIdPrefix + nextSeqLong.toString();
         } else {
@@ -59,7 +61,6 @@ public class SequenceGenerator {
      * @see org.ofbiz.entity.Delegator#getNextSeqIdLong(java.lang.String, long)
      */
     public Long getNextSeqIdLong(String seqName, long staggerMax) {
-        boolean beganTransaction = false;
         try {
             if (sequencer == null) {
                 synchronized (this) {

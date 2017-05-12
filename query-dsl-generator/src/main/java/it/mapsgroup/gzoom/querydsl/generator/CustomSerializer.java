@@ -18,6 +18,7 @@ import com.querydsl.codegen.SerializerConfig;
 /**
  * @author SIVI
  */
+@Deprecated
 public class CustomSerializer implements Serializer {
 
     private final List<Type> interfaces = Lists.newArrayList();

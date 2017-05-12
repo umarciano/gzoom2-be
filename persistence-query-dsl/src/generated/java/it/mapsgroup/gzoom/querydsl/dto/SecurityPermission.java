@@ -2,12 +2,13 @@ package it.mapsgroup.gzoom.querydsl.dto;
 
 import javax.annotation.Generated;
 import com.querydsl.sql.Column;
+import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 
 /**
  * SecurityPermission is a Querydsl bean type
  */
 @Generated("com.querydsl.codegen.BeanSerializer")
-public class SecurityPermission {
+public class SecurityPermission implements AbstractIdentity {
 
     @Column("CREATED_STAMP")
     private java.time.LocalDateTime createdStamp;

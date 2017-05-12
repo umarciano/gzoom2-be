@@ -2,12 +2,13 @@ package it.mapsgroup.gzoom.querydsl.dto;
 
 import javax.annotation.Generated;
 import com.querydsl.sql.Column;
+import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 
 /**
  * Person is a Querydsl bean type
  */
 @Generated("com.querydsl.codegen.BeanSerializer")
-public class Person {
+public class Person implements AbstractIdentity {
 
     @Column("BIRTH_COUNTRY")
     private String birthCountry;

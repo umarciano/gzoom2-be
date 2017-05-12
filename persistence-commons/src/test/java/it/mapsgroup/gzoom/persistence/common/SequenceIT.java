@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
@@ -19,7 +20,7 @@ import static org.junit.Assert.assertThat;
  * @author Andrea Fossi.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = PersistenceConfiguration.class)
+@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = CommonPersistenceConfiguration.class)
 @TestPropertySource("/gzoom.properties")
 public class SequenceIT {
 
@@ -31,17 +32,21 @@ public class SequenceIT {
 
     private JdbcTemplate jdbcTemplate;
 
+    private String seqName;
+
     @Before
     public void setUp() throws Exception {
         jdbcTemplate = new JdbcTemplate(dataSource);
+        seqName = "Test03";
     }
+
 
     @Test
     public void SequenceTest() throws Exception {
-        String seqName = "Test01";
         Long v1 = getCurrentSeqValue();
+        if (v1 == null) v1 = 10000L;
         String id1 = sequenceGenerator.getNextSeqId(seqName);
-        assertThat(id1, is(String.valueOf(v1 + 1)));
+        assertThat(id1, is(String.valueOf(v1)));
 
         Long v2 = getCurrentSeqValue();
         assertThat(v1 + 10, is(v2));
@@ -54,9 +59,12 @@ public class SequenceIT {
     }
 
     private Long getCurrentSeqValue() {
-        Long value = jdbcTemplate.queryForObject("SELECT SEQ_NAME, SEQ_ID from SEQUENCE_VALUE_ITEM WHERE SEQ_NAME=?", (rs, rowNum) -> {
-            return rs.getLong(1);
-        }, "Test01");
-        return value;
+        try {
+            Long value = jdbcTemplate.queryForObject("SELECT SEQ_NAME, SEQ_ID from SEQUENCE_VALUE_ITEM WHERE SEQ_NAME=?",
+                    (rs, rowNum) -> rs.getLong(2), seqName);
+            return value;
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 }

@@ -1,10 +1,9 @@
 package it.mapsgroup.gzoom.querydsl.generator;
 
 import com.mysema.codegen.CodeWriter;
-import com.querydsl.codegen.BeanSerializer;
-import com.querydsl.codegen.EntityType;
-import com.querydsl.codegen.Serializer;
-import com.querydsl.codegen.SerializerConfig;
+import com.mysema.codegen.model.ClassType;
+import com.mysema.codegen.model.SimpleType;
+import com.querydsl.codegen.*;
 import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 
 import java.io.IOException;
@@ -18,9 +17,11 @@ public class CustomSerializer2 implements Serializer {
     public void serialize(EntityType model, SerializerConfig serializerConfig, CodeWriter writer) throws IOException {
         model.getPropertyNames();
         BeanSerializer beanSerializer = new BeanSerializer();
-        if (model.getPropertyNames().contains("description")
-                && model.getPropertyNames().contains("modifiedStamp")
-                && model.getPropertyNames().contains("createdStamp")) {
+        if (model.getPropertyNames().contains("createdStamp")
+                && model.getPropertyNames().contains("createdTxStamp")
+                && model.getPropertyNames().contains("lastUpdatedStamp")
+                && model.getPropertyNames().contains("lastUpdatedTxStamp")
+                ) {
             beanSerializer.setPrintSupertype(true);
             //model.addSupertype(new Supertype(new ClassType(AbstractIdentity.class)));
             beanSerializer.addInterface(AbstractIdentity.class);

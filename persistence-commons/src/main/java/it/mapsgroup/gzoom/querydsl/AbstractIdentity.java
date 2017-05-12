@@ -1,19 +1,23 @@
 package it.mapsgroup.gzoom.querydsl;
 
-import java.util.Date;
-
 /**
  * @author Andrea Fossi.
  */
 public interface AbstractIdentity {
 
-	public Long getId();
+    java.time.LocalDateTime getCreatedStamp();
 
-	public Date getModifiedStamp();
+    void setCreatedStamp(java.time.LocalDateTime createdStamp);
 
-	public Date getCreatedStamp();
+    java.time.LocalDateTime getCreatedTxStamp();
 
-	public Long getCreatedByUserId();
+    void setCreatedTxStamp(java.time.LocalDateTime createdTxStamp);
 
-	public Long getModifiedByUserId();
+    java.time.LocalDateTime getLastUpdatedStamp();
+
+    void setLastUpdatedStamp(java.time.LocalDateTime lastUpdatedStamp);
+
+    java.time.LocalDateTime getLastUpdatedTxStamp();
+
+    void setLastUpdatedTxStamp(java.time.LocalDateTime lastUpdatedTxStamp);
 }

@@ -2,12 +2,13 @@ package it.mapsgroup.gzoom.querydsl.dto;
 
 import javax.annotation.Generated;
 import com.querydsl.sql.Column;
+import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 
 /**
  * ContactMech is a Querydsl bean type
  */
 @Generated("com.querydsl.codegen.BeanSerializer")
-public class ContactMech {
+public class ContactMech implements AbstractIdentity {
 
     @Column("CONTACT_MECH_ID")
     private String contactMechId;
