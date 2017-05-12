@@ -22,7 +22,7 @@ public class QUserLoginSecurityGroup extends com.querydsl.sql.RelationalPathBase
 
     private static final long serialVersionUID = 446815084;
 
-    public static final QUserLoginSecurityGroup userLoginSecurityGroup = new QUserLoginSecurityGroup("USER_LOGIN_SECURITY_GROUP");
+    public static final QUserLoginSecurityGroup userLoginSecurityGroup = new QUserLoginSecurityGroup("user_login_security_group");
 
     public final DateTimePath<java.time.LocalDateTime> createdStamp = createDateTime("createdStamp", java.time.LocalDateTime.class);
 
@@ -47,7 +47,7 @@ public class QUserLoginSecurityGroup extends com.querydsl.sql.RelationalPathBase
     public final com.querydsl.sql.ForeignKey<UserLoginPersistent> userSecgrpUser = createForeignKey(userLoginId, "USER_LOGIN_ID");
 
     public QUserLoginSecurityGroup(String variable) {
-        super(UserLoginSecurityGroup.class, forVariable(variable), "null", "USER_LOGIN_SECURITY_GROUP");
+        super(UserLoginSecurityGroup.class, forVariable(variable), "null", "user_login_security_group");
         addMetadata();
     }
 
@@ -57,17 +57,17 @@ public class QUserLoginSecurityGroup extends com.querydsl.sql.RelationalPathBase
     }
 
     public QUserLoginSecurityGroup(String variable, String schema) {
-        super(UserLoginSecurityGroup.class, forVariable(variable), schema, "USER_LOGIN_SECURITY_GROUP");
+        super(UserLoginSecurityGroup.class, forVariable(variable), schema, "user_login_security_group");
         addMetadata();
     }
 
     public QUserLoginSecurityGroup(Path<? extends UserLoginSecurityGroup> path) {
-        super(path.getType(), path.getMetadata(), "null", "USER_LOGIN_SECURITY_GROUP");
+        super(path.getType(), path.getMetadata(), "null", "user_login_security_group");
         addMetadata();
     }
 
     public QUserLoginSecurityGroup(PathMetadata metadata) {
-        super(UserLoginSecurityGroup.class, metadata, "null", "USER_LOGIN_SECURITY_GROUP");
+        super(UserLoginSecurityGroup.class, metadata, "null", "user_login_security_group");
         addMetadata();
     }
 

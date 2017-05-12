@@ -18,11 +18,11 @@ public class LoginServiceOfBiz {
     public LoginResponseOfBiz login(String username, String password) {
         Map<String, Object> response = loginClient.login(username, password, null);
 //        Map<String, Object> response = loginClient.login("admin", "MapsGzoom01",null);
-        String sessionId = (String) response.get("sessionId");
+        String externalLoginKey = (String) response.get("externalLoginKey");
         String firstName = (String) response.get("firstName");
         String lastName = (String) response.get("lastName");
         LoginResponseOfBiz loginResponse = new LoginResponseOfBiz();
-        loginResponse.setSessionId(sessionId);
+        loginResponse.setExternalLoginKey(externalLoginKey);
         loginResponse.setFirstName(firstName);
         loginResponse.setLastName(lastName);
         return loginResponse;

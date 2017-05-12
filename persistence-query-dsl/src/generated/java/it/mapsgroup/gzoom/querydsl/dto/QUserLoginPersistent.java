@@ -22,7 +22,7 @@ public class QUserLoginPersistent extends com.querydsl.sql.RelationalPathBase<Us
 
     private static final long serialVersionUID = -715393686;
 
-    public static final QUserLoginPersistent userLogin = new QUserLoginPersistent("USER_LOGIN");
+    public static final QUserLoginPersistent userLogin = new QUserLoginPersistent("user_login");
 
     public final DateTimePath<java.time.LocalDateTime> createdStamp = createDateTime("createdStamp", java.time.LocalDateTime.class);
 
@@ -85,7 +85,7 @@ public class QUserLoginPersistent extends com.querydsl.sql.RelationalPathBase<Us
     public final com.querydsl.sql.ForeignKey<UserLoginSecurityGroup> _userSecgrpUser = createInvForeignKey(userLoginId, "USER_LOGIN_ID");
 
     public QUserLoginPersistent(String variable) {
-        super(UserLoginPersistent.class, forVariable(variable), "null", "USER_LOGIN");
+        super(UserLoginPersistent.class, forVariable(variable), "null", "user_login");
         addMetadata();
     }
 
@@ -95,17 +95,17 @@ public class QUserLoginPersistent extends com.querydsl.sql.RelationalPathBase<Us
     }
 
     public QUserLoginPersistent(String variable, String schema) {
-        super(UserLoginPersistent.class, forVariable(variable), schema, "USER_LOGIN");
+        super(UserLoginPersistent.class, forVariable(variable), schema, "user_login");
         addMetadata();
     }
 
     public QUserLoginPersistent(Path<? extends UserLoginPersistent> path) {
-        super(path.getType(), path.getMetadata(), "null", "USER_LOGIN");
+        super(path.getType(), path.getMetadata(), "null", "user_login");
         addMetadata();
     }
 
     public QUserLoginPersistent(PathMetadata metadata) {
-        super(UserLoginPersistent.class, metadata, "null", "USER_LOGIN");
+        super(UserLoginPersistent.class, metadata, "null", "user_login");
         addMetadata();
     }
 

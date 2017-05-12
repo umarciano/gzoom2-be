@@ -22,7 +22,7 @@ public class QPerson extends com.querydsl.sql.RelationalPathBase<Person> {
 
     private static final long serialVersionUID = 886970208;
 
-    public static final QPerson person = new QPerson("PERSON");
+    public static final QPerson person = new QPerson("person");
 
     public final StringPath birthCountry = createString("birthCountry");
 
@@ -119,7 +119,7 @@ public class QPerson extends com.querydsl.sql.RelationalPathBase<Person> {
     public final com.querydsl.sql.ForeignKey<Party> personParty = createForeignKey(partyId, "PARTY_ID");
 
     public QPerson(String variable) {
-        super(Person.class, forVariable(variable), "null", "PERSON");
+        super(Person.class, forVariable(variable), "null", "person");
         addMetadata();
     }
 
@@ -129,17 +129,17 @@ public class QPerson extends com.querydsl.sql.RelationalPathBase<Person> {
     }
 
     public QPerson(String variable, String schema) {
-        super(Person.class, forVariable(variable), schema, "PERSON");
+        super(Person.class, forVariable(variable), schema, "person");
         addMetadata();
     }
 
     public QPerson(Path<? extends Person> path) {
-        super(path.getType(), path.getMetadata(), "null", "PERSON");
+        super(path.getType(), path.getMetadata(), "null", "person");
         addMetadata();
     }
 
     public QPerson(PathMetadata metadata) {
-        super(Person.class, metadata, "null", "PERSON");
+        super(Person.class, metadata, "null", "person");
         addMetadata();
     }
 

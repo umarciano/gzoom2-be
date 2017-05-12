@@ -67,11 +67,11 @@ public class JwtOfBizLoginAuthenticationProvider implements AuthenticationProvid
             // verifies the credentials
             //boolean auth = hashingStrategy.verify(profile.getSalt(), (String) userPwd.getCredentials(), profile.getPassword());
             LoginResponseOfBiz response = loginService.login(username, (String) userPwd.getCredentials());
-            if (StringUtils.isEmpty(response.getSessionId()))
+            if (StringUtils.isEmpty(response.getExternalLoginKey()))
                 throw new BadCredentialsException(Messages.INVALID_USERNAME_OR_PASSWORD);
 
             // password matches
-            profile.setSessionId(response.getSessionId());
+            profile.setSessionId(response.getExternalLoginKey());
             String token = jwtService.generate(profile);
             permitsStorage.save(token, profile.getUsername());
             return new JwtAuthentication(token, profile);

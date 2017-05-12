@@ -11,6 +11,7 @@ import com.querydsl.core.types.QBean;
 import com.querydsl.sql.SQLQueryFactory;
 
 import it.mapsgroup.gzoom.querydsl.dto.QSecurityGroupPermission;
+import it.mapsgroup.gzoom.querydsl.dto.QSecurityPermission;
 import it.mapsgroup.gzoom.querydsl.dto.QUserLoginSecurityGroup;
 import it.mapsgroup.gzoom.querydsl.dto.SecurityPermission;
 
@@ -30,13 +31,15 @@ public class PermissionDao {
     public List<SecurityPermission> getPermission(String userLoginId) {
         QUserLoginSecurityGroup qulsg = QUserLoginSecurityGroup.userLoginSecurityGroup;
         QSecurityGroupPermission qsgp = QSecurityGroupPermission.securityGroupPermission;
+        QSecurityPermission qsp = QSecurityPermission.securityPermission;
         
         QBean<SecurityPermission> perm = Projections.bean(SecurityPermission.class, qsgp.permissionId);
         
         List<SecurityPermission> ret = queryFactory.select(qsgp.permissionId)
                 .from(qsgp)
                 .innerJoin(qulsg).on(qulsg.groupId.eq(qsgp.groupId))
-                .where(qulsg.userLoginId.eq(userLoginId))
+                .innerJoin(qsp).on(qsgp.permissionId.eq(qsp.permissionId))
+                .where(qulsg.userLoginId.eq(userLoginId).and(qsp.enabled.isTrue()))
                 .transform(GroupBy.groupBy(qsgp.permissionId).list(perm));
         
         return ret.isEmpty() ? null : ret;

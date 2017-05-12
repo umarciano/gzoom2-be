@@ -22,7 +22,7 @@ public class QContentAttribute extends com.querydsl.sql.RelationalPathBase<Conte
 
     private static final long serialVersionUID = -352929682;
 
-    public static final QContentAttribute contentAttribute = new QContentAttribute("CONTENT_ATTRIBUTE");
+    public static final QContentAttribute contentAttribute = new QContentAttribute("content_attribute");
 
     public final StringPath attrName = createString("attrName");
 
@@ -43,7 +43,7 @@ public class QContentAttribute extends com.querydsl.sql.RelationalPathBase<Conte
     public final com.querydsl.sql.ForeignKey<Content> contentAttr = createForeignKey(contentId, "CONTENT_ID");
 
     public QContentAttribute(String variable) {
-        super(ContentAttribute.class, forVariable(variable), "null", "CONTENT_ATTRIBUTE");
+        super(ContentAttribute.class, forVariable(variable), "null", "content_attribute");
         addMetadata();
     }
 
@@ -53,17 +53,17 @@ public class QContentAttribute extends com.querydsl.sql.RelationalPathBase<Conte
     }
 
     public QContentAttribute(String variable, String schema) {
-        super(ContentAttribute.class, forVariable(variable), schema, "CONTENT_ATTRIBUTE");
+        super(ContentAttribute.class, forVariable(variable), schema, "content_attribute");
         addMetadata();
     }
 
     public QContentAttribute(Path<? extends ContentAttribute> path) {
-        super(path.getType(), path.getMetadata(), "null", "CONTENT_ATTRIBUTE");
+        super(path.getType(), path.getMetadata(), "null", "content_attribute");
         addMetadata();
     }
 
     public QContentAttribute(PathMetadata metadata) {
-        super(ContentAttribute.class, metadata, "null", "CONTENT_ATTRIBUTE");
+        super(ContentAttribute.class, metadata, "null", "content_attribute");
         addMetadata();
     }
 

@@ -22,7 +22,7 @@ public class QContactMechPurposeType extends com.querydsl.sql.RelationalPathBase
 
     private static final long serialVersionUID = -221562106;
 
-    public static final QContactMechPurposeType contactMechPurposeType = new QContactMechPurposeType("CONTACT_MECH_PURPOSE_TYPE");
+    public static final QContactMechPurposeType contactMechPurposeType = new QContactMechPurposeType("contact_mech_purpose_type");
 
     public final StringPath contactMechPurposeTypeId = createString("contactMechPurposeTypeId");
 
@@ -45,7 +45,7 @@ public class QContactMechPurposeType extends com.querydsl.sql.RelationalPathBase
     public final com.querydsl.sql.ForeignKey<PartyContactMechPurpose> _partyCmprpType = createInvForeignKey(contactMechPurposeTypeId, "CONTACT_MECH_PURPOSE_TYPE_ID");
 
     public QContactMechPurposeType(String variable) {
-        super(ContactMechPurposeType.class, forVariable(variable), "null", "CONTACT_MECH_PURPOSE_TYPE");
+        super(ContactMechPurposeType.class, forVariable(variable), "null", "contact_mech_purpose_type");
         addMetadata();
     }
 
@@ -55,17 +55,17 @@ public class QContactMechPurposeType extends com.querydsl.sql.RelationalPathBase
     }
 
     public QContactMechPurposeType(String variable, String schema) {
-        super(ContactMechPurposeType.class, forVariable(variable), schema, "CONTACT_MECH_PURPOSE_TYPE");
+        super(ContactMechPurposeType.class, forVariable(variable), schema, "contact_mech_purpose_type");
         addMetadata();
     }
 
     public QContactMechPurposeType(Path<? extends ContactMechPurposeType> path) {
-        super(path.getType(), path.getMetadata(), "null", "CONTACT_MECH_PURPOSE_TYPE");
+        super(path.getType(), path.getMetadata(), "null", "contact_mech_purpose_type");
         addMetadata();
     }
 
     public QContactMechPurposeType(PathMetadata metadata) {
-        super(ContactMechPurposeType.class, metadata, "null", "CONTACT_MECH_PURPOSE_TYPE");
+        super(ContactMechPurposeType.class, metadata, "null", "contact_mech_purpose_type");
         addMetadata();
     }
 

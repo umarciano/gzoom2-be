@@ -22,7 +22,7 @@ public class QSecurityGroupPermission extends com.querydsl.sql.RelationalPathBas
 
     private static final long serialVersionUID = -830580317;
 
-    public static final QSecurityGroupPermission securityGroupPermission = new QSecurityGroupPermission("SECURITY_GROUP_PERMISSION");
+    public static final QSecurityGroupPermission securityGroupPermission = new QSecurityGroupPermission("security_group_permission");
 
     public final DateTimePath<java.time.LocalDateTime> createdStamp = createDateTime("createdStamp", java.time.LocalDateTime.class);
 
@@ -41,7 +41,7 @@ public class QSecurityGroupPermission extends com.querydsl.sql.RelationalPathBas
     public final com.querydsl.sql.ForeignKey<SecurityGroup> secGrpPermGrp = createForeignKey(groupId, "GROUP_ID");
 
     public QSecurityGroupPermission(String variable) {
-        super(SecurityGroupPermission.class, forVariable(variable), "null", "SECURITY_GROUP_PERMISSION");
+        super(SecurityGroupPermission.class, forVariable(variable), "null", "security_group_permission");
         addMetadata();
     }
 
@@ -51,17 +51,17 @@ public class QSecurityGroupPermission extends com.querydsl.sql.RelationalPathBas
     }
 
     public QSecurityGroupPermission(String variable, String schema) {
-        super(SecurityGroupPermission.class, forVariable(variable), schema, "SECURITY_GROUP_PERMISSION");
+        super(SecurityGroupPermission.class, forVariable(variable), schema, "security_group_permission");
         addMetadata();
     }
 
     public QSecurityGroupPermission(Path<? extends SecurityGroupPermission> path) {
-        super(path.getType(), path.getMetadata(), "null", "SECURITY_GROUP_PERMISSION");
+        super(path.getType(), path.getMetadata(), "null", "security_group_permission");
         addMetadata();
     }
 
     public QSecurityGroupPermission(PathMetadata metadata) {
-        super(SecurityGroupPermission.class, metadata, "null", "SECURITY_GROUP_PERMISSION");
+        super(SecurityGroupPermission.class, metadata, "null", "security_group_permission");
         addMetadata();
     }
 
