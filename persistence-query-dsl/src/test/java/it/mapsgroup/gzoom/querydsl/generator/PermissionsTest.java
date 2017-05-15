@@ -1,28 +1,24 @@
 package it.mapsgroup.gzoom.querydsl.generator;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
+import java.util.List;
+
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.querydsl.core.group.GroupBy;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.QBean;
 import com.querydsl.sql.SQLQueryFactory;
+
 import it.mapsgroup.gzoom.querydsl.dao.AbstractDaoTest;
 import it.mapsgroup.gzoom.querydsl.dto.QSecurityGroupPermission;
 import it.mapsgroup.gzoom.querydsl.dto.QUserLoginSecurityGroup;
 import it.mapsgroup.gzoom.querydsl.dto.SecurityGroupPermission;
 import it.mapsgroup.gzoom.querydsl.dto.SecurityPermission;
-import it.mapsgroup.gzoom.querydsl.persistence.service.QueryDslPersistenceConfiguration;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-
-import static org.slf4j.LoggerFactory.getLogger;
 
 
 public class PermissionsTest extends AbstractDaoTest{
@@ -36,7 +32,6 @@ public class PermissionsTest extends AbstractDaoTest{
     @Test
     @Transactional
     public void name() throws Exception {
-        QUserLoginSecurityGroup qulsg = QUserLoginSecurityGroup.userLoginSecurityGroup;
         QSecurityGroupPermission qsgp = QSecurityGroupPermission.securityGroupPermission;
 
         List<SecurityGroupPermission> ret = queryFactory.select(qsgp)
@@ -47,7 +42,7 @@ public class PermissionsTest extends AbstractDaoTest{
 
         System.out.println("name ret.size() " + ret.size());
         ret.forEach(p ->
-                System.out.println("p " + p.getPermissionId())
+            System.out.println("p " + p.getPermissionId())
         );
     }
 
