@@ -36,9 +36,8 @@ public class QueryDslPersistenceConfiguration {
         String queryDslTemplate = "com.querydsl.sql.MySQLTemplates";
         SQLTemplates templates;
         try {
-            Class<?> c;
-            c = Class.forName(queryDslTemplate);
-            Object builder = c.getMethod("builder").invoke(null);
+            Class<?> clazz = Class.forName(queryDslTemplate);
+            Object builder = clazz.getMethod("builder").invoke(null);
             templates = (SQLTemplates) builder.getClass().getMethod("build").invoke(builder);
             templates.getEscapeChar();
         } catch (ClassNotFoundException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {

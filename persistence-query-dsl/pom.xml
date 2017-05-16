@@ -24,7 +24,6 @@
           </dependency>-->
 
 
-
         <dependency>
             <groupId>it.mapsgroup.gzoom</groupId>
             <artifactId>common-persistence</artifactId>
@@ -93,7 +92,7 @@
         <dependency>
             <groupId>it.mapsgroup.gzoom</groupId>
             <artifactId>jdbc-repo</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
         </dependency>
 
     </dependencies>
