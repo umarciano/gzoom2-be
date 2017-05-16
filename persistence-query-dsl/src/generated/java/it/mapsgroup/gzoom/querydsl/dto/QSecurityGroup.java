@@ -22,7 +22,7 @@ public class QSecurityGroup extends com.querydsl.sql.RelationalPathBase<Security
 
     private static final long serialVersionUID = -538769228;
 
-    public static final QSecurityGroup securityGroup = new QSecurityGroup("security_group");
+    public static final QSecurityGroup securityGroup = new QSecurityGroup("SECURITY_GROUP");
 
     public final StringPath createdByUserLogin = createString("createdByUserLogin");
 
@@ -49,7 +49,7 @@ public class QSecurityGroup extends com.querydsl.sql.RelationalPathBase<Security
     public final com.querydsl.sql.ForeignKey<UserLoginSecurityGroup> _userSecgrpGrp = createInvForeignKey(groupId, "GROUP_ID");
 
     public QSecurityGroup(String variable) {
-        super(SecurityGroup.class, forVariable(variable), "null", "security_group");
+        super(SecurityGroup.class, forVariable(variable), "null", "SECURITY_GROUP");
         addMetadata();
     }
 
@@ -59,17 +59,17 @@ public class QSecurityGroup extends com.querydsl.sql.RelationalPathBase<Security
     }
 
     public QSecurityGroup(String variable, String schema) {
-        super(SecurityGroup.class, forVariable(variable), schema, "security_group");
+        super(SecurityGroup.class, forVariable(variable), schema, "SECURITY_GROUP");
         addMetadata();
     }
 
     public QSecurityGroup(Path<? extends SecurityGroup> path) {
-        super(path.getType(), path.getMetadata(), "null", "security_group");
+        super(path.getType(), path.getMetadata(), "null", "SECURITY_GROUP");
         addMetadata();
     }
 
     public QSecurityGroup(PathMetadata metadata) {
-        super(SecurityGroup.class, metadata, "null", "security_group");
+        super(SecurityGroup.class, metadata, "null", "SECURITY_GROUP");
         addMetadata();
     }
 

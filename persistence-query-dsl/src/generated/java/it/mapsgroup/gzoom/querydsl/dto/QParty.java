@@ -22,7 +22,7 @@ public class QParty extends com.querydsl.sql.RelationalPathBase<Party> {
 
     private static final long serialVersionUID = -664243845;
 
-    public static final QParty party = new QParty("party");
+    public static final QParty party = new QParty("PARTY");
 
     public final StringPath createdByUserLogin = createString("createdByUserLogin");
 
@@ -66,9 +66,9 @@ public class QParty extends com.querydsl.sql.RelationalPathBase<Party> {
 
     public final com.querydsl.sql.PrimaryKey<Party> primary = createPrimaryKey(partyId);
 
-    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> partyCul = createForeignKey(createdByUserLogin, "USER_LOGIN_ID");
-
     public final com.querydsl.sql.ForeignKey<UserLoginPersistent> partyLmcul = createForeignKey(lastModifiedByUserLogin, "USER_LOGIN_ID");
+
+    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> partyCul = createForeignKey(createdByUserLogin, "USER_LOGIN_ID");
 
     public final com.querydsl.sql.ForeignKey<PartyContactMechPurpose> _partyCmprpParty = createInvForeignKey(partyId, "PARTY_ID");
 
@@ -79,7 +79,7 @@ public class QParty extends com.querydsl.sql.RelationalPathBase<Party> {
     public final com.querydsl.sql.ForeignKey<UserLoginPersistent> _userParty = createInvForeignKey(partyId, "PARTY_ID");
 
     public QParty(String variable) {
-        super(Party.class, forVariable(variable), "null", "party");
+        super(Party.class, forVariable(variable), "null", "PARTY");
         addMetadata();
     }
 
@@ -89,17 +89,17 @@ public class QParty extends com.querydsl.sql.RelationalPathBase<Party> {
     }
 
     public QParty(String variable, String schema) {
-        super(Party.class, forVariable(variable), schema, "party");
+        super(Party.class, forVariable(variable), schema, "PARTY");
         addMetadata();
     }
 
     public QParty(Path<? extends Party> path) {
-        super(path.getType(), path.getMetadata(), "null", "party");
+        super(path.getType(), path.getMetadata(), "null", "PARTY");
         addMetadata();
     }
 
     public QParty(PathMetadata metadata) {
-        super(Party.class, metadata, "null", "party");
+        super(Party.class, metadata, "null", "PARTY");
         addMetadata();
     }
 

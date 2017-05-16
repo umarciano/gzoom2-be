@@ -10,9 +10,6 @@ import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 @Generated("com.querydsl.codegen.BeanSerializer")
 public class SecurityPermission implements AbstractIdentity {
 
-    @Column("CREATED_BY_USER_LOGIN")
-    private String createdByUserLogin;
-
     @Column("CREATED_STAMP")
     private java.time.LocalDateTime createdStamp;
 
@@ -28,9 +25,6 @@ public class SecurityPermission implements AbstractIdentity {
     @Column("ENABLED")
     private Boolean enabled;
 
-    @Column("LAST_MODIFIED_BY_USER_LOGIN")
-    private String lastModifiedByUserLogin;
-
     @Column("LAST_UPDATED_STAMP")
     private java.time.LocalDateTime lastUpdatedStamp;
 
@@ -39,14 +33,6 @@ public class SecurityPermission implements AbstractIdentity {
 
     @Column("PERMISSION_ID")
     private String permissionId;
-
-    public String getCreatedByUserLogin() {
-        return createdByUserLogin;
-    }
-
-    public void setCreatedByUserLogin(String createdByUserLogin) {
-        this.createdByUserLogin = createdByUserLogin;
-    }
 
     public java.time.LocalDateTime getCreatedStamp() {
         return createdStamp;
@@ -86,14 +72,6 @@ public class SecurityPermission implements AbstractIdentity {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
-    }
-
-    public String getLastModifiedByUserLogin() {
-        return lastModifiedByUserLogin;
-    }
-
-    public void setLastModifiedByUserLogin(String lastModifiedByUserLogin) {
-        this.lastModifiedByUserLogin = lastModifiedByUserLogin;
     }
 
     public java.time.LocalDateTime getLastUpdatedStamp() {
