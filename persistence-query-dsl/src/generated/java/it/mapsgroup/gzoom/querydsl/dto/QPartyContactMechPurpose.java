@@ -22,7 +22,7 @@ public class QPartyContactMechPurpose extends com.querydsl.sql.RelationalPathBas
 
     private static final long serialVersionUID = -61403396;
 
-    public static final QPartyContactMechPurpose partyContactMechPurpose = new QPartyContactMechPurpose("party_contact_mech_purpose");
+    public static final QPartyContactMechPurpose partyContactMechPurpose = new QPartyContactMechPurpose("PARTY_CONTACT_MECH_PURPOSE");
 
     public final StringPath contactMechId = createString("contactMechId");
 
@@ -55,7 +55,7 @@ public class QPartyContactMechPurpose extends com.querydsl.sql.RelationalPathBas
     public final com.querydsl.sql.ForeignKey<ContactMechPurposeType> partyCmprpType = createForeignKey(contactMechPurposeTypeId, "CONTACT_MECH_PURPOSE_TYPE_ID");
 
     public QPartyContactMechPurpose(String variable) {
-        super(PartyContactMechPurpose.class, forVariable(variable), "null", "party_contact_mech_purpose");
+        super(PartyContactMechPurpose.class, forVariable(variable), "null", "PARTY_CONTACT_MECH_PURPOSE");
         addMetadata();
     }
 
@@ -65,17 +65,17 @@ public class QPartyContactMechPurpose extends com.querydsl.sql.RelationalPathBas
     }
 
     public QPartyContactMechPurpose(String variable, String schema) {
-        super(PartyContactMechPurpose.class, forVariable(variable), schema, "party_contact_mech_purpose");
+        super(PartyContactMechPurpose.class, forVariable(variable), schema, "PARTY_CONTACT_MECH_PURPOSE");
         addMetadata();
     }
 
     public QPartyContactMechPurpose(Path<? extends PartyContactMechPurpose> path) {
-        super(path.getType(), path.getMetadata(), "null", "party_contact_mech_purpose");
+        super(path.getType(), path.getMetadata(), "null", "PARTY_CONTACT_MECH_PURPOSE");
         addMetadata();
     }
 
     public QPartyContactMechPurpose(PathMetadata metadata) {
-        super(PartyContactMechPurpose.class, metadata, "null", "party_contact_mech_purpose");
+        super(PartyContactMechPurpose.class, metadata, "null", "PARTY_CONTACT_MECH_PURPOSE");
         addMetadata();
     }
 

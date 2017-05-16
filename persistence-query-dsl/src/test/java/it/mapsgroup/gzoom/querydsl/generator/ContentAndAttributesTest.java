@@ -1,10 +1,9 @@
 package it.mapsgroup.gzoom.querydsl.generator;
 
+import com.querydsl.core.Tuple;
 import com.querydsl.core.group.GroupBy;
 import com.querydsl.core.types.QBean;
-import com.querydsl.sql.SQLCommonQuery;
-import com.querydsl.sql.SQLQuery;
-import com.querydsl.sql.SQLQueryFactory;
+import com.querydsl.sql.*;
 import it.mapsgroup.gzoom.querydsl.dao.AbstractDaoTest;
 import it.mapsgroup.gzoom.querydsl.dto.*;
 import org.junit.Test;
@@ -182,21 +181,26 @@ public class ContentAndAttributesTest extends AbstractDaoTest {
         regExp = "(^(/" + regExp + "))";
         
         System.out.println(regExp);
-        List<ContentAndAttributes> ret = queryFactory.select(qContent, qContentAttrTitle)
+
+        SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qContent, qContentAttrTitle)
                 .from(qContent)
                 .innerJoin(qContent._contentasscTo, qContentAssoc)
                 .innerJoin(qContentAttrTitle).on(qContentAttrTitle.contentId.eq(qContentAssoc.contentIdTo).and(qContentAttrTitle.attrName.eq("title")))
                 .innerJoin(qContentAttrLink).on(qContentAttrLink.contentId.eq(qContentAssoc.contentIdTo).and(qContentAttrLink.attrName.eq("link")))
-                
+
                 .where(
                         qContentAttrLink.attrValue.matches(regExp)
-                        .and(
-                            queryFactory.from(qulsg)
-                                .leftJoin(qsgp).on(qulsg.groupId.eq(qsgp.groupId))
-                                .where(qulsg.userLoginId.eq(userLoginId), qsgp.contentId.eq(qContentAssoc.contentIdTo)).notExists())
-                        )
+                                .and(
+                                        queryFactory.from(qulsg)
+                                                .leftJoin(qsgp).on(qulsg.groupId.eq(qsgp.groupId))
+                                                .where(qulsg.userLoginId.eq(userLoginId), qsgp.contentId.eq(qContentAssoc.contentIdTo)).notExists())
+                )
                 // .orderBy(qContentAssoc.sequenceNum.asc())
-                .orderBy(qContent.contentId.asc())
+                .orderBy(qContent.contentId.asc());
+        SQLBindings bindings = tupleSQLQuery.getSQL();
+        LOG.info("{}",bindings.getSQL());
+        LOG.info("{}",bindings.getBindings());
+        List<ContentAndAttributes> ret = tupleSQLQuery
                 .transform(GroupBy.groupBy(qContent.contentId).list(contentAndAttributesExQBean));
         
         System.out.println("ret.size() " + ret.size()); // 48

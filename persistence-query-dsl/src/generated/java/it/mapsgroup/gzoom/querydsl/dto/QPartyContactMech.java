@@ -22,7 +22,7 @@ public class QPartyContactMech extends com.querydsl.sql.RelationalPathBase<Party
 
     private static final long serialVersionUID = -658004030;
 
-    public static final QPartyContactMech partyContactMech = new QPartyContactMech("party_contact_mech");
+    public static final QPartyContactMech partyContactMech = new QPartyContactMech("PARTY_CONTACT_MECH");
 
     public final BooleanPath allowSolicitation = createBoolean("allowSolicitation");
 
@@ -65,7 +65,7 @@ public class QPartyContactMech extends com.querydsl.sql.RelationalPathBase<Party
     public final com.querydsl.sql.ForeignKey<Party> partyCmechParty = createForeignKey(partyId, "PARTY_ID");
 
     public QPartyContactMech(String variable) {
-        super(PartyContactMech.class, forVariable(variable), "null", "party_contact_mech");
+        super(PartyContactMech.class, forVariable(variable), "null", "PARTY_CONTACT_MECH");
         addMetadata();
     }
 
@@ -75,17 +75,17 @@ public class QPartyContactMech extends com.querydsl.sql.RelationalPathBase<Party
     }
 
     public QPartyContactMech(String variable, String schema) {
-        super(PartyContactMech.class, forVariable(variable), schema, "party_contact_mech");
+        super(PartyContactMech.class, forVariable(variable), schema, "PARTY_CONTACT_MECH");
         addMetadata();
     }
 
     public QPartyContactMech(Path<? extends PartyContactMech> path) {
-        super(path.getType(), path.getMetadata(), "null", "party_contact_mech");
+        super(path.getType(), path.getMetadata(), "null", "PARTY_CONTACT_MECH");
         addMetadata();
     }
 
     public QPartyContactMech(PathMetadata metadata) {
-        super(PartyContactMech.class, metadata, "null", "party_contact_mech");
+        super(PartyContactMech.class, metadata, "null", "PARTY_CONTACT_MECH");
         addMetadata();
     }
 
