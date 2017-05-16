@@ -15,14 +15,16 @@ import java.sql.Types;
 
 
 /**
- * QUserLoginSecurityGroup is a Querydsl query type for UserLoginSecurityGroup
+ * QSecurityGroupContent is a Querydsl query type for SecurityGroupContent
  */
 @Generated("com.querydsl.sql.codegen.MetaDataSerializer")
-public class QUserLoginSecurityGroup extends com.querydsl.sql.RelationalPathBase<UserLoginSecurityGroup> {
+public class QSecurityGroupContent extends com.querydsl.sql.RelationalPathBase<SecurityGroupContent> {
 
-    private static final long serialVersionUID = 446815084;
+    private static final long serialVersionUID = -1167634139;
 
-    public static final QUserLoginSecurityGroup userLoginSecurityGroup = new QUserLoginSecurityGroup("user_login_security_group");
+    public static final QSecurityGroupContent securityGroupContent = new QSecurityGroupContent("security_group_content");
+
+    public final StringPath contentId = createString("contentId");
 
     public final DateTimePath<java.time.LocalDateTime> createdStamp = createDateTime("createdStamp", java.time.LocalDateTime.class);
 
@@ -38,48 +40,46 @@ public class QUserLoginSecurityGroup extends com.querydsl.sql.RelationalPathBase
 
     public final DateTimePath<java.time.LocalDateTime> thruDate = createDateTime("thruDate", java.time.LocalDateTime.class);
 
-    public final StringPath userLoginId = createString("userLoginId");
+    public final com.querydsl.sql.PrimaryKey<SecurityGroupContent> primary = createPrimaryKey(contentId, fromDate, groupId);
 
-    public final com.querydsl.sql.PrimaryKey<UserLoginSecurityGroup> primary = createPrimaryKey(fromDate, groupId, userLoginId);
+    public final com.querydsl.sql.ForeignKey<SecurityGroup> secgrpCntGrp = createForeignKey(groupId, "GROUP_ID");
 
-    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> userSecgrpUser = createForeignKey(userLoginId, "USER_LOGIN_ID");
+    public final com.querydsl.sql.ForeignKey<Content> secgrpCntCnt = createForeignKey(contentId, "CONTENT_ID");
 
-    public final com.querydsl.sql.ForeignKey<SecurityGroup> userSecgrpGrp = createForeignKey(groupId, "GROUP_ID");
-
-    public QUserLoginSecurityGroup(String variable) {
-        super(UserLoginSecurityGroup.class, forVariable(variable), "null", "user_login_security_group");
+    public QSecurityGroupContent(String variable) {
+        super(SecurityGroupContent.class, forVariable(variable), "null", "security_group_content");
         addMetadata();
     }
 
-    public QUserLoginSecurityGroup(String variable, String schema, String table) {
-        super(UserLoginSecurityGroup.class, forVariable(variable), schema, table);
+    public QSecurityGroupContent(String variable, String schema, String table) {
+        super(SecurityGroupContent.class, forVariable(variable), schema, table);
         addMetadata();
     }
 
-    public QUserLoginSecurityGroup(String variable, String schema) {
-        super(UserLoginSecurityGroup.class, forVariable(variable), schema, "user_login_security_group");
+    public QSecurityGroupContent(String variable, String schema) {
+        super(SecurityGroupContent.class, forVariable(variable), schema, "security_group_content");
         addMetadata();
     }
 
-    public QUserLoginSecurityGroup(Path<? extends UserLoginSecurityGroup> path) {
-        super(path.getType(), path.getMetadata(), "null", "user_login_security_group");
+    public QSecurityGroupContent(Path<? extends SecurityGroupContent> path) {
+        super(path.getType(), path.getMetadata(), "null", "security_group_content");
         addMetadata();
     }
 
-    public QUserLoginSecurityGroup(PathMetadata metadata) {
-        super(UserLoginSecurityGroup.class, metadata, "null", "user_login_security_group");
+    public QSecurityGroupContent(PathMetadata metadata) {
+        super(SecurityGroupContent.class, metadata, "null", "security_group_content");
         addMetadata();
     }
 
     public void addMetadata() {
+        addMetadata(contentId, ColumnMetadata.named("CONTENT_ID").withIndex(2).ofType(Types.VARCHAR).withSize(20).notNull());
         addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(7).ofType(Types.TIMESTAMP).withSize(19));
         addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(8).ofType(Types.TIMESTAMP).withSize(19));
         addMetadata(fromDate, ColumnMetadata.named("FROM_DATE").withIndex(3).ofType(Types.TIMESTAMP).withSize(19).notNull());
-        addMetadata(groupId, ColumnMetadata.named("GROUP_ID").withIndex(2).ofType(Types.VARCHAR).withSize(20).notNull());
+        addMetadata(groupId, ColumnMetadata.named("GROUP_ID").withIndex(1).ofType(Types.VARCHAR).withSize(20).notNull());
         addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(5).ofType(Types.TIMESTAMP).withSize(19));
         addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(6).ofType(Types.TIMESTAMP).withSize(19));
         addMetadata(thruDate, ColumnMetadata.named("THRU_DATE").withIndex(4).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(userLoginId, ColumnMetadata.named("USER_LOGIN_ID").withIndex(1).ofType(Types.VARCHAR).withSize(250).notNull());
     }
 
 }
