@@ -179,7 +179,7 @@ public class ContentAndAttributesTest extends AbstractDaoTest {
                         bean(ContentAttribute.class, qContentAttrTitle.all()).as("title"),
                         bean(ContentAttribute.class, qContentAttrLink.all()).as("link")));
         String regExp = String.join("|/", keys);
-        regExp = "(/" + regExp + ")";
+        regExp = "(^(/" + regExp + "))";
         
         System.out.println(regExp);
         List<ContentAndAttributes> ret = queryFactory.select(qContent, qContentAttrTitle)
@@ -195,14 +195,20 @@ public class ContentAndAttributesTest extends AbstractDaoTest {
                                 .leftJoin(qsgp).on(qulsg.groupId.eq(qsgp.groupId))
                                 .where(qulsg.userLoginId.eq(userLoginId), qsgp.contentId.eq(qContentAssoc.contentIdTo)).notExists())
                         )
-                .orderBy(qContentAssoc.sequenceNum.asc())
+                // .orderBy(qContentAssoc.sequenceNum.asc())
+                .orderBy(qContent.contentId.asc())
                 .transform(GroupBy.groupBy(qContent.contentId).list(contentAndAttributesExQBean));
         
-        System.out.println("ret.size() " + ret.size()); // 132
-        System.out.println("ret " + ret.get(0).getContentId());
-        if (ret.get(0).getLink() != null) {
-            System.out.println("ret " + ret.get(0).getLink().getAttrValue());
-        }
-        System.out.println("ret " + ret.get(0).getTitle().getAttrValue());
+        System.out.println("ret.size() " + ret.size()); // 48
+        ret.forEach(c -> {
+            final String contentId = c.getContentId();
+            final String value = " - " + c.getTitle().getAttrValue();
+            if (c.getLink() != null) {
+                System.out.println("content = " + contentId + value + " - " + c.getLink().getAttrValue());
+            }else {
+                System.out.println("content " + contentId + value);
+            }
+        });
+        
     }
 }
