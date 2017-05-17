@@ -32,6 +32,8 @@ public class QSecurityPermission extends com.querydsl.sql.RelationalPathBase<Sec
 
     public final StringPath dynamicAccess = createString("dynamicAccess");
 
+    public final BooleanPath enabled = createBoolean("enabled");
+
     public final DateTimePath<java.time.LocalDateTime> lastUpdatedStamp = createDateTime("lastUpdatedStamp", java.time.LocalDateTime.class);
 
     public final DateTimePath<java.time.LocalDateTime> lastUpdatedTxStamp = createDateTime("lastUpdatedTxStamp", java.time.LocalDateTime.class);
@@ -70,6 +72,7 @@ public class QSecurityPermission extends com.querydsl.sql.RelationalPathBase<Sec
         addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(7).ofType(Types.TIMESTAMP).withSize(19));
         addMetadata(description, ColumnMetadata.named("DESCRIPTION").withIndex(2).ofType(Types.VARCHAR).withSize(255));
         addMetadata(dynamicAccess, ColumnMetadata.named("DYNAMIC_ACCESS").withIndex(3).ofType(Types.VARCHAR).withSize(255));
+        addMetadata(enabled, ColumnMetadata.named("ENABLED").withIndex(8).ofType(Types.CHAR).withSize(1));
         addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(4).ofType(Types.TIMESTAMP).withSize(19));
         addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(5).ofType(Types.TIMESTAMP).withSize(19));
         addMetadata(permissionId, ColumnMetadata.named("PERMISSION_ID").withIndex(1).ofType(Types.VARCHAR).withSize(60).notNull());

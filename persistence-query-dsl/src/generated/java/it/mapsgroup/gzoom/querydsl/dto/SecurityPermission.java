@@ -22,6 +22,9 @@ public class SecurityPermission implements AbstractIdentity {
     @Column("DYNAMIC_ACCESS")
     private String dynamicAccess;
 
+    @Column("ENABLED")
+    private Boolean enabled;
+
     @Column("LAST_UPDATED_STAMP")
     private java.time.LocalDateTime lastUpdatedStamp;
 
@@ -61,6 +64,14 @@ public class SecurityPermission implements AbstractIdentity {
 
     public void setDynamicAccess(String dynamicAccess) {
         this.dynamicAccess = dynamicAccess;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public java.time.LocalDateTime getLastUpdatedStamp() {

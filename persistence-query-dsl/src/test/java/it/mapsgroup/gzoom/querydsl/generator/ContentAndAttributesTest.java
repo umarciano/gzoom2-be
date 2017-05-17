@@ -4,7 +4,6 @@ import com.querydsl.core.Tuple;
 import com.querydsl.core.group.GroupBy;
 import com.querydsl.core.types.QBean;
 import com.querydsl.sql.*;
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BindInfo;
 import it.mapsgroup.gzoom.querydsl.dao.AbstractDaoTest;
 import it.mapsgroup.gzoom.querydsl.dto.*;
 import org.junit.Test;
