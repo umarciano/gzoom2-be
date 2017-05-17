@@ -22,7 +22,7 @@ public class QSecurityGroupContent extends com.querydsl.sql.RelationalPathBase<S
 
     private static final long serialVersionUID = -1167634139;
 
-    public static final QSecurityGroupContent securityGroupContent = new QSecurityGroupContent("security_group_content");
+    public static final QSecurityGroupContent securityGroupContent = new QSecurityGroupContent("SECURITY_GROUP_CONTENT");
 
     public final StringPath contentId = createString("contentId");
 
@@ -47,7 +47,7 @@ public class QSecurityGroupContent extends com.querydsl.sql.RelationalPathBase<S
     public final com.querydsl.sql.ForeignKey<Content> secgrpCntCnt = createForeignKey(contentId, "CONTENT_ID");
 
     public QSecurityGroupContent(String variable) {
-        super(SecurityGroupContent.class, forVariable(variable), "null", "security_group_content");
+        super(SecurityGroupContent.class, forVariable(variable), "null", "SECURITY_GROUP_CONTENT");
         addMetadata();
     }
 
@@ -57,17 +57,17 @@ public class QSecurityGroupContent extends com.querydsl.sql.RelationalPathBase<S
     }
 
     public QSecurityGroupContent(String variable, String schema) {
-        super(SecurityGroupContent.class, forVariable(variable), schema, "security_group_content");
+        super(SecurityGroupContent.class, forVariable(variable), schema, "SECURITY_GROUP_CONTENT");
         addMetadata();
     }
 
     public QSecurityGroupContent(Path<? extends SecurityGroupContent> path) {
-        super(path.getType(), path.getMetadata(), "null", "security_group_content");
+        super(path.getType(), path.getMetadata(), "null", "SECURITY_GROUP_CONTENT");
         addMetadata();
     }
 
     public QSecurityGroupContent(PathMetadata metadata) {
-        super(SecurityGroupContent.class, metadata, "null", "security_group_content");
+        super(SecurityGroupContent.class, metadata, "null", "SECURITY_GROUP_CONTENT");
         addMetadata();
     }
 

@@ -22,7 +22,7 @@ public class QContactMech extends com.querydsl.sql.RelationalPathBase<ContactMec
 
     private static final long serialVersionUID = 711257874;
 
-    public static final QContactMech contactMech = new QContactMech("contact_mech");
+    public static final QContactMech contactMech = new QContactMech("CONTACT_MECH");
 
     public final StringPath contactMechId = createString("contactMechId");
 
@@ -49,7 +49,7 @@ public class QContactMech extends com.querydsl.sql.RelationalPathBase<ContactMec
     public final com.querydsl.sql.ForeignKey<PartyContactMech> _partyCmechCmech = createInvForeignKey(contactMechId, "CONTACT_MECH_ID");
 
     public QContactMech(String variable) {
-        super(ContactMech.class, forVariable(variable), "null", "contact_mech");
+        super(ContactMech.class, forVariable(variable), "null", "CONTACT_MECH");
         addMetadata();
     }
 
@@ -59,17 +59,17 @@ public class QContactMech extends com.querydsl.sql.RelationalPathBase<ContactMec
     }
 
     public QContactMech(String variable, String schema) {
-        super(ContactMech.class, forVariable(variable), schema, "contact_mech");
+        super(ContactMech.class, forVariable(variable), schema, "CONTACT_MECH");
         addMetadata();
     }
 
     public QContactMech(Path<? extends ContactMech> path) {
-        super(path.getType(), path.getMetadata(), "null", "contact_mech");
+        super(path.getType(), path.getMetadata(), "null", "CONTACT_MECH");
         addMetadata();
     }
 
     public QContactMech(PathMetadata metadata) {
-        super(ContactMech.class, metadata, "null", "contact_mech");
+        super(ContactMech.class, metadata, "null", "CONTACT_MECH");
         addMetadata();
     }
 

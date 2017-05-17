@@ -22,7 +22,7 @@ public class QContentAssoc extends com.querydsl.sql.RelationalPathBase<ContentAs
 
     private static final long serialVersionUID = 117420775;
 
-    public static final QContentAssoc contentAssoc = new QContentAssoc("content_assoc");
+    public static final QContentAssoc contentAssoc = new QContentAssoc("CONTENT_ASSOC");
 
     public final StringPath contentAssocPredicateId = createString("contentAssocPredicateId");
 
@@ -66,14 +66,14 @@ public class QContentAssoc extends com.querydsl.sql.RelationalPathBase<ContentAs
 
     public final com.querydsl.sql.ForeignKey<Content> contentasscFrom = createForeignKey(contentId, "CONTENT_ID");
 
-    public final com.querydsl.sql.ForeignKey<Content> contentasscTo = createForeignKey(contentIdTo, "CONTENT_ID");
+    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> contentasscCbusr = createForeignKey(createdByUserLogin, "USER_LOGIN_ID");
 
     public final com.querydsl.sql.ForeignKey<UserLoginPersistent> contentasscLmbur = createForeignKey(lastModifiedByUserLogin, "USER_LOGIN_ID");
 
-    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> contentasscCbusr = createForeignKey(createdByUserLogin, "USER_LOGIN_ID");
+    public final com.querydsl.sql.ForeignKey<Content> contentasscTo = createForeignKey(contentIdTo, "CONTENT_ID");
 
     public QContentAssoc(String variable) {
-        super(ContentAssoc.class, forVariable(variable), "null", "content_assoc");
+        super(ContentAssoc.class, forVariable(variable), "null", "CONTENT_ASSOC");
         addMetadata();
     }
 
@@ -83,17 +83,17 @@ public class QContentAssoc extends com.querydsl.sql.RelationalPathBase<ContentAs
     }
 
     public QContentAssoc(String variable, String schema) {
-        super(ContentAssoc.class, forVariable(variable), schema, "content_assoc");
+        super(ContentAssoc.class, forVariable(variable), schema, "CONTENT_ASSOC");
         addMetadata();
     }
 
     public QContentAssoc(Path<? extends ContentAssoc> path) {
-        super(path.getType(), path.getMetadata(), "null", "content_assoc");
+        super(path.getType(), path.getMetadata(), "null", "CONTENT_ASSOC");
         addMetadata();
     }
 
     public QContentAssoc(PathMetadata metadata) {
-        super(ContentAssoc.class, metadata, "null", "content_assoc");
+        super(ContentAssoc.class, metadata, "null", "CONTENT_ASSOC");
         addMetadata();
     }
 
