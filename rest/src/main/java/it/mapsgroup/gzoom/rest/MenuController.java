@@ -35,6 +35,6 @@ public class MenuController {
     @RequestMapping(value = "/menu", method = RequestMethod.GET)
     @ResponseBody
     public AbstractMenu getUserPermission(HttpServletRequest req) {
-        return Exec.exec("menu", () -> menuService.getMenu(req));
+        return Exec.exec("menu", () -> menuService.getMenu());
     }
 }

@@ -28,7 +28,7 @@ public class ProfileService {
         this.permissionDao = permissionDao;
     }
 
-    public Permissions getUserPermission(HttpServletRequest req) {
+    public Permissions getUserPermission() {
         List<SecurityPermission> listSecurityPermission = permissionDao.getPermission(principal().getUserLoginId());
         Permissions permissions = new Permissions();
         

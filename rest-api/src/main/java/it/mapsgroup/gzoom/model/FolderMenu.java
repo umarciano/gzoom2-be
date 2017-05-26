@@ -13,14 +13,17 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class FolderMenu extends AbstractMenu {
 
-    List<LeafMenu> children;
+    /*List<AbstractMenu> children = new ArrayList<AbstractMenu>();
 
-    public List<LeafMenu> getChildren() {
+    public List<AbstractMenu> getChildren() {
         return children;
     }
 
-    public void setChildren(List<LeafMenu> children) {
+    public void setChildren(List<AbstractMenu> children) {
         this.children = children;
     }
 
+    public void addChild(AbstractMenu child) {
+        children.add(child);
+    }*/
 }

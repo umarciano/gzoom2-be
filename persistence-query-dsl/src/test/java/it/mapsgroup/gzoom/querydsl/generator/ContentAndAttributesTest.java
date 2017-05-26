@@ -1,5 +1,6 @@
 package it.mapsgroup.gzoom.querydsl.generator;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.group.GroupBy;
 import com.querydsl.core.types.QBean;
@@ -9,6 +10,7 @@ import it.mapsgroup.gzoom.querydsl.dto.*;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Predicate;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -56,7 +58,6 @@ public class ContentAndAttributesTest extends AbstractDaoTest {
     @Test
     @Transactional
     public void select() throws Exception {
-
         QContent qContent = QContent.content;
         QContentAssoc qContentAssoc = QContentAssoc.contentAssoc;
         QContentAttribute qContentAttrTitle = new QContentAttribute("tit");
@@ -89,78 +90,6 @@ public class ContentAndAttributesTest extends AbstractDaoTest {
     @Test
     @Transactional
     public void selectWithPermission() throws Exception {
-
-        QContent qContent = QContent.content;
-        QContentAssoc qContentAssoc = QContentAssoc.contentAssoc;
-        QContentAttribute qContentAttrTitle = new QContentAttribute("tit");
-        QContentAttribute qContentAttrLink = new QContentAttribute("lin");
-
-        QBean<ContentAndAttributes> contentAndAttributesExQBean =
-                bean(ContentAndAttributes.class,
-                        merge(qContent.all(),
-                                bean(ContentAttribute.class, qContentAttrTitle.all()).as("title"),
-                                bean(ContentAttribute.class, qContentAttrLink.all()).as("link")));
-                
-                
-            List<ContentAndAttributes> ret = queryFactory.select(qContent, qContentAttrTitle)
-                    .from(qContent)
-                    .innerJoin(qContent._contentasscTo, qContentAssoc)
-                    .innerJoin(qContentAttrTitle).on(qContentAttrTitle.contentId.eq(qContentAssoc.contentIdTo).and(qContentAttrTitle.attrName.eq("title")))
-                    .leftJoin(qContentAttrLink).on(qContentAttrLink.contentId.eq(qContentAssoc.contentIdTo).and(qContentAttrLink.attrName.eq("link")))
-                    .where(qContentAssoc.contentId.eq("GP_MENU"))
-                    .orderBy(qContentAssoc.sequenceNum.asc())
-                    .transform(GroupBy.groupBy(qContent.contentId).list(contentAndAttributesExQBean));
-            
-            System.out.println("ret.size() " + ret.size());
-            System.out.println("ret " + ret.get(0).getContentId());
-            if (ret.get(0).getLink() != null) {
-                System.out.println("ret " + ret.get(0).getLink().getAttrValue());
-            }
-            System.out.println("ret " + ret.get(0).getTitle().getAttrValue());
-    }
-    
-    @Test
-    @Transactional
-    public void getValidMenu() throws Exception {
-        // like String startRegExp2 = "(/accountingext|/workeffort)";
-        List<String> keys = new ArrayList<String>();
-        keys.add("ACCOUNTING");
-        keys.add("WORKEFFORT");
-        QContent qContent = QContent.content;
-        QContentAssoc qContentAssoc = QContentAssoc.contentAssoc;
-        QContentAttribute qContentAttrTitle = new QContentAttribute("tit");
-        QContentAttribute qContentAttrLink = new QContentAttribute("lin");
-        
-        QBean<ContentAndAttributes> contentAndAttributesExQBean = 
-                bean(ContentAndAttributes.class,
-                merge(qContent.all(),
-                        bean(ContentAttribute.class, qContentAttrTitle.all()).as("title"),
-                        bean(ContentAttribute.class, qContentAttrLink.all()).as("link")));
-        String regExp = String.join("|/", keys);
-        regExp = "(/" + regExp + ")";
-        
-        System.out.println(regExp);
-        List<ContentAndAttributes> ret = queryFactory.select(qContent, qContentAttrTitle)
-                .from(qContent)
-                .innerJoin(qContent._contentasscTo, qContentAssoc)
-                .innerJoin(qContentAttrTitle).on(qContentAttrTitle.contentId.eq(qContentAssoc.contentIdTo).and(qContentAttrTitle.attrName.eq("title")))
-                .innerJoin(qContentAttrLink).on(qContentAttrLink.contentId.eq(qContentAssoc.contentIdTo).and(qContentAttrLink.attrName.eq("link")))
-                .where(qContentAttrLink.attrValue.matches(regExp))
-                .orderBy(qContentAssoc.sequenceNum.asc())
-                .transform(GroupBy.groupBy(qContent.contentId).list(contentAndAttributesExQBean));
-        
-        System.out.println("ret.size() " + ret.size());
-        System.out.println("ret " + ret.get(0).getContentId());
-        if (ret.get(0).getLink() != null) {
-            System.out.println("ret " + ret.get(0).getLink().getAttrValue());
-        }
-        System.out.println("ret " + ret.get(0).getTitle().getAttrValue());
-    }
-    
-    @Test
-    @Transactional
-    public void getValidMenuPerm() throws Exception {
-        // like String startRegExp2 = "(/accountingext|/workeffort)";
         List<String> keys = new ArrayList<String>();
         keys.add("ACCOUNTING");
         keys.add("WORKEFFORT");
@@ -177,29 +106,29 @@ public class ContentAndAttributesTest extends AbstractDaoTest {
                 merge(qContent.all(),
                         bean(ContentAttribute.class, qContentAttrTitle.all()).as("title"),
                         bean(ContentAttribute.class, qContentAttrLink.all()).as("link")));
-        String regExp = String.join("|/", keys);
-        regExp = "(^(/" + regExp + "))";
         
-        System.out.println(regExp);
-
+        BooleanBuilder builder = new BooleanBuilder();
+        for (String key : keys) {
+            builder.or(qContentAttrLink.attrValue.like("/" + key + "%"));
+        }
+        
         SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qContent, qContentAttrTitle)
                 .from(qContent)
                 .innerJoin(qContent._contentasscTo, qContentAssoc)
                 .innerJoin(qContentAttrTitle).on(qContentAttrTitle.contentId.eq(qContentAssoc.contentIdTo).and(qContentAttrTitle.attrName.eq("title")))
                 .innerJoin(qContentAttrLink).on(qContentAttrLink.contentId.eq(qContentAssoc.contentIdTo).and(qContentAttrLink.attrName.eq("link")))
-
-                .where(
-                        qContentAttrLink.attrValue.matches(regExp)
+                .where(builder
+                            .and(qContentAssoc.contentAssocTypeId.eq("TREE_CHILD"))
                                 .and(
                                         queryFactory.from(qulsg)
                                                 .leftJoin(qsgp).on(qulsg.groupId.eq(qsgp.groupId))
                                                 .where(qulsg.userLoginId.eq(userLoginId), qsgp.contentId.eq(qContentAssoc.contentIdTo)).notExists())
                 )
-                // .orderBy(qContentAssoc.sequenceNum.asc())
+                // .orderBy(qContentAssoc.sequenceNum.asc());
                 .orderBy(qContent.contentId.asc());
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}",bindings.getSQL());
-        LOG.info("{}",bindings.getBindings());
+        LOG.info("{}",bindings.getBindings()); // debug
         List<ContentAndAttributes> ret = tupleSQLQuery
                 .transform(GroupBy.groupBy(qContent.contentId).list(contentAndAttributesExQBean));
         

@@ -24,6 +24,6 @@ public class PermissionDaoIT extends AbstractDaoTest {
     public void findByUsername() throws Exception {
         List<SecurityPermission> permissions2 = permissionDao.getPermission("admin");
         assertNotNull(permissions2);
-        assertEquals(73, permissions2.size());
+        assertEquals(2, permissions2.size());
     }
 }
