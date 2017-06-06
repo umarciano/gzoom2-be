@@ -30,6 +30,12 @@ public class ContentAndAttributesDao {
         this.queryFactory = queryFactory;
     }
 
+    /**
+     * TODO
+     * Return Menu with title and link for specific contentId
+     * @param contentId
+     * @return
+     */
     @Transactional
     public List<ContentAndAttributes> getMenu(String contentId) {
         QContent qContent = QContent.content;
@@ -51,6 +57,12 @@ public class ContentAndAttributesDao {
         return ret;
     }
 
+    /**
+     * Return only valid Menu for specific userLoginId 
+     * @param keys
+     * @param userLoginId
+     * @return
+     */
     @Transactional
     public List<ContentAndAttributes> getValidMenu(List<String> keys, String userLoginId) {
         QContent qContent = QContent.content;
@@ -70,6 +82,7 @@ public class ContentAndAttributesDao {
 
         BooleanBuilder builder = new BooleanBuilder();
         for (String key : keys) {
+            // Specific mapping for COMMONEXT / COMMONDATAEXT
             if ("COMMONEXT".equals(key)) {
                 key = "COMMONDATAEXT";
             }
@@ -88,16 +101,21 @@ public class ContentAndAttributesDao {
                                 .from(qulsg)
                                 .leftJoin(qsgp).on(qulsg.groupId.eq(qsgp.groupId))
                                 .where(qulsg.userLoginId.eq(userLoginId), qsgp.contentId.eq(qContentAssoc.contentIdTo)).notExists()))
-                // .orderBy(qContentAssoc.sequenceNum.asc());
-                .orderBy(qContent.contentId.asc());
+                .orderBy(qContentAssoc.sequenceNum.asc());
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
         List<ContentAndAttributes> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContent.contentId).list(contentAndAttributesExQBean));
-        LOG.info("ret.size() ", ret.size());
+        LOG.info("size = {}", ret.size());
         return ret;
     }
 
+    /**
+     * TODO
+     * Return Parent Folder Menu
+     * @param parentIdList
+     * @return
+     */
     @Transactional
     public List<ContentAndAttributes> getParentMenu(List<String> parentIdList) {
         QContent qContent = QContent.content;
@@ -118,16 +136,19 @@ public class ContentAndAttributesDao {
                 .innerJoin(qContentAttrTitle).on(qContentAttrTitle.contentId.eq(qContentAssoc.contentIdTo).and(qContentAttrTitle.attrName.eq("title")))
                 .where(builder
                         .and(qContentAssoc.contentAssocTypeId.eq("TREE_CHILD")))
-                // .orderBy(qContentAssoc.sequenceNum.asc());
                 .orderBy(qContent.contentId.asc());
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
         List<ContentAndAttributes> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContent.contentId).list(contentAndAttributesExQBean));
-
-        return ret; // TODO
+        LOG.info("size = {}", ret.size());
+        return ret;
     }
 
+    /**
+     * Return only Folder Menu
+     * @return
+     */
     @Transactional
     public List<ContentAndAttributes> getFolderMenu() {
         QContent qContent = QContent.content;
@@ -151,13 +172,12 @@ public class ContentAndAttributesDao {
                     .and(queryFactory
                             .from(qContentAttrLink)
                             .where(qContentAttrLink.attrName.eq("link"), qContentAttrLink.contentId.eq(qContentAssoc.contentIdTo)).notExists()))
-                // .orderBy(qContentAssoc.sequenceNum.asc());
-                .orderBy(qContent.contentId.asc());
+                .orderBy(qContentAssoc.sequenceNum.asc());
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
         List<ContentAndAttributes> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContent.contentId).list(contentAndAttributesExQBean));
-        LOG.info("ret.size() ", ret.size());
-        return ret; // TODO
+        LOG.info("size = {}", ret.size());
+        return ret;
     }
 }

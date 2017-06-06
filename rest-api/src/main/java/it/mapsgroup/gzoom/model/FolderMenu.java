@@ -1,6 +1,7 @@
 package it.mapsgroup.gzoom.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class FolderMenu {
@@ -60,8 +61,25 @@ public class FolderMenu {
         this.children = children;
     }
     
-    public void addChild(FolderMenu child) {
-        children.add(child);
+    /**
+     * Add child if it isn't in the list
+     * @param child
+     * @param id
+     */
+    public void addChild(FolderMenu child, String id) {
+        boolean addChild = true; // whether add child
+        if (!children.isEmpty()) {
+            Iterator<FolderMenu> c = children.iterator();
+            while(c.hasNext()) {
+                FolderMenu item = c.next();
+                if (item.getId().equals(id)) {
+                    addChild = false;
+                    break;
+                }
+            }
+        }
+        if (addChild) {
+            children.add(child);
+        }
     }
-
 }

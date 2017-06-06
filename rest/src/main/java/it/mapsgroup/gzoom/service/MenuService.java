@@ -10,9 +10,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.mapsgroup.gzoom.model.*;
+import it.mapsgroup.gzoom.model.FolderMenu;
+import it.mapsgroup.gzoom.model.LeafMenu;
+import it.mapsgroup.gzoom.model.Permissions;
 import it.mapsgroup.gzoom.querydsl.dao.ContentAndAttributesDao;
-import it.mapsgroup.gzoom.querydsl.dao.PermissionDao;
 import it.mapsgroup.gzoom.querydsl.dto.ContentAndAttributes;
 
 /**
@@ -22,14 +23,14 @@ import it.mapsgroup.gzoom.querydsl.dto.ContentAndAttributes;
 @Service
 public class MenuService {
 
+    private static final String ROOT_MENU_ID = "GP_MENU";
+    
     private final ContentAndAttributesDao contentAndAttributeDao;
-    private final PermissionDao permissionDao;
     private final ProfileService profileService;
     
     @Autowired
-    public MenuService(ContentAndAttributesDao contentAndAttributeDao, PermissionDao permissionDao, ProfileService profileService) {
+    public MenuService(ContentAndAttributesDao contentAndAttributeDao, ProfileService profileService) {
         this.contentAndAttributeDao = contentAndAttributeDao;
-        this.permissionDao = permissionDao;
         this.profileService = profileService;
     }
 
@@ -41,38 +42,21 @@ public class MenuService {
         List<ContentAndAttributes> links = contentAndAttributeDao.getValidMenu(keys, principal().getUserLoginId());
         List<ContentAndAttributes> folders = contentAndAttributeDao.getFolderMenu();
         FolderMenu root = new FolderMenu();
-        root.setId("GP_MENU");
+        root.setId(ROOT_MENU_ID);
         
-        cercoFiglioDi(root, folders, links);
-        removeEmptyFolder(root);
+        createMenu(root, folders, links);
+        removeEmptyMenu(root);
         
         return root;
     }
     
-    private boolean removeEmptyFolder(FolderMenu parent) {
-        List<FolderMenu> children = parent.getChildren();
-        boolean found = false;
-        for (int i = 0; i < children.size(); i++ ) {
-            FolderMenu folder = (FolderMenu) children.get(i);
-            removeEmptyFolder(folder);
-            if (!(folder instanceof LeafMenu) && folder.getChildren().isEmpty()) {
-                children.remove(i);
-            }
-        }
-        
-        return found;
-    }
-
-    private void cercoFiglioDi(FolderMenu parent, List<ContentAndAttributes> folders, List<ContentAndAttributes> links) {
+    private void createMenu(FolderMenu parent, List<ContentAndAttributes> folders, List<ContentAndAttributes> links) {
         String id = parent.getId();
-        // try children
-        boolean foundChild = false; // found almost 1 child
-        
+        // first try link
         Iterator<ContentAndAttributes> l = links.iterator();
         while(l.hasNext()) {
             ContentAndAttributes link = l.next();
             if (id.equals(link.getParent().getContentId())) {
-                boolean addChild = true; // child to add
                 LeafMenu leaf = new LeafMenu();
                 leaf.setId(link.getContentId());
                 leaf.setLabel(link.getTitle().getAttrValue()); // TODO recuperare dal file
@@ -80,53 +64,36 @@ public class MenuService {
                     leaf.setClasses(link.getClasses().getAttrValue()); // TODO array o string?
                 }
                 leaf.setParams(null);
-                List<FolderMenu> children = parent.getChildren();
-                if (!children.isEmpty()) {
-                    Iterator<FolderMenu> p = children.iterator();
-                    while(p.hasNext()) {
-                        FolderMenu pluto = p.next();
-                        if (pluto.getId().equals(link.getContentId())) {
-                            addChild = false;
-                            foundChild = true;
-                            break;
-                        }
-                    }
-                }
-                if (addChild) {
-                    parent.addChild(leaf);
-                    foundChild = true;
-                }
+                
+                parent.addChild(leaf, link.getContentId());
             }
         }
         
+        // after try folder
         Iterator<ContentAndAttributes> iter = folders.iterator();
         while(iter.hasNext()) {
             ContentAndAttributes item = iter.next();
             if (id.equals(item.getParent().getContentId()) ) {
-                boolean addFolder = true; // child to add
                 FolderMenu folder = new FolderMenu();
                 folder.setId(item.getContentId());
                 folder.setLabel(item.getTitle().getAttrValue()); // TODO recuperare dal file
                 if (item.getClasses() != null) {
                     folder.setClasses(item.getClasses().getAttrValue()); // TODO array o string?
                 }
-                List<FolderMenu> children = parent.getChildren();
-                if (!children.isEmpty()) {
-                    Iterator<FolderMenu> p = children.iterator();
-                    while(p.hasNext()) {
-                        FolderMenu pluto = p.next();
-                        if (pluto.getId().equals(item.getContentId())) {
-                            addFolder = false;
-                            foundChild = true;
-                            break;
-                        }
-                    }
-                }
-                if(addFolder) {
-                    parent.addChild(folder);
-                    foundChild = true;
-                }
-                cercoFiglioDi(folder, folders, links);
+                parent.addChild(folder, item.getContentId());
+                
+                createMenu(folder, folders, links);
+            }
+        }
+    }
+    
+    private void removeEmptyMenu(FolderMenu parent) {
+        List<FolderMenu> children = parent.getChildren();
+        for (int i = 0; i < children.size(); i++ ) {
+            FolderMenu folder = (FolderMenu) children.get(i);
+            removeEmptyMenu(folder);
+            if (!(folder instanceof LeafMenu) && folder.getChildren().isEmpty()) {
+                children.remove(i);
             }
         }
     }
