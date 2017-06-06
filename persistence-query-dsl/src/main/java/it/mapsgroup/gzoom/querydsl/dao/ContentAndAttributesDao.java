@@ -57,11 +57,16 @@ public class ContentAndAttributesDao {
         QContentAssoc qContentAssoc = QContentAssoc.contentAssoc;
         QContentAttribute qContentAttrTitle = new QContentAttribute("tit");
         QContentAttribute qContentAttrLink = new QContentAttribute("lin");
+        QContentAttribute qContentAttrClasses = new QContentAttribute("cla");
         QSecurityGroupContent qsgp = QSecurityGroupContent.securityGroupContent;
         QUserLoginSecurityGroup qulsg = QUserLoginSecurityGroup.userLoginSecurityGroup;
 
         QBean<ContentAndAttributes> contentAndAttributesExQBean = bean(ContentAndAttributes.class,
-                merge(qContent.all(), bean(ContentAttribute.class, qContentAttrTitle.all()).as("title"), bean(ContentAttribute.class, qContentAttrLink.all()).as("link"), bean(ContentAssoc.class, qContentAssoc.all()).as("parent")));
+                merge(qContent.all(), 
+                        bean(ContentAttribute.class, qContentAttrTitle.all()).as("title"), 
+                        bean(ContentAttribute.class, qContentAttrLink.all()).as("link"),
+                        bean(ContentAttribute.class, qContentAttrClasses.all()).as("classes"),
+                        bean(ContentAssoc.class, qContentAssoc.all()).as("parent")));
 
         BooleanBuilder builder = new BooleanBuilder();
         for (String key : keys) {
@@ -76,6 +81,7 @@ public class ContentAndAttributesDao {
                 .innerJoin(qContent._contentasscTo, qContentAssoc)
                 .innerJoin(qContentAttrTitle).on(qContentAttrTitle.contentId.eq(qContentAssoc.contentIdTo).and(qContentAttrTitle.attrName.eq("title")))
                 .innerJoin(qContentAttrLink).on(qContentAttrLink.contentId.eq(qContentAssoc.contentIdTo).and(qContentAttrLink.attrName.eq("link")))
+                .leftJoin(qContentAttrClasses).on(qContentAttrClasses.contentId.eq(qContentAssoc.contentIdTo).and(qContentAttrClasses.attrName.eq("classes")))
                 .where(builder
                         .and(qContentAssoc.contentAssocTypeId.eq("TREE_CHILD"))
                         .and(queryFactory
@@ -128,14 +134,19 @@ public class ContentAndAttributesDao {
         QContentAssoc qContentAssoc = QContentAssoc.contentAssoc;
         QContentAttribute qContentAttrTitle = new QContentAttribute("tit");
         QContentAttribute qContentAttrLink = new QContentAttribute("lin");
-
+        QContentAttribute qContentAttrClasses = new QContentAttribute("cla");
+        
         QBean<ContentAndAttributes> contentAndAttributesExQBean = bean(ContentAndAttributes.class,
-                merge(qContent.all(), bean(ContentAttribute.class, qContentAttrTitle.all()).as("title"), bean(ContentAssoc.class, qContentAssoc.all()).as("parent")));
+                merge(qContent.all(), 
+                        bean(ContentAttribute.class, qContentAttrTitle.all()).as("title"), 
+                        bean(ContentAttribute.class, qContentAttrClasses.all()).as("classes"),
+                        bean(ContentAssoc.class, qContentAssoc.all()).as("parent")));
 
         SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qContent, qContentAttrTitle)
                 .from(qContent)
                 .innerJoin(qContent._contentasscTo, qContentAssoc)
                 .innerJoin(qContentAttrTitle).on(qContentAttrTitle.contentId.eq(qContentAssoc.contentIdTo).and(qContentAttrTitle.attrName.eq("title")))
+                .leftJoin(qContentAttrClasses).on(qContentAttrClasses.contentId.eq(qContentAssoc.contentIdTo).and(qContentAttrClasses.attrName.eq("classes")))
                 .where(qContentAssoc.contentAssocTypeId.eq("TREE_CHILD")
                     .and(queryFactory
                             .from(qContentAttrLink)

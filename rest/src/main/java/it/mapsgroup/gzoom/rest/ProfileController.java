@@ -42,7 +42,7 @@ public class ProfileController {
     
     @RequestMapping(value = "/account/permissions", method = RequestMethod.GET)
     @ResponseBody
-    public Permissions getUserPermission(HttpServletRequest req) {
+    public Permissions getUserPermission() {
         return Exec.exec("user-permission", () -> profileService.getUserPermission());
     }
 }

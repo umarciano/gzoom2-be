@@ -1,39 +1,31 @@
 package it.mapsgroup.gzoom.querydsl.generator;
 
-import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.Tuple;
-import com.querydsl.core.group.GroupBy;
-import com.querydsl.core.types.QBean;
-import com.querydsl.sql.*;
-import it.mapsgroup.gzoom.querydsl.dao.AbstractDaoTest;
-import it.mapsgroup.gzoom.querydsl.dto.*;
+import static com.querydsl.core.types.Projections.bean;
+import static it.mapsgroup.gzoom.querydsl.QBeanUtils.merge;
+import static org.slf4j.LoggerFactory.getLogger;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.sql.DataSource;
+
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Predicate;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import javax.sql.DataSource;
-
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionDefinition;
-import org.springframework.transaction.support.TransactionTemplate;
-
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.Tuple;
 import com.querydsl.core.group.GroupBy;
 import com.querydsl.core.types.QBean;
+import com.querydsl.sql.SQLBindings;
+import com.querydsl.sql.SQLQuery;
 import com.querydsl.sql.SQLQueryFactory;
 
-import static com.querydsl.core.types.Projections.bean;
-import static it.mapsgroup.gzoom.querydsl.QBeanUtils.merge;
-import static org.slf4j.LoggerFactory.getLogger;
+import it.mapsgroup.gzoom.querydsl.dao.AbstractDaoTest;
+import it.mapsgroup.gzoom.querydsl.dto.*;
 
 /**
  * @author Andrea Fossi.
@@ -98,6 +90,7 @@ public class ContentAndAttributesTest extends AbstractDaoTest {
         QContentAssoc qContentAssoc = QContentAssoc.contentAssoc;
         QContentAttribute qContentAttrTitle = new QContentAttribute("tit");
         QContentAttribute qContentAttrLink = new QContentAttribute("lin");
+        QContentAttribute qContentAttrClasses = new QContentAttribute("cla");
         QSecurityGroupContent qsgp = QSecurityGroupContent.securityGroupContent;
         QUserLoginSecurityGroup qulsg = QUserLoginSecurityGroup.userLoginSecurityGroup;
         
@@ -105,7 +98,8 @@ public class ContentAndAttributesTest extends AbstractDaoTest {
                 bean(ContentAndAttributes.class,
                 merge(qContent.all(),
                         bean(ContentAttribute.class, qContentAttrTitle.all()).as("title"),
-                        bean(ContentAttribute.class, qContentAttrLink.all()).as("link")));
+                        bean(ContentAttribute.class, qContentAttrLink.all()).as("link"),
+                        bean(ContentAttribute.class, qContentAttrClasses.all()).as("classes")));
         
         BooleanBuilder builder = new BooleanBuilder();
         for (String key : keys) {

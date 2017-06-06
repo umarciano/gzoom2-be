@@ -7,7 +7,9 @@ package it.mapsgroup.gzoom.querydsl.dto;
 public class ContentAndAttributes extends Content {
     private ContentAttribute link;
     private ContentAttribute title;
+    private ContentAttribute classes;
     private ContentAssoc parent;
+    
     /**
      * @return the link
      */
@@ -32,18 +34,16 @@ public class ContentAndAttributes extends Content {
     public void setTitle(ContentAttribute title) {
         this.title = title;
     }
-    /**
-     * @return the parent
-     */
     public ContentAssoc getParent() {
         return parent;
     }
-    /**
-     * @param parent the parent to set
-     */
     public void setParent(ContentAssoc parent) {
         this.parent = parent;
     }
-    
-   
+    public ContentAttribute getClasses() {
+        return classes;
+    }
+    public void setClasses(ContentAttribute classes) {
+        this.classes = classes;
+    }
 }
