@@ -1,12 +1,19 @@
 package it.mapsgroup.gzoom.querydsl.dao;
 
-import it.mapsgroup.gzoom.persistence.common.CustomTransactionStatus;
-import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
+
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
-import java.time.LocalDateTime;
+import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.DateTimePath;
+
+import it.mapsgroup.gzoom.persistence.common.CustomTransactionStatus;
+import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 
 /**
  * @author Andrea Fossi.
@@ -41,4 +48,13 @@ public abstract class AbstractDao {
         record.setLastUpdatedStamp(LocalDateTime.now());
         record.setLastUpdatedTxStamp(getTxTimestamp());
     }
+    
+    public Predicate filterByDate(DateTimePath<LocalDateTime> fromDate, DateTimePath<LocalDateTime> thruDate) {
+        Calendar calendar = Calendar.getInstance();
+        Date now = calendar.getTime();
+        Timestamp currentTimestamp = new Timestamp(now.getTime());
+        return fromDate.loe(currentTimestamp.toLocalDateTime()).and(thruDate.isNull().or(thruDate.goe(currentTimestamp.toLocalDateTime())));
+    }
+
+    
 }

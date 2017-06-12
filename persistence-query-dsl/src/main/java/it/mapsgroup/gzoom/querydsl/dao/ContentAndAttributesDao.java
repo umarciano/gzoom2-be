@@ -21,7 +21,7 @@ import com.querydsl.sql.SQLQueryFactory;
 import it.mapsgroup.gzoom.querydsl.dto.*;
 
 @Service
-public class ContentAndAttributesDao {
+public class ContentAndAttributesDao extends AbstractDao {
     private static final Logger LOG = getLogger(ContentAndAttributesDao.class);
 
     private final SQLQueryFactory queryFactory;
@@ -85,7 +85,10 @@ public class ContentAndAttributesDao {
             // Specific mapping for COMMONEXT / COMMONDATAEXT
             if ("COMMONEXT".equals(key)) {
                 key = "COMMONDATAEXT";
+            } else if ("BSCPERF".equals(key)) {
+                key = "STRATPERF";
             }
+            
             builder.or(qContentAttrLink.attrValue.like("/" + key + "%"));
         }
 
@@ -96,6 +99,7 @@ public class ContentAndAttributesDao {
                 .innerJoin(qContentAttrLink).on(qContentAttrLink.contentId.eq(qContentAssoc.contentIdTo).and(qContentAttrLink.attrName.eq("link")))
                 .leftJoin(qContentAttrClasses).on(qContentAttrClasses.contentId.eq(qContentAssoc.contentIdTo).and(qContentAttrClasses.attrName.eq("classes")))
                 .where(builder
+                        .and(filterByDate(qContentAssoc.fromDate, qContentAssoc.thruDate))
                         .and(qContentAssoc.contentAssocTypeId.eq("TREE_CHILD"))
                         .and(queryFactory
                                 .from(qulsg)
@@ -169,7 +173,8 @@ public class ContentAndAttributesDao {
                 .innerJoin(qContentAttrTitle).on(qContentAttrTitle.contentId.eq(qContentAssoc.contentIdTo).and(qContentAttrTitle.attrName.eq("title")))
                 .leftJoin(qContentAttrClasses).on(qContentAttrClasses.contentId.eq(qContentAssoc.contentIdTo).and(qContentAttrClasses.attrName.eq("classes")))
                 .where(qContentAssoc.contentAssocTypeId.eq("TREE_CHILD")
-                    .and(queryFactory
+                        .and(filterByDate(qContentAssoc.fromDate, qContentAssoc.thruDate))
+                        .and(queryFactory
                             .from(qContentAttrLink)
                             .where(qContentAttrLink.attrName.eq("link"), qContentAttrLink.contentId.eq(qContentAssoc.contentIdTo)).notExists()))
                 .orderBy(qContentAssoc.sequenceNum.asc());
