@@ -7,7 +7,7 @@ package it.mapsgroup.gzoom.querydsl.dto;
 public class UserLogin extends UserLoginPersistent {
     private Party party;
     private Person person;
-    private String sessionId;
+    private String externalLoginKey;
 
     public String getUsername() {
         return this.getUserLoginId();
@@ -29,11 +29,11 @@ public class UserLogin extends UserLoginPersistent {
         this.person = person;
     }
 
-    public String getSessionId() {
-        return sessionId;
+    public String getExternalLoginKey() {
+        return externalLoginKey;
     }
 
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
+    public void setExternalLoginKey(String externalLoginKey) {
+        this.externalLoginKey = externalLoginKey;
     }
 }
