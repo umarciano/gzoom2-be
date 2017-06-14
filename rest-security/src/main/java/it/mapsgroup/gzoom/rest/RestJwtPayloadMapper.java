@@ -24,6 +24,7 @@ public class RestJwtPayloadMapper implements JwtPayloadMapper {
     private static final String PAYLOAD_ACL_PERMISSIONS = "aclPermissions";
     private static final String PAYLOAD_ACTIVE_NODE_ID = "activeNodeId";
     private static final String PAYLOAD_SESSION_ID = "sessionId";
+    private static final String PAYLOAD_EXTERNAL_LOGIN_KEY = "externalLoginKey";
 
     @Override
     public Map<String, Object> map(UserLogin user) {
@@ -38,7 +39,7 @@ public class RestJwtPayloadMapper implements JwtPayloadMapper {
         //payload.put(PAYLOAD_NODES, mapNodes(user.getNodes()));
         //payload.put(PAYLOAD_ACL_PERMISSIONS, PermissionMapper.mapPermissions(user.getAclPermissions()));
         //payload.put(PAYLOAD_ACTIVE_NODE_ID, mapNodeId(user));
-        payload.put(PAYLOAD_SESSION_ID, user.getSessionId());
+        payload.put(PAYLOAD_EXTERNAL_LOGIN_KEY, user.getExternalLoginKey());
         return payload;
     }
 

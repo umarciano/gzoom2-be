@@ -44,6 +44,8 @@ public class QSecurityGroup extends com.querydsl.sql.RelationalPathBase<Security
 
     public final com.querydsl.sql.PrimaryKey<SecurityGroup> primary = createPrimaryKey(groupId);
 
+    public final com.querydsl.sql.ForeignKey<SecurityGroupContent> _secgrpCntGrp = createInvForeignKey(groupId, "GROUP_ID");
+
     public final com.querydsl.sql.ForeignKey<SecurityGroupPermission> _secGrpPermGrp = createInvForeignKey(groupId, "GROUP_ID");
 
     public final com.querydsl.sql.ForeignKey<UserLoginSecurityGroup> _userSecgrpGrp = createInvForeignKey(groupId, "GROUP_ID");

@@ -71,7 +71,7 @@ public class JwtOfBizLoginAuthenticationProvider implements AuthenticationProvid
                 throw new BadCredentialsException(Messages.INVALID_USERNAME_OR_PASSWORD);
 
             // password matches
-            profile.setSessionId(response.getExternalLoginKey());
+            profile.setExternalLoginKey(response.getExternalLoginKey());
             String token = jwtService.generate(profile);
             permitsStorage.save(token, profile.getUsername());
             return new JwtAuthentication(token, profile);
