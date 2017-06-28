@@ -5,10 +5,10 @@ import com.querydsl.sql.Column;
 import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 
 /**
- * SecurityPermission is a Querydsl bean type
+ * UomType is a Querydsl bean type
  */
 @Generated("com.querydsl.codegen.BeanSerializer")
-public class SecurityPermission implements AbstractIdentity {
+public class UomType implements AbstractIdentity {
 
     @Column("CREATED_BY_USER_LOGIN")
     private String createdByUserLogin;
@@ -22,11 +22,11 @@ public class SecurityPermission implements AbstractIdentity {
     @Column("DESCRIPTION")
     private String description;
 
-    @Column("DYNAMIC_ACCESS")
-    private String dynamicAccess;
+    @Column("HAS_TABLE")
+    private Boolean hasTable;
 
-    @Column("ENABLED")
-    private Boolean enabled;
+    @Column("IS_RESERVED")
+    private Boolean isReserved;
 
     @Column("LAST_MODIFIED_BY_USER_LOGIN")
     private String lastModifiedByUserLogin;
@@ -37,8 +37,11 @@ public class SecurityPermission implements AbstractIdentity {
     @Column("LAST_UPDATED_TX_STAMP")
     private java.time.LocalDateTime lastUpdatedTxStamp;
 
-    @Column("PERMISSION_ID")
-    private String permissionId;
+    @Column("PARENT_TYPE_ID")
+    private String parentTypeId;
+
+    @Column("UOM_TYPE_ID")
+    private String uomTypeId;
 
     public String getCreatedByUserLogin() {
         return createdByUserLogin;
@@ -72,20 +75,20 @@ public class SecurityPermission implements AbstractIdentity {
         this.description = description;
     }
 
-    public String getDynamicAccess() {
-        return dynamicAccess;
+    public Boolean getHasTable() {
+        return hasTable;
     }
 
-    public void setDynamicAccess(String dynamicAccess) {
-        this.dynamicAccess = dynamicAccess;
+    public void setHasTable(Boolean hasTable) {
+        this.hasTable = hasTable;
     }
 
-    public Boolean getEnabled() {
-        return enabled;
+    public Boolean getIsReserved() {
+        return isReserved;
     }
 
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
+    public void setIsReserved(Boolean isReserved) {
+        this.isReserved = isReserved;
     }
 
     public String getLastModifiedByUserLogin() {
@@ -112,12 +115,20 @@ public class SecurityPermission implements AbstractIdentity {
         this.lastUpdatedTxStamp = lastUpdatedTxStamp;
     }
 
-    public String getPermissionId() {
-        return permissionId;
+    public String getParentTypeId() {
+        return parentTypeId;
     }
 
-    public void setPermissionId(String permissionId) {
-        this.permissionId = permissionId;
+    public void setParentTypeId(String parentTypeId) {
+        this.parentTypeId = parentTypeId;
+    }
+
+    public String getUomTypeId() {
+        return uomTypeId;
+    }
+
+    public void setUomTypeId(String uomTypeId) {
+        this.uomTypeId = uomTypeId;
     }
 
 }

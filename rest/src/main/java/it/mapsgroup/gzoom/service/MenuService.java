@@ -1,12 +1,15 @@
 package it.mapsgroup.gzoom.service;
 
 import static it.mapsgroup.gzoom.security.Principals.principal;
+import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +25,7 @@ import it.mapsgroup.gzoom.querydsl.dto.ContentAndAttributes;
  */
 @Service
 public class MenuService {
+    private static final Logger LOG = getLogger(MenuService.class);
     private static final String ROOT_MENU_ID = "GP_MENU";
     
     private final ContentAndAttributesDao contentAndAttributeDao;
@@ -91,9 +95,13 @@ public class MenuService {
         for (int i = 0; i < children.size(); i++ ) {
             FolderMenu folder = (FolderMenu) children.get(i);
             removeEmptyMenu(folder);
-            if (!(folder instanceof LeafMenu) && folder.getChildren().isEmpty()) {
-                children.remove(i);
+            if (folder.getChildren().isEmpty()) {
+                if (!(folder instanceof LeafMenu)) {
+                    folder.setToRemove(true);
+                }
             }
         }
+        parent.setChildren(children.stream().filter(node -> !node.isToRemove()).collect(Collectors.toList()));
     }
+    
 }

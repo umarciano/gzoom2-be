@@ -31,7 +31,7 @@ public class PermissionsTest extends AbstractDaoTest{
 
     @Test
     @Transactional
-    public void name() throws Exception {
+    public void select() throws Exception {
         QSecurityGroupPermission qsgp = QSecurityGroupPermission.securityGroupPermission;
 
         List<SecurityGroupPermission> ret = queryFactory.select(qsgp)

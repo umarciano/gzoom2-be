@@ -7,6 +7,7 @@ import it.mapsgroup.gzoom.querydsl.dto.QParty;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -26,11 +27,13 @@ public class PartyDao extends AbstractDao {
         this.queryFactory = queryFactory;
     }
 
+    @Transactional
     public boolean create(Party record) {
         QParty party = QParty.party;
         String id = sequenceGenerator.getNextSeqId("Party");
         LOG.debug("PartyId[{}]", id);
         record.setPartyId(id);
+        setCreatedTimestamp(record);
         long i = queryFactory.insert(party).populate(record).execute();
         LOG.debug("created records: {}", i);
 
@@ -43,6 +46,7 @@ public class PartyDao extends AbstractDao {
      * @param record
      * @return
      */
+    @Transactional
     public boolean update(Party record) {
         QParty party = QParty.party;
         record.setDescription("Primo Party " + record.getPartyId());

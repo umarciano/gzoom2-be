@@ -52,6 +52,8 @@ public class QContent extends com.querydsl.sql.RelationalPathBase<Content> {
 
     public final StringPath description = createString("description");
 
+    public final StringPath descriptionLang = createString("descriptionLang");
+
     public final StringPath instanceOfContentId = createString("instanceOfContentId");
 
     public final StringPath lastModifiedByUserLogin = createString("lastModifiedByUserLogin");
@@ -78,13 +80,13 @@ public class QContent extends com.querydsl.sql.RelationalPathBase<Content> {
 
     public final com.querydsl.sql.PrimaryKey<Content> primary = createPrimaryKey(contentId);
 
-    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> contentCbUlgn = createForeignKey(createdByUserLogin, "USER_LOGIN_ID");
-
-    public final com.querydsl.sql.ForeignKey<Content> contentDcntnt = createForeignKey(decoratorContentId, "CONTENT_ID");
-
     public final com.querydsl.sql.ForeignKey<Content> contentIofcnt = createForeignKey(instanceOfContentId, "CONTENT_ID");
 
     public final com.querydsl.sql.ForeignKey<Content> contentPcntnt = createForeignKey(ownerContentId, "CONTENT_ID");
+
+    public final com.querydsl.sql.ForeignKey<Content> contentDcntnt = createForeignKey(decoratorContentId, "CONTENT_ID");
+
+    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> contentCbUlgn = createForeignKey(createdByUserLogin, "USER_LOGIN_ID");
 
     public final com.querydsl.sql.ForeignKey<UserLoginPersistent> contentLmbUlgn = createForeignKey(lastModifiedByUserLogin, "USER_LOGIN_ID");
 
@@ -142,6 +144,7 @@ public class QContent extends com.querydsl.sql.RelationalPathBase<Content> {
         addMetadata(dataSourceId, ColumnMetadata.named("DATA_SOURCE_ID").withIndex(8).ofType(Types.VARCHAR).withSize(20));
         addMetadata(decoratorContentId, ColumnMetadata.named("DECORATOR_CONTENT_ID").withIndex(4).ofType(Types.VARCHAR).withSize(20));
         addMetadata(description, ColumnMetadata.named("DESCRIPTION").withIndex(13).ofType(Types.VARCHAR).withSize(255));
+        addMetadata(descriptionLang, ColumnMetadata.named("DESCRIPTION_LANG").withIndex(27).ofType(Types.VARCHAR).withSize(255));
         addMetadata(instanceOfContentId, ColumnMetadata.named("INSTANCE_OF_CONTENT_ID").withIndex(5).ofType(Types.VARCHAR).withSize(20));
         addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(22).ofType(Types.VARCHAR).withSize(250));
         addMetadata(lastModifiedDate, ColumnMetadata.named("LAST_MODIFIED_DATE").withIndex(21).ofType(Types.TIMESTAMP).withSize(19));

@@ -52,6 +52,9 @@ public class Content implements AbstractIdentity {
     @Column("DESCRIPTION")
     private String description;
 
+    @Column("DESCRIPTION_LANG")
+    private String descriptionLang;
+
     @Column("INSTANCE_OF_CONTENT_ID")
     private String instanceOfContentId;
 
@@ -198,6 +201,14 @@ public class Content implements AbstractIdentity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getDescriptionLang() {
+        return descriptionLang;
+    }
+
+    public void setDescriptionLang(String descriptionLang) {
+        this.descriptionLang = descriptionLang;
     }
 
     public String getInstanceOfContentId() {

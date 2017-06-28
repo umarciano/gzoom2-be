@@ -31,21 +31,11 @@ import it.mapsgroup.gzoom.querydsl.dto.*;
  * @author Andrea Fossi.
  */
 
-public class ContentAndAttributesTest extends AbstractDaoTest {
-    private static final Logger LOG = getLogger(ContentAndAttributesTest.class);
-
-    @Autowired
-    @Deprecated
-    private DataSource mainDataSource;
+public class ContentAndAttributesIT extends AbstractDaoTest {
+    private static final Logger LOG = getLogger(ContentAndAttributesIT.class);
 
     @Autowired
     private SQLQueryFactory queryFactory;
-
-    @Autowired
-    TransactionTemplate transactionTemplate;
-
-    @Autowired
-    PlatformTransactionManager txManager;
 
     @Test
     @Transactional

@@ -5,10 +5,13 @@ import com.querydsl.sql.Column;
 import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 
 /**
- * SecurityPermission is a Querydsl bean type
+ * Uom is a Querydsl bean type
  */
 @Generated("com.querydsl.codegen.BeanSerializer")
-public class SecurityPermission implements AbstractIdentity {
+public class Uom implements AbstractIdentity {
+
+    @Column("ABBREVIATION")
+    private String abbreviation;
 
     @Column("CREATED_BY_USER_LOGIN")
     private String createdByUserLogin;
@@ -19,14 +22,11 @@ public class SecurityPermission implements AbstractIdentity {
     @Column("CREATED_TX_STAMP")
     private java.time.LocalDateTime createdTxStamp;
 
+    @Column("DECIMAL_SCALE")
+    private java.math.BigInteger decimalScale;
+
     @Column("DESCRIPTION")
     private String description;
-
-    @Column("DYNAMIC_ACCESS")
-    private String dynamicAccess;
-
-    @Column("ENABLED")
-    private Boolean enabled;
 
     @Column("LAST_MODIFIED_BY_USER_LOGIN")
     private String lastModifiedByUserLogin;
@@ -37,8 +37,25 @@ public class SecurityPermission implements AbstractIdentity {
     @Column("LAST_UPDATED_TX_STAMP")
     private java.time.LocalDateTime lastUpdatedTxStamp;
 
-    @Column("PERMISSION_ID")
-    private String permissionId;
+    @Column("MAX_VALUE")
+    private java.math.BigDecimal maxValue;
+
+    @Column("MIN_VALUE")
+    private java.math.BigDecimal minValue;
+
+    @Column("UOM_ID")
+    private String uomId;
+
+    @Column("UOM_TYPE_ID")
+    private String uomTypeId;
+
+    public String getAbbreviation() {
+        return abbreviation;
+    }
+
+    public void setAbbreviation(String abbreviation) {
+        this.abbreviation = abbreviation;
+    }
 
     public String getCreatedByUserLogin() {
         return createdByUserLogin;
@@ -64,28 +81,20 @@ public class SecurityPermission implements AbstractIdentity {
         this.createdTxStamp = createdTxStamp;
     }
 
+    public java.math.BigInteger getDecimalScale() {
+        return decimalScale;
+    }
+
+    public void setDecimalScale(java.math.BigInteger decimalScale) {
+        this.decimalScale = decimalScale;
+    }
+
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getDynamicAccess() {
-        return dynamicAccess;
-    }
-
-    public void setDynamicAccess(String dynamicAccess) {
-        this.dynamicAccess = dynamicAccess;
-    }
-
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
     }
 
     public String getLastModifiedByUserLogin() {
@@ -112,12 +121,36 @@ public class SecurityPermission implements AbstractIdentity {
         this.lastUpdatedTxStamp = lastUpdatedTxStamp;
     }
 
-    public String getPermissionId() {
-        return permissionId;
+    public java.math.BigDecimal getMaxValue() {
+        return maxValue;
     }
 
-    public void setPermissionId(String permissionId) {
-        this.permissionId = permissionId;
+    public void setMaxValue(java.math.BigDecimal maxValue) {
+        this.maxValue = maxValue;
+    }
+
+    public java.math.BigDecimal getMinValue() {
+        return minValue;
+    }
+
+    public void setMinValue(java.math.BigDecimal minValue) {
+        this.minValue = minValue;
+    }
+
+    public String getUomId() {
+        return uomId;
+    }
+
+    public void setUomId(String uomId) {
+        this.uomId = uomId;
+    }
+
+    public String getUomTypeId() {
+        return uomTypeId;
+    }
+
+    public void setUomTypeId(String uomTypeId) {
+        this.uomTypeId = uomTypeId;
     }
 
 }
