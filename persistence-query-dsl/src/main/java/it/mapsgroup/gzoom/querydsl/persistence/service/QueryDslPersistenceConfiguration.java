@@ -4,13 +4,9 @@ import com.querydsl.sql.SQLQueryFactory;
 import com.querydsl.sql.SQLTemplates;
 import com.querydsl.sql.spring.SpringConnectionProvider;
 import com.querydsl.sql.spring.SpringExceptionTranslator;
-import com.querydsl.sql.types.JSR310LocalDateTimeType;
-import com.querydsl.sql.types.JSR310LocalDateType;
+import com.querydsl.sql.types.LocalDateTimeType;
+import com.querydsl.sql.types.LocalDateType;
 import it.mapsgroup.gzoom.querydsl.BooleanCharacterType;
-import it.mapsgroup.gzoom.querydsl.LogListener;
-import net.sf.cglib.proxy.Enhancer;
-import net.sf.cglib.proxy.FixedValue;
-import net.sf.cglib.proxy.InvocationHandler;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,7 +20,6 @@ import org.springframework.util.StringUtils;
 import javax.inject.Provider;
 import javax.sql.DataSource;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.sql.Connection;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -60,7 +55,9 @@ public class QueryDslPersistenceConfiguration {
         com.querydsl.sql.Configuration configuration = new com.querydsl.sql.Configuration(templates);
         configuration.setExceptionTranslator(new SpringExceptionTranslator());
 
-        configuration.register(new JSR310LocalDateTimeType());
+        //configuration.register(new LocalDateTimeType());
+       // configuration.register(new LocalDateType());
+       configuration.register(new JSR310LocalDateTimeType());
         configuration.register(new JSR310LocalDateType());
         configuration.register(new BooleanCharacterType());
 

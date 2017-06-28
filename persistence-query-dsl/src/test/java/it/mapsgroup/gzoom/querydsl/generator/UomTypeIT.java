@@ -62,7 +62,7 @@ public class UomTypeIT extends AbstractDaoTest {
     @Test
     public void update() throws Exception {
         transactionTemplate.execute(txStatus -> {
-            setUpdateTimestamp(record);
+            //setUpdateTimestamp(record);
             
             QUomType uomType = QUomType.uomType;
             long i = queryFactory.update(uomType)
