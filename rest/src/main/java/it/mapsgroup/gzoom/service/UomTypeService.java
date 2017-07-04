@@ -1,6 +1,7 @@
 package it.mapsgroup.gzoom.service;
 
 import static org.slf4j.LoggerFactory.getLogger;
+import static it.mapsgroup.gzoom.security.Principals.principal;
 
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.mapsgroup.gzoom.model.Messages;
 import it.mapsgroup.gzoom.model.Result;
 import it.mapsgroup.gzoom.querydsl.dao.UomTypeDao;
 import it.mapsgroup.gzoom.querydsl.dto.UomType;
@@ -29,22 +31,37 @@ public class UomTypeService {
 
     public Result<UomType> getUomTypes() {
         List<UomType> list = uomTypeDao.getUomTypes();
-        return new Result<>(list, list.size()); // TODO gestire count con paginazione
+        return new Result<>(list, list.size());
     }
 
     public String createUomType(UomType req) {
-        uomTypeDao.create(req);
+        Validators.assertNotNull(req, Messages.UOM_TYPE_REQUIRED);
+        Validators.assertNotNull(req.getUomTypeId(), Messages.UOM_TYPE_ID_REQUIRED);
+        Validators.assertNotBlank(req.getUomTypeId(), Messages.UOM_TYPE_ID_REQUIRED);
+        Validators.assertNotNull(req.getDescription(), Messages.UOM_TYPE_DESCRIPTION_REQUIRED);
+        Validators.assertNotBlank(req.getDescription(), Messages.UOM_TYPE_DESCRIPTION_REQUIRED);
+        uomTypeDao.create(req, principal().getUserLoginId());
         return req.getUomTypeId();
     }
 
     public String updateUomType(String id, UomType req) {
-        uomTypeDao.update(req);
-        return id;
+        Validators.assertNotNull(req, Messages.UOM_TYPE_REQUIRED);
+        Validators.assertNotNull(req.getUomTypeId(), Messages.UOM_TYPE_ID_REQUIRED);
+        Validators.assertNotBlank(req.getUomTypeId(), Messages.UOM_TYPE_ID_REQUIRED);
+        Validators.assertNotNull(req.getDescription(), Messages.UOM_TYPE_DESCRIPTION_REQUIRED);
+        Validators.assertNotBlank(req.getDescription(), Messages.UOM_TYPE_DESCRIPTION_REQUIRED);
+        UomType record = uomTypeDao.getUomType(id);
+        Validators.assertNotNull(record, Messages.INVALID_UOM_TYPE);
+        uomTypeDao.update(id, req, principal().getUserLoginId());
+        return req.getUomTypeId();
     }
 
     public String deleteUomType(String id) {
+        Validators.assertNotNull(id, Messages.UOM_TYPE_ID_REQUIRED);
+        Validators.assertNotBlank(id, Messages.UOM_TYPE_ID_REQUIRED);
         UomType record = uomTypeDao.getUomType(id);
-        uomTypeDao.delete(record);
+        Validators.assertNotNull(record, Messages.INVALID_UOM_TYPE);
+        uomTypeDao.delete(id);
         return id;
     }
 }

@@ -18,6 +18,7 @@ import com.querydsl.sql.SQLBindings;
 import com.querydsl.sql.SQLQuery;
 import com.querydsl.sql.SQLQueryFactory;
 
+import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 import it.mapsgroup.gzoom.querydsl.dto.QUomType;
 import it.mapsgroup.gzoom.querydsl.dto.UomType;
 
@@ -99,37 +100,62 @@ public class UomTypeDao extends AbstractDao {
     }
 
     @Transactional
-    public boolean create(UomType record) {
+    public boolean create(UomType record, String userLoginId) {
         QUomType uomType = QUomType.uomType;
-        LOG.debug("UomType[{}]", record);
-        setCreatedTimestamp(record); // TODO timestamp 2 ore avanti
+        setCreatedTimestamp(record);
+        setCreatedByUserLogin(record, userLoginId);
         long i = queryFactory.insert(uomType).populate(record).execute();
-        LOG.debug("created records: {}", i);
+        LOG.info("created records: {}", i);
+
+        return i > 0;
+    }
+    
+
+    private void setCreatedByUserLogin(UomType record, String userLoginId) {
+        record.setCreatedByUserLogin(userLoginId);
+    }
+
+    private void setLastModifiedByUserLogin(UomType record, String userLoginId) {
+        record.setLastModifiedByUserLogin(userLoginId);
+    }
+
+    /**
+     * Update record with uomTypeId = id
+     * @param id
+     * @param record
+     * @param userLoginId
+     * @return
+     */
+    @Transactional
+    public boolean update(String id, UomType record, String userLoginId) {
+        QUomType uomType = QUomType.uomType;
+        setUpdateTimestamp(record);
+        setLastModifiedByUserLogin(record, userLoginId);
+        // Using bean population
+        long i = queryFactory.update(uomType)
+        .set(uomType.uomTypeId, record.getUomTypeId())
+        .where(uomType.uomTypeId.eq(id))
+        .populate(record)
+        .execute();
+        
+        LOG.info("updated records: {}", i);
 
         return i > 0;
     }
 
     /**
-     * TODO implement
-     *
-     * @param record
+     * Delete record with uomTypeId = id
+     * @param id
      * @return
      */
     @Transactional
-    public boolean update(UomType record) {
+    public boolean delete(String id) {
         QUomType uomType = QUomType.uomType;
-        setUpdateTimestamp(record);
-        long i = queryFactory.update(uomType).set(uomType.description, record.getDescription()).where(uomType.uomTypeId.eq(record.getUomTypeId())).execute();
-        LOG.debug("updated records: {}", i);
-
-        return i > 0;
-    }
-
-    @Transactional
-    public boolean delete(UomType record) {
-        QUomType uomType = QUomType.uomType;
-        long i = queryFactory.delete(uomType).where(uomType.uomTypeId.eq(record.getUomTypeId())).execute();
-        LOG.debug("deleted records: {}", i);
+        long i = queryFactory
+                .delete(uomType)
+                .where(uomType.uomTypeId.eq(id))
+                .execute();
+        LOG.info("deleted records: {}", i);
 
         return i > 0;
     }

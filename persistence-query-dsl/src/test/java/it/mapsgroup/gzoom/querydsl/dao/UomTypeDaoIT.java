@@ -1,20 +1,17 @@
 package it.mapsgroup.gzoom.querydsl.dao;
 
-import com.querydsl.sql.SQLQueryFactory;
-import it.mapsgroup.gzoom.persistence.common.SequenceGenerator;
-import it.mapsgroup.gzoom.querydsl.dao.AbstractDaoTest;
-import it.mapsgroup.gzoom.querydsl.dao.UomTypeDao;
-import it.mapsgroup.gzoom.querydsl.dto.UomType;
-import it.mapsgroup.gzoom.querydsl.dto.QUomType;
+import static org.slf4j.LoggerFactory.getLogger;
+
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import javax.sql.DataSource;
+import com.querydsl.sql.SQLQueryFactory;
 
-import static org.slf4j.LoggerFactory.getLogger;
+import it.mapsgroup.gzoom.querydsl.dto.QUomType;
+import it.mapsgroup.gzoom.querydsl.dto.UomType;
 
 public class UomTypeDaoIT extends AbstractDaoTest {
     private static final Logger LOG = getLogger(UomTypeDaoIT.class);
@@ -34,11 +31,11 @@ public class UomTypeDaoIT extends AbstractDaoTest {
     @Test
     public void daoInsert() throws Exception {
         transactionTemplate.execute(txStatus -> {
-
+            String userLoginId = "admin";
             UomType record = new UomType();
-            record.setUomTypeId("Uom_TYPE_1");
+            record.setUomTypeId("Uom_TYPE_2");
             record.setDescription("Primo UomType " + System.currentTimeMillis());
-            uomTypeDao.create(record);
+            uomTypeDao.create(record, userLoginId);
             LOG.debug("i" + record.getUomTypeId());
 
             return null;
@@ -48,14 +45,42 @@ public class UomTypeDaoIT extends AbstractDaoTest {
     @Test
     public void daoUpdate() throws Exception {
         transactionTemplate.execute(txStatus -> {
-
+            String userLoginId = "admin";
+            
             UomType record = new UomType();
             record.setUomTypeId("Uom_TYPE_1");
             record.setDescription("Update Primo UomType " + System.currentTimeMillis());
-            uomTypeDao.update(record);
+            uomTypeDao.update(record, userLoginId);
             LOG.debug("i" + record.getUomTypeId());
 
             return null;
+        });
+        
+        transactionTemplate.execute(txStatus -> {
+            UomType record = new UomType();
+        QUomType survey = QUomType.uomType;
+
+        queryFactory.update(survey)
+            .where(survey.uomTypeId.eq("Uom_TYPE_1"))
+            .set(survey.description, "S")
+            .execute();
+        return null;
+        });
+        
+        
+        transactionTemplate.execute(txStatus -> {
+            UomType record = new UomType();
+            QUomType survey = QUomType.uomType;
+        // Using bean population
+
+            record.setUomTypeId("Uom_TYPE_1");
+            record.setDescription("Update 2");
+        
+            queryFactory.update(survey)
+            .where(survey.uomTypeId.eq("Uom_TYPE_1"))
+            .populate(record)
+            .execute();
+        return null;
         });
     }
 }

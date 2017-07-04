@@ -23,7 +23,8 @@ public abstract class AbstractDao {
     public TransactionStatus getTxStatus() {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             return TransactionAspectSupport.currentTransactionStatus();
-        } else return null;
+        } else
+            return null;
     }
 
     public LocalDateTime getTxTimestamp() {
@@ -48,7 +49,7 @@ public abstract class AbstractDao {
         record.setLastUpdatedStamp(LocalDateTime.now());
         record.setLastUpdatedTxStamp(getTxTimestamp());
     }
-    
+
     public Predicate filterByDate(DateTimePath<LocalDateTime> fromDate, DateTimePath<LocalDateTime> thruDate) {
         Calendar calendar = Calendar.getInstance();
         Date now = calendar.getTime();
@@ -56,5 +57,4 @@ public abstract class AbstractDao {
         return fromDate.loe(currentTimestamp.toLocalDateTime()).and(thruDate.isNull().or(thruDate.goe(currentTimestamp.toLocalDateTime())));
     }
 
-    
 }

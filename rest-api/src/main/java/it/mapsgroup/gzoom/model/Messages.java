@@ -4,6 +4,11 @@ package it.mapsgroup.gzoom.model;
  * @author Fabio G. Strozzi
  */
 public class Messages {
+    public static final String INVALID_UOM_TYPE = "Invalid uom type";
+    public static final String UOM_TYPE_REQUIRED = "An uom type is required";
+    public static final String UOM_TYPE_ID_REQUIRED = "Uom type id is required";
+    public static final String UOM_TYPE_DESCRIPTION_REQUIRED = "Uom type description is required";
+    
     public static final String CANNOT_UPDATE_USER = "Cannot update user";
     public static final String INVALID_DATE = "Invalid date";
     public static final String INVALID_DATE_ORDER = "Start date is not before end date";
@@ -250,6 +255,5 @@ public class Messages {
     public static final String INVALID_EVENTS_LIST = "Events list is empty";
     public static final String INVALID_WORK_LOG = "Invalid work log";
     public static final String INVALID_REQUEST = "Invalid request";
-
 
 }
