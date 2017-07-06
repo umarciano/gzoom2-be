@@ -22,27 +22,27 @@ public class UomTypeController {
         this.uomTypeService = uomTypeService;
     }
 
-    @RequestMapping(value = "uom/types", method = RequestMethod.GET)
+    @RequestMapping(value = "uom/type", method = RequestMethod.GET)
     @ResponseBody
     public Result<UomType> getUomTypes() {
-        return Exec.exec("uom/types", () -> uomTypeService.getUomTypes());
+        return Exec.exec("uom/type get", () -> uomTypeService.getUomTypes());
     }
 
-    @RequestMapping(value = "uom/types", method = RequestMethod.POST)
+    @RequestMapping(value = "uom/type", method = RequestMethod.POST)
     @ResponseBody
     public String createUomType(@RequestBody UomType req) {
-        return Exec.exec("uom/types", () -> uomTypeService.createUomType(req));
+        return Exec.exec("uom/type post", () -> uomTypeService.createUomType(req));
     }
 
-    @RequestMapping(value = "uom/types/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "uom/type/{id}", method = RequestMethod.PUT)
     @ResponseBody
     public String updateUomType(@PathVariable(value = "id") String id, @RequestBody UomType req) {
-        return Exec.exec("uom/types", () -> uomTypeService.updateUomType(id, req));
+        return Exec.exec("uom/type put", () -> uomTypeService.updateUomType(id, req));
     }
 
-    @RequestMapping(value = "uom/types/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "uom/type/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public String deleteUomType(@PathVariable(value = "id") String id) {
-        return Exec.exec("uom/types", () -> uomTypeService.deleteUomType(id));
+        return Exec.exec("uom/type delete", () -> uomTypeService.deleteUomType(id));
     }
 }
