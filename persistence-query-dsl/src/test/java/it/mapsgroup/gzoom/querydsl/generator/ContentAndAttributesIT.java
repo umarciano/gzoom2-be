@@ -7,14 +7,10 @@ import static org.slf4j.LoggerFactory.getLogger;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionTemplate;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
@@ -24,14 +20,14 @@ import com.querydsl.sql.SQLBindings;
 import com.querydsl.sql.SQLQuery;
 import com.querydsl.sql.SQLQueryFactory;
 
-import it.mapsgroup.gzoom.querydsl.dao.AbstractDaoTest;
+import it.mapsgroup.gzoom.querydsl.dao.AbstractDaoIT;
 import it.mapsgroup.gzoom.querydsl.dto.*;
 
 /**
  * @author Andrea Fossi.
  */
 
-public class ContentAndAttributesIT extends AbstractDaoTest {
+public class ContentAndAttributesIT extends AbstractDaoIT {
     private static final Logger LOG = getLogger(ContentAndAttributesIT.class);
 
     @Autowired

@@ -39,13 +39,8 @@ public class ProfileService {
             String permissionId = r.getPermissionId();
             
             String[] permArray = permPattern.split(permissionId);
-            
-            for(int i = 0; i < permArray.length; i++) {
-                System.out.println("permission " + i + " : " + permArray[i]);
-            }
             permissions.addPermission(permArray[0], permArray[permArray.length-1]);
         });
-        System.out.println(permissions.getPermissions());
         return permissions;
     }
 }

@@ -5,7 +5,10 @@ import it.mapsgroup.gzoom.model.Permissions;
 import it.mapsgroup.gzoom.service.LocaleService;
 import it.mapsgroup.gzoom.service.ProfileService;
 import it.mapsgroup.gzoom.common.Exec;
+
+import org.apache.commons.lang3.LocaleUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+
+import static it.mapsgroup.gzoom.security.Principals.principal;
+
 import java.util.Locale;
 
 /**

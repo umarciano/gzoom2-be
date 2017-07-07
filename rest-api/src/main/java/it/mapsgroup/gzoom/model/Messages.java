@@ -9,6 +9,12 @@ public class Messages {
     public static final String UOM_TYPE_ID_REQUIRED = "Uom type id is required";
     public static final String UOM_TYPE_DESCRIPTION_REQUIRED = "Uom type description is required";
     
+    public static final String INVALID_UOM = "Invalid uom";
+    public static final String UOM_REQUIRED = "An uom is required";;
+    public static final String UOM_ID_REQUIRED = "Uom id is required";
+    public static final String UOM_DESCRIPTION_REQUIRED = "Uom type description is required";
+    public static final String UOM_ABBREVIATION_REQUIRED = "Uom type abbreviation is required";;
+    
     public static final String CANNOT_UPDATE_USER = "Cannot update user";
     public static final String INVALID_DATE = "Invalid date";
     public static final String INVALID_DATE_ORDER = "Start date is not before end date";

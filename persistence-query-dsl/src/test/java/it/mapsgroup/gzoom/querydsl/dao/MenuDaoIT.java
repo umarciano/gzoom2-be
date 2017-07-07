@@ -18,7 +18,7 @@ import it.mapsgroup.gzoom.querydsl.dto.SecurityPermission;
  * @author Andrea Fossi.
  */
 
-public class MenuDaoIT extends AbstractDaoTest {
+public class MenuDaoIT extends AbstractDaoIT {
     @Autowired
     PermissionDao permissionDao;
     @Autowired
@@ -27,34 +27,34 @@ public class MenuDaoIT extends AbstractDaoTest {
     @Test
     @Transactional
     public void findByContentId() throws Exception {
-        List<SecurityPermission> permissions2 = permissionDao.getPermission("admin");
-        assertNotNull(permissions2);
-        assertEquals(2, permissions2.size());
+        List<SecurityPermission> permissions = permissionDao.getPermission("admin");
+        assertNotNull(permissions);
+        assertEquals(6, permissions.size());
     }
-    
+
     @Test
     @Transactional
     public void findByUserLoginId() throws Exception {
         List<SecurityPermission> permissions = permissionDao.getPermission("admin");
         assertNotNull(permissions);
-        assertEquals(2, permissions.size());
-        
+        assertEquals(6, permissions.size());
+
         List<String> keys = new ArrayList<String>();
-        
+
         String permRegExp = "(((?i)(MGR|ROLE|ORG)?)_)";
         Pattern permPattern = Pattern.compile(permRegExp);
-        
+
         permissions.forEach(r -> {
             String permissionId = r.getPermissionId();
-            
+
             String[] permArray = permPattern.split(permissionId);
-            
-            for(int i = 0; i < permArray.length; i++) {
+
+            for (int i = 0; i < permArray.length; i++) {
                 System.out.println("permission " + i + " : " + permArray[i]);
             }
             keys.add(permArray[0]);
         });
-        
+
         List<ContentAndAttributes> menus = contentAndAttributesDao.getValidMenu(keys, "admin");
         menus.forEach(m -> System.out.println("menu = " + m.toString()));
     }

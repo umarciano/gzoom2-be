@@ -15,7 +15,7 @@ import it.mapsgroup.gzoom.querydsl.dto.SecurityPermission;
  * @author Andrea Fossi.
  */
 
-public class PermissionDaoIT extends AbstractDaoTest {
+public class PermissionDaoIT extends AbstractDaoIT {
     @Autowired
     PermissionDao permissionDao;
 

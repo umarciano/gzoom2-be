@@ -14,14 +14,14 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.QBean;
 import com.querydsl.sql.SQLQueryFactory;
 
-import it.mapsgroup.gzoom.querydsl.dao.AbstractDaoTest;
+import it.mapsgroup.gzoom.querydsl.dao.AbstractDaoIT;
 import it.mapsgroup.gzoom.querydsl.dto.QSecurityGroupPermission;
 import it.mapsgroup.gzoom.querydsl.dto.QUserLoginSecurityGroup;
 import it.mapsgroup.gzoom.querydsl.dto.SecurityGroupPermission;
 import it.mapsgroup.gzoom.querydsl.dto.SecurityPermission;
 
 
-public class PermissionsTest extends AbstractDaoTest{
+public class PermissionsTest extends AbstractDaoIT{
     private static final Logger LOG = getLogger(PermissionsTest.class);
 
 
