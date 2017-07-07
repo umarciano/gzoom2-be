@@ -13,17 +13,11 @@ import com.querydsl.sql.SQLQueryFactory;
 import it.mapsgroup.gzoom.querydsl.dto.QUomType;
 import it.mapsgroup.gzoom.querydsl.dto.UomType;
 
-public class UomTypeDaoIT extends AbstractDaoTest {
+public class UomTypeDaoIT extends AbstractDaoIT {
     private static final Logger LOG = getLogger(UomTypeDaoIT.class);
 
     @Autowired
-    private SQLQueryFactory queryFactory;
-
-    @Autowired
     TransactionTemplate transactionTemplate;
-
-    @Autowired
-    PlatformTransactionManager txManager;
 
     @Autowired
     UomTypeDao uomTypeDao;
@@ -33,10 +27,10 @@ public class UomTypeDaoIT extends AbstractDaoTest {
         transactionTemplate.execute(txStatus -> {
             String userLoginId = "admin";
             UomType record = new UomType();
-            record.setUomTypeId("Uom_TYPE_2");
+            record.setUomTypeId("Uom_TYPE_1");
             record.setDescription("Primo UomType " + System.currentTimeMillis());
             uomTypeDao.create(record, userLoginId);
-            LOG.debug("i" + record.getUomTypeId());
+            LOG.debug("uomTypeId " + record.getUomTypeId());
 
             return null;
         });
@@ -50,37 +44,19 @@ public class UomTypeDaoIT extends AbstractDaoTest {
             UomType record = new UomType();
             record.setUomTypeId("Uom_TYPE_1");
             record.setDescription("Update Primo UomType " + System.currentTimeMillis());
-            uomTypeDao.update(record, userLoginId);
-            LOG.debug("i" + record.getUomTypeId());
+            uomTypeDao.update("Uom_TYPE_1", record, userLoginId);
+            LOG.debug("uomTypeId " + record.getUomTypeId());
 
             return null;
         });
-        
+    }
+    
+    @Test
+    public void daoDelete() throws Exception {
         transactionTemplate.execute(txStatus -> {
-            UomType record = new UomType();
-        QUomType survey = QUomType.uomType;
-
-        queryFactory.update(survey)
-            .where(survey.uomTypeId.eq("Uom_TYPE_1"))
-            .set(survey.description, "S")
-            .execute();
-        return null;
-        });
-        
-        
-        transactionTemplate.execute(txStatus -> {
-            UomType record = new UomType();
-            QUomType survey = QUomType.uomType;
-        // Using bean population
-
-            record.setUomTypeId("Uom_TYPE_1");
-            record.setDescription("Update 2");
-        
-            queryFactory.update(survey)
-            .where(survey.uomTypeId.eq("Uom_TYPE_1"))
-            .populate(record)
-            .execute();
-        return null;
+            uomTypeDao.delete("Uom_TYPE_1");
+            
+            return null;
         });
     }
 }

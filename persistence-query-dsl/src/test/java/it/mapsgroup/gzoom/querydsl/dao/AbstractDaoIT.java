@@ -16,5 +16,5 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = {CommonPersistenceConfiguration.class, QueryDslPersistenceConfiguration.class})
 @ComponentScan("it.mapsgroup.gzoom.querydsl.dao")
 @TestPropertySource("/gzoom.properties")
-public abstract class AbstractDaoTest {
+public abstract class AbstractDaoIT {
 }

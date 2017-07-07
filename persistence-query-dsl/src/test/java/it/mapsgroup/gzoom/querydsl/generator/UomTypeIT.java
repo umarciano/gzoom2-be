@@ -4,8 +4,6 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import com.querydsl.core.group.GroupBy;
-import com.querydsl.sql.SQLExpressions;
 import com.querydsl.sql.SQLQueryFactory;
 
-import it.mapsgroup.gzoom.persistence.common.SequenceGenerator;
-import it.mapsgroup.gzoom.querydsl.dao.AbstractDaoTest;
-import it.mapsgroup.gzoom.querydsl.dto.*;
+import it.mapsgroup.gzoom.querydsl.dao.AbstractDaoIT;
+import it.mapsgroup.gzoom.querydsl.dto.QUomType;
+import it.mapsgroup.gzoom.querydsl.dto.UomType;
 
-public class UomTypeIT extends AbstractDaoTest {
+public class UomTypeIT extends AbstractDaoIT {
     private static final Logger LOG = getLogger(UomTypeIT.class);
 
     @Autowired
@@ -53,40 +50,58 @@ public class UomTypeIT extends AbstractDaoTest {
             record.setUomTypeId("PROVA_UOM_TYPE");
             record.setDescription("Primo UomType ");
             long i = queryFactory.insert(uomType).populate(record).execute();
-            LOG.debug("i" + i);
+            LOG.info("i " + i);
 
             return null;
         });
     }
-    
+
     @Test
     public void update() throws Exception {
         transactionTemplate.execute(txStatus -> {
-            //setUpdateTimestamp(record);
-            
+            // setUpdateTimestamp(record);
+
             QUomType uomType = QUomType.uomType;
-            long i = queryFactory.update(uomType)
-            .set(uomType.description, "Primo UomType 2 Updated")
-            .where(uomType.uomTypeId.eq("PROVA_UOM_TYPE"))
-            .execute();
+            long i = queryFactory.update(uomType).set(uomType.description, "Primo UomType 2 Updated").where(uomType.uomTypeId.eq("PROVA_UOM_TYPE")).execute();
+
+            LOG.info("i " + i);
+
+            return null;
+        });
+
+        transactionTemplate.execute(txStatus -> {
+            QUomType uomType = QUomType.uomType;
+
+            long i = queryFactory.update(uomType).where(uomType.uomTypeId.eq("Uom_TYPE_1")).set(uomType.description, "S").execute();
+            LOG.info("i " + i);
             
-            LOG.debug("i" + i);
+            return null;
+        });
+
+        transactionTemplate.execute(txStatus -> {
+            UomType record = new UomType();
+            QUomType survey = QUomType.uomType;
+            // Using bean population
+
+            record.setUomTypeId("Uom_TYPE_1");
+            record.setDescription("Update 2");
+
+            long i = queryFactory.update(survey).where(survey.uomTypeId.eq("Uom_TYPE_1")).populate(record).execute();
+            LOG.info("i " + i);
+            
+            return null;
+        });
+    }
+
+    @Test
+    public void delete() throws Exception {
+        transactionTemplate.execute(txStatus -> {
+            QUomType uomType = QUomType.uomType;
+            long i = queryFactory.delete(uomType).where(uomType.uomTypeId.eq("PROVA_UOM_TYPE")).execute();
+
+            LOG.info("i " + i);
 
             return null;
         });
     }
-    
-    /*@Test
-    public void delete() throws Exception {
-        transactionTemplate.execute(txStatus -> {
-            QUomType uomType = QUomType.uomType;
-            long i = queryFactory.delete(uomType)
-            .where(uomType.uomTypeId.eq("PROVA_UOM_TYPE"))
-            .execute();
-            
-            LOG.debug("i" + i);
-
-            return null;
-        });
-    }*/
 }

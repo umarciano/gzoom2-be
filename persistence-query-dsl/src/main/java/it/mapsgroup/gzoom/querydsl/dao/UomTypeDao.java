@@ -18,7 +18,6 @@ import com.querydsl.sql.SQLBindings;
 import com.querydsl.sql.SQLQuery;
 import com.querydsl.sql.SQLQueryFactory;
 
-import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 import it.mapsgroup.gzoom.querydsl.dto.QUomType;
 import it.mapsgroup.gzoom.querydsl.dto.UomType;
 
@@ -109,15 +108,6 @@ public class UomTypeDao extends AbstractDao {
 
         return i > 0;
     }
-    
-
-    private void setCreatedByUserLogin(UomType record, String userLoginId) {
-        record.setCreatedByUserLogin(userLoginId);
-    }
-
-    private void setLastModifiedByUserLogin(UomType record, String userLoginId) {
-        record.setLastModifiedByUserLogin(userLoginId);
-    }
 
     /**
      * Update record with uomTypeId = id
@@ -159,4 +149,13 @@ public class UomTypeDao extends AbstractDao {
 
         return i > 0;
     }
+
+    private void setCreatedByUserLogin(UomType record, String userLoginId) {
+        record.setCreatedByUserLogin(userLoginId);
+    }
+
+    private void setLastModifiedByUserLogin(UomType record, String userLoginId) {
+        record.setLastModifiedByUserLogin(userLoginId);
+    }
+
 }

@@ -36,9 +36,7 @@ public class UomTypeService {
 
     public String createUomType(UomType req) {
         Validators.assertNotNull(req, Messages.UOM_TYPE_REQUIRED);
-        Validators.assertNotNull(req.getUomTypeId(), Messages.UOM_TYPE_ID_REQUIRED);
         Validators.assertNotBlank(req.getUomTypeId(), Messages.UOM_TYPE_ID_REQUIRED);
-        Validators.assertNotNull(req.getDescription(), Messages.UOM_TYPE_DESCRIPTION_REQUIRED);
         Validators.assertNotBlank(req.getDescription(), Messages.UOM_TYPE_DESCRIPTION_REQUIRED);
         uomTypeDao.create(req, principal().getUserLoginId());
         return req.getUomTypeId();
@@ -46,9 +44,7 @@ public class UomTypeService {
 
     public String updateUomType(String id, UomType req) {
         Validators.assertNotNull(req, Messages.UOM_TYPE_REQUIRED);
-        Validators.assertNotNull(req.getUomTypeId(), Messages.UOM_TYPE_ID_REQUIRED);
         Validators.assertNotBlank(req.getUomTypeId(), Messages.UOM_TYPE_ID_REQUIRED);
-        Validators.assertNotNull(req.getDescription(), Messages.UOM_TYPE_DESCRIPTION_REQUIRED);
         Validators.assertNotBlank(req.getDescription(), Messages.UOM_TYPE_DESCRIPTION_REQUIRED);
         UomType record = uomTypeDao.getUomType(id);
         Validators.assertNotNull(record, Messages.INVALID_UOM_TYPE);
@@ -57,7 +53,6 @@ public class UomTypeService {
     }
 
     public String deleteUomType(String id) {
-        Validators.assertNotNull(id, Messages.UOM_TYPE_ID_REQUIRED);
         Validators.assertNotBlank(id, Messages.UOM_TYPE_ID_REQUIRED);
         UomType record = uomTypeDao.getUomType(id);
         Validators.assertNotNull(record, Messages.INVALID_UOM_TYPE);
