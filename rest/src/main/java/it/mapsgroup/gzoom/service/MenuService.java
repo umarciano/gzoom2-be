@@ -27,6 +27,7 @@ import it.mapsgroup.gzoom.querydsl.dto.ContentAndAttributes;
 public class MenuService {
     private static final Logger LOG = getLogger(MenuService.class);
     private static final String ROOT_MENU_ID = "GP_MENU";
+    private static final String MENU_UI_LABELS = "MenuUiLabels";
     
     private final ContentAndAttributesDao contentAndAttributeDao;
     private final ProfileService profileService;
@@ -62,7 +63,8 @@ public class MenuService {
             if (id.equals(link.getParent().getContentId())) {
                 LeafMenu leaf = new LeafMenu();
                 leaf.setId(link.getContentId());
-                leaf.setLabel(link.getTitle().getAttrValue()); // TODO recuperare dal file
+                String label = link.getTitle().getAttrValue();
+                leaf.setLabel(label.substring(MENU_UI_LABELS.length() + 1));
                 if (link.getClasses() != null) {
                     leaf.setClasses(link.getClasses().getAttrValue()); // TODO array o string?
                 }
@@ -79,7 +81,8 @@ public class MenuService {
             if (id.equals(item.getParent().getContentId()) ) {
                 FolderMenu folder = new FolderMenu();
                 folder.setId(item.getContentId());
-                folder.setLabel(item.getTitle().getAttrValue()); // TODO recuperare dal file
+                String label = item.getTitle().getAttrValue();
+                folder.setLabel(label.substring(MENU_UI_LABELS.length() + 1));
                 if (item.getClasses() != null) {
                     folder.setClasses(item.getClasses().getAttrValue()); // TODO array o string?
                 }

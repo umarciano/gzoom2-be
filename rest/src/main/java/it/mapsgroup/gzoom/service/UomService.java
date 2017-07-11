@@ -14,6 +14,7 @@ import it.mapsgroup.gzoom.model.Result;
 import it.mapsgroup.gzoom.querydsl.dao.UomDao;
 import it.mapsgroup.gzoom.querydsl.dto.Uom;
 import it.mapsgroup.gzoom.querydsl.dto.UomEx;
+import it.mapsgroup.gzoom.rest.ValidationException;
 
 /**
  * Profile service.
@@ -34,6 +35,12 @@ public class UomService {
         List<UomEx> list = uomDao.getUoms();
         return new Result<>(list, list.size());
     }
+    
+
+    public UomEx getUom(String id) {
+        UomEx uom = uomDao.getUom(id);
+        return uom;
+    }
 
     public String createUom(Uom req) {
         Validators.assertNotNull(req, Messages.UOM_REQUIRED);
@@ -41,6 +48,9 @@ public class UomService {
         Validators.assertNotBlank(req.getUomTypeId(), Messages.UOM_TYPE_ID_REQUIRED);
         Validators.assertNotBlank(req.getDescription(), Messages.UOM_DESCRIPTION_REQUIRED);
         Validators.assertNotBlank(req.getAbbreviation(), Messages.UOM_ABBREVIATION_REQUIRED);
+        if(req.getMinValue().compareTo(req.getMaxValue()) > 0) {
+            throw new ValidationException(Messages.UOM_MIN_VALUE_GREATER_THAN_MAX_VALUE);
+        }
         uomDao.create(req, principal().getUserLoginId());
         return req.getUomId();
     }
@@ -64,4 +74,5 @@ public class UomService {
         uomDao.delete(id);
         return id;
     }
+
 }

@@ -1,5 +1,7 @@
 package it.mapsgroup.gzoom.rest;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +10,7 @@ import it.mapsgroup.gzoom.common.Exec;
 import it.mapsgroup.gzoom.model.Result;
 import it.mapsgroup.gzoom.querydsl.dto.Uom;
 import it.mapsgroup.gzoom.querydsl.dto.UomEx;
+import it.mapsgroup.gzoom.querydsl.dto.UomRatingScaleEx;
 import it.mapsgroup.gzoom.service.UomService;
 
 /**
@@ -27,6 +30,13 @@ public class UomController {
     @ResponseBody
     public Result<UomEx> getUoms() {
         return Exec.exec("uom/value get", () -> uomService.getUoms());
+    }
+    
+    
+    @RequestMapping(value = "uom/value/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public UomEx getUomRatingScale(@PathVariable(value = "id") String id) {
+        return Exec.exec("uom/value get", () -> uomService.getUom(id));
     }
 
     @RequestMapping(value = "uom/value", method = RequestMethod.POST)
