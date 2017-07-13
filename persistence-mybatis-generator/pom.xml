@@ -24,6 +24,24 @@
             <groupId>it.mapsgroup.mybatis-generator</groupId>
             <artifactId>mybatis-generator-lib</artifactId>
             <version>1.3.5-1-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.oracle</groupId>
+                    <artifactId>ojdbc7</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.microsoft.sqlserver</groupId>
+                    <artifactId>sqljdbc4</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 

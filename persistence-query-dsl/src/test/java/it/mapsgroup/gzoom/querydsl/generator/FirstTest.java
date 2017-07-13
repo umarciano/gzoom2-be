@@ -1,40 +1,22 @@
 package it.mapsgroup.gzoom.querydsl.generator;
 
-import com.querydsl.core.group.GroupBy;
-import com.querydsl.core.types.QBean;
-import com.querydsl.sql.*;
-import it.mapsgroup.gzoom.querydsl.dto.UserLoginEx;
-import it.memelabs.smartnebula.lmm.querydsl.ex.PersonEx;
-import it.memelabs.smartnebula.lmm.querydsl.ex.PersonEx2;
-import it.memelabs.smartnebula.lmm.querydsl.generated.Person;
-import it.memelabs.smartnebula.lmm.querydsl.generated.QPerson;
-import it.memelabs.smartnebula.lmm.querydsl.generated.QUserLogin;
-import org.junit.Test;
+import com.querydsl.sql.SQLQueryFactory;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionDefinition;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.sql.DataSource;
-import java.util.List;
 
-import static com.querydsl.core.types.Projections.bean;
-import static it.mapsgroup.gzoom.querydsl.QBeanUtils.merge;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * @author Andrea Fossi.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = it.memelabs.smartnebula.lmm.persistence.service.MainPersistenceConfiguration.class)
 @TestPropertySource("/dev.properties")
 public class FirstTest {
     private static final Logger LOG = getLogger(FirstTest.class);
@@ -52,7 +34,7 @@ public class FirstTest {
     @Autowired
     PlatformTransactionManager txManager;
 
-    @Test
+  /*  @Test
     public void name() throws Exception {
         transactionTemplate.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
         transactionTemplate.execute(status -> {
@@ -116,11 +98,11 @@ public class FirstTest {
 
     }
 
-    /**
+    *//**
      * person that contains two postal_address
      *
      * @throws Exception
-     */
+     *//*
     @Test
     public void persons() throws Exception {
         QPerson person = QPerson.person;
@@ -148,12 +130,12 @@ public class FirstTest {
         ret.size();
     }
 
-    /**
+    *//**
      * Check if can aggregate collection
      * limit/offset give wrong result if cartesian product is greather than 1 (userLogin has more than one node)
      *
      * @throws Exception
-     */
+     *//*
     @Test
     public void userLogin() throws Exception {
         QUserLogin userLogin = QUserLogin.userLogin;
@@ -178,12 +160,12 @@ public class FirstTest {
     }
 
 
-    /**
+    *//**
      * Check if can aggregate collection
      * limit/offset give wrong result if cartesian product is greather than 1 (userLogin has more than one node)
      *
      * @throws Exception
-     */
+     *//*
     @Test
     public void userLogin2() throws Exception {
         QUserLogin userLogin = QUserLogin.userLogin;
@@ -211,7 +193,7 @@ public class FirstTest {
         ret.size();
         //  queryFactory.query().getSQL()
         //  queryFactory.select().from(Exception.)
-    }
+    }*/
 
 
 }

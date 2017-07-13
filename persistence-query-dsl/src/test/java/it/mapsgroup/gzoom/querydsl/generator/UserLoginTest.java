@@ -4,17 +4,11 @@ import com.querydsl.core.group.GroupBy;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.QBean;
 import com.querydsl.sql.SQLQueryFactory;
-import it.mapsgroup.gzoom.querydsl.dao.AbstractDaoTest;
+import it.mapsgroup.gzoom.querydsl.dao.AbstractDaoIT;
 import it.mapsgroup.gzoom.querydsl.dto.*;
-import it.mapsgroup.gzoom.querydsl.persistence.service.QueryDslPersistenceConfiguration;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -29,7 +23,7 @@ import static org.slf4j.LoggerFactory.getLogger;
  * @author Andrea Fossi.
  */
 
-public class UserLoginTest extends AbstractDaoTest{
+public class UserLoginTest extends AbstractDaoIT {
     private static final Logger LOG = getLogger(UserLoginTest.class);
 
     @Autowired

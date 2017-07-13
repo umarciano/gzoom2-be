@@ -2,7 +2,7 @@ package it.mapsgroup.gzoom.querydsl.generator;
 
 import com.querydsl.sql.SQLQueryFactory;
 import it.mapsgroup.gzoom.persistence.common.SequenceGenerator;
-import it.mapsgroup.gzoom.querydsl.dao.AbstractDaoTest;
+import it.mapsgroup.gzoom.querydsl.dao.AbstractDaoIT;
 import it.mapsgroup.gzoom.querydsl.dao.PartyDao;
 import it.mapsgroup.gzoom.querydsl.dto.Party;
 import it.mapsgroup.gzoom.querydsl.dto.QParty;
@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-public class PartyDaoIT extends AbstractDaoTest {
+public class PartyDaoIT extends AbstractDaoIT {
     private static final Logger LOG = getLogger(PartyDaoIT.class);
 
     @Autowired

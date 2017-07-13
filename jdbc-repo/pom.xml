@@ -31,11 +31,11 @@
 
 
         <!-- ORACLE database driver -->
-     <!--   <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc7</artifactId>
-            <version>12.1.0.2</version>
-        </dependency>-->
+        <!--   <dependency>
+               <groupId>com.oracle</groupId>
+               <artifactId>ojdbc7</artifactId>
+               <version>12.1.0.2</version>
+           </dependency>-->
 
         <!-- ORACLE database driver -->
         <dependency>
@@ -57,8 +57,25 @@
             <version>5.1.6</version>
         </dependency>
 
-    </dependencies>
 
+        <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/sqljdbc4 -->
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>sqljdbc4</artifactId>
+            <version>4.0</version>
+        </dependency>
+
+
+
+        <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+       <!-- <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>6.2.0.jre8</version>
+            <scope>test</scope>
+        </dependency>-->
+
+    </dependencies>
 
 
 </project>
