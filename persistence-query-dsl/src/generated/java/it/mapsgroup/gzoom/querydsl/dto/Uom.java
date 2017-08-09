@@ -13,6 +13,9 @@ public class Uom implements AbstractIdentity {
     @Column("ABBREVIATION")
     private String abbreviation;
 
+    @Column("ABBREVIATION_LANG")
+    private String abbreviationLang;
+
     @Column("CREATED_BY_USER_LOGIN")
     private String createdByUserLogin;
 
@@ -27,6 +30,9 @@ public class Uom implements AbstractIdentity {
 
     @Column("DESCRIPTION")
     private String description;
+
+    @Column("DESCRIPTION_LANG")
+    private String descriptionLang;
 
     @Column("LAST_MODIFIED_BY_USER_LOGIN")
     private String lastModifiedByUserLogin;
@@ -55,6 +61,14 @@ public class Uom implements AbstractIdentity {
 
     public void setAbbreviation(String abbreviation) {
         this.abbreviation = abbreviation;
+    }
+
+    public String getAbbreviationLang() {
+        return abbreviationLang;
+    }
+
+    public void setAbbreviationLang(String abbreviationLang) {
+        this.abbreviationLang = abbreviationLang;
     }
 
     public String getCreatedByUserLogin() {
@@ -95,6 +109,14 @@ public class Uom implements AbstractIdentity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getDescriptionLang() {
+        return descriptionLang;
+    }
+
+    public void setDescriptionLang(String descriptionLang) {
+        this.descriptionLang = descriptionLang;
     }
 
     public String getLastModifiedByUserLogin() {

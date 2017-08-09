@@ -56,6 +56,8 @@ public class QParty extends com.querydsl.sql.RelationalPathBase<Party> {
 
     public final StringPath partyName = createString("partyName");
 
+    public final StringPath partyNameLang = createString("partyNameLang");
+
     public final StringPath partyTypeId = createString("partyTypeId");
 
     public final StringPath preferredCurrencyUomId = createString("preferredCurrencyUomId");
@@ -66,11 +68,11 @@ public class QParty extends com.querydsl.sql.RelationalPathBase<Party> {
 
     public final com.querydsl.sql.PrimaryKey<Party> primary = createPrimaryKey(partyId);
 
-    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> partyCul = createForeignKey(createdByUserLogin, "USER_LOGIN_ID");
+    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> partyLmcul = createForeignKey(lastModifiedByUserLogin, "USER_LOGIN_ID");
 
     public final com.querydsl.sql.ForeignKey<Uom> partyPrefCrncy = createForeignKey(preferredCurrencyUomId, "UOM_ID");
 
-    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> partyLmcul = createForeignKey(lastModifiedByUserLogin, "USER_LOGIN_ID");
+    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> partyCul = createForeignKey(createdByUserLogin, "USER_LOGIN_ID");
 
     public final com.querydsl.sql.ForeignKey<PartyContactMechPurpose> _partyCmprpParty = createInvForeignKey(partyId, "PARTY_ID");
 
@@ -122,6 +124,7 @@ public class QParty extends com.querydsl.sql.RelationalPathBase<Party> {
         addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(14).ofType(Types.TIMESTAMP).withSize(19));
         addMetadata(partyId, ColumnMetadata.named("PARTY_ID").withIndex(1).ofType(Types.VARCHAR).withSize(20).notNull());
         addMetadata(partyName, ColumnMetadata.named("PARTY_NAME").withIndex(19).ofType(Types.VARCHAR).withSize(255));
+        addMetadata(partyNameLang, ColumnMetadata.named("PARTY_NAME_LANG").withIndex(21).ofType(Types.VARCHAR).withSize(255));
         addMetadata(partyTypeId, ColumnMetadata.named("PARTY_TYPE_ID").withIndex(2).ofType(Types.VARCHAR).withSize(20));
         addMetadata(preferredCurrencyUomId, ColumnMetadata.named("PREFERRED_CURRENCY_UOM_ID").withIndex(4).ofType(Types.VARCHAR).withSize(20));
         addMetadata(statusId, ColumnMetadata.named("STATUS_ID").withIndex(6).ofType(Types.VARCHAR).withSize(20));

@@ -22,6 +22,9 @@ public class UomRatingScale implements AbstractIdentity {
     @Column("DESCRIPTION")
     private String description;
 
+    @Column("DESCRIPTION_LANG")
+    private String descriptionLang;
+
     @Column("ICON_CONTENT_ID")
     private String iconContentId;
 
@@ -70,6 +73,14 @@ public class UomRatingScale implements AbstractIdentity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getDescriptionLang() {
+        return descriptionLang;
+    }
+
+    public void setDescriptionLang(String descriptionLang) {
+        this.descriptionLang = descriptionLang;
     }
 
     public String getIconContentId() {

@@ -58,6 +58,9 @@ public class Party implements AbstractIdentity {
     @Column("PARTY_NAME")
     private String partyName;
 
+    @Column("PARTY_NAME_LANG")
+    private String partyNameLang;
+
     @Column("PARTY_TYPE_ID")
     private String partyTypeId;
 
@@ -196,6 +199,14 @@ public class Party implements AbstractIdentity {
 
     public void setPartyName(String partyName) {
         this.partyName = partyName;
+    }
+
+    public String getPartyNameLang() {
+        return partyNameLang;
+    }
+
+    public void setPartyNameLang(String partyNameLang) {
+        this.partyNameLang = partyNameLang;
     }
 
     public String getPartyTypeId() {

@@ -14,7 +14,8 @@ public class Messages {
     public static final String UOM_ID_REQUIRED = "Uom id is required";
     public static final String UOM_DESCRIPTION_REQUIRED = "Uom description is required";
     public static final String UOM_ABBREVIATION_REQUIRED = "Uom abbreviation is required";;
-    public static final String UOM_MIN_VALUE_GREATER_THAN_MAX_VALUE = "MinValue is greater than maxValue";
+    public static final String UOM_MIN_VALUE_GREATER_THAN_MAX_VALUE = "Min Value is greater than Max Value";
+    public static final String UOM_MIN_VALUE_AND_MAX_VALUE = "Insert both Min Value and Max Value";
     
     public static final String INVALID_UOM_RATING_SCALE = "Invalid uomRatingScale";
     public static final String UOM_RATING_SCALE_REQUIRED = "An uomRatingScale is required";;

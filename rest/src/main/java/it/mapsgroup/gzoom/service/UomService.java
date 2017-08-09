@@ -42,14 +42,26 @@ public class UomService {
         return uom;
     }
 
+    /**
+     * Validation and Create
+     * TODO Manage db Exception, like integrity Violetion, Duplicate Key or create a error message with detail
+     * @param req
+     * @return
+     */
     public String createUom(Uom req) {
         Validators.assertNotNull(req, Messages.UOM_REQUIRED);
         Validators.assertNotBlank(req.getUomId(), Messages.UOM_ID_REQUIRED);
         Validators.assertNotBlank(req.getUomTypeId(), Messages.UOM_TYPE_ID_REQUIRED);
         Validators.assertNotBlank(req.getDescription(), Messages.UOM_DESCRIPTION_REQUIRED);
         Validators.assertNotBlank(req.getAbbreviation(), Messages.UOM_ABBREVIATION_REQUIRED);
-        if(req.getMinValue().compareTo(req.getMaxValue()) > 0) {
-            throw new ValidationException(Messages.UOM_MIN_VALUE_GREATER_THAN_MAX_VALUE);
+        if(req.getMinValue() != null && req.getMaxValue() != null ) {
+            if(req.getMinValue().compareTo(req.getMaxValue()) > 0) {
+                throw new ValidationException(Messages.UOM_MIN_VALUE_GREATER_THAN_MAX_VALUE);
+            }
+        }
+        if ((req.getMinValue() == null && req.getMaxValue() != null )
+                || (req.getMinValue() != null && req.getMaxValue() == null)) {
+            throw new ValidationException(Messages.UOM_MIN_VALUE_AND_MAX_VALUE);
         }
         uomDao.create(req, principal().getUserLoginId());
         return req.getUomId();
@@ -63,6 +75,15 @@ public class UomService {
         Validators.assertNotBlank(req.getAbbreviation(), Messages.UOM_ABBREVIATION_REQUIRED);
         Uom record = uomDao.getUom(id);
         Validators.assertNotNull(record, Messages.INVALID_UOM);
+        if(req.getMinValue() != null && req.getMaxValue() != null ) {
+            if(req.getMinValue().compareTo(req.getMaxValue()) > 0) {
+                throw new ValidationException(Messages.UOM_MIN_VALUE_GREATER_THAN_MAX_VALUE);
+            }
+        }
+        if ((req.getMinValue() == null && req.getMaxValue() != null )
+                || (req.getMinValue() != null && req.getMaxValue() == null)) {
+            throw new ValidationException(Messages.UOM_MIN_VALUE_AND_MAX_VALUE);
+        }
         uomDao.update(id, req, principal().getUserLoginId());
         return req.getUomId();
     }

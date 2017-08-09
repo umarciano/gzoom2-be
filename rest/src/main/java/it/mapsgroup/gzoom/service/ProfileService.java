@@ -5,8 +5,6 @@ import static it.mapsgroup.gzoom.security.Principals.principal;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,12 +33,14 @@ public class ProfileService {
         String permRegExp = "(((?i)(MGR|ROLE|ORG)?)_)";
         Pattern permPattern = Pattern.compile(permRegExp);
         
-        listSecurityPermission.forEach(r -> {
-            String permissionId = r.getPermissionId();
-            
-            String[] permArray = permPattern.split(permissionId);
-            permissions.addPermission(permArray[0], permArray[permArray.length-1]);
-        });
+        if(listSecurityPermission != null) {
+            listSecurityPermission.forEach(r -> {
+                String permissionId = r.getPermissionId();
+                
+                String[] permArray = permPattern.split(permissionId);
+                permissions.addPermission(permArray[0], permArray[permArray.length-1]);
+            });
+        }
         return permissions;
     }
 }

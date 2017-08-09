@@ -82,7 +82,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({DataAccessException.class})
     @ResponseBody
     public ResponseEntity<RestError> onDataAccessException(DataAccessException e) {
-        RestError err = new RestError(INTERNAL, "Generic Error");
+        RestError err = new RestError(INTERNAL, e.getMessage());
         LOG.error("Error querying database", e);
         return new ResponseEntity<>(err, HttpStatus.INTERNAL_SERVER_ERROR);
     }

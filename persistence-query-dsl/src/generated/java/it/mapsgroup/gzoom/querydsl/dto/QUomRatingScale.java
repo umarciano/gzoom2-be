@@ -32,6 +32,8 @@ public class QUomRatingScale extends com.querydsl.sql.RelationalPathBase<UomRati
 
     public final StringPath description = createString("description");
 
+    public final StringPath descriptionLang = createString("descriptionLang");
+
     public final StringPath iconContentId = createString("iconContentId");
 
     public final StringPath lastModifiedByUserLogin = createString("lastModifiedByUserLogin");
@@ -46,9 +48,9 @@ public class QUomRatingScale extends com.querydsl.sql.RelationalPathBase<UomRati
 
     public final com.querydsl.sql.PrimaryKey<UomRatingScale> primary = createPrimaryKey(uomId, uomRatingValue);
 
-    public final com.querydsl.sql.ForeignKey<Uom> ratingToUom = createForeignKey(uomId, "UOM_ID");
-
     public final com.querydsl.sql.ForeignKey<Content> ratingToCont = createForeignKey(iconContentId, "CONTENT_ID");
+
+    public final com.querydsl.sql.ForeignKey<Uom> ratingToUom = createForeignKey(uomId, "UOM_ID");
 
     public QUomRatingScale(String variable) {
         super(UomRatingScale.class, forVariable(variable), "null", "UOM_RATING_SCALE");
@@ -80,6 +82,7 @@ public class QUomRatingScale extends com.querydsl.sql.RelationalPathBase<UomRati
         addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(9).ofType(Types.TIMESTAMP).withSize(19));
         addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(10).ofType(Types.TIMESTAMP).withSize(19));
         addMetadata(description, ColumnMetadata.named("DESCRIPTION").withIndex(3).ofType(Types.VARCHAR).withSize(255));
+        addMetadata(descriptionLang, ColumnMetadata.named("DESCRIPTION_LANG").withIndex(11).ofType(Types.VARCHAR).withSize(255));
         addMetadata(iconContentId, ColumnMetadata.named("ICON_CONTENT_ID").withIndex(4).ofType(Types.VARCHAR).withSize(20));
         addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(5).ofType(Types.VARCHAR).withSize(250));
         addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(7).ofType(Types.TIMESTAMP).withSize(19));
