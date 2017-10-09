@@ -576,6 +576,7 @@
         <module>ofbiz/hot-deploy</module>
         <module>persistence-mybatis-generator</module>
         <module>jdbc-repo</module>
+        <module>report</module>
     </modules>
 
 </project>
