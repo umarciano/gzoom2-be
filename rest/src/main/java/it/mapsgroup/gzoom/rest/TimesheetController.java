@@ -2,6 +2,7 @@ package it.mapsgroup.gzoom.rest;
 
 import it.mapsgroup.gzoom.common.Exec;
 import it.mapsgroup.gzoom.model.Result;
+import it.mapsgroup.gzoom.querydsl.dto.Timesheet;
 import it.mapsgroup.gzoom.querydsl.dto.Uom;
 import it.mapsgroup.gzoom.querydsl.dto.UomEx;
 import it.mapsgroup.gzoom.service.TimesheetService;
@@ -22,11 +23,17 @@ public class TimesheetController {
     public TimesheetController(TimesheetService timesheetService) {
         this.timesheetService = timesheetService;
     }
-/*
+
     @RequestMapping(value = "timesheet/timesheet", method = RequestMethod.GET)
     @ResponseBody
-    public Result<UomEx> getUoms() {
+    public Result<Timesheet> getTimesheets() {
         return Exec.exec("timesheet/timesheet get", () -> timesheetService.getTimesheets());
     }
-    */
+
+    @RequestMapping(value = "timesheet/timesheet" , method = RequestMethod.POST)
+    @ResponseBody
+    public String createTimesheet(@RequestBody Timesheet req) {
+        return Exec.exec( "timesheet/timesheet-create", () -> timesheetService.createTimesheet(req));
+    }
+
 }

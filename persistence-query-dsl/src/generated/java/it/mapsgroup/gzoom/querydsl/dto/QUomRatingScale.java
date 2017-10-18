@@ -48,9 +48,9 @@ public class QUomRatingScale extends com.querydsl.sql.RelationalPathBase<UomRati
 
     public final com.querydsl.sql.PrimaryKey<UomRatingScale> primary = createPrimaryKey(uomId, uomRatingValue);
 
-    public final com.querydsl.sql.ForeignKey<Content> ratingToCont = createForeignKey(iconContentId, "CONTENT_ID");
-
     public final com.querydsl.sql.ForeignKey<Uom> ratingToUom = createForeignKey(uomId, "UOM_ID");
+
+    public final com.querydsl.sql.ForeignKey<Content> ratingToCont = createForeignKey(iconContentId, "CONTENT_ID");
 
     public QUomRatingScale(String variable) {
         super(UomRatingScale.class, forVariable(variable), "null", "UOM_RATING_SCALE");
