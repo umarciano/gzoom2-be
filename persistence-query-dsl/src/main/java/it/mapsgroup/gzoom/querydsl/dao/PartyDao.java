@@ -3,11 +3,14 @@ package it.mapsgroup.gzoom.querydsl.dao;
 import com.querydsl.sql.SQLQueryFactory;
 import it.mapsgroup.gzoom.persistence.common.SequenceGenerator;
 import it.mapsgroup.gzoom.querydsl.dto.Party;
+import it.mapsgroup.gzoom.querydsl.dto.Person;
 import it.mapsgroup.gzoom.querydsl.dto.QParty;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -56,4 +59,5 @@ public class PartyDao extends AbstractDao {
 
         return i > 0;
     }
+
 }

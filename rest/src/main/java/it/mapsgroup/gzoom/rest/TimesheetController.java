@@ -33,7 +33,19 @@ public class TimesheetController {
     @RequestMapping(value = "timesheet/timesheet" , method = RequestMethod.POST)
     @ResponseBody
     public String createTimesheet(@RequestBody Timesheet req) {
-        return Exec.exec( "timesheet/timesheet-create", () -> timesheetService.createTimesheet(req));
+        return Exec.exec( "timesheet/timesheet-post", () -> timesheetService.createTimesheet(req));
+    }
+
+    @RequestMapping(value = "timesheet/timesheet/{id}", method = RequestMethod.PUT)
+    @ResponseBody
+    public String updateTimesheet(@PathVariable(value = "id") String id, @RequestBody Timesheet req) {
+        return Exec.exec("timesheet/timesheet put", () -> timesheetService.updateTimesheet(id, req));
+    }
+
+    @RequestMapping(value = "timesheet/timesheet/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public String deleteTimesheet(@PathVariable(value = "id") String id) {
+        return Exec.exec("timesheet/timesheet delete", () -> timesheetService.deleteTimesheet(id));
     }
 
 }
