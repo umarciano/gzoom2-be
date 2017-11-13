@@ -27,6 +27,12 @@
             <version>${project.parent.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>it.mapsgroup.gzoom</groupId>
+            <artifactId>query-dsl</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
 
         <!-- Maps commons -->
         <dependency>

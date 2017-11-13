@@ -2,7 +2,8 @@ package it.mapsgroup.gzoom.rest;
 
 import it.mapsgroup.gzoom.common.Exec;
 import it.mapsgroup.gzoom.model.Result;
-import it.mapsgroup.gzoom.querydsl.dto.Timesheet;
+
+import it.mapsgroup.gzoom.model.Timesheet;
 import it.mapsgroup.gzoom.querydsl.dto.Uom;
 import it.mapsgroup.gzoom.querydsl.dto.UomEx;
 import it.mapsgroup.gzoom.service.TimesheetService;
