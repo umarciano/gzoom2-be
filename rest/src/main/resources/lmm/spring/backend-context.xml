@@ -32,11 +32,11 @@
     <bean id="configuration" class="it.mapsgroup.gzoom.service.ConfigurationImpl"/>
 
     <!-- JSON (de)serialization -->
-    <bean id="isoDateFormatter" class="com.fasterxml.jackson.databind.util.ISO8601DateFormat"/>
+    <!--<bean id="isoDateFormatter" class="com.fasterxml.jackson.databind.util.ISO8601DateFormat"/>
 
     <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" primary="true">
         <property name="dateFormat" ref="isoDateFormatter"/>
-    </bean>
+    </bean>-->
 
 
 </beans>

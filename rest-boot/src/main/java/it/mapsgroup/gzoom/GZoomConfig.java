@@ -2,6 +2,10 @@ package it.mapsgroup.gzoom;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
+import it.mapsgroup.gzoom.jackson.LocalDateDeserializer;
+import it.mapsgroup.gzoom.jackson.LocalDateSerializer;
 import it.mapsgroup.gzoom.ofbiz.client.OfBizClientConfig;
 import it.mapsgroup.gzoom.ofbiz.client.impl.AuthenticationOfBizClientImpl;
 import it.mapsgroup.gzoom.ofbiz.service.LoginServiceOfBiz;
@@ -27,6 +31,7 @@ import org.springframework.security.web.util.matcher.OrRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import java.net.URL;
+import java.time.LocalDate;
 
 /**
  * @author Andrea Fossi.
@@ -51,6 +56,17 @@ public class GZoomConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private Http403ForbiddenEntryPoint http403ForbiddenEntryPoint;
 
+    @Bean
+    public ObjectMapper getObjectMapper() {
+        SimpleModule simpleModule = new SimpleModule();
+        simpleModule.addSerializer(LocalDate.class, new LocalDateSerializer());
+        simpleModule.addDeserializer(LocalDate.class, new LocalDateDeserializer());
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(simpleModule);
+        objectMapper.setDateFormat(new ISO8601DateFormat());
+        return objectMapper;
+    }
 
     @Bean
     @Autowired
