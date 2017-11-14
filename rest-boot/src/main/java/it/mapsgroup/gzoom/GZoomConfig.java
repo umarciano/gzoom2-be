@@ -2,6 +2,8 @@ package it.mapsgroup.gzoom;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import it.mapsgroup.gzoom.ofbiz.client.OfBizClientConfig;
 import it.mapsgroup.gzoom.ofbiz.client.impl.AuthenticationOfBizClientImpl;
 import it.mapsgroup.gzoom.ofbiz.service.LoginServiceOfBiz;
@@ -50,6 +52,20 @@ public class GZoomConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private Http403ForbiddenEntryPoint http403ForbiddenEntryPoint;
+
+
+    @Bean
+    public ObjectMapper getObjectMapper() {
+
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper
+                //.registerModule(new ParameterNamesModule())
+                //.registerModule(new Jdk8Module())
+                .registerModule(new JavaTimeModule());
+        objectMapper.setDateFormat(new ISO8601DateFormat());
+        return objectMapper;
+    }
 
 
     @Bean
