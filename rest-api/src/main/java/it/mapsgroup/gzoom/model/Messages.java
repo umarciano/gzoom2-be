@@ -269,4 +269,9 @@ public class Messages {
     public static final String INVALID_WORK_LOG = "Invalid work log";
     public static final String INVALID_REQUEST = "Invalid request";
 
+    public static final String TIMESHEET_REQUIRED = "A timesheet is required";
+    public static final String PARTY_ID_REQUIRED = "Party id is required";
+    public static final String TIMESHEET_ID_REQUIRED = "Timesheet id is required";
+    public static final String INVALID_TIMESHEET = "Invalid timesheet";
+
 }

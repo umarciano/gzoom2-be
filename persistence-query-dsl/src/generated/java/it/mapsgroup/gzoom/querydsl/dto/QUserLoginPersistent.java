@@ -82,6 +82,8 @@ public class QUserLoginPersistent extends com.querydsl.sql.RelationalPathBase<Us
 
     public final com.querydsl.sql.ForeignKey<Content> _contentCbUlgn = createInvForeignKey(userLoginId, "CREATED_BY_USER_LOGIN");
 
+    public final com.querydsl.sql.ForeignKey<Timesheet> _timesheetAbUl = createInvForeignKey(userLoginId, "APPROVED_BY_USER_LOGIN_ID");
+
     public final com.querydsl.sql.ForeignKey<UserLoginSecurityGroup> _userSecgrpUser = createInvForeignKey(userLoginId, "USER_LOGIN_ID");
 
     public QUserLoginPersistent(String variable) {

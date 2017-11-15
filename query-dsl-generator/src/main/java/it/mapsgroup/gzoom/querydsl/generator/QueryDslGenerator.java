@@ -33,7 +33,8 @@ public class QueryDslGenerator {
                 "(CONNECT_DATA=(SERVER = DEDICATED)(SERVICE_NAME= devdb.maps1.mapsengineering.com)))", "ANFO", "@4ndr34_77");*/
 //        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/ltprod", "lmm", "lmm");
         //return DriverManager.getConnection("jdbc:mysql://localhost/gzoom_lite", "root", "root");
-        return DriverManager.getConnection("jdbc:mysql://localhost/gzoom?autoReconnect=true&amp;useOldAliasMetadataBehavior=true&amp;generateSimpleParameterMetadata=true", "root", "root");
+        //return DriverManager.getConnection("jdbc:mysql://localhost/gzoom?autoReconnect=true&amp;useOldAliasMetadataBehavior=true&amp;generateSimpleParameterMetadata=true", "root", "root");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/gzoom_anli?autoReconnect=true&amp;useOldAliasMetadataBehavior=true&amp;generateSimpleParameterMetadata=true&amp;verifyServerCertificate=false&amp;useSSL=false", "anli", "anli");
     }
 
 
