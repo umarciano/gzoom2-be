@@ -30,8 +30,8 @@ public class DtoMapper {
             to.setThruDate(from.getThruDate().toLocalDate());
         to.setPartyId(from.getPartyId());
         to.setTimesheetId(from.getTimesheetId());
-        //to.setActualHours(from.getActualHours());
-        //to.setContractHours(from.getContractHours());
+        to.setActualHours(from.getActualHours());
+        to.setContractHours(from.getContractHours());
         return to;
     }
 

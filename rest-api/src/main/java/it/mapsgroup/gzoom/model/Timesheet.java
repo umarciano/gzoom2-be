@@ -8,8 +8,8 @@ public class Timesheet extends Identifiable {
     private LocalDate thruDate;
     private String partyId;
     private String timesheetId;
-    private float actualHours;
-    private float contractHours;
+    private BigDecimal actualHours;
+    private BigDecimal contractHours;
 
     public LocalDate getFromDate() {
         return fromDate;
@@ -43,19 +43,19 @@ public class Timesheet extends Identifiable {
         this.timesheetId = timesheetId;
     }
 
-    public float getActualHours() {
+    public BigDecimal getActualHours() {
         return actualHours;
     }
 
-    public void setActualHours(float actualHours) {
+    public void setActualHours(BigDecimal actualHours) {
         this.actualHours = actualHours;
     }
 
-    public float getContractHours() {
+    public BigDecimal getContractHours() {
         return contractHours;
     }
 
-    public void setContractHours(float contractHours) {
+    public void setContractHours(BigDecimal contractHours) {
         this.contractHours = contractHours;
     }
 }

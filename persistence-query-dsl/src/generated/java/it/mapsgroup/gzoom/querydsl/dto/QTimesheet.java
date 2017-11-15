@@ -24,7 +24,7 @@ public class QTimesheet extends com.querydsl.sql.RelationalPathBase<Timesheet> {
 
     public static final QTimesheet timesheet = new QTimesheet("TIMESHEET");
 
-    public final DateTimePath<java.time.LocalDateTime> actualHours = createDateTime("actualHours", java.time.LocalDateTime.class);
+    public final NumberPath<java.math.BigDecimal> actualHours = createNumber("actualHours", java.math.BigDecimal.class);
 
     public final StringPath approvedByUserLoginId = createString("approvedByUserLoginId");
 
@@ -32,7 +32,7 @@ public class QTimesheet extends com.querydsl.sql.RelationalPathBase<Timesheet> {
 
     public final StringPath comments = createString("comments");
 
-    public final DateTimePath<java.time.LocalDateTime> contractHours = createDateTime("contractHours", java.time.LocalDateTime.class);
+    public final NumberPath<java.math.BigDecimal> contractHours = createNumber("contractHours", java.math.BigDecimal.class);
 
     public final DateTimePath<java.time.LocalDateTime> createdStamp = createDateTime("createdStamp", java.time.LocalDateTime.class);
 
@@ -88,11 +88,11 @@ public class QTimesheet extends com.querydsl.sql.RelationalPathBase<Timesheet> {
     }
 
     public void addMetadata() {
-        addMetadata(actualHours, ColumnMetadata.named("ACTUAL_HOURS").withIndex(15).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(actualHours, ColumnMetadata.named("ACTUAL_HOURS").withIndex(15).ofType(Types.DECIMAL).withSize(18).withDigits(6));
         addMetadata(approvedByUserLoginId, ColumnMetadata.named("APPROVED_BY_USER_LOGIN_ID").withIndex(7).ofType(Types.VARCHAR).withSize(250));
         addMetadata(clientPartyId, ColumnMetadata.named("CLIENT_PARTY_ID").withIndex(3).ofType(Types.VARCHAR).withSize(20));
         addMetadata(comments, ColumnMetadata.named("COMMENTS").withIndex(8).ofType(Types.VARCHAR).withSize(255));
-        addMetadata(contractHours, ColumnMetadata.named("CONTRACT_HOURS").withIndex(14).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(contractHours, ColumnMetadata.named("CONTRACT_HOURS").withIndex(14).ofType(Types.DECIMAL).withSize(18).withDigits(6));
         addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(11).ofType(Types.TIMESTAMP).withSize(19));
         addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(12).ofType(Types.TIMESTAMP).withSize(19));
         addMetadata(fromDate, ColumnMetadata.named("FROM_DATE").withIndex(4).ofType(Types.TIMESTAMP).withSize(19));

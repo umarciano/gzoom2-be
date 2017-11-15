@@ -47,6 +47,8 @@ public class TimesheetService {
         timesheet.setPartyId(req.getPartyId());
         timesheet.setFromDate(req.getFromDate().atStartOfDay());
         timesheet.setThruDate(req.getThruDate().atStartOfDay());
+        timesheet.setActualHours(req.getActualHours());
+        timesheet.setContractHours(req.getContractHours());
         timesheetDao.create(timesheet, principal().getUserLoginId());
         return req.getTimesheetId();
     }
@@ -75,7 +77,7 @@ public class TimesheetService {
         to.setThruDate(from.getThruDate().atStartOfDay());
         to.setPartyId(from.getPartyId());
         to.setTimesheetId(from.getTimesheetId());
-        //to.setActualHours(from.getActualHours());
-        //to.setContractHours(from.getContractHours());
+        to.setActualHours(from.getActualHours());
+        to.setContractHours(from.getContractHours());
     }
 }

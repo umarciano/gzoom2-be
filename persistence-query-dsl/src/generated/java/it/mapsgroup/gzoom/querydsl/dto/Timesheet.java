@@ -11,7 +11,7 @@ import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 public class Timesheet implements AbstractIdentity {
 
     @Column("ACTUAL_HOURS")
-    private java.time.LocalDateTime actualHours;
+    private java.math.BigDecimal actualHours;
 
     @Column("APPROVED_BY_USER_LOGIN_ID")
     private String approvedByUserLoginId;
@@ -23,7 +23,7 @@ public class Timesheet implements AbstractIdentity {
     private String comments;
 
     @Column("CONTRACT_HOURS")
-    private java.time.LocalDateTime contractHours;
+    private java.math.BigDecimal contractHours;
 
     @Column("CREATED_STAMP")
     private java.time.LocalDateTime createdStamp;
@@ -55,11 +55,11 @@ public class Timesheet implements AbstractIdentity {
     @Column("TRANSFER_FLAG")
     private Boolean transferFlag;
 
-    public java.time.LocalDateTime getActualHours() {
+    public java.math.BigDecimal getActualHours() {
         return actualHours;
     }
 
-    public void setActualHours(java.time.LocalDateTime actualHours) {
+    public void setActualHours(java.math.BigDecimal actualHours) {
         this.actualHours = actualHours;
     }
 
@@ -87,11 +87,11 @@ public class Timesheet implements AbstractIdentity {
         this.comments = comments;
     }
 
-    public java.time.LocalDateTime getContractHours() {
+    public java.math.BigDecimal getContractHours() {
         return contractHours;
     }
 
-    public void setContractHours(java.time.LocalDateTime contractHours) {
+    public void setContractHours(java.math.BigDecimal contractHours) {
         this.contractHours = contractHours;
     }
 
