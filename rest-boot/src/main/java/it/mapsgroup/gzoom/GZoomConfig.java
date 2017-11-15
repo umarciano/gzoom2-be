@@ -54,19 +54,6 @@ public class GZoomConfig extends WebSecurityConfigurerAdapter {
     private Http403ForbiddenEntryPoint http403ForbiddenEntryPoint;
 
 
-    @Bean
-    public ObjectMapper getObjectMapper() {
-
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper
-                //.registerModule(new ParameterNamesModule())
-                //.registerModule(new Jdk8Module())
-                .registerModule(new JavaTimeModule());
-        objectMapper.setDateFormat(new ISO8601DateFormat());
-        return objectMapper;
-    }
-
 
     @Bean
     @Autowired
