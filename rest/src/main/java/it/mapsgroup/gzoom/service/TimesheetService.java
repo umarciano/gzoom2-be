@@ -5,11 +5,13 @@ import it.mapsgroup.gzoom.model.Result;
 import it.mapsgroup.gzoom.model.Timesheet;
 import it.mapsgroup.gzoom.querydsl.dao.TimesheetDao;
 
+import it.mapsgroup.gzoom.querydsl.dto.TimesheetEx;
 import it.mapsgroup.gzoom.rest.ValidationException;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +36,7 @@ public class TimesheetService {
     }
 
     public Result<Timesheet> getTimesheets() {
-        List<it.mapsgroup.gzoom.querydsl.dto.Timesheet> list = timesheetDao.getTimesheets();
+        List<TimesheetEx> list = timesheetDao.getTimesheets();
         List<Timesheet> ret = list.stream().map(p -> dtoMapper.copy(p, new Timesheet())).collect(Collectors.toList());
         return new Result<>(ret, ret.size());
     }
@@ -80,4 +82,5 @@ public class TimesheetService {
         to.setActualHours(from.getActualHours());
         to.setContractHours(from.getContractHours());
     }
+
 }

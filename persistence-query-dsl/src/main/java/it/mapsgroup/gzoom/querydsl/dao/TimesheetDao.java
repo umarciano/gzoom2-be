@@ -1,5 +1,6 @@
 package it.mapsgroup.gzoom.querydsl.dao;
 
+import com.querydsl.core.Tuple;
 import com.querydsl.core.group.GroupBy;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.QBean;
@@ -7,8 +8,7 @@ import com.querydsl.sql.SQLBindings;
 import com.querydsl.sql.SQLQuery;
 import com.querydsl.sql.SQLQueryFactory;
 import it.mapsgroup.gzoom.persistence.common.SequenceGenerator;
-import it.mapsgroup.gzoom.querydsl.dto.QTimesheet;
-import it.mapsgroup.gzoom.querydsl.dto.Timesheet;
+import it.mapsgroup.gzoom.querydsl.dto.*;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +20,8 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import java.util.List;
 
+import static com.querydsl.core.types.Projections.bean;
+import static it.mapsgroup.gzoom.querydsl.QBeanUtils.merge;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
@@ -41,18 +43,22 @@ public class TimesheetDao extends AbstractDao {
     }
 
     @Transactional
-    public List<Timesheet> getTimesheets() {
+    public List<TimesheetEx> getTimesheets() {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
         }
         QTimesheet qTimesheet = QTimesheet.timesheet;
-        SQLQuery<Timesheet> tSQLQuery = queryFactory.select(qTimesheet).from(qTimesheet);
-        SQLBindings bindings = tSQLQuery.getSQL();
+        QPerson qPerson = QPerson.person;
+        QParty qParty = QParty.party;
+        //SQLQuery<Timesheet> tSQLQuery = queryFactory.select(qTimesheet).from(qTimesheet);
+        QBean<TimesheetEx> timesheetExQBean = bean(TimesheetEx.class, merge(qTimesheet.all(), bean(Party.class, qParty.all()).as("party")));
+        SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qTimesheet, qPerson).from(qTimesheet).innerJoin(qTimesheet.timesheetPrty, qParty);
+        SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
-        QBean<Timesheet> timesheets = Projections.bean(Timesheet.class, qTimesheet.all());
-        List<Timesheet> ret = tSQLQuery.transform(GroupBy.groupBy(qTimesheet.timesheetId).list(timesheets));
+        //QBean<Timesheet> timesheets = Projections.bean(Timesheet.class, qTimesheet.all());
+        List<TimesheetEx> ret = tupleSQLQuery.transform(GroupBy.groupBy(qTimesheet.timesheetId).list(timesheetExQBean));
         LOG.info("size = {}", ret.size());
         return ret;
     }
