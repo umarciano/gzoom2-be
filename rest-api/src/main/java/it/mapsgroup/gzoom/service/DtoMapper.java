@@ -33,19 +33,10 @@ public class DtoMapper {
 
     public Timesheet copy(it.mapsgroup.gzoom.querydsl.dto.TimesheetEx from, Timesheet to) {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-
-        if (from.getFromDate() != null) {
-            String fromDate = from.getFromDate().toLocalDate().format(formatter);
-            to.setFromDateAsString(fromDate);
+        if (from.getFromDate() != null)
             to.setFromDate(from.getFromDate().toLocalDate());
-        }
-        if (from.getThruDate() != null) {
-            String thruDate = from.getThruDate().toLocalDate().format(formatter);
-            to.setThruDateAsString(thruDate);
+        if (from.getThruDate() != null)
             to.setThruDate(from.getThruDate().toLocalDate());
-        }
         to.setPartyId(from.getPartyId());
         to.setTimesheetId(from.getTimesheetId());
         to.setActualHours(from.getActualHours());

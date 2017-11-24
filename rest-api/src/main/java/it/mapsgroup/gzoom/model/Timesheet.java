@@ -11,8 +11,6 @@ public class Timesheet extends Identifiable {
     private BigDecimal actualHours;
     private BigDecimal contractHours;
     private String partyName;
-    private String fromDateAsString;
-    private String thruDateAsString;
 
     public LocalDate getFromDate() {
         return fromDate;
@@ -68,21 +66,5 @@ public class Timesheet extends Identifiable {
 
     public void setPartyName(String partyName) {
         this.partyName = partyName;
-    }
-
-    public String getFromDateAsString() {
-        return fromDateAsString;
-    }
-
-    public void setFromDateAsString(String fromDateAsString) {
-        this.fromDateAsString = fromDateAsString;
-    }
-
-    public String getThruDateAsString() {
-        return thruDateAsString;
-    }
-
-    public void setThruDateAsString(String thruDateAsString) {
-        this.thruDateAsString = thruDateAsString;
     }
 }
