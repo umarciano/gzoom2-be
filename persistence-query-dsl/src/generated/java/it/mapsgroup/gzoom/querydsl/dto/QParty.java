@@ -76,6 +76,8 @@ public class QParty extends com.querydsl.sql.RelationalPathBase<Party> {
 
     public final com.querydsl.sql.ForeignKey<PartyContactMechPurpose> _partyCmprpParty = createInvForeignKey(partyId, "PARTY_ID");
 
+    public final com.querydsl.sql.ForeignKey<TimeEntry> _timeEntPrty = createInvForeignKey(partyId, "PARTY_ID");
+
     public final com.querydsl.sql.ForeignKey<Timesheet> _timesheetPrty = createInvForeignKey(partyId, "PARTY_ID");
 
     public final com.querydsl.sql.ForeignKey<Person> _personParty = createInvForeignKey(partyId, "PARTY_ID");

@@ -2,16 +2,15 @@ package it.mapsgroup.gzoom.service;
 
 import it.mapsgroup.gzoom.model.Messages;
 import it.mapsgroup.gzoom.model.Result;
+import it.mapsgroup.gzoom.model.TimeEntry;
 import it.mapsgroup.gzoom.model.Timesheet;
+import it.mapsgroup.gzoom.querydsl.dao.TimeEntryDao;
 import it.mapsgroup.gzoom.querydsl.dao.TimesheetDao;
-
 import it.mapsgroup.gzoom.querydsl.dto.TimesheetEx;
-import it.mapsgroup.gzoom.rest.ValidationException;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,25 +22,29 @@ import static org.slf4j.LoggerFactory.getLogger;
  *
  */
 @Service
-public class TimesheetService {
-    private static final Logger LOG = getLogger(TimesheetService.class);
+public class TimeEntryService {
+    private static final Logger LOG = getLogger(TimeEntryService.class);
 
     private final TimesheetDao timesheetDao;
+    private final TimeEntryDao timeEntryDao;
     private final DtoMapper dtoMapper;
 
     @Autowired
-    public TimesheetService(TimesheetDao timesheetDao, DtoMapper dtoMapper) {
+    public TimeEntryService(TimesheetDao timesheetDao, TimeEntryDao timeEntryDao,
+                            DtoMapper dtoMapper) {
         this.timesheetDao = timesheetDao;
+        this.timeEntryDao = timeEntryDao;
         this.dtoMapper = dtoMapper;
     }
 
-    public Result<Timesheet> getTimesheets() {
-        List<TimesheetEx> list = timesheetDao.getTimesheets();
-        List<Timesheet> ret = list.stream().map(p -> dtoMapper.copy(p, new Timesheet())).collect(Collectors.toList());
-        return new Result<>(ret, ret.size());
+    public Result<TimeEntry> getWorkEfforts() {
+        List<it.mapsgroup.gzoom.querydsl.dto.TimeEntry> list = timeEntryDao.getWorkEfforts();
+        //List<TimeEntry> ret = list.stream().map(p -> dtoMapper.copy(p, new TimeEntry())).collect(Collectors.toList());
+        //return new Result<>(ret, ret.size());
+        return null;
     }
 
-    public String createTimesheet(Timesheet req) {
+    /*public String createTimesheet(Timesheet req) {
         Validators.assertNotNull(req, Messages.TIMESHEET_REQUIRED);
         Validators.assertNotBlank(req.getPartyId(), Messages.PARTY_ID_REQUIRED);
         it.mapsgroup.gzoom.querydsl.dto.Timesheet timesheet = new it.mapsgroup.gzoom.querydsl.dto.Timesheet();
@@ -81,6 +84,6 @@ public class TimesheetService {
         to.setTimesheetId(from.getTimesheetId());
         to.setActualHours(from.getActualHours());
         to.setContractHours(from.getContractHours());
-    }
+    }*/
 
 }

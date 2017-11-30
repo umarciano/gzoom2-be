@@ -2,9 +2,17 @@ package it.mapsgroup.gzoom.service;
 
 import it.mapsgroup.gzoom.model.Timesheet;
 import it.mapsgroup.gzoom.model.User;
+import it.mapsgroup.gzoom.querydsl.dto.TimesheetEx;
+import it.memelabs.smartnebula.commons.DateUtil;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  * @author Fabio G. Strozzi
@@ -23,7 +31,8 @@ public class DtoMapper {
      * @return
      */
 
-    public Timesheet copy(it.mapsgroup.gzoom.querydsl.dto.Timesheet from, Timesheet to) {
+    public Timesheet copy(it.mapsgroup.gzoom.querydsl.dto.TimesheetEx from, Timesheet to) {
+
         if (from.getFromDate() != null)
             to.setFromDate(from.getFromDate().toLocalDate());
         if (from.getThruDate() != null)
@@ -32,6 +41,7 @@ public class DtoMapper {
         to.setTimesheetId(from.getTimesheetId());
         to.setActualHours(from.getActualHours());
         to.setContractHours(from.getContractHours());
+        to.setPartyName(from.getParty().getPartyName());
         return to;
     }
 

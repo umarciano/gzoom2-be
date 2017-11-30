@@ -10,6 +10,7 @@ public class Timesheet extends Identifiable {
     private String timesheetId;
     private BigDecimal actualHours;
     private BigDecimal contractHours;
+    private String partyName;
 
     public LocalDate getFromDate() {
         return fromDate;
@@ -57,5 +58,13 @@ public class Timesheet extends Identifiable {
 
     public void setContractHours(BigDecimal contractHours) {
         this.contractHours = contractHours;
+    }
+
+    public String getPartyName() {
+        return partyName;
+    }
+
+    public void setPartyName(String partyName) {
+        this.partyName = partyName;
     }
 }

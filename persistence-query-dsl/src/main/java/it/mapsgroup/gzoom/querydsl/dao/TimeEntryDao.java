@@ -2,8 +2,6 @@ package it.mapsgroup.gzoom.querydsl.dao;
 
 import com.querydsl.core.Tuple;
 import com.querydsl.core.group.GroupBy;
-import com.querydsl.core.types.Projections;
-import com.querydsl.core.types.QBean;
 import com.querydsl.sql.SQLBindings;
 import com.querydsl.sql.SQLQuery;
 import com.querydsl.sql.SQLQueryFactory;
@@ -20,22 +18,20 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import java.util.List;
 
-import static com.querydsl.core.types.Projections.bean;
-import static it.mapsgroup.gzoom.querydsl.QBeanUtils.merge;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  */
 @Service
-public class TimesheetDao extends AbstractDao {
-    private static final Logger LOG = getLogger(TimesheetDao.class);
+public class TimeEntryDao extends AbstractDao {
+    private static final Logger LOG = getLogger(TimeEntryDao.class);
 
     private final SQLQueryFactory queryFactory;
     private final SequenceGenerator sequenceGenerator;
     private final TransactionTemplate transactionTemplate;
 
     @Autowired
-    public TimesheetDao(SQLQueryFactory queryFactory, SequenceGenerator sequenceGenerator,
+    public TimeEntryDao(SQLQueryFactory queryFactory, SequenceGenerator sequenceGenerator,
                         TransactionTemplate transactionTemplate) {
         this.queryFactory = queryFactory;
         this.sequenceGenerator = sequenceGenerator;
@@ -43,26 +39,40 @@ public class TimesheetDao extends AbstractDao {
     }
 
     @Transactional
-    public List<TimesheetEx> getTimesheets() {
+    public List<TimeEntry> getWorkEfforts() {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
         }
         QTimesheet qTimesheet = QTimesheet.timesheet;
-        QParty qParty = QParty.party;
-        //SQLQuery<Timesheet> tSQLQuery = queryFactory.select(qTimesheet).from(qTimesheet);
-        QBean<TimesheetEx> timesheetExQBean = bean(TimesheetEx.class, merge(qTimesheet.all(), bean(Party.class, qParty.all()).as("party")));
-        SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qTimesheet, qParty).from(qTimesheet).innerJoin(qTimesheet.timesheetPrty, qParty);
+        QTimeEntry qTimeEntry = QTimeEntry.timeEntry;
+        QWorkEffort qWorkEffortL1 = QWorkEffort.workEffort;
+        QWorkEffort qWorkEffortL2 = QWorkEffort.workEffort;
+        QWorkEffort qWorkEffortL3 = QWorkEffort.workEffort;
+        QWorkEffortAssoc qWorkEffortAssoc = QWorkEffortAssoc.workEffortAssoc;
+        QWorkEffortType qWorkEffortType = QWorkEffortType.workEffortType;
+        QWorkEffortTypeType qWorkEffortTypeType = QWorkEffortTypeType.workEffortTypeType;
+
+
+        SQLQuery<Tuple> tupleSQLQuery;
+        tupleSQLQuery = queryFactory.
+                select(qWorkEffortL1.workEffortName, qWorkEffortL2.workEffortName, qWorkEffortL3.workEffortName, qWorkEffortL3.workEffortId).
+                    from(qTimesheet).
+                    innerJoin(qWorkEffortType, qWorkEffortType).on(qWorkEffortType.etch.equalsIgnoreCase("TIMESHEET")).
+                    innerJoin(qWorkEffortTypeType,qWorkEffortTypeType).
+                        on(qWorkEffortTypeType.workEffortTypeIdRoot.equalsIgnoreCase(qWorkEffortType.workEffortTypeId));
+
+
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
         //QBean<Timesheet> timesheets = Projections.bean(Timesheet.class, qTimesheet.all());
-        List<TimesheetEx> ret = tupleSQLQuery.transform(GroupBy.groupBy(qTimesheet.timesheetId).list(timesheetExQBean));
-        LOG.info("size = {}", ret.size());
-        return ret;
+        /*List<TimesheetEx> ret = tupleSQLQuery.transform(GroupBy.groupBy(qTimesheet.timesheetId).list(timesheetExQBean));
+        LOG.info("size = {}", ret.size());*/
+        return null;
     }
 
-    @Transactional
+    /*@Transactional
     public boolean create(Timesheet record, String userLoginId) {
         QTimesheet qTimesheet = QTimesheet.timesheet;
         setCreatedTimestamp(record);
@@ -113,6 +123,6 @@ public class TimesheetDao extends AbstractDao {
         long i = queryFactory.delete(qTimesheet).where(qTimesheet.timesheetId.eq(id)).execute();
         LOG.info("deleted records: {}", i);
         return i > 0;
-    }
+    }*/
 
 }
