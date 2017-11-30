@@ -94,15 +94,21 @@ public class QContent extends com.querydsl.sql.RelationalPathBase<Content> {
 
     public final com.querydsl.sql.ForeignKey<Content> _contentDcntnt = createInvForeignKey(contentId, "DECORATOR_CONTENT_ID");
 
+    public final com.querydsl.sql.ForeignKey<WorkEffort> _weLnamecnt = createInvForeignKey(contentId, "LOCAL_NAME_CONTENT_ID");
+
     public final com.querydsl.sql.ForeignKey<Content> _contentPcntnt = createInvForeignKey(contentId, "OWNER_CONTENT_ID");
 
     public final com.querydsl.sql.ForeignKey<ContentAssoc> _contentasscFrom = createInvForeignKey(contentId, "CONTENT_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetLnamecnt = createInvForeignKey(contentId, "LOCAL_NAME_CONTENT_ID");
 
     public final com.querydsl.sql.ForeignKey<UomRatingScale> _ratingToCont = createInvForeignKey(contentId, "ICON_CONTENT_ID");
 
     public final com.querydsl.sql.ForeignKey<Content> _contentIofcnt = createInvForeignKey(contentId, "INSTANCE_OF_CONTENT_ID");
 
     public final com.querydsl.sql.ForeignKey<ContentAssoc> _contentasscTo = createInvForeignKey(contentId, "CONTENT_ID_TO");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetIconcnt = createInvForeignKey(contentId, "ICON_CONTENT_ID");
 
     public final com.querydsl.sql.ForeignKey<ContentAttribute> _contentAttr = createInvForeignKey(contentId, "CONTENT_ID");
 

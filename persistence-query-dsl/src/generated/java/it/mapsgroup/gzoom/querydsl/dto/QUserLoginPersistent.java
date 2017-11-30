@@ -74,6 +74,8 @@ public class QUserLoginPersistent extends com.querydsl.sql.RelationalPathBase<Us
 
     public final com.querydsl.sql.ForeignKey<Content> _contentLmbUlgn = createInvForeignKey(userLoginId, "LAST_MODIFIED_BY_USER_LOGIN");
 
+    public final com.querydsl.sql.ForeignKey<WorkEffortPartyAssignment> _wkeffPaAbusrlog = createInvForeignKey(userLoginId, "ASSIGNED_BY_USER_LOGIN_ID");
+
     public final com.querydsl.sql.ForeignKey<Party> _partyLmcul = createInvForeignKey(userLoginId, "LAST_MODIFIED_BY_USER_LOGIN");
 
     public final com.querydsl.sql.ForeignKey<ContentAssoc> _contentasscLmbur = createInvForeignKey(userLoginId, "LAST_MODIFIED_BY_USER_LOGIN");
