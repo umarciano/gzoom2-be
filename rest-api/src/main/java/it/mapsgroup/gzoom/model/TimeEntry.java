@@ -12,7 +12,7 @@ public class TimeEntry extends Identifiable {
     private String comments;
     private String timeEntryId;
     private String rateTypeId;
-    private double percentage;
+    private BigDecimal percentage;
     private String effortUomId;
 
     public LocalDate getFromDate() {
@@ -79,11 +79,11 @@ public class TimeEntry extends Identifiable {
         this.rateTypeId = rateTypeId;
     }
 
-    public double getPercentage() {
+    public BigDecimal getPercentage() {
         return percentage;
     }
 
-    public void setPercentage(double percentage) {
+    public void setPercentage(BigDecimal percentage) {
         this.percentage = percentage;
     }
 

@@ -1,5 +1,6 @@
 package it.mapsgroup.gzoom.service;
 
+import it.mapsgroup.gzoom.model.TimeEntry;
 import it.mapsgroup.gzoom.model.Timesheet;
 import it.mapsgroup.gzoom.model.User;
 import it.mapsgroup.gzoom.querydsl.dto.TimesheetEx;
@@ -42,6 +43,19 @@ public class DtoMapper {
         to.setActualHours(from.getActualHours());
         to.setContractHours(from.getContractHours());
         to.setPartyName(from.getParty().getPartyName());
+        return to;
+    }
+
+    public TimeEntry copy(it.mapsgroup.gzoom.querydsl.dto.TimeEntry from, TimeEntry to) {
+
+        if (from.getFromDate() != null)
+            to.setFromDate(from.getFromDate().toLocalDate());
+        if (from.getThruDate() != null)
+            to.setThruDate(from.getThruDate().toLocalDate());
+        to.setTimesheetId(from.getTimesheetId());
+        to.setWorkEffortId(from.getWorkEffortId());
+        to.setPercentage(from.getPercentage());
+
         return to;
     }
 

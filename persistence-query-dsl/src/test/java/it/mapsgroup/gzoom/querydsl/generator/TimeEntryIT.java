@@ -39,61 +39,53 @@ public class TimeEntryIT extends AbstractDaoIT {
     @Transactional
     public void select() throws Exception {
 
-        QTimesheet ts = QTimesheet.timesheet;
-        QTimeEntry te = QTimeEntry.timeEntry;
-        QWorkEffort l1 = QWorkEffort.workEffort;
-        QWorkEffort l2 = QWorkEffort.workEffort;
-        QWorkEffort l3 = QWorkEffort.workEffort;
-        QWorkEffortAssoc wa = QWorkEffortAssoc.workEffortAssoc;
-        QWorkEffortType wt = QWorkEffortType.workEffortType;
-        QWorkEffortTypeType t1 = QWorkEffortTypeType.workEffortTypeType;
-        QWorkEffortTypeType t2 = QWorkEffortTypeType.workEffortTypeType;
-        QWorkEffortTypeType t3 = QWorkEffortTypeType.workEffortTypeType;
-        QWorkEffortPartyAssignment pa = QWorkEffortPartyAssignment.workEffortPartyAssignment;
+        String timesheetId = "10020";
+
+        QTimesheet ts = new QTimesheet("ts");
+        QTimeEntry te = new QTimeEntry("te");
+        QWorkEffort l1 = new QWorkEffort("l1");
+        QWorkEffort l2 = new QWorkEffort("l2");
+        QWorkEffort l3 = new QWorkEffort("l3");
+        QWorkEffortAssoc l12 = new QWorkEffortAssoc("l12");
+        QWorkEffortAssoc l23 = new QWorkEffortAssoc("l23");
+        QWorkEffortType wt = new QWorkEffortType("wt");
+        QWorkEffortTypeType t1 = new QWorkEffortTypeType("t1");
+        QWorkEffortTypeType t2 = new QWorkEffortTypeType("t2");
+        QWorkEffortTypeType t3 = new QWorkEffortTypeType("t3");
+        QWorkEffortPartyAssignment wpa = new QWorkEffortPartyAssignment("wpa");
 
         SQLQuery<Tuple> tupleSQLQuery;
         tupleSQLQuery = queryFactory.
-            select(l1.workEffortName, l2.workEffortName, l3.workEffortName, l3.workEffortId)
+            select(l1.workEffortName.as("AttivitaLiv1"), l2.workEffortName.as("AttivitaLiv2"),
+                    l3.workEffortName.as("AttivitaLiv3"), l3.workEffortId.as("IdLiv3"))
             .from(ts)
-            .innerJoin(wt, wt).on(wt.etch.equalsIgnoreCase("TIMESHEET"))
-            .innerJoin(t1,t1).on(t1.workEffortTypeIdRoot.equalsIgnoreCase(wt.workEffortTypeId).and(t1.sequenceNum.eq(new BigInteger("1"))))
-            .innerJoin(l1,l1).on(l1.workEffortTypeId.equalsIgnoreCase(t1.workEffortTypeIdTo)
+            .innerJoin(wt).on(wt.etch.eq("TIMESHEET"))
+            .innerJoin(t1).on(t1.workEffortTypeIdRoot.eq(wt.workEffortTypeId).and(t1.sequenceNum.eq(new BigInteger("1"))))
+            .innerJoin(l1).on(l1.workEffortTypeId.eq(t1.workEffortTypeIdTo)
                     .and(l1.estimatedStartDate.before(ts.thruDate))
                     .and(l1.estimatedCompletionDate.after(ts.fromDate))
                     .and(l1.workEffortRevisionId.isNull()))
-
-/*
-        inner join work_effort_party_assignment pa
-        on pa.WORK_EFFORT_ID = l1.WORK_EFFORT_ID
-        and pa.PARTY_ID = ts.PARTY_ID
-        and pa.FROM_DATE <= ts.THRU_DATE
-        and pa.THRU_DATE >= ts.FROM_DATE
-        inner join work_effort_type_type t2
-        on t2.WORK_EFFORT_TYPE_ID_ROOT = wt.WORK_EFFORT_TYPE_ID
-        and t2.SEQUENCE_NUM = 2
-        inner join work_effort_assoc l12
-        on l12.WORK_EFFORT_ID_FROM = l1.WORK_EFFORT_ID
-        inner join work_effort l2
-        on l2.WORK_EFFORT_ID = l12.WORK_EFFORT_ID_TO
-        and l2.WORK_EFFORT_TYPE_ID = t2.WORK_EFFORT_TYPE_ID_TO
-        and l2.ESTIMATED_START_DATE <= ts.THRU_DATE
-        and l2.ESTIMATED_COMPLETION_DATE >= ts.FROM_DATE
-        and l1.WORK_EFFORT_REVISION_ID is null
-        inner join work_effort_type_type t3
-        on t3.WORK_EFFORT_TYPE_ID_ROOT = wt.WORK_EFFORT_TYPE_ID
-        and t3.SEQUENCE_NUM = 3
-        inner join work_effort_assoc l23
-        on l23.WORK_EFFORT_ID_FROM = l2.WORK_EFFORT_ID
-        inner join work_effort l3
-        on l3.WORK_EFFORT_ID = l23.WORK_EFFORT_ID_TO
-        and l3.WORK_EFFORT_TYPE_ID = t3.WORK_EFFORT_TYPE_ID_TO
-        and l3.ESTIMATED_START_DATE <= ts.THRU_DATE
-        and l3.ESTIMATED_COMPLETION_DATE >= ts.FROM_DATE
-        and l3.WORK_EFFORT_REVISION_ID is null
-
-*/
-
-        ;
+            .innerJoin(wpa).on(wpa.workEffortId.eq(l1.workEffortId)
+                    .and(wpa.partyId.eq(ts.partyId))
+                    .and(wpa.fromDate.before(ts.thruDate))
+                    .and(wpa.thruDate.after(ts.fromDate)))
+            .innerJoin(t2).on(t2.workEffortTypeIdRoot.eq(wt.workEffortTypeId)
+                    .and(t2.sequenceNum.eq(new BigInteger("2"))))
+            .innerJoin(l12).on(l12.workEffortIdFrom.eq(l1.workEffortId))
+            .innerJoin(l2).on(l2.workEffortId.eq(l12.workEffortIdTo)
+                .and(l2.workEffortTypeId.eq(t2.workEffortTypeIdTo))
+                .and(l2.estimatedStartDate.before(ts.thruDate))
+                .and(l2.estimatedCompletionDate.after(ts.fromDate))
+                .and(l1.workEffortRevisionId.isNull()))
+            .innerJoin(t3).on(t3.workEffortTypeIdRoot.eq(wt.workEffortTypeId)
+                .and(t3.sequenceNum.eq(new BigInteger("3"))))
+            .innerJoin(l23).on(l23.workEffortIdFrom.eq(l2.workEffortId))
+            .innerJoin(l3).on(l3.workEffortId.eq(l23.workEffortIdTo)
+                .and(l3.workEffortTypeId.eq(t3.workEffortTypeIdTo))
+                .and(l3.estimatedStartDate.before(ts.thruDate))
+                .and(l3.estimatedCompletionDate.after(ts.fromDate))
+                .and(l3.workEffortRevisionId.isNull()))
+        .where(ts.timesheetId.eq(timesheetId));
 
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
