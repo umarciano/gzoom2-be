@@ -2,6 +2,8 @@ package it.mapsgroup.gzoom.querydsl.dao;
 
 import com.querydsl.core.Tuple;
 import com.querydsl.core.group.GroupBy;
+import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.QBean;
 import com.querydsl.sql.SQLBindings;
 import com.querydsl.sql.SQLQuery;
 import com.querydsl.sql.SQLQueryFactory;
@@ -17,8 +19,10 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 import org.springframework.transaction.support.TransactionTemplate;
 
 import java.math.BigInteger;
+import java.sql.Time;
 import java.util.List;
 
+import static com.querydsl.core.types.Projections.bean;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
@@ -37,6 +41,23 @@ public class TimeEntryDao extends AbstractDao {
         this.queryFactory = queryFactory;
         this.sequenceGenerator = sequenceGenerator;
         this.transactionTemplate = transactionTemplate;
+    }
+
+    @Transactional
+    public List<TimeEntry> getTimeEntries(String id) {
+        if (TransactionSynchronizationManager.isActualTransactionActive()) {
+            TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
+            status.getClass();
+        }
+        QTimeEntry qte = QTimeEntry.timeEntry;
+        SQLQuery<TimeEntry> tSQLQuery = queryFactory.select(qte).from(qte).where(qte.timesheetId.eq(id));
+        SQLBindings bindings = tSQLQuery.getSQL();
+        LOG.info("{}", bindings.getSQL());
+        LOG.info("{}", bindings.getBindings());
+        QBean<TimeEntry> timeEntries = Projections.bean(TimeEntry.class, qte.all());
+        List<TimeEntry> ret = tSQLQuery.transform(GroupBy.groupBy(qte.timeEntryId).list(timeEntries));
+        LOG.info("size = {}", ret.size());
+        return ret;
     }
 
     @Transactional

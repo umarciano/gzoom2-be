@@ -37,6 +37,12 @@ public class TimeEntryService {
         this.dtoMapper = dtoMapper;
     }
 
+    public Result<TimeEntry> getTimeEntries(String id) {
+        List<it.mapsgroup.gzoom.querydsl.dto.TimeEntry> list = timeEntryDao.getTimeEntries(id);
+        List<TimeEntry> ret = list.stream().map(p -> dtoMapper.copy(p, new TimeEntry())).collect(Collectors.toList());
+        return new Result<>(ret, ret.size());
+    }
+
     public Result<TimeEntry> getWorkEfforts() {
         List<it.mapsgroup.gzoom.querydsl.dto.TimeEntry> list = timeEntryDao.getWorkEfforts();
         List<TimeEntry> ret = list.stream().map(p -> dtoMapper.copy(p, new TimeEntry())).collect(Collectors.toList());

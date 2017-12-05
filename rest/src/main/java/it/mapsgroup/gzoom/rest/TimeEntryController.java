@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  */
 @RestController
@@ -30,6 +32,12 @@ public class TimeEntryController {
     @ResponseBody
     public Result<Timesheet> getTimesheets() {
         return Exec.exec("timesheet/timesheet get", () -> timesheetService.getTimesheets());
+    }
+
+    @RequestMapping(value = "timesheet/time-entry/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Result<TimeEntry> getTimeEntries(@PathVariable(value = "id") String id){
+        return Exec.exec("timesheet/time-entry get", () -> timeEntryService.getTimeEntries(id));
     }
 
     @RequestMapping(value = "timesheet/time-entry-workefforts", method = RequestMethod.GET)
