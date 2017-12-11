@@ -23,6 +23,7 @@ import java.sql.Time;
 import java.util.List;
 
 import static com.querydsl.core.types.Projections.bean;
+import static it.mapsgroup.gzoom.querydsl.QBeanUtils.merge;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
@@ -61,7 +62,7 @@ public class TimeEntryDao extends AbstractDao {
     }
 
     @Transactional
-    public List<TimeEntry> getWorkEfforts() {
+    public List<TimeEntryEx> getWorkEfforts() {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
@@ -119,10 +120,10 @@ public class TimeEntryDao extends AbstractDao {
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
-        //QBean<Timesheet> timesheets = Projections.bean(Timesheet.class, qTimesheet.all());
-        /*List<TimesheetEx> ret = tupleSQLQuery.transform(GroupBy.groupBy(qTimesheet.timesheetId).list(timesheetExQBean));
-        LOG.info("size = {}", ret.size());*/
-        return null;
+        QBean<TimeEntryEx> teExQBean = Projections.bean(TimeEntryEx.class, te.all());
+        List<TimeEntryEx> ret = tupleSQLQuery.transform(GroupBy.groupBy(te.timeEntryId).list(teExQBean));
+        LOG.info("size = {}", ret.size());
+        return ret;
     }
 
     /*@Transactional
