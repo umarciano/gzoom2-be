@@ -120,8 +120,8 @@ public class TimeEntryDao extends AbstractDao {
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
-        QBean<TimeEntryEx> teExQBean = Projections.bean(TimeEntryEx.class, te.all());
-        List<TimeEntryEx> ret = tupleSQLQuery.transform(GroupBy.groupBy(te.timeEntryId).list(teExQBean));
+        QBean<TimeEntryEx> teExQBean = Projections.bean(TimeEntryEx.class);
+        List<TimeEntryEx> ret = tupleSQLQuery.transform(GroupBy.groupBy(l1.workEffortId).list(teExQBean));
         LOG.info("size = {}", ret.size());
         return ret;
     }
