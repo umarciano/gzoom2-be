@@ -1,5 +1,7 @@
 package it.mapsgroup.gzoom.model;
 
+import it.mapsgroup.gzoom.querydsl.dto.WorkEffort;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -14,6 +16,7 @@ public class TimeEntry extends Identifiable {
     private String rateTypeId;
     private BigDecimal percentage;
     private String effortUomId;
+    private WorkEffort workEffort;
 
     public LocalDate getFromDate() {
         return fromDate;
@@ -93,5 +96,13 @@ public class TimeEntry extends Identifiable {
 
     public void setEffortUomId(String effortUomId) {
         this.effortUomId = effortUomId;
+    }
+
+    public WorkEffort getWorkEffort() {
+        return workEffort;
+    }
+
+    public void setWorkEffort(WorkEffort workEffort) {
+        this.workEffort = workEffort;
     }
 }

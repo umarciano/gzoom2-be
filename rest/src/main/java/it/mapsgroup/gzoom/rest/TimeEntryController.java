@@ -43,7 +43,7 @@ public class TimeEntryController {
 
     @RequestMapping(value = "timesheet/time-entry-work-efforts", method = RequestMethod.GET)
     @ResponseBody
-    public List<TimeEntryEx> getWorkEfforts() {
+    public Result<TimeEntry> getWorkEfforts() {
         return Exec.exec("timesheet/time-entry-workefforts get", () -> timeEntryService.getWorkEfforts());
     }
 

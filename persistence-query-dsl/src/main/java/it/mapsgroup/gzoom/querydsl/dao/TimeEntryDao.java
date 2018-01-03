@@ -68,7 +68,7 @@ public class TimeEntryDao extends AbstractDao {
             status.getClass();
         }
 
-        String timesheetId = "1000";
+        //String timesheetId = "1000";
 
         QTimesheet ts = new QTimesheet("ts");
         QTimeEntry te = new QTimeEntry("te");
@@ -83,18 +83,21 @@ public class TimeEntryDao extends AbstractDao {
         QWorkEffortTypeType t3 = new QWorkEffortTypeType("t3");
         QWorkEffortPartyAssignment wpa = new QWorkEffortPartyAssignment("wpa");
 
+        QBean<TimeEntryEx> teExQBean = bean(TimeEntryEx.class);
+
         SQLQuery<Tuple> tupleSQLQuery;
         tupleSQLQuery = queryFactory.
-            select(l1.workEffortName.as("AttivitaLiv1"), l2.workEffortName.as("AttivitaLiv2"),
-                    l3.workEffortName.as("AttivitaLiv3"), l3.workEffortId.as("IdLiv3"))
+            select( l1.workEffortName.as("AttivitaLiv1"), l1.workEffortId
+            //        ,l2.workEffortName.as("AttivitaLiv2"),l3.workEffortName.as("AttivitaLiv3"), l3.workEffortId.as("IdLiv3")
+            )
             .from(ts)
             .innerJoin(wt).on(wt.etch.eq("TIMESHEET"))
             .innerJoin(t1).on(t1.workEffortTypeIdRoot.eq(wt.workEffortTypeId).and(t1.sequenceNum.eq(new BigInteger("1"))))
             .innerJoin(l1).on(l1.workEffortTypeId.eq(t1.workEffortTypeIdTo)
                     .and(l1.estimatedStartDate.before(ts.thruDate))
                     .and(l1.estimatedCompletionDate.after(ts.fromDate))
-                    .and(l1.workEffortRevisionId.isNull()))
-            .innerJoin(wpa).on(wpa.workEffortId.eq(l1.workEffortId)
+                    .and(l1.workEffortRevisionId.isNull()));
+            /*.innerJoin(wpa).on(wpa.workEffortId.eq(l1.workEffortId)
                     .and(wpa.partyId.eq(ts.partyId))
                     .and(wpa.fromDate.before(ts.thruDate))
                     .and(wpa.thruDate.after(ts.fromDate)))
@@ -113,14 +116,12 @@ public class TimeEntryDao extends AbstractDao {
                     .and(l3.workEffortTypeId.eq(t3.workEffortTypeIdTo))
                     .and(l3.estimatedStartDate.before(ts.thruDate))
                     .and(l3.estimatedCompletionDate.after(ts.fromDate))
-                    .and(l3.workEffortRevisionId.isNull()))
-            .where(ts.timesheetId.eq(timesheetId));
-
-
+                    .and(l3.workEffortRevisionId.isNull()))*/
+           // .where(ts.timesheetId.eq(timesheetId));
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
-        QBean<TimeEntryEx> teExQBean = Projections.bean(TimeEntryEx.class);
+
         List<TimeEntryEx> ret = tupleSQLQuery.transform(GroupBy.groupBy(l1.workEffortId).list(teExQBean));
         LOG.info("size = {}", ret.size());
         return ret;

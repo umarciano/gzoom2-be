@@ -44,11 +44,10 @@ public class TimeEntryService {
         return new Result<>(ret, ret.size());
     }
 
-    public List<TimeEntryEx> getWorkEfforts() {
+    public Result<TimeEntry> getWorkEfforts() {
         List<it.mapsgroup.gzoom.querydsl.dto.TimeEntryEx> list = timeEntryDao.getWorkEfforts();
-        //List<TimeEntryEx> ret = list.stream().map(p -> dtoMapper.copy(p, new TimeEntryEx())).collect(Collectors.toList());
-        //return new Result<>(ret, ret.size());
-        return list;
+        List<TimeEntry> ret = list.stream().map(p -> dtoMapper.copy(p, new TimeEntry())).collect(Collectors.toList());
+        return new Result<>(ret, ret.size());
     }
 
     /*public String createTimesheet(Timesheet req) {
