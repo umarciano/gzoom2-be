@@ -19,7 +19,6 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 import org.springframework.transaction.support.TransactionTemplate;
 
 import java.math.BigInteger;
-import java.sql.Time;
 import java.util.List;
 
 import static com.querydsl.core.types.Projections.bean;
@@ -83,21 +82,20 @@ public class TimeEntryDao extends AbstractDao {
         QWorkEffortTypeType t3 = new QWorkEffortTypeType("t3");
         QWorkEffortPartyAssignment wpa = new QWorkEffortPartyAssignment("wpa");
 
-        QBean<TimeEntryEx> teExQBean = bean(TimeEntryEx.class);
+        QBean<TimeEntryEx> teExQBean = bean(TimeEntryEx.class, merge(l1.all(), bean(WorkEffort.class, l1.all()).as("workEffort")));
 
-        SQLQuery<Tuple> tupleSQLQuery;
-        tupleSQLQuery = queryFactory.
-            select( l1.workEffortName.as("AttivitaLiv1"), l1.workEffortId
-            //        ,l2.workEffortName.as("AttivitaLiv2"),l3.workEffortName.as("AttivitaLiv3"), l3.workEffortId.as("IdLiv3")
-            )
-            .from(ts)
-            .innerJoin(wt).on(wt.etch.eq("TIMESHEET"))
-            .innerJoin(t1).on(t1.workEffortTypeIdRoot.eq(wt.workEffortTypeId).and(t1.sequenceNum.eq(new BigInteger("1"))))
-            .innerJoin(l1).on(l1.workEffortTypeId.eq(t1.workEffortTypeIdTo)
-                    .and(l1.estimatedStartDate.before(ts.thruDate))
-                    .and(l1.estimatedCompletionDate.after(ts.fromDate))
-                    .and(l1.workEffortRevisionId.isNull()));
-            /*.innerJoin(wpa).on(wpa.workEffortId.eq(l1.workEffortId)
+        SQLQuery<Tuple> tupleSQLQuery = queryFactory.
+                select(l1.workEffortName.as("attivitaLiv1"), l1.workEffortId
+                        //        ,l2.workEffortName.as("AttivitaLiv2"),l3.workEffortName.as("AttivitaLiv3"), l3.workEffortId.as("IdLiv3")
+                )
+                .from(ts)
+                .innerJoin(wt).on(wt.etch.eq("TIMESHEET"))
+                .innerJoin(t1).on(t1.workEffortTypeIdRoot.eq(wt.workEffortTypeId).and(t1.sequenceNum.eq(new BigInteger("1"))))
+                .innerJoin(l1).on(l1.workEffortTypeId.eq(t1.workEffortTypeIdTo)
+                        .and(l1.estimatedStartDate.before(ts.thruDate))
+                        .and(l1.estimatedCompletionDate.after(ts.fromDate))
+                        .and(l1.workEffortRevisionId.isNull()))
+            .innerJoin(wpa).on(wpa.workEffortId.eq(l1.workEffortId)
                     .and(wpa.partyId.eq(ts.partyId))
                     .and(wpa.fromDate.before(ts.thruDate))
                     .and(wpa.thruDate.after(ts.fromDate)))
@@ -116,8 +114,8 @@ public class TimeEntryDao extends AbstractDao {
                     .and(l3.workEffortTypeId.eq(t3.workEffortTypeIdTo))
                     .and(l3.estimatedStartDate.before(ts.thruDate))
                     .and(l3.estimatedCompletionDate.after(ts.fromDate))
-                    .and(l3.workEffortRevisionId.isNull()))*/
-           // .where(ts.timesheetId.eq(timesheetId));
+                    .and(l3.workEffortRevisionId.isNull()));
+        // .where(ts.timesheetId.eq(timesheetId));
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
@@ -127,57 +125,51 @@ public class TimeEntryDao extends AbstractDao {
         return ret;
     }
 
-    /*@Transactional
-    public boolean create(Timesheet record, String userLoginId) {
-        QTimesheet qTimesheet = QTimesheet.timesheet;
+    @Transactional
+    public boolean create(TimeEntry record, String userLoginId) {
+        QTimeEntry qTimeEntry = QTimeEntry.timeEntry;
         setCreatedTimestamp(record);
-        //setCreatedByUserLogin(record, userLoginId);
-        //transactionTemplate.execute(txStatus -> {
-        Timesheet t = new Timesheet();
-        String id = sequenceGenerator.getNextSeqId("Timesheet");
-        LOG.debug("new timesheetId" + id);
-        record.setTimesheetId(id);
-        long i = queryFactory.insert(qTimesheet).populate(record).execute();
+        TimeEntry t = new TimeEntry();
+        String id = sequenceGenerator.getNextSeqId("TimeEntry");
+        LOG.debug("new timeEntryId" + id);
+        record.setTimeEntryId(id);
+        long i = queryFactory.insert(qTimeEntry).populate(record).execute();
         LOG.info("created records: {}", i);
-
         return i > 0;
-        //});
     }
 
     @Transactional
-    public Timesheet getTimesheet(String timesheetId) {
-        if (TransactionSynchronizationManager.isActualTransactionActive()) {
-            TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
-            status.getClass();
-        }
-        QTimesheet qTimesheet = QTimesheet.timesheet;
-        SQLQuery<Timesheet> tSQLQuery = queryFactory.select(qTimesheet).from(qTimesheet).where(qTimesheet.timesheetId.eq(timesheetId));
-        SQLBindings bindings = tSQLQuery.getSQL();
-        LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
-        QBean<Timesheet> timesheets = Projections.bean(Timesheet.class, qTimesheet.all());
-        List<Timesheet> ret = tSQLQuery.transform(GroupBy.groupBy(qTimesheet.timesheetId).list(timesheets));
-
-        return ret.isEmpty() ? null : ret.get(0);
-    }
-
-    @Transactional
-    public boolean update(String id, Timesheet record, String userLoginId) {
-        QTimesheet qTimesheet = QTimesheet.timesheet;
+    public boolean update(String id, TimeEntry record, String userLoginId) {
+        QTimeEntry qTimeEntry = QTimeEntry.timeEntry;
         setUpdateTimestamp(record);
-        //setLastModifiedByUserLogin(record, userLoginId);
-        // Using bean population
-        long i = queryFactory.update(qTimesheet).set(qTimesheet.timesheetId, record.getTimesheetId()).where(qTimesheet.timesheetId.eq(id)).populate(record).execute();
+        long i = queryFactory.update(qTimeEntry).set(qTimeEntry.timeEntryId, record.getTimeEntryId()).where(qTimeEntry.timeEntryId.eq(id)).populate(record).execute();
         LOG.info("updated records: {}", i);
         return i > 0;
     }
 
     @Transactional
     public boolean delete(String id) {
-        QTimesheet qTimesheet = QTimesheet.timesheet;
-        long i = queryFactory.delete(qTimesheet).where(qTimesheet.timesheetId.eq(id)).execute();
+        QTimeEntry qTimeEntry = QTimeEntry.timeEntry;
+        long i = queryFactory.delete(qTimeEntry).where(qTimeEntry.timeEntryId.eq(id)).execute();
         LOG.info("deleted records: {}", i);
         return i > 0;
-    }*/
+    }
+
+    @Transactional
+    public TimeEntry getTimeEntry(String timeEntryId) {
+        if (TransactionSynchronizationManager.isActualTransactionActive()) {
+            TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
+            status.getClass();
+        }
+        QTimeEntry qTimeEntry = QTimeEntry.timeEntry;
+        SQLQuery<TimeEntry> tSQLQuery = queryFactory.select(qTimeEntry).from(qTimeEntry).where(qTimeEntry.timeEntryId.eq(timeEntryId));
+        SQLBindings bindings = tSQLQuery.getSQL();
+        LOG.info("{}", bindings.getSQL());
+        LOG.info("{}", bindings.getBindings());
+        QBean<TimeEntry> timeEntry = Projections.bean(TimeEntry.class, qTimeEntry.all());
+        List<TimeEntry> ret = tSQLQuery.transform(GroupBy.groupBy(qTimeEntry.timeEntryId).list(timeEntry));
+
+        return ret.isEmpty() ? null : ret.get(0);
+    }
 
 }

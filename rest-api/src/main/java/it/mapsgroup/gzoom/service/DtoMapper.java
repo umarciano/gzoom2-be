@@ -70,6 +70,10 @@ public class DtoMapper {
         to.setWorkEffortId(from.getWorkEffortId());
         to.setTimeEntryId(from.getTimeEntryId());
         to.setWorkEffort(from.getWorkEffort());
+        to.setAttivitaLiv1(from.getAttivitaLiv1());
+        to.setAttivitaLiv2(from.getAttivitaLiv2());
+        to.setAttivitaLiv3(from.getAttivitaLiv3());
+        to.setAttivitaLiv1(from.getWorkEffortName());
         return to;
     }
 

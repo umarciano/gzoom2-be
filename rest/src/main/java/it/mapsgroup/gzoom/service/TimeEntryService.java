@@ -50,32 +50,26 @@ public class TimeEntryService {
         return new Result<>(ret, ret.size());
     }
 
-    /*public String createTimesheet(Timesheet req) {
-        Validators.assertNotNull(req, Messages.TIMESHEET_REQUIRED);
-        Validators.assertNotBlank(req.getPartyId(), Messages.PARTY_ID_REQUIRED);
-        it.mapsgroup.gzoom.querydsl.dto.Timesheet timesheet = new it.mapsgroup.gzoom.querydsl.dto.Timesheet();
-        //timesheet.setTimesheetId(req.getTimesheetId());
-        timesheet.setPartyId(req.getPartyId());
-        timesheet.setFromDate(req.getFromDate().atStartOfDay());
-        timesheet.setThruDate(req.getThruDate().atStartOfDay());
-        timesheet.setActualHours(req.getActualHours());
-        timesheet.setContractHours(req.getContractHours());
-        timesheetDao.create(timesheet, principal().getUserLoginId());
+    public String createTimeEntry(TimeEntry req) {
+        Validators.assertNotNull(req.getTimesheetId(), Messages.INVALID_TIMESHEET);
+        it.mapsgroup.gzoom.querydsl.dto.TimeEntry timeEntry = new it.mapsgroup.gzoom.querydsl.dto.TimeEntry();
+        timeEntry.setWorkEffortId(req.getWorkEffort().getWorkEffortId());
+        timeEntry.setTimeEntryId(req.getTimeEntryId());
+        timeEntry.setPercentage(req.getPercentage());
+        timeEntryDao.create(timeEntry, principal().getUserLoginId());
         return req.getTimesheetId();
     }
 
-    public String updateTimesheet(String id, Timesheet req) {
-        Validators.assertNotNull(req, Messages.TIMESHEET_REQUIRED);
-        Validators.assertNotBlank(req.getPartyId(), Messages.PARTY_ID_REQUIRED);
-
-        it.mapsgroup.gzoom.querydsl.dto.Timesheet record = timesheetDao.getTimesheet(id);
-        Validators.assertNotNull(record, Messages.INVALID_TIMESHEET);
+    public String updateTimeEntry(String id, TimeEntry req) {
+        Validators.assertNotNull(req.getTimeEntryId(), Messages.TIME_ENTRY_ID_REQUIRED);
+        it.mapsgroup.gzoom.querydsl.dto.TimeEntry record = timeEntryDao.getTimeEntry(id);
+        Validators.assertNotNull(record, Messages.INVALID_TIME_ENTRY);
         copy(req, record);
-        timesheetDao.update(id, record, principal().getUserLoginId());
+        timeEntryDao.update(id, record, principal().getUserLoginId());
         return req.getTimesheetId();
     }
 
-    public String deleteTimesheet(String id) {
+    public String deleteTimeEntry(String id) {
         Validators.assertNotBlank(id, Messages.TIMESHEET_ID_REQUIRED);
         it.mapsgroup.gzoom.querydsl.dto.Timesheet record = timesheetDao.getTimesheet(id);
         Validators.assertNotNull(record, Messages.INVALID_TIMESHEET);
@@ -83,13 +77,11 @@ public class TimeEntryService {
         return id;
     }
 
-    public void copy( Timesheet from, it.mapsgroup.gzoom.querydsl.dto.Timesheet to) {
+    public void copy( TimeEntry from, it.mapsgroup.gzoom.querydsl.dto.TimeEntry to) {
         to.setFromDate(from.getFromDate().atStartOfDay());
         to.setThruDate(from.getThruDate().atStartOfDay());
         to.setPartyId(from.getPartyId());
         to.setTimesheetId(from.getTimesheetId());
-        to.setActualHours(from.getActualHours());
-        to.setContractHours(from.getContractHours());
-    }*/
+    }
 
 }
