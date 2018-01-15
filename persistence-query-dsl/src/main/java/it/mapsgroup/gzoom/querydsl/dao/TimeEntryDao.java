@@ -67,8 +67,6 @@ public class TimeEntryDao extends AbstractDao {
             status.getClass();
         }
 
-        //String timesheetId = "1000";
-
         QTimesheet ts = new QTimesheet("ts");
         QTimeEntry te = new QTimeEntry("te");
         QWorkEffort l1 = new QWorkEffort("l1");
@@ -85,37 +83,37 @@ public class TimeEntryDao extends AbstractDao {
         QBean<TimeEntryEx> teExQBean = bean(TimeEntryEx.class, merge(l1.all(), bean(WorkEffort.class, l1.all()).as("workEffort")));
 
         SQLQuery<Tuple> tupleSQLQuery = queryFactory.
-                select(l1.workEffortName.as("attivitaLiv1"), l1.workEffortId
-                        //        ,l2.workEffortName.as("AttivitaLiv2"),l3.workEffortName.as("AttivitaLiv3"), l3.workEffortId.as("IdLiv3")
+                select(l1.workEffortName.as("attivitaLiv1"), l1.workEffortId.as("IdLiv1")
+                        ,l2.workEffortName.as("AttivitaLiv2"), l2.workEffortId.as("IdLiv2")
+                        ,l3.workEffortName.as("AttivitaLiv3"), l3.workEffortId.as("IdLiv3")
                 )
                 .from(ts)
-                .innerJoin(wt).on(wt.etch.eq("TIMESHEET"))
-                .innerJoin(t1).on(t1.workEffortTypeIdRoot.eq(wt.workEffortTypeId).and(t1.sequenceNum.eq(new BigInteger("1"))))
-                .innerJoin(l1).on(l1.workEffortTypeId.eq(t1.workEffortTypeIdTo)
+                .leftJoin(wt).on(wt.etch.eq("TIMESHEET"))
+                .leftJoin(t1).on(t1.workEffortTypeIdRoot.eq(wt.workEffortTypeId).and(t1.sequenceNum.eq(new BigInteger("1"))))
+                .leftJoin(l1).on(l1.workEffortTypeId.eq(t1.workEffortTypeIdTo)
                         .and(l1.estimatedStartDate.before(ts.thruDate))
                         .and(l1.estimatedCompletionDate.after(ts.fromDate))
                         .and(l1.workEffortRevisionId.isNull()))
-            .innerJoin(wpa).on(wpa.workEffortId.eq(l1.workEffortId)
+            .leftJoin(wpa).on(wpa.workEffortId.eq(l1.workEffortId)
                     .and(wpa.partyId.eq(ts.partyId))
                     .and(wpa.fromDate.before(ts.thruDate))
                     .and(wpa.thruDate.after(ts.fromDate)))
-            .innerJoin(t2).on(t2.workEffortTypeIdRoot.eq(wt.workEffortTypeId)
+            .leftJoin(t2).on(t2.workEffortTypeIdRoot.eq(wt.workEffortTypeId)
                     .and(t2.sequenceNum.eq(new BigInteger("2"))))
-            .innerJoin(l12).on(l12.workEffortIdFrom.eq(l1.workEffortId))
-            .innerJoin(l2).on(l2.workEffortId.eq(l12.workEffortIdTo)
+            .leftJoin(l12).on(l12.workEffortIdFrom.eq(l1.workEffortId))
+            .leftJoin(l2).on(l2.workEffortId.eq(l12.workEffortIdTo)
                     .and(l2.workEffortTypeId.eq(t2.workEffortTypeIdTo))
                     .and(l2.estimatedStartDate.before(ts.thruDate))
                     .and(l2.estimatedCompletionDate.after(ts.fromDate))
                     .and(l1.workEffortRevisionId.isNull()))
-            .innerJoin(t3).on(t3.workEffortTypeIdRoot.eq(wt.workEffortTypeId)
+            .leftJoin(t3).on(t3.workEffortTypeIdRoot.eq(wt.workEffortTypeId)
                     .and(t3.sequenceNum.eq(new BigInteger("3"))))
-            .innerJoin(l23).on(l23.workEffortIdFrom.eq(l2.workEffortId))
-            .innerJoin(l3).on(l3.workEffortId.eq(l23.workEffortIdTo)
+            .leftJoin(l23).on(l23.workEffortIdFrom.eq(l2.workEffortId))
+            .leftJoin(l3).on(l3.workEffortId.eq(l23.workEffortIdTo)
                     .and(l3.workEffortTypeId.eq(t3.workEffortTypeIdTo))
                     .and(l3.estimatedStartDate.before(ts.thruDate))
                     .and(l3.estimatedCompletionDate.after(ts.fromDate))
                     .and(l3.workEffortRevisionId.isNull()));
-        // .where(ts.timesheetId.eq(timesheetId));
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
