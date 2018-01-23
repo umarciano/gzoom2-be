@@ -80,12 +80,17 @@ public class TimeEntryDao extends AbstractDao {
         QWorkEffortTypeType t3 = new QWorkEffortTypeType("t3");
         QWorkEffortPartyAssignment wpa = new QWorkEffortPartyAssignment("wpa");
 
-        QBean<TimeEntryEx> teExQBean = bean(TimeEntryEx.class, merge(l1.all(), bean(WorkEffort.class, l1.all()).as("workEffort")));
+        QBean<TimeEntryEx> teExQBean = bean(TimeEntryEx.class,
+                merge(ts.all(),
+                        bean(WorkEffort.class, l1.all()).as("workEffort1"),
+                        bean(WorkEffort.class, l2.all()).as("workEffort2"),
+                        bean(WorkEffort.class, l3.all()).as("workEffort3")
+                ));
 
         SQLQuery<Tuple> tupleSQLQuery = queryFactory.
                 select(l1.workEffortName.as("attivitaLiv1"), l1.workEffortId.as("IdLiv1")
-                        ,l2.workEffortName.as("AttivitaLiv2"), l2.workEffortId.as("IdLiv2")
-                        ,l3.workEffortName.as("AttivitaLiv3"), l3.workEffortId.as("IdLiv3")
+                        ,l2.workEffortName.as("attivitaLiv2"), l2.workEffortId.as("IdLiv2")
+                        ,l3.workEffortName.as("attivitaLiv3"), l3.workEffortId.as("IdLiv3")
                 )
                 .from(ts)
                 .leftJoin(wt).on(wt.etch.eq("TIMESHEET"))

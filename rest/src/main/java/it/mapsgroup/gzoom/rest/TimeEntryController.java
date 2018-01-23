@@ -50,7 +50,7 @@ public class TimeEntryController {
     @RequestMapping(value = "timesheet/time-entry-create" , method = RequestMethod.POST)
     @ResponseBody
     public String createTimeEntry(@RequestBody TimeEntry req) {
-        return Exec.exec( "timesheet/time-entry post", () -> timeEntryService.createTimeEntry(req));
+        return exec.exec( "timesheet/time-entry post", () -> timeentryservice.createtimeentry(req));
     }
 
     @RequestMapping(value = "timesheet/time-entry-update/{id}", method = RequestMethod.PUT)
