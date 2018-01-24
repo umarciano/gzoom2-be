@@ -58,8 +58,6 @@ public class DtoMapper {
             to.setThruDate(from.getThruDate().toLocalDate());
         to.setPartyId(from.getPartyId());
         to.setTimesheetId(from.getTimesheetId());
-        to.setWorkEffortId(from.getWorkEffortId());
-        to.setTimeEntryId(from.getTimeEntryId());
         to.setAttivitaLiv1(from.getWorkEffort1().getWorkEffortName());
         to.setAttivitaLiv2(from.getWorkEffort2().getWorkEffortName());
         to.setAttivitaLiv3(from.getWorkEffort3().getWorkEffortName());

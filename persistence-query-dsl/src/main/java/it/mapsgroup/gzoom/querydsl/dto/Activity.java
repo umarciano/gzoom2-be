@@ -1,6 +1,6 @@
 package it.mapsgroup.gzoom.querydsl.dto;
 
-public class Activity extends TimeEntry {
+public class Activity extends Timesheet {
     private WorkEffort workEffort1;
     private WorkEffort workEffort2;
     private WorkEffort workEffort3;
