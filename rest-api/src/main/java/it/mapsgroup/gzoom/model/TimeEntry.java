@@ -1,13 +1,12 @@
 package it.mapsgroup.gzoom.model;
 
 import it.mapsgroup.gzoom.querydsl.dto.WorkEffort;
-
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class TimeEntry extends Identifiable {
-    private LocalDate fromDate;
-    private LocalDate thruDate;
+    private LocalDateTime fromDate;
+    private LocalDateTime thruDate;
     private String partyId;
     private String timesheetId;
     private String workEffortId;
@@ -21,19 +20,19 @@ public class TimeEntry extends Identifiable {
     private String attivitaLiv2;
     private String attivitaLiv3;
 
-    public LocalDate getFromDate() {
+    public LocalDateTime getFromDate() {
         return fromDate;
     }
 
-    public void setFromDate(LocalDate fromDate) {
+    public void setFromDate(LocalDateTime fromDate) {
         this.fromDate = fromDate;
     }
 
-    public LocalDate getThruDate() {
+    public LocalDateTime getThruDate() {
         return thruDate;
     }
 
-    public void setThruDate(LocalDate thruDate) {
+    public void setThruDate(LocalDateTime thruDate) {
         this.thruDate = thruDate;
     }
 

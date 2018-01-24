@@ -48,14 +48,26 @@ public class TimeEntryService {
         return new Result<>(ret, ret.size());
     }
 
-    public String createTimeEntry(TimeEntry req) {
-        Validators.assertNotNull(req.getTimesheetId(), Messages.INVALID_TIMESHEET);
-        it.mapsgroup.gzoom.querydsl.dto.TimeEntry timeEntry = new it.mapsgroup.gzoom.querydsl.dto.TimeEntry();
-        timeEntry.setWorkEffortId(req.getWorkEffort().getWorkEffortId());
-        timeEntry.setTimeEntryId(req.getTimeEntryId());
-        timeEntry.setPercentage(req.getPercentage());
-        timeEntryDao.create(timeEntry, principal().getUserLoginId());
-        return req.getTimesheetId();
+    public String createTimeEntry(List<TimeEntry> reqList) {
+        Validators.assertFalse(reqList.isEmpty(), Messages.INVALID_TIME_ENTRY);
+        for (TimeEntry req : reqList) {
+            Validators.assertNotNull(req.getTimesheetId(), Messages.INVALID_TIMESHEET);
+            it.mapsgroup.gzoom.querydsl.dto.TimeEntry timeEntry = new it.mapsgroup.gzoom.querydsl.dto.TimeEntry();
+            timeEntry.setWorkEffortId(req.getWorkEffortId());
+            timeEntry.setPercentage(req.getPercentage());
+            timeEntry.setFromDate(req.getFromDate());
+            timeEntry.setThruDate(req.getThruDate());
+
+            if (req.getTimeEntryId() != null) {
+                updateTimeEntry(req.getTimeEntryId(), req);
+            } else {
+                timeEntry.setTimeEntryId(req.getTimeEntryId());
+                timeEntry.setTimesheetId(req.getTimesheetId());
+                timeEntryDao.create(timeEntry, principal().getUserLoginId());
+            }
+
+        }
+        return reqList.get(0).getTimeEntryId();
     }
 
     public String updateTimeEntry(String id, TimeEntry req) {
@@ -64,7 +76,7 @@ public class TimeEntryService {
         Validators.assertNotNull(record, Messages.INVALID_TIME_ENTRY);
         copy(req, record);
         timeEntryDao.update(id, record, principal().getUserLoginId());
-        return req.getTimesheetId();
+        return req.getTimeEntryId();
     }
 
     public String deleteTimeEntry(String id) {
@@ -76,10 +88,10 @@ public class TimeEntryService {
     }
 
     public void copy( TimeEntry from, it.mapsgroup.gzoom.querydsl.dto.TimeEntry to) {
-        to.setFromDate(from.getFromDate().atStartOfDay());
-        to.setThruDate(from.getThruDate().atStartOfDay());
-        to.setPartyId(from.getPartyId());
-        to.setTimesheetId(from.getTimesheetId());
+        to.setFromDate(from.getFromDate());
+        to.setThruDate(from.getThruDate());
+        to.setPercentage(from.getPercentage());
+        to.setWorkEffortId(from.getWorkEffortId());
     }
 
 }

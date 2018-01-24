@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  */
 @RestController
@@ -47,8 +49,8 @@ public class TimeEntryController {
 
     @RequestMapping(value = "timesheet/time-entry-create" , method = RequestMethod.POST)
     @ResponseBody
-    public String createTimeEntry(@RequestBody TimeEntry req) {
-        return Exec.exec( "timesheet/time-entry post", () -> timeEntryService.createTimeEntry(req));
+    public String createTimeEntry(@RequestBody List<TimeEntry> reqList) {
+        return Exec.exec( "timesheet/time-entry post", () -> timeEntryService.createTimeEntry(reqList));
     }
 
     @RequestMapping(value = "timesheet/time-entry-update/{id}", method = RequestMethod.PUT)

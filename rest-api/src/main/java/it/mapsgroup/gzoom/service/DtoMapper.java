@@ -38,15 +38,14 @@ public class DtoMapper {
     }
 
     public TimeEntry copy(it.mapsgroup.gzoom.querydsl.dto.TimeEntry from, TimeEntry to) {
-
         if (from.getFromDate() != null)
-            to.setFromDate(from.getFromDate().toLocalDate());
+            to.setFromDate(from.getFromDate());
         if (from.getThruDate() != null)
-            to.setThruDate(from.getThruDate().toLocalDate());
+            to.setThruDate(from.getThruDate());
         to.setTimesheetId(from.getTimesheetId());
         to.setWorkEffortId(from.getWorkEffortId());
         to.setPercentage(from.getPercentage());
-
+        to.setTimeEntryId(from.getTimeEntryId());
         return to;
     }
 
