@@ -67,7 +67,7 @@ public class TimeEntryService {
             }
 
         }
-        return reqList.get(0).getTimeEntryId();
+        return reqList.get(0).getTimesheetId();
     }
 
     public String updateTimeEntry(String id, TimeEntry req) {
