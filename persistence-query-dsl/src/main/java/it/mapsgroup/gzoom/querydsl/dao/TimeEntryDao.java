@@ -61,7 +61,7 @@ public class TimeEntryDao extends AbstractDao {
     }
 
     @Transactional
-    public List<Activity> getWorkEfforts() {
+    public List<Activity> getWorkEfforts(String id) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
@@ -119,7 +119,9 @@ public class TimeEntryDao extends AbstractDao {
                     .and(l3.workEffortTypeId.eq(t3.workEffortTypeIdTo))
                     .and(l3.estimatedStartDate.before(ts.thruDate))
                     .and(l3.estimatedCompletionDate.after(ts.fromDate))
-                    .and(l3.workEffortRevisionId.isNull()));
+                    .and(l3.workEffortRevisionId.isNull()))
+
+                .where(ts.timesheetId.eq(id));
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());

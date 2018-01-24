@@ -39,10 +39,10 @@ public class TimeEntryController {
         return Exec.exec("timesheet/time-entry get", () -> timeEntryService.getTimeEntries(id));
     }
 
-    @RequestMapping(value = "timesheet/time-entry-work-efforts", method = RequestMethod.GET)
+    @RequestMapping(value = "timesheet/time-entry-work-efforts/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Result<Activity> getWorkEfforts() {
-        return Exec.exec("timesheet/time-entry-workefforts get", () -> timeEntryService.getWorkEfforts());
+    public Result<Activity> getWorkEfforts(@PathVariable(value = "id") String id) {
+        return Exec.exec("timesheet/time-entry-workefforts get", () -> timeEntryService.getWorkEfforts(id));
     }
 
     @RequestMapping(value = "timesheet/time-entry-create" , method = RequestMethod.POST)

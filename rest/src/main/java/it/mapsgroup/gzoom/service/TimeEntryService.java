@@ -42,8 +42,8 @@ public class TimeEntryService {
         return new Result<>(ret, ret.size());
     }
 
-    public Result<Activity> getWorkEfforts() {
-        List<it.mapsgroup.gzoom.querydsl.dto.Activity> list = timeEntryDao.getWorkEfforts();
+    public Result<Activity> getWorkEfforts(String id) {
+        List<it.mapsgroup.gzoom.querydsl.dto.Activity> list = timeEntryDao.getWorkEfforts(id);
         List<Activity> ret = list.stream().map(p -> dtoMapper.copy(p, new Activity())).collect(Collectors.toList());
         return new Result<>(ret, ret.size());
     }
