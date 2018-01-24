@@ -50,13 +50,8 @@ public class DtoMapper {
         return to;
     }
 
-    public TimeEntry copy(Activity from, TimeEntry to) {
-
-        if (from.getFromDate() != null)
-            to.setFromDate(from.getFromDate().toLocalDate());
-        if (from.getThruDate() != null)
-            to.setThruDate(from.getThruDate().toLocalDate());
-        to.setPartyId(from.getPartyId());
+    public it.mapsgroup.gzoom.model.Activity copy(Activity from, it.mapsgroup.gzoom.model.Activity to) {
+        to.setWorkEffortId(from.getWorkEffort3().getWorkEffortId());
         to.setTimesheetId(from.getTimesheetId());
         to.setAttivitaLiv1(from.getWorkEffort1().getWorkEffortName());
         to.setAttivitaLiv2(from.getWorkEffort2().getWorkEffortName());

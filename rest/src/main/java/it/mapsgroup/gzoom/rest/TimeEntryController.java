@@ -1,6 +1,7 @@
 package it.mapsgroup.gzoom.rest;
 
 import it.mapsgroup.gzoom.common.Exec;
+import it.mapsgroup.gzoom.model.Activity;
 import it.mapsgroup.gzoom.model.Result;
 import it.mapsgroup.gzoom.model.TimeEntry;
 import it.mapsgroup.gzoom.model.Timesheet;
@@ -40,7 +41,7 @@ public class TimeEntryController {
 
     @RequestMapping(value = "timesheet/time-entry-work-efforts", method = RequestMethod.GET)
     @ResponseBody
-    public Result<TimeEntry> getWorkEfforts() {
+    public Result<Activity> getWorkEfforts() {
         return Exec.exec("timesheet/time-entry-workefforts get", () -> timeEntryService.getWorkEfforts());
     }
 
