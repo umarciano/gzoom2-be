@@ -48,7 +48,7 @@ public class TimeEntryService {
         return new Result<>(ret, ret.size());
     }
 
-    public String createTimeEntry(List<TimeEntry> reqList) {
+    public String createOrUpdateTimeEntry(List<TimeEntry> reqList) {
         Validators.assertFalse(reqList.isEmpty(), Messages.INVALID_TIME_ENTRY);
         for (TimeEntry req : reqList) {
             Validators.assertNotNull(req.getTimesheetId(), Messages.INVALID_TIMESHEET);
