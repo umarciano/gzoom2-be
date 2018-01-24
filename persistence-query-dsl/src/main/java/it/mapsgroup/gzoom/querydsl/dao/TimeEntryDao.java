@@ -61,7 +61,7 @@ public class TimeEntryDao extends AbstractDao {
     }
 
     @Transactional
-    public List<TimeEntryEx> getWorkEfforts() {
+    public List<Activity> getWorkEfforts() {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
@@ -80,7 +80,7 @@ public class TimeEntryDao extends AbstractDao {
         QWorkEffortTypeType t3 = new QWorkEffortTypeType("t3");
         QWorkEffortPartyAssignment wpa = new QWorkEffortPartyAssignment("wpa");
 
-        QBean<TimeEntryEx> teExQBean = bean(TimeEntryEx.class,
+        QBean<Activity> teExQBean = bean(Activity.class,
                 merge(ts.all(),
                         bean(WorkEffort.class, l1.all()).as("workEffort1"),
                         bean(WorkEffort.class, l2.all()).as("workEffort2"),
@@ -88,10 +88,11 @@ public class TimeEntryDao extends AbstractDao {
                 ));
 
         SQLQuery<Tuple> tupleSQLQuery = queryFactory.
-                select(l1.workEffortName.as("attivitaLiv1"), l1.workEffortId.as("IdLiv1")
+                /*select(l1.workEffortName.as("attivitaLiv1"), l1.workEffortId.as("IdLiv1")
                         ,l2.workEffortName.as("attivitaLiv2"), l2.workEffortId.as("IdLiv2")
                         ,l3.workEffortName.as("attivitaLiv3"), l3.workEffortId.as("IdLiv3")
-                )
+                )*/
+                select(ts,l1,l2,l3)
                 .from(ts)
                 .innerJoin(wt).on(wt.etch.eq("TIMESHEET"))
                 .innerJoin(t1).on(t1.workEffortTypeIdRoot.eq(wt.workEffortTypeId).and(t1.sequenceNum.eq(new BigInteger("1"))))
@@ -123,7 +124,7 @@ public class TimeEntryDao extends AbstractDao {
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
 
-        List<TimeEntryEx> ret = tupleSQLQuery.transform(GroupBy.groupBy(l1.workEffortId).list(teExQBean));
+        List<Activity> ret = tupleSQLQuery.transform(GroupBy.groupBy(l3.workEffortId).list(teExQBean));
         LOG.info("size = {}", ret.size());
         return ret;
     }

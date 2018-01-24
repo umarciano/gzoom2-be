@@ -3,17 +3,8 @@ package it.mapsgroup.gzoom.service;
 import it.mapsgroup.gzoom.model.TimeEntry;
 import it.mapsgroup.gzoom.model.Timesheet;
 import it.mapsgroup.gzoom.model.User;
-import it.mapsgroup.gzoom.querydsl.dto.TimesheetEx;
-import it.memelabs.smartnebula.commons.DateUtil;
-import org.joda.time.format.DateTimeFormat;
+import it.mapsgroup.gzoom.querydsl.dto.Activity;
 import org.springframework.stereotype.Component;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 /**
  * @author Fabio G. Strozzi
@@ -59,7 +50,7 @@ public class DtoMapper {
         return to;
     }
 
-    public TimeEntry copy(it.mapsgroup.gzoom.querydsl.dto.TimeEntryEx from, TimeEntry to) {
+    public TimeEntry copy(Activity from, TimeEntry to) {
 
         if (from.getFromDate() != null)
             to.setFromDate(from.getFromDate().toLocalDate());
@@ -69,7 +60,6 @@ public class DtoMapper {
         to.setTimesheetId(from.getTimesheetId());
         to.setWorkEffortId(from.getWorkEffortId());
         to.setTimeEntryId(from.getTimeEntryId());
-        to.setWorkEffort(from.getWorkEffort());
         to.setAttivitaLiv1(from.getWorkEffort1().getWorkEffortName());
         to.setAttivitaLiv2(from.getWorkEffort2().getWorkEffortName());
         to.setAttivitaLiv3(from.getWorkEffort3().getWorkEffortName());
