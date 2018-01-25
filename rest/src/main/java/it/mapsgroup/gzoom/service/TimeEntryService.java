@@ -81,9 +81,9 @@ public class TimeEntryService {
 
     public String deleteTimeEntry(String id) {
         Validators.assertNotBlank(id, Messages.TIMESHEET_ID_REQUIRED);
-        it.mapsgroup.gzoom.querydsl.dto.Timesheet record = timesheetDao.getTimesheet(id);
+        it.mapsgroup.gzoom.querydsl.dto.TimeEntry record = timeEntryDao.getTimeEntry(id);
         Validators.assertNotNull(record, Messages.INVALID_TIMESHEET);
-        timesheetDao.delete(id);
+        timeEntryDao.delete(id);
         return id;
     }
 
