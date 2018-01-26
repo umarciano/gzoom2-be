@@ -52,7 +52,7 @@ public class TimesheetService {
         timesheet.setActualHours(req.getActualHours());
         timesheet.setContractHours(req.getContractHours());
         timesheetDao.create(timesheet, principal().getUserLoginId());
-        return req.getTimesheetId();
+        return timesheet.getTimesheetId();
     }
 
     public String updateTimesheet(String id, Timesheet req) {

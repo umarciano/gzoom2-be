@@ -273,5 +273,7 @@ public class Messages {
     public static final String PARTY_ID_REQUIRED = "Party id is required";
     public static final String TIMESHEET_ID_REQUIRED = "Timesheet id is required";
     public static final String INVALID_TIMESHEET = "Invalid timesheet";
+    public static final String TIME_ENTRY_ID_REQUIRED = "TimeEntry id is required";
+    public static final String INVALID_TIME_ENTRY = "Invalid time entry";
 
 }
