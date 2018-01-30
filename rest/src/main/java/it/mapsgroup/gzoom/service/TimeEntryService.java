@@ -6,6 +6,7 @@ import it.mapsgroup.gzoom.model.TimeEntry;
 import it.mapsgroup.gzoom.model.Activity;
 import it.mapsgroup.gzoom.querydsl.dao.TimeEntryDao;
 import it.mapsgroup.gzoom.querydsl.dao.TimesheetDao;
+import it.mapsgroup.gzoom.querydsl.dto.TimeEntryEx;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class TimeEntryService {
     }
 
     public Result<TimeEntry> getTimeEntries(String id) {
-        List<it.mapsgroup.gzoom.querydsl.dto.TimeEntry> list = timeEntryDao.getTimeEntries(id);
+        List<TimeEntryEx> list = timeEntryDao.getTimeEntries(id);
         List<TimeEntry> ret = list.stream().map(p -> dtoMapper.copy(p, new TimeEntry())).collect(Collectors.toList());
         return new Result<>(ret, ret.size());
     }

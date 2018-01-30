@@ -5,6 +5,7 @@ import it.mapsgroup.gzoom.model.Activity;
 import it.mapsgroup.gzoom.model.Result;
 import it.mapsgroup.gzoom.model.TimeEntry;
 import it.mapsgroup.gzoom.model.Timesheet;
+import it.mapsgroup.gzoom.querydsl.dto.TimeEntryEx;
 import it.mapsgroup.gzoom.service.TimeEntryService;
 import it.mapsgroup.gzoom.service.TimesheetService;
 import org.springframework.beans.factory.annotation.Autowired;
