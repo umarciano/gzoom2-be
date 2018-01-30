@@ -44,18 +44,44 @@ public class TimeEntryDao extends AbstractDao {
     }
 
     @Transactional
-    public List<TimeEntry> getTimeEntries(String id) {
+    public List<TimeEntryEx> getTimeEntries(String id) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
         }
         QTimeEntry qte = QTimeEntry.timeEntry;
-        SQLQuery<TimeEntry> tSQLQuery = queryFactory.select(qte).from(qte).where(qte.timesheetId.eq(id));
+        QWorkEffort l1 = new QWorkEffort("l1");
+        QWorkEffort l2 = new QWorkEffort("l2");
+        QWorkEffort l3 = new QWorkEffort("l3");
+        QWorkEffortAssoc l12 = new QWorkEffortAssoc("l12");
+        QWorkEffortAssoc l23 = new QWorkEffortAssoc("l23");
+        QWorkEffortType wt = new QWorkEffortType("wt");
+        QWorkEffortTypeType t1 = new QWorkEffortTypeType("t1");
+        QWorkEffortTypeType t2 = new QWorkEffortTypeType("t2");
+        QWorkEffortTypeType t3 = new QWorkEffortTypeType("t3");
+
+        SQLQuery<Tuple> tSQLQuery = queryFactory.select(qte,l1,l2,l3)
+                .from(qte)
+                .innerJoin(l3).on(l3.workEffortId.eq(qte.workEffortId))
+                .innerJoin(l23).on(l23.workEffortIdTo.eq(l3.workEffortId))
+                .innerJoin(l2).on(l2.workEffortId.eq(l23.workEffortIdFrom))
+                .innerJoin(l12).on(l12.workEffortIdTo.eq(l2.workEffortId))
+                .innerJoin(l1).on(l1.workEffortId.eq(l12.workEffortIdFrom))
+                .where(qte.timesheetId.eq(id));
         SQLBindings bindings = tSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
-        QBean<TimeEntry> timeEntries = Projections.bean(TimeEntry.class, qte.all());
-        List<TimeEntry> ret = tSQLQuery.transform(GroupBy.groupBy(qte.timeEntryId).list(timeEntries));
+
+        //QBean<TimeEntryEx> timeEntries = Projections.bean(TimeEntryEx.class, qte.all());
+        QBean<TimeEntryEx> timeEntries = bean(TimeEntryEx.class,
+                merge(qte.all(),
+                        bean(WorkEffort.class, l1.all()).as("workEffort1"),
+                        bean(WorkEffort.class, l2.all()).as("workEffort2"),
+                        bean(WorkEffort.class, l3.all()).as("workEffort3")
+                ));
+
+
+        List<TimeEntryEx> ret = tSQLQuery.transform(GroupBy.groupBy(qte.timeEntryId).list(timeEntries));
         LOG.info("size = {}", ret.size());
         return ret;
     }

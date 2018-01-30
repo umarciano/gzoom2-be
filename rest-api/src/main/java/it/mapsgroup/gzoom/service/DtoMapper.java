@@ -4,6 +4,7 @@ import it.mapsgroup.gzoom.model.TimeEntry;
 import it.mapsgroup.gzoom.model.Timesheet;
 import it.mapsgroup.gzoom.model.User;
 import it.mapsgroup.gzoom.querydsl.dto.Activity;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 /**
@@ -37,7 +38,7 @@ public class DtoMapper {
         return to;
     }
 
-    public TimeEntry copy(it.mapsgroup.gzoom.querydsl.dto.TimeEntry from, TimeEntry to) {
+    public TimeEntry copy(it.mapsgroup.gzoom.querydsl.dto.TimeEntryEx from, TimeEntry to) {
         if (from.getFromDate() != null)
             to.setFromDate(from.getFromDate());
         if (from.getThruDate() != null)
@@ -46,6 +47,9 @@ public class DtoMapper {
         to.setWorkEffortId(from.getWorkEffortId());
         to.setPercentage(from.getPercentage());
         to.setTimeEntryId(from.getTimeEntryId());
+        to.setDescription(from.getWorkEffort1().getWorkEffortName()+" - "+
+                            from.getWorkEffort2().getWorkEffortName()+" - "+
+                            from.getWorkEffort3().getWorkEffortName());
         return to;
     }
 
