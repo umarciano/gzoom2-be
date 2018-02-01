@@ -19,6 +19,7 @@ public class TimeEntry extends Identifiable {
     private String attivitaLiv1;
     private String attivitaLiv2;
     private String attivitaLiv3;
+    private String description;
 
     public LocalDateTime getFromDate() {
         return fromDate;
@@ -130,5 +131,15 @@ public class TimeEntry extends Identifiable {
 
     public void setAttivitaLiv3(String attivitaLiv3) {
         this.attivitaLiv3 = attivitaLiv3;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

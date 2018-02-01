@@ -59,6 +59,9 @@ public class DtoMapper {
         to.setAttivitaLiv1(from.getWorkEffort1().getWorkEffortName());
         to.setAttivitaLiv2(from.getWorkEffort2().getWorkEffortName());
         to.setAttivitaLiv3(from.getWorkEffort3().getWorkEffortName());
+        to.setDescription(from.getWorkEffort1().getWorkEffortName()+" - "+
+                from.getWorkEffort2().getWorkEffortName()+" - "+
+                from.getWorkEffort3().getWorkEffortName());
         return to;
     }
 
