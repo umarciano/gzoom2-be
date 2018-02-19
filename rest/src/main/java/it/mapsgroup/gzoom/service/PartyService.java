@@ -3,6 +3,7 @@ package it.mapsgroup.gzoom.service;
 import it.mapsgroup.gzoom.model.Result;
 import it.mapsgroup.gzoom.querydsl.dao.PartyDao;
 import it.mapsgroup.gzoom.querydsl.dao.PersonDao;
+import it.mapsgroup.gzoom.querydsl.dto.Party;
 import it.mapsgroup.gzoom.querydsl.dto.Person;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,11 @@ public class PartyService {
 
     public Result<Person> getPersons() {
         List<Person> list = personDao.getPersons();
+        return new Result<>(list, list.size());
+    }
+    
+    public Result<Party> getPartys() {
+        List<Party> list = partyDao.getPartys();
         return new Result<>(list, list.size());
     }
 

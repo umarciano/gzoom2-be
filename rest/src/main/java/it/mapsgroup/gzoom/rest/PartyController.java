@@ -2,6 +2,7 @@ package it.mapsgroup.gzoom.rest;
 
 import it.mapsgroup.gzoom.common.Exec;
 import it.mapsgroup.gzoom.model.Result;
+import it.mapsgroup.gzoom.querydsl.dto.Party;
 import it.mapsgroup.gzoom.querydsl.dto.Person;
 import it.mapsgroup.gzoom.service.PartyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,12 @@ public class PartyController {
     @ResponseBody
     public Result<Person> getPersons() {
         return Exec.exec("party/person get", () -> partyService.getPersons());
+    }
+    
+    @RequestMapping(value = "party", method = RequestMethod.GET)
+    @ResponseBody
+    public Result<Party> getPartys() {
+        return Exec.exec("party get", () -> partyService.getPartys());
     }
 
 }
