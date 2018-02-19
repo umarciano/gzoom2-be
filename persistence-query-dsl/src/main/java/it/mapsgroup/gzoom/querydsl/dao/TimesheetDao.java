@@ -61,6 +61,26 @@ public class TimesheetDao extends AbstractDao {
         LOG.info("size = {}", ret.size());
         return ret;
     }
+    
+    @Transactional
+    public TimesheetEx getTimesheetExt(String timesheetId) {
+        if (TransactionSynchronizationManager.isActualTransactionActive()) {
+            TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
+            status.getClass();
+        }
+        QTimesheet qTimesheet = QTimesheet.timesheet;
+        QParty qParty = QParty.party;
+        
+        QBean<TimesheetEx> timesheetExQBean = bean(TimesheetEx.class, merge(qTimesheet.all(), bean(Party.class, qParty.all()).as("party")));
+        SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qTimesheet, qParty).from(qTimesheet).innerJoin(qTimesheet.timesheetPrty, qParty).where(qTimesheet.timesheetId.eq(timesheetId));
+        
+        SQLBindings bindings = tupleSQLQuery.getSQL();
+        LOG.info("{}", bindings.getSQL());
+        LOG.info("{}", bindings.getBindings()); // debug
+        List<TimesheetEx> ret = tupleSQLQuery.transform(GroupBy.groupBy(qTimesheet.timesheetId).list(timesheetExQBean));
+
+        return ret.isEmpty() ? null : ret.get(0);
+    }
 
     @Transactional
     public boolean create(Timesheet record, String userLoginId) {

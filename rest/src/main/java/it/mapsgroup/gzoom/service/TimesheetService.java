@@ -40,6 +40,12 @@ public class TimesheetService {
         List<Timesheet> ret = list.stream().map(p -> dtoMapper.copy(p, new Timesheet())).collect(Collectors.toList());
         return new Result<>(ret, ret.size());
     }
+    
+    public Timesheet getTimesheet(String timesheetId) {
+    	TimesheetEx tm = timesheetDao.getTimesheetExt(timesheetId);
+    	Timesheet ret = dtoMapper.copy(tm, new Timesheet());
+        return ret;
+    }
 
     public String createTimesheet(Timesheet req) {
         Validators.assertNotNull(req, Messages.TIMESHEET_REQUIRED);

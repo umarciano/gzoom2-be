@@ -31,6 +31,12 @@ public class TimesheetController {
     public Result<Timesheet> getTimesheets() {
         return Exec.exec("timesheet/timesheet get", () -> timesheetService.getTimesheets());
     }
+    
+    @RequestMapping(value = "timesheet/timesheet/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Timesheet getTimesheet(@PathVariable(value = "id") String id) {
+        return Exec.exec("timesheet/timesheet get", () -> timesheetService.getTimesheet(id));
+    }
 
     @RequestMapping(value = "timesheet/timesheet" , method = RequestMethod.POST)
     @ResponseBody
