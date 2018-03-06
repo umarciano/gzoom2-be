@@ -28,6 +28,14 @@ public interface Configuration {
      * @return The formats of the given locale or null if locale is not supported.
      */
     Map<String, Object> getFormats(Locale locale);
+    
+    /**
+     * Retrieves the label calendar of the given locale or null if locale is not supported.
+     *
+     * @param locale The locale
+     * @return The formats of the given locale or null if locale is not supported.
+     */
+    Map<String, Object> getCalendarLocale(Locale locale);
 
     /**
      * Retrieves the URL path to the REST API services.
