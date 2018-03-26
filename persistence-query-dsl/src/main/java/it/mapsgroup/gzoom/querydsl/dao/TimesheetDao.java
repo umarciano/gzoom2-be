@@ -52,7 +52,7 @@ public class TimesheetDao extends AbstractDao {
         QParty qParty = QParty.party;
         //SQLQuery<Timesheet> tSQLQuery = queryFactory.select(qTimesheet).from(qTimesheet);
         QBean<TimesheetEx> timesheetExQBean = bean(TimesheetEx.class, merge(qTimesheet.all(), bean(Party.class, qParty.all()).as("party")));
-        SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qTimesheet, qParty).from(qTimesheet).innerJoin(qTimesheet.timesheetPrty, qParty);
+        SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qTimesheet, qParty).from(qTimesheet).innerJoin(qTimesheet.timesheetPrty, qParty).orderBy(qParty.partyName.asc());
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());

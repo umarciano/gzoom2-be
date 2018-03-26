@@ -106,6 +106,15 @@ public class ConfigurationImpl implements Configuration, SecurityConfiguration, 
             return null;
         return (Map<String, Object>) map.get("formats");
     }
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public Map<String, Object> getCalendarLocale(Locale locale) {
+        Map<String, Object> map = localizationOf(locale);
+        if (map == null)
+            return null;
+        return (Map<String, Object>) map.get("calendarLocale");
+    }
 
     private Map<String, Object> localizationOf(Locale locale) {
         // copy reference, this will synchronize writing of the volatile reference
