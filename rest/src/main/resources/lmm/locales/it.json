@@ -1834,6 +1834,7 @@
     "Password successfully updated": "Password aggiornata con successo",
     "Password updated": "Password aggiornata",
     "Path": "Percorso",
+    "patternRegExp": "Impostare il valore correttamente",
     "Pdf": "Pdf",
     "Pending": "In corso",
     "Per Lav From": "Periodo di Lavoro da",
@@ -2859,7 +2860,8 @@
     "date-range-long": "Dal %D al %D",
     "date-time-short": "dd-MM-yyyy, LT",
     "date-time-long": "d MMMM yyyy - LT",
-    "date-short-pcalendar": "dd/mm/yy"
+    "date-short-pcalendar": "dd/mm/yy",
+    "date-MMMM-YYYY": "MMMM yyyy"
   },
   "calendarLocale": {  
     "firstDayOfWeek": 1,      

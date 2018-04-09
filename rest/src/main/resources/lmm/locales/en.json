@@ -629,6 +629,7 @@
     "Password Cambiata": "Password Changed",
     "Password Nuova": "New Password",
     "Password aggiornata con successo": "Password successfully updated",
+    "patternRegExp": "Impostare il valore correttamente",
     "Pdf": "Pdf",
     "Per importare le relazioni della Scheda con ${sourceId} uno dei campi tra sourceReferenceRootIdFrom e sourceReferenceRootIdTo deve essere uguale al suo codice ": "For Root with ${sourceId} The field sourceReferenceRootIdFrom or sourceReferenceRootIdTo must equals sourceReferenceRootId ${sourceId}",
     "Per questo elemento non sono previste stampe! ": "Per questo elemento non sono previste stampe! ",
@@ -1026,7 +1027,8 @@
     "date-range-long": "Dal %D al %D",
     "date-time-short": "dd-MM-yyyy, LT",
     "date-time-long": "d MMMM yyyy - LT",
-    "date-short-pcalendar": "dd/mm/yy"
+    "date-short-pcalendar": "dd/mm/yy",
+    "date-MMMM-YYYY": "MMMM yyyy"
   },
   "calendarLocale": {  
     "firstDayOfWeek": 0,
