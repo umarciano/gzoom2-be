@@ -103,6 +103,9 @@ public class WorkEffortType implements AbstractIdentity {
     @Column("IS_ROOT")
     private Boolean isRoot;
 
+    @Column("IS_ROOT_ACTIVE")
+    private Boolean isRootActive;
+
     @Column("IS_TEMPLATE")
     private Boolean isTemplate;
 
@@ -177,6 +180,9 @@ public class WorkEffortType implements AbstractIdentity {
 
     @Column("PURPOSE_ETCH_LANG")
     private String purposeEtchLang;
+
+    @Column("REMINDER_ACTIVE")
+    private Boolean reminderActive;
 
     @Column("ROLE_TYPE_ID_AUTO")
     private String roleTypeIdAuto;
@@ -525,6 +531,14 @@ public class WorkEffortType implements AbstractIdentity {
         this.isRoot = isRoot;
     }
 
+    public Boolean getIsRootActive() {
+        return isRootActive;
+    }
+
+    public void setIsRootActive(Boolean isRootActive) {
+        this.isRootActive = isRootActive;
+    }
+
     public Boolean getIsTemplate() {
         return isTemplate;
     }
@@ -723,6 +737,14 @@ public class WorkEffortType implements AbstractIdentity {
 
     public void setPurposeEtchLang(String purposeEtchLang) {
         this.purposeEtchLang = purposeEtchLang;
+    }
+
+    public Boolean getReminderActive() {
+        return reminderActive;
+    }
+
+    public void setReminderActive(Boolean reminderActive) {
+        this.reminderActive = reminderActive;
     }
 
     public String getRoleTypeIdAuto() {

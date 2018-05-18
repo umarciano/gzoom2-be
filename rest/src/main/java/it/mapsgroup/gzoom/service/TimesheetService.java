@@ -36,7 +36,7 @@ public class TimesheetService {
     }
 
     public Result<Timesheet> getTimesheets() {
-        List<TimesheetEx> list = timesheetDao.getTimesheets();
+        List<TimesheetEx> list = timesheetDao.getTimesheets(principal().getUserLoginId());
         List<Timesheet> ret = list.stream().map(p -> dtoMapper.copy(p, new Timesheet())).collect(Collectors.toList());
         return new Result<>(ret, ret.size());
     }

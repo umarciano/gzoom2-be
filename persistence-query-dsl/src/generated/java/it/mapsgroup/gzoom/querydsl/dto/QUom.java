@@ -68,6 +68,8 @@ public class QUom extends com.querydsl.sql.RelationalPathBase<Uom> {
 
     public final com.querydsl.sql.ForeignKey<WorkEffort> _wkEffrtMonUom = createInvForeignKey(uomId, "MONEY_UOM_ID");
 
+    public final com.querydsl.sql.ForeignKey<PartyRelationship> _uomFk01 = createInvForeignKey(uomId, "VALUE_UOM_ID");
+
     public QUom(String variable) {
         super(Uom.class, forVariable(variable), "null", "UOM");
         addMetadata();

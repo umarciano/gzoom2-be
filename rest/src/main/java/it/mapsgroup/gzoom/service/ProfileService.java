@@ -30,7 +30,7 @@ public class ProfileService {
         List<SecurityPermission> listSecurityPermission = permissionDao.getPermission(principal().getUserLoginId());
         Permissions permissions = new Permissions();
         
-        String permRegExp = "(((?i)(MGR|ROLE|ORG)?)_)";
+        String permRegExp = "(((?i)(MGR|ROLE|ORG|SUP|TOP)?)_)";
         Pattern permPattern = Pattern.compile(permRegExp);
         
         if(listSecurityPermission != null) {

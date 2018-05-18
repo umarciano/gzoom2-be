@@ -43,13 +43,16 @@ public class MenuService {
         Map<String, List<String>> mappa = perms.getPermissions();
         List<String> keys = new ArrayList<String>(mappa.keySet());
         
-        List<ContentAndAttributes> links = contentAndAttributeDao.getValidMenu(keys, principal().getUserLoginId());
-        List<ContentAndAttributes> folders = contentAndAttributeDao.getFolderMenu();
         FolderMenu root = new FolderMenu();
         root.setId(ROOT_MENU_ID);
         
-        createMenu(root, folders, links);
-        removeEmptyMenu(root);
+        if (keys.size() != 0) {
+            List<ContentAndAttributes> links = contentAndAttributeDao.getValidMenu(keys, principal().getUserLoginId());
+            List<ContentAndAttributes> folders = contentAndAttributeDao.getFolderMenu();
+
+        	createMenu(root, folders, links);
+            removeEmptyMenu(root);
+        }    
         
         return root;
     }

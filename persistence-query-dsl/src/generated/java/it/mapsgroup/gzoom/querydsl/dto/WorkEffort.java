@@ -43,6 +43,9 @@ public class WorkEffort implements AbstractIdentity {
     @Column("CURRENT_STATUS_ID")
     private String currentStatusId;
 
+    @Column("DATA_SOLL")
+    private java.time.LocalDateTime dataSoll;
+
     @Column("DESCRIPTION")
     private String description;
 
@@ -354,6 +357,14 @@ public class WorkEffort implements AbstractIdentity {
 
     public void setCurrentStatusId(String currentStatusId) {
         this.currentStatusId = currentStatusId;
+    }
+
+    public java.time.LocalDateTime getDataSoll() {
+        return dataSoll;
+    }
+
+    public void setDataSoll(java.time.LocalDateTime dataSoll) {
+        this.dataSoll = dataSoll;
     }
 
     public String getDescription() {

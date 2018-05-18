@@ -8,6 +8,8 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 
+import java.util.*;
+
 import com.querydsl.sql.ColumnMetadata;
 import java.sql.Types;
 
@@ -45,6 +47,8 @@ public class QWorkEffort extends com.querydsl.sql.RelationalPathBase<WorkEffort>
     public final DateTimePath<java.time.LocalDateTime> createdTxStamp = createDateTime("createdTxStamp", java.time.LocalDateTime.class);
 
     public final StringPath currentStatusId = createString("currentStatusId");
+
+    public final DateTimePath<java.time.LocalDateTime> dataSoll = createDateTime("dataSoll", java.time.LocalDateTime.class);
 
     public final StringPath description = createString("description");
 
@@ -198,15 +202,17 @@ public class QWorkEffort extends com.querydsl.sql.RelationalPathBase<WorkEffort>
 
     public final com.querydsl.sql.PrimaryKey<WorkEffort> primary = createPrimaryKey(workEffortId);
 
-    public final com.querydsl.sql.ForeignKey<Content> weLnamecnt = createForeignKey(localNameContentId, "CONTENT_ID");
-
     public final com.querydsl.sql.ForeignKey<Uom> wkEffrtMonUom = createForeignKey(moneyUomId, "UOM_ID");
 
     public final com.querydsl.sql.ForeignKey<WorkEffort> wkEffrtParent = createForeignKey(workEffortParentId, "WORK_EFFORT_ID");
 
     public final com.querydsl.sql.ForeignKey<Uom> weEffuom = createForeignKey(effortUomId, "UOM_ID");
 
+    public final com.querydsl.sql.ForeignKey<Content> weLnamecnt = createForeignKey(localNameContentId, "CONTENT_ID");
+
     public final com.querydsl.sql.ForeignKey<WorkEffortType> wkEffrtType = createForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<PartyRole> weOrgUnit = createForeignKey(Arrays.asList(orgUnitId, orgUnitRoleTypeId), Arrays.asList("PARTY_ID", "ROLE_TYPE_ID"));
 
     public final com.querydsl.sql.ForeignKey<TimeEntry> _timeEntWeff = createInvForeignKey(workEffortId, "WORK_EFFORT_ID");
 
@@ -255,6 +261,7 @@ public class QWorkEffort extends com.querydsl.sql.RelationalPathBase<WorkEffort>
         addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(54).ofType(Types.TIMESTAMP).withSize(19));
         addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(55).ofType(Types.TIMESTAMP).withSize(19));
         addMetadata(currentStatusId, ColumnMetadata.named("CURRENT_STATUS_ID").withIndex(3).ofType(Types.VARCHAR).withSize(20));
+        addMetadata(dataSoll, ColumnMetadata.named("DATA_SOLL").withIndex(87).ofType(Types.TIMESTAMP).withSize(19));
         addMetadata(description, ColumnMetadata.named("DESCRIPTION").withIndex(13).ofType(Types.VARCHAR).withSize(2000));
         addMetadata(descriptionLang, ColumnMetadata.named("DESCRIPTION_LANG").withIndex(86).ofType(Types.VARCHAR).withSize(2000));
         addMetadata(effortUomId, ColumnMetadata.named("EFFORT_UOM_ID").withIndex(58).ofType(Types.VARCHAR).withSize(20));
