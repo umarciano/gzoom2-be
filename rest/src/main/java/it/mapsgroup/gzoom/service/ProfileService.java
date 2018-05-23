@@ -37,8 +37,12 @@ public class ProfileService {
             listSecurityPermission.forEach(r -> {
                 String permissionId = r.getPermissionId();
                 
+                String perm = "";
                 String[] permArray = permPattern.split(permissionId);
-                permissions.addPermission(permArray[0], permArray[permArray.length-1]);
+                for (int i = 0; i < permArray.length-1; i++) {
+                    perm = perm.concat(permArray[i]);
+                }
+                permissions.addPermission(perm, permArray[permArray.length-1]);
             });
         }
         return permissions;
