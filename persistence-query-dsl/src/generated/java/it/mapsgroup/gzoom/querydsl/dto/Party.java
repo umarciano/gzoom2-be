@@ -28,6 +28,9 @@ public class Party implements AbstractIdentity {
     @Column("DESCRIPTION")
     private String description;
 
+    @Column("DESCRIPTION_LANG")
+    private String descriptionLang;
+
     @Column("END_DATE")
     private java.time.LocalDateTime endDate;
 
@@ -119,6 +122,14 @@ public class Party implements AbstractIdentity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getDescriptionLang() {
+        return descriptionLang;
+    }
+
+    public void setDescriptionLang(String descriptionLang) {
+        this.descriptionLang = descriptionLang;
     }
 
     public java.time.LocalDateTime getEndDate() {

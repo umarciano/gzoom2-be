@@ -23,8 +23,8 @@ import static org.slf4j.LoggerFactory.getLogger;
  * @author Andrea Fossi.
  */
 
-public class UserLoginTest extends AbstractDaoIT {
-    private static final Logger LOG = getLogger(UserLoginTest.class);
+public class UserLoginIT extends AbstractDaoIT {
+    private static final Logger LOG = getLogger(UserLoginIT.class);
 
     @Autowired
     @Deprecated

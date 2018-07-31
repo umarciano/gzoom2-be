@@ -60,7 +60,15 @@ public class QUom extends com.querydsl.sql.RelationalPathBase<Uom> {
 
     public final com.querydsl.sql.ForeignKey<Party> _partyPrefCrncy = createInvForeignKey(uomId, "PREFERRED_CURRENCY_UOM_ID");
 
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetEffuom = createInvForeignKey(uomId, "EFFORT_UOM_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffort> _weEffuom = createInvForeignKey(uomId, "EFFORT_UOM_ID");
+
     public final com.querydsl.sql.ForeignKey<UomRatingScale> _ratingToUom = createInvForeignKey(uomId, "UOM_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffort> _wkEffrtMonUom = createInvForeignKey(uomId, "MONEY_UOM_ID");
+
+    public final com.querydsl.sql.ForeignKey<PartyRelationship> _uomFk01 = createInvForeignKey(uomId, "VALUE_UOM_ID");
 
     public QUom(String variable) {
         super(Uom.class, forVariable(variable), "null", "UOM");
@@ -89,13 +97,13 @@ public class QUom extends com.querydsl.sql.RelationalPathBase<Uom> {
 
     public void addMetadata() {
         addMetadata(abbreviation, ColumnMetadata.named("ABBREVIATION").withIndex(3).ofType(Types.VARCHAR).withSize(60));
-        addMetadata(abbreviationLang, ColumnMetadata.named("ABBREVIATION_LANG").withIndex(15).ofType(Types.VARCHAR).withSize(60));
+        addMetadata(abbreviationLang, ColumnMetadata.named("ABBREVIATION_LANG").withIndex(14).ofType(Types.VARCHAR).withSize(60));
         addMetadata(createdByUserLogin, ColumnMetadata.named("CREATED_BY_USER_LOGIN").withIndex(13).ofType(Types.VARCHAR).withSize(250));
         addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(7).ofType(Types.TIMESTAMP).withSize(19));
         addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(8).ofType(Types.TIMESTAMP).withSize(19));
         addMetadata(decimalScale, ColumnMetadata.named("DECIMAL_SCALE").withIndex(9).ofType(Types.DECIMAL).withSize(20));
         addMetadata(description, ColumnMetadata.named("DESCRIPTION").withIndex(4).ofType(Types.VARCHAR).withSize(255));
-        addMetadata(descriptionLang, ColumnMetadata.named("DESCRIPTION_LANG").withIndex(14).ofType(Types.VARCHAR).withSize(255));
+        addMetadata(descriptionLang, ColumnMetadata.named("DESCRIPTION_LANG").withIndex(15).ofType(Types.VARCHAR).withSize(255));
         addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(12).ofType(Types.VARCHAR).withSize(250));
         addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(5).ofType(Types.TIMESTAMP).withSize(19));
         addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(6).ofType(Types.TIMESTAMP).withSize(19));

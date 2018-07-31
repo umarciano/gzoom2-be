@@ -34,8 +34,8 @@ import static org.slf4j.LoggerFactory.getLogger;
 @TestPropertySource("/dev.properties")
 @Deprecated
 @Ignore
-public class SecondTest {
-    private static final Logger LOG = getLogger(SecondTest.class);
+public class SecondIT {
+    private static final Logger LOG = getLogger(SecondIT.class);
 
     @Autowired
     private DataSource mainDataSource;

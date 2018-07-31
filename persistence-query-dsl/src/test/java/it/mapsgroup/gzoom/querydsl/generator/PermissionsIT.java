@@ -21,8 +21,8 @@ import it.mapsgroup.gzoom.querydsl.dto.SecurityGroupPermission;
 import it.mapsgroup.gzoom.querydsl.dto.SecurityPermission;
 
 
-public class PermissionsTest extends AbstractDaoIT{
-    private static final Logger LOG = getLogger(PermissionsTest.class);
+public class PermissionsIT extends AbstractDaoIT{
+    private static final Logger LOG = getLogger(PermissionsIT.class);
 
 
     @Autowired

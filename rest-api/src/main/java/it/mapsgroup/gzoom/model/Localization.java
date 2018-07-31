@@ -19,14 +19,16 @@ public class Localization {
     private String language;
     private Map<String, String> translations;
     private Map<String, Object> formats;
+    private Map<String, Object> calendarLocale;
 
     public final static Localization DEFAULT =
-            new Localization("default", unmodifiableMap(new HashMap<>()), unmodifiableMap(new HashMap<>()));
+            new Localization("default", unmodifiableMap(new HashMap<>()), unmodifiableMap(new HashMap<>()), unmodifiableMap(new HashMap<>()));
 
-    public Localization(String language, Map<String, String> translations, Map<String, Object> formats) {
+    public Localization(String language, Map<String, String> translations, Map<String, Object> formats, Map<String, Object> calendarLocale) {
         this.language = language;
         this.translations = translations;
         this.formats = formats;
+        this.calendarLocale = calendarLocale;
     }
 
     public String getLanguage() {
@@ -51,5 +53,13 @@ public class Localization {
 
     public void setFormats(Map<String, Object> formats) {
         this.formats = formats;
+    }
+    
+    public Map<String, Object> getCalendarLocale() {
+        return calendarLocale;
+    }
+
+    public void setCalendarLocale(Map<String, Object> calendarLocale) {
+        this.calendarLocale = calendarLocale;
     }
 }

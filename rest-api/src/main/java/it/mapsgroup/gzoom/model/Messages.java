@@ -10,15 +10,15 @@ public class Messages {
     public static final String UOM_TYPE_DESCRIPTION_REQUIRED = "Uom type description is required";
     
     public static final String INVALID_UOM = "Invalid uom";
-    public static final String UOM_REQUIRED = "An uom is required";;
+    public static final String UOM_REQUIRED = "An uom is required";
     public static final String UOM_ID_REQUIRED = "Uom id is required";
     public static final String UOM_DESCRIPTION_REQUIRED = "Uom description is required";
-    public static final String UOM_ABBREVIATION_REQUIRED = "Uom abbreviation is required";;
+    public static final String UOM_ABBREVIATION_REQUIRED = "Uom abbreviation is required";
     public static final String UOM_MIN_VALUE_GREATER_THAN_MAX_VALUE = "Min Value is greater than Max Value";
     public static final String UOM_MIN_VALUE_AND_MAX_VALUE = "Insert both Min Value and Max Value";
     
     public static final String INVALID_UOM_RATING_SCALE = "Invalid uomRatingScale";
-    public static final String UOM_RATING_SCALE_REQUIRED = "An uomRatingScale is required";;
+    public static final String UOM_RATING_SCALE_REQUIRED = "An uomRatingScale is required";
     public static final String UOM_RATING_SCALE_DESCRIPTION_REQUIRED = "UomRatingScale description is required";
     public static final String UOM_RATING_VALUE_REQUIRED = "UomRatingValue is required";
     
@@ -268,5 +268,12 @@ public class Messages {
     public static final String INVALID_EVENTS_LIST = "Events list is empty";
     public static final String INVALID_WORK_LOG = "Invalid work log";
     public static final String INVALID_REQUEST = "Invalid request";
+
+    public static final String TIMESHEET_REQUIRED = "A timesheet is required";
+    public static final String PARTY_ID_REQUIRED = "Party id is required";
+    public static final String TIMESHEET_ID_REQUIRED = "Timesheet id is required";
+    public static final String INVALID_TIMESHEET = "Invalid timesheet";
+    public static final String TIME_ENTRY_ID_REQUIRED = "TimeEntry id is required";
+    public static final String INVALID_TIME_ENTRY = "Invalid time entry";
 
 }

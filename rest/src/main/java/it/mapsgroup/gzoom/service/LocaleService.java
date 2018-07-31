@@ -36,7 +36,8 @@ public class LocaleService {
 
         Map<String, String> trans = config.getTranslations(locale);
         Map<String, Object> formats = config.getFormats(locale);
+        Map<String, Object> calendarLocale = config.getCalendarLocale(locale);
 
-        return new Localization(locale.getLanguage(), trans, formats);
+        return new Localization(locale.getLanguage(), trans, formats, calendarLocale);
     }
 }

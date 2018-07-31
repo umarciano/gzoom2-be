@@ -18,8 +18,8 @@ import static org.slf4j.LoggerFactory.getLogger;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @TestPropertySource("/dev.properties")
-public class FirstTest {
-    private static final Logger LOG = getLogger(FirstTest.class);
+public class FirstIT {
+    private static final Logger LOG = getLogger(FirstIT.class);
 
     @Autowired
     @Deprecated

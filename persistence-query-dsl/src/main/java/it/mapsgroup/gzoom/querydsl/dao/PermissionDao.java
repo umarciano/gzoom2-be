@@ -53,4 +53,28 @@ public class PermissionDao {
         
         return ret.isEmpty() ? null : ret;
     }
+    
+    @Transactional
+    public List<SecurityPermission> getPermission(String userLoginId, String permission) {
+        QUserLoginSecurityGroup qulsg = QUserLoginSecurityGroup.userLoginSecurityGroup;
+        QSecurityGroupPermission qsgp = QSecurityGroupPermission.securityGroupPermission;
+        QSecurityPermission qsp = QSecurityPermission.securityPermission;
+        
+        SQLQuery<String> tupleSQLQuery = queryFactory.select(qsgp.permissionId)
+                .from(qsgp)
+                .innerJoin(qulsg).on(qulsg.groupId.eq(qsgp.groupId))
+                .innerJoin(qsp).on(qsgp.permissionId.eq(qsp.permissionId))
+                .where(qulsg.userLoginId.eq(userLoginId).and(qsp.enabled.isTrue())
+                		.and(qsp.permissionId.contains(permission)));
+
+        SQLBindings bindings = tupleSQLQuery.getSQL();
+        LOG.info("{}", bindings.getSQL());
+        LOG.info("{}", bindings.getBindings());
+        QBean<SecurityPermission> perm = Projections.bean(SecurityPermission.class, qsgp.permissionId);
+        
+        List<SecurityPermission> ret = tupleSQLQuery.transform(GroupBy.groupBy(qsgp.permissionId).list(perm));
+        
+        
+        return ret.isEmpty() ? null : ret;
+    }
 }
