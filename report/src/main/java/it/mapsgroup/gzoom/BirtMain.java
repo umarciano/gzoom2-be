@@ -10,11 +10,13 @@ import java.util.logging.Level;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
+
 /**
  * @author Andrea Fossi.
  */
 public class BirtMain {
     private static final Logger LOG = getLogger(BirtMain.class);
+
 
     public static void main(String... args) {
         IReportEngine engine = null;
@@ -25,9 +27,9 @@ public class BirtMain {
             config.setBIRTHome("/Users/anfo/projects/gzoom/report-designer/birt-runtime-4.6.0-20160607/ReportEngine/lib");
             config.setLogConfig("/Users/anfo/projects/gzoom/logs", Level.FINEST);
             //config.setResourcePath();
-            Platform.startup( config );
-            IReportEngineFactory factory = (IReportEngineFactory) Platform.createFactoryObject( IReportEngineFactory.EXTENSION_REPORT_ENGINE_FACTORY );
-            engine = factory.createReportEngine( config );
+            Platform.startup(config);
+            IReportEngineFactory factory = (IReportEngineFactory) Platform.createFactoryObject(IReportEngineFactory.EXTENSION_REPORT_ENGINE_FACTORY);
+            engine = factory.createReportEngine(config);
 
 
         } catch (Exception e) {
