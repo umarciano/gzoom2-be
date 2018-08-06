@@ -20,7 +20,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.logging.Level;
 
@@ -31,9 +30,11 @@ import static org.slf4j.LoggerFactory.getLogger;
 @Qualifier("birt")
 public class BIRTReportRunner implements ReportRunner {
     private static final String DEFAULT_LOGGING_DIRECTORY = "defaultBirtLoggingDirectory/";
+    public static final String BIRT_PARAMETERS = "birtParameters";
+
     private Logger logger = getLogger(BIRTReportRunner.class);
 
-    private static String reportOutputDirectory;
+    private static String reportTempDirectory;
 
     private IReportEngine birtReportEngine = null;
 
@@ -88,7 +89,7 @@ public class BIRTReportRunner implements ReportRunner {
             logger.error("Birt Startup Error: {}", e.getMessage());
         }
 
-        reportOutputDirectory = env.getProperty("birt_temp_file_output_dir");
+        reportTempDirectory = env.getProperty("birt_temp_file_output_dir");
     }
 
     /**
@@ -138,7 +139,8 @@ public class BIRTReportRunner implements ReportRunner {
         }
 
         // process any additional parameters
-        Map<String, String> parsedParameters = parseParametersAsMap(birtReport.getParameters());
+        //Map<String, String> parsedParameters = parseParametersAsMap(birtReport.getParameters());
+        Map<String, Object> reportParameters = birtReport.getParameters();
 
         byteArrayOutputStream = new ByteArrayOutputStream();
         try {
@@ -149,20 +151,20 @@ public class BIRTReportRunner implements ReportRunner {
             //setting locale
             //see https://stackoverflow.com/questions/25281571/birt-is-not-finding-properties-file-containing-localization-at-runtime-servlet
             try {
-                reportDesign.getDesignHandle().setStringProperty("locale", Locale.ITALIAN.toString());
+                reportDesign.getDesignHandle().setStringProperty("locale", birtReport.reportLocale.toString());
             } catch (SemanticException e) {
                 logger.error("error", e);
                 throw new RuntimeException(e);
             }
             IRunTask runTask = birtReportEngine.createRunTask(reportDesign);
 
-            //todo config locale
-            runTask.setLocale(Locale.ITALIAN);
+            runTask.setLocale(birtReport.reportLocale);
 
             logger.info("ResourcePath: {}", birtReportEngine.getConfig().getResourcePath());
 
-            if (parsedParameters.size() > 0) {
-                for (Map.Entry<String, String> entry : parsedParameters.entrySet()) {
+            runTask.getAppContext().put(BIRT_PARAMETERS, reportParameters);
+            if (reportParameters.size() > 0) {
+                for (Map.Entry<String, Object> entry : reportParameters.entrySet()) {
                     runTask.setParameterValue(entry.getKey(), entry.getValue());
                 }
             }
@@ -170,9 +172,10 @@ public class BIRTReportRunner implements ReportRunner {
 
             runTask.validateParameters();
 
-            String rptdocument = reportOutputDirectory + File.separator
+            String rptdocument = reportTempDirectory + File.separator
                     + "generated" + File.separator
-                    + birtReport.getName() + ".rptdocument";
+                    + birtReport.getName() + "_" +
+                    System.currentTimeMillis() + ".rptdocument";
             runTask.run(rptdocument);
 
 
@@ -211,6 +214,7 @@ public class BIRTReportRunner implements ReportRunner {
      * @param reportParameters a String from a HTTP request URL
      * @return a map of parameters with Key,Value entries as strings
      */
+    @Deprecated
     public Map<String, String> parseParametersAsMap(String reportParameters) {
         Map<String, String> parsedParameters = new HashMap<String, String>();
         String[] paramArray;

@@ -1,13 +1,16 @@
 package it.mapsgroup.gzoom;
 
 
+import java.util.Locale;
+import java.util.Map;
+
 /**
  * @author Andrea Fossi.
  */
 public class BIRTReport extends Report {
 
-    public BIRTReport(String name, String reportParameters, ReportRunner reportRunner) {
-        super(name, reportParameters, reportRunner);
+    public BIRTReport(String name, Map<String, Object> reportParameters, ReportRunner reportRunner, Locale reportLocale) {
+        super(name, reportParameters, reportRunner, reportLocale);
     }
 
     @Override
