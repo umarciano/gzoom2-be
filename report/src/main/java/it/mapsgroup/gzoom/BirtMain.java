@@ -14,6 +14,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 /**
  * @author Andrea Fossi.
  */
+@Deprecated
 public class BirtMain {
     private static final Logger LOG = getLogger(BirtMain.class);
 

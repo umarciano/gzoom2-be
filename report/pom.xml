@@ -60,6 +60,18 @@
             <artifactId>spring-boot-starter</artifactId>
             <!--<version>${spring-boot.version}</version>-->
         </dependency>
+<!--
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-integration</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-jdbc</artifactId>
+        </dependency>
+-->
+
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -128,14 +140,13 @@
 
         <!--Birt-->
         <!-- https://mvnrepository.com/artifact/org.eclipse.birt.runtime/org.eclipse.birt.runtime -->
-  <!--      <dependency>
+        <dependency>
             <groupId>org.eclipse.birt.runtime</groupId>
             <artifactId>org.eclipse.birt.runtime</artifactId>
-            &lt;!&ndash;<version>4.4.2</version>&ndash;&gt;
             <version>4.6.0-20160607</version>
             <scope>provided</scope>
         </dependency>
--->
+
 
         <dependency>
             <groupId>mysql</groupId>

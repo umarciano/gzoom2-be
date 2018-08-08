@@ -45,6 +45,7 @@ public class BIRTReportRunner implements ReportRunner {
      * Starts up and configures the BIRT Report Engine
      */
     @PostConstruct
+    @SuppressWarnings("unchecked")
     public void startUp() {
         if (env.getProperty("birt_report_input_dir") == null)
             throw new RuntimeException("Cannot start application since birt report input directory was not specified.");
@@ -186,7 +187,7 @@ public class BIRTReportRunner implements ReportRunner {
             PDFRenderOption pdfRenderOption = new PDFRenderOption();
             pdfRenderOption.setOption(IPDFRenderOption.REPAGINATE_FOR_PDF, new Boolean(true));
             pdfRenderOption.setOutputFormat("pdf");
-            pdfRenderOption.setOutputStream(byteArrayOutputStream);
+            pdfRenderOption.closeOutputStreamOnExit(true);
             renderTask.setRenderOption(pdfRenderOption);
 
             //EXCELRenderOption excelRenderOption= new EXCELRenderOption();
