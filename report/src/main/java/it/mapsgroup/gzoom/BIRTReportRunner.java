@@ -190,11 +190,11 @@ public class BIRTReportRunner implements ReportRunner {
             pdfRenderOption.closeOutputStreamOnExit(true);
             renderTask.setRenderOption(pdfRenderOption);
 
-            //EXCELRenderOption excelRenderOption= new EXCELRenderOption();
-            //excelRenderOption.setEnableMultipleSheet(true);
-            //excelRenderOption.setOutputFormat("xls");
-            //excelRenderOption.setOutputStream(byteArrayOutputStream);
-            //renderTask.setRenderOption(excelRenderOption);
+//            EXCELRenderOption excelRenderOption= new EXCELRenderOption();
+//            excelRenderOption.setEnableMultipleSheet(true);
+//            excelRenderOption.setOutputFormat("xls");
+//            excelRenderOption.setOutputStream(byteArrayOutputStream);
+//            renderTask.setRenderOption(excelRenderOption);
 
             renderTask.render();
             renderTask.close();

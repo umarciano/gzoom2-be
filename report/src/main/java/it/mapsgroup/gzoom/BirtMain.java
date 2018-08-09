@@ -25,8 +25,8 @@ public class BirtMain {
 
         try {
             config = new EngineConfig();
-            config.setBIRTHome("/Users/anfo/projects/gzoom/report-designer/birt-runtime-4.6.0-20160607/ReportEngine/lib");
-            config.setLogConfig("/Users/anfo/projects/gzoom/logs", Level.FINEST);
+            config.setBIRTHome("C:/data/Gzoom_2/birt-runtime-4.6.0-20160607/ReportEngine/lib");
+            config.setLogConfig("C:/data/Gzoom_2/birt/logs", Level.FINEST);
             //config.setResourcePath();
             Platform.startup(config);
             IReportEngineFactory factory = (IReportEngineFactory) Platform.createFactoryObject(IReportEngineFactory.EXTENSION_REPORT_ENGINE_FACTORY);

@@ -1,5 +1,6 @@
 package it.mapsgroup.gzoom;
 
+import org.apache.derby.client.am.DateTime;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
@@ -7,6 +8,8 @@ import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+
+import com.ibm.icu.util.Calendar;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -27,9 +30,23 @@ public class BirtReportRunnerApplication {
         //Report report = new BIRTReport("simple_report", "?null=null", reportRunner).runReport();
         HashMap<String, Object> reportParameters = new HashMap<>();
         //todo add parameters here
-
-        Report report = new BIRTReport("simple_report", reportParameters, reportRunner, Locale.ITALIAN).runReport();
-
-        report.getReportContent().writeTo(new FileOutputStream("/Users/anfo/projects/gzoom/report-designer/file.pdf"));
+        reportParameters.put("langLocale", "");
+        reportParameters.put("outputFormat", "pdf");
+        reportParameters.put("workEffortTypeId", "15AP0PPC");
+       // reportParameters.put("workEffortId", "E10211");
+        reportParameters.put("exposeReleaseDate", "Y");
+        reportParameters.put("exposePaginator", "Y");
+        reportParameters.put("reportContentId", "REPORT_CATALOGO");
+        reportParameters.put("userLoginId", "admin");
+        reportParameters.put("userProfile", "MGR_ADMIN");
+        reportParameters.put("birtOutputFileName", "CatalogoTreLivelli");
+        reportParameters.put("localDispatcherName", "corperf");
+        reportParameters.put("defaultOrganizationPartyId", "Company");
+        
+        
+        Report report = new BIRTReport("CatalogoTreLivelli_ORI", reportParameters, reportRunner, Locale.ITALIAN).runReport();
+        
+        String namePath = "C:/data/Gzoom_2/birt/logs/file_" + Calendar.getInstance().getTimeInMillis() + ".pdf";
+        report.getReportContent().writeTo(new FileOutputStream(namePath));
     }
 }
