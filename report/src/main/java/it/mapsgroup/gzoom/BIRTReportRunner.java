@@ -189,6 +189,7 @@ public class BIRTReportRunner implements ReportRunner {
             pdfRenderOption.setOutputFormat("pdf");
             pdfRenderOption.closeOutputStreamOnExit(true);
             renderTask.setRenderOption(pdfRenderOption);
+            pdfRenderOption.setOutputStream(byteArrayOutputStream);
 
 //            EXCELRenderOption excelRenderOption= new EXCELRenderOption();
 //            excelRenderOption.setEnableMultipleSheet(true);
