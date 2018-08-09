@@ -7,6 +7,7 @@ import com.querydsl.sql.spring.SpringExceptionTranslator;
 import com.querydsl.sql.types.EnumByNameType;
 import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatus;
 import it.mapsgroup.gzoom.querydsl.BooleanCharacterType;
+import it.mapsgroup.gzoom.report.querydsl.dao.ReportActivityDao;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,7 +30,7 @@ import static org.slf4j.LoggerFactory.getLogger;
  */
 @Configuration
 @EnableTransactionManagement
-@ComponentScan("it.mapsgroup.gzoom.report.querydsl.dao")
+@ComponentScan(basePackageClasses = {ReportActivityDao.class})
 public class QueryDslPersistenceConfiguration {
     private static final Logger LOG = getLogger(QueryDslPersistenceConfiguration.class);
 

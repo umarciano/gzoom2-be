@@ -588,6 +588,8 @@
         <module>jdbc-repo</module>
         <module>report</module>
         <module>report-persistence-query-dsl</module>
+        <module>report-rest</module>
+        <module>report-rest-boot</module>
     </modules>
 
 </project>

@@ -38,7 +38,7 @@ public class ReportActivityDaoIT extends AbstractReportDaoIT {
             activityDao.create(record);
             LOG.debug("i" + record.getActivityId());
 
-            activityDao.getActvities();
+            activityDao.getActvities(null);
             return null;
         });
 

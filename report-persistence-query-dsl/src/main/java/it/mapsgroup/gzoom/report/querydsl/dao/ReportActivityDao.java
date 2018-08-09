@@ -4,15 +4,13 @@ import com.querydsl.sql.SQLBindings;
 import com.querydsl.sql.SQLQuery;
 import com.querydsl.sql.SQLQueryFactory;
 import it.mapsgroup.gzoom.persistence.common.SequenceGenerator;
+import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatus;
 import it.mapsgroup.report.querydsl.dto.QReportActivity;
 import it.mapsgroup.report.querydsl.dto.ReportActivity;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.util.List;
 
@@ -46,15 +44,35 @@ public class ReportActivityDao extends AbstractDao {
         return i > 0;
     }
 
+    @Transactional
+    public ReportActivity get(String id) {
+        QReportActivity qReportActivity = QReportActivity.reportActivity;
+        return queryFactory.select(qReportActivity)
+                .from(qReportActivity)
+                .where(qReportActivity.activityId.eq(id))
+                .fetchFirst();
+    }
 
     @Transactional
-    public List<ReportActivity> getActvities() {
-        if (TransactionSynchronizationManager.isActualTransactionActive()) {
-            TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
-            status.getClass();
-        }
+    public Boolean updateState(String id,
+                               ReportActivityStatus src,
+                               ReportActivityStatus dest) {
+        QReportActivity qReportActivity = QReportActivity.reportActivity;
+        long result = queryFactory.update(qReportActivity)
+                .set(qReportActivity.status, dest)
+                .where(qReportActivity.activityId.eq(id)
+                        .and(qReportActivity.status.eq(src)))
+                .execute();
+        return result > 0;
+
+    }
+
+
+    public List<ReportActivity> getActvities(ReportActivityStatus status) {
         QReportActivity qReportActivity = QReportActivity.reportActivity;
         SQLQuery<ReportActivity> pSQLQuery = queryFactory.select(qReportActivity).from(qReportActivity).orderBy(qReportActivity.activityId.asc());
+        if (status != null)
+            pSQLQuery.where(qReportActivity.status.eq(status));
         SQLBindings bindings = pSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
