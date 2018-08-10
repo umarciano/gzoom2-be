@@ -25,7 +25,8 @@ public class Exec {
         } catch (InternalServerException | ValidationException | AccessDeniedException | DataAccessException e) {
             throw e;
         } catch (Exception e) {
-            LOG.error("Unexpected exception [user={}, phase={}]", Principals.username(), phase, e);
+            //WorkAround for BirtRuntime Compilation
+            LOG.error("Unexpected exception [user={}, phase={}]", new Object[]{Principals.username(), phase, e});
             throw new InternalServerException( e.getMessage());
         }
     }

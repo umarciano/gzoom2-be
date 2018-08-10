@@ -49,10 +49,10 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
-       <!-- <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-        </dependency>-->
+        <!-- <dependency>
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-starter-tomcat</artifactId>
+         </dependency>-->
 
 
         <!--db poller-->
@@ -67,7 +67,6 @@
               &lt;!&ndash;<version>4.3.8.RELEASE</version>&ndash;&gt;
           </dependency>-->
         <!--end db poller-->
-
 
 
         <dependency>
@@ -129,13 +128,34 @@
 
         <!--Birt-->
         <!-- https://mvnrepository.com/artifact/org.eclipse.birt.runtime/org.eclipse.birt.runtime -->
+        <!-- <dependency>
+             <groupId>org.eclipse.birt.runtime</groupId>
+             <artifactId>org.eclipse.birt.runtime</artifactId>
+             <version>4.6.0-20160607</version>
+             <scope>provided</scope>
+         </dependency>-->
+
         <dependency>
             <groupId>org.eclipse.birt.runtime</groupId>
             <artifactId>org.eclipse.birt.runtime</artifactId>
-            <version>4.6.0-20160607</version>
-            <scope>provided</scope>
+            <version>4.8.0-20180626</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/lib/org.eclipse.birt.runtime_4.8.0-20180626.jar</systemPath>
         </dependency>
-
+        <dependency>
+            <groupId>org.eclipse.birt.runtime</groupId>
+            <artifactId>org.eclipse.equinox.registry</artifactId>
+            <version>4.8.0-20180626</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/lib/org.eclipse.equinox.registry_3.8.0.v20180426-1327.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.birt.runtime</groupId>
+            <artifactId>com.ibm.icu</artifactId>
+            <version>4.8.0-20180626</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/lib/com.ibm.icu_58.2.0.v20170418-1837.jar</systemPath>
+        </dependency>
 
         <dependency>
             <groupId>mysql</groupId>

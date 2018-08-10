@@ -1,6 +1,5 @@
 package it.mapsgroup.gzoom;
 
-import com.ibm.icu.util.Calendar;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
@@ -9,6 +8,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 
