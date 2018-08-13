@@ -1,4 +1,4 @@
-package it.mapsgroup.gzoom;
+package it.mapsgroup.gzoom.birt;
 
 import org.eclipse.birt.report.engine.api.IEngineTask;
 import org.eclipse.birt.report.engine.api.IProgressMonitor;

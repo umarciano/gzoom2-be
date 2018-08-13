@@ -24,7 +24,7 @@
     <logger name="it.memelabs" level="debug"/>
     <logger name="org.eclipse.birt" level="info"/>
     <logger name="org.springframework.security" level="info"/>
-    <logger name="it.mapsgroup.gzoom.BirtServiceProgress" level="trace"/>
+    <logger name="it.mapsgroup.gzoom.birt.BirtServiceProgress" level="trace"/>
 
 </configuration>
 

@@ -1,4 +1,4 @@
-package it.mapsgroup.gzoom;
+package it.mapsgroup.gzoom.birt;
 
 /**
  * @author Andrea Fossi.
@@ -21,12 +21,14 @@ public abstract class Report {
     protected ByteArrayOutputStream reportContent;
     protected ReportRunner reportRunner;
     protected Locale reportLocale;
+    protected BirtServiceProgress birtServiceProgress;
 
     public Report(String name, Map<String, Object> parameters, ReportRunner reportRunner, Locale reportLocale) {
         this.name = name;
         this.parameters = parameters;
         this.reportRunner = reportRunner;
         this.reportLocale = reportLocale;
+        this.birtServiceProgress = new BirtServiceProgress();
     }
 
     /**
@@ -52,5 +54,9 @@ public abstract class Report {
 
     public Locale getReportLocale() {
         return reportLocale;
+    }
+
+    public BirtServiceProgress getBirtServiceProgress() {
+        return birtServiceProgress;
     }
 }

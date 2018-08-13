@@ -10,7 +10,6 @@ public class DataSourceEventHandler extends DataSourceEventAdapter {
 
     public void beforeOpen(IDataSourceInstance dataSource, IReportContext reportContext) throws ScriptException {
         super.beforeOpen(dataSource, reportContext);
-
         String odaURL = (String) reportContext.getAppContext().get("odaURL");
         String odaDriverClass = (String) reportContext.getAppContext().get("odaDriverClass");
         String odaPassword = (String) reportContext.getAppContext().get("odaPassword");
@@ -22,6 +21,7 @@ public class DataSourceEventHandler extends DataSourceEventAdapter {
             dataSource.setExtensionProperty("odaDriverClass", odaDriverClass);
             dataSource.setExtensionProperty("odaPassword", odaPassword);
             dataSource.setExtensionProperty("odaUser", odaUser);
+            dataSource.setExtensionProperty("odaJndiName",System.currentTimeMillis()+"_DS");
             if (StringUtils.isNotEmpty(odaIsolationMode)) {
                 dataSource.setExtensionProperty("odaIsolationMode", odaIsolationMode);
             }

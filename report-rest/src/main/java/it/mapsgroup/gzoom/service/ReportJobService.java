@@ -42,7 +42,7 @@ public class ReportJobService {
     }
 
     @Transactional
-    private ReportActivity save(CreateReport report) {
+    public ReportActivity save(CreateReport report) {
         ReportActivity record = new ReportActivity();
         record.setReportData("Primo ReportActivity " + System.currentTimeMillis());
         record.setStatus(ReportActivityStatus.QUEUED);
@@ -54,7 +54,7 @@ public class ReportJobService {
             else
                 record.setReportData(objectMapper.writeValueAsString(new HashMap<Object, String>()));
         } catch (JsonProcessingException e) {
-            throw new ValidationException("Canno serialize params");
+            throw new ValidationException("Cannot serialize params");
         }
 
         record.setCompletedStamp(LocalDateTime.now());

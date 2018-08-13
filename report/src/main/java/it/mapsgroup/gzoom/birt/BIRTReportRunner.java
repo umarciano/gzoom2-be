@@ -1,4 +1,4 @@
-package it.mapsgroup.gzoom;
+package it.mapsgroup.gzoom.birt;
 
 import org.eclipse.birt.core.exception.BirtException;
 import org.eclipse.birt.core.framework.Platform;
@@ -8,7 +8,8 @@ import org.eclipse.core.internal.registry.RegistryProviderFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.env.Environment;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -21,15 +22,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
 
 @Service
 @Qualifier("birt")
+//@Scope(value = BeanDefinition.SCOPE_PROTOTYPE)
 public class BIRTReportRunner implements ReportRunner {
-    private static final String DEFAULT_LOGGING_DIRECTORY = "defaultBirtLoggingDirectory/";
     public static final String BIRT_PARAMETERS = "birtParameters";
 
     private Logger logger = getLogger(BIRTReportRunner.class);
@@ -39,7 +39,8 @@ public class BIRTReportRunner implements ReportRunner {
     private IReportEngine birtReportEngine = null;
 
     @Autowired
-    private Environment env;
+    private BirtConfig config;
+
 
     /**
      * Starts up and configures the BIRT Report Engine
@@ -47,38 +48,32 @@ public class BIRTReportRunner implements ReportRunner {
     @PostConstruct
     @SuppressWarnings("unchecked")
     public void startUp() {
-        if (env.getProperty("birt_report_input_dir") == null)
+        if (StringUtils.isEmpty(config.getBirtReportInputDir()))
             throw new RuntimeException("Cannot start application since birt report input directory was not specified.");
         try {
-            String birtLoggingDirectory = env.getProperty("birt_logging_directory") == null ? DEFAULT_LOGGING_DIRECTORY : env.getProperty("birt_logging_directory");
-            Level birtLoggingLevel = env.getProperty("birt_logging_level") == null ? Level.SEVERE : Level.parse(env.getProperty("birt_logging_level"));
+            //String birtLoggingDirectory = env.getProperty("birt_logging_directory") == null ? DEFAULT_LOGGING_DIRECTORY : env.getProperty("birt_logging_directory");
+            //Level birtLoggingLevel = env.getProperty("birt_logging_level") == null ? Level.SEVERE : Level.parse(env.getProperty("birt_logging_level"));
             EngineConfig engineConfig = new EngineConfig();
-            logger.info("BIRT LOG DIRECTORY SET TO : {}", birtLoggingDirectory);
-            logger.info("BIRT LOGGING LEVEL SET TO {}", birtLoggingLevel);
+            logger.info("BIRT LOG DIRECTORY SET TO : {}", config.getBirtLoggingDirectory());
+            logger.info("BIRT LOGGING LEVEL SET TO {}", config.getBirtLoggingLevel());
 
-            engineConfig.setLogConfig(birtLoggingDirectory, birtLoggingLevel);
+            engineConfig.setLogConfig(config.getBirtLoggingDirectory(), config.getBirtLoggingLevel());
             engineConfig.setLogger(java.util.logging.Logger.getLogger(BIRTReportRunner.class.getName()));
 
-            engineConfig.setResourcePath(env.getProperty("birt_report_input_dir"));
-            //engineConfig.setLogger();
+            engineConfig.setResourcePath(config.getBirtReportInputDir());
 
             // Required due to a bug in BIRT that occurs in calling Startup after the Platform has already been started up
             RegistryProviderFactory.releaseDefault();
             Platform.startup(engineConfig);
 
             // data source
-            //engineConfig.setProperty("odaURL", "jdbc:mysql://localhost/gzoom?autoReconnect=true&amp;useOldAliasMetadataBehavior=true&amp;generateSimpleParameterMetadata=true");
-            //engineConfig.setProperty("odaDriverClass", "com.mysql.jdbc.Driver");
-            //engineConfig.setProperty("odaPassword", "root");
-            //engineConfig.setProperty("odaUser", "root");
-
-            if (!StringUtils.isEmpty(env.getProperty("oda_url"))) {
-                logger.info("Setting data source url: {}", env.getProperty("oda_url"));
-                logger.info("Setting data source driver: {}", env.getProperty("oda_driver_class"));
-                engineConfig.getAppContext().put("odaURL", env.getProperty("oda_url"));
-                engineConfig.getAppContext().put("odaDriverClass", env.getProperty("oda_driver_class"));
-                engineConfig.getAppContext().put("odaPassword", env.getProperty("oda_password"));
-                engineConfig.getAppContext().put("odaUser", env.getProperty("oda_user"));
+            if (!StringUtils.isEmpty(config.getOdaUrl())) {
+                logger.info("Setting data source url: {}", config.getOdaUrl());
+                logger.info("Setting data source driver: {}", config.getOdaDriverClass());
+                engineConfig.getAppContext().put("odaURL", config.getOdaUrl());
+                engineConfig.getAppContext().put("odaDriverClass", config.getOdaDriverClass());
+                engineConfig.getAppContext().put("odaUser", config.getOdaUser());
+                engineConfig.getAppContext().put("odaPassword", config.getOdaPassword());
             }
 
             IReportEngineFactory reportEngineFactory = (IReportEngineFactory) Platform.createFactoryObject(IReportEngineFactory.EXTENSION_REPORT_ENGINE_FACTORY);
@@ -90,7 +85,7 @@ public class BIRTReportRunner implements ReportRunner {
             logger.error("Birt Startup Error: {}", e.getMessage());
         }
 
-        reportTempDirectory = env.getProperty("birt_temp_file_output_dir");
+        reportTempDirectory = config.getBirtTempFileOutputDir();
     }
 
     /**
@@ -104,7 +99,7 @@ public class BIRTReportRunner implements ReportRunner {
     }
 
     public File getReportFromFilesystem(String reportName) throws RuntimeException {
-        String reportDirectory = env.getProperty("birt_report_input_dir");
+        String reportDirectory = config.getBirtReportInputDir();
         Path birtReport = Paths.get(reportDirectory + File.separator + reportName + ".rptdesign");
         if (!Files.isReadable(birtReport))
             throw new RuntimeException("Report " + reportName + " either did not exist or was not writable.");
@@ -126,8 +121,8 @@ public class BIRTReportRunner implements ReportRunner {
      * @return Returns a ByteArrayOutputStream of the PDF bytes generated by the
      */
     @Override
+    @SuppressWarnings("unchecked")
     public ByteArrayOutputStream runReport(Report birtReport) {
-
         ByteArrayOutputStream byteArrayOutputStream;
         File rptDesignFile;
 
@@ -182,7 +177,7 @@ public class BIRTReportRunner implements ReportRunner {
 
             IReportDocument reportDocument = birtReportEngine.openReportDocument(rptdocument);
             IRenderTask renderTask = birtReportEngine.createRenderTask(reportDocument);
-            renderTask.setProgressMonitor(new BirtServiceProgress());
+            renderTask.setProgressMonitor(birtReport.getBirtServiceProgress());
 
             PDFRenderOption pdfRenderOption = new PDFRenderOption();
             pdfRenderOption.setOption(IPDFRenderOption.REPAGINATE_FOR_PDF, new Boolean(true));

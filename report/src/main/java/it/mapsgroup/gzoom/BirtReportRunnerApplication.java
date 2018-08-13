@@ -1,6 +1,9 @@
 package it.mapsgroup.gzoom;
 
 import com.ibm.icu.util.Calendar;
+import it.mapsgroup.gzoom.birt.BIRTReport;
+import it.mapsgroup.gzoom.birt.BIRTReportRunner;
+import it.mapsgroup.gzoom.birt.Report;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
