@@ -29,20 +29,39 @@ public class BirtReportRunnerApplication {
 
         //Report report = new BIRTReport("simple_report", "?null=null", reportRunner).runReport();
         HashMap<String, Object> reportParameters = new HashMap<>();
-        //todo add parameters here
-        reportParameters.put("langLocale", "");
-        reportParameters.put("outputFormat", "pdf");
+        //TODO add parameters here
+
+        /*
+         * SchedaDupOperativa2018
         reportParameters.put("workEffortTypeId", "15AP0PPC");
-        // reportParameters.put("workEffortId", "E10211");
+        reportParameters.put("workEffortId", "14363");
+        reportParameters.put("reportContentId", "REPORT_DUP_MAND_STR");
+        reportParameters.put("selectNote", "DATA");
+        reportParameters.put("typeNotes", "ALL");
+        reportParameters.put("exposeOnlyIndex", "N");
+        reportParameters.put("localDispatcherName", "stratperf");
+        */
+
+
+        reportParameters.put("workEffortTypeId", "15AP0PPC");
+        reportParameters.put("workEffortId", "E12144");
+        reportParameters.put("reportContentId", "REPO_VALUT_RISC"); // REPO_VALUT_RISC - REPO_PRI_VALUT_RISC
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(2017, 11, 31, 0, 0, 0);
+
+        reportParameters.put("monitoringDate", cal.getTime());
+
+        reportParameters.put("excludeValidity", "N");
         reportParameters.put("exposeReleaseDate", "Y");
         reportParameters.put("exposePaginator", "Y");
-        reportParameters.put("reportContentId", "REPORT_CATALOGO");
+
+        reportParameters.put("langLocale", "");
+        reportParameters.put("outputFormat", "pdf");
         reportParameters.put("userLoginId", "admin");
         reportParameters.put("userProfile", "MGR_ADMIN");
-        reportParameters.put("birtOutputFileName", "CatalogoTreLivelli");
-        reportParameters.put("localDispatcherName", "corperf");
+        reportParameters.put("birtOutputFileName", "ValutazioniRischi");
         reportParameters.put("defaultOrganizationPartyId", "Company");
-
 
         Report report = new BIRTReport("CatalogoTreLivelli_ORI", reportParameters, reportRunner, Locale.ITALIAN).runReport();
         //Report report = new BIRTReport("simple_report", reportParameters, reportRunner, Locale.ITALIAN).runReport();
