@@ -74,6 +74,7 @@ public class BIRTReportRunner implements ReportRunner {
                 engineConfig.getAppContext().put("odaDriverClass", config.getOdaDriverClass());
                 engineConfig.getAppContext().put("odaUser", config.getOdaUser());
                 engineConfig.getAppContext().put("odaPassword", config.getOdaPassword());
+                engineConfig.getAppContext().put("odaDialect", config.getOdaDialect());
             }
 
             IReportEngineFactory reportEngineFactory = (IReportEngineFactory) Platform.createFactoryObject(IReportEngineFactory.EXTENSION_REPORT_ENGINE_FACTORY);

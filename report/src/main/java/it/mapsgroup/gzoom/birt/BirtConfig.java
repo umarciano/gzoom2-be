@@ -22,6 +22,7 @@ public class BirtConfig {
     private final String odaDriverClass;
     private final String odaPassword;
     private final String odaUser;
+    private final String odaDialect;
 
 
     public BirtConfig(Environment env) {
@@ -34,6 +35,7 @@ public class BirtConfig {
         odaDriverClass = env.getProperty("oda_driver_class");
         odaPassword = env.getProperty("oda_password");
         odaUser = env.getProperty("oda_user");
+        odaDialect = env.getProperty("oda_dialect");
     }
 
     public String getBirtLoggingDirectory() {
@@ -70,5 +72,9 @@ public class BirtConfig {
 
     public String getBirtReportOutputDir() {
         return birtReportOutputDir;
+    }
+
+    public String getOdaDialect() {
+        return odaDialect;
     }
 }
