@@ -8,15 +8,15 @@ import org.eclipse.core.internal.registry.RegistryProviderFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -122,9 +122,10 @@ public class BIRTReportRunner implements ReportRunner {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public ByteArrayOutputStream runReport(Report birtReport) {
-        ByteArrayOutputStream byteArrayOutputStream;
+    public ReportHandler runReport(Report birtReport) {
+        OutputStream byteArrayOutputStream;
         File rptDesignFile;
+        File reportContentTempFile;
 
         // get the path to the report design file
         try {
@@ -138,9 +139,14 @@ public class BIRTReportRunner implements ReportRunner {
         //Map<String, String> parsedParameters = parseParametersAsMap(birtReport.getParameters());
         Map<String, Object> reportParameters = birtReport.getParameters();
 
-        byteArrayOutputStream = new ByteArrayOutputStream();
+        //byteArrayOutputStream =  new ByteArrayOutputStream();
         try {
-
+            reportContentTempFile = new File(reportTempDirectory + File.separator
+                    + "generated" + File.separator
+                    + birtReport.getName() + "_" +
+                    System.currentTimeMillis() + ".tmp");
+            reportContentTempFile.deleteOnExit();
+            byteArrayOutputStream = new FileOutputStream(reportContentTempFile);
 
             IReportRunnable reportDesign = birtReportEngine.openReportDesign(rptDesignFile.getPath());
 
@@ -197,10 +203,14 @@ public class BIRTReportRunner implements ReportRunner {
         } catch (EngineException e) {
             logger.error("Error while running report task: {}.", e.getMessage());
             // TODO add custom message to thrown exception
-            throw new RuntimeException();
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            logger.error("Error while running report task: {}. Cannot create temporary file", e.getMessage());
+            // TODO add custom message to thrown exception
+            throw new RuntimeException(e);
         }
 
-        return byteArrayOutputStream;
+        return new ReportHandler(reportContentTempFile);
     }
 
     /**

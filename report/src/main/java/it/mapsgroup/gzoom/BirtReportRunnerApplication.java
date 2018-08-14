@@ -4,6 +4,7 @@ import com.ibm.icu.util.Calendar;
 import it.mapsgroup.gzoom.birt.BIRTReport;
 import it.mapsgroup.gzoom.birt.BIRTReportRunner;
 import it.mapsgroup.gzoom.birt.Report;
+import org.apache.xmlbeans.impl.common.IOUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
@@ -47,7 +48,8 @@ public class BirtReportRunnerApplication {
         //Report report = new BIRTReport("simple_report", reportParameters, reportRunner, Locale.ITALIAN).runReport();
 
         String namePath = "/Users/anfo/projects/gzoom/logs/file_" + Calendar.getInstance().getTimeInMillis() + ".pdf";
-        report.getReportContent().writeTo(new FileOutputStream(namePath));
+        IOUtil.copyCompletely(report.getReportContent().getReportContent(), new FileOutputStream(namePath));
+        //report.getReportContent().writeTo(new FileOutputStream(namePath));
 
     }
 

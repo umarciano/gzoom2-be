@@ -1,5 +1,6 @@
 package it.mapsgroup.gzoom.birt;
 
+import org.apache.xmlbeans.impl.common.IOUtil;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -53,7 +54,10 @@ public class BirtService {
         //String namePath = "/Users/anfo/projects/gzoom/logs/file_" + Calendar.getInstance().getTimeInMillis() + ".pdf";
         File outputPath = new File(config.getBirtReportOutputDir(), outputFileName + ".pdf");
         try {
-            report.getReportContent().writeTo(new FileOutputStream(outputPath));
+            FileOutputStream out = new FileOutputStream(outputPath);
+            //report.getReportContent().writeTo(out);
+            IOUtil.copyCompletely(report.getReportContent().getReportContent(), out);
+            report.getReportContent().close();
         } catch (IOException e) {
             //FIXME
             LOG.error("Cannot save report", e);

@@ -6,6 +6,8 @@ package it.mapsgroup.gzoom.birt;
 
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.OutputStream;
 import java.util.Locale;
 import java.util.Map;
 
@@ -18,7 +20,7 @@ public abstract class Report {
 
     protected String name;
     protected Map<String, Object> parameters;
-    protected ByteArrayOutputStream reportContent;
+    protected ReportHandler reportContent;
     protected ReportRunner reportRunner;
     protected Locale reportLocale;
     protected BirtServiceProgress birtServiceProgress;
@@ -40,7 +42,7 @@ public abstract class Report {
      */
     public abstract Report runReport();
 
-    public ByteArrayOutputStream getReportContent() {
+    public ReportHandler getReportContent() {
         return this.reportContent;
     }
 

@@ -3,11 +3,12 @@ package it.mapsgroup.gzoom.birt;
 import it.mapsgroup.gzoom.birt.Report;
 
 import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 
 /**
  * @author Andrea Fossi.
  */
 public interface ReportRunner {
 
-    ByteArrayOutputStream runReport(Report report);
+    ReportHandler runReport(Report report);
 }

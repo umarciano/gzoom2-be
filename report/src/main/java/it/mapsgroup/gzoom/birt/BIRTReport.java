@@ -1,6 +1,7 @@
 package it.mapsgroup.gzoom.birt;
 
 
+import java.io.ByteArrayOutputStream;
 import java.util.Locale;
 import java.util.Map;
 
