@@ -34,6 +34,9 @@ public class ReportActivity implements AbstractIdentity {
     @Column("REPORT_DATA")
     private String reportData;
 
+    @Column("REPORT_LOCALE")
+    private String reportLocale;
+
     @Column("REPORT_NAME")
     private String reportName;
 
@@ -108,6 +111,14 @@ public class ReportActivity implements AbstractIdentity {
 
     public void setReportData(String reportData) {
         this.reportData = reportData;
+    }
+
+    public String getReportLocale() {
+        return reportLocale;
+    }
+
+    public void setReportLocale(String reportLocale) {
+        this.reportLocale = reportLocale;
     }
 
     public String getReportName() {

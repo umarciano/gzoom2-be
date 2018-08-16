@@ -7,6 +7,8 @@ import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatu
 import it.mapsgroup.gzoom.report.querydsl.dao.ReportActivityDao;
 import it.mapsgroup.gzoom.report.querydsl.dao.ReportActvityFilter;
 import it.mapsgroup.report.querydsl.dto.ReportActivity;
+import org.apache.commons.lang3.LocaleUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.task.TaskExecutor;
@@ -55,11 +57,22 @@ public class ReportTaskService {
                     Map<String, Object> params =
                             objectMapper.readValue(record.getReportData(), new TypeReference<Map<String, Object>>() {
                             });
+                    Locale locale=null;
+                    try {
+                        if (StringUtils.isNotEmpty(record.getReportLocale()))
+                            locale = LocaleUtils.toLocale(record.getReportLocale());
+                    } catch (Exception e) {
+                        LOG.error("Cannot parse locale", e);
+                    }
+                    if(locale==null){
+                        LOG.warn("invalid report locale, setting default");
+                        locale=Locale.ITALIAN;
+                    }
                     birtService.build(record.getActivityId(),
                             record.getReportName(),
                             params,
                             "report_" + record.getActivityId(),
-                            Locale.ITALIAN);//fixme pass  locale as params
+                            locale);
                 } catch (Exception e) {
                     LOG.error("Cannot generate report", e);
                     reportDao.updateState(record.getActivityId(),

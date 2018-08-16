@@ -40,6 +40,8 @@ public class QReportActivity extends com.querydsl.sql.RelationalPathBase<ReportA
 
     public final StringPath reportData = createString("reportData");
 
+    public final StringPath reportLocale = createString("reportLocale");
+
     public final StringPath reportName = createString("reportName");
 
     public final BooleanPath resumed = createBoolean("resumed");
@@ -77,13 +79,14 @@ public class QReportActivity extends com.querydsl.sql.RelationalPathBase<ReportA
 
     public void addMetadata() {
         addMetadata(activityId, ColumnMetadata.named("ACTIVITY_ID").withIndex(1).ofType(Types.VARCHAR).withSize(255).notNull());
-        addMetadata(completedStamp, ColumnMetadata.named("COMPLETED_STAMP").withIndex(8).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(11).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(12).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(completedStamp, ColumnMetadata.named("COMPLETED_STAMP").withIndex(9).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(12).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(13).ofType(Types.TIMESTAMP).withSize(19));
         addMetadata(error, ColumnMetadata.named("ERROR").withIndex(5).ofType(Types.LONGVARCHAR).withSize(65535));
-        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(9).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(10).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(10).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(11).ofType(Types.TIMESTAMP).withSize(19));
         addMetadata(reportData, ColumnMetadata.named("REPORT_DATA").withIndex(4).ofType(Types.LONGVARCHAR).withSize(65535));
+        addMetadata(reportLocale, ColumnMetadata.named("REPORT_LOCALE").withIndex(8).ofType(Types.VARCHAR).withSize(255));
         addMetadata(reportName, ColumnMetadata.named("REPORT_NAME").withIndex(7).ofType(Types.VARCHAR).withSize(255).notNull());
         addMetadata(resumed, ColumnMetadata.named("RESUMED").withIndex(3).ofType(Types.CHAR).withSize(1));
         addMetadata(status, ColumnMetadata.named("STATUS").withIndex(2).ofType(Types.VARCHAR).withSize(255).notNull());

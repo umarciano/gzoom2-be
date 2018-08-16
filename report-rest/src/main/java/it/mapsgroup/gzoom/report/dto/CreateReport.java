@@ -8,6 +8,7 @@ import java.util.Map;
 public class CreateReport {
     private Map<String, Object> params;
     private String reportName;
+    private String reportLocale;
 
     public Map<String, Object> getParams() {
         return params;
@@ -23,5 +24,13 @@ public class CreateReport {
 
     public void setReportName(String reportName) {
         this.reportName = reportName;
+    }
+
+    public String getReportLocale() {
+        return reportLocale;
+    }
+
+    public void setReportLocale(String reportLocale) {
+        this.reportLocale = reportLocale;
     }
 }

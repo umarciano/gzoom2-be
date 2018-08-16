@@ -7,6 +7,8 @@ import it.mapsgroup.gzoom.report.dto.CreateReport;
 import it.mapsgroup.gzoom.report.querydsl.dao.ReportActivityDao;
 import it.mapsgroup.gzoom.rest.ValidationException;
 import it.mapsgroup.report.querydsl.dto.ReportActivity;
+import org.apache.commons.lang3.LocaleUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Locale;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -44,10 +47,21 @@ public class ReportJobService {
     @Transactional
     public ReportActivity save(CreateReport report) {
         ReportActivity record = new ReportActivity();
+
+        Locale locale = null;
+        try {
+            if (StringUtils.isNotEmpty(report.getReportLocale()))
+                locale = LocaleUtils.toLocale(report.getReportLocale());
+        } catch (Exception e) {
+            LOG.error("Cannot parse locale", e);
+        }
+        Validators.assertNotNull(locale, "Locale cannot be null");
+
         record.setReportData("Primo ReportActivity " + System.currentTimeMillis());
         record.setStatus(ReportActivityStatus.QUEUED);
         record.setTemplateName(report.getReportName());
         record.setReportName(report.getReportName());
+        record.setReportLocale(report.getReportLocale());
         try {
             if (report.getParams() != null)
                 record.setReportData(objectMapper.writeValueAsString(report.getParams()));
