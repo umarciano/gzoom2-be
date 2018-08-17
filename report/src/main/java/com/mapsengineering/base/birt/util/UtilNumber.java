@@ -48,21 +48,28 @@ public class UtilNumber {
 		return a + b - c;
 	}
 	
-	public static String getFormatPattern(int decimalScale, String um){
-
-        String pattern = "#,##0";
-        if (decimalScale > 0) {
-            pattern = pattern + ".";
-            
-            for(int i=0; i < decimalScale; i++ ){
-                pattern = pattern.concat("0");
-            }
-        }
-        if ("%".equals(um) || (um != null && um.indexOf("Perc") != -1)) {
-            pattern = pattern + "%";
-        }
-        return pattern;
-        
+	public static String getFormatPattern(Integer decimalScale, String um){
+		return getFormatPattern(decimalScale, um, "0");
     }
+	
+	public static String getFormatPatternWithoutZero(Integer decimalScale, String um){
+		return getFormatPattern(decimalScale, um, "#");
+	}
+	
+	public static String getFormatPattern(Integer decimalScale, String um, String patt) {
+		String pattern = "#,##0";
+		if (decimalScale != null && decimalScale > 0) {
+			pattern = pattern + ".";
+			
+			 for(int i=0; i < decimalScale; i++ ){
+				pattern += patt;
+			}
+		}
+		if ("%".equals(um) || (um != null && um.indexOf("Perc") != -1)) {
+			pattern = pattern + "%";
+		}
+		return pattern;
+	}
+
         	
 }

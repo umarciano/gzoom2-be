@@ -64,13 +64,11 @@ public class BirtReportRunnerApplication {
         reportParameters.put("birtOutputFileName", "ValutazioniRischi");
         reportParameters.put("defaultOrganizationPartyId", "Company");
 
-
-        //Report report = new BIRTReport("CatalogoTreLivelli_ORI", reportParameters, reportRunner, Locale.ITALIAN).runReport();
         Report report = new BIRTReport("ValutazioniRischi/ValutazioniRischi", reportParameters, Locale.ITALIAN);
-        ReportHandler reportHandler = reportRunner.runReport(report);
+//Report report = new BIRTReport("CatalogoTreLivelli_ORI", reportParameters, reportRunner, Locale.ITALIAN).runReport();        ReportHandler reportHandler = reportRunner.runReport(report);
         //Report report = new BIRTReport("simple_report", reportParameters, reportRunner, Locale.ITALIAN).runReport();
 
-        String namePath = "/Users/anfo/projects/gzoom/logs/file_" + Calendar.getInstance().getTimeInMillis() + ".pdf";
+        String namePath = "C:/data/Gzoom_2/birt/logs/report/ValutazioniRischi_" + Calendar.getInstance().getTimeInMillis() + ".pdf";
         IOUtil.copyCompletely(reportHandler.getReportContent(), new FileOutputStream(namePath));
         //report.getReportContent().writeTo(new FileOutputStream(namePath));
 

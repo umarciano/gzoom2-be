@@ -41,6 +41,7 @@ public class UtilDateTime {
 	public static Date getDateMeasureReference() {
 		Calendar cal = Calendar.getInstance();
 		cal.set(1899, 11, 31, 0, 0, 0);
+		cal.set(Calendar.MILLISECOND, 0);
 		return cal.getTime();
 	}
 	
@@ -50,6 +51,7 @@ public class UtilDateTime {
 			if (month >= FIRST_MONTH && month <= LAST_MONTH) {
 				Calendar cal = Calendar.getInstance();
 				cal.set(year, month-1, 1, 0, 0, 0);
+				cal.set(Calendar.MILLISECOND, 0);
 				return cal.getTime();
 			}
 		}	
@@ -70,7 +72,8 @@ public class UtilDateTime {
 			int month = Integer.valueOf(monthStr);
 			if (month >= FIRST_MONTH && month <= LAST_MONTH) {
 				Calendar cal = Calendar.getInstance();
-				cal.set(year, month-1, cal.getActualMaximum(Calendar.DAY_OF_MONTH), 23, 59, 59);
+				cal.set(year, month-1, cal.getActualMaximum(Calendar.DAY_OF_MONTH), cal.getMaximum(Calendar.HOUR), cal.getMaximum(Calendar.MINUTE), cal.getMaximum(Calendar.SECOND));
+				cal.getMaximum(Calendar.MILLISECOND);
 				return cal.getTime();
 			}
 		}
