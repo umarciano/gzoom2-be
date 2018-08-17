@@ -147,7 +147,7 @@
             <artifactId>org.eclipse.birt.runtime</artifactId>
             <version>4.8.0-20180626</version>
             <scope>system</scope>
-            <systemPath>${pom.basedir}/lib/org.eclipse.birt.runtime_4.8.0-20180626.jar</systemPath>
+            <systemPath>${pom.basedir}/lib/org.eclipse.birt.runtime_4.8.0-20180626_gzoom.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.eclipse.birt.runtime</groupId>
