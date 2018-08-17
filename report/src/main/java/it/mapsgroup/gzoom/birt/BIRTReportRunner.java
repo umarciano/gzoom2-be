@@ -28,7 +28,6 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 @Service
 @Qualifier("birt")
-//@Scope(value = BeanDefinition.SCOPE_PROTOTYPE)
 public class BIRTReportRunner implements ReportRunner {
     public static final String BIRT_PARAMETERS = "birtParameters";
 
@@ -154,7 +153,7 @@ public class BIRTReportRunner implements ReportRunner {
             //setting locale
             //see https://stackoverflow.com/questions/25281571/birt-is-not-finding-properties-file-containing-localization-at-runtime-servlet
             try {
-                reportDesign.getDesignHandle().setStringProperty("locale", birtReport.reportLocale.toString());
+                reportDesign.getDesignHandle().setStringProperty("locale", birtReport.getReportLocale().toString());
             } catch (SemanticException e) {
                 logger.error("error", e);
                 throw new RuntimeException(e);
@@ -184,7 +183,11 @@ public class BIRTReportRunner implements ReportRunner {
 
             IReportDocument reportDocument = birtReportEngine.openReportDocument(rptdocument);
             IRenderTask renderTask = birtReportEngine.createRenderTask(reportDocument);
+            renderTask.setLogger(java.util.logging.Logger.getLogger(IRenderTask.class.getSimpleName()));
             renderTask.setProgressMonitor(birtReport.getBirtServiceProgress());
+            birtReport.getBirtServiceProgress().setTask(renderTask);
+
+
 
             PDFRenderOption pdfRenderOption = new PDFRenderOption();
             pdfRenderOption.setOption(IPDFRenderOption.REPAGINATE_FOR_PDF, new Boolean(true));

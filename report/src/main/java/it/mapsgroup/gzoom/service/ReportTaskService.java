@@ -3,6 +3,7 @@ package it.mapsgroup.gzoom.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.mapsgroup.gzoom.birt.BirtService;
+import it.mapsgroup.gzoom.birt.Report;
 import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatus;
 import it.mapsgroup.gzoom.report.querydsl.dao.ReportActivityDao;
 import it.mapsgroup.gzoom.report.querydsl.dao.ReportActvityFilter;
@@ -57,22 +58,22 @@ public class ReportTaskService {
                     Map<String, Object> params =
                             objectMapper.readValue(record.getReportData(), new TypeReference<Map<String, Object>>() {
                             });
-                    Locale locale=null;
+                    Locale locale = null;
                     try {
                         if (StringUtils.isNotEmpty(record.getReportLocale()))
                             locale = LocaleUtils.toLocale(record.getReportLocale());
                     } catch (Exception e) {
                         LOG.error("Cannot parse locale", e);
                     }
-                    if(locale==null){
+                    if (locale == null) {
                         LOG.warn("invalid report locale, setting default");
-                        locale=Locale.ITALIAN;
+                        locale = Locale.ITALIAN;
                     }
-                    birtService.build(record.getActivityId(),
+                    Report report = birtService.build(record.getActivityId(),
                             record.getReportName(),
                             params,
-                            "report_" + record.getActivityId(),
                             locale);
+                    birtService.run(record.getActivityId(), "report_" + record.getActivityId(), report);
                 } catch (Exception e) {
                     LOG.error("Cannot generate report", e);
                     reportDao.updateState(record.getActivityId(),
@@ -101,5 +102,13 @@ public class ReportTaskService {
         List<ReportActivity> actvities = reportDao.getActvities(filter);
         actvities.forEach(a -> add(new ReportTask(a.getActivityId())));
         LOG.info("Added to queue {} reports", actvities.size());
+    }
+
+    public boolean cancel(String id, String reason) {
+       return birtService.cancel(id, reason);
+    }
+
+    public String getStatus(String id) {
+        return birtService.getStatus(id);
     }
 }
