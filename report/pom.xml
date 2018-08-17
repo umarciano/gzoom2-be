@@ -24,6 +24,12 @@
             <version>${project.parent.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>it.mapsgroup.gzoom</groupId>
+            <artifactId>commons-spring-boot</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
         <!-- Maps commons -->
         <dependency>
             <groupId>it.mapsgroup.commons</groupId>

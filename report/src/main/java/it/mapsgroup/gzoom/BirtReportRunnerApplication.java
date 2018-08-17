@@ -5,12 +5,15 @@ import it.mapsgroup.gzoom.birt.BIRTReport;
 import it.mapsgroup.gzoom.birt.BIRTReportRunner;
 import it.mapsgroup.gzoom.birt.Report;
 import it.mapsgroup.gzoom.birt.ReportHandler;
+import it.memelabs.smartnebula.spring.boot.config.ApplicationContextProvider;
 import org.apache.xmlbeans.impl.common.IOUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -22,6 +25,13 @@ import java.util.Locale;
  */
 @SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class,})
 public class BirtReportRunnerApplication {
+
+    @Bean
+    public ApplicationContextProvider applicationContextProvider(ApplicationContext ac){
+        ApplicationContextProvider provider = new ApplicationContextProvider();
+        provider.setApplicationContext(ac);
+        return provider;
+    }
 
     public static void main(String[] args) throws IOException {
         ConfigurableApplicationContext ctx = SpringApplication.run(BirtReportRunnerApplication.class, args);
