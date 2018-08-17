@@ -1,6 +1,7 @@
 package it.mapsgroup.gzoom.rest;
 
 import it.mapsgroup.gzoom.common.Exec;
+import it.mapsgroup.gzoom.report.dto.CancelReport;
 import it.mapsgroup.gzoom.report.dto.CreateReport;
 import it.mapsgroup.gzoom.service.ReportJobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,4 +27,12 @@ public class ReportJobController {
     public String add(@RequestBody CreateReport report) {
         return Exec.exec("add-report", () -> reportJobService.add(report));
     }
+
+    @RequestMapping(value = "/report/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public String cancel(@PathVariable(value = "id") String id, @RequestBody CancelReport cancelReport) {
+        return Exec.exec("cancel-report", () -> reportJobService.cancel(id, cancelReport.getReason()));
+    }
+
+
 }

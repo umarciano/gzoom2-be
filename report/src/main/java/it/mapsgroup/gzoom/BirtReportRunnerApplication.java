@@ -64,7 +64,9 @@ public class BirtReportRunnerApplication {
         reportParameters.put("defaultOrganizationPartyId", "Company");
 
 
-        Report report = new BIRTReport("CatalogoTreLivelli_ORI", reportParameters, reportRunner, Locale.ITALIAN).runReport();
+        //Report report = new BIRTReport("CatalogoTreLivelli_ORI", reportParameters, reportRunner, Locale.ITALIAN).runReport();
+        Report report = new BIRTReport("ValutazioniRischi/ValutazioniRischi", reportParameters, Locale.ITALIAN);
+        reportRunner.runReport(report);
         //Report report = new BIRTReport("simple_report", reportParameters, reportRunner, Locale.ITALIAN).runReport();
 
         String namePath = "/Users/anfo/projects/gzoom/logs/file_" + Calendar.getInstance().getTimeInMillis() + ".pdf";

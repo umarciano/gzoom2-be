@@ -75,4 +75,11 @@ public class ReportJobService {
         reportDao.create(record);
         return record;
     }
+
+    public String cancel(String id, String reason) {
+        return taskService.cancel(id, reason) + "";
+    }
+    public String getStatus(String id) {
+        return taskService.getStatus(id);
+    }
 }

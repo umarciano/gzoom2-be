@@ -10,6 +10,7 @@ CREATE TABLE report_activity (
   error TEXT NULL,
   template_name VARCHAR(255) NOT NULL,
   report_name VARCHAR(255) NOT NULL,
+  report_locale VARCHAR(255) ,
   completed_stamp datetime NULL,
   LAST_UPDATED_STAMP datetime DEFAULT NULL,
   LAST_UPDATED_TX_STAMP datetime DEFAULT NULL,
