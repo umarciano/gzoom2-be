@@ -22,6 +22,9 @@ public class ReportActivity implements AbstractIdentity {
     @Column("CREATED_TX_STAMP")
     private java.time.LocalDateTime createdTxStamp;
 
+    @Column("ERROR")
+    private String error;
+
     @Column("LAST_UPDATED_STAMP")
     private java.time.LocalDateTime lastUpdatedStamp;
 
@@ -31,8 +34,14 @@ public class ReportActivity implements AbstractIdentity {
     @Column("REPORT_DATA")
     private String reportData;
 
+    @Column("REPORT_LOCALE")
+    private String reportLocale;
+
     @Column("REPORT_NAME")
     private String reportName;
+
+    @Column("RESUMED")
+    private Boolean resumed;
 
     @Column("STATUS")
     private it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatus status;
@@ -72,6 +81,14 @@ public class ReportActivity implements AbstractIdentity {
         this.createdTxStamp = createdTxStamp;
     }
 
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
     public java.time.LocalDateTime getLastUpdatedStamp() {
         return lastUpdatedStamp;
     }
@@ -96,12 +113,28 @@ public class ReportActivity implements AbstractIdentity {
         this.reportData = reportData;
     }
 
+    public String getReportLocale() {
+        return reportLocale;
+    }
+
+    public void setReportLocale(String reportLocale) {
+        this.reportLocale = reportLocale;
+    }
+
     public String getReportName() {
         return reportName;
     }
 
     public void setReportName(String reportName) {
         this.reportName = reportName;
+    }
+
+    public Boolean getResumed() {
+        return resumed;
+    }
+
+    public void setResumed(Boolean resumed) {
+        this.resumed = resumed;
     }
 
     public it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatus getStatus() {

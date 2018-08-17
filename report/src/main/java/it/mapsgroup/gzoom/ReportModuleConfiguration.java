@@ -1,7 +1,10 @@
 package it.mapsgroup.gzoom;
 
+import it.mapsgroup.gzoom.birt.BirtService;
 import it.mapsgroup.gzoom.persistence.common.CommonPersistenceConfiguration;
 import it.mapsgroup.gzoom.report.querydsl.persistence.service.QueryDslPersistenceConfiguration;
+import it.mapsgroup.gzoom.service.ReportTaskService;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
@@ -12,5 +15,6 @@ import org.springframework.context.annotation.ImportResource;
 @Configuration
 @ImportResource("classpath:app-config.xml")
 @Import({QueryDslPersistenceConfiguration.class, CommonPersistenceConfiguration.class})
-public class ReportConfiguration {
+@ComponentScan(basePackageClasses = {ReportTaskService.class, BirtService.class})
+public class ReportModuleConfiguration {
 }

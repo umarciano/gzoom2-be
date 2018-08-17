@@ -1,4 +1,4 @@
-package it.mapsgroup.gzoom;
+package it.mapsgroup.gzoom.birt;
 
 import org.eclipse.birt.report.engine.api.IEngineTask;
 import org.eclipse.birt.report.engine.api.IProgressMonitor;
@@ -15,7 +15,6 @@ public class BirtServiceProgress implements IProgressMonitor {
     private static final Logger LOG = getLogger(BirtServiceProgress.class);
 
 
-    private static final String MODULE = BirtServiceProgress.class.getName();
 
     //private final BirtService birtService;
     private final AtomicReference<IEngineTask> task;
@@ -38,7 +37,7 @@ public class BirtServiceProgress implements IProgressMonitor {
         queryCount.set(0);
         pageCount.set(0);
     }
-
+/*
   //  @Override
     public void onAsyncJobProgress() {
         IEngineTask task = this.task.get();
@@ -51,9 +50,16 @@ public class BirtServiceProgress implements IProgressMonitor {
           //  checkInterrupted(task, !birtService.getJob().updateResult(result), progressMessage);
         }
     }
-
+*/
     @Override
     public void onProgress(int type, int value) {
+        //fixme remove (SLOW REPORT)
+        try {
+            Thread.sleep(500);
+            LOG.warn("Remove: slow report");
+        } catch (InterruptedException e) {
+
+        }
         switch (type) {
             case START_QUERY:
                 if (LOG.isTraceEnabled()) {
@@ -66,6 +72,7 @@ public class BirtServiceProgress implements IProgressMonitor {
                 }
                 queryCount.incrementAndGet();
               //  checkInterrupted(task.get(), birtService.getJob().isInterrupted(), null);
+
                 break;
             case START_PAGE:
                 if (LOG.isTraceEnabled()) {

@@ -6,6 +6,7 @@ package it.mapsgroup.gzoom.service;
 public class ReportTask {
     private final String id;
 
+
     public ReportTask(String id) {
         this.id = id;
     }
@@ -13,4 +14,6 @@ public class ReportTask {
     public String getId() {
         return id;
     }
+
+
 }

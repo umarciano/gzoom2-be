@@ -3,10 +3,12 @@ package it.mapsgroup.gzoom.report.querydsl.dao;
 import com.querydsl.sql.SQLBindings;
 import com.querydsl.sql.SQLQuery;
 import com.querydsl.sql.SQLQueryFactory;
+import com.querydsl.sql.dml.SQLUpdateClause;
 import it.mapsgroup.gzoom.persistence.common.SequenceGenerator;
 import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatus;
 import it.mapsgroup.report.querydsl.dto.QReportActivity;
 import it.mapsgroup.report.querydsl.dto.ReportActivity;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,23 +58,34 @@ public class ReportActivityDao extends AbstractDao {
     @Transactional
     public Boolean updateState(String id,
                                ReportActivityStatus src,
-                               ReportActivityStatus dest) {
+                               ReportActivityStatus dest,
+                               String error) {
         QReportActivity qReportActivity = QReportActivity.reportActivity;
-        long result = queryFactory.update(qReportActivity)
-                .set(qReportActivity.status, dest)
-                .where(qReportActivity.activityId.eq(id)
-                        .and(qReportActivity.status.eq(src)))
-                .execute();
+        SQLUpdateClause query = queryFactory.update(qReportActivity);
+        if (StringUtils.isNotEmpty(error))
+            query.set(qReportActivity.error, error);
+        query.set(qReportActivity.status, dest);
+        query.where(qReportActivity.activityId.eq(id)
+                .and(qReportActivity.status.eq(src)));
+        long result = query.execute();
         return result > 0;
 
     }
 
+    @Transactional
+    public Boolean updateState(String id,
+                               ReportActivityStatus src,
+                               ReportActivityStatus dest) {
+        return updateState(id, src, dest, null);
 
-    public List<ReportActivity> getActvities(ReportActivityStatus status) {
+    }
+
+    @Transactional
+    public List<ReportActivity> getActvities(ReportActvityFilter filter) {
         QReportActivity qReportActivity = QReportActivity.reportActivity;
         SQLQuery<ReportActivity> pSQLQuery = queryFactory.select(qReportActivity).from(qReportActivity).orderBy(qReportActivity.activityId.asc());
-        if (status != null)
-            pSQLQuery.where(qReportActivity.status.eq(status));
+        if (filter.getStates() != null)
+            pSQLQuery.where(qReportActivity.status.in(filter.states));
         SQLBindings bindings = pSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
@@ -81,5 +94,15 @@ public class ReportActivityDao extends AbstractDao {
         List<ReportActivity> ret = pSQLQuery.fetch();
         LOG.info("size = {}", ret.size());
         return ret;
+    }
+
+    @Transactional
+    public long resumeRunning() {
+        QReportActivity qReportActivity = QReportActivity.reportActivity;
+        return queryFactory.update(qReportActivity)
+                .set(qReportActivity.status, ReportActivityStatus.QUEUED)
+                .set(qReportActivity.resumed, Boolean.TRUE)
+                .where(qReportActivity.status.eq(ReportActivityStatus.RUNNING))
+                .execute();
     }
 }
