@@ -52,14 +52,13 @@ public class BirtService {
     }
 
     public void run(String taskId, String outputFileName, Report report) {
-        reportRunner.runReport(report);
-        //String namePath = "/Users/anfo/projects/gzoom/logs/file_" + Calendar.getInstance().getTimeInMillis() + ".pdf";
+        ReportHandler reportHandler = reportRunner.runReport(report);
         File outputPath = new File(config.getBirtReportOutputDir(), outputFileName + ".pdf");
         try {
             FileOutputStream out = new FileOutputStream(outputPath);
             //report.getReportContent().writeTo(out);
-            IOUtil.copyCompletely(report.getReportContent().getReportContent(), out);
-            report.getReportContent().close();
+            IOUtil.copyCompletely(reportHandler.getReportContent(), out);
+            reportHandler.close();
         } catch (IOException e) {
             //FIXME
             LOG.error("Cannot save report", e);

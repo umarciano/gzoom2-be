@@ -55,7 +55,7 @@ public class BirtServiceProgress implements IProgressMonitor {
     public void onProgress(int type, int value) {
         //fixme remove (SLOW REPORT)
         try {
-            Thread.sleep(500);
+            Thread.sleep(1);
             LOG.warn("Remove: slow report");
         } catch (InterruptedException e) {
 

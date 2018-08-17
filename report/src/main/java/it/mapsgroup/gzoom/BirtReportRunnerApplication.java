@@ -4,6 +4,7 @@ import com.ibm.icu.util.Calendar;
 import it.mapsgroup.gzoom.birt.BIRTReport;
 import it.mapsgroup.gzoom.birt.BIRTReportRunner;
 import it.mapsgroup.gzoom.birt.Report;
+import it.mapsgroup.gzoom.birt.ReportHandler;
 import org.apache.xmlbeans.impl.common.IOUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -66,11 +67,11 @@ public class BirtReportRunnerApplication {
 
         //Report report = new BIRTReport("CatalogoTreLivelli_ORI", reportParameters, reportRunner, Locale.ITALIAN).runReport();
         Report report = new BIRTReport("ValutazioniRischi/ValutazioniRischi", reportParameters, Locale.ITALIAN);
-        reportRunner.runReport(report);
+        ReportHandler reportHandler = reportRunner.runReport(report);
         //Report report = new BIRTReport("simple_report", reportParameters, reportRunner, Locale.ITALIAN).runReport();
 
         String namePath = "/Users/anfo/projects/gzoom/logs/file_" + Calendar.getInstance().getTimeInMillis() + ".pdf";
-        IOUtil.copyCompletely(report.getReportContent().getReportContent(), new FileOutputStream(namePath));
+        IOUtil.copyCompletely(reportHandler.getReportContent(), new FileOutputStream(namePath));
         //report.getReportContent().writeTo(new FileOutputStream(namePath));
 
     }
