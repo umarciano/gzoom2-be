@@ -31,8 +31,8 @@ import static org.slf4j.LoggerFactory.getLogger;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan(basePackageClasses = {ReportActivityDao.class})
-public class QueryDslPersistenceConfiguration {
-    private static final Logger LOG = getLogger(QueryDslPersistenceConfiguration.class);
+public class ReportQueryDslPersistenceConfiguration {
+    private static final Logger LOG = getLogger(ReportQueryDslPersistenceConfiguration.class);
 
 
     public com.querydsl.sql.Configuration querydslConfiguration(Environment env) {
