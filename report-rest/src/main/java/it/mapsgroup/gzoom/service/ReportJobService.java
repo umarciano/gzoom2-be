@@ -79,6 +79,7 @@ public class ReportJobService {
     public String cancel(String id, String reason) {
         return taskService.cancel(id, reason) + "";
     }
+
     public String getStatus(String id) {
         return taskService.getStatus(id);
     }

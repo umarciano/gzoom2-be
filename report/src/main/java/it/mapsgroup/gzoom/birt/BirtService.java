@@ -10,7 +10,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -25,15 +24,12 @@ public class BirtService {
     private final BirtConfig config;
     private final ReportRunner reportRunner;
 
-    @Deprecated //fimex
-    private final ConcurrentHashMap<String, BirtServiceProgress> reports;
 
     @Autowired
     public BirtService(BirtConfig config, ReportRunner reportRunner) {
         //this.birtReportRunner = birtReportRunner;
         this.config = config;
         this.reportRunner = reportRunner;
-        reports = new ConcurrentHashMap<>();
     }
 
 
@@ -47,11 +43,10 @@ public class BirtService {
      */
     public Report build(String taskId, String reportName, Map<String, Object> reportParams, Locale locale) {
         Report report = new BIRTReport(reportName, reportParams, locale);
-        reports.put(taskId, report.getBirtServiceProgress());
         return report;
     }
 
-    public void run(String taskId, String outputFileName, Report report) {
+    public void run(String outputFileName, Report report) {
         ReportHandler reportHandler = reportRunner.runReport(report);
         File outputPath = new File(config.getBirtReportOutputDir(), outputFileName + ".pdf");
         try {
@@ -60,24 +55,9 @@ public class BirtService {
             IOUtil.copyCompletely(reportHandler.getReportContent(), out);
             reportHandler.close();
         } catch (IOException e) {
-            //FIXME
             LOG.error("Cannot save report", e);
-        } finally {
-            //FIXME
-            if (reports.remove(taskId) == null) LOG.error("Task {} not found", taskId);
+            throw new RuntimeException(e);//fixme manage exception
         }
     }
 
-    public boolean cancel(String id, String reason) {
-        BirtServiceProgress serviceProgress = reports.get(id);
-        if (serviceProgress != null && serviceProgress.getTask() != null) {
-            serviceProgress.getTask().cancel(reason);
-            return true;
-        }
-        return false;
-    }
-
-    public String getStatus(String id) {
-        return ""; //fixme implement
-    }
 }

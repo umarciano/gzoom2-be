@@ -33,13 +33,16 @@ public class BIRTReportRunner implements ReportRunner {
 
     private Logger logger = getLogger(BIRTReportRunner.class);
 
-    private static String reportTempDirectory;
+    private String reportTempDirectory;
 
     private IReportEngine birtReportEngine = null;
 
-    @Autowired
-    private BirtConfig config;
+    private final BirtConfig config;
 
+    @Autowired
+    public BIRTReportRunner(BirtConfig config) {
+        this.config = config;
+    }
 
     /**
      * Starts up and configures the BIRT Report Engine
@@ -186,7 +189,6 @@ public class BIRTReportRunner implements ReportRunner {
             renderTask.setLogger(java.util.logging.Logger.getLogger(IRenderTask.class.getSimpleName()));
             renderTask.setProgressMonitor(birtReport.getBirtServiceProgress());
             birtReport.getBirtServiceProgress().setTask(renderTask);
-
 
 
             PDFRenderOption pdfRenderOption = new PDFRenderOption();

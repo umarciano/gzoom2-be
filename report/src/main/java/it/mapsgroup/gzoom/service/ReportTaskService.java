@@ -10,6 +10,7 @@ import it.mapsgroup.gzoom.report.querydsl.dao.ReportActvityFilter;
 import it.mapsgroup.report.querydsl.dto.ReportActivity;
 import org.apache.commons.lang3.LocaleUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.birt.report.engine.api.IEngineTask;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.task.TaskExecutor;
@@ -19,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -35,6 +38,9 @@ public class ReportTaskService {
     private final BirtService birtService;
     private final ObjectMapper objectMapper;
 
+    private final ConcurrentHashMap<String, ReportTask> tasks;
+
+
     public ReportTaskService(@Qualifier("reportTaskExecutor") TaskExecutor taskExecutor,
                              ReportActivityDao reportDao,
                              BirtService birtService) {
@@ -42,10 +48,12 @@ public class ReportTaskService {
         this.reportDao = reportDao;
         this.birtService = birtService;
         this.objectMapper = new ObjectMapper();
+        this.tasks = new ConcurrentHashMap<>();
     }
 
 
     public void add(ReportTask reportTask) {
+        tasks.put(reportTask.getId(), reportTask);
         taskExecutor.execute(() -> {
             LOG.info("Executing {}", reportTask.getId());
 
@@ -73,19 +81,21 @@ public class ReportTaskService {
                             record.getReportName(),
                             params,
                             locale);
-                    birtService.run(record.getActivityId(), "report_" + record.getActivityId(), report);
+                    reportTask.setReport(report);
+                    birtService.run("report_" + record.getActivityId(), report);
+                    reportDao.updateState(record.getActivityId(),
+                            ReportActivityStatus.RUNNING,
+                            ReportActivityStatus.DONE);
+                    LOG.info("Done {}", reportTask.getId());
                 } catch (Exception e) {
-                    LOG.error("Cannot generate report", e);
+                    LOG.error("Failed: cannot generate report", e);
                     reportDao.updateState(record.getActivityId(),
                             ReportActivityStatus.RUNNING,
                             ReportActivityStatus.FAILED,
                             e.toString());
-                    return;
+                } finally {
+                    tasks.remove(reportTask.getId());
                 }
-                reportDao.updateState(record.getActivityId(),
-                        ReportActivityStatus.RUNNING,
-                        ReportActivityStatus.DONE);
-                LOG.info("Done {}", reportTask.getId());
             } else {
                 LOG.info("Skipped {}", reportTask.getId());
             }
@@ -105,10 +115,27 @@ public class ReportTaskService {
     }
 
     public boolean cancel(String id, String reason) {
-       return birtService.cancel(id, reason);
+        Optional<IEngineTask> iEngineTask = getReportTask(id);
+        iEngineTask.ifPresent(ie -> {
+            ie.cancel(reason);
+            reportDao.updateState(id, ReportActivityStatus.RUNNING, ReportActivityStatus.CANCELLED, reason);
+        });
+        return iEngineTask.isPresent();
     }
 
     public String getStatus(String id) {
-        return birtService.getStatus(id);
+        Optional<IEngineTask> iEngineTask = getReportTask(id);
+        if (iEngineTask.isPresent()) return iEngineTask.get().getStatus() + ""; //todo manage states
+        else return "UNKNOWN";
+
+    }
+
+    private Optional<IEngineTask> getReportTask(String id) {
+        if (tasks.get(id)!=null
+                && tasks.get(id).getReport() != null
+                && tasks.get(id).getReport().getBirtServiceProgress() != null
+                && tasks.get(id).getReport().getBirtServiceProgress().getTask() != null) {
+            return Optional.of(tasks.get(id).getReport().getBirtServiceProgress().getTask());
+        } else return Optional.empty();
     }
 }

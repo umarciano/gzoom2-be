@@ -25,7 +25,6 @@ import static org.slf4j.LoggerFactory.getLogger;
 /**
  * @author Andrea Fossi.
  */
-//@ImportResource("classpath:/bootstrap-context.xml")
 @SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class,})
 @EnableConfigurationProperties
 @ComponentScan(basePackageClasses = {ReportJobService.class, ReportJobController.class})
