@@ -34,5 +34,11 @@ public class ReportJobController {
         return Exec.exec("cancel-report", () -> reportJobService.cancel(id, cancelReport.getReason()));
     }
 
+    @RequestMapping(value = "/report/{id}/status", method = RequestMethod.GET)
+    @ResponseBody
+    public String status(@PathVariable(value = "id") String id) {
+        return Exec.exec("cancel-report", () -> reportJobService.getStatus(id));
+    }
+
 
 }

@@ -22,12 +22,14 @@ import java.util.Locale;
 
 /**
  * @author Andrea Fossi.
+ * <p>
+ * Spring boot command line report test application
  */
 @SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class,})
 public class BirtReportRunnerApplication {
 
     @Bean
-    public ApplicationContextProvider applicationContextProvider(ApplicationContext ac){
+    public ApplicationContextProvider applicationContextProvider(ApplicationContext ac) {
         ApplicationContextProvider provider = new ApplicationContextProvider();
         provider.setApplicationContext(ac);
         return provider;
