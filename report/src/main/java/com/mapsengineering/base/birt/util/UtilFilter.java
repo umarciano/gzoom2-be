@@ -42,94 +42,90 @@ public class UtilFilter {
     private boolean isFullAdmin = false;
   //  private Security security;
     private String localDispatcherName;
-  //  private GenericValue userLogin;
+    private String userLoginId;
     
     public UtilFilter() {
         
     }
-//    /*
-//    public UtilFilter(Security security, String userLoginId, String localDispatcherName) {
-//        try {
-//            GenericValue userLogin = security.getDelegator().findOne("UserLogin", UtilMisc.toMap("userLoginId", userLoginId), false);
-//            setFullAdmin(security, userLogin, localDispatcherName);
-//        } catch (GenericEntityException e) {
-//            Debug.logError(e, MODULE);
-//        }
-//        
-//    }
-//    
-//    public UtilFilter(Security security, GenericValue userLogin, String localDispatcherName) {
-//        setFullAdmin(security, userLogin, localDispatcherName);
-//    }
-//    
-//    private void setFullAdmin(Security security, GenericValue userLogin, String localDispatcherName) {
-//        this.security = security;
-//        this.localDispatcherName = localDispatcherName;
-//        this.userLogin = userLogin;
-//        
-//        String permission = Utils.permissionLocalDispatcherName(localDispatcherName);
-//        if (security.hasPermission(permission + MGR_ADMIN, userLogin) || Utils.hasSecurityGroup(security, userLogin, FULLADMIN)) {
-//            isFullAdmin = true;
-//        }
-//    }
-//
-//    /**
-//     * Ritorna la query utilizzata per i filtri in inner join solo se non sono full admin
-//     * @return
-//     */
-//    public String getWorkEffortFilterInner() {       
-//        if (isFullAdmin) {
-//            return "";
-//        }
-//        return filterInnerJoin;
-//    }
-//    
-//    
-//    /**
-//     * Ritorna la query utilizzata per i filtri in left outer join solo se non sono full admin
-//     * @return
-//     */
-//    public String getWorkEffortFilterLeftJoin() {        
-//        if (isFullAdmin) {
-//            return "";
-//        }
-//        return filterLeftJoin;
-//    }
-//    
-//    /**
-//     * Ritorna la query utilizzata per i filtri in where solo se non sono full admin e in base al tipo di permesso
-//     * @return
-//     */
-//    public String getWorkEffortFilterWhere() {
-//        if (isFullAdmin) {
-//            return "";
-//        }
-//        
-//        String where = filterUserLogin + "'" + userLogin.getString(E.userLoginId.name()) +"'";
-//        where += " AND (1 = 0 " ;
-//        String permission = Utils.permissionLocalDispatcherName(localDispatcherName);
-//        if (security.hasPermission(permission + ORG_ADMIN, userLogin)) {
-//            where += filterWherIsOrg;
-//        }
-//        
-//        if (security.hasPermission(permission + ROLE_ADMIN, userLogin)) {
-//            where += filterWherIsRole;
-//        }
-//        
-//        if (security.hasPermission(permission + SUP_ADMIN, userLogin)) {
-//            where += filterWhereIsSup;
-//        }
-//        where +=  ") ";
-//        
-//        return  where;
-//    }
-//    
-//    
-//    public static boolean hasUserProfile(Security security, GenericValue userLogin, String localDispatcherName, String permissionAdmin) {
-//        String permission = Utils.permissionLocalDispatcherName(localDispatcherName);
-//        return security.hasPermission(permission + permissionAdmin, userLogin);
-//    }
-//     
-//    */
+    /*
+    public UtilFilter(String userLoginId, String localDispatcherName) {
+      
+    	//UserLoginDao dao = ApplicationContextProvider.getApplicationContext().getBean(UserLoginDao.class);
+    	//UserLogin user = dao.getUserLogin(userLoginId);
+    	//System.out.println("User="+user.getUsername());
+    	
+    }*/
+    
+    public UtilFilter(String userLoginId, String localDispatcherName) {
+        setFullAdmin(userLoginId, localDispatcherName);
+    }
+    
+    private void setFullAdmin(String userLoginId, String localDispatcherName) {
+        this.localDispatcherName = localDispatcherName;
+        this.userLoginId = userLoginId;
+        
+        String permission = UtilPermission.permissionLocalDispatcherName(localDispatcherName);
+        if (UtilPermission.hasPermission(permission + MGR_ADMIN, userLoginId) || UtilPermission.hasSecurityGroup(userLoginId, FULLADMIN)) {
+            isFullAdmin = true;
+        }
+    }
+
+    /**
+     * Ritorna la query utilizzata per i filtri in inner join solo se non sono full admin
+     * @return
+     */
+    public String getWorkEffortFilterInner() {       
+        if (isFullAdmin) {
+            return "";
+        }
+        return filterInnerJoin;
+    }
+    
+    
+    /**
+     * Ritorna la query utilizzata per i filtri in left outer join solo se non sono full admin
+     * @return
+     */
+    public String getWorkEffortFilterLeftJoin() {        
+        if (isFullAdmin) {
+            return "";
+        }
+        return filterLeftJoin;
+    }
+    
+    /**
+     * Ritorna la query utilizzata per i filtri in where solo se non sono full admin e in base al tipo di permesso
+     * @return
+     */
+    public String getWorkEffortFilterWhere() {
+        if (isFullAdmin) {
+            return "";
+        }
+        
+        String where = filterUserLogin + "'" + userLoginId +"'";
+        where += " AND (1 = 0 " ;
+        String permission = UtilPermission.permissionLocalDispatcherName(localDispatcherName);
+        if (UtilPermission.hasPermission(permission + ORG_ADMIN, userLoginId)) {
+            where += filterWherIsOrg;
+        }
+        
+        if (UtilPermission.hasPermission(permission + ROLE_ADMIN, userLoginId)) {
+            where += filterWherIsRole;
+        }
+        
+        if (UtilPermission.hasPermission(permission + SUP_ADMIN, userLoginId)) {
+            where += filterWhereIsSup;
+        }
+        where +=  ") ";
+        
+        return  where;
+    }
+    
+    
+    public static boolean hasUserProfile(String userLoginId, String localDispatcherName, String permissionAdmin) {
+        String permission = UtilPermission.permissionLocalDispatcherName(localDispatcherName);
+        return UtilPermission.hasPermission(permission + permissionAdmin, userLoginId);
+    }  
+    
 
 }
