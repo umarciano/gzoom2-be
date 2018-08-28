@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.mapsgroup.gzoom.birt.BirtService;
 import it.mapsgroup.gzoom.birt.Report;
+import it.mapsgroup.gzoom.dto.JsonTypeMap;
 import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatus;
 import it.mapsgroup.gzoom.report.querydsl.dao.ReportActivityDao;
 import it.mapsgroup.gzoom.report.querydsl.dao.ReportActvityFilter;
@@ -19,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -63,8 +63,8 @@ public class ReportTaskService {
                     ReportActivityStatus.RUNNING);
             if (inCharge) {
                 try {
-                    Map<String, Object> params =
-                            objectMapper.readValue(record.getReportData(), new TypeReference<Map<String, Object>>() {
+                    JsonTypeMap<String, Object> params =
+                            objectMapper.readValue(record.getReportData(), new TypeReference<JsonTypeMap<String, Object>>() {
                             });
                     Locale locale = null;
                     try {
@@ -79,7 +79,7 @@ public class ReportTaskService {
                     }
                     Report report = birtService.build(record.getActivityId(),
                             record.getReportName(),
-                            params,
+                            params.get(),
                             locale);
                     reportTask.setReport(report);
                     birtService.run("report_" + record.getActivityId(), report);
@@ -131,7 +131,7 @@ public class ReportTaskService {
     }
 
     private Optional<IEngineTask> getReportTask(String id) {
-        if (tasks.get(id)!=null
+        if (tasks.get(id) != null
                 && tasks.get(id).getReport() != null
                 && tasks.get(id).getReport().getBirtServiceProgress() != null
                 && tasks.get(id).getReport().getBirtServiceProgress().getTask() != null) {

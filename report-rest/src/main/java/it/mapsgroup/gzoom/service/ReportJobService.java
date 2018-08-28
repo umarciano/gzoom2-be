@@ -2,6 +2,7 @@ package it.mapsgroup.gzoom.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import it.mapsgroup.gzoom.dto.JsonTypeMap;
 import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatus;
 import it.mapsgroup.gzoom.report.dto.CreateReport;
 import it.mapsgroup.gzoom.report.querydsl.dao.ReportActivityDao;
@@ -57,16 +58,15 @@ public class ReportJobService {
         }
         Validators.assertNotNull(locale, "Locale cannot be null");
 
-        record.setReportData("Primo ReportActivity " + System.currentTimeMillis());
         record.setStatus(ReportActivityStatus.QUEUED);
         record.setTemplateName(report.getReportName());
         record.setReportName(report.getReportName());
         record.setReportLocale(report.getReportLocale());
         try {
             if (report.getParams() != null)
-                record.setReportData(objectMapper.writeValueAsString(report.getParams()));
+                record.setReportData(objectMapper.writeValueAsString(new JsonTypeMap<>(report.getParams())));
             else
-                record.setReportData(objectMapper.writeValueAsString(new HashMap<Object, String>()));
+                record.setReportData(objectMapper.writeValueAsString(new JsonTypeMap<>(new HashMap<>())));
         } catch (JsonProcessingException e) {
             throw new ValidationException("Cannot serialize params");
         }

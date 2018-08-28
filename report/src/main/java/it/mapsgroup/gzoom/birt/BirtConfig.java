@@ -26,15 +26,15 @@ public class BirtConfig {
 
 
     public BirtConfig(Environment env) {
-        birtLoggingDirectory = env.getProperty("birt_logging_directory", DEFAULT_LOGGING_DIRECTORY);
-        birtLoggingLevel = Level.parse(env.getProperty("birt_logging_level", Level.SEVERE.getName()));
-        birtTempFileOutputDir = env.getProperty("birt_temp_file_output_dir");
-        birtReportInputDir = env.getProperty("birt_report_input_dir");
-        birtReportOutputDir = env.getProperty("birt_report_output_dir");
-        odaUrl = env.getProperty("oda_url");
-        odaDriverClass = env.getProperty("oda_driver_class");
-        odaPassword = env.getProperty("oda_password");
-        odaUser = env.getProperty("oda_user");
+        birtLoggingDirectory = env.getProperty("birt.logging.directory", DEFAULT_LOGGING_DIRECTORY);
+        birtLoggingLevel = Level.parse(env.getProperty("birt.logging.level", Level.SEVERE.getName()));
+        birtTempFileOutputDir = env.getProperty("birt.temp.file.output.dir");
+        birtReportInputDir = env.getProperty("birt.report.input.dir");
+        birtReportOutputDir = env.getProperty("birt.report.output.dir");
+        odaUrl = env.getProperty("oda.url");
+        odaDriverClass = env.getProperty("oda.driver.class");
+        odaPassword = env.getProperty("oda.password");
+        odaUser = env.getProperty("oda.user");
         odaDialect = env.getProperty("oda_dialect");
     }
 

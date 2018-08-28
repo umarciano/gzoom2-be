@@ -1,7 +1,12 @@
 package it.mapsgroup.gzoom.report;
 
 
+import com.querydsl.sql.Configuration;
+import com.querydsl.sql.SQLQueryFactory;
+import com.querydsl.sql.types.EnumByNameType;
 import it.mapsgroup.gzoom.ReportModuleConfiguration;
+import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatus;
+import it.mapsgroup.gzoom.querydsl.persistence.service.QueryDslPersistenceConfiguration;
 import it.mapsgroup.gzoom.rest.ReportJobController;
 import it.mapsgroup.gzoom.service.ReportJobService;
 import it.mapsgroup.gzoom.service.ReportTaskService;
@@ -46,6 +51,15 @@ public class GZoomReportRun {
         ConfigurableApplicationContext context = new SpringApplicationBuilder(GZoomReportRun.class)
                 .initializers(new PropertyApplicationContextInitializer("file:" + System.getProperty("gzoom.conf.dir") + "/gzoom-report.properties"))
                 .run(args);
+
+        //fixme remove workaround
+        Configuration configuration = context.getBean(SQLQueryFactory.class).getConfiguration();
+        configuration.register("report_activity", "status", new EnumByNameType<>(ReportActivityStatus.class));
+        configuration.register("REPORT_ACTIVITY", "status", new EnumByNameType<>(ReportActivityStatus.class));
+        configuration.register("REPORT_ACTIVITY", "STATUS", new EnumByNameType<>(ReportActivityStatus.class));
+        configuration.register("report_activity", "STATUS", new EnumByNameType<>(ReportActivityStatus.class));
+
+
         //resume suspended
         context.getBean(ReportTaskService.class).resume();
     }

@@ -53,8 +53,8 @@ public class BIRTReportRunner implements ReportRunner {
         if (StringUtils.isEmpty(config.getBirtReportInputDir()))
             throw new RuntimeException("Cannot start application since birt report input directory was not specified.");
         try {
-            //String birtLoggingDirectory = env.getProperty("birt_logging_directory") == null ? DEFAULT_LOGGING_DIRECTORY : env.getProperty("birt_logging_directory");
-            //Level birtLoggingLevel = env.getProperty("birt_logging_level") == null ? Level.SEVERE : Level.parse(env.getProperty("birt_logging_level"));
+            //String birtLoggingDirectory = env.getProperty("birt.logging.directory") == null ? DEFAULT_LOGGING_DIRECTORY : env.getProperty("birt.logging.directory");
+            //Level birtLoggingLevel = env.getProperty("birt.logging.level") == null ? Level.SEVERE : Level.parse(env.getProperty("birt.logging.level"));
             EngineConfig engineConfig = new EngineConfig();
             logger.info("BIRT LOG DIRECTORY SET TO : {}", config.getBirtLoggingDirectory());
             logger.info("BIRT LOGGING LEVEL SET TO {}", config.getBirtLoggingLevel());
@@ -146,7 +146,7 @@ public class BIRTReportRunner implements ReportRunner {
         try {
             reportContentTempFile = new File(reportTempDirectory + File.separator
                     + "generated" + File.separator
-                    + birtReport.getName() + "_" +
+                    + /*birtReport.getName() +*/ "birt_report_temp_file_" +
                     System.currentTimeMillis() + ".tmp");
             reportContentTempFile.deleteOnExit();
             byteArrayOutputStream = new FileOutputStream(reportContentTempFile);

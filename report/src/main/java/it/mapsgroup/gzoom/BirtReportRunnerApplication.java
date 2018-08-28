@@ -77,7 +77,8 @@ public class BirtReportRunnerApplication {
         reportParameters.put("defaultOrganizationPartyId", "Company");
 
         Report report = new BIRTReport("ValutazioniRischi/ValutazioniRischi", reportParameters, Locale.ITALIAN);
-//Report report = new BIRTReport("CatalogoTreLivelli_ORI", reportParameters, reportRunner, Locale.ITALIAN).runReport();        ReportHandler reportHandler = reportRunner.runReport(report);
+        //Report report = new BIRTReport("CatalogoTreLivelli_ORI", reportParameters, reportRunner, Locale.ITALIAN).runReport();
+        ReportHandler reportHandler = reportRunner.runReport(report);
         //Report report = new BIRTReport("simple_report", reportParameters, reportRunner, Locale.ITALIAN).runReport();
 
         String namePath = "C:/data/Gzoom_2/birt/logs/report/ValutazioniRischi_" + Calendar.getInstance().getTimeInMillis() + ".pdf";
