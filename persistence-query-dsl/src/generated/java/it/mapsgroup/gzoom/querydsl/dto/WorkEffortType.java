@@ -73,6 +73,9 @@ public class WorkEffortType implements AbstractIdentity {
     @Column("FROM_DATE")
     private java.time.LocalDateTime fromDate;
 
+    @Column("GP_MENU_ENUM_ID")
+    private String gpMenuEnumId;
+
     @Column("HAS_PERSON_FILTER")
     private Boolean hasPersonFilter;
 
@@ -207,6 +210,9 @@ public class WorkEffortType implements AbstractIdentity {
 
     @Column("SEQ_DIGIT")
     private java.math.BigInteger seqDigit;
+
+    @Column("SEQ_ESP")
+    private java.math.BigInteger seqEsp;
 
     @Column("SEQ_ONLY_ID")
     private Boolean seqOnlyId;
@@ -449,6 +455,14 @@ public class WorkEffortType implements AbstractIdentity {
 
     public void setFromDate(java.time.LocalDateTime fromDate) {
         this.fromDate = fromDate;
+    }
+
+    public String getGpMenuEnumId() {
+        return gpMenuEnumId;
+    }
+
+    public void setGpMenuEnumId(String gpMenuEnumId) {
+        this.gpMenuEnumId = gpMenuEnumId;
     }
 
     public Boolean getHasPersonFilter() {
@@ -809,6 +823,14 @@ public class WorkEffortType implements AbstractIdentity {
 
     public void setSeqDigit(java.math.BigInteger seqDigit) {
         this.seqDigit = seqDigit;
+    }
+
+    public java.math.BigInteger getSeqEsp() {
+        return seqEsp;
+    }
+
+    public void setSeqEsp(java.math.BigInteger seqEsp) {
+        this.seqEsp = seqEsp;
     }
 
     public Boolean getSeqOnlyId() {
