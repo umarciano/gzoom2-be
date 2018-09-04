@@ -66,7 +66,6 @@
         <querydsl.version>4.1.4</querydsl.version>
 
 
-
         <!-- Plugin versions -->
         <plugin.compiler.version>3.2</plugin.compiler.version>
         <plugin.jetty.version>9.3.3.v20150827</plugin.jetty.version>
@@ -589,6 +588,7 @@
         <module>report</module>
         <module>report-persistence-query-dsl</module>
         <module>report-rest</module>
+        <module>report-rest-dto</module>
         <module>report-rest-boot</module>
     </modules>
 

@@ -18,13 +18,13 @@
 
 
         <!-- Internal dependencies -->
-<!--
-        <dependency>
-            <groupId>it.mapsgroup.gzoom</groupId>
-            <artifactId>rest-api</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        -->
+        <!--
+                <dependency>
+                    <groupId>it.mapsgroup.gzoom</groupId>
+                    <artifactId>rest-api</artifactId>
+                    <version>${project.parent.version}</version>
+                </dependency>
+                -->
 
         <dependency>
             <groupId>it.mapsgroup.gzoom</groupId>
@@ -40,6 +40,12 @@
         <dependency>
             <groupId>it.mapsgroup.gzoom</groupId>
             <artifactId>report-persistence-query-dsl</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>it.mapsgroup.gzoom</groupId>
+            <artifactId>report-rest-dto</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
@@ -109,10 +115,10 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
         </dependency>
-      <!--  <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jdk8</artifactId>
-        </dependency>-->
+        <!--  <dependency>
+              <groupId>com.fasterxml.jackson.datatype</groupId>
+              <artifactId>jackson-datatype-jdk8</artifactId>
+          </dependency>-->
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
