@@ -3,6 +3,7 @@ package it.mapsgroup.gzoom.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.mapsgroup.gzoom.dto.JsonTypeMap;
+import it.mapsgroup.gzoom.dto.ReportStatus;
 import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatus;
 import it.mapsgroup.gzoom.report.dto.CreateReport;
 import it.mapsgroup.gzoom.report.querydsl.dao.ReportActivityDao;
@@ -80,7 +81,7 @@ public class ReportJobService {
         return taskService.cancel(id, reason) + "";
     }
 
-    public String getStatus(String id) {
+    public ReportStatus getStatus(String id) {
         return taskService.getStatus(id);
     }
 }

@@ -1,6 +1,7 @@
 package it.mapsgroup.gzoom.rest;
 
 import it.mapsgroup.gzoom.common.Exec;
+import it.mapsgroup.gzoom.dto.ReportStatus;
 import it.mapsgroup.gzoom.report.dto.CancelReport;
 import it.mapsgroup.gzoom.report.dto.CreateReport;
 import it.mapsgroup.gzoom.service.ReportJobService;
@@ -36,7 +37,7 @@ public class ReportJobController {
 
     @RequestMapping(value = "/report/{id}/status", method = RequestMethod.GET)
     @ResponseBody
-    public String status(@PathVariable(value = "id") String id) {
+    public ReportStatus status(@PathVariable(value = "id") String id) {
         return Exec.exec("cancel-report", () -> reportJobService.getStatus(id));
     }
 

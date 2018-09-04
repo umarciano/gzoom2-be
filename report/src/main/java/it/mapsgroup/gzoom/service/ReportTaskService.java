@@ -3,15 +3,16 @@ package it.mapsgroup.gzoom.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.mapsgroup.gzoom.birt.BirtService;
+import it.mapsgroup.gzoom.birt.BirtServiceProgress;
 import it.mapsgroup.gzoom.birt.Report;
 import it.mapsgroup.gzoom.dto.JsonTypeMap;
+import it.mapsgroup.gzoom.dto.ReportStatus;
 import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatus;
 import it.mapsgroup.gzoom.report.querydsl.dao.ReportActivityDao;
 import it.mapsgroup.gzoom.report.querydsl.dao.ReportActvityFilter;
 import it.mapsgroup.report.querydsl.dto.ReportActivity;
 import org.apache.commons.lang3.LocaleUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.birt.report.engine.api.IEngineTask;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.task.TaskExecutor;
@@ -115,27 +116,29 @@ public class ReportTaskService {
     }
 
     public boolean cancel(String id, String reason) {
-        Optional<IEngineTask> iEngineTask = getReportTask(id);
-        iEngineTask.ifPresent(ie -> {
+        Optional<BirtServiceProgress> reportProgress = getReportProgress(id);
+        reportProgress.ifPresent(ie -> {
             ie.cancel(reason);
             reportDao.updateState(id, ReportActivityStatus.RUNNING, ReportActivityStatus.CANCELLED, reason);
         });
-        return iEngineTask.isPresent();
+        return reportProgress.isPresent();
     }
 
-    public String getStatus(String id) {
-        Optional<IEngineTask> iEngineTask = getReportTask(id);
-        if (iEngineTask.isPresent()) return iEngineTask.get().getStatus() + ""; //todo manage states
-        else return "UNKNOWN";
-
+    public ReportStatus getStatus(String id) {
+        Optional<BirtServiceProgress> iEngineTask = getReportProgress(id);
+        ReportStatus reportStatus = iEngineTask.map(BirtServiceProgress::getStatus).orElse(new ReportStatus());
+        ReportActivity reportActivity = reportDao.get(id);
+        if (reportActivity != null) {
+            reportStatus.setActivityStatus(reportActivity.getStatus());
+        }
+        return reportStatus;
     }
 
-    private Optional<IEngineTask> getReportTask(String id) {
+
+    private Optional<BirtServiceProgress> getReportProgress(String id) {
         if (tasks.get(id) != null
-                && tasks.get(id).getReport() != null
-                && tasks.get(id).getReport().getBirtServiceProgress() != null
-                && tasks.get(id).getReport().getBirtServiceProgress().getTask() != null) {
-            return Optional.of(tasks.get(id).getReport().getBirtServiceProgress().getTask());
-        } else return Optional.empty();
+                && tasks.get(id).getReport() != null)
+            return Optional.of(tasks.get(id).getReport().getBirtServiceProgress());
+        else return Optional.empty();
     }
 }
