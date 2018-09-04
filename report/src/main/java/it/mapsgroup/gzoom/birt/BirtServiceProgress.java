@@ -57,11 +57,11 @@ public class BirtServiceProgress implements IProgressMonitor {
     @Override
     public void onProgress(int type, int value) {
         //fixme remove (SLOW REPORT)
-        try {
+       /* try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         switch (type) {
             case START_QUERY:
                 if (LOG.isTraceEnabled()) {

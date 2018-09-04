@@ -76,7 +76,7 @@ public class BirtReportRunnerApplication {
         reportParameters.put("birtOutputFileName", "ValutazioniRischi");
         reportParameters.put("defaultOrganizationPartyId", "Company");
 
-        Report report = new BIRTReport("ValutazioniRischi/ValutazioniRischi", reportParameters, Locale.ITALIAN);
+        Report report = new BIRTReport(System.currentTimeMillis() + "", "ValutazioniRischi/ValutazioniRischi", reportParameters, Locale.ITALIAN);
         //Report report = new BIRTReport("CatalogoTreLivelli_ORI", reportParameters, reportRunner, Locale.ITALIAN).runReport();
         ReportHandler reportHandler = reportRunner.runReport(report);
         //Report report = new BIRTReport("simple_report", reportParameters, reportRunner, Locale.ITALIAN).runReport();

@@ -24,14 +24,14 @@ public class ReportTaskDtoMapper {
         return to;
     }
 
-    public DataResource getDataResource(ReportActivity from, String reportPath) {
+    public DataResource getDataResource(ReportActivity from) {
         DataResource to = new DataResource();
         to.setDataResourceTypeId("LOCAL_FILE");
         to.setDataTemplateTypeId("NONE");
         to.setStatusId("CTNT_IN_PROGRESS");
         to.setDataResourceName(from.getContentName());
         to.setMimeTypeId("application/pdf");
-        to.setObjectInfo(reportPath);
+        to.setObjectInfo(from.getObjectInfo());
         to.setIsPublic(false);
         to.setCreatedByUserLogin(from.getCreatedByUserLogin());
         to.setLastModifiedByUserLogin(from.getLastModifiedByUserLogin());

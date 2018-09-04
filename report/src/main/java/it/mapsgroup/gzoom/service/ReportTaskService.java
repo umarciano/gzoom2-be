@@ -7,6 +7,8 @@ import it.mapsgroup.gzoom.dto.ReportStatus;
 import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatus;
 import it.mapsgroup.gzoom.querydsl.dao.ContentDao;
 import it.mapsgroup.gzoom.querydsl.dao.DataResourceDao;
+import it.mapsgroup.gzoom.querydsl.dto.Content;
+import it.mapsgroup.gzoom.querydsl.dto.DataResource;
 import it.mapsgroup.gzoom.report.querydsl.dao.ReportActivityDao;
 import it.mapsgroup.gzoom.report.querydsl.dao.ReportActvityFilter;
 import it.mapsgroup.report.querydsl.dto.ReportActivity;
@@ -63,9 +65,20 @@ public class ReportTaskService {
         tasks.put(reportTask.getId(), reportTask);
         taskExecutor.execute(new ReportRunnableTask(reportTask, reportDao, birtService, objectMapper, reportTaskInfo -> {
             tasks.remove(reportTaskInfo.getId());
-            // DataResource dataResource = dtoMapper.getDataResource(reportTask, null);//fixme
-            //   dtoMapper.getContent(reportTask,dataResource.getDataResourceId());
+            createOfbizRecords(reportTask.getId());
         }));
+    }
+
+    @Transactional
+    protected void createOfbizRecords(String reportTaskId) {
+        ReportActivity record = reportDao.get(reportTaskId);
+        if (record.getStatus() == ReportActivityStatus.DONE) {
+            DataResource dataResource = dtoMapper.getDataResource(record);
+            dataResourceDao.create(dataResource);
+            Content content = dtoMapper.getContent(record, dataResource.getDataResourceId());
+            contentDao.create(content);
+        }
+        LOG.debug("Ofbiz records created");
     }
 
 

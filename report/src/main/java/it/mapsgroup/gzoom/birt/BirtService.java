@@ -42,12 +42,11 @@ public class BirtService {
      * @param locale
      */
     public Report build(String taskId, String reportName, Map<String, Object> reportParams, Locale locale) {
-        Report report = new BIRTReport(reportName, reportParams, locale);
+        Report report = new BIRTReport(taskId, reportName, reportParams, locale);
         return report;
     }
 
     /**
-     *
      * @param outputFileName
      * @param report
      * @return absolute path of report

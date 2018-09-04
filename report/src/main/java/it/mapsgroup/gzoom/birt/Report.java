@@ -19,15 +19,15 @@ public abstract class Report {
     protected Map<String, Object> parameters;
     protected Locale reportLocale;
     protected BirtServiceProgress birtServiceProgress;
+    protected String taskId;
 
-    public Report(String name, Map<String, Object> parameters, Locale reportLocale) {
+    public Report(String taskId, String name, Map<String, Object> parameters, Locale reportLocale) {
         this.name = name;
         this.parameters = parameters;
         this.reportLocale = reportLocale;
+        this.taskId = taskId;
         this.birtServiceProgress = new BirtServiceProgress();
     }
-
-
 
 
     public String getName() {
@@ -44,5 +44,9 @@ public abstract class Report {
 
     public BirtServiceProgress getBirtServiceProgress() {
         return birtServiceProgress;
+    }
+
+    public String getTaskId() {
+        return taskId;
     }
 }
