@@ -59,11 +59,14 @@ public class ReportActivityDao extends AbstractDao {
     public Boolean updateState(String id,
                                ReportActivityStatus src,
                                ReportActivityStatus dest,
-                               String error) {
+                               String error,
+                               String objectInfo) {
         QReportActivity qReportActivity = QReportActivity.reportActivity;
         SQLUpdateClause query = queryFactory.update(qReportActivity);
         if (StringUtils.isNotEmpty(error))
             query.set(qReportActivity.error, error);
+        if (StringUtils.isNotEmpty(objectInfo))
+            query.set(qReportActivity.objectInfo, objectInfo);
         query.set(qReportActivity.status, dest);
         query.where(qReportActivity.activityId.eq(id)
                 .and(qReportActivity.status.eq(src)));
@@ -76,7 +79,7 @@ public class ReportActivityDao extends AbstractDao {
     public Boolean updateState(String id,
                                ReportActivityStatus src,
                                ReportActivityStatus dest) {
-        return updateState(id, src, dest, null);
+        return updateState(id, src, dest, null, null);
 
     }
 

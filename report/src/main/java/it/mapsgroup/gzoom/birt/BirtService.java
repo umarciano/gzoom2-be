@@ -46,7 +46,13 @@ public class BirtService {
         return report;
     }
 
-    public void run(String outputFileName, Report report) {
+    /**
+     *
+     * @param outputFileName
+     * @param report
+     * @return absolute path of report
+     */
+    public String run(String outputFileName, Report report) {
         ReportHandler reportHandler = reportRunner.runReport(report);
         File outputPath = new File(config.getBirtReportOutputDir(), outputFileName + ".pdf");
         try {
@@ -54,6 +60,7 @@ public class BirtService {
             //report.getReportContent().writeTo(out);
             IOUtil.copyCompletely(reportHandler.getReportContent(), out);
             reportHandler.close();
+            return outputPath.getPath();
         } catch (IOException e) {
             LOG.error("Cannot save report", e);
             throw new RuntimeException(e);//fixme manage exception

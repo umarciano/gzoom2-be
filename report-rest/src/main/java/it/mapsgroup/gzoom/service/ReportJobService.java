@@ -3,10 +3,10 @@ package it.mapsgroup.gzoom.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.mapsgroup.gzoom.dto.JsonTypeMap;
-import it.mapsgroup.gzoom.dto.ReportStatus;
 import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatus;
-import it.mapsgroup.gzoom.report.dto.CreateReport;
 import it.mapsgroup.gzoom.report.querydsl.dao.ReportActivityDao;
+import it.mapsgroup.gzoom.report.report.dto.CreateReport;
+import it.mapsgroup.gzoom.report.report.dto.ReportStatus;
 import it.mapsgroup.gzoom.rest.ValidationException;
 import it.mapsgroup.report.querydsl.dto.ReportActivity;
 import org.apache.commons.lang3.LocaleUtils;
@@ -42,7 +42,7 @@ public class ReportJobService {
 
     public String add(CreateReport report) {
         ReportActivity record = save(report);
-        taskService.add(new ReportTask(record.getActivityId()));
+        taskService.addToQueue(new ReportTaskInfo(record.getActivityId()));
         return record.getActivityId();
     }
 
@@ -63,6 +63,10 @@ public class ReportJobService {
         record.setTemplateName(report.getReportName());
         record.setReportName(report.getReportName());
         record.setReportLocale(report.getReportLocale());
+        record.setCreatedByUserLogin(report.getCreatedByUserLogin());
+        record.setLastModifiedByUserLogin(report.getModifiedByUserLogin());
+        record.setContentName(report.getContentName());
+
         try {
             if (report.getParams() != null)
                 record.setReportData(objectMapper.writeValueAsString(new JsonTypeMap<>(report.getParams())));
@@ -82,6 +86,13 @@ public class ReportJobService {
     }
 
     public ReportStatus getStatus(String id) {
-        return taskService.getStatus(id);
+        ReportStatus to = new ReportStatus();
+        it.mapsgroup.gzoom.dto.ReportStatus from = taskService.getStatus(id);
+        to.setPageCount(from.getPageCount());
+        to.setQueryCount(from.getPageCount());
+        to.setStatus(from.getStatus());
+        to.setTask(from.getTask());
+        to.setActivityStatus(from.getActivityStatus() != null ? from.getActivityStatus().toString() : null);
+        return to;
     }
 }

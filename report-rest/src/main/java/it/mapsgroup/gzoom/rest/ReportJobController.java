@@ -1,9 +1,9 @@
 package it.mapsgroup.gzoom.rest;
 
 import it.mapsgroup.gzoom.common.Exec;
-import it.mapsgroup.gzoom.dto.ReportStatus;
-import it.mapsgroup.gzoom.report.dto.CancelReport;
-import it.mapsgroup.gzoom.report.dto.CreateReport;
+import it.mapsgroup.gzoom.report.report.dto.CancelReport;
+import it.mapsgroup.gzoom.report.report.dto.CreateReport;
+import it.mapsgroup.gzoom.report.report.dto.ReportStatus;
 import it.mapsgroup.gzoom.service.ReportJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -26,7 +26,7 @@ public class ReportJobController {
     @RequestMapping(value = "/report/add", method = RequestMethod.POST)
     @ResponseBody
     public String add(@RequestBody CreateReport report) {
-        return Exec.exec("add-report", () -> reportJobService.add(report));
+        return Exec.exec("addToQueue-report", () -> reportJobService.add(report));
     }
 
     @RequestMapping(value = "/report/{id}", method = RequestMethod.DELETE)

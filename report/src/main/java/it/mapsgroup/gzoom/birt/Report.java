@@ -17,7 +17,6 @@ public abstract class Report {
 
     protected String name;
     protected Map<String, Object> parameters;
-    protected ReportHandler reportContent;
     protected Locale reportLocale;
     protected BirtServiceProgress birtServiceProgress;
 
@@ -30,9 +29,6 @@ public abstract class Report {
 
 
 
-    public ReportHandler getReportContent() {
-        return this.reportContent;
-    }
 
     public String getName() {
         return name;

@@ -5,12 +5,12 @@ import it.mapsgroup.gzoom.birt.Report;
 /**
  * @author Andrea Fossi.
  */
-public class ReportTask {
+public class ReportTaskInfo {
     private final String id;
     private Report report;
 
 
-    public ReportTask(String id) {
+    public ReportTaskInfo(String id) {
         this.id = id;
     }
 

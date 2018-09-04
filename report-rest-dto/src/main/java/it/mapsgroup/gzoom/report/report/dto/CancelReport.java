@@ -1,4 +1,4 @@
-package it.mapsgroup.gzoom.report.dto;
+package it.mapsgroup.gzoom.report.report.dto;
 
 /**
  * @author Andrea Fossi.

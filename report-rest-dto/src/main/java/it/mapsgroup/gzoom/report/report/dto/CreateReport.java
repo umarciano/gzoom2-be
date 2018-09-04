@@ -1,4 +1,4 @@
-package it.mapsgroup.gzoom.report.dto;
+package it.mapsgroup.gzoom.report.report.dto;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
@@ -20,6 +20,9 @@ public class CreateReport {
     private Map<String, Object> params;
     private String reportName;
     private String reportLocale;
+    private String createdByUserLogin;
+    private String modifiedByUserLogin;
+    private String contentName;
 
     public CreateReport() {
         this.params = new HashMap<>();
@@ -47,5 +50,29 @@ public class CreateReport {
 
     public void setReportLocale(String reportLocale) {
         this.reportLocale = reportLocale;
+    }
+
+    public String getCreatedByUserLogin() {
+        return createdByUserLogin;
+    }
+
+    public void setCreatedByUserLogin(String createdByUserLogin) {
+        this.createdByUserLogin = createdByUserLogin;
+    }
+
+    public String getModifiedByUserLogin() {
+        return modifiedByUserLogin;
+    }
+
+    public void setModifiedByUserLogin(String modifiedByUserLogin) {
+        this.modifiedByUserLogin = modifiedByUserLogin;
+    }
+
+    public String getContentName() {
+        return contentName;
+    }
+
+    public void setContentName(String contentName) {
+        this.contentName = contentName;
     }
 }

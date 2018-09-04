@@ -16,6 +16,12 @@ public class ReportActivity implements AbstractIdentity {
     @Column("COMPLETED_STAMP")
     private java.time.LocalDateTime completedStamp;
 
+    @Column("CONTENT_NAME")
+    private String contentName;
+
+    @Column("CREATED_BY_USER_LOGIN")
+    private String createdByUserLogin;
+
     @Column("CREATED_STAMP")
     private java.time.LocalDateTime createdStamp;
 
@@ -25,11 +31,17 @@ public class ReportActivity implements AbstractIdentity {
     @Column("ERROR")
     private String error;
 
+    @Column("LAST_MODIFIED_BY_USER_LOGIN")
+    private String lastModifiedByUserLogin;
+
     @Column("LAST_UPDATED_STAMP")
     private java.time.LocalDateTime lastUpdatedStamp;
 
     @Column("LAST_UPDATED_TX_STAMP")
     private java.time.LocalDateTime lastUpdatedTxStamp;
+
+    @Column("OBJECT_INFO")
+    private String objectInfo;
 
     @Column("REPORT_DATA")
     private String reportData;
@@ -65,6 +77,22 @@ public class ReportActivity implements AbstractIdentity {
         this.completedStamp = completedStamp;
     }
 
+    public String getContentName() {
+        return contentName;
+    }
+
+    public void setContentName(String contentName) {
+        this.contentName = contentName;
+    }
+
+    public String getCreatedByUserLogin() {
+        return createdByUserLogin;
+    }
+
+    public void setCreatedByUserLogin(String createdByUserLogin) {
+        this.createdByUserLogin = createdByUserLogin;
+    }
+
     public java.time.LocalDateTime getCreatedStamp() {
         return createdStamp;
     }
@@ -89,6 +117,14 @@ public class ReportActivity implements AbstractIdentity {
         this.error = error;
     }
 
+    public String getLastModifiedByUserLogin() {
+        return lastModifiedByUserLogin;
+    }
+
+    public void setLastModifiedByUserLogin(String lastModifiedByUserLogin) {
+        this.lastModifiedByUserLogin = lastModifiedByUserLogin;
+    }
+
     public java.time.LocalDateTime getLastUpdatedStamp() {
         return lastUpdatedStamp;
     }
@@ -103,6 +139,14 @@ public class ReportActivity implements AbstractIdentity {
 
     public void setLastUpdatedTxStamp(java.time.LocalDateTime lastUpdatedTxStamp) {
         this.lastUpdatedTxStamp = lastUpdatedTxStamp;
+    }
+
+    public String getObjectInfo() {
+        return objectInfo;
+    }
+
+    public void setObjectInfo(String objectInfo) {
+        this.objectInfo = objectInfo;
     }
 
     public String getReportData() {

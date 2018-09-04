@@ -1,9 +1,7 @@
 package it.mapsgroup.gzoom.jackson;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import it.mapsgroup.gzoom.report.dto.CreateReport;
-import org.junit.Assert;
+import it.mapsgroup.gzoom.report.report.dto.CreateReport;
 import org.junit.Test;
 import org.slf4j.Logger;
 

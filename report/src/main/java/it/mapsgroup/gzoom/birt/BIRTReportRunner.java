@@ -145,7 +145,7 @@ public class BIRTReportRunner implements ReportRunner {
         //byteArrayOutputStream =  new ByteArrayOutputStream();
         try {
             reportContentTempFile = new File(reportTempDirectory + File.separator
-                    + "generated" + File.separator
+                    //+ "generated_" + File.separator
                     + /*birtReport.getName() +*/ "birt_report_temp_file_" +
                     System.currentTimeMillis() + ".tmp");
             reportContentTempFile.deleteOnExit();
