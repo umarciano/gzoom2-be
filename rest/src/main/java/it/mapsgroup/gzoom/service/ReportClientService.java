@@ -40,27 +40,25 @@ public class ReportClientService {
 
 
         Date date3112 = DateUtil.parse("20171231", "yyyyMMdd");
-        reportParameters.put("monitoringDate", date3112.getTime());
-        reportParameters.put("date3112", date3112);
-
-        reportParameters.put("excludeValidity", "N");
-        reportParameters.put("exposeReleaseDate", "Y");
-        reportParameters.put("exposePaginator", "Y");
-
         reportParameters.put("langLocale", "");
         reportParameters.put("outputFormat", "pdf");
+        reportParameters.put("workEffortTypeId", "15AP0PPC");
+        reportParameters.put("exposeReleaseDate", "Y");
+        reportParameters.put("exposePaginator", "Y");
+        reportParameters.put("reportContentId", "REPORT_CATALOGO");
         reportParameters.put("userLoginId", "admin");
         reportParameters.put("userProfile", "MGR_ADMIN");
-        reportParameters.put("birtOutputFileName", "ValutazioniRischi");
+        reportParameters.put("birtOutputFileName", "CatalogoTreLivelli");
+        reportParameters.put("localDispatcherName", "corperf");
         reportParameters.put("defaultOrganizationPartyId", "Company");
-
+        reportParameters.put("date3112", date3112);
 
         CreateReport request = new CreateReport();
         request.setContentName("test.pdf");
         request.setCreatedByUserLogin("admin");
         request.setModifiedByUserLogin("admin");
-        request.setReportLocale("it");
-        request.setReportName("ValutazioniRischi/ValutazioniRischi");
+        request.setReportLocale("it_IT");
+        request.setReportName("CatalogoTreLivelli/CatalogoTreLivelli");
         request.setParams(reportParameters);
 
         String reportId = restTemplate.postForObject("http://localhost:8081/rest/report/add", request, String.class);
@@ -69,6 +67,6 @@ public class ReportClientService {
     }
 
     public ResponseEntity<ReportStatus> getStatus(String id) {
-        return restTemplate.getForEntity("http://localhost:8081/rest/report/{reportId}/status", ReportStatus.class,  id);
+        return restTemplate.getForEntity("http://localhost:8081/rest/report/{reportId}/status", ReportStatus.class, id);
     }
 }
