@@ -51,4 +51,15 @@ public class ReportStatus {
     public void setActivityStatus(String activityStatus) {
         this.activityStatus = activityStatus;
     }
+
+    @Override
+    public String toString() {
+        return "ReportStatus{" +
+                "queryCount=" + queryCount +
+                ", pageCount=" + pageCount +
+                ", status='" + status + '\'' +
+                ", task='" + task + '\'' +
+                ", activityStatus='" + activityStatus + '\'' +
+                '}';
+    }
 }
