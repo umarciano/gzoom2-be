@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -28,12 +29,11 @@ public class ReportClientService {
         this.restTemplate = restTemplate;
     }
 
-    //todo sample rest call
+  //todo sample rest call
     public String createReport() {
         HashMap<String, Object> reportParameters = new HashMap<>();
         //TODO add parameters here
-
-
+        
         reportParameters.put("workEffortTypeId", "15AP0PPC");
         reportParameters.put("workEffortId", "E12144");
         reportParameters.put("reportContentId", "REPO_VALUT_RISC"); // REPO_VALUT_RISC - REPO_PRI_VALUT_RISC
@@ -53,6 +53,7 @@ public class ReportClientService {
         reportParameters.put("defaultOrganizationPartyId", "Company");
         reportParameters.put("date3112", date3112);
 
+        
         CreateReport request = new CreateReport();
         request.setContentName("test.pdf");
         request.setCreatedByUserLogin("admin");
@@ -61,12 +62,25 @@ public class ReportClientService {
         request.setReportName("CatalogoTreLivelli/CatalogoTreLivelli");
         request.setParams(reportParameters);
 
+        // 
         String reportId = restTemplate.postForObject("http://localhost:8081/rest/report/add", request, String.class);
+        LOG.info("ReportId {}", reportId);
+        return reportId;
+    }
+    
+    //todo sample rest call
+    public String createReport(URL url, CreateReport request) {
+        // "http://localhost:8081/rest/report/add"
+        String reportId = restTemplate.postForObject(url.toString()+"/add", request, String.class);
         LOG.info("ReportId {}", reportId);
         return reportId;
     }
 
     public ResponseEntity<ReportStatus> getStatus(String id) {
         return restTemplate.getForEntity("http://localhost:8081/rest/report/{reportId}/status", ReportStatus.class, id);
+    }
+
+    public ResponseEntity<ReportStatus> getStatus(URL url, String id) {
+        return restTemplate.getForEntity(url.toString()+"/" + id + "/status", ReportStatus.class, id);
     }
 }

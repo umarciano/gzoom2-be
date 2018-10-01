@@ -26,7 +26,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 /**
  * Configuration implementation.
  */
-public class ConfigurationImpl implements Configuration, SecurityConfiguration, OfBizClientConfig {
+public class ConfigurationImpl implements Configuration, SecurityConfiguration, OfBizClientConfig, GzoomReportClientConfig {
     private static final Logger LOG = getLogger(ConfigurationImpl.class);
 
     // Localizations
@@ -47,6 +47,8 @@ public class ConfigurationImpl implements Configuration, SecurityConfiguration, 
 
     private final String ofbizServerXmlrpcUrl;
 
+    private final String gzoomServerReportUrl;
+
     @Autowired
     public ConfigurationImpl(Environment env) {
         // localization
@@ -65,6 +67,8 @@ public class ConfigurationImpl implements Configuration, SecurityConfiguration, 
         this.configurationPath = env.getProperty("gzoom.conf.dir");
 
         this.ofbizServerXmlrpcUrl = env.getProperty("ofbiz.server.xmlrpc.url");
+        
+        this.gzoomServerReportUrl = env.getProperty("gzoom.server.report.url");
     }
 
 
@@ -157,5 +161,12 @@ public class ConfigurationImpl implements Configuration, SecurityConfiguration, 
         }
     }
 
-
+    @Override
+    public URL getServerReportUrl() {
+        try {
+            return new URL(gzoomServerReportUrl);
+        } catch (MalformedURLException e) {
+            throw new IllegalArgumentException("gzoomServerReportUrl is wrong");
+        }
+    }
 }

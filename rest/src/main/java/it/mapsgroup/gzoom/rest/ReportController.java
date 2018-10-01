@@ -1,0 +1,60 @@
+package it.mapsgroup.gzoom.rest;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import it.mapsgroup.gzoom.common.Exec;
+import it.mapsgroup.gzoom.model.Result;
+import it.mapsgroup.gzoom.querydsl.dto.Report;
+import it.mapsgroup.gzoom.querydsl.dto.UomEx;
+import it.mapsgroup.gzoom.report.report.dto.ReportStatus;
+import it.mapsgroup.gzoom.service.ReportService;
+import it.mapsgroup.gzoom.service.UomService;
+
+/**
+ */
+@RestController
+@RequestMapping(value = "", produces = { MediaType.APPLICATION_JSON_VALUE })
+public class ReportController {
+
+    private final ReportService reportService;
+
+    @Autowired
+    public ReportController(ReportService reportService) {
+        this.reportService = reportService;
+    }
+
+    @RequestMapping(value = "report/{parentTypeId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Result<Report> getReports(@PathVariable(value = "parentTypeId") String parentTypeId) {
+        return Exec.exec("report get", () -> reportService.getReports(parentTypeId));
+    }
+
+    @RequestMapping(value = "report/{parentTypeId}/{reportContentId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Report getReport(@PathVariable(value = "parentTypeId") String parentTypeId, @PathVariable(value = "reportContentId") String reportContentId) {
+        return Exec.exec("report get", () -> reportService.getReport(reportContentId));
+    }
+    
+    @RequestMapping(value = "report/add", method = RequestMethod.POST)
+    @ResponseBody
+    public String createReport(@RequestBody Report req) {
+        return Exec.exec("report/add post", () -> reportService.add(req));
+    }
+
+    @RequestMapping(value = "report/{contentId}/status", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<ReportStatus> updateUom(@PathVariable(value = "contentId") String contentId) {
+        return Exec.exec("report status", () -> reportService.status(contentId));
+    }
+
+    @RequestMapping(value = "report/{contentId}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public Boolean deleteUom(@PathVariable(value = "contentId") String contentId) {
+        return Exec.exec("report delete", () -> reportService.deleteReport(contentId));
+    }
+}
