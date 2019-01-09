@@ -42,9 +42,9 @@ public class QSecurityGroupContent extends com.querydsl.sql.RelationalPathBase<S
 
     public final com.querydsl.sql.PrimaryKey<SecurityGroupContent> primary = createPrimaryKey(contentId, fromDate, groupId);
 
-    public final com.querydsl.sql.ForeignKey<Content> secgrpCntCnt = createForeignKey(contentId, "CONTENT_ID");
-
     public final com.querydsl.sql.ForeignKey<SecurityGroup> secgrpCntGrp = createForeignKey(groupId, "GROUP_ID");
+
+    public final com.querydsl.sql.ForeignKey<Content> secgrpCntCnt = createForeignKey(contentId, "CONTENT_ID");
 
     public QSecurityGroupContent(String variable) {
         super(SecurityGroupContent.class, forVariable(variable), "null", "SECURITY_GROUP_CONTENT");

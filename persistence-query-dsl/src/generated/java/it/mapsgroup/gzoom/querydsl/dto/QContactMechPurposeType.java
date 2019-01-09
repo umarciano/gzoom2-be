@@ -42,8 +42,6 @@ public class QContactMechPurposeType extends com.querydsl.sql.RelationalPathBase
 
     public final com.querydsl.sql.PrimaryKey<ContactMechPurposeType> primary = createPrimaryKey(contactMechPurposeTypeId);
 
-    public final com.querydsl.sql.ForeignKey<PartyContactMechPurpose> _partyCmprpType = createInvForeignKey(contactMechPurposeTypeId, "CONTACT_MECH_PURPOSE_TYPE_ID");
-
     public QContactMechPurposeType(String variable) {
         super(ContactMechPurposeType.class, forVariable(variable), "null", "CONTACT_MECH_PURPOSE_TYPE");
         addMetadata();

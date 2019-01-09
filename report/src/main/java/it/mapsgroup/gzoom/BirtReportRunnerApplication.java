@@ -56,10 +56,16 @@ public class BirtReportRunnerApplication {
         */
 
 
-        reportParameters.put("workEffortTypeId", "15AP0PPC");
-        reportParameters.put("workEffortId", "E12144");
-        reportParameters.put("reportContentId", "REPO_VALUT_RISC"); // REPO_VALUT_RISC - REPO_PRI_VALUT_RISC
-
+//        reportParameters.put("workEffortTypeId", "15AP0PPC");
+//        reportParameters.put("workEffortId", "E12144");
+//        reportParameters.put("reportContentId", "REPO_VALUT_RISC"); // REPO_VALUT_RISC - REPO_PRI_VALUT_RISC - REPORT_MON_TRAT
+        
+        reportParameters.put("workEffortTypeId", "PRVST");
+        reportParameters.put("reportContentId", "REP_TIMESHEET");
+        reportParameters.put("localDispatcherName", "procperf");
+        
+         
+        
         Calendar cal = Calendar.getInstance();
         cal.set(2017, 11, 31, 0, 0, 0);
 
@@ -73,16 +79,17 @@ public class BirtReportRunnerApplication {
         reportParameters.put("outputFormat", "pdf");
         reportParameters.put("userLoginId", "admin");
         reportParameters.put("userProfile", "MGR_ADMIN");
-        reportParameters.put("birtOutputFileName", "ValutazioniRischi");
+        reportParameters.put("birtOutputFileName", "Timesheet");
+        reportParameters.put("birtOutputFileName", "Timesheet");
         reportParameters.put("defaultOrganizationPartyId", "Company");
 
-        Report report = new BIRTReport(System.currentTimeMillis() + "", "ValutazioniRischi/ValutazioniRischi", reportParameters, Locale.ITALIAN);
+        Report report = new BIRTReport(System.currentTimeMillis() + "", "StampaTimesheet/StampaTimesheet", reportParameters, Locale.ITALIAN);
         //Report report = new BIRTReport("CatalogoTreLivelli_ORI", reportParameters, reportRunner, Locale.ITALIAN).runReport();
         ReportHandler reportHandler = reportRunner.runReport(report);
         //Report report = new BIRTReport("simple_report", reportParameters, reportRunner, Locale.ITALIAN).runReport();
 
         
-        String namePath = "C://projects/Gzoom2/upload/ValutazioniRischi_" + Calendar.getInstance().getTimeInMillis() + ".pdf";
+        String namePath = "C:/data/Gzoom_2/birt/logs/report/StampaTimesheet_" + Calendar.getInstance().getTimeInMillis() + ".pdf";
         //String namePath = "C:/data/Gzoom_2/birt/logs/report/ValutazioniRischi_" + Calendar.getInstance().getTimeInMillis() + ".pdf";
         IOUtil.copyCompletely(reportHandler.getReportContent(), new FileOutputStream(namePath));
         //report.getReportContent().writeTo(new FileOutputStream(namePath));

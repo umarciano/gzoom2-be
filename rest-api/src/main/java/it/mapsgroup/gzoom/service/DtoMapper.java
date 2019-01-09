@@ -4,7 +4,7 @@ import it.mapsgroup.gzoom.model.TimeEntry;
 import it.mapsgroup.gzoom.model.Timesheet;
 import it.mapsgroup.gzoom.model.User;
 import it.mapsgroup.gzoom.querydsl.dto.Activity;
-import org.apache.commons.lang3.StringUtils;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -62,6 +62,47 @@ public class DtoMapper {
         to.setDescription(from.getWorkEffort1().getWorkEffortName()+" - "+
                 from.getWorkEffort2().getWorkEffortName()+" - "+
                 from.getWorkEffort3().getWorkEffortName());
+        return to;
+    }
+ 
+    
+    public it.mapsgroup.gzoom.model.Report copy(it.mapsgroup.gzoom.querydsl.dto.Report from, it.mapsgroup.gzoom.model.Report to) {
+        if (from == null) {
+        	return to;
+        }
+    	to.setWorkEffortTypeId(from.getWorkEffortType().getWorkEffortTypeId());
+        to.setParentTypeId(from.getWorkEffortType().getParentTypeId());
+        to.setDescription(from.getDescription());        
+        to.setDescriptionLang(from.getDescriptionLang());
+        to.setServiceName(from.getServiceName());
+        to.setReportContentId(from.getContentId());
+        to.setContentName(from.getContentName());
+        
+    	//workEffortAnalysis campi provenente dall'analisi
+        if (from.getWorkEffortAnalysis() != null) {
+        	to.setWorkEffortAnalysisId(from.getWorkEffortAnalysis().getWorkEffortAnalysisId());
+            to.setEtch(from.getWorkEffortAnalysis().getDescription5());
+            to.setEtchLang(from.getWorkEffortAnalysis().getDescription5()); 
+            
+            to.setDescriptionType(from.getWorkEffortAnalysis().getDescription());
+            to.setDescriptionTypeLang(from.getWorkEffortAnalysis().getDescription());
+        }
+        
+    	//workEffortTypeContent campi provenenti dal report
+        if (from.getWorkEffortTypeContent() != null) {
+        	to.setSequenceNum(from.getWorkEffortTypeContent().getSequenceNum());
+            to.setEtch(from.getWorkEffortTypeContent().getEtch());
+            to.setEtchLang(from.getWorkEffortTypeContent().getEtchLang()); 
+            to.setUseFilter(from.getWorkEffortTypeContent().getUseFilter());
+            
+            to.setDescriptionType(from.getWorkEffortType().getDescription());
+            to.setDescriptionTypeLang(from.getWorkEffortType().getDescriptionLang());
+        	
+        }
+        
+        //TODO gestire il LANG
+        to.setReportName(to.getEtch() == null ? to.getDescription() : to.getEtch());
+        
         return to;
     }
 

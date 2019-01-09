@@ -36,5 +36,11 @@ public class PartyController {
     public Result<Party> getPartys() {
         return Exec.exec("party get", () -> partyService.getPartys());
     }
+    
+    @RequestMapping(value = "orgUnits", method = RequestMethod.GET)
+    @ResponseBody
+    public Result<Party> getOrgUnits() {
+        return Exec.exec("orgUnit get", () -> partyService.getOrgUnits());
+    }
 
 }

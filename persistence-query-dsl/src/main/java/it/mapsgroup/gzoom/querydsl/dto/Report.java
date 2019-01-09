@@ -3,62 +3,49 @@ package it.mapsgroup.gzoom.querydsl.dto;
 import java.util.List;
 
 public class Report extends Content {
-    private String reportName;
-    private String reportContentId;
-    private String parentTypeId;
+	
+	   
+    private WorkEffortType workEffortType;
+    private WorkEffortTypeContent workEffortTypeContent;
+    private WorkEffortAnalysis workEffortAnalysis;
+    
+    
     private List<ReportParams> params;
     private List<ReportType> outputFormats;
 
-    /**
-     * @return the parentTypeId
-     */
-    public String getParentTypeId() {
-        return parentTypeId;
-    }
+    
+	public WorkEffortType getWorkEffortType() {
+		return workEffortType;
+	}
 
-    /**
-     * @param parentTypeId the parentTypeId to set
-     */
-    public void setParentTypeId(String parentTypeId) {
-        this.parentTypeId = parentTypeId;
-    }
+	public void setWorkEffortType(WorkEffortType workEffortType) {
+		this.workEffortType = workEffortType;
+	}
 
-    /**
-     * @return the reportContentId
-     */
-    public String getReportContentId() {
-        return reportContentId;
-    }
+	public WorkEffortTypeContent getWorkEffortTypeContent() {
+		return workEffortTypeContent;
+	}
 
-    /**
-     * @param reportContentId the reportContentId to set
-     */
-    public void setReportContentId(String reportContentId) {
-        this.reportContentId = reportContentId;
-    }
+	public void setWorkEffortTypeContent(WorkEffortTypeContent workEffortTypeContent) {
+		this.workEffortTypeContent = workEffortTypeContent;
+	}
+	
+	public WorkEffortAnalysis getWorkEffortAnalysis() {
+		return workEffortAnalysis;
+	}
 
-    /**
-     * @return the reportName
-     */
-    public String getReportName() {
-        return reportName;
-    }
+	public void setWorkEffortAnalysis(WorkEffortAnalysis workEffortAnalysis) {
+		this.workEffortAnalysis = workEffortAnalysis;
+	}		
 
-    /**
-     * @param reportName the reportName to set
-     */
-    public void setReportName(String reportName) {
-        this.reportName = reportName;
-    }
-
-    /**
+	/**
      * @return the params
      */
     public List<ReportParams> getParams() {
         return params;
     }
 
-    /**
+	/**
      * @param params the params to set
      */
     public void setParams(List<ReportParams> params) {

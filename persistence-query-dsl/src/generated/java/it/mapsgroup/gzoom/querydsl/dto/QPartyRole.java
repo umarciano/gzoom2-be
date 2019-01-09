@@ -50,6 +50,8 @@ public class QPartyRole extends com.querydsl.sql.RelationalPathBase<PartyRole> {
 
     public final com.querydsl.sql.ForeignKey<Party> partyRleParty = createForeignKey(partyId, "PARTY_ID");
 
+    public final com.querydsl.sql.ForeignKey<PartyParentRole> pprFk01 = createForeignKey(Arrays.asList(parentRoleTypeId, partyId), Arrays.asList("ROLE_TYPE_ID", "PARTY_ID"));
+
     public final com.querydsl.sql.ForeignKey<PartyRelationship> _partyRelTprole = createInvForeignKey(Arrays.asList(partyId, roleTypeId), Arrays.asList("PARTY_ID_TO", "ROLE_TYPE_ID_TO"));
 
     public final com.querydsl.sql.ForeignKey<WorkEffort> _weOrgUnit = createInvForeignKey(Arrays.asList(partyId, roleTypeId), Arrays.asList("ORG_UNIT_ID", "ORG_UNIT_ROLE_TYPE_ID"));

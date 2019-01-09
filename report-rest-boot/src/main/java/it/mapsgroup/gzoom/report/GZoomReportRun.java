@@ -6,7 +6,6 @@ import com.querydsl.sql.SQLQueryFactory;
 import com.querydsl.sql.types.EnumByNameType;
 import it.mapsgroup.gzoom.ReportModuleConfiguration;
 import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatus;
-import it.mapsgroup.gzoom.querydsl.persistence.service.QueryDslPersistenceConfiguration;
 import it.mapsgroup.gzoom.rest.ReportJobController;
 import it.mapsgroup.gzoom.service.ReportJobService;
 import it.mapsgroup.gzoom.service.ReportTaskService;

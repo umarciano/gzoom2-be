@@ -44,8 +44,6 @@ public class QContactMech extends com.querydsl.sql.RelationalPathBase<ContactMec
 
     public final com.querydsl.sql.PrimaryKey<ContactMech> primary = createPrimaryKey(contactMechId);
 
-    public final com.querydsl.sql.ForeignKey<PartyContactMechPurpose> _partyCmprpCmech = createInvForeignKey(contactMechId, "CONTACT_MECH_ID");
-
     public final com.querydsl.sql.ForeignKey<PartyContactMech> _partyCmechCmech = createInvForeignKey(contactMechId, "CONTACT_MECH_ID");
 
     public QContactMech(String variable) {

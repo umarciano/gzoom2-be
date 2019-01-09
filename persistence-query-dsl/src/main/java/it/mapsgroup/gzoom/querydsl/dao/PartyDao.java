@@ -8,9 +8,10 @@ import com.querydsl.sql.SQLQuery;
 import com.querydsl.sql.SQLQueryFactory;
 import it.mapsgroup.gzoom.persistence.common.SequenceGenerator;
 import it.mapsgroup.gzoom.querydsl.dto.Party;
-import it.mapsgroup.gzoom.querydsl.dto.Person;
 import it.mapsgroup.gzoom.querydsl.dto.QParty;
-import it.mapsgroup.gzoom.querydsl.dto.QPerson;
+import it.mapsgroup.gzoom.querydsl.dto.QPartyParentRole;
+import it.mapsgroup.gzoom.querydsl.dto.QPartyRole;
+import it.mapsgroup.gzoom.querydsl.dto.QRoleType;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,58 @@ public class PartyDao extends AbstractDao {
         List<Party> ret = pSQLQuery.transform(GroupBy.groupBy(qParty.partyId).list(partys));
         LOG.info("size = {}", ret.size());
         return ret;
+    }
+    
+    @Transactional
+    public List<Party> getPartys(String roleTypeId) {
+        if (TransactionSynchronizationManager.isActualTransactionActive()) {
+            TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
+            status.getClass();
+        }
+        QParty qParty = QParty.party;
+        QPartyRole qPartyRole = QPartyRole.partyRole;
+        
+        SQLQuery<Party> pSQLQuery = queryFactory.select(qParty)
+        							.from(qParty)
+        							.innerJoin(qPartyRole).on(qPartyRole.partyId.eq(qParty.partyId))
+        							.where(qParty.partyTypeId.eq("PERSON")
+        									.and(qPartyRole.roleTypeId.eq(roleTypeId)))        							
+        							.orderBy(qParty.partyName.asc());
+        SQLBindings bindings = pSQLQuery.getSQL();
+        LOG.info("{}", bindings.getSQL());
+        LOG.info("{}", bindings.getBindings());
+        QBean<Party> partys = Projections.bean(Party.class, qParty.all());
+        List<Party> ret = pSQLQuery.transform(GroupBy.groupBy(qParty.partyId).list(partys));
+        LOG.info("size = {}", ret.size());
+        return ret;
+    }
+    
+    @Transactional
+    public List<Party> getOrgUnits() {
+    	 if (TransactionSynchronizationManager.isActualTransactionActive()) {
+             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
+             status.getClass();
+         }
+    
+         QParty qParty = QParty.party;
+         QPartyParentRole qPartyParentRole = QPartyParentRole.partyParentRole;
+         QRoleType qRoleType = QRoleType.roleType;
+         
+         SQLQuery<Party> tupleSQLQuery = queryFactory.select(qParty)
+ 				.from(qParty)
+ 				.innerJoin(qPartyParentRole).on(qPartyParentRole.partyId.eq(qParty.partyId)) 
+ 				.innerJoin(qRoleType).on(qPartyParentRole.roleTypeId.eq(qRoleType.roleTypeId)) 
+ 				.where(qRoleType.roleTypeId.eq("ORGANIZATION_UNIT"))
+                .orderBy(qPartyParentRole.parentRoleCode.asc());
+ 
+ 
+		 SQLBindings bindings = tupleSQLQuery.getSQL();
+		 LOG.info("{}", bindings.getSQL());
+		 LOG.info("{}", bindings.getBindings());
+		 QBean<Party> partyQBean = Projections.bean(Party.class, qParty.all());
+		 List<Party> ret = tupleSQLQuery.transform(GroupBy.groupBy(qParty.partyId).list(partyQBean));
+		 LOG.info("size = {}", ret.size()); 
+		 return ret;    
     }
 
 }

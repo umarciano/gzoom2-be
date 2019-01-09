@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.util.StringUtils;
 
 import static org.slf4j.LoggerFactory.getLogger;
-
+ 
 /**
  * @author Andrea Fossi.
  */

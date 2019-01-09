@@ -68,7 +68,7 @@ public class ReportClientService {
         return reportId;
     }
     
-    //todo sample rest call
+    //TODO sample rest call
     public String createReport(URL url, CreateReport request) {
         // "http://localhost:8081/rest/report/add"
         String reportId = restTemplate.postForObject(url.toString()+"/add", request, String.class);
@@ -83,4 +83,5 @@ public class ReportClientService {
     public ResponseEntity<ReportStatus> getStatus(URL url, String id) {
         return restTemplate.getForEntity(url.toString()+"/" + id + "/status", ReportStatus.class, id);
     }
+    
 }

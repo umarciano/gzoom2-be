@@ -94,6 +94,9 @@ public class WorkEffortType implements AbstractIdentity {
     @Column("INFLUENCE_CATALOG_ID")
     private String influenceCatalogId;
 
+    @Column("INITIALLY_COLLAPSED")
+    private String initiallyCollapsed;
+
     @Column("IS_INDIC_AUTO")
     private Boolean isIndicAuto;
 
@@ -511,6 +514,14 @@ public class WorkEffortType implements AbstractIdentity {
 
     public void setInfluenceCatalogId(String influenceCatalogId) {
         this.influenceCatalogId = influenceCatalogId;
+    }
+
+    public String getInitiallyCollapsed() {
+        return initiallyCollapsed;
+    }
+
+    public void setInitiallyCollapsed(String initiallyCollapsed) {
+        this.initiallyCollapsed = initiallyCollapsed;
     }
 
     public Boolean getIsIndicAuto() {

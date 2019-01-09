@@ -1,6 +1,7 @@
 package it.mapsgroup.gzoom.rest;
 
-import java.util.List;
+import java.io.ByteArrayOutputStream;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -8,12 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import it.mapsgroup.gzoom.common.Exec;
+import it.mapsgroup.gzoom.model.Report;
 import it.mapsgroup.gzoom.model.Result;
-import it.mapsgroup.gzoom.querydsl.dto.Report;
-import it.mapsgroup.gzoom.querydsl.dto.UomEx;
+import it.mapsgroup.gzoom.querydsl.dto.WorkEffort;
 import it.mapsgroup.gzoom.report.report.dto.ReportStatus;
 import it.mapsgroup.gzoom.service.ReportService;
-import it.mapsgroup.gzoom.service.UomService;
 
 /**
  */
@@ -37,7 +37,7 @@ public class ReportController {
     @RequestMapping(value = "report/{parentTypeId}/{reportContentId}", method = RequestMethod.GET)
     @ResponseBody
     public Report getReport(@PathVariable(value = "parentTypeId") String parentTypeId, @PathVariable(value = "reportContentId") String reportContentId) {
-        return Exec.exec("report get", () -> reportService.getReport(reportContentId));
+        return Exec.exec("report get", () -> reportService.getReport(parentTypeId, reportContentId));
     }
     
     @RequestMapping(value = "report/add", method = RequestMethod.POST)
@@ -46,15 +46,29 @@ public class ReportController {
         return Exec.exec("report/add post", () -> reportService.add(req));
     }
 
-    @RequestMapping(value = "report/{contentId}/status", method = RequestMethod.GET)
+    @RequestMapping(value = "report/{activityId}/status", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<ReportStatus> updateUom(@PathVariable(value = "contentId") String contentId) {
-        return Exec.exec("report status", () -> reportService.status(contentId));
+    public ResponseEntity<ReportStatus> update(@PathVariable(value = "activityId") String activityId) {
+        return Exec.exec("report status", () -> reportService.status(activityId));
+    }
+    
+    @RequestMapping(value = "report/{activityId}/strem", method = RequestMethod.GET)
+    @ResponseBody
+    public ByteArrayOutputStream stream(@PathVariable(value = "activityId") String activityId) {
+        return Exec.exec("report stream", () -> reportService.stream(activityId));
     }
 
     @RequestMapping(value = "report/{contentId}", method = RequestMethod.DELETE)
     @ResponseBody
-    public Boolean deleteUom(@PathVariable(value = "contentId") String contentId) {
+    public Boolean delete(@PathVariable(value = "contentId") String contentId) {
         return Exec.exec("report delete", () -> reportService.deleteReport(contentId));
     }
+    
+    //carico la li sta per le drop
+    @RequestMapping(value = "report/{parentTypeId}/{reportContentId}/{workEffortTypeId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Result<WorkEffort> getWorkEfforts(@PathVariable(value = "parentTypeId") String parentTypeId, @PathVariable(value = "reportContentId") String reportContentId, @PathVariable(value = "workEffortTypeId") String workEffortTypeId) {
+        return Exec.exec("report workEffort get", () -> reportService.getWorkEfforts(workEffortTypeId));
+    }
+    
 }

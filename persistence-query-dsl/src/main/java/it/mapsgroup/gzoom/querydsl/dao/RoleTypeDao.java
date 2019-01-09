@@ -5,6 +5,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 import java.util.List;
 
 import org.slf4j.Logger;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -20,6 +21,7 @@ import com.querydsl.sql.SQLQueryFactory;
 import it.mapsgroup.gzoom.querydsl.dto.QRoleType;
 import it.mapsgroup.gzoom.querydsl.dto.RoleType;
 
+@Service
 public class RoleTypeDao extends AbstractDao {
 	private static final Logger LOG = getLogger(RoleTypeDao.class);
 

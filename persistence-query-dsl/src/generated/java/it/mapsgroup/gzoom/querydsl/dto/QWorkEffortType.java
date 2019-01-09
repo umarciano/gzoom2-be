@@ -80,6 +80,8 @@ public class QWorkEffortType extends com.querydsl.sql.RelationalPathBase<WorkEff
 
     public final StringPath influenceCatalogId = createString("influenceCatalogId");
 
+    public final StringPath initiallyCollapsed = createString("initiallyCollapsed");
+
     public final BooleanPath isIndicAuto = createBoolean("isIndicAuto");
 
     public final BooleanPath isInOnlyOneCard = createBoolean("isInOnlyOneCard");
@@ -212,25 +214,25 @@ public class QWorkEffortType extends com.querydsl.sql.RelationalPathBase<WorkEff
 
     public final com.querydsl.sql.PrimaryKey<WorkEffortType> primary = createPrimaryKey(workEffortTypeId);
 
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> wetRult4wet = createForeignKey(ruleTypeId4, "WORK_EFFORT_TYPE_ID");
-
-    public final com.querydsl.sql.ForeignKey<Uom> wetEffuom = createForeignKey(effortUomId, "UOM_ID");
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> wetRult1wet = createForeignKey(ruleTypeId1, "WORK_EFFORT_TYPE_ID");
 
     public final com.querydsl.sql.ForeignKey<Content> wetLnamecnt = createForeignKey(localNameContentId, "CONTENT_ID");
 
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> wetRult1wet = createForeignKey(ruleTypeId1, "WORK_EFFORT_TYPE_ID");
-
     public final com.querydsl.sql.ForeignKey<WorkEffortType> wetRult5wet = createForeignKey(ruleTypeId5, "WORK_EFFORT_TYPE_ID");
-
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> wkEffrtTypePar = createForeignKey(parentTypeId, "WORK_EFFORT_TYPE_ID");
 
     public final com.querydsl.sql.ForeignKey<Content> wetIconcnt = createForeignKey(iconContentId, "CONTENT_ID");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortType> wetChldtmplwet = createForeignKey(childTemplateId, "WORK_EFFORT_TYPE_ID");
 
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> wetRult3wet = createForeignKey(ruleTypeId3, "WORK_EFFORT_TYPE_ID");
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> wkEffrtTypePar = createForeignKey(parentTypeId, "WORK_EFFORT_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> wetRult4wet = createForeignKey(ruleTypeId4, "WORK_EFFORT_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<Uom> wetEffuom = createForeignKey(effortUomId, "UOM_ID");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortType> wetRult2wet = createForeignKey(ruleTypeId2, "WORK_EFFORT_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> wetRult3wet = createForeignKey(ruleTypeId3, "WORK_EFFORT_TYPE_ID");
 
     public final com.querydsl.sql.ForeignKey<WorkEffort> _wkEffrtType = createInvForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID");
 
@@ -242,13 +244,29 @@ public class QWorkEffortType extends com.querydsl.sql.RelationalPathBase<WorkEff
 
     public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetRult4wet = createInvForeignKey(workEffortTypeId, "RULE_TYPE_ID4");
 
+    public final com.querydsl.sql.ForeignKey<WorkEffortTypeContent> _wtfWtFk = createInvForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID");
+
     public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetChldtmplwet = createInvForeignKey(workEffortTypeId, "CHILD_TEMPLATE_ID");
 
+    public final com.querydsl.sql.ForeignKey<WorkEffortAnalysis> _weaWet4Fk = createInvForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID_SEZ4");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortAnalysis> _weaWet5Fk = createInvForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID_SEZ5");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortAnalysis> _weaWet6Fk = createInvForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID_SEZ6");
+
     public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetRult1wet = createInvForeignKey(workEffortTypeId, "RULE_TYPE_ID1");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortAnalysis> _weaWet1Fk = createInvForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID_SEZ1");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortAnalysis> _weaWet2Fk = createInvForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID_SEZ2");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortAnalysis> _weaWet3Fk = createInvForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID_SEZ3");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetRult5wet = createInvForeignKey(workEffortTypeId, "RULE_TYPE_ID5");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetRult3wet = createInvForeignKey(workEffortTypeId, "RULE_TYPE_ID3");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortAnalysis> _weaWetFk = createInvForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortTypeType> _wttFrFk = createInvForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID_FROM");
 
@@ -308,6 +326,7 @@ public class QWorkEffortType extends com.querydsl.sql.RelationalPathBase<WorkEff
         addMetadata(hierarchyAssocTypeId, ColumnMetadata.named("HIERARCHY_ASSOC_TYPE_ID").withIndex(24).ofType(Types.VARCHAR).withSize(20));
         addMetadata(iconContentId, ColumnMetadata.named("ICON_CONTENT_ID").withIndex(10).ofType(Types.VARCHAR).withSize(20));
         addMetadata(influenceCatalogId, ColumnMetadata.named("INFLUENCE_CATALOG_ID").withIndex(9).ofType(Types.VARCHAR).withSize(20));
+        addMetadata(initiallyCollapsed, ColumnMetadata.named("INITIALLY_COLLAPSED").withIndex(94).ofType(Types.VARCHAR).withSize(20));
         addMetadata(isIndicAuto, ColumnMetadata.named("IS_INDIC_AUTO").withIndex(59).ofType(Types.CHAR).withSize(1));
         addMetadata(isInOnlyOneCard, ColumnMetadata.named("IS_IN_ONLY_ONE_CARD").withIndex(18).ofType(Types.CHAR).withSize(1));
         addMetadata(isRoleTypeIdAuto, ColumnMetadata.named("IS_ROLE_TYPE_ID_AUTO").withIndex(79).ofType(Types.CHAR).withSize(1));

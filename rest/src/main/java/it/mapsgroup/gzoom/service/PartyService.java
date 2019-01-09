@@ -39,5 +39,12 @@ public class PartyService {
         List<Party> list = partyDao.getPartys();
         return new Result<>(list, list.size());
     }
+    
+    public Result<Party> getOrgUnits() {
+        List<Party> list = partyDao.getOrgUnits();
+        return new Result<>(list, list.size());
+    }
+    
+    
 
 }
