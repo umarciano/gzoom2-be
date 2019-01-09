@@ -25,7 +25,6 @@ import static it.mapsgroup.gzoom.querydsl.QBeanUtils.merge;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -215,7 +214,7 @@ public class ReportDao extends AbstractDao {
     //2. tutti glie elementi con il workEffortType scelto
     //3. per entrambe le scelte superiori -> scegliere se il filtro utente è attivo
     
-    @Transactional
+  /*  @Transactional
     public List<WorkEffort> getWorkEfforts(String workEffortTypeId) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
@@ -237,7 +236,7 @@ public class ReportDao extends AbstractDao {
         List<WorkEffort> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWorkEffort.workEffortId).list(workEffortQBean));
         LOG.info("size = {}", ret.size()); 
         return ret;
-    }
+    }*/
     
     
  }

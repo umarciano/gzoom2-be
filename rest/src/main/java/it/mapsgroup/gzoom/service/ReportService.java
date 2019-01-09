@@ -32,6 +32,7 @@ import it.mapsgroup.gzoom.querydsl.dto.WorkEffort;
 import it.mapsgroup.gzoom.querydsl.dto.WorkEffortTypeExt;
 import it.mapsgroup.gzoom.report.report.dto.CreateReport;
 import it.mapsgroup.gzoom.report.report.dto.ReportStatus;
+import it.memelabs.smartnebula.commons.DateUtil;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -94,22 +95,22 @@ public class ReportService {
         ret.setWorkEffortTypes(workEffortTypes);        
         
         //TODO manca param
-        ret.setParams(getParams(reportContentId));
+        ret.setParams(getParams(report.getContentName()));
         
         return ret;
     }
     
     /**
-     * La lista dei parametri vado a prenderla nella cartella del report,
-     * se non esiste prendo i valori dal report
-     * (i vecchi report i valori non sono settati in modo corretto ed è meglio metterlil
-     * in file di configurazione, mentre si può pensare nei nuovi di andarlia pescare dal report)
-     * @param reportContentId
+     *  Dato il noem del report  mi carico la lista dei parametri
+     * @param reportName
      * @return
      */
-	private List<ReportParam> getParams(String reportContentId) {
+	private List<ReportParam> getParams(String reportName) {		
+		ResponseEntity<ReportParams> params = client.getReportParams(config.getServerReportUrl(), reportName);
+        return params.getBody().getParams();
+		
 		//TODO
-    	String path = "C:/Users/asma/workspaceNeon/ProvaBirt/StampaTimesheet/StampaTimesheet.json";
+    	/*String path = "C:/Users/asma/workspaceNeon/ProvaBirt/StampaTimesheet/StampaTimesheet.json";
     	File file = new File(path);
     	if (file.exists()) {
     		return getParamsToFile(file);
@@ -118,7 +119,7 @@ public class ReportService {
     		
     	}
         
-        return null;
+        return null;*/
     	
     	/*
     	ReportParams param1111 = new ReportParams();
@@ -158,23 +159,7 @@ public class ReportService {
     	
     }
 	
-	private List<ReportParam> getParamsToFile(File file) {
-		ObjectMapper mapper = new ObjectMapper();
-        try {
-        	ReportParams params = mapper.readValue(file, ReportParams.class);
-			LOG.info("PIPPO value -> "+ params.getParams().toString());
-			 return params.getParams();
-			 
-		} catch (JsonParseException e) {			
-			e.printStackTrace();
-		} catch (JsonMappingException e) {			
-			e.printStackTrace();
-		} catch (IOException e) {			
-			e.printStackTrace();
-		}
-        
-        return null;
-	}
+	
 
     /**     
      * 
@@ -193,10 +178,26 @@ public class ReportService {
         reportParameters.put("outputFormat", req.getOutputFormat()); 
         
         Map<String, Object> paramsValue = req.getParamsValue();
-        for(String key: paramsValue.keySet()) {
+        /*for(String key: paramsValue.keySet()) {
         	reportParameters.put(key, paramsValue.get(key));
-        }
-
+        }*/
+        
+        req.getParams().forEach(params -> {
+        	Object obj = paramsValue.get(params.getParamName());
+        	if (params.getParamType().equals("DATE")) {
+        		reportParameters.put(params.getParamName(), DateUtil.parse((String)obj, "yyyy-MM-dd"));
+        	} else if(params.getParamType().equals("BOOLEAN")) {        		
+        		String value = "N";
+        		if ((boolean)obj) {
+        			value = "Y";
+        		}
+        		reportParameters.put(params.getParamName(), value);
+        	} else {
+        		reportParameters.put(params.getParamName(), obj);
+        	}
+        	
+        });
+        
         /*Date date3112 = DateUtil.parse("20171231", "yyyyMMdd");
         reportParameters.put("date3112", date3112);*/
         
@@ -255,10 +256,5 @@ public class ReportService {
         return false;
     }
     
-    public Result<WorkEffort> getWorkEfforts(String workEffortTypeId) {
-       List<WorkEffort> ret = reportDao.getWorkEfforts(workEffortTypeId);
-       
-       return new Result<>(ret, ret.size());
-    }
 
 }

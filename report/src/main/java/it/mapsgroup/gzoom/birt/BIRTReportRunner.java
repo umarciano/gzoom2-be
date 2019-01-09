@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import it.mapsgroup.gzoom.querydsl.dto.ReportParam;
+import it.mapsgroup.gzoom.querydsl.dto.ReportParams;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.io.File;
@@ -23,7 +26,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -171,7 +173,7 @@ public class BIRTReportRunner implements ReportRunner {
 			// ----------------
 			// TODO ASSUNTINA
 			IGetParameterDefinitionTask task = birtReportEngine.createGetParameterDefinitionTask(reportDesign);
-			Collection params = task.getParameterDefns(true);
+			Collection<?> params = task.getParameterDefns(true);
 			logger.info("---> params", params);
 			this.conversionParam(params);
 			// ----------------
@@ -271,31 +273,76 @@ public class BIRTReportRunner implements ReportRunner {
 		return parsedParameters;
 	}
 
-	public void conversionParam(Collection c) {
-    	HashMap parmDetails = new HashMap();
-    	Iterator iterator = c.iterator();
+	
+	/**
+	 * Leggo la lista di parametri dal report
+	 * @param birtReport
+	 * @return
+	 */
+	public ReportParams getReportParams(Report birtReport) {
+		ReportParams reportParameters = new ReportParams();
+		File rptDesignFile;
+
+		// get the path to the report design file
+		try {
+			rptDesignFile = getReportFromFilesystem(birtReport.getName());
+		} catch (Exception e) {
+			logger.error("Error while loading rptdesign: {}.", e.getMessage());
+			throw new RuntimeException("Could not find report");
+		}
+
+		try {
+			IReportRunnable reportDesign = birtReportEngine.openReportDesign(rptDesignFile.getPath());
+			IGetParameterDefinitionTask task = birtReportEngine.createGetParameterDefinitionTask(reportDesign);
+			
+			Collection<?> params = task.getParameterDefns(true);
+			logger.info("---> params", params);
+			reportParameters.setParams(this.conversionParam(params));
+
+		} catch (EngineException e) {
+			logger.error("Error while running report task: {}.", e.getMessage());
+			// TODO add custom message to thrown exception
+			throw new RuntimeException(e);
+		}
+			
+		return reportParameters;
+	}
+	
+
+	public List<ReportParam> conversionParam(Collection<?> c) {
+		List<ReportParam> parmDetails = new ArrayList<ReportParam>();
+    	Iterator<?> iterator = c.iterator();
     	while(iterator.hasNext()) {
     		IParameterDefnBase param = (IParameterDefnBase) iterator.next( );
     		if (param instanceof IParameterGroupDefn) {
     			//attualmente noi non abbiamo GRUPPI
 	    		IParameterGroupDefn group = (IParameterGroupDefn) param;
 	    		logger.info("Parameter Group: ", group.getName() );
-	    		Iterator i2 = group.getContents( ).iterator( );
+	    		Iterator<?> i2 = group.getContents( ).iterator( );
 	    		while (i2.hasNext()) {
 	    			IScalarParameterDefn scalar = (IScalarParameterDefn) i2.next( );
-		    		parmDetails.put(scalar.getName(), loadParameterDetails(scalar, group));
+		    		parmDetails.add(loadParameterDetails(scalar, group));
 	    		}
-
     		} else {
 	    		IScalarParameterDefn scalar = (IScalarParameterDefn) param;
-	    		parmDetails.put(scalar.getName(),loadParameterDetails(scalar, null));	
-    		}
-    		
-    	}
+	    		parmDetails.add(loadParameterDetails(scalar, null));	
+    		}    		
+    	}    	
+    	return parmDetails;
     }
 
-	private HashMap loadParameterDetails(IScalarParameterDefn scalar, IParameterGroupDefn group) {
-		HashMap parameter = new HashMap();
+	//TODO decidere cosa mi serve
+	private ReportParam loadParameterDetails(IScalarParameterDefn scalar, IParameterGroupDefn group) {
+		ReportParam param = new ReportParam();
+		if (!scalar.isHidden()) {
+			param.setParamName(scalar.getName());
+			param.setMandatory(scalar.isRequired());
+			param.setParamDefault(scalar.getDefaultValue());
+			param.setParamType("INPUT"); //??
+			return param;
+		}
+		return null;
+		/*
 		if (group == null) {
 			parameter.put("Parameter Group", "Default");
 		} else {
@@ -354,16 +401,15 @@ public class BIRTReportRunner implements ReportRunner {
 		parameter.put("Default Value", scalar.getDefaultValue());
 		parameter.put("Prompt Text", scalar.getPromptText());
 		parameter.put("Data Set Expression", parameterHandle.getValueExpr());
-
 		
-		Iterator iter = parameter.keySet().iterator();
+		
+		Iterator<String> iter = parameter.keySet().iterator();
 		String mapString = "";
 		while (iter.hasNext()) {
 			String name = (String) iter.next();
 			mapString += name + " = " + parameter.get(name) + ", ";
 		}
-		logger.info("====================== Parameter = " + scalar.getName() + ": " + mapString);
-		return parameter;
+		logger.info("====================== Parameter = " + scalar.getName() + ": " + mapString);*/
 
 	}
 

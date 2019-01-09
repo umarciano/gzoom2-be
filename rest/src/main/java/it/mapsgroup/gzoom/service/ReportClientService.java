@@ -1,5 +1,6 @@
 package it.mapsgroup.gzoom.service;
 
+import it.mapsgroup.gzoom.querydsl.dto.ReportParams;
 import it.mapsgroup.gzoom.report.report.dto.CreateReport;
 import it.mapsgroup.gzoom.report.report.dto.ReportStatus;
 import it.memelabs.smartnebula.commons.DateUtil;
@@ -74,6 +75,10 @@ public class ReportClientService {
         String reportId = restTemplate.postForObject(url.toString()+"/add", request, String.class);
         LOG.info("ReportId {}", reportId);
         return reportId;
+    }
+    
+    public ResponseEntity<ReportParams> getReportParams(URL url, String reportName) {
+    	return restTemplate.getForEntity(url.toString()+"/params/"+ reportName, ReportParams.class, reportName);
     }
 
     public ResponseEntity<ReportStatus> getStatus(String id) {

@@ -64,11 +64,4 @@ public class ReportController {
         return Exec.exec("report delete", () -> reportService.deleteReport(contentId));
     }
     
-    //carico la li sta per le drop
-    @RequestMapping(value = "report/{parentTypeId}/{reportContentId}/{workEffortTypeId}", method = RequestMethod.GET)
-    @ResponseBody
-    public Result<WorkEffort> getWorkEfforts(@PathVariable(value = "parentTypeId") String parentTypeId, @PathVariable(value = "reportContentId") String reportContentId, @PathVariable(value = "workEffortTypeId") String workEffortTypeId) {
-        return Exec.exec("report workEffort get", () -> reportService.getWorkEfforts(workEffortTypeId));
-    }
-    
 }

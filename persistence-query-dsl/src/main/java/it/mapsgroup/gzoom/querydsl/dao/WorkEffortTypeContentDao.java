@@ -1,0 +1,70 @@
+package it.mapsgroup.gzoom.querydsl.dao;
+
+import static com.querydsl.core.types.Projections.bean;
+import static it.mapsgroup.gzoom.querydsl.QBeanUtils.merge;
+import static org.slf4j.LoggerFactory.getLogger;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
+
+import com.querydsl.core.Tuple;
+import com.querydsl.core.group.GroupBy;
+import com.querydsl.core.types.QBean;
+import com.querydsl.sql.SQLBindings;
+import com.querydsl.sql.SQLQuery;
+import com.querydsl.sql.SQLQueryFactory;
+
+import it.mapsgroup.gzoom.querydsl.dto.QWorkEffortType;
+import it.mapsgroup.gzoom.querydsl.dto.QWorkEffortTypeContent;
+import it.mapsgroup.gzoom.querydsl.dto.WorkEffortType;
+import it.mapsgroup.gzoom.querydsl.dto.WorkEffortTypeContent;
+import it.mapsgroup.gzoom.querydsl.dto.WorkEffortTypeExt;
+
+@Service
+public class WorkEffortTypeContentDao extends AbstractDao {
+	    
+	    private static final Logger LOG = getLogger(WorkEffortTypeContentDao.class);
+
+	    private final SQLQueryFactory queryFactory;
+	    
+	    @Autowired
+	    public WorkEffortTypeContentDao(SQLQueryFactory queryFactory) {
+	        this.queryFactory = queryFactory;	        
+	    }
+
+	    
+	    @Transactional
+	    public List<WorkEffortTypeExt> getWorkEffortTypeContents(String reportContentId) {
+	        if (TransactionSynchronizationManager.isActualTransactionActive()) {
+	            TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
+	            status.getClass();
+	        }
+
+	        QWorkEffortTypeContent qWorkEffortTypeContent = QWorkEffortTypeContent.workEffortTypeContent;
+	        QWorkEffortType qWorkEffortType = QWorkEffortType.workEffortType;
+
+	        QBean<WorkEffortTypeExt> tupleExQBean = bean(WorkEffortTypeExt.class, merge(qWorkEffortType.all(), bean(WorkEffortTypeContent.class, qWorkEffortTypeContent.all()).as("workEffortTypeContent")));
+	        
+	        
+	        SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qWorkEffortTypeContent, qWorkEffortType)
+	        					.from(qWorkEffortTypeContent)
+	        					.innerJoin(qWorkEffortType).on(qWorkEffortType.workEffortTypeId.eq(qWorkEffortTypeContent.workEffortTypeId)) 
+	        					.where(qWorkEffortTypeContent.weTypeContentTypeId.eq("REPORT")
+	        							.and(qWorkEffortTypeContent.contentId.eq(reportContentId)))	        					
+	            				.orderBy(qWorkEffortTypeContent.sequenceNum.asc());
+
+	        SQLBindings bindings = tupleSQLQuery.getSQL();
+	        LOG.info("{}", bindings.getSQL());
+	        LOG.info("{}", bindings.getBindings());
+	        List<WorkEffortTypeExt> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWorkEffortType.workEffortTypeId).list(tupleExQBean));
+	        LOG.info("size = {}", ret.size());
+	        return ret;
+	    }
+}
