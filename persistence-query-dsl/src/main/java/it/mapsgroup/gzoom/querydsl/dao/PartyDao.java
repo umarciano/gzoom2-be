@@ -89,7 +89,7 @@ public class PartyDao extends AbstractDao {
     }
     
     @Transactional
-    public List<Party> getPartys(String roleTypeId) {
+    public List<Party> getRoleTypePartys(String roleTypeId) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();

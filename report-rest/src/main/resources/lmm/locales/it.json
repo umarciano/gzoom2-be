@@ -1734,6 +1734,7 @@
     "Part of the Open For Business Family of Open Source Software": "Parte della Open For Business Family of Open Source Software",
     "Parties": "Soggetti",
     "Party": "Soggetto",
+    "partyId": "Soggetto",
     "Party ${partyId} with role ${roleTypeId} not found": "Soggetto ${partyId} con ruolo ${roleTypeId} non censito in anagrafica",
     "Party ${partyId} with role ${roleTypeId} not found for code ${sourceId}": "Soggetto ${partyId} con ruolo ${roleTypeId} non censito in anagrafica per il codice ${sourceId}",
     "Party ${partyName} not found for code ${sourceId}": "Soggetto ${partyName} non presente in anagrafica per il codice ${sourceId}",

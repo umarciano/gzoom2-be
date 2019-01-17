@@ -3,18 +3,23 @@ package it.mapsgroup.gzoom.service;
 import static it.mapsgroup.gzoom.security.Principals.principal;
 import static org.slf4j.LoggerFactory.getLogger;
 
-import java.io.ByteArrayOutputStream;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -28,15 +33,12 @@ import it.mapsgroup.gzoom.querydsl.dao.WorkEffortTypeContentDao;
 import it.mapsgroup.gzoom.querydsl.dto.ReportParam;
 import it.mapsgroup.gzoom.querydsl.dto.ReportParams;
 import it.mapsgroup.gzoom.querydsl.dto.ReportType;
-import it.mapsgroup.gzoom.querydsl.dto.WorkEffort;
 import it.mapsgroup.gzoom.querydsl.dto.WorkEffortTypeExt;
 import it.mapsgroup.gzoom.report.report.dto.CreateReport;
 import it.mapsgroup.gzoom.report.report.dto.ReportStatus;
+import it.mapsgroup.gzoom.rest.ValidationException;
+import it.mapsgroup.report.querydsl.dto.ReportActivity;
 import it.memelabs.smartnebula.commons.DateUtil;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Profile service.
@@ -230,10 +232,10 @@ public class ReportService {
         return status;
     }
     
-    public ByteArrayOutputStream stream(String activityId) {
+    /*public ByteArrayOutputStream stream(String activityId) {
     	try {
     		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-	    	File file = new File("C:\\data\\Gzoom_2\\birt\\logs\\report\\report_10070.pdf");
+	    	File file = new File("C:\\data\\Gzoom_2\\birt\\logs\\report\\report_10100.pdf");
 	    	FileInputStream fis = new FileInputStream(file);
 	    	
 	    	byte[] bytes = new byte[1024];
@@ -250,11 +252,36 @@ public class ReportService {
 			e.printStackTrace();
 		}
 		return null;
-    }
+    }*/
     
     public Boolean deleteReport(String contentId) {
         return false;
     }
     
+    /**
+     * 
+     * @param activityId
+     * @param request
+     * @param response
+     * @return
+     */
+    public String stream(String activityId, HttpServletRequest request, HttpServletResponse response) {
+    	ReportActivity reportActivity = client.getReportActivity(config.getServerReportUrl(), activityId).getBody();
+    	LOG.info("stream patch: "+reportActivity.getObjectInfo());
+        File file = new File(reportActivity.getObjectInfo()); 
+        
+        try (InputStream bw = new BufferedInputStream(new FileInputStream(file))) {
+            response.setContentType("application/pdf"); //TODO
+            response.setContentLength((int) file.length());
+            String fileName = reportActivity.getReportName() + ".pdf"; //TODO
+            response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\"");
+            IOUtils.copy(bw, response.getOutputStream());
+            response.flushBuffer();
+        } catch (IOException e) {
+            LOG.error("error loading file", e);
+            throw new ValidationException("error loading file");
+        }
+        return "";
+    }
 
 }

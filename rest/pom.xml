@@ -44,6 +44,11 @@
             <artifactId>report-rest-dto</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>it.mapsgroup.gzoom</groupId>
+            <artifactId>report-persistence-query-dsl</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
 
         <!-- Maps commons -->
         <dependency>

@@ -3,6 +3,8 @@ package it.mapsgroup.gzoom.service;
 import it.mapsgroup.gzoom.querydsl.dto.ReportParams;
 import it.mapsgroup.gzoom.report.report.dto.CreateReport;
 import it.mapsgroup.gzoom.report.report.dto.ReportStatus;
+import it.mapsgroup.report.querydsl.dto.ReportActivity;
+
 import it.memelabs.smartnebula.commons.DateUtil;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,12 +83,16 @@ public class ReportClientService {
     	return restTemplate.getForEntity(url.toString()+"/params/"+ reportName, ReportParams.class, reportName);
     }
 
-    public ResponseEntity<ReportStatus> getStatus(String id) {
+    /*public ResponseEntity<ReportStatus> getStatus(String id) {
         return restTemplate.getForEntity("http://localhost:8081/rest/report/{reportId}/status", ReportStatus.class, id);
-    }
+    }*/
 
     public ResponseEntity<ReportStatus> getStatus(URL url, String id) {
         return restTemplate.getForEntity(url.toString()+"/" + id + "/status", ReportStatus.class, id);
+    }
+    
+    public ResponseEntity<ReportActivity> getReportActivity(URL url, String id) {
+        return restTemplate.getForEntity(url.toString()+"/" + id, ReportActivity.class, id);
     }
     
 }

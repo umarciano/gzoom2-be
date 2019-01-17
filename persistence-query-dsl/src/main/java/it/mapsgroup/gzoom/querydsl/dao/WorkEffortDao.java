@@ -54,7 +54,7 @@ public class WorkEffortDao {
     }
     
     @Transactional
-    public List<WorkEffort> getWorkEfforts(String workEffortType) {
+    public List<WorkEffort> getWorkEfforts(String workEffortTypeId) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
@@ -64,7 +64,7 @@ public class WorkEffortDao {
 
         SQLQuery<WorkEffort> tupleSQLQuery = queryFactory.select(qWorkEffort)
         												.from(qWorkEffort)
-        												.where(qWorkEffort.workEffortTypeId.eq(workEffortType))
+        												.where(qWorkEffort.workEffortTypeId.eq(workEffortTypeId))
         												.orderBy(qWorkEffort.workEffortName.asc());
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
@@ -75,5 +75,28 @@ public class WorkEffortDao {
         LOG.info("size = {}", ret.size()); 
         return ret;
     }
+    
+    @Transactional
+    public List<WorkEffort> getWorkEffortParents(String workEffortParentId) {
+        if (TransactionSynchronizationManager.isActualTransactionActive()) {
+            TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
+            status.getClass();
+        }
+
+        QWorkEffort qWorkEffort = QWorkEffort.workEffort;
+        SQLQuery<WorkEffort> tupleSQLQuery = queryFactory.select(qWorkEffort)
+        												.from(qWorkEffort)
+        												.where(qWorkEffort.workEffortParentId.eq(workEffortParentId))
+        												.orderBy(qWorkEffort.workEffortName.asc());
+
+        SQLBindings bindings = tupleSQLQuery.getSQL();
+        LOG.info("{}", bindings.getSQL());
+        LOG.info("{}", bindings.getBindings());
+        QBean<WorkEffort> workEfforts = Projections.bean(WorkEffort.class, qWorkEffort.all());
+        List<WorkEffort> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWorkEffort.workEffortId).list(workEfforts));
+        LOG.info("size = {}", ret.size()); 
+        return ret;
+    }
+    
 
 }

@@ -45,6 +45,9 @@ public class PartyService {
         return new Result<>(list, list.size());
     }
     
-    
+    public Result<Party> getRoleTypePartys(String roleTypeId) {
+        List<Party> list = partyDao.getRoleTypePartys(roleTypeId);
+        return new Result<>(list, list.size());
+    }
 
 }

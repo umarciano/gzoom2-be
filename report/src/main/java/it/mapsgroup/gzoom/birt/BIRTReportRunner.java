@@ -169,15 +169,7 @@ public class BIRTReportRunner implements ReportRunner {
 			byteArrayOutputStream = new FileOutputStream(reportContentTempFile);
 
 			IReportRunnable reportDesign = birtReportEngine.openReportDesign(rptDesignFile.getPath());
-
-			// ----------------
-			// TODO ASSUNTINA
-			IGetParameterDefinitionTask task = birtReportEngine.createGetParameterDefinitionTask(reportDesign);
-			Collection<?> params = task.getParameterDefns(true);
-			logger.info("---> params", params);
-			this.conversionParam(params);
-			// ----------------
-
+			
 			// setting locale
 			// see
 			// https://stackoverflow.com/questions/25281571/birt-is-not-finding-properties-file-containing-localization-at-runtime-servlet
@@ -212,6 +204,7 @@ public class BIRTReportRunner implements ReportRunner {
 			renderTask.setProgressMonitor(birtReport.getBirtServiceProgress());
 			birtReport.getBirtServiceProgress().setTask(renderTask);
 
+			//TODO generalizzare il tipo
 			PDFRenderOption pdfRenderOption = new PDFRenderOption();
 			pdfRenderOption.setOption(IPDFRenderOption.REPAGINATE_FOR_PDF, new Boolean(true));
 			pdfRenderOption.setOutputFormat("pdf");

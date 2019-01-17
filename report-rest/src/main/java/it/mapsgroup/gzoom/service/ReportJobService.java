@@ -160,4 +160,15 @@ public class ReportJobService {
 		String reportDirectory = config.getBirtReportInputDir();
 		return Paths.get(reportDirectory + File.separator + reportName + File.separator + reportName + ".json");
 	}
+    
+    
+    /**
+     * Get ReportActivity
+     * @param reportActivityId
+     * @return
+     */
+    public ReportActivity get(String reportActivityId) {
+    	return reportDao.get(reportActivityId);
+    }
+    
 }

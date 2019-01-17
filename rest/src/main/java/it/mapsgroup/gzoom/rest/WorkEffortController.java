@@ -26,12 +26,20 @@ public class WorkEffortController {
 	@RequestMapping(value = "work-effort/{workEffortTypeId}", method = RequestMethod.GET)
 	@ResponseBody
 	public Result<WorkEffort> getWorkEfforts(@PathVariable(value = "workEffortTypeId") String workEffortTypeId) {
-		return Exec.exec("statusItem get", () -> workEffortService.getWorkEfforts(workEffortTypeId));
+		return Exec.exec("workEffortTypeId get", () -> workEffortService.getWorkEfforts(workEffortTypeId));
 	}
 	
 	@RequestMapping(value = "work-effort", method = RequestMethod.GET)
 	@ResponseBody
 	public Result<WorkEffort> getWorkEfforts() {
-		return Exec.exec("statusItem get", () -> workEffortService.getWorkEfforts());
+		return Exec.exec("workEfforts get", () -> workEffortService.getWorkEfforts());
 	}
+	
+	
+	@RequestMapping(value = "work-effort/work-effort-parent/{workEffortParentId}", method = RequestMethod.GET)
+	@ResponseBody
+	public Result<WorkEffort> getWorkEffortParents(@PathVariable(value = "workEffortParentId") String workEffortParentId) {
+		return Exec.exec("workEffortParents get", () -> workEffortService.getWorkEfforts(workEffortParentId));
+	}
+
 }

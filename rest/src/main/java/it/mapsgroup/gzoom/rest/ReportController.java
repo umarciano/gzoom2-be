@@ -1,7 +1,7 @@
 package it.mapsgroup.gzoom.rest;
 
-import java.io.ByteArrayOutputStream;
-
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import it.mapsgroup.gzoom.common.Exec;
 import it.mapsgroup.gzoom.model.Report;
 import it.mapsgroup.gzoom.model.Result;
-import it.mapsgroup.gzoom.querydsl.dto.WorkEffort;
 import it.mapsgroup.gzoom.report.report.dto.ReportStatus;
 import it.mapsgroup.gzoom.service.ReportService;
 
@@ -52,12 +51,19 @@ public class ReportController {
         return Exec.exec("report status", () -> reportService.status(activityId));
     }
     
-    @RequestMapping(value = "report/{activityId}/strem", method = RequestMethod.GET)
+   /* @RequestMapping(value = "report/{activityId}/stream", method = RequestMethod.GET)
     @ResponseBody
     public ByteArrayOutputStream stream(@PathVariable(value = "activityId") String activityId) {
         return Exec.exec("report stream", () -> reportService.stream(activityId));
-    }
+    }*/
 
+    
+    @RequestMapping(method = RequestMethod.GET, value = "report/{activityId}/stream")
+    @ResponseBody
+    public String stream(@PathVariable(value = "activityId") String activityId, HttpServletRequest req, HttpServletResponse response) {
+    	return Exec.exec("report stream", () -> reportService.stream(activityId, req, response));
+    }
+    
     @RequestMapping(value = "report/{contentId}", method = RequestMethod.DELETE)
     @ResponseBody
     public Boolean delete(@PathVariable(value = "contentId") String contentId) {
