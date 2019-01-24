@@ -58,9 +58,9 @@ public class QWorkEffortTypeContent extends com.querydsl.sql.RelationalPathBase<
 
     public final com.querydsl.sql.PrimaryKey<WorkEffortTypeContent> primary = createPrimaryKey(contentId, workEffortTypeId);
 
-    public final com.querydsl.sql.ForeignKey<Content> wtfCnFk = createForeignKey(contentId, "CONTENT_ID");
-
     public final com.querydsl.sql.ForeignKey<WorkEffortType> wtfWtFk = createForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<Content> wtfCnFk = createForeignKey(contentId, "CONTENT_ID");
 
     public QWorkEffortTypeContent(String variable) {
         super(WorkEffortTypeContent.class, forVariable(variable), "null", "WORK_EFFORT_TYPE_CONTENT");

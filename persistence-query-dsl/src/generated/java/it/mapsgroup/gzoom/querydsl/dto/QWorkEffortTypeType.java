@@ -50,9 +50,9 @@ public class QWorkEffortTypeType extends com.querydsl.sql.RelationalPathBase<Wor
 
     public final com.querydsl.sql.ForeignKey<WorkEffortType> wttFrFk = createForeignKey(workEffortTypeIdFrom, "WORK_EFFORT_TYPE_ID");
 
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> wttRtFk = createForeignKey(workEffortTypeIdRoot, "WORK_EFFORT_TYPE_ID");
-
     public final com.querydsl.sql.ForeignKey<WorkEffortType> wttToFk = createForeignKey(workEffortTypeIdTo, "WORK_EFFORT_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> wttRtFk = createForeignKey(workEffortTypeIdRoot, "WORK_EFFORT_TYPE_ID");
 
     public QWorkEffortTypeType(String variable) {
         super(WorkEffortTypeType.class, forVariable(variable), "null", "WORK_EFFORT_TYPE_TYPE");

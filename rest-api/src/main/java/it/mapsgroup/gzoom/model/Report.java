@@ -7,6 +7,7 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import it.mapsgroup.gzoom.querydsl.dto.ReportParam;
+import it.mapsgroup.gzoom.querydsl.dto.ReportParamService;
 import it.mapsgroup.gzoom.querydsl.dto.ReportType;
 import it.mapsgroup.gzoom.querydsl.dto.WorkEffortTypeExt;
 
@@ -21,20 +22,34 @@ public class Report extends Identifiable {
 	private String etch;
 	private String etchLang;
 	private String description;
-	private String descriptionLang;
-	private String descriptionType;
-	private String descriptionTypeLang;	
+	private String descriptionLang;	
 	private String serviceName;
 	private Boolean useFilter;
 	private BigInteger sequenceNum;
 	private String outputFormat;
 	private String contentName;
+	private boolean analysis;
 	
 	private List<ReportParam> params;
+	private List<ReportParamService> services;
     private List<ReportType> outputFormats;
     private List<WorkEffortTypeExt> workEffortTypes;
     private Map<String, Object> paramsValue;
-    
+
+
+	/**
+	 * @return the analysis
+	 */
+	public boolean isAnalysis() {
+		return analysis;
+	}
+
+	/**
+	 * @param analysis the analysis to set
+	 */
+	public void setAnalysis(boolean analysis) {
+		this.analysis = analysis;
+	}
 
 	/**
 	 * @return the reportName
@@ -162,33 +177,6 @@ public class Report extends Identifiable {
 		this.descriptionLang = descriptionLang;
 	}
 
-	/**
-	 * @return the descriptionType
-	 */
-	public String getDescriptionType() {
-		return descriptionType;
-	}
-
-	/**
-	 * @param descriptionType the descriptionType to set
-	 */
-	public void setDescriptionType(String descriptionType) {
-		this.descriptionType = descriptionType;
-	}
-
-	/**
-	 * @return the descriptionLangType
-	 */
-	public String getDescriptionTypeLang() {
-		return descriptionTypeLang;
-	}
-
-	/**
-	 * @param descriptionLangType the descriptionLangType to set
-	 */
-	public void setDescriptionTypeLang(String descriptionTypeLang) {
-		this.descriptionTypeLang = descriptionTypeLang;
-	}
 
 	/**
 	 * @return the serviceName
@@ -317,5 +305,21 @@ public class Report extends Identifiable {
 	public void setParamsValue(Map<String, Object> paramsValue) {
 		this.paramsValue = paramsValue;
 	}
+
+	/**
+	 * @return the services
+	 */
+	public List<ReportParamService> getServices() {
+		return services;
+	}
+
+	/**
+	 * @param services the services to set
+	 */
+	public void setServices(List<ReportParamService> services) {
+		this.services = services;
+	}
+	
+	
 	
 }

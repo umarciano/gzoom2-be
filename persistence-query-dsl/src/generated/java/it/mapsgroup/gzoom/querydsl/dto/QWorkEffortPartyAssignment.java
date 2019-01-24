@@ -86,15 +86,15 @@ public class QWorkEffortPartyAssignment extends com.querydsl.sql.RelationalPathB
 
     public final com.querydsl.sql.PrimaryKey<WorkEffortPartyAssignment> primary = createPrimaryKey(fromDate, partyId, roleTypeId, workEffortId);
 
-    public final com.querydsl.sql.ForeignKey<WorkEffort> wkeffPaWe = createForeignKey(workEffortId, "WORK_EFFORT_ID");
-
-    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> wkeffPaAbusrlog = createForeignKey(assignedByUserLoginId, "USER_LOGIN_ID");
-
     public final com.querydsl.sql.ForeignKey<StatusItem> wkeffPaAvstts = createForeignKey(availabilityStatusId, "STATUS_ID");
 
     public final com.querydsl.sql.ForeignKey<StatusItem> wkeffPaStts = createForeignKey(statusId, "STATUS_ID");
 
+    public final com.querydsl.sql.ForeignKey<WorkEffort> wkeffPaWe = createForeignKey(workEffortId, "WORK_EFFORT_ID");
+
     public final com.querydsl.sql.ForeignKey<WorkEffortPartyAssignment> wepaFr = createForeignKey(Arrays.asList(workEffortIdFrom, partyIdFrom, roleTypeIdFrom, fromDateFrom), Arrays.asList("WORK_EFFORT_ID", "PARTY_ID", "ROLE_TYPE_ID", "FROM_DATE"));
+
+    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> wkeffPaAbusrlog = createForeignKey(assignedByUserLoginId, "USER_LOGIN_ID");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortPartyAssignment> _wepaFr = createInvForeignKey(Arrays.asList(workEffortId, partyId, roleTypeId, fromDate), Arrays.asList("WORK_EFFORT_ID_FROM", "PARTY_ID_FROM", "ROLE_TYPE_ID_FROM", "FROM_DATE_FROM"));
 

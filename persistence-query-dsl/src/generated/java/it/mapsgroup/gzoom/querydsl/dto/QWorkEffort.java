@@ -202,7 +202,7 @@ public class QWorkEffort extends com.querydsl.sql.RelationalPathBase<WorkEffort>
 
     public final com.querydsl.sql.PrimaryKey<WorkEffort> primary = createPrimaryKey(workEffortId);
 
-    public final com.querydsl.sql.ForeignKey<Uom> wkEffrtMonUom = createForeignKey(moneyUomId, "UOM_ID");
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> wkEffrtType = createForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID");
 
     public final com.querydsl.sql.ForeignKey<StatusItem> wkEffrtCurstts = createForeignKey(currentStatusId, "STATUS_ID");
 
@@ -210,9 +210,9 @@ public class QWorkEffort extends com.querydsl.sql.RelationalPathBase<WorkEffort>
 
     public final com.querydsl.sql.ForeignKey<Content> weLnamecnt = createForeignKey(localNameContentId, "CONTENT_ID");
 
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> wkEffrtType = createForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID");
-
     public final com.querydsl.sql.ForeignKey<Uom> weEffuom = createForeignKey(effortUomId, "UOM_ID");
+
+    public final com.querydsl.sql.ForeignKey<Uom> wkEffrtMonUom = createForeignKey(moneyUomId, "UOM_ID");
 
     public final com.querydsl.sql.ForeignKey<PartyRole> weOrgUnit = createForeignKey(Arrays.asList(orgUnitId, orgUnitRoleTypeId), Arrays.asList("PARTY_ID", "ROLE_TYPE_ID"));
 

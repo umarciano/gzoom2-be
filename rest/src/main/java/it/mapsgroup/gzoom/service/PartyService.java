@@ -4,14 +4,13 @@ import it.mapsgroup.gzoom.model.Result;
 import it.mapsgroup.gzoom.querydsl.dao.PartyDao;
 import it.mapsgroup.gzoom.querydsl.dao.PersonDao;
 import it.mapsgroup.gzoom.querydsl.dto.Party;
+import it.mapsgroup.gzoom.querydsl.dto.PartyEx;
 import it.mapsgroup.gzoom.querydsl.dto.Person;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * Profile service.
@@ -19,7 +18,6 @@ import static org.slf4j.LoggerFactory.getLogger;
  */
 @Service
 public class PartyService {
-    private static final Logger LOG = getLogger(PartyService.class);
 
     private final PartyDao partyDao;
     private final PersonDao personDao;
@@ -40,8 +38,8 @@ public class PartyService {
         return new Result<>(list, list.size());
     }
     
-    public Result<Party> getOrgUnits() {
-        List<Party> list = partyDao.getOrgUnits();
+    public Result<PartyEx> getOrgUnits(String userLoginId, String parentTypeId) {
+        List<PartyEx> list = partyDao.getOrgUnits(userLoginId, parentTypeId);
         return new Result<>(list, list.size());
     }
     

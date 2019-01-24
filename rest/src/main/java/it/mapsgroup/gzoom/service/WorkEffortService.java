@@ -23,8 +23,8 @@ public class WorkEffortService {
         this.workEffortDao = workEffortDao;
     }
 
-    public Result<WorkEffort> getWorkEfforts(String workEffortTypeId) {
-        List<WorkEffort> list = workEffortDao.getWorkEfforts(workEffortTypeId);
+    public Result<WorkEffort> getWorkEfforts(String userLoginId, String parentTypeId, String workEffortTypeId, boolean useFilter) {
+        List<WorkEffort> list = workEffortDao.getWorkEfforts(userLoginId, parentTypeId, workEffortTypeId, useFilter);
         return new Result<>(list, list.size());
     }
     

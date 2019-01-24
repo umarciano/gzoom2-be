@@ -81,11 +81,12 @@ public class DtoMapper {
     	//workEffortAnalysis campi provenente dall'analisi
         if (from.getWorkEffortAnalysis() != null) {
         	to.setWorkEffortAnalysisId(from.getWorkEffortAnalysis().getWorkEffortAnalysisId());
+        	to.setAnalysis(true);
             to.setEtch(from.getWorkEffortAnalysis().getDescription5());
             to.setEtchLang(from.getWorkEffortAnalysis().getDescription5()); 
             
-            to.setDescriptionType(from.getWorkEffortAnalysis().getDescription());
-            to.setDescriptionTypeLang(from.getWorkEffortAnalysis().getDescription());
+        } else {
+        	to.setAnalysis(false);        	
         }
         
     	//workEffortTypeContent campi provenenti dal report
@@ -94,9 +95,6 @@ public class DtoMapper {
             to.setEtch(from.getWorkEffortTypeContent().getEtch());
             to.setEtchLang(from.getWorkEffortTypeContent().getEtchLang()); 
             to.setUseFilter(from.getWorkEffortTypeContent().getUseFilter());
-            
-            to.setDescriptionType(from.getWorkEffortType().getDescription());
-            to.setDescriptionTypeLang(from.getWorkEffortType().getDescriptionLang());
         	
         }
         

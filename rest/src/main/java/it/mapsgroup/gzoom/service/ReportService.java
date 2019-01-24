@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,15 +31,14 @@ import it.mapsgroup.gzoom.model.Report;
 import it.mapsgroup.gzoom.model.Result;
 import it.mapsgroup.gzoom.querydsl.dao.ReportDao;
 import it.mapsgroup.gzoom.querydsl.dao.WorkEffortTypeContentDao;
-import it.mapsgroup.gzoom.querydsl.dto.ReportParam;
 import it.mapsgroup.gzoom.querydsl.dto.ReportParams;
 import it.mapsgroup.gzoom.querydsl.dto.ReportType;
 import it.mapsgroup.gzoom.querydsl.dto.WorkEffortTypeExt;
 import it.mapsgroup.gzoom.report.report.dto.CreateReport;
 import it.mapsgroup.gzoom.report.report.dto.ReportStatus;
 import it.mapsgroup.gzoom.rest.ValidationException;
+import it.mapsgroup.gzoom.util.BirtUtil;
 import it.mapsgroup.report.querydsl.dto.ReportActivity;
-import it.memelabs.smartnebula.commons.DateUtil;
 
 /**
  * Profile service.
@@ -55,19 +55,18 @@ public class ReportService {
     
     private final ReportDao reportDao;
     private final WorkEffortTypeContentDao workEffortTypeContentDao;
-    private final DtoMapper dtoMapper;    
+    private final DtoMapper dtoMapper; 
+    private final BirtUtil birtUtil;
 
     @Autowired
     public ReportService(ReportClientService client, GzoomReportClientConfig config, ReportDao reportDao,  DtoMapper dtoMapper, 
-    		WorkEffortTypeContentDao workEffortTypeContentDao) {
+    		WorkEffortTypeContentDao workEffortTypeContentDao, BirtUtil birtUtil) {
         this.config = config;
         this.client = new ReportClientService(new RestTemplate());
         this.reportDao = reportDao;
         this.workEffortTypeContentDao = workEffortTypeContentDao;
         this.dtoMapper = dtoMapper;
-        // this.client = client;
-        // client = new HttpClient(new SimpleHttpConnectionManager());
-        // client.getHttpConnectionManager().getParams().setConnectionTimeout(30000);
+        this.birtUtil = birtUtil;
     }
 
     public Result<Report> getReports(String parentTypeId) {
@@ -81,23 +80,31 @@ public class ReportService {
         return new Result<>(ret, ret.size());
     }
 
-    public Report getReport(String parentTypeId, String reportContentId) {
-        //TODO gestire caso analisi 
+    public Report getReport(String parentTypeId, String reportContentId, String reportName, boolean analysis) {
+        
+    	it.mapsgroup.gzoom.querydsl.dto.Report report = null;
+    	List<WorkEffortTypeExt> workEffortTypes = null;
     	
-        it.mapsgroup.gzoom.querydsl.dto.Report report = reportDao.getReport(reportContentId);
+    	if (analysis) {
+    		report = reportDao.getAnalysisReport(parentTypeId, reportContentId, reportName);
+    		workEffortTypes = reportDao.getAnalysisWorkEffortTypeContents(parentTypeId, reportContentId, reportName); 
+    		
+    	} else {
+    		report = reportDao.getReport(parentTypeId, reportContentId, reportName);
+    		workEffortTypes = workEffortTypeContentDao.getWorkEffortTypeContents(parentTypeId, reportContentId, reportName); 
+    	}        
         Report ret = dtoMapper.copy(report, new Report());
+        ret.setWorkEffortTypes(workEffortTypes);  
+        
         
         //carico la lista di formati
         List<ReportType> outputFormats = reportDao.getReportType(reportContentId);
         ret.setOutputFormats(outputFormats);
+                
         
-        
-        //carico la lista dei workEffortType
-        List<WorkEffortTypeExt> workEffortTypes = workEffortTypeContentDao.getWorkEffortTypeContents(reportContentId);
-        ret.setWorkEffortTypes(workEffortTypes);        
-        
-        //TODO manca param
-        ret.setParams(getParams(report.getContentName()));
+        ReportParams params = getParams(report.getContentName());
+        ret.setParams(params.getParams());
+        ret.setServices(params.getServices());
         
         return ret;
     }
@@ -107,58 +114,9 @@ public class ReportService {
      * @param reportName
      * @return
      */
-	private List<ReportParam> getParams(String reportName) {		
+	private ReportParams getParams(String reportName) {		
 		ResponseEntity<ReportParams> params = client.getReportParams(config.getServerReportUrl(), reportName);
-        return params.getBody().getParams();
-		
-		//TODO
-    	/*String path = "C:/Users/asma/workspaceNeon/ProvaBirt/StampaTimesheet/StampaTimesheet.json";
-    	File file = new File(path);
-    	if (file.exists()) {
-    		return getParamsToFile(file);
-    	} else {
-    		//vado a prendere i parametri dal report
-    		
-    	}
-        
-        return null;*/
-    	
-    	/*
-    	ReportParams param1111 = new ReportParams();
-    	param1111.setParamType("LIST");
-    	param1111.setMandatory(false);
-    	param1111.setParamName("workEffortId");
-    	list.add(param1111);
-    	
-    	ReportParams param111 = new ReportParams();
-    	param111.setParamType("DATE");
-    	param111.setMandatory(true);
-    	param111.setParamName("monitoringDate");
-    	list.add(param111);
-    	
-    	ReportParams param1111111 = new ReportParams();
-    	param1111111.setParamType("LIST");
-    	param1111111.setMandatory(true);
-    	param1111111.setParamName("currentStatusName");
-    	list.add(param1111111);
-    	
-    	
-    	ReportParams param11111 = new ReportParams();
-    	param11111.setParamType("INPUT");
-    	param11111.setMandatory(true);
-    	param11111.setParamDefault("PIPPO");
-    	param11111.setParamName("workEffortTypeId_Obb");
-    	list.add(param11111);
-    	
-    	ReportParams param = new ReportParams();
-    	param.setParamType("BOOLEAN");
-    	param.setMandatory(false);    
-    	param.setParamDefault(false);    	
-    	param.setParamName("exposePaginator"); 
-    	list.add(param); 
-
-    	*/
-    	
+        return params.getBody();
     }
 	
 	
@@ -180,14 +138,35 @@ public class ReportService {
         reportParameters.put("outputFormat", req.getOutputFormat()); 
         
         Map<String, Object> paramsValue = req.getParamsValue();
-        /*for(String key: paramsValue.keySet()) {
+        for(String key: paramsValue.keySet()) {
         	reportParameters.put(key, paramsValue.get(key));
-        }*/
+        }
         
-        req.getParams().forEach(params -> {
+        //TODO
+        reportParameters.put("langLocale", "");
+        reportParameters.put("userProfile", "MGR_ADMIN");
+        reportParameters.put("localDispatcherName", "corperf"); //non serve più
+        reportParameters.put("defaultOrganizationPartyId", "Company");
+        
+        LOG.info("add  before call all service reportParameters-> "+ reportParameters);
+        req.getServices().forEach(services -> {
+        	String serviceName = services.getServiceName();
+			try {
+				Method setNameMethod = BirtUtil.class.getMethod(serviceName, Map.class);
+				setNameMethod.invoke(birtUtil, reportParameters);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            
+	    	LOG.info("add call serviceName="+serviceName);
+	    });
+        
+       /* req.getParams().forEach(params -> {
         	Object obj = paramsValue.get(params.getParamName());
+        	
         	if (params.getParamType().equals("DATE")) {
-        		reportParameters.put(params.getParamName(), DateUtil.parse((String)obj, "yyyy-MM-dd"));
+        		//reportParameters.put(params.getParamName(), DateUtil.parse((String)obj, "YYYY-MM-DD"));
         	} else if(params.getParamType().equals("BOOLEAN")) {        		
         		String value = "N";
         		if ((boolean)obj) {
@@ -198,17 +177,11 @@ public class ReportService {
         		reportParameters.put(params.getParamName(), obj);
         	}
         	
-        });
-        
-        /*Date date3112 = DateUtil.parse("20171231", "yyyyMMdd");
-        reportParameters.put("date3112", date3112);*/
-        
-        // TODO       
-        
-        reportParameters.put("langLocale", "");
-        reportParameters.put("userProfile", "MGR_ADMIN");
-        reportParameters.put("localDispatcherName", "corperf");
-        reportParameters.put("defaultOrganizationPartyId", "Company");
+        });*/
+
+		//TODO nel caso che ho un servizio da chiamare al posto della creazione dell stampa
+        //unico caso creazioen di uno zip in formato xls
+        //come si fa?
         
         LOG.info("add  reportParameters-> "+ reportParameters);
         CreateReport request = new CreateReport();
@@ -217,7 +190,6 @@ public class ReportService {
         request.setReportLocale("it_IT");
         request.setReportName(req.getContentName());
         request.setParams(reportParameters);
-
         
         String id = client.createReport(config.getServerReportUrl(), request);
         ResponseEntity<ReportStatus> status = client.getStatus(config.getServerReportUrl(), id);

@@ -5,6 +5,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 import java.util.List;
 
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,39 +19,34 @@ import com.querydsl.sql.SQLBindings;
 import com.querydsl.sql.SQLQuery;
 import com.querydsl.sql.SQLQueryFactory;
 
-import it.mapsgroup.gzoom.querydsl.dto.QSecurityGroupPermission;
-import it.mapsgroup.gzoom.querydsl.dto.SecurityGroupPermission;
+import it.mapsgroup.gzoom.querydsl.dto.QWorkEffortAnalysis;
+import it.mapsgroup.gzoom.querydsl.dto.WorkEffortAnalysis;
 
 @Service
-public class SecurityGroupPermissionDao extends AbstractDao {
-private static final Logger LOG = getLogger(SecurityGroupPermissionDao.class);
+public class WorkEffortAnalysisDao {
 	
-	private final SQLQueryFactory queryFactory;
-
-    public SecurityGroupPermissionDao(SQLQueryFactory queryFactory) {
+	private static final Logger LOG = getLogger(WorkEffortAnalysisDao.class);
+    
+    private final SQLQueryFactory queryFactory;
+    
+    @Autowired
+    public WorkEffortAnalysisDao(SQLQueryFactory queryFactory) {
         this.queryFactory = queryFactory;
-    }       
+    }
     
     @Transactional
-    public List<SecurityGroupPermission> getSecurityGroupPermissions(String groupId, String permissionId) {
-    	 
+    public WorkEffortAnalysis getWorkEffortAnalysis(String workEffortAnalysisId) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
         }
-
-        QSecurityGroupPermission qsgp = QSecurityGroupPermission.securityGroupPermission;
-        QBean<SecurityGroupPermission> qsgps = Projections.bean(SecurityGroupPermission.class, qsgp.all());
-        
-        SQLQuery<SecurityGroupPermission> tupleSQLQuery = queryFactory.select(qsgp)
-        		.from(qsgp)
-        		.where((qsgp.permissionId.eq(permissionId))
-        				.and(qsgp.groupId.eq(groupId)));
-
+        QWorkEffortAnalysis qWa = QWorkEffortAnalysis.workEffortAnalysis;
+        SQLQuery<WorkEffortAnalysis> tupleSQLQuery = queryFactory.select(qWa).from(qWa).where(qWa.workEffortAnalysisId.eq(workEffortAnalysisId));
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
-        List<SecurityGroupPermission> ret = tupleSQLQuery.transform(GroupBy.groupBy(qsgp.groupId, qsgp.permissionId).list(qsgps));
-        return ret;
-    } 
+        QBean<WorkEffortAnalysis> wa = Projections.bean(WorkEffortAnalysis.class, qWa.all());
+        List<WorkEffortAnalysis> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWa.workEffortAnalysisId).list(wa));
+        return ret.isEmpty() ? null : ret.get(0);
+    }
 }

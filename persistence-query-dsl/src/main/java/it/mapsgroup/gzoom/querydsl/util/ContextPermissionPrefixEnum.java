@@ -1,4 +1,4 @@
-package com.mapsengineering.base.birt.util;
+package it.mapsgroup.gzoom.querydsl.util;
 
 import java.util.Map;
 

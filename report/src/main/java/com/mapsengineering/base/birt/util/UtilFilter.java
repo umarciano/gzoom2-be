@@ -1,6 +1,10 @@
 package com.mapsengineering.base.birt.util;
 
 
+import it.mapsgroup.gzoom.querydsl.service.PermissionService;
+import it.memelabs.smartnebula.spring.boot.config.ApplicationContextProvider;
+
+
 public class UtilFilter {
     
     public static final String MODULE = UtilFilter.class.getName();
@@ -44,8 +48,10 @@ public class UtilFilter {
     private String localDispatcherName;
     private String userLoginId;
     
+    private PermissionService permissionService;
+    
     public UtilFilter() {
-        
+    	permissionService = ApplicationContextProvider.getApplicationContext().getBean(PermissionService.class);
     }
     /*
     public UtilFilter(String userLoginId, String localDispatcherName) {
@@ -64,8 +70,8 @@ public class UtilFilter {
         this.localDispatcherName = localDispatcherName;
         this.userLoginId = userLoginId;
         
-        String permission = UtilPermission.permissionLocalDispatcherName(localDispatcherName);
-        if (UtilPermission.hasPermission(permission + MGR_ADMIN, userLoginId) || UtilPermission.hasSecurityGroup(userLoginId, FULLADMIN)) {
+        String permission = permissionService.permissionLocalDispatcherName(localDispatcherName);
+        if (permissionService.hasPermission(permission + MGR_ADMIN, userLoginId) || permissionService.hasSecurityGroup(userLoginId, FULLADMIN)) {
             isFullAdmin = true;
         }
     }
@@ -104,16 +110,16 @@ public class UtilFilter {
         
         String where = filterUserLogin + "'" + userLoginId +"'";
         where += " AND (1 = 0 " ;
-        String permission = UtilPermission.permissionLocalDispatcherName(localDispatcherName);
-        if (UtilPermission.hasPermission(permission + ORG_ADMIN, userLoginId)) {
+        String permission = permissionService.permissionLocalDispatcherName(localDispatcherName);
+        if (permissionService.hasPermission(permission + ORG_ADMIN, userLoginId)) {
             where += filterWherIsOrg;
         }
         
-        if (UtilPermission.hasPermission(permission + ROLE_ADMIN, userLoginId)) {
+        if (permissionService.hasPermission(permission + ROLE_ADMIN, userLoginId)) {
             where += filterWherIsRole;
         }
         
-        if (UtilPermission.hasPermission(permission + SUP_ADMIN, userLoginId)) {
+        if (permissionService.hasPermission(permission + SUP_ADMIN, userLoginId)) {
             where += filterWhereIsSup;
         }
         where +=  ") ";
@@ -122,9 +128,9 @@ public class UtilFilter {
     }
     
     
-    public static boolean hasUserProfile(String userLoginId, String localDispatcherName, String permissionAdmin) {
-        String permission = UtilPermission.permissionLocalDispatcherName(localDispatcherName);
-        return UtilPermission.hasPermission(permission + permissionAdmin, userLoginId);
+    public boolean hasUserProfile(String userLoginId, String localDispatcherName, String permissionAdmin) {
+        String permission = permissionService.permissionLocalDispatcherName(localDispatcherName);
+        return permissionService.hasPermission(permission + permissionAdmin, userLoginId);
     }  
     
 

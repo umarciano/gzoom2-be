@@ -1,5 +1,7 @@
 package it.mapsgroup.gzoom.rest;
 
+import static it.mapsgroup.gzoom.security.Principals.principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,10 +25,10 @@ public class WorkEffortController {
 		this.workEffortService = workEffortService;
 	}
 
-	@RequestMapping(value = "work-effort/{workEffortTypeId}", method = RequestMethod.GET)
+	@RequestMapping(value = "work-effort/{parentTypeId}/{workEffortTypeId}/{useFilter}", method = RequestMethod.GET)
 	@ResponseBody
-	public Result<WorkEffort> getWorkEfforts(@PathVariable(value = "workEffortTypeId") String workEffortTypeId) {
-		return Exec.exec("workEffortTypeId get", () -> workEffortService.getWorkEfforts(workEffortTypeId));
+	public Result<WorkEffort> getWorkEfforts(@PathVariable(value = "parentTypeId") String parentTypeId, @PathVariable(value = "workEffortTypeId") String workEffortTypeId, @PathVariable(value = "useFilter") boolean useFilter) {
+		return Exec.exec("workEffortTypeId get", () -> workEffortService.getWorkEfforts(principal().getUserLoginId(), parentTypeId, workEffortTypeId, useFilter));
 	}
 	
 	@RequestMapping(value = "work-effort", method = RequestMethod.GET)
@@ -39,7 +41,7 @@ public class WorkEffortController {
 	@RequestMapping(value = "work-effort/work-effort-parent/{workEffortParentId}", method = RequestMethod.GET)
 	@ResponseBody
 	public Result<WorkEffort> getWorkEffortParents(@PathVariable(value = "workEffortParentId") String workEffortParentId) {
-		return Exec.exec("workEffortParents get", () -> workEffortService.getWorkEfforts(workEffortParentId));
+		return Exec.exec("workEffortParents get", () -> workEffortService.getWorkEffortParents(workEffortParentId));
 	}
 
 }

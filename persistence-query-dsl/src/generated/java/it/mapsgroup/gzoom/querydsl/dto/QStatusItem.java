@@ -58,9 +58,13 @@ public class QStatusItem extends com.querydsl.sql.RelationalPathBase<StatusItem>
 
     public final com.querydsl.sql.ForeignKey<WorkEffortPartyAssignment> _wkeffPaAvstts = createInvForeignKey(statusId, "AVAILABILITY_STATUS_ID");
 
+    public final com.querydsl.sql.ForeignKey<WorkEffortTypeStatus> _wetsCurrsi = createInvForeignKey(statusId, "CURRENT_STATUS_ID");
+
     public final com.querydsl.sql.ForeignKey<WorkEffortPartyAssignment> _wkeffPaStts = createInvForeignKey(statusId, "STATUS_ID");
 
     public final com.querydsl.sql.ForeignKey<Timesheet> _timesheetSts = createInvForeignKey(statusId, "STATUS_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortTypeStatus> _wetsNextsi = createInvForeignKey(statusId, "NEXT_STATUS_ID");
 
     public final com.querydsl.sql.ForeignKey<PartyRelationship> _partyRelStts = createInvForeignKey(statusId, "STATUS_ID");
 

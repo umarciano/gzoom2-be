@@ -5,10 +5,10 @@ import static org.slf4j.LoggerFactory.getLogger;
 import java.util.List;
 
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.querydsl.core.Tuple;
 import com.querydsl.core.group.GroupBy;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.QBean;
@@ -27,10 +27,12 @@ public class PermissionDao {
 
     private final SQLQueryFactory queryFactory;
 
+    @Autowired
     public PermissionDao(SQLQueryFactory queryFactory) {
         this.queryFactory = queryFactory;
     }
 
+    
     @Transactional
     public List<SecurityPermission> getPermission(String userLoginId) {
         QUserLoginSecurityGroup qulsg = QUserLoginSecurityGroup.userLoginSecurityGroup;

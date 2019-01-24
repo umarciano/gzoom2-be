@@ -21,9 +21,9 @@ import com.querydsl.sql.SQLBindings;
 import com.querydsl.sql.SQLQuery;
 import com.querydsl.sql.SQLQueryFactory;
 
+import it.mapsgroup.gzoom.querydsl.dto.QContent;
 import it.mapsgroup.gzoom.querydsl.dto.QWorkEffortType;
 import it.mapsgroup.gzoom.querydsl.dto.QWorkEffortTypeContent;
-import it.mapsgroup.gzoom.querydsl.dto.WorkEffortType;
 import it.mapsgroup.gzoom.querydsl.dto.WorkEffortTypeContent;
 import it.mapsgroup.gzoom.querydsl.dto.WorkEffortTypeExt;
 
@@ -33,15 +33,24 @@ public class WorkEffortTypeContentDao extends AbstractDao {
 	    private static final Logger LOG = getLogger(WorkEffortTypeContentDao.class);
 
 	    private final SQLQueryFactory queryFactory;
+
 	    
 	    @Autowired
 	    public WorkEffortTypeContentDao(SQLQueryFactory queryFactory) {
-	        this.queryFactory = queryFactory;	        
+	        this.queryFactory = queryFactory;
+
 	    }
 
+	    /**
+	     * prendo la lista dei tipi selezionato un report TODO aggiungere il nome del report nella condizione
+	     * @param parentTypeId
+	     * @param reportContentId
+	     * @param reportName
+	     * @return
+	     */
 	    
 	    @Transactional
-	    public List<WorkEffortTypeExt> getWorkEffortTypeContents(String reportContentId) {
+	    public List<WorkEffortTypeExt> getWorkEffortTypeContents(String parentTypeId, String reportContentId, String reportName) {
 	        if (TransactionSynchronizationManager.isActualTransactionActive()) {
 	            TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
 	            status.getClass();
@@ -49,6 +58,7 @@ public class WorkEffortTypeContentDao extends AbstractDao {
 
 	        QWorkEffortTypeContent qWorkEffortTypeContent = QWorkEffortTypeContent.workEffortTypeContent;
 	        QWorkEffortType qWorkEffortType = QWorkEffortType.workEffortType;
+	        QContent qContent = QContent.content;
 
 	        QBean<WorkEffortTypeExt> tupleExQBean = bean(WorkEffortTypeExt.class, merge(qWorkEffortType.all(), bean(WorkEffortTypeContent.class, qWorkEffortTypeContent.all()).as("workEffortTypeContent")));
 	        
@@ -56,9 +66,13 @@ public class WorkEffortTypeContentDao extends AbstractDao {
 	        SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qWorkEffortTypeContent, qWorkEffortType)
 	        					.from(qWorkEffortTypeContent)
 	        					.innerJoin(qWorkEffortType).on(qWorkEffortType.workEffortTypeId.eq(qWorkEffortTypeContent.workEffortTypeId)) 
+	        					.innerJoin(qContent).on(qContent.contentId.eq(qWorkEffortTypeContent.contentId))
 	        					.where(qWorkEffortTypeContent.weTypeContentTypeId.eq("REPORT")
-	        							.and(qWorkEffortTypeContent.contentId.eq(reportContentId)))	        					
-	            				.orderBy(qWorkEffortTypeContent.sequenceNum.asc());
+	        							.and(qWorkEffortTypeContent.contentId.eq(reportContentId))
+	        							.and(qWorkEffortType.parentTypeId.eq(parentTypeId))
+	       								.and(qWorkEffortTypeContent.etch.eq(reportName)
+	       										.or(qContent.description.eq(reportName).and(qWorkEffortTypeContent.etch.isNull()))));
+
 
 	        SQLBindings bindings = tupleSQLQuery.getSQL();
 	        LOG.info("{}", bindings.getSQL());

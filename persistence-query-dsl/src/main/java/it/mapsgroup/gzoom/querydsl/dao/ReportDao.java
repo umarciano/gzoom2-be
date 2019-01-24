@@ -8,7 +8,6 @@ import com.querydsl.sql.SQLBindings;
 import com.querydsl.sql.SQLQuery;
 import com.querydsl.sql.SQLQueryFactory;
 
-import it.mapsgroup.gzoom.persistence.common.SequenceGenerator;
 import it.mapsgroup.gzoom.querydsl.dto.*;
 
 import org.slf4j.Logger;
@@ -18,7 +17,6 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
-import org.springframework.transaction.support.TransactionTemplate;
 
 import static com.querydsl.core.types.Projections.bean;
 import static it.mapsgroup.gzoom.querydsl.QBeanUtils.merge;
@@ -34,14 +32,10 @@ public class ReportDao extends AbstractDao {
     private static final Logger LOG = getLogger(ReportDao.class);
 
     private final SQLQueryFactory queryFactory;
-    private final SequenceGenerator sequenceGenerator;
-    private final TransactionTemplate transactionTemplate;
     
     @Autowired
-    public ReportDao(SQLQueryFactory queryFactory, SequenceGenerator sequenceGenerator, TransactionTemplate transactionTemplate) {
+    public ReportDao(SQLQueryFactory queryFactory) {
         this.queryFactory = queryFactory;
-        this.sequenceGenerator = sequenceGenerator;
-        this.transactionTemplate = transactionTemplate;
     }
 
     @Transactional
@@ -72,6 +66,11 @@ public class ReportDao extends AbstractDao {
         return ret;
     }
     
+    /**
+     * Prendo la lista dei report per quel modulo
+     * @param parentTypeId
+     * @return
+     */
     @Transactional
     public List<Report> getReports(String parentTypeId) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
@@ -100,19 +99,26 @@ public class ReportDao extends AbstractDao {
         				.where(qContentAssoc.contentId.eq("WE_PRINT")
         				.and(qWorkEffortType.parentTypeId.eq(parentTypeId))
         				.and(qWorkEffortTypeContent.isVisible.eq(true)))
-                        .orderBy(qWorkEffortTypeContent.sequenceNum.asc());
+                        .orderBy(qWorkEffortTypeContent.sequenceNum.asc())
+                        .groupBy(qContent.contentId, qWorkEffortTypeContent.etch, qContent.description);
         
         
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
-        List<Report> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContent.contentId).list(reportQBean));
+        List<Report> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContent.contentId, qWorkEffortTypeContent.etch, qContent.description).list(reportQBean));
         LOG.info("size = {}", ret.size()); 
         return ret;
     }
     
+    /**
+     * TODO aggiunege la lista di condizione per etichette
+     * Seleziono il singolo report 
+     * @param reportContentId
+     * @return
+     */
     @Transactional
-    public Report getReport(String reportContentId) {
+    public Report getReport(String parentTypeId, String reportContentId, String reportName) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
@@ -133,7 +139,8 @@ public class ReportDao extends AbstractDao {
         				.from(qWorkEffortType)
         				.innerJoin(qWorkEffortTypeContent).on(qWorkEffortType.workEffortTypeId.eq(qWorkEffortTypeContent.workEffortTypeId)) 
         				.innerJoin(qContent).on(qWorkEffortTypeContent.contentId.eq(qContent.contentId)) 
-        				.where(qContent.contentId.eq(reportContentId))
+        				.where(qContent.contentId.eq(reportContentId)
+        						.and(qWorkEffortType.parentTypeId.eq(parentTypeId)))
                         .orderBy(qWorkEffortTypeContent.sequenceNum.asc());
         
         
@@ -174,7 +181,11 @@ public class ReportDao extends AbstractDao {
     
     
     
-    
+    /**
+     * Prendo la lista dei report collegati all'analisi
+     * @param parentTypeId
+     * @return
+     */
     @Transactional
     public List<Report> getAnalysisReports(String parentTypeId) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
@@ -196,47 +207,131 @@ public class ReportDao extends AbstractDao {
         				.from(qWorkEffortType)
         				.innerJoin(qWorkEffortAnalysis).on(qWorkEffortType.workEffortTypeId.eq(qWorkEffortAnalysis.workEffortTypeId)) 
         				.innerJoin(qContent).on(qWorkEffortAnalysis.reportId.eq(qContent.contentId)) 
-        				.where(qWorkEffortType.parentTypeId.eq(parentTypeId));
-                      //  .orderBy(qWorkEffortTypeContent.sequenceNum.asc());
-        
-        
+        				.where(qWorkEffortType.parentTypeId.eq(parentTypeId))
+        				.groupBy(qContent.contentId, qWorkEffortAnalysis.description5, qContent.description);
+                      //  .orderBy(qWorkEffortTypeContent.sequenceNum.asc());        
+        	
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
-        List<Report> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContent.contentId).list(reportQBean));
+        List<Report> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContent.contentId, qWorkEffortAnalysis.description5, qContent.description).list(reportQBean));
         LOG.info("size = {}", ret.size()); 
         return ret;
-    }
+    } 
     
-    
-    //TODO devo fare la query in base al tipo di dati che debbo estrarre:
-    //1. tutti gli elementi,
-    //2. tutti glie elementi con il workEffortType scelto
-    //3. per entrambe le scelte superiori -> scegliere se il filtro utente è attivo
-    
-  /*  @Transactional
-    public List<WorkEffort> getWorkEfforts(String workEffortTypeId) {
+    /**
+     * Mostra la lista dei typr TODO manca reportName da cercare
+     * @param parentTypeId
+     * @return
+     */
+    @Transactional
+    public List<WorkEffortTypeExt> getAnalysisWorkEffortTypeContents(String parentTypeId, String reportContentId, String reportName) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
         }
    
-        QWorkEffort qWorkEffort = QWorkEffort.workEffort;
+        QContent qContent = QContent.content;
+        QWorkEffortType qWorkEffortType = QWorkEffortType.workEffortType;
+        QWorkEffortAnalysis qWorkEffortAnalysis = QWorkEffortAnalysis.workEffortAnalysis;
         
-        SQLQuery<WorkEffort> tupleSQLQuery = queryFactory.select(qWorkEffort)
-        				.from(qWorkEffort)
-        				.where(qWorkEffort.workEffortTypeId.eq(workEffortTypeId));
+        QBean<WorkEffortTypeExt> tupleExQBean = bean(WorkEffortTypeExt.class, 
+        		merge(qWorkEffortType.all(), 
+        				bean(WorkEffortAnalysis.class, qWorkEffortAnalysis.all()).as("workEffortAnalysis")));
+        
+        SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qContent, qWorkEffortType, qWorkEffortAnalysis)
+        				.from(qWorkEffortType)
+        				.innerJoin(qWorkEffortAnalysis).on(qWorkEffortType.workEffortTypeId.eq(qWorkEffortAnalysis.workEffortTypeId)) 
+        				.innerJoin(qContent).on(qWorkEffortAnalysis.reportId.eq(qContent.contentId)) 
+        				.where(qWorkEffortType.parentTypeId.eq(parentTypeId)
+        						.and(qContent.contentId.eq(reportContentId))
+        						.and(qWorkEffortAnalysis.description5.eq(reportName).or(qContent.description.eq(reportName).and(qWorkEffortAnalysis.description5.isNull()))));
+                      //  .orderBy(qWorkEffortTypeContent.sequenceNum.asc());        
+        	
+        SQLBindings bindings = tupleSQLQuery.getSQL();
+        LOG.info("{}", bindings.getSQL());
+        LOG.info("{}", bindings.getBindings());
+        List<WorkEffortTypeExt> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWorkEffortAnalysis.description).list(tupleExQBean));
+        LOG.info("size = {}", ret.size()); 
+        return ret;
+    }  
+    
+    
+    /**
+     * TODO aggiunege la lista di condizione per etichette
+     * Prendo la lista dei report collegati all'analisi
+     * @param parentTypeId
+     * @return
+     */
+    @Transactional
+    public Report getAnalysisReport(String parentTypeId, String reportContentId, String reportName) {
+        if (TransactionSynchronizationManager.isActualTransactionActive()) {
+            TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
+            status.getClass();
+        }
+   
+        QContent qContent = QContent.content;
+        QWorkEffortType qWorkEffortType = QWorkEffortType.workEffortType;
+        QWorkEffortAnalysis qWorkEffortAnalysis = QWorkEffortAnalysis.workEffortAnalysis;
+        
+        QBean<Report> reportQBean = bean(Report.class,
+                merge(qContent.all(),
+                        bean(WorkEffortType.class, qWorkEffortType.all()).as("workEffortType"),
+                        bean(WorkEffortAnalysis.class, qWorkEffortAnalysis.all()).as("workEffortAnalysis")
+                        ));        
+        
+        SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qContent, qWorkEffortType, qWorkEffortAnalysis)
+        				.from(qWorkEffortType)
+        				.innerJoin(qWorkEffortAnalysis).on(qWorkEffortType.workEffortTypeId.eq(qWorkEffortAnalysis.workEffortTypeId)) 
+        				.innerJoin(qContent).on(qWorkEffortAnalysis.reportId.eq(qContent.contentId)) 
+        				.where(qWorkEffortType.parentTypeId.eq(parentTypeId)
+        						.and(qContent.contentId.eq(reportContentId)));
+                      //  .orderBy(qWorkEffortTypeContent.sequenceNum.asc());        
+        	
+        SQLBindings bindings = tupleSQLQuery.getSQL();
+        LOG.info("{}", bindings.getSQL());
+        LOG.info("{}", bindings.getBindings());
+        List<Report> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContent.contentId).list(reportQBean));        
+        return ret.isEmpty() ? null : ret.get(0);
+    }  
+   
+    @Transactional
+    public List<WorkEffortAssoc> getChildRootEquality(String workEffortId) {
+        if (TransactionSynchronizationManager.isActualTransactionActive()) {
+            TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
+            status.getClass();
+        }
+   
+        QWorkEffortAssoc qWorkEffortAssoc = QWorkEffortAssoc.workEffortAssoc;
+        QWorkEffort qWETO = QWorkEffort.workEffort;
+        QWorkEffort qWEFROM = QWorkEffort.workEffort;
+        QWorkEffortType qWETTO = QWorkEffortType.workEffortType;
+        QWorkEffortType qWETFROM = QWorkEffortType.workEffortType;        
+	
+        
+        SQLQuery<WorkEffortAssoc> tupleSQLQuery = queryFactory.select(qWorkEffortAssoc)
+        				.from(qWorkEffortAssoc)
+        				.innerJoin(qWETO).on(qWETO.workEffortId.eq(qWorkEffortAssoc.workEffortIdTo))
+        				.innerJoin(qWETTO).on(qWETTO.workEffortTypeId.eq(qWETO.workEffortTypeId))
+        				.innerJoin(qWEFROM).on(qWEFROM.workEffortId.eq(qWorkEffortAssoc.workEffortIdFrom))
+        				.innerJoin(qWETFROM).on(qWETFROM.workEffortTypeId.eq(qWEFROM.workEffortTypeId))
+        				.where(qWETFROM.parentTypeId.eq(qWETTO.parentTypeId)
+        						.and(qWorkEffortAssoc.workEffortIdTo.eq(workEffortId))
+        						.and(qWorkEffortAssoc.workEffortAssocTypeId.ne("SNAPSHOT"))
+        						.and(qWorkEffortAssoc.workEffortAssocTypeId.ne("COPY"))
+        						.and(qWorkEffortAssoc.workEffortAssocTypeId.ne("TEMPL")));
+        				
                       //  .orderBy(qWorkEffortTypeContent.sequenceNum.asc());
         
         
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
-        QBean<WorkEffort> workEffortQBean = Projections.bean(WorkEffort.class, qWorkEffort.all());
-        List<WorkEffort> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWorkEffort.workEffortId).list(workEffortQBean));
+        QBean<WorkEffortAssoc> workEffortAssocQBean = Projections.bean(WorkEffortAssoc.class, qWorkEffortAssoc.all());
+        List<WorkEffortAssoc> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWorkEffortAssoc.workEffortIdTo, qWorkEffortAssoc.workEffortIdFrom,
+        		qWorkEffortAssoc.workEffortAssocTypeId, qWorkEffortAssoc.fromDate).list(workEffortAssocQBean));
         LOG.info("size = {}", ret.size()); 
         return ret;
-    }*/
-    
+    }
     
  }

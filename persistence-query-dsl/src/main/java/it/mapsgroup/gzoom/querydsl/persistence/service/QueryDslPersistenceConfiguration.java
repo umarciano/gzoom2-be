@@ -4,9 +4,10 @@ import com.querydsl.sql.SQLQueryFactory;
 import com.querydsl.sql.SQLTemplates;
 import com.querydsl.sql.spring.SpringConnectionProvider;
 import com.querydsl.sql.spring.SpringExceptionTranslator;
-import com.querydsl.sql.types.LocalDateTimeType;
-import com.querydsl.sql.types.LocalDateType;
 import it.mapsgroup.gzoom.querydsl.BooleanCharacterType;
+import it.mapsgroup.gzoom.querydsl.dao.PermissionDao;
+import it.mapsgroup.gzoom.querydsl.service.PermissionService;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,7 +30,8 @@ import static org.slf4j.LoggerFactory.getLogger;
  */
 @Configuration
 @EnableTransactionManagement
-@ComponentScan("it.mapsgroup.gzoom.querydsl.dao")
+//@ComponentScan("it.mapsgroup.gzoom.querydsl")
+@ComponentScan(basePackageClasses = {PermissionDao.class, PermissionService.class})
 public class QueryDslPersistenceConfiguration {
     private static final Logger LOG = getLogger(QueryDslPersistenceConfiguration.class);
 
@@ -60,7 +62,7 @@ public class QueryDslPersistenceConfiguration {
        configuration.register(new JSR310LocalDateTimeType());
         configuration.register(new JSR310LocalDateType());
         configuration.register(new BooleanCharacterType());
-
+        
       //  configuration.addListener(new LogListener());
 
         return configuration;
