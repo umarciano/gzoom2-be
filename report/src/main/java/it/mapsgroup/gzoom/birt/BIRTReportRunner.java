@@ -194,8 +194,7 @@ public class BIRTReportRunner implements ReportRunner {
 
 			runTask.validateParameters();
 
-			String rptdocument = reportTempDirectory + File.separator + "generated_" + birtReport.getTaskId()
-					+ ".rptdocument";
+			String rptdocument = reportTempDirectory + File.separator + "generated_" + birtReport.getTaskId()+ ".rptdocument";
 			runTask.run(rptdocument);
 
 			IReportDocument reportDocument = birtReportEngine.openReportDocument(rptdocument);
@@ -204,19 +203,23 @@ public class BIRTReportRunner implements ReportRunner {
 			renderTask.setProgressMonitor(birtReport.getBirtServiceProgress());
 			birtReport.getBirtServiceProgress().setTask(renderTask);
 
-			//TODO generalizzare il tipo
-			PDFRenderOption pdfRenderOption = new PDFRenderOption();
-			pdfRenderOption.setOption(IPDFRenderOption.REPAGINATE_FOR_PDF, new Boolean(true));
-			pdfRenderOption.setOutputFormat("pdf");
-			pdfRenderOption.closeOutputStreamOnExit(true);
-			renderTask.setRenderOption(pdfRenderOption);
-			pdfRenderOption.setOutputStream(byteArrayOutputStream);
-
-			// EXCELRenderOption excelRenderOption= new EXCELRenderOption();
-			// excelRenderOption.setEnableMultipleSheet(true);
-			// excelRenderOption.setOutputFormat("xls");
-			// excelRenderOption.setOutputStream(byteArrayOutputStream);
-			// renderTask.setRenderOption(excelRenderOption);
+							
+			RenderOption options = new RenderOption();
+			String outputFormat = (String) reportParameters.get("outputFormat");
+			if ("xls".equals(outputFormat)) {
+				 EXCELRenderOption excelRenderOption= new EXCELRenderOption();
+				 excelRenderOption.setEnableMultipleSheet(true);				 
+			} else if ("doc".equals(outputFormat)) {
+				options.setOption(IRenderOption.HTML_PAGINATION, true);
+			} else {
+				PDFRenderOption pdfRenderOption = new PDFRenderOption();
+				pdfRenderOption.setOption(IPDFRenderOption.REPAGINATE_FOR_PDF, new Boolean(true));
+				pdfRenderOption.closeOutputStreamOnExit(true);
+			}
+			
+			options.setOutputFormat(outputFormat);			
+			options.setOutputStream(byteArrayOutputStream);
+			renderTask.setRenderOption(options);
 
 			renderTask.render();
 			renderTask.close();

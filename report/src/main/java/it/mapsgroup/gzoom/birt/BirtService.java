@@ -53,7 +53,8 @@ public class BirtService {
      */
     public String run(String outputFileName, Report report) {
         ReportHandler reportHandler = reportRunner.runReport(report);
-        File outputPath = new File(config.getBirtReportOutputDir(), outputFileName + ".pdf");
+        String outputFormat = (String) report.getParameters().get("outputFormat");
+        File outputPath = new File(config.getBirtReportOutputDir(), outputFileName + "." + outputFormat);
         try {
             FileOutputStream out = new FileOutputStream(outputPath);
             //report.getReportContent().writeTo(out);

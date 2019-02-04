@@ -34,11 +34,14 @@ import it.mapsgroup.gzoom.querydsl.dao.WorkEffortTypeContentDao;
 import it.mapsgroup.gzoom.querydsl.dto.ReportParams;
 import it.mapsgroup.gzoom.querydsl.dto.ReportType;
 import it.mapsgroup.gzoom.querydsl.dto.WorkEffortTypeExt;
+import it.mapsgroup.gzoom.querydsl.util.ContextPermissionPrefixEnum;
 import it.mapsgroup.gzoom.report.report.dto.CreateReport;
 import it.mapsgroup.gzoom.report.report.dto.ReportStatus;
 import it.mapsgroup.gzoom.rest.ValidationException;
+import it.mapsgroup.gzoom.util.BirtContentTypeEnum;
 import it.mapsgroup.gzoom.util.BirtUtil;
 import it.mapsgroup.report.querydsl.dto.ReportActivity;
+import it.memelabs.smartnebula.commons.DateUtil;
 
 /**
  * Profile service.
@@ -136,16 +139,31 @@ public class ReportService {
         reportParameters.put("userLoginId", principal().getUserLoginId());
         reportParameters.put("birtOutputFileName", req.getContentName()); 
         reportParameters.put("outputFormat", req.getOutputFormat()); 
+        reportParameters.put("localDispatcherName", ContextPermissionPrefixEnum.getPermissionPrefix(req.getParentTypeId())); //non serve piu
         
         Map<String, Object> paramsValue = req.getParamsValue();
         for(String key: paramsValue.keySet()) {
         	reportParameters.put(key, paramsValue.get(key));
         }
         
+        //devo convertire la data in Date 
+        req.getParams().forEach(params -> {
+        	Object obj = paramsValue.get(params.getParamName());
+        	if (params.getParamType().equals("DATE")) {
+        		reportParameters.put(params.getParamName(), DateUtil.parse((String)obj, "yyyy-MM-dd"));
+        	} else if(params.getParamType().equals("BOOLEAN")) {        		
+                boolean value = (boolean) reportParameters.get(params.getParamName());
+                if (value) {
+                	reportParameters.put(params.getParamName(), "Y");
+                } else {
+                	reportParameters.put(params.getParamName(), "N");
+                }
+              }
+        });
+        
         //TODO
         reportParameters.put("langLocale", "");
-        reportParameters.put("userProfile", "MGR_ADMIN");
-        reportParameters.put("localDispatcherName", "corperf"); //non serve più
+        //reportParameters.put("userProfile", "MGR_ADMIN"); //nnon serve piu
         reportParameters.put("defaultOrganizationPartyId", "Company");
         
         LOG.info("add  before call all service reportParameters-> "+ reportParameters);
@@ -160,24 +178,7 @@ public class ReportService {
 			}
             
 	    	LOG.info("add call serviceName="+serviceName);
-	    });
-        
-       /* req.getParams().forEach(params -> {
-        	Object obj = paramsValue.get(params.getParamName());
-        	
-        	if (params.getParamType().equals("DATE")) {
-        		//reportParameters.put(params.getParamName(), DateUtil.parse((String)obj, "YYYY-MM-DD"));
-        	} else if(params.getParamType().equals("BOOLEAN")) {        		
-        		String value = "N";
-        		if ((boolean)obj) {
-        			value = "Y";
-        		}
-        		reportParameters.put(params.getParamName(), value);
-        	} else {
-        		reportParameters.put(params.getParamName(), obj);
-        	}
-        	
-        });*/
+	    });   
 
 		//TODO nel caso che ho un servizio da chiamare al posto della creazione dell stampa
         //unico caso creazioen di uno zip in formato xls
@@ -243,9 +244,12 @@ public class ReportService {
         File file = new File(reportActivity.getObjectInfo()); 
         
         try (InputStream bw = new BufferedInputStream(new FileInputStream(file))) {
-            response.setContentType("application/pdf"); //TODO
+        	String outputFormat = reportActivity.getObjectInfo().substring(reportActivity.getObjectInfo().length() -3);
+        	String contentType = BirtContentTypeEnum.getContentType(outputFormat);
+        	
+            response.setContentType(contentType); 
             response.setContentLength((int) file.length());
-            String fileName = reportActivity.getReportName() + ".pdf"; //TODO
+            String fileName = reportActivity.getReportName() + "." + outputFormat; 
             response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\"");
             IOUtils.copy(bw, response.getOutputStream());
             response.flushBuffer();

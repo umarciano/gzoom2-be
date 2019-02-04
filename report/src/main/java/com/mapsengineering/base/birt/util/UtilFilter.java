@@ -50,10 +50,7 @@ public class UtilFilter {
     
     private PermissionService permissionService;
     
-    public UtilFilter() {
-    	permissionService = ApplicationContextProvider.getApplicationContext().getBean(PermissionService.class);
-    }
-    /*
+       /*
     public UtilFilter(String userLoginId, String localDispatcherName) {
       
     	//UserLoginDao dao = ApplicationContextProvider.getApplicationContext().getBean(UserLoginDao.class);
@@ -63,7 +60,8 @@ public class UtilFilter {
     }*/
     
     public UtilFilter(String userLoginId, String localDispatcherName) {
-        setFullAdmin(userLoginId, localDispatcherName);
+    	permissionService = ApplicationContextProvider.getApplicationContext().getBean(PermissionService.class);
+    	setFullAdmin(userLoginId, localDispatcherName);        
     }
     
     private void setFullAdmin(String userLoginId, String localDispatcherName) {
