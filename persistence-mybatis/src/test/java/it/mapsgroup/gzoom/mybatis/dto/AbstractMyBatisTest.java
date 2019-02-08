@@ -3,6 +3,8 @@ package it.mapsgroup.gzoom.mybatis.dto;
 import it.mapsgroup.gzoom.mybatis.MyBatisPersistenceConfiguration;
 import it.mapsgroup.gzoom.mybatis.dao.UserLoginMyBatisDao;
 import it.mapsgroup.gzoom.persistence.common.CommonPersistenceConfiguration;
+import it.mapsgroup.gzoom.querydsl.persistence.service.QueryDslPersistenceConfiguration;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,7 @@ import static org.junit.Assert.assertNotNull;
  * @author Andrea Fossi.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = {CommonPersistenceConfiguration.class, MyBatisPersistenceConfiguration.class})
+@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = {CommonPersistenceConfiguration.class, MyBatisPersistenceConfiguration.class, QueryDslPersistenceConfiguration.class})
 @TestPropertySource("/gzoom.properties")
 public abstract class AbstractMyBatisTest {
 

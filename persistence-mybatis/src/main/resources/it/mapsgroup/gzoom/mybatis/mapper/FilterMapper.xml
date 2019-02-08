@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.mapsgroup.gzoom.mybatis.mapper.FilterMapper">
+	
+  
+  <sql id="filterInnerJoin">
+  	<if test="!filter.isFullAdmin">
+	  	INNER JOIN ( 
+	  			SELECT FIL_UL.PARTY_ID AS UL_PARTY_ID, FIL_ULVR.USER_LOGIN_ID AS ULVR_USER_LOGIN_ID, FIL_ULVR.PARTY_ID AS ULVR_PARTY_ID, FIL_ULVR.ROLE_TYPE_ID AS ULVR_ROLE_TYPE_ID 
+	            FROM USER_LOGIN_VALID_PARTY_ROLE FIL_ULVR
+	            INNER JOIN USER_LOGIN FIL_UL ON FIL_ULVR.USER_LOGIN_ID = FIL_UL.USER_LOGIN_ID) FIL_U ON FIL_W.ORGANIZATION_ID = FIL_U.ULVR_PARTY_ID AND FIL_U.ULVR_ROLE_TYPE_ID = 'INTERNAL_ORGANIZATIO'
+	    INNER JOIN WORK_EFFORT_TYPE_STATUS FIL_STATUS ON FIL_W.WORK_EFFORT_TYPE_ID = FIL_STATUS.WORK_EFFORT_TYPE_ROOT_ID AND FIL_W.CURRENT_STATUS_ID = FIL_STATUS.CURRENT_STATUS_ID
+  	</if>
+  </sql>
+  
+  <sql id="filterLeftJoin">
+  	<if test="!filter.isFullAdmin">
+	  	LEFT OUTER JOIN PARTY_RELATIONSHIP FIL_PRM ON FIL_W.ORG_UNIT_ROLE_TYPE_ID = FIL_PRM.ROLE_TYPE_ID_FROM AND FIL_W.ORG_UNIT_ID = FIL_PRM.PARTY_ID_FROM  
+	    	AND FIL_PRM.PARTY_RELATIONSHIP_TYPE_ID IN ('ORG_RESPONSIBLE', 'ORG_DELEGATE') AND FIL_PRM.FROM_DATE &#60;= FIL_W.ESTIMATED_COMPLETION_DATE
+	    	AND (FIL_PRM.THRU_DATE IS NULL OR FIL_PRM.THRU_DATE &#62;= FIL_W.ESTIMATED_COMPLETION_DATE) AND FIL_PRM.PARTY_ID_TO = FIL_U.UL_PARTY_ID
+	    LEFT OUTER JOIN PARTY_RELATIONSHIP FIL_PRS ON FIL_W.ORG_UNIT_ROLE_TYPE_ID = FIL_PRS.ROLE_TYPE_ID_TO AND FIL_W.ORG_UNIT_ID = FIL_PRS.PARTY_ID_TO
+	         AND FIL_PRS.PARTY_RELATIONSHIP_TYPE_ID = 'GROUP_ROLLUP' AND FIL_PRS.FROM_DATE &#60;= FIL_W.ESTIMATED_COMPLETION_DATE
+	         AND (FIL_PRS.THRU_DATE IS NULL OR FIL_PRS.THRU_DATE &#62;= FIL_W.ESTIMATED_COMPLETION_DATE)
+	    LEFT OUTER JOIN PARTY_RELATIONSHIP FIL_PRS2 ON FIL_PRS.ROLE_TYPE_ID_FROM = FIL_PRS2.ROLE_TYPE_ID_FROM AND FIL_PRS.PARTY_ID_FROM = FIL_PRS2.PARTY_ID_FROM
+	         AND FIL_PRS2.PARTY_RELATIONSHIP_TYPE_ID IN ('ORG_RESPONSIBLE', 'ORG_DELEGATE') AND FIL_PRS2.FROM_DATE &#60;= FIL_W.ESTIMATED_COMPLETION_DATE
+	         AND (FIL_PRS2.THRU_DATE IS NULL OR FIL_PRS2.THRU_DATE &#62;= FIL_W.ESTIMATED_COMPLETION_DATE) AND FIL_PRS2.PARTY_ID_TO = FIL_U.UL_PARTY_ID
+	    LEFT OUTER JOIN WORK_EFFORT_PARTY_ASSIGNMENT FIL_WEPA ON FIL_W.WORK_EFFORT_ID = FIL_WEPA.WORK_EFFORT_ID AND FIL_W.ESTIMATED_COMPLETION_DATE = FIL_WEPA.THRU_DATE
+	         AND FIL_WEPA.ROLE_TYPE_ID LIKE 'WEM%' AND FIL_WEPA.PARTY_ID = FIL_U.UL_PARTY_ID 
+    </if> 
+  </sql>
+  
+  <sql id="filterWherIsOrg">
+  	 OR FIL_PRM.PARTY_ID_TO IS NOT NULL
+  </sql>
+  <sql id="filterWhereIsSup">
+  	 OR FIL_PRS2.PARTY_ID_TO IS NOT NULL
+  </sql>
+  <sql id="filterWherIsRole">
+  	 OR  FIL_WEPA.PARTY_ID IS NOT NULL
+  </sql>
+  <sql id="filterUserLogin">
+  	  AND FIL_U.ULVR_USER_LOGIN_ID = #{filter.userLoginId}
+  </sql>
+  
+  <sql id="filterWhere">
+  	  <if test="!filter.isFullAdmin">
+  	  	<include refid="it.mapsgroup.gzoom.mybatis.mapper.FilterMapper.filterUserLogin"/>
+  	  	AND (1 = 0 
+  	  	<if test="filter.isOrgMgr">
+  	  		<include refid="it.mapsgroup.gzoom.mybatis.mapper.FilterMapper.filterWherIsOrg"/>
+  	  	</if>
+  	  	<if test="filter.isRole">
+  	  		<include refid="it.mapsgroup.gzoom.mybatis.mapper.FilterMapper.filterWherIsRole"/>
+  	  	</if>
+  	  	<if test="filter.isSup">
+  	  		<include refid="it.mapsgroup.gzoom.mybatis.mapper.FilterMapper.filterWhereIsSup"/>
+  	  	</if>
+  	  	)  	  	
+  	  </if>
+  </sql>
+  
+  
+</mapper>

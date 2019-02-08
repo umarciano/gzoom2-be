@@ -19,6 +19,8 @@ public class PermissionService {
 	private static String TOP_ADMIN = "TOP_ADMIN";
 	private static String ORG_ADMIN = "ORG_ADMIN";
 	private static String ROLE_ADMIN = "ROLE_ADMIN";
+	private static String MGR_ADMIN = "MGR_ADMIN";
+	private static String FULLADMIN = "FULLADMIN";
 
 	private static String BSCPERF = "BSCPERF";
 		
@@ -80,6 +82,10 @@ public class PermissionService {
 
 	public boolean isTop(String userLoginId, String permission) {
 	    return hasPermission(permission + TOP_ADMIN, userLoginId);
+	}
+	
+	public boolean isFullAdmin(String userLoginId, String permission) {
+		return hasPermission(permission + MGR_ADMIN, userLoginId) || hasSecurityGroup(userLoginId, FULLADMIN);
 	}
 
 	

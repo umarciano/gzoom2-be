@@ -158,23 +158,23 @@ public class QWorkEffortAnalysis extends com.querydsl.sql.RelationalPathBase<Wor
 
     public final com.querydsl.sql.PrimaryKey<WorkEffortAnalysis> primary = createPrimaryKey(workEffortAnalysisId);
 
-    public final com.querydsl.sql.ForeignKey<WorkEffort> weaWeFk = createForeignKey(workEffortId, "WORK_EFFORT_ID");
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> weaWet4Fk = createForeignKey(workEffortTypeIdSez4, "WORK_EFFORT_TYPE_ID");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortType> weaWet6Fk = createForeignKey(workEffortTypeIdSez6, "WORK_EFFORT_TYPE_ID");
 
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> weaWetFk = createForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID");
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> weaWet1Fk = createForeignKey(workEffortTypeIdSez1, "WORK_EFFORT_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffort> weaWeFk = createForeignKey(workEffortId, "WORK_EFFORT_ID");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortType> weaWet2Fk = createForeignKey(workEffortTypeIdSez2, "WORK_EFFORT_TYPE_ID");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortType> weaWet3Fk = createForeignKey(workEffortTypeIdSez3, "WORK_EFFORT_TYPE_ID");
 
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> weaWetFk = createForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID");
+
     public final com.querydsl.sql.ForeignKey<WorkEffortType> weaWet5Fk = createForeignKey(workEffortTypeIdSez5, "WORK_EFFORT_TYPE_ID");
 
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> weaWet1Fk = createForeignKey(workEffortTypeIdSez1, "WORK_EFFORT_TYPE_ID");
-
     public final com.querydsl.sql.ForeignKey<Content> weaCntFk = createForeignKey(reportId, "CONTENT_ID");
-
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> weaWet4Fk = createForeignKey(workEffortTypeIdSez4, "WORK_EFFORT_TYPE_ID");
 
     public QWorkEffortAnalysis(String variable) {
         super(WorkEffortAnalysis.class, forVariable(variable), "null", "WORK_EFFORT_ANALYSIS");

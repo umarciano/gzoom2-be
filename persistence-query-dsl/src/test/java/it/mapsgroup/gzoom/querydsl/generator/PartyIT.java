@@ -12,16 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import javax.sql.DataSource;
-
 import static org.slf4j.LoggerFactory.getLogger;
 
-public class PartyDaoIT extends AbstractDaoIT {
-    private static final Logger LOG = getLogger(PartyDaoIT.class);
-
-    @Autowired
-    @Deprecated
-    private DataSource mainDataSource;
+public class PartyIT extends AbstractDaoIT {
+    private static final Logger LOG = getLogger(PartyIT.class);
 
     @Autowired
     private SequenceGenerator sequenceGenerator;

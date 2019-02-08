@@ -62,9 +62,9 @@ public class QWorkEffortAssoc extends com.querydsl.sql.RelationalPathBase<WorkEf
 
     public final com.querydsl.sql.PrimaryKey<WorkEffortAssoc> primary = createPrimaryKey(fromDate, workEffortAssocTypeId, workEffortIdFrom, workEffortIdTo);
 
-    public final com.querydsl.sql.ForeignKey<WorkEffort> wkEffrtasscFwe = createForeignKey(workEffortIdFrom, "WORK_EFFORT_ID");
-
     public final com.querydsl.sql.ForeignKey<WorkEffort> wkEffrtasscTwe = createForeignKey(workEffortIdTo, "WORK_EFFORT_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffort> wkEffrtasscFwe = createForeignKey(workEffortIdFrom, "WORK_EFFORT_ID");
 
     public QWorkEffortAssoc(String variable) {
         super(WorkEffortAssoc.class, forVariable(variable), "null", "WORK_EFFORT_ASSOC");

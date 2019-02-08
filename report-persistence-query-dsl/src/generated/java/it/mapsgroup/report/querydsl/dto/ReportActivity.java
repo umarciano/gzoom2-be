@@ -40,6 +40,9 @@ public class ReportActivity implements AbstractIdentity {
     @Column("LAST_UPDATED_TX_STAMP")
     private java.time.LocalDateTime lastUpdatedTxStamp;
 
+    @Column("MIME_TYPE_ID")
+    private String mimeTypeId;
+
     @Column("OBJECT_INFO")
     private String objectInfo;
 
@@ -139,6 +142,14 @@ public class ReportActivity implements AbstractIdentity {
 
     public void setLastUpdatedTxStamp(java.time.LocalDateTime lastUpdatedTxStamp) {
         this.lastUpdatedTxStamp = lastUpdatedTxStamp;
+    }
+
+    public String getMimeTypeId() {
+        return mimeTypeId;
+    }
+
+    public void setMimeTypeId(String mimeTypeId) {
+        this.mimeTypeId = mimeTypeId;
     }
 
     public String getObjectInfo() {

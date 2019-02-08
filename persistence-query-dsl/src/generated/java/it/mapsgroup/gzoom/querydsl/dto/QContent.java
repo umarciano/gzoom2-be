@@ -122,6 +122,8 @@ public class QContent extends com.querydsl.sql.RelationalPathBase<Content> {
 
     public final com.querydsl.sql.ForeignKey<ContentAttribute> _contentAttr = createInvForeignKey(contentId, "CONTENT_ID");
 
+    public final com.querydsl.sql.ForeignKey<CommEventContentAssoc> _commevCaFrom = createInvForeignKey(contentId, "CONTENT_ID");
+
     public QContent(String variable) {
         super(Content.class, forVariable(variable), "null", "CONTENT");
         addMetadata();

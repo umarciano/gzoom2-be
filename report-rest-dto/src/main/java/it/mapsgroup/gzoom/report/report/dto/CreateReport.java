@@ -23,6 +23,7 @@ public class CreateReport {
     private String createdByUserLogin;
     private String modifiedByUserLogin;
     private String contentName;
+    private String mimeTypeId;
 
     public CreateReport() {
         this.params = new HashMap<>();
@@ -75,4 +76,14 @@ public class CreateReport {
     public void setContentName(String contentName) {
         this.contentName = contentName;
     }
+	
+	public String getMimeTypeId() {
+		return mimeTypeId;
+	}
+	
+	public void setMimeTypeId(String mimeTypeId) {
+		this.mimeTypeId = mimeTypeId;
+	}
+    
+    
 }

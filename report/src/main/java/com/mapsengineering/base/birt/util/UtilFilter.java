@@ -4,7 +4,7 @@ package com.mapsengineering.base.birt.util;
 import it.mapsgroup.gzoom.querydsl.service.PermissionService;
 import it.memelabs.smartnebula.spring.boot.config.ApplicationContextProvider;
 
-
+//TODO RISCRITTO
 public class UtilFilter {
     
     public static final String MODULE = UtilFilter.class.getName();
@@ -41,7 +41,7 @@ public class UtilFilter {
     private String filterWherIsOrg = " OR FIL_PRM.PARTY_ID_TO IS NOT NULL"; //" OR (FIL_STATUS.MANAG_WE_STATUS_ENUM_ID = 'ORGMANAGER' AND FIL_PRM.PARTY_ID_TO IS NOT NULL) ";    
     private String filterWhereIsSup = " OR FIL_PRS2.PARTY_ID_TO IS NOT NULL"; //" OR (FIL_STATUS.MANAG_WE_STATUS_ENUM_ID = 'SUPMANAGER' AND FIL_PRS2.PARTY_ID_TO IS NOT NULL) ";
     private String filterWherIsRole = " OR  FIL_WEPA.PARTY_ID IS NOT NULL";  //" OR (FIL_STATUS.MANAG_WE_STATUS_ENUM_ID = 'ROLE' AND FIL_WEPA.ROLE_TYPE_ID = FIL_STATUS.MANAGEMENT_ROLE_TYPE_ID AND FIL_WEPA.PARTY_ID IS NOT NULL) ";   
-    private String filterUserLogin  = "AND FIL_U.ULVR_USER_LOGIN_ID = ";
+    private String filterUserLogin  = " AND FIL_U.ULVR_USER_LOGIN_ID = ";
     
     private boolean isFullAdmin = false;
   //  private Security security;

@@ -1,6 +1,5 @@
-package it.mapsgroup.gzoom.service;
+package it.mapsgroup.gzoom.service.report;
 
-import static it.mapsgroup.gzoom.security.Principals.principal;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import java.io.BufferedInputStream;
@@ -8,10 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Method;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,14 +30,12 @@ import it.mapsgroup.gzoom.querydsl.dao.WorkEffortTypeContentDao;
 import it.mapsgroup.gzoom.querydsl.dto.ReportParams;
 import it.mapsgroup.gzoom.querydsl.dto.ReportType;
 import it.mapsgroup.gzoom.querydsl.dto.WorkEffortTypeExt;
-import it.mapsgroup.gzoom.querydsl.util.ContextPermissionPrefixEnum;
-import it.mapsgroup.gzoom.report.report.dto.CreateReport;
 import it.mapsgroup.gzoom.report.report.dto.ReportStatus;
 import it.mapsgroup.gzoom.rest.ValidationException;
-import it.mapsgroup.gzoom.util.BirtContentTypeEnum;
-import it.mapsgroup.gzoom.util.BirtUtil;
+import it.mapsgroup.gzoom.service.DtoMapper;
+import it.mapsgroup.gzoom.service.GzoomReportClientConfig;
+import it.mapsgroup.gzoom.service.ReportClientService;
 import it.mapsgroup.report.querydsl.dto.ReportActivity;
-import it.memelabs.smartnebula.commons.DateUtil;
 
 /**
  * Profile service.
@@ -59,17 +53,16 @@ public class ReportService {
     private final ReportDao reportDao;
     private final WorkEffortTypeContentDao workEffortTypeContentDao;
     private final DtoMapper dtoMapper; 
-    private final BirtUtil birtUtil;
-
+   
     @Autowired
     public ReportService(ReportClientService client, GzoomReportClientConfig config, ReportDao reportDao,  DtoMapper dtoMapper, 
-    		WorkEffortTypeContentDao workEffortTypeContentDao, BirtUtil birtUtil) {
+    		WorkEffortTypeContentDao workEffortTypeContentDao) {
         this.config = config;
         this.client = new ReportClientService(new RestTemplate());
         this.reportDao = reportDao;
         this.workEffortTypeContentDao = workEffortTypeContentDao;
         this.dtoMapper = dtoMapper;
-        this.birtUtil = birtUtil;
+        
     }
 
     public Result<Report> getReports(String parentTypeId) {
@@ -120,84 +113,7 @@ public class ReportService {
 	private ReportParams getParams(String reportName) {		
 		ResponseEntity<ReportParams> params = client.getReportParams(config.getServerReportUrl(), reportName);
         return params.getBody();
-    }
-	
-	
-
-    /**     
-     * 
-     * @param req
-     * @return
-     */
-    public String add(Report req) {
-        // TODO controllo parametri se sono corretti
-
-        HashMap<String, Object> reportParameters = new HashMap<>();
-               
-        reportParameters.put("workEffortTypeId", req.getWorkEffortTypeId());
-        reportParameters.put("reportContentId", req.getReportContentId()); 
-        reportParameters.put("userLoginId", principal().getUserLoginId());
-        reportParameters.put("birtOutputFileName", req.getContentName()); 
-        reportParameters.put("outputFormat", req.getOutputFormat()); 
-        reportParameters.put("localDispatcherName", ContextPermissionPrefixEnum.getPermissionPrefix(req.getParentTypeId())); //non serve piu
-        
-        Map<String, Object> paramsValue = req.getParamsValue();
-        for(String key: paramsValue.keySet()) {
-        	reportParameters.put(key, paramsValue.get(key));
-        }
-        
-        //devo convertire la data in Date 
-        req.getParams().forEach(params -> {
-        	Object obj = paramsValue.get(params.getParamName());
-        	if (params.getParamType().equals("DATE")) {
-        		reportParameters.put(params.getParamName(), DateUtil.parse((String)obj, "yyyy-MM-dd"));
-        	} else if(params.getParamType().equals("BOOLEAN")) {        		
-                boolean value = (boolean) reportParameters.get(params.getParamName());
-                if (value) {
-                	reportParameters.put(params.getParamName(), "Y");
-                } else {
-                	reportParameters.put(params.getParamName(), "N");
-                }
-              }
-        });
-        
-        //TODO
-        reportParameters.put("langLocale", "");
-        //reportParameters.put("userProfile", "MGR_ADMIN"); //nnon serve piu
-        reportParameters.put("defaultOrganizationPartyId", "Company");
-        
-        LOG.info("add  before call all service reportParameters-> "+ reportParameters);
-        req.getServices().forEach(services -> {
-        	String serviceName = services.getServiceName();
-			try {
-				Method setNameMethod = BirtUtil.class.getMethod(serviceName, Map.class);
-				setNameMethod.invoke(birtUtil, reportParameters);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            
-	    	LOG.info("add call serviceName="+serviceName);
-	    });   
-
-		//TODO nel caso che ho un servizio da chiamare al posto della creazione dell stampa
-        //unico caso creazioen di uno zip in formato xls
-        //come si fa?
-        
-        LOG.info("add  reportParameters-> "+ reportParameters);
-        CreateReport request = new CreateReport();
-        request.setCreatedByUserLogin(principal().getUserLoginId());
-        request.setModifiedByUserLogin(principal().getUserLoginId());
-        request.setReportLocale("it_IT");
-        request.setReportName(req.getContentName());
-        request.setParams(reportParameters);
-        
-        String id = client.createReport(config.getServerReportUrl(), request);
-        ResponseEntity<ReportStatus> status = client.getStatus(config.getServerReportUrl(), id);
-        LOG.info(status.getBody().toString());
-
-        return id;
-    }
+    }	
     
     public ResponseEntity<ReportStatus> status(String activityId) {
         ResponseEntity<ReportStatus> status = client.getStatus(config.getServerReportUrl(), activityId);
@@ -244,12 +160,12 @@ public class ReportService {
         File file = new File(reportActivity.getObjectInfo()); 
         
         try (InputStream bw = new BufferedInputStream(new FileInputStream(file))) {
-        	String outputFormat = reportActivity.getObjectInfo().substring(reportActivity.getObjectInfo().length() -3);
-        	String contentType = BirtContentTypeEnum.getContentType(outputFormat);
+        	//String outputFormat = reportActivity.getObjectInfo().substring(reportActivity.getContentName().length() -3);
+        	//String contentType = BirtContentTypeEnum.getContentType(outputFormat);
         	
-            response.setContentType(contentType); 
+            response.setContentType(reportActivity.getMimeTypeId()); 
             response.setContentLength((int) file.length());
-            String fileName = reportActivity.getReportName() + "." + outputFormat; 
+            String fileName = reportActivity.getContentName(); 
             response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\"");
             IOUtils.copy(bw, response.getOutputStream());
             response.flushBuffer();

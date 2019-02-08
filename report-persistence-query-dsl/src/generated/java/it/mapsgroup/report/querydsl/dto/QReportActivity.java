@@ -44,6 +44,8 @@ public class QReportActivity extends com.querydsl.sql.RelationalPathBase<ReportA
 
     public final DateTimePath<java.time.LocalDateTime> lastUpdatedTxStamp = createDateTime("lastUpdatedTxStamp", java.time.LocalDateTime.class);
 
+    public final StringPath mimeTypeId = createString("mimeTypeId");
+
     public final StringPath objectInfo = createString("objectInfo");
 
     public final StringPath reportData = createString("reportData");
@@ -86,23 +88,24 @@ public class QReportActivity extends com.querydsl.sql.RelationalPathBase<ReportA
     }
 
     public void addMetadata() {
-        addMetadata(activityId, ColumnMetadata.named("ACTIVITY_ID").withIndex(1).ofType(Types.VARCHAR).withSize(255).notNull());
-        addMetadata(completedStamp, ColumnMetadata.named("COMPLETED_STAMP").withIndex(10).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(contentName, ColumnMetadata.named("CONTENT_NAME").withIndex(17).ofType(Types.VARCHAR).withSize(100));
-        addMetadata(createdByUserLogin, ColumnMetadata.named("CREATED_BY_USER_LOGIN").withIndex(15).ofType(Types.VARCHAR).withSize(250));
-        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(13).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(14).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(error, ColumnMetadata.named("ERROR").withIndex(5).ofType(Types.LONGVARCHAR).withSize(65535));
-        addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(16).ofType(Types.VARCHAR).withSize(250));
-        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(11).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(12).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(objectInfo, ColumnMetadata.named("OBJECT_INFO").withIndex(9).ofType(Types.VARCHAR).withSize(255));
-        addMetadata(reportData, ColumnMetadata.named("REPORT_DATA").withIndex(4).ofType(Types.LONGVARCHAR).withSize(65535));
+        addMetadata(activityId, ColumnMetadata.named("ACTIVITY_ID").withIndex(1).ofType(Types.VARCHAR).withSize(250).notNull());
+        addMetadata(completedStamp, ColumnMetadata.named("COMPLETED_STAMP").withIndex(9).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(contentName, ColumnMetadata.named("CONTENT_NAME").withIndex(12).ofType(Types.VARCHAR).withSize(100));
+        addMetadata(createdByUserLogin, ColumnMetadata.named("CREATED_BY_USER_LOGIN").withIndex(10).ofType(Types.VARCHAR).withSize(250));
+        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(15).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(16).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(error, ColumnMetadata.named("ERROR").withIndex(5).ofType(Types.LONGVARCHAR).withSize(2147483647));
+        addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(11).ofType(Types.VARCHAR).withSize(250));
+        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(13).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(14).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(mimeTypeId, ColumnMetadata.named("MIME_TYPE_ID").withIndex(18).ofType(Types.VARCHAR).withSize(60));
+        addMetadata(objectInfo, ColumnMetadata.named("OBJECT_INFO").withIndex(17).ofType(Types.VARCHAR).withSize(255));
+        addMetadata(reportData, ColumnMetadata.named("REPORT_DATA").withIndex(4).ofType(Types.LONGVARCHAR).withSize(2147483647));
         addMetadata(reportLocale, ColumnMetadata.named("REPORT_LOCALE").withIndex(8).ofType(Types.VARCHAR).withSize(255));
-        addMetadata(reportName, ColumnMetadata.named("REPORT_NAME").withIndex(7).ofType(Types.VARCHAR).withSize(255).notNull());
+        addMetadata(reportName, ColumnMetadata.named("REPORT_NAME").withIndex(7).ofType(Types.VARCHAR).withSize(250));
         addMetadata(resumed, ColumnMetadata.named("RESUMED").withIndex(3).ofType(Types.CHAR).withSize(1));
-        addMetadata(status, ColumnMetadata.named("STATUS").withIndex(2).ofType(Types.VARCHAR).withSize(255).notNull());
-        addMetadata(templateName, ColumnMetadata.named("TEMPLATE_NAME").withIndex(6).ofType(Types.VARCHAR).withSize(255).notNull());
+        addMetadata(status, ColumnMetadata.named("STATUS").withIndex(2).ofType(Types.VARCHAR).withSize(250).notNull());
+        addMetadata(templateName, ColumnMetadata.named("TEMPLATE_NAME").withIndex(6).ofType(Types.VARCHAR).withSize(250));
     }
 
 }

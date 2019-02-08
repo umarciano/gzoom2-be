@@ -12,6 +12,7 @@ CREATE TABLE report_activity (
   report_name VARCHAR(255) NOT NULL,
   report_locale VARCHAR(255) ,
   object_info VARCHAR(255),
+  mime_type_id VARCHAR(60),
   completed_stamp datetime NULL,
   LAST_UPDATED_STAMP datetime DEFAULT NULL,
   LAST_UPDATED_TX_STAMP datetime DEFAULT NULL,

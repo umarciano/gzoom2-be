@@ -68,6 +68,8 @@ public class QStatusItem extends com.querydsl.sql.RelationalPathBase<StatusItem>
 
     public final com.querydsl.sql.ForeignKey<PartyRelationship> _partyRelStts = createInvForeignKey(statusId, "STATUS_ID");
 
+    public final com.querydsl.sql.ForeignKey<CommunicationEvent> _comEvntStts = createInvForeignKey(statusId, "STATUS_ID");
+
     public final com.querydsl.sql.ForeignKey<DataResource> _dtrsrcStatus = createInvForeignKey(statusId, "STATUS_ID");
 
     public final com.querydsl.sql.ForeignKey<Content> _contentStatus = createInvForeignKey(statusId, "STATUS_ID");

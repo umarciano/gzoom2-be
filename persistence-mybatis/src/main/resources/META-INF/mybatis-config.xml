@@ -32,4 +32,5 @@
             <property name="someProperty" value="100"/>
         </plugin>
     </plugins>-->
+  	   
 </configuration>

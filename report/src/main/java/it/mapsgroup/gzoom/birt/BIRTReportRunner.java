@@ -3,7 +3,6 @@ package it.mapsgroup.gzoom.birt;
 import org.eclipse.birt.core.exception.BirtException;
 import org.eclipse.birt.core.framework.Platform;
 import org.eclipse.birt.report.engine.api.*;
-import org.eclipse.birt.report.model.api.ScalarParameterHandle;
 import org.eclipse.birt.report.model.api.activity.SemanticException;
 import org.eclipse.core.internal.registry.RegistryProviderFactory;
 import org.slf4j.Logger;
@@ -12,8 +11,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import it.mapsgroup.gzoom.querydsl.dto.ReportParam;
-import it.mapsgroup.gzoom.querydsl.dto.ReportParams;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -24,11 +21,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -234,179 +227,6 @@ public class BIRTReportRunner implements ReportRunner {
 		}
 
 		return new ReportHandler(reportContentTempFile);
-	}
-
-	/**
-	 * Takes a String of parameters started by '?', delimited by '&', and with
-	 * keys and values split by '=' and returnes a Map of the keys and values in
-	 * the String.
-	 *
-	 * @param reportParameters
-	 *            a String from a HTTP request URL
-	 * @return a map of parameters with Key,Value entries as strings
-	 */
-	@Deprecated
-	public Map<String, String> parseParametersAsMap(String reportParameters) {
-		Map<String, String> parsedParameters = new HashMap<String, String>();
-		String[] paramArray;
-		if (reportParameters.isEmpty()) {
-			throw new IllegalArgumentException("Report parameters cannot be empty");
-		} else if (!reportParameters.startsWith("?") && !reportParameters.contains("?")) {
-			throw new IllegalArgumentException("Report parameters must start with a question mark '?'!");
-		} else {
-			String noQuestionMark = reportParameters.substring(1, reportParameters.length());
-			paramArray = noQuestionMark.split("&");
-			for (String param : paramArray) {
-				String[] paramGroup = param.split("=");
-				if (paramGroup.length == 2) {
-					parsedParameters.put(paramGroup[0], paramGroup[1]);
-				} else {
-					parsedParameters.put(paramGroup[0], "");
-				}
-
-			}
-		}
-		return parsedParameters;
-	}
-
-	
-	/**
-	 * Leggo la lista di parametri dal report
-	 * @param birtReport
-	 * @return
-	 */
-	public ReportParams getReportParams(Report birtReport) {
-		ReportParams reportParameters = new ReportParams();
-		File rptDesignFile;
-
-		// get the path to the report design file
-		try {
-			rptDesignFile = getReportFromFilesystem(birtReport.getName());
-		} catch (Exception e) {
-			logger.error("Error while loading rptdesign: {}.", e.getMessage());
-			throw new RuntimeException("Could not find report");
-		}
-
-		try {
-			IReportRunnable reportDesign = birtReportEngine.openReportDesign(rptDesignFile.getPath());
-			IGetParameterDefinitionTask task = birtReportEngine.createGetParameterDefinitionTask(reportDesign);
-			
-			Collection<?> params = task.getParameterDefns(true);
-			logger.info("---> params", params);
-			reportParameters.setParams(this.conversionParam(params));
-
-		} catch (EngineException e) {
-			logger.error("Error while running report task: {}.", e.getMessage());
-			// TODO add custom message to thrown exception
-			throw new RuntimeException(e);
-		}
-			
-		return reportParameters;
-	}
-	
-
-	public List<ReportParam> conversionParam(Collection<?> c) {
-		List<ReportParam> parmDetails = new ArrayList<ReportParam>();
-    	Iterator<?> iterator = c.iterator();
-    	while(iterator.hasNext()) {
-    		IParameterDefnBase param = (IParameterDefnBase) iterator.next( );
-    		if (param instanceof IParameterGroupDefn) {
-    			//attualmente noi non abbiamo GRUPPI
-	    		IParameterGroupDefn group = (IParameterGroupDefn) param;
-	    		logger.info("Parameter Group: ", group.getName() );
-	    		Iterator<?> i2 = group.getContents( ).iterator( );
-	    		while (i2.hasNext()) {
-	    			IScalarParameterDefn scalar = (IScalarParameterDefn) i2.next( );
-		    		parmDetails.add(loadParameterDetails(scalar, group));
-	    		}
-    		} else {
-	    		IScalarParameterDefn scalar = (IScalarParameterDefn) param;
-	    		parmDetails.add(loadParameterDetails(scalar, null));	
-    		}    		
-    	}    	
-    	return parmDetails;
-    }
-
-	//TODO decidere cosa mi serve
-	private ReportParam loadParameterDetails(IScalarParameterDefn scalar, IParameterGroupDefn group) {
-		ReportParam param = new ReportParam();
-		if (!scalar.isHidden()) {
-			param.setParamName(scalar.getName());
-			param.setMandatory(scalar.isRequired());
-			param.setParamDefault(scalar.getDefaultValue());
-			param.setParamType("INPUT"); //??
-			return param;
-		}
-		return null;
-		/*
-		if (group == null) {
-			parameter.put("Parameter Group", "Default");
-		} else {
-			parameter.put("Parameter Group", group.getName());
-		}
-		parameter.put("Name", scalar.getName());
-		parameter.put("Display Name", scalar.getDisplayName());
-		parameter.put("Display Format", scalar.getDisplayFormat());
-
-		parameter.put("Hidden", scalar.isHidden());
-		parameter.put("Allow Blank", scalar.allowBlank());
-		parameter.put("Allow Null", scalar.allowNull());
-		parameter.put("Required", scalar.isRequired());
-		parameter.put("Default Value", scalar.getDefaultValue());
-		
-		switch (scalar.getControlType()) {
-		case IScalarParameterDefn.TEXT_BOX:
-			parameter.put("Type", "Text Box");
-			break;
-		case IScalarParameterDefn.LIST_BOX:
-			parameter.put("Type", "List Box");
-			break;
-		case IScalarParameterDefn.RADIO_BUTTON:
-			parameter.put("Type", "List Box");
-			break;
-		case IScalarParameterDefn.CHECK_BOX:
-			parameter.put("Type", "List  Box");
-			break;
-		default:
-			parameter.put("Type", "Text Box");
-			break;
-		}
-
-		switch (scalar.getDataType()) {
-		case IScalarParameterDefn.TYPE_STRING:
-			parameter.put("Data Type", "String");
-			break;
-		case IScalarParameterDefn.TYPE_FLOAT:
-			parameter.put("Data Type", "Float");
-			break;
-		case IScalarParameterDefn.TYPE_DECIMAL:
-			parameter.put("Data Type", "Decimal");
-			break;
-		case IScalarParameterDefn.TYPE_DATE_TIME:
-			parameter.put("Data Type", "Date Time");
-			break;
-		case IScalarParameterDefn.TYPE_BOOLEAN:
-			parameter.put("Data Type", "Boolean");
-			break;
-		default:
-			parameter.put("Data Type", "Any");
-			break;
-		}
-
-		ScalarParameterHandle parameterHandle = (ScalarParameterHandle) scalar.getHandle();
-		parameter.put("Default Value", scalar.getDefaultValue());
-		parameter.put("Prompt Text", scalar.getPromptText());
-		parameter.put("Data Set Expression", parameterHandle.getValueExpr());
-		
-		
-		Iterator<String> iter = parameter.keySet().iterator();
-		String mapString = "";
-		while (iter.hasNext()) {
-			String name = (String) iter.next();
-			mapString += name + " = " + parameter.get(name) + ", ";
-		}
-		logger.info("====================== Parameter = " + scalar.getName() + ": " + mapString);*/
-
 	}
 
 }

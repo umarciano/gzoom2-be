@@ -81,6 +81,7 @@ public class ReportJobService {
         record.setCreatedByUserLogin(report.getCreatedByUserLogin());
         record.setLastModifiedByUserLogin(report.getModifiedByUserLogin());
         record.setContentName(report.getContentName());
+        record.setMimeTypeId(report.getMimeTypeId());
 
         try {
             if (report.getParams() != null)
@@ -129,14 +130,14 @@ public class ReportJobService {
     		return getParamsToFile(path.toFile());
     	} else {
     		//vado a prendere i parametri dal report
-    		//getReportParams(reportName);
-    		List<ReportParam> list = new ArrayList();
-    		ReportParam param = new ReportParam();
-        	param.setParamType("LIST");
-        	param.setMandatory(false);
-        	param.setParamName("workEffortId");
-        	list.add(param);
-        	params.setParams(list);
+    		//getReportParams(reportName); TODO
+//    		List<ReportParam> list = new ArrayList<ReportParam>();
+//    		ReportParam param = new ReportParam();
+//        	param.setParamType("LIST");
+//        	param.setMandatory(false);
+//        	param.setParamName("workEffortId");
+//        	list.add(param);
+//        	params.setParams(list);
     	}           	
         return params;
     }

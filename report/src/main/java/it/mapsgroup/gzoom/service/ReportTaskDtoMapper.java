@@ -16,7 +16,7 @@ public class ReportTaskDtoMapper {
         to.setContentTypeId("TMP_ENCLOSE");
         to.setDataResourceId(dataResourceId);//data resource id
         to.setStatusId("CTNT_INITIAL_DRAFT");
-        to.setServiceName("RP" + from.getActivityId());//scheduled job id
+        to.setServiceName(from.getActivityId());//scheduled job id
         to.setContentName(from.getContentName());//report file name (when downloaded)
         to.setMimeTypeId("application/pdf");
         to.setCreatedByUserLogin(from.getCreatedByUserLogin());

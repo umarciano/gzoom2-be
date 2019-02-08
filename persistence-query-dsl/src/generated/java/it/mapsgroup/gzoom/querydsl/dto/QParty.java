@@ -70,13 +70,13 @@ public class QParty extends com.querydsl.sql.RelationalPathBase<Party> {
 
     public final com.querydsl.sql.PrimaryKey<Party> primary = createPrimaryKey(partyId);
 
+    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> partyLmcul = createForeignKey(lastModifiedByUserLogin, "USER_LOGIN_ID");
+
     public final com.querydsl.sql.ForeignKey<Uom> partyPrefCrncy = createForeignKey(preferredCurrencyUomId, "UOM_ID");
 
     public final com.querydsl.sql.ForeignKey<StatusItem> partyStatusitm = createForeignKey(statusId, "STATUS_ID");
 
     public final com.querydsl.sql.ForeignKey<UserLoginPersistent> partyCul = createForeignKey(createdByUserLogin, "USER_LOGIN_ID");
-
-    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> partyLmcul = createForeignKey(lastModifiedByUserLogin, "USER_LOGIN_ID");
 
     public final com.querydsl.sql.ForeignKey<TimeEntry> _timeEntPrty = createInvForeignKey(partyId, "PARTY_ID");
 
@@ -84,9 +84,13 @@ public class QParty extends com.querydsl.sql.RelationalPathBase<Party> {
 
     public final com.querydsl.sql.ForeignKey<Timesheet> _timesheetPrty = createInvForeignKey(partyId, "PARTY_ID");
 
+    public final com.querydsl.sql.ForeignKey<CommunicationEvent> _comEvntFpty = createInvForeignKey(partyId, "PARTY_ID_FROM");
+
     public final com.querydsl.sql.ForeignKey<Person> _personParty = createInvForeignKey(partyId, "PARTY_ID");
 
     public final com.querydsl.sql.ForeignKey<Timesheet> _timesheetCpty = createInvForeignKey(partyId, "CLIENT_PARTY_ID");
+
+    public final com.querydsl.sql.ForeignKey<CommunicationEvent> _comEvntTpty = createInvForeignKey(partyId, "PARTY_ID_TO");
 
     public final com.querydsl.sql.ForeignKey<PartyRole> _partyRleParty = createInvForeignKey(partyId, "PARTY_ID");
 
