@@ -7,6 +7,9 @@ import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
@@ -17,10 +20,11 @@ public class ReportClientServiceIT {
 
     @Test
     @Ignore
-    public void sampleTest() {
+    public void sampleTest() throws MalformedURLException {
         ReportClientService client = new ReportClientService(new RestTemplate());
         String id = client.createReport();
-        ResponseEntity<ReportStatus> status = client.getStatus(id);
+        ResponseEntity<ReportStatus> status = client.getStatus(new URL("http://localhost:8081/rest/report/{reportId}/status"), id);
+
         LOG.info(status.getBody().toString());
     }
 }

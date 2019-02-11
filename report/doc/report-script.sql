@@ -1,11 +1,12 @@
 -- Drop table
 
-DROP TABLE report_activity;
+DROP TABLE if exists report_activity;
 
 CREATE TABLE report_activity (
   activity_id varchar(255) NOT NULL,
   status varchar(255) NOT NULL,
   resumed CHAR,
+
   report_data text NULL, /* json */
   error TEXT NULL,
   template_name VARCHAR(255) NOT NULL,
@@ -21,6 +22,8 @@ CREATE TABLE report_activity (
   CREATED_BY_USER_LOGIN varchar(250) DEFAULT NULL,
   LAST_MODIFIED_BY_USER_LOGIN varchar(250) DEFAULT NULL,
   CONTENT_NAME varchar(100) DEFAULT NULL,
+  callback_data text NULL, /* json */
+  callback_type VARCHAR(255), /* json */
   PRIMARY KEY (activity_id),
   KEY CONTENT_TXSTMP (`LAST_UPDATED_TX_STAMP`),
   KEY CONTENT_TXCRTS (`CREATED_TX_STAMP`)

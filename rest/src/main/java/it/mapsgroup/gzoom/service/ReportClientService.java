@@ -1,5 +1,6 @@
 package it.mapsgroup.gzoom.service;
 
+import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportCallbackType;
 import it.mapsgroup.gzoom.querydsl.dto.ReportParams;
 import it.mapsgroup.gzoom.report.report.dto.CreateReport;
 import it.mapsgroup.gzoom.report.report.dto.ReportStatus;
@@ -62,8 +63,13 @@ public class ReportClientService {
         request.setCreatedByUserLogin("admin");
         request.setModifiedByUserLogin("admin");
         request.setReportLocale("it_IT");
-        request.setReportName("CatalogoTreLivelli/CatalogoTreLivelli");
+        request.setReportName("CatalogoTreLivelli");
         request.setParams(reportParameters);
+
+        request.setCallbackType(ReportCallbackType.TEST.toString());
+        HashMap<String, Object> cp = new HashMap<>();
+        cp.put("description","test");
+        request.setCallbackParams(cp);
 
         // 
         String reportId = restTemplate.postForObject("http://localhost:8081/rest/report/add", request, String.class);

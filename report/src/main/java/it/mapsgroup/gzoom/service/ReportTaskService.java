@@ -40,19 +40,23 @@ public class ReportTaskService {
     private final DataResourceDao dataResourceDao;
     private final ReportTaskDtoMapper dtoMapper;
 
+    private final ReportCallbackService callbackService;
+
     private final ConcurrentHashMap<String, ReportTaskInfo> tasks;
 
 
     public ReportTaskService(@Qualifier("reportTaskExecutor") TaskExecutor taskExecutor,
                              ReportActivityDao reportDao,
                              BirtService birtService, ContentDao contentDao,
-                             DataResourceDao dataResourceDao, ReportTaskDtoMapper dtoMapper) {
+                             DataResourceDao dataResourceDao, ReportTaskDtoMapper dtoMapper,
+                             ReportCallbackService callbackService) {
         this.taskExecutor = taskExecutor;
         this.reportDao = reportDao;
         this.birtService = birtService;
         this.contentDao = contentDao;
         this.dataResourceDao = dataResourceDao;
         this.dtoMapper = dtoMapper;
+        this.callbackService = callbackService;
         this.objectMapper = new ObjectMapper();
         this.tasks = new ConcurrentHashMap<>();
     }
@@ -66,7 +70,9 @@ public class ReportTaskService {
         taskExecutor.execute(new ReportRunnableTask(reportTask, reportDao, birtService, objectMapper, reportTaskInfo -> {
             tasks.remove(reportTaskInfo.getId());
             createOfbizRecords(reportTask.getId());
+            callbackService.reportDone(reportTask.getId());
         }));
+
     }
 
     @Transactional
