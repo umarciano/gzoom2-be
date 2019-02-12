@@ -276,4 +276,6 @@ public class Messages {
     public static final String TIME_ENTRY_ID_REQUIRED = "TimeEntry id is required";
     public static final String INVALID_TIME_ENTRY = "Invalid time entry";
 
+    public static final String CANNOT_SCHEDULE_PROBE = "Cannot schedule probe";
+    public static final String CANNOT_UNSCHEDULE_PROBE ="Cannot unschedule probe" ;
 }
