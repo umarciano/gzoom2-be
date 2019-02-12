@@ -14,6 +14,7 @@ import static org.slf4j.LoggerFactory.getLogger;
  * @author Andrea Fossi
  */
 //@SuppressWarnings("SpringJavaAutowiredMembersInspection")
+//@DisallowConcurrentExecution
 public class ProbeJob implements Job {
     private static final Logger LOG = getLogger(ProbeJob.class);
 

@@ -24,12 +24,9 @@ public class CreateReport {
     private String modifiedByUserLogin;
     private String contentName;
     private String mimeTypeId;
-    private Map<String, Object> callbackParams;
-    private String callbackType;
 
     public CreateReport() {
         this.params = new HashMap<>();
-        this.callbackParams= new HashMap<>();
     }
 
     public Map<String, Object> getParams() {
@@ -79,28 +76,12 @@ public class CreateReport {
     public void setContentName(String contentName) {
         this.contentName = contentName;
     }
-	
+
 	public String getMimeTypeId() {
 		return mimeTypeId;
 	}
-	
+
 	public void setMimeTypeId(String mimeTypeId) {
 		this.mimeTypeId = mimeTypeId;
 	}
-
-    public Map<String, Object> getCallbackParams() {
-        return callbackParams;
-    }
-
-    public void setCallbackParams(Map<String, Object> callbackParams) {
-        this.callbackParams = callbackParams;
-    }
-
-    public String getCallbackType() {
-        return callbackType;
-    }
-
-    public void setCallbackType(String callbackType) {
-        this.callbackType = callbackType;
-    }
 }

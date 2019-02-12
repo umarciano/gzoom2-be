@@ -48,8 +48,14 @@ public class ProbeService {
 
     public void probeReport(String id, String callbackType, String jsonParams) {
         ResponseEntity<ReportStatus> status = null;
-        status = reportClientService.getStatus(config.getServerReportUrl(), id);
-
+        try {
+            status = reportClientService.getStatus(config.getServerReportUrl(), id);
+        } catch (Exception e) {
+            LOG.error("Cannot probe report[{}]", id);
+            LOG.debug("Rescheduling report probe [{}]", id);
+            schedulerService.updateReportProbe(id, false);
+            return;
+        }
         Map<String, Object> params = Collections.emptyMap();
         if (StringUtils.isNotEmpty(callbackType)) {
             try {

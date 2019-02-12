@@ -25,6 +25,8 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * Continuously probes the Report status in order to update the local database.
+ * <p>
+ * Database ddl at  @see <a href="https://github.com/elventear/quartz-scheduler/tree/master/distribution/src/main/assembly/root/docs/dbTables">dbTables</a>
  *
  * @author Fabio G. Strozzi
  * @author Andrea Fossi

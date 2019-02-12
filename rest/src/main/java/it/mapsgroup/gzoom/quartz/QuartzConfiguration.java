@@ -45,7 +45,7 @@ public class QuartzConfiguration {
          * @return
          */
         default int getReportProbeDelay() {
-            return 4;
+            return 10;
         }
 
         /**

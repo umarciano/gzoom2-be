@@ -1,11 +1,10 @@
 package it.mapsgroup.gzoom.service;
 
-import it.mapsgroup.gzoom.report.service.ReportCallbackType;
 import it.mapsgroup.gzoom.querydsl.dto.ReportParams;
 import it.mapsgroup.gzoom.report.report.dto.CreateReport;
 import it.mapsgroup.gzoom.report.report.dto.ReportStatus;
+import it.mapsgroup.gzoom.report.service.ReportCallbackType;
 import it.mapsgroup.report.querydsl.dto.ReportActivity;
-
 import it.memelabs.smartnebula.commons.DateUtil;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +36,7 @@ public class ReportClientService {
     public String createReport() {
         HashMap<String, Object> reportParameters = new HashMap<>();
         //TODO add parameters here
-        
+
         reportParameters.put("workEffortTypeId", "15AP0PPC");
         reportParameters.put("workEffortId", "E12144");
         reportParameters.put("reportContentId", "REPO_VALUT_RISC"); // REPO_VALUT_RISC - REPO_PRI_VALUT_RISC
@@ -57,7 +56,7 @@ public class ReportClientService {
         reportParameters.put("defaultOrganizationPartyId", "Company");
         reportParameters.put("date3112", date3112);
 
-        
+
         CreateReport request = new CreateReport();
         request.setContentName("test.pdf");
         request.setCreatedByUserLogin("admin");
@@ -66,27 +65,22 @@ public class ReportClientService {
         request.setReportName("CatalogoTreLivelli");
         request.setParams(reportParameters);
 
-        request.setCallbackType(ReportCallbackType.TEST.toString());
-        HashMap<String, Object> cp = new HashMap<>();
-        cp.put("description","test");
-        request.setCallbackParams(cp);
-
         // 
         String reportId = restTemplate.postForObject("http://localhost:8081/rest/report/add", request, String.class);
         LOG.info("ReportId {}", reportId);
         return reportId;
     }
-    
+
     //TODO sample rest call
     public String createReport(URL url, CreateReport request) {
         // "http://localhost:8081/rest/report/add"
-        String reportId = restTemplate.postForObject(url.toString()+"/add", request, String.class);
+        String reportId = restTemplate.postForObject(url.toString() + "/add", request, String.class);
         LOG.info("ReportId {}", reportId);
         return reportId;
     }
-    
+
     public ResponseEntity<ReportParams> getReportParams(URL url, String reportName) {
-    	return restTemplate.getForEntity(url.toString()+"/params/"+ reportName, ReportParams.class, reportName);
+        return restTemplate.getForEntity(url.toString() + "/params/" + reportName, ReportParams.class, reportName);
     }
 
     /*public ResponseEntity<ReportStatus> getStatus(String id) {
@@ -94,11 +88,11 @@ public class ReportClientService {
     }*/
 
     public ResponseEntity<ReportStatus> getStatus(URL url, String id) {
-        return restTemplate.getForEntity(url.toString()+"/" + id + "/status", ReportStatus.class, id);
+        return restTemplate.getForEntity(url.toString() + "/" + id + "/status", ReportStatus.class, id);
     }
-    
+
     public ResponseEntity<ReportActivity> getReportActivity(URL url, String id) {
-        return restTemplate.getForEntity(url.toString()+"/" + id, ReportActivity.class, id);
+        return restTemplate.getForEntity(url.toString() + "/" + id, ReportActivity.class, id);
     }
-    
+
 }
