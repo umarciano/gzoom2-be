@@ -1,17 +1,9 @@
 package it.mapsgroup.gzoom.quartz;
 
-import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatus;
-import it.mapsgroup.gzoom.report.report.dto.ReportStatus;
-import it.mapsgroup.gzoom.service.ReportClientService;
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.StopWatch;
-import org.springframework.web.client.RestTemplate;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -26,6 +18,7 @@ public class ProbeJob implements Job {
     private static final Logger LOG = getLogger(ProbeJob.class);
 
     static final String PROBE_TYPE_KEY = "probe-type";
+    static final String PROBE_TYPE_SND_KEY = "probe-snd-type";
     static final String PROBE_RETRY_KEY = "probe-retry";
     static final String PROBE_ID_KEY = "probe-id";
     static final String PROBE_PARAMS_KEY = "probe-params";
@@ -53,7 +46,7 @@ public class ProbeJob implements Job {
         try {
             switch (type) {
                 case REPORT:
-                    probeService.probeReport(id);
+                    probeService.probeReport(id, map.getString(PROBE_TYPE_SND_KEY), map.getString(PROBE_PARAMS_KEY));
                     break;
                 default:
                     throw new IllegalStateException("Unexpected probe type: " + type);

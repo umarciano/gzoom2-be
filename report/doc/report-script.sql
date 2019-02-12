@@ -22,8 +22,6 @@ CREATE TABLE report_activity (
   CREATED_BY_USER_LOGIN varchar(250) DEFAULT NULL,
   LAST_MODIFIED_BY_USER_LOGIN varchar(250) DEFAULT NULL,
   CONTENT_NAME varchar(100) DEFAULT NULL,
-  callback_data text NULL, /* json */
-  callback_type VARCHAR(255), /* json */
   PRIMARY KEY (activity_id),
   KEY CONTENT_TXSTMP (`LAST_UPDATED_TX_STAMP`),
   KEY CONTENT_TXCRTS (`CREATED_TX_STAMP`)

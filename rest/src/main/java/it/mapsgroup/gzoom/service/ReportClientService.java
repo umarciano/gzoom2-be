@@ -1,6 +1,6 @@
 package it.mapsgroup.gzoom.service;
 
-import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportCallbackType;
+import it.mapsgroup.gzoom.report.service.ReportCallbackType;
 import it.mapsgroup.gzoom.querydsl.dto.ReportParams;
 import it.mapsgroup.gzoom.report.report.dto.CreateReport;
 import it.mapsgroup.gzoom.report.report.dto.ReportStatus;

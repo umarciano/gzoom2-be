@@ -6,7 +6,6 @@ import com.querydsl.sql.SQLQueryFactory;
 import com.querydsl.sql.types.EnumByNameType;
 import it.mapsgroup.gzoom.ReportModuleConfiguration;
 import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatus;
-import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportCallbackType;
 import it.mapsgroup.gzoom.rest.ReportJobController;
 import it.mapsgroup.gzoom.service.ReportJobService;
 import it.mapsgroup.gzoom.service.ReportTaskService;
@@ -58,11 +57,6 @@ public class GZoomReportRun {
         configuration.register("REPORT_ACTIVITY", "status", new EnumByNameType<>(ReportActivityStatus.class));
         configuration.register("REPORT_ACTIVITY", "STATUS", new EnumByNameType<>(ReportActivityStatus.class));
         configuration.register("report_activity", "STATUS", new EnumByNameType<>(ReportActivityStatus.class));
-        configuration.register("report_activity", "callback_type", new EnumByNameType<>(ReportCallbackType.class));
-        configuration.register("REPORT_ACTIVITY", "callback_type", new EnumByNameType<>(ReportCallbackType.class));
-        configuration.register("REPORT_ACTIVITY", "CALLBACK_TYPE", new EnumByNameType<>(ReportCallbackType.class));
-        configuration.register("report_activity", "CALLBACK_TYPE", new EnumByNameType<>(ReportCallbackType.class));
-
 
         //resume suspended
         context.getBean(ReportTaskService.class).resume();

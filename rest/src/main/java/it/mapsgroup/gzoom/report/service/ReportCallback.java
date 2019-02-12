@@ -1,7 +1,7 @@
-package it.mapsgroup.gzoom.callback;
+package it.mapsgroup.gzoom.report.service;
 
-import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportCallbackType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.Map;
@@ -25,5 +25,5 @@ public abstract class ReportCallback {
 
     public abstract ReportCallbackType getType();
 
-    public abstract void run(Map<String, Object> params);
+    public abstract void run(String reportActivityId, Map<String, Object> params);
 }

@@ -26,10 +26,6 @@ public class QReportActivity extends com.querydsl.sql.RelationalPathBase<ReportA
 
     public final StringPath activityId = createString("activityId");
 
-    public final StringPath callbackData = createString("callbackData");
-
-    public final EnumPath<it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportCallbackType> callbackType = createEnum("callbackType", it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportCallbackType.class);
-
     public final DateTimePath<java.time.LocalDateTime> completedStamp = createDateTime("completedStamp", java.time.LocalDateTime.class);
 
     public final StringPath contentName = createString("contentName");
@@ -93,8 +89,6 @@ public class QReportActivity extends com.querydsl.sql.RelationalPathBase<ReportA
 
     public void addMetadata() {
         addMetadata(activityId, ColumnMetadata.named("ACTIVITY_ID").withIndex(1).ofType(Types.VARCHAR).withSize(255).notNull());
-        addMetadata(callbackData, ColumnMetadata.named("CALLBACK_DATA").withIndex(19).ofType(Types.LONGVARCHAR).withSize(65535));
-        addMetadata(callbackType, ColumnMetadata.named("CALLBACK_TYPE").withIndex(20).ofType(Types.VARCHAR).withSize(255));
         addMetadata(completedStamp, ColumnMetadata.named("COMPLETED_STAMP").withIndex(11).ofType(Types.TIMESTAMP).withSize(19));
         addMetadata(contentName, ColumnMetadata.named("CONTENT_NAME").withIndex(18).ofType(Types.VARCHAR).withSize(100));
         addMetadata(createdByUserLogin, ColumnMetadata.named("CREATED_BY_USER_LOGIN").withIndex(16).ofType(Types.VARCHAR).withSize(250));

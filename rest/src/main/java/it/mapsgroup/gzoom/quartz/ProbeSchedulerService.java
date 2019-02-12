@@ -3,6 +3,7 @@ package it.mapsgroup.gzoom.quartz;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.mapsgroup.gzoom.model.Messages;
+import it.mapsgroup.gzoom.report.service.ReportCallbackType;
 import it.mapsgroup.gzoom.rest.InternalServerException;
 import it.mapsgroup.gzoom.rest.ValidationException;
 import org.quartz.*;
@@ -47,9 +48,9 @@ public class ProbeSchedulerService {
      *
      * @param id Execution identifier
      */
-    public void scheduleReportProbe(String id, Map<String, Object> params) {
+    public void scheduleReportProbe(String id, ReportCallbackType callback, Map<String, Object> params) {
         try {
-            createSchedule(id, ProbeJob.ProbeType.REPORT, params, config.getReportProbeDelay(), config.getReportProbeRetries());
+            createSchedule(id, ProbeJob.ProbeType.REPORT, callback.name(), params, config.getReportProbeDelay(), config.getReportProbeRetries());
         } catch (Exception e) {
             LOG.error("Unexpected exception occurred while scheduling report probe [id={}]", id, e);
             throw new InternalServerException(Messages.CANNOT_SCHEDULE_PROBE);
@@ -129,18 +130,18 @@ public class ProbeSchedulerService {
         LOG.info("Scheduling successfully removed [id={}, type={}, key={}]", id, type, jkey);
     }
 
-    private void createSchedule(String id, ProbeJob.ProbeType type, Map<String, Object> params, int delaySec, int maxRetries) throws SchedulerException {
+    private void createSchedule(String id, ProbeJob.ProbeType type, String secondKey, Map<String, Object> params, int delaySec, int maxRetries) throws SchedulerException {
         JobKey jkey = asJobKey(id, type);
         TriggerKey tKey = asTriggerKey(id, type);
 
         if (scheduler.checkExists(jkey)) {
             LOG.warn("Scheduling already exists [key={}]", jkey);
         } else {
-            create(jkey, tKey, id, type, params, delaySec, maxRetries);
+            create(jkey, tKey, id, type, secondKey, params, delaySec, maxRetries);
         }
     }
 
-    private void create(JobKey jkey, TriggerKey tkey, String id, ProbeJob.ProbeType type, Map<String, Object> params, int delaySec, int maxRetries) throws SchedulerException {
+    private void create(JobKey jkey, TriggerKey tkey, String id, ProbeJob.ProbeType type, String secondKey, Map<String, Object> params, int delaySec, int maxRetries) throws SchedulerException {
         LOG.debug("Scheduling job [id={}, type={}, delay={}s]", id, type, delaySec);
 
         String jsonParams = null;
@@ -156,6 +157,7 @@ public class ProbeSchedulerService {
                 .ofType(ProbeJob.class)
                 .usingJobData(ProbeJob.PROBE_ID_KEY, id)
                 .usingJobData(ProbeJob.PROBE_TYPE_KEY, type.toString())
+                .usingJobData(ProbeJob.PROBE_TYPE_SND_KEY, secondKey)
                 .usingJobData(ProbeJob.PROBE_RETRY_KEY, maxRetries)
                 .usingJobData(ProbeJob.PROBE_PARAMS_KEY, jsonParams)
                 .withDescription("Probe job for entity " + id + " of type " + type)
@@ -166,6 +168,9 @@ public class ProbeSchedulerService {
                 .forJob(jkey)
                 .usingJobData(ProbeJob.PROBE_ID_KEY, id)
                 .usingJobData(ProbeJob.PROBE_TYPE_KEY, type.toString())
+                .usingJobData(ProbeJob.PROBE_TYPE_SND_KEY, secondKey)
+                .usingJobData(ProbeJob.PROBE_RETRY_KEY, maxRetries)
+                .usingJobData(ProbeJob.PROBE_PARAMS_KEY, jsonParams)
                 .withDescription("Probe trigger for entity " + id + " of type " + type)
                 .withIdentity(tkey)
                 .withSchedule(repeatSecondlyForever(delaySec))

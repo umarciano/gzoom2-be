@@ -1,7 +1,6 @@
 package it.mapsgroup.gzoom;
 
 import it.mapsgroup.gzoom.birt.BirtService;
-import it.mapsgroup.gzoom.callback.ReportCallback;
 import it.mapsgroup.gzoom.persistence.common.CommonPersistenceConfiguration;
 import it.mapsgroup.gzoom.querydsl.persistence.service.QueryDslPersistenceConfiguration;
 import it.mapsgroup.gzoom.report.querydsl.dao.ReportActivityDao;
@@ -23,7 +22,6 @@ import org.springframework.context.annotation.ImportResource;
 @ComponentScan(basePackageClasses = {
         ReportTaskService.class,
         BirtService.class,
-        ReportActivityDao.class,
-        ReportCallback.class})
+        ReportActivityDao.class})
 public class ReportModuleConfiguration {
 }

@@ -1,4 +1,4 @@
-package it.mapsgroup.gzoom.persistence.common.dto.enumeration;
+package it.mapsgroup.gzoom.report.service;
 
 /**
  * @author Andrea Fossi.

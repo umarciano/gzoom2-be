@@ -58,7 +58,7 @@ public class ReportService {
     public ReportService(ReportClientService client, GzoomReportClientConfig config, ReportDao reportDao,  DtoMapper dtoMapper,
     		WorkEffortTypeContentDao workEffortTypeContentDao) {
         this.config = config;
-        this.client = new ReportClientService(new RestTemplate());
+        this.client = client;
         this.reportDao = reportDao;
         this.workEffortTypeContentDao = workEffortTypeContentDao;
         this.dtoMapper = dtoMapper;

@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import it.mapsgroup.gzoom.birt.BirtConfig;
 import it.mapsgroup.gzoom.dto.JsonTypeMap;
 import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatus;
-import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportCallbackType;
 import it.mapsgroup.gzoom.querydsl.dto.ReportParams;
 import it.mapsgroup.gzoom.report.querydsl.dao.ReportActivityDao;
 import it.mapsgroup.gzoom.report.report.dto.CreateReport;
@@ -87,21 +86,6 @@ public class ReportJobService {
                 record.setReportData(objectMapper.writeValueAsString(new JsonTypeMap<>(new HashMap<>())));
         } catch (JsonProcessingException e) {
             throw new ValidationException("Cannot serialize params");
-        }
-
-        try {
-            if (report.getCallbackParams() != null)
-                record.setCallbackData(objectMapper.writeValueAsString(new JsonTypeMap<>(report.getCallbackParams())));
-            else
-                record.setCallbackData(objectMapper.writeValueAsString(new JsonTypeMap<>(new HashMap<>())));
-        } catch (JsonProcessingException e) {
-            throw new ValidationException("Cannot serialize params");
-        }
-
-        if (report.getCallbackType() != null) {
-            record.setCallbackType(Validators.assertIsEnum(ReportCallbackType.class, report.getCallbackType(), "CallbackType not valid"));
-        } else {
-            record.setCallbackType(null);
         }
         record.setCompletedStamp(LocalDateTime.now());
         reportDao.create(record);

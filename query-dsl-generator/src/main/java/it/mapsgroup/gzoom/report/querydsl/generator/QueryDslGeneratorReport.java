@@ -7,7 +7,6 @@ import com.querydsl.sql.types.EnumByNameType;
 import com.querydsl.sql.types.JSR310LocalDateTimeType;
 import com.querydsl.sql.types.JSR310LocalDateType;
 import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatus;
-import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportCallbackType;
 import it.mapsgroup.gzoom.querydsl.BooleanCharacterType;
 import it.mapsgroup.gzoom.querydsl.generator.CustomNamingStrategy;
 import it.mapsgroup.gzoom.querydsl.generator.CustomSerializer2;
@@ -58,7 +57,6 @@ public class QueryDslGeneratorReport {
         exporter.setConfiguration(configuration);
         // configuration.register("company", "state_tag", new EnumByNameType<EntityStateTag>(EntityStateTag.class));
         configuration.register("report_activity", "status", new EnumByNameType<>(ReportActivityStatus.class));
-        configuration.register("report_activity", "callback_type", new EnumByNameType<>(ReportCallbackType.class));
 
         configuration.register(new JSR310LocalDateTimeType());
         configuration.register(new JSR310LocalDateType());

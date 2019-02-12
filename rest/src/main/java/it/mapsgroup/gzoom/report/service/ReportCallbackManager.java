@@ -1,6 +1,5 @@
-package it.mapsgroup.gzoom.callback;
+package it.mapsgroup.gzoom.report.service;
 
-import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportCallbackType;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 

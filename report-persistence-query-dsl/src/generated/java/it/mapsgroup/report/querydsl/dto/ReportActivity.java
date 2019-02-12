@@ -13,12 +13,6 @@ public class ReportActivity implements AbstractIdentity {
     @Column("ACTIVITY_ID")
     private String activityId;
 
-    @Column("CALLBACK_DATA")
-    private String callbackData;
-
-    @Column("CALLBACK_TYPE")
-    private it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportCallbackType callbackType;
-
     @Column("COMPLETED_STAMP")
     private java.time.LocalDateTime completedStamp;
 
@@ -76,22 +70,6 @@ public class ReportActivity implements AbstractIdentity {
 
     public void setActivityId(String activityId) {
         this.activityId = activityId;
-    }
-
-    public String getCallbackData() {
-        return callbackData;
-    }
-
-    public void setCallbackData(String callbackData) {
-        this.callbackData = callbackData;
-    }
-
-    public it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportCallbackType getCallbackType() {
-        return callbackType;
-    }
-
-    public void setCallbackType(it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportCallbackType callbackType) {
-        this.callbackType = callbackType;
     }
 
     public java.time.LocalDateTime getCompletedStamp() {
