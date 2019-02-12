@@ -23,6 +23,7 @@ import it.mapsgroup.gzoom.querydsl.dto.ContactMech;
 import it.mapsgroup.gzoom.querydsl.dto.QContactMech;
 import it.mapsgroup.gzoom.querydsl.dto.QPartyContactMech;
 import it.mapsgroup.gzoom.querydsl.dto.QPartyRole;
+import it.mapsgroup.gzoom.querydsl.dto.QWorkEffortTypeRole;
 
 @Service
 public class ContactMechDao extends AbstractDao {
@@ -36,7 +37,7 @@ public class ContactMechDao extends AbstractDao {
     }
     
     @Transactional
-    public List<ContactMech> getContactMechPartyRole(String roleTypeId) {
+    public List<ContactMech> getContactMechWorkEffortTypeRole(String workEffortType) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
@@ -45,14 +46,17 @@ public class ContactMechDao extends AbstractDao {
         QContactMech qContactMech = QContactMech.contactMech;
         QPartyRole qPartyRole = QPartyRole.partyRole;
         QPartyContactMech qPartyContactMech = QPartyContactMech.partyContactMech;
+        QWorkEffortTypeRole qWorkEffortTypeRole = QWorkEffortTypeRole.workEffortTypeRole;
 
         SQLQuery<ContactMech> tupleSQLQuery = queryFactory.select(qContactMech)
         		.from(qPartyRole)
         		.innerJoin(qPartyContactMech).on(qPartyContactMech.partyId.eq(qPartyRole.partyId)
         				.and(filterByDate(qPartyContactMech.fromDate, qPartyContactMech.thruDate)))
         		.innerJoin(qContactMech).on(qContactMech.contactMechId.eq(qPartyContactMech.contactMechId))
-        		.where(qPartyRole.roleTypeId.eq(roleTypeId)
-        				.and(qContactMech.contactMechTypeId.eq("EMAIL_ADDRESS")));
+        		.innerJoin(qWorkEffortTypeRole).on(qWorkEffortTypeRole.roleTypeId.eq(qPartyRole.roleTypeId))
+        		.where(qWorkEffortTypeRole.workEffortTypeId.eq(workEffortType)
+        				.and(qContactMech.contactMechTypeId.eq("EMAIL_ADDRESS"))
+        				.and(qContactMech.infoString.isNotNull()));
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());

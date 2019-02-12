@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import it.mapsgroup.gzoom.birt.BirtConfig;
 import it.mapsgroup.gzoom.dto.JsonTypeMap;
+import it.mapsgroup.gzoom.model.Result;
 import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatus;
 import it.mapsgroup.gzoom.querydsl.dto.ReportParam;
 import it.mapsgroup.gzoom.querydsl.dto.ReportParams;
@@ -55,6 +56,12 @@ public class ReportJobService {
         this.config = config;
     }
 
+    
+    public Result<ReportActivity> getActvities(String userLoginId) {
+    	List<ReportActivity> ret = reportDao.getActvities(userLoginId);
+        return new Result<>(ret, ret.size());
+    }
+    
     public String add(CreateReport report) {
         ReportActivity record = save(report);
         taskService.addToQueue(new ReportTaskInfo(record.getActivityId()));
@@ -131,13 +138,13 @@ public class ReportJobService {
     	} else {
     		//vado a prendere i parametri dal report
     		//getReportParams(reportName); TODO
-//    		List<ReportParam> list = new ArrayList<ReportParam>();
-//    		ReportParam param = new ReportParam();
-//        	param.setParamType("LIST");
-//        	param.setMandatory(false);
-//        	param.setParamName("workEffortId");
-//        	list.add(param);
-//        	params.setParams(list);
+    		List<ReportParam> list = new ArrayList<ReportParam>();
+    		ReportParam param = new ReportParam();
+        	param.setParamType("LIST");
+        	param.setMandatory(false);
+        	param.setParamName("workEffortId");
+        	list.add(param);
+        	params.setParams(list);
     	}           	
         return params;
     }

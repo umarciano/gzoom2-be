@@ -64,13 +64,13 @@ public class QWorkEffortTypeStatus extends com.querydsl.sql.RelationalPathBase<W
 
     public final com.querydsl.sql.PrimaryKey<WorkEffortTypeStatus> primary = createPrimaryKey(currentStatusId, workEffortTypeRootId);
 
-    public final com.querydsl.sql.ForeignKey<RoleType> wetsMgmrt = createForeignKey(managementRoleTypeId, "ROLE_TYPE_ID");
-
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> wetsRootwet = createForeignKey(workEffortTypeRootId, "WORK_EFFORT_TYPE_ID");
+    public final com.querydsl.sql.ForeignKey<StatusItem> wetsNextsi = createForeignKey(nextStatusId, "STATUS_ID");
 
     public final com.querydsl.sql.ForeignKey<StatusItem> wetsCurrsi = createForeignKey(currentStatusId, "STATUS_ID");
 
-    public final com.querydsl.sql.ForeignKey<StatusItem> wetsNextsi = createForeignKey(nextStatusId, "STATUS_ID");
+    public final com.querydsl.sql.ForeignKey<RoleType> wetsMgmrt = createForeignKey(managementRoleTypeId, "ROLE_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> wetsRootwet = createForeignKey(workEffortTypeRootId, "WORK_EFFORT_TYPE_ID");
 
     public QWorkEffortTypeStatus(String variable) {
         super(WorkEffortTypeStatus.class, forVariable(variable), "null", "WORK_EFFORT_TYPE_STATUS");

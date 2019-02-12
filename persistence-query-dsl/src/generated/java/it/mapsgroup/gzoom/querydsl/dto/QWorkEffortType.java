@@ -238,6 +238,8 @@ public class QWorkEffortType extends com.querydsl.sql.RelationalPathBase<WorkEff
 
     public final com.querydsl.sql.ForeignKey<WorkEffortTypePeriod> _wtpWtype = createInvForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID");
 
+    public final com.querydsl.sql.ForeignKey<WorkEffortTypeRole> _wetrWtFk = createInvForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID");
+
     public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetRult2wet = createInvForeignKey(workEffortTypeId, "RULE_TYPE_ID2");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortType> _wkEffrtTypePar = createInvForeignKey(workEffortTypeId, "PARENT_TYPE_ID");

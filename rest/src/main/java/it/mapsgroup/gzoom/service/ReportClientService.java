@@ -1,5 +1,6 @@
 package it.mapsgroup.gzoom.service;
 
+import it.mapsgroup.gzoom.model.Result;
 import it.mapsgroup.gzoom.querydsl.dto.ReportParams;
 import it.mapsgroup.gzoom.report.report.dto.CreateReport;
 import it.mapsgroup.gzoom.report.report.dto.ReportStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -93,6 +95,12 @@ public class ReportClientService {
     
     public ResponseEntity<ReportActivity> getReportActivity(URL url, String id) {
         return restTemplate.getForEntity(url.toString()+"/" + id, ReportActivity.class, id);
+    }    
+    
+	public Result<ReportActivity> getReportDownloads(URL url, String userLoginId) {
+		List rest = (List) ((HashMap) restTemplate.getForObject(url.toString()+ "/report-download/" + userLoginId, Object.class, userLoginId)).get("results");		
+		return new Result<>(rest, rest.size());
+        
     }
     
 }

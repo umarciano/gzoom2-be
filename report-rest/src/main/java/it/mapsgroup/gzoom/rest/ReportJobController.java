@@ -1,6 +1,7 @@
 package it.mapsgroup.gzoom.rest;
 
 import it.mapsgroup.gzoom.common.Exec;
+import it.mapsgroup.gzoom.model.Result;
 import it.mapsgroup.gzoom.querydsl.dto.ReportParams;
 import it.mapsgroup.gzoom.report.report.dto.CancelReport;
 import it.mapsgroup.gzoom.report.report.dto.CreateReport;
@@ -24,6 +25,13 @@ public class ReportJobController {
     @Autowired
     public ReportJobController(ReportJobService reportJobService) {
         this.reportJobService = reportJobService;
+    }
+    
+
+    @RequestMapping(value = "/report/report-download/{userLoginId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Result<ReportActivity> getActvities(@PathVariable(value = "userLoginId") String userLoginId){
+        return Exec.exec("reports", () -> reportJobService.getActvities(userLoginId));
     }
 
     @RequestMapping(value = "/report/add", method = RequestMethod.POST)
