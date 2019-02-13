@@ -1,6 +1,7 @@
 package it.mapsgroup.gzoom.service;
 
 import it.mapsgroup.gzoom.ofbiz.client.OfBizClientConfig;
+import it.mapsgroup.gzoom.quartz.SchedulerConfig;
 import it.mapsgroup.gzoom.security.model.SecurityConfiguration;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,23 +11,19 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import static com.google.common.base.Strings.emptyToNull;
-import static it.mapsgroup.commons.Strings.splitToArray;
 import static it.mapsgroup.gzoom.common.JsonLocalizationReader.readClasspathResources;
 import static it.mapsgroup.gzoom.common.JsonLocalizationReader.readDirectory;
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * Configuration implementation.
  */
-public class ConfigurationImpl implements Configuration, SecurityConfiguration, OfBizClientConfig, GzoomReportClientConfig {
+public class ConfigurationImpl implements Configuration, SecurityConfiguration, OfBizClientConfig, GzoomReportClientConfig, SchedulerConfig {
     private static final Logger LOG = getLogger(ConfigurationImpl.class);
 
     // Localizations
@@ -49,6 +46,9 @@ public class ConfigurationImpl implements Configuration, SecurityConfiguration, 
 
     private final String gzoomServerReportUrl;
 
+    private final int reportProbeDelay;
+    private final int reportProbeRetries;
+
     @Autowired
     public ConfigurationImpl(Environment env) {
         // localization
@@ -67,8 +67,11 @@ public class ConfigurationImpl implements Configuration, SecurityConfiguration, 
         this.configurationPath = env.getProperty("gzoom.conf.dir");
 
         this.ofbizServerXmlrpcUrl = env.getProperty("ofbiz.server.xmlrpc.url");
-        
+
         this.gzoomServerReportUrl = env.getProperty("gzoom.server.report.url");
+
+        this.reportProbeDelay = env.getProperty("gzoom.quartz.report.probe.delay", Integer.class, 60);//60 sec default
+        this.reportProbeRetries = env.getProperty("gzoom.quartz.report.probe.retries", Integer.class, 20);//number of retires
     }
 
 
@@ -110,7 +113,7 @@ public class ConfigurationImpl implements Configuration, SecurityConfiguration, 
             return null;
         return (Map<String, Object>) map.get("formats");
     }
-    
+
     @SuppressWarnings("unchecked")
     @Override
     public Map<String, Object> getCalendarLocale(Locale locale) {
@@ -168,5 +171,15 @@ public class ConfigurationImpl implements Configuration, SecurityConfiguration, 
         } catch (MalformedURLException e) {
             throw new IllegalArgumentException("gzoomServerReportUrl is wrong");
         }
+    }
+
+    @Override
+    public int getReportProbeDelay() {
+        return this.reportProbeDelay;
+    }
+
+    @Override
+    public int getReportProbeRetries() {
+        return this.reportProbeRetries;
     }
 }

@@ -1,10 +1,10 @@
+package it.mapsgroup.gzoom.quartz;
+
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import it.mapsgroup.gzoom.persistence.common.CommonPersistenceConfiguration;
-import it.mapsgroup.gzoom.quartz.ProbeSchedulerService;
-import it.mapsgroup.gzoom.quartz.QuartzConfiguration;
 import it.mapsgroup.gzoom.querydsl.dao.AbstractDao;
 import it.mapsgroup.gzoom.querydsl.dao.ReportDao;
 import it.mapsgroup.gzoom.querydsl.persistence.service.QueryDslPersistenceConfiguration;
@@ -36,50 +36,10 @@ import static org.slf4j.LoggerFactory.getLogger;
 @RunWith(SpringRunner.class)
 @ImportResource("classpath:/lmm/spring/backend-context.xml")
 @TestPropertySource("classpath:test.properties")
+@Import(SchedulerTestConfig.class)
 public class ReportClientServiceQuartzIT {
     private static final Logger LOG = getLogger(ReportClientServiceQuartzIT.class);
 
-
-    @Configuration
-    @ComponentScan(basePackageClasses = {AbstractDao.class})
-    @ComponentScan(basePackageClasses = ReportCallbackService.class)
-    @Import({QueryDslPersistenceConfiguration.class,
-            CommonPersistenceConfiguration.class,
-            QuartzConfiguration.class,
-    })
-    public static class TestConfig {
-        @Bean
-        public ObjectMapper getObjectMapper() {
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper
-                    //.registerModule(new ParameterNamesModule())
-                    //.registerModule(new Jdk8Module())
-                    .registerModule(new JavaTimeModule());
-            objectMapper.setDateFormat(new ISO8601DateFormat());
-            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            return objectMapper;
-        }
-
-        @Bean
-        public ReportClientService reportClientService() {
-            return new ReportClientService(new RestTemplate());
-        }
-
-        @Bean
-        GzoomReportClientConfig gzoomReportClientConfig() {
-            return new GzoomReportClientConfig() {
-                @Override
-                public URL getServerReportUrl() {
-                    try {
-                        return new URL("http://localhost:8090/rest/report");
-                    } catch (MalformedURLException e) {
-                        LOG.error("URL parsing error", e);
-                        throw new RuntimeException(e);
-                    }
-                }
-            };
-        }
-    }
 
     @Autowired
     ReportDao reportDao;
@@ -93,7 +53,7 @@ public class ReportClientServiceQuartzIT {
     GzoomReportClientConfig config;
 
     @Test
-    public void test() throws InterruptedException, MalformedURLException {
+    public void test() throws InterruptedException {
         //todo sample rest call
             HashMap<String, Object> reportParameters = new HashMap<>();
             //TODO add parameters here

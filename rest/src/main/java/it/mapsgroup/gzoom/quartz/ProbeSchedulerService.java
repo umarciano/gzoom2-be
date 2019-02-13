@@ -35,11 +35,11 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class ProbeSchedulerService {
     private static final Logger LOG = getLogger(ProbeSchedulerService.class);
     private final Scheduler scheduler;
-    private final QuartzConfiguration.SchedulerConfig config;
+    private final SchedulerConfig config;
     private final ObjectMapper objectMapper;
 
     @Autowired
-    public ProbeSchedulerService(Scheduler scheduler, QuartzConfiguration.SchedulerConfig config, ObjectMapper objectMapper) {
+    public ProbeSchedulerService(Scheduler scheduler, SchedulerConfig config, ObjectMapper objectMapper) {
         this.scheduler = scheduler;
         this.config = config;
         this.objectMapper = objectMapper;

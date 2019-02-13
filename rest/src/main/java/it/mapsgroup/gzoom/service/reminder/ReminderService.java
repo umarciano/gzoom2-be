@@ -58,7 +58,7 @@ public class ReminderService {
     public String sendMail(Report report) {    
     	String selectName = "selectReminderWorkEffortExpiry"; //TODO ReminderReportContentIdEnum.getQuery(report.getReportContentId());
     	try {
-			reminder(reportAddService.getReportParameters(report), report.getParentTypeId(), report.getContentName(), selectName);
+			reminder(reportAddService.getReportParameters(report), report.getParentTypeId(), report.getContentName(), report.getWorkEffortTypeId(), selectName);
 		} catch (Exception e) {
 			LOG.error("Exception "+ e);
 		} 
@@ -96,7 +96,7 @@ public class ReminderService {
     		LOG.info("Scheduled reminder "+wt.getWorkEffortTypeId());
     		param.put("workEffortTypeId", wt.getWorkEffortTypeId());
     		try {
-				reminder(param, wt.getParentTypeId(), "BHO" ,ReminderReportContentIdEnum.getQuery(name)); //TODO
+				reminder(param, wt.getParentTypeId(), "BHO",  wt.getWorkEffortTypeId(), ReminderReportContentIdEnum.getQuery(name)); //TODO
 			} catch (Exception e) {
 				LOG.error("Exception "+ e);
 			}
@@ -106,7 +106,7 @@ public class ReminderService {
     }
 	
 	@SuppressWarnings("unchecked")
-	public void reminder (HashMap<String, Object> reportParameters, String parentTypeId, String contentName, String selectName) throws Exception {
+	public void reminder (HashMap<String, Object> reportParameters, String parentTypeId, String contentName, String workEffortTypeId, String selectName) throws Exception {
 		LOG.info("start reminder");
 		
 		if (selectName.isEmpty()) {
@@ -114,7 +114,7 @@ public class ReminderService {
             throw new Exception("query null");
 		}
 		
-		List<ContactMech> contactMechIdFromList = getContactMechIdFrom(parentTypeId);
+		List<ContactMech> contactMechIdFromList = getContactMechIdFrom(workEffortTypeId);
 		LOG.info("reminder contactMechIdFrom="+contactMechIdFromList.toString());
 		
 		if (contactMechIdFromList.size() <= 0) {
@@ -197,8 +197,8 @@ public class ReminderService {
 	 * Resistuisco la lista dei party dove inviare il riepilogo mail
 	 * @return
 	 */
-	private List<ContactMech> getContactMechIdFrom(String parentTypeId) {
-		return contactMechDao.getContactMechPartyRole("REMINDER_"+parentTypeId); 
+	private List<ContactMech> getContactMechIdFrom(String workEffortTypeId) {
+		return contactMechDao.getContactMechWorkEffortTypeRole(workEffortTypeId); 
 	}
 
 }

@@ -20,13 +20,6 @@ public class QuartzConfiguration {
 
 
     @Bean
-    SchedulerConfig schedulerConfig() {
-        return new SchedulerConfig() {
-        };
-    }
-
-
-    @Bean
     public SchedulerFactoryBean schedulerFactory(ApplicationContext appCtx, @Qualifier("mainDataSource") DataSource mainDataSource) {
         SchedulerFactoryBean factory = new SchedulerFactoryBean();
         factory.setConfigLocation(new ClassPathResource("/report/quartz.properties"));
@@ -35,27 +28,4 @@ public class QuartzConfiguration {
         return factory;
     }
 
-    /**
-     * @author Andrea Fossi.
-     */
-    public static interface SchedulerConfig {
-        /**
-         * seconds
-         *
-         * @return
-         */
-        default int getReportProbeDelay() {
-            return 10;
-        }
-
-        /**
-         * numneber of retries
-         *
-         * @return
-         */
-        default int getReportProbeRetries() {
-            return 10;
-        }
-
-    }
 }

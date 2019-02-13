@@ -98,6 +98,20 @@ public class ReportActivityDao extends AbstractDao {
         LOG.info("size = {}", ret.size());
         return ret;
     }
+    
+    
+    @Transactional
+    public List<ReportActivity> getActvities(String userLoginId) {
+        QReportActivity qReportActivity = QReportActivity.reportActivity;
+        SQLQuery<ReportActivity> pSQLQuery = queryFactory.select(qReportActivity).from(qReportActivity).where(qReportActivity.createdByUserLogin.eq(userLoginId)).orderBy(qReportActivity.createdStamp.desc());
+        
+        SQLBindings bindings = pSQLQuery.getSQL();
+        LOG.info("{}", bindings.getSQL());
+        LOG.info("{}", bindings.getBindings());
+        List<ReportActivity> ret = pSQLQuery.fetch();
+        LOG.info("size = {}", ret.size());
+        return ret;
+    }
 
     @Transactional
     public long resumeRunning() {

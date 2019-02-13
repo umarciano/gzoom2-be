@@ -6,7 +6,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.mapsgroup.gzoom.birt.BirtConfig;
 import it.mapsgroup.gzoom.dto.JsonTypeMap;
+import it.mapsgroup.gzoom.model.Result;
 import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatus;
+import it.mapsgroup.gzoom.querydsl.dto.ReportParam;
 import it.mapsgroup.gzoom.querydsl.dto.ReportParams;
 import it.mapsgroup.gzoom.report.querydsl.dao.ReportActivityDao;
 import it.mapsgroup.gzoom.report.report.dto.CreateReport;
@@ -26,8 +28,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.List;
+
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -49,6 +54,12 @@ public class ReportJobService {
         this.objectMapper = objectMapper;
         this.taskService = taskService;
         this.config = config;
+    }
+
+
+    public Result<ReportActivity> getActvities(String userLoginId) {
+    	List<ReportActivity> ret = reportDao.getActvities(userLoginId);
+        return new Result<>(ret, ret.size());
     }
 
     public String add(CreateReport report) {
@@ -128,13 +139,13 @@ public class ReportJobService {
         } else {
             //vado a prendere i parametri dal report
             //getReportParams(reportName); TODO
-//    		List<ReportParam> list = new ArrayList<ReportParam>();
-//    		ReportParam param = new ReportParam();
-//        	param.setParamType("LIST");
-//        	param.setMandatory(false);
-//        	param.setParamName("workEffortId");
-//        	list.add(param);
-//        	params.setParams(list);
+    		List<ReportParam> list = new ArrayList<ReportParam>();
+    		ReportParam param = new ReportParam();
+        	param.setParamType("LIST");
+        	param.setMandatory(false);
+        	param.setParamName("workEffortId");
+        	list.add(param);
+        	params.setParams(list);
         }
         return params;
     }
