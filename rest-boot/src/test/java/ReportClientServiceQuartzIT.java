@@ -130,6 +130,6 @@ public class ReportClientServiceQuartzIT {
 
         String id = client.createReport(config.getServerReportUrl(),request);
         probeSchedulerService.scheduleReportProbe(id, ReportCallbackType.TEST, new HashMap<>());
-       // Thread.sleep(60 * 1000);
+        Thread.sleep(60 * 1000);
     }
 }
