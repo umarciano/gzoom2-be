@@ -66,8 +66,9 @@ public class ReportDownloadService {
         return status;
     }
     
-    public Boolean deleteReport(String contentId) {
-        return false;
+    public Boolean deleteReport(String activityId) {
+    	client.cancel(config.getServerReportUrl(), activityId);
+        return true;
     }
     
     /**

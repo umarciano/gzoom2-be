@@ -99,8 +99,13 @@ public class ReportClientService {
     
 	public Result<ReportActivity> getReportDownloads(URL url, String userLoginId) {
 		List rest = (List) ((HashMap) restTemplate.getForObject(url.toString()+ "/report-download/" + userLoginId, Object.class, userLoginId)).get("results");		
-		return new Result<>(rest, rest.size());
-        
+		return new Result<>(rest, rest.size());        
     }
     
+
+    public String cancel(URL url, String id) {
+    	restTemplate.delete(url.toString() + "/" + id, id);
+        return "";
+    }
+	
 }
