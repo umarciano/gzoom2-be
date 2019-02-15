@@ -35,13 +35,13 @@ public class ReportService {
     
     private final ReportDao reportDao;
     private final WorkEffortTypeContentDao workEffortTypeContentDao;
-    private final DtoMapper dtoMapper; 
-   
+    private final DtoMapper dtoMapper;
+
     @Autowired
-    public ReportService(ReportClientService client, GzoomReportClientConfig config, ReportDao reportDao,  DtoMapper dtoMapper, 
+    public ReportService(ReportClientService client, GzoomReportClientConfig config, ReportDao reportDao,  DtoMapper dtoMapper,
     		WorkEffortTypeContentDao workEffortTypeContentDao) {
         this.config = config;
-        this.client = new ReportClientService(new RestTemplate());
+        this.client = client;
         this.reportDao = reportDao;
         this.workEffortTypeContentDao = workEffortTypeContentDao;
         this.dtoMapper = dtoMapper;

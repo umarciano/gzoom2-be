@@ -1,0 +1,31 @@
+package it.mapsgroup.gzoom.quartz;
+
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.scheduling.quartz.SchedulerFactoryBean;
+
+import javax.sql.DataSource;
+
+
+/**
+ * @author Andrea Fossi.
+ */
+@Configuration
+@ComponentScan(basePackageClasses = QuartzConfiguration.class)
+public class QuartzConfiguration {
+
+
+    @Bean
+    public SchedulerFactoryBean schedulerFactory(ApplicationContext appCtx, @Qualifier("mainDataSource") DataSource mainDataSource) {
+        SchedulerFactoryBean factory = new SchedulerFactoryBean();
+        factory.setConfigLocation(new ClassPathResource("/report/quartz.properties"));
+        factory.setDataSource(mainDataSource);
+        factory.setJobFactory(new AutowiringJobFactory(appCtx));
+        return factory;
+    }
+
+}

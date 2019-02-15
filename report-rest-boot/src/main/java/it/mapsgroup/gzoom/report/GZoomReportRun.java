@@ -37,7 +37,7 @@ public class GZoomReportRun {
     private static final Logger LOG = getLogger(GZoomReportRun.class);
 
     @Bean
-    public ApplicationContextProvider applicationContextProvider(ApplicationContext ac){
+    public ApplicationContextProvider applicationContextProvider(ApplicationContext ac) {
         ApplicationContextProvider provider = new ApplicationContextProvider();
         provider.setApplicationContext(ac);
         return provider;
@@ -57,7 +57,6 @@ public class GZoomReportRun {
         configuration.register("REPORT_ACTIVITY", "status", new EnumByNameType<>(ReportActivityStatus.class));
         configuration.register("REPORT_ACTIVITY", "STATUS", new EnumByNameType<>(ReportActivityStatus.class));
         configuration.register("report_activity", "STATUS", new EnumByNameType<>(ReportActivityStatus.class));
-
 
         //resume suspended
         context.getBean(ReportTaskService.class).resume();

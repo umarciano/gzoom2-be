@@ -19,6 +19,9 @@ import org.springframework.context.annotation.ImportResource;
         QueryDslPersistenceConfiguration.class,//gzoom query dsl module configuration
         CommonPersistenceConfiguration.class
 })
-@ComponentScan(basePackageClasses = {ReportTaskService.class, BirtService.class, ReportActivityDao.class})
+@ComponentScan(basePackageClasses = {
+        ReportTaskService.class,
+        BirtService.class,
+        ReportActivityDao.class})
 public class ReportModuleConfiguration {
 }

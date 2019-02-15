@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import it.mapsgroup.gzoom.birt.BirtConfig;
 import it.mapsgroup.gzoom.dto.JsonTypeMap;
 import it.mapsgroup.gzoom.model.Result;
@@ -31,8 +30,9 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
+import java.util.List;
+
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -49,19 +49,19 @@ public class ReportJobService {
     private final BirtConfig config;
 
     @Autowired
-    public ReportJobService(ReportActivityDao reportDao, ObjectMapper objectMapper, ReportTaskService taskService, BirtConfig config ) {
+    public ReportJobService(ReportActivityDao reportDao, ObjectMapper objectMapper, ReportTaskService taskService, BirtConfig config) {
         this.reportDao = reportDao;
         this.objectMapper = objectMapper;
         this.taskService = taskService;
         this.config = config;
     }
 
-    
+
     public Result<ReportActivity> getActvities(String userLoginId) {
     	List<ReportActivity> ret = reportDao.getActvities(userLoginId);
         return new Result<>(ret, ret.size());
     }
-    
+
     public String add(CreateReport report) {
         ReportActivity record = save(report);
         taskService.addToQueue(new ReportTaskInfo(record.getActivityId()));
@@ -98,7 +98,6 @@ public class ReportJobService {
         } catch (JsonProcessingException e) {
             throw new ValidationException("Cannot serialize params");
         }
-
         record.setCompletedStamp(LocalDateTime.now());
         reportDao.create(record);
         return record;
@@ -118,26 +117,28 @@ public class ReportJobService {
         to.setActivityStatus(from.getActivityStatus() != null ? from.getActivityStatus().toString() : null);
         return to;
     }
-    
+
     //TODO FINIRE
+
     /**
      * Dato il nome del report vado aprender la lista dei parametro
      * nella cartella del report,
      * se non esiste prendo i valori dal report
      * (i vecchi report i valori non sono settati in modo corretto ed è meglio metterlil
      * in file di configurazione, mentre si può pensare nei nuovi di andarlia pescare dal report)
+     *
      * @param reportName
      * @return
      */
     public ReportParams params(String reportName) {
-    	ReportParams params = new ReportParams();
-    	
-    	Path path = getReportParamsPath(reportName);
-    	if (Files.isReadable(path)) {
-    		return getParamsToFile(path.toFile());
-    	} else {
-    		//vado a prendere i parametri dal report
-    		//getReportParams(reportName); TODO
+        ReportParams params = new ReportParams();
+
+        Path path = getReportParamsPath(reportName);
+        if (Files.isReadable(path)) {
+            return getParamsToFile(path.toFile());
+        } else {
+            //vado a prendere i parametri dal report
+            //getReportParams(reportName); TODO
     		List<ReportParam> list = new ArrayList<ReportParam>();
     		ReportParam param = new ReportParam();
         	param.setParamType("LIST");
@@ -145,38 +146,39 @@ public class ReportJobService {
         	param.setParamName("workEffortId");
         	list.add(param);
         	params.setParams(list);
-    	}           	
+        }
         return params;
     }
-    
+
     private ReportParams getParamsToFile(File file) {
-		ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
         try {
-        	return mapper.readValue(file, ReportParams.class);			 
-		} catch (JsonParseException e) {			
-			e.printStackTrace();
-		} catch (JsonMappingException e) {			
-			e.printStackTrace();
-		} catch (IOException e) {			
-			e.printStackTrace();
-		}
-        
+            return mapper.readValue(file, ReportParams.class);
+        } catch (JsonParseException e) {
+            e.printStackTrace();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return new ReportParams();
-	}
-    
+    }
+
     private Path getReportParamsPath(String reportName) throws RuntimeException {
-		String reportDirectory = config.getBirtReportInputDir();
-		return Paths.get(reportDirectory + File.separator + reportName + File.separator + reportName + ".json");
-	}
-    
-    
+        String reportDirectory = config.getBirtReportInputDir();
+        return Paths.get(reportDirectory + File.separator + reportName + File.separator + reportName + ".json");
+    }
+
+
     /**
      * Get ReportActivity
+     *
      * @param reportActivityId
      * @return
      */
     public ReportActivity get(String reportActivityId) {
-    	return reportDao.get(reportActivityId);
+        return reportDao.get(reportActivityId);
     }
-    
+
 }

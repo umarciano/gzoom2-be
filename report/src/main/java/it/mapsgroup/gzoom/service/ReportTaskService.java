@@ -40,6 +40,7 @@ public class ReportTaskService {
     private final DataResourceDao dataResourceDao;
     private final ReportTaskDtoMapper dtoMapper;
 
+
     private final ConcurrentHashMap<String, ReportTaskInfo> tasks;
 
 
@@ -67,6 +68,7 @@ public class ReportTaskService {
             tasks.remove(reportTaskInfo.getId());
             createOfbizRecords(reportTask.getId());
         }));
+
     }
 
     @Transactional

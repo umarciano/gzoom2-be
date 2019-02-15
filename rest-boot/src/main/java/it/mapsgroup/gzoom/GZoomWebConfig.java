@@ -1,7 +1,9 @@
-package it.mapsgroup.gzoom.report;
+package it.mapsgroup.gzoom;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import it.mapsgroup.gzoom.ofbiz.client.OfBizClientConfig;
 import it.mapsgroup.gzoom.ofbiz.client.impl.AuthenticationOfBizClientImpl;
 import it.mapsgroup.gzoom.ofbiz.service.LoginServiceOfBiz;
@@ -9,11 +11,14 @@ import it.mapsgroup.gzoom.security.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
@@ -28,12 +33,11 @@ import java.net.URL;
 /**
  * @author Andrea Fossi.
  */
-//FIXME security disabled
-@Deprecated
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
-//@EnableWebSecurity
-//@Configuration
-public class GZoomReportConfig extends WebSecurityConfigurerAdapter {
+
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableWebSecurity
+@Configuration
+public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
@@ -48,6 +52,7 @@ public class GZoomReportConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private Http403ForbiddenEntryPoint http403ForbiddenEntryPoint;
+
 
 
     @Bean
