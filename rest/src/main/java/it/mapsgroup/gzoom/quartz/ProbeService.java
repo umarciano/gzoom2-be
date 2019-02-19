@@ -7,8 +7,10 @@ import it.mapsgroup.gzoom.report.report.dto.ReportStatus;
 import it.mapsgroup.gzoom.report.service.ReportCallbackService;
 import it.mapsgroup.gzoom.report.service.ReportCallbackType;
 import it.mapsgroup.gzoom.service.GzoomReportClientConfig;
-import it.mapsgroup.gzoom.service.ReportClientService;
+
 import it.mapsgroup.gzoom.service.Validators;
+import it.mapsgroup.gzoom.service.report.ReportClientService;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +51,7 @@ public class ProbeService {
     public void probeReport(String id, String callbackType, String jsonParams) {
         ResponseEntity<ReportStatus> status = null;
         try {
-            status = reportClientService.getStatus(config.getServerReportUrl(), id);
+            status = reportClientService.getStatus(id);
         } catch (Exception e) {
             LOG.error("Cannot probe report[{}]", id);
             LOG.debug("Rescheduling report probe [{}]", id);

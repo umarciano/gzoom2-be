@@ -4,8 +4,7 @@ import it.mapsgroup.gzoom.model.Report;
 import it.mapsgroup.gzoom.querydsl.util.ContextPermissionPrefixEnum;
 import it.mapsgroup.gzoom.report.report.dto.CreateReport;
 import it.mapsgroup.gzoom.report.report.dto.ReportStatus;
-import it.mapsgroup.gzoom.service.GzoomReportClientConfig;
-import it.mapsgroup.gzoom.service.ReportClientService;
+import it.mapsgroup.gzoom.service.report.ReportClientService;
 import it.mapsgroup.gzoom.util.BirtContentTypeEnum;
 import it.mapsgroup.gzoom.util.BirtUtil;
 import it.memelabs.smartnebula.commons.DateUtil;
@@ -25,19 +24,14 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class ReportAddService {
     private static final Logger LOG = getLogger(ReportAddService.class);
 
-    private final GzoomReportClientConfig config;
     private final ReportClientService client;
     private final BirtUtil birtUtil;
 
     private static final String DEFAULT_REPORT_OUTPUT_FORMAT = "pdf";
 
     @Autowired
-    public ReportAddService(BirtUtil birtUtil,
-                            GzoomReportClientConfig config,
-                            ReportClientService client) {
-
+    public ReportAddService(BirtUtil birtUtil, ReportClientService client) {
         this.birtUtil = birtUtil;
-        this.config = config;
         this.client = client;
     }
 
@@ -127,8 +121,8 @@ public class ReportAddService {
         request.setContentName(contentName + "." + reportParameters.get("outputFormat"));
         request.setParams(reportParameters);
 
-        String id = client.createReport(config.getServerReportUrl(), request);
-        ResponseEntity<ReportStatus> status = client.getStatus(config.getServerReportUrl(), id);
+        String id = client.createReport(request);
+        ResponseEntity<ReportStatus> status = client.getStatus(id);
         LOG.info(status.getBody().toString());
 
         return id;

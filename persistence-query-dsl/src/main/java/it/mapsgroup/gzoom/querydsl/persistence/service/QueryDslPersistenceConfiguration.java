@@ -37,7 +37,8 @@ public class QueryDslPersistenceConfiguration {
 
 
     public com.querydsl.sql.Configuration querydslConfiguration(Environment env) {
-        String queryDslTemplate = env.getProperty("persistence.main.querydsl.templates");
+        String queryDslTemplate = env.getProperty("persistence.main.querydsl.templates");        
+        
         if (StringUtils.isEmpty(queryDslTemplate)) {
             LOG.error("persistence.main.querydsl.templates cannot be empty");
             throw new RuntimeException("persistence.main.querydsl.templates cannot be empty");

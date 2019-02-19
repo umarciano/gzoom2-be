@@ -23,11 +23,10 @@ import org.springframework.web.client.RestTemplate;
 
 
 import it.mapsgroup.gzoom.model.Result;
-import it.mapsgroup.gzoom.querydsl.dao.ReportDao;
 import it.mapsgroup.gzoom.report.report.dto.ReportStatus;
 import it.mapsgroup.gzoom.rest.ValidationException;
 import it.mapsgroup.gzoom.service.GzoomReportClientConfig;
-import it.mapsgroup.gzoom.service.ReportClientService;
+import it.mapsgroup.gzoom.service.report.ReportClientService;
 import it.mapsgroup.report.querydsl.dto.ReportActivity;
 
 /**
@@ -37,21 +36,18 @@ import it.mapsgroup.report.querydsl.dto.ReportActivity;
 @Service
 public class ReportDownloadService {
     private static final Logger LOG = getLogger(ReportDownloadService.class);
-
-    // private final GzoomReportClient client;
-    private final GzoomReportClientConfig config;
-
-    private final ReportClientService client;
-    
+   
+   
+    private final ReportClientService client;    
    
     @Autowired
-    public ReportDownloadService(ReportClientService client, GzoomReportClientConfig config, ReportDao reportDao) {
-        this.config = config;
-        this.client = new ReportClientService(new RestTemplate());
+    public ReportDownloadService(ReportClientService client, GzoomReportClientConfig config) {
+        this.client = new ReportClientService(new RestTemplate(), config);
     }
     
+    
     public Result<ReportActivity> getReportDownloads() {
-    	return client.getReportDownloads(config.getServerReportUrl(), principal().getUserLoginId()); 
+    	return client.getReportDownloads(principal().getUserLoginId()); 
    
 //    	ReportActivity reportActivity = client.getReportActivity(config.getServerReportUrl(), "10070").getBody();
 //    	List<ReportActivity> rest = new ArrayList<>();
@@ -61,13 +57,13 @@ public class ReportDownloadService {
     }
     
     public ResponseEntity<ReportStatus> status(String activityId) {
-        ResponseEntity<ReportStatus> status = client.getStatus(config.getServerReportUrl(), activityId);
+        ResponseEntity<ReportStatus> status = client.getStatus(activityId);
         LOG.info(status.getBody().toString());
         return status;
     }
     
     public Boolean deleteReport(String activityId) {
-    	client.cancel(config.getServerReportUrl(), activityId);
+    	client.cancel(activityId);
         return true;
     }
     
@@ -79,7 +75,7 @@ public class ReportDownloadService {
      * @return
      */
     public String stream(String activityId, HttpServletRequest request, HttpServletResponse response) {
-    	ReportActivity reportActivity = client.getReportActivity(config.getServerReportUrl(), activityId).getBody();
+    	ReportActivity reportActivity = client.getReportActivity(activityId).getBody();
     	LOG.info("stream patch: "+reportActivity.getObjectInfo());
         File file = new File(reportActivity.getObjectInfo()); 
         

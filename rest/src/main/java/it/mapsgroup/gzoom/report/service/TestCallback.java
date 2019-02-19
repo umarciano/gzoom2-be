@@ -1,7 +1,7 @@
 package it.mapsgroup.gzoom.report.service;
 
 import it.mapsgroup.gzoom.service.GzoomReportClientConfig;
-import it.mapsgroup.gzoom.service.ReportClientService;
+import it.mapsgroup.gzoom.service.report.ReportClientService;
 import it.mapsgroup.report.querydsl.dto.ReportActivity;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class TestCallback extends ReportCallback {
     @Override
     public void run(String reportActivityId, Map<String, Object> params) {
         LOG.info("TEST - params[description]={}", params.get("description"));
-        ResponseEntity<ReportActivity> reportActivity = client.getReportActivity(config.getServerReportUrl(), reportActivityId);
+        ResponseEntity<ReportActivity> reportActivity = client.getReportActivity(reportActivityId);
         ReportActivity report = reportActivity.getBody();
         LOG.info("Report name {}", report.getReportName());
 

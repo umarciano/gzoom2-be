@@ -6,9 +6,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
-
 
 import it.mapsgroup.gzoom.model.Report;
 import it.mapsgroup.gzoom.model.Result;
@@ -18,8 +15,7 @@ import it.mapsgroup.gzoom.querydsl.dto.ReportParams;
 import it.mapsgroup.gzoom.querydsl.dto.ReportType;
 import it.mapsgroup.gzoom.querydsl.dto.WorkEffortTypeExt;
 import it.mapsgroup.gzoom.service.DtoMapper;
-import it.mapsgroup.gzoom.service.GzoomReportClientConfig;
-import it.mapsgroup.gzoom.service.ReportClientService;
+import it.mapsgroup.gzoom.service.report.ReportClientService;
 
 /**
  * Profile service.
@@ -28,9 +24,6 @@ import it.mapsgroup.gzoom.service.ReportClientService;
 @Service
 public class ReportService {
 
-    // private final GzoomReportClient client;
-    private final GzoomReportClientConfig config;
-
     private final ReportClientService client;
     
     private final ReportDao reportDao;
@@ -38,10 +31,9 @@ public class ReportService {
     private final DtoMapper dtoMapper;
 
     @Autowired
-    public ReportService(ReportClientService client, GzoomReportClientConfig config, ReportDao reportDao,  DtoMapper dtoMapper,
+    public ReportService(ReportClientService client, ReportDao reportDao,  DtoMapper dtoMapper,
     		WorkEffortTypeContentDao workEffortTypeContentDao) {
-        this.config = config;
-        this.client = client;
+    	this.client = client;
         this.reportDao = reportDao;
         this.workEffortTypeContentDao = workEffortTypeContentDao;
         this.dtoMapper = dtoMapper;
@@ -94,7 +86,7 @@ public class ReportService {
      * @return
      */
 	private ReportParams getParams(String reportName) {		
-		ResponseEntity<ReportParams> params = client.getReportParams(config.getServerReportUrl(), reportName);
+		ResponseEntity<ReportParams> params = client.getReportParams(reportName);
         return params.getBody();
     }	
 

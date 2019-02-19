@@ -8,7 +8,6 @@ import it.mapsgroup.gzoom.birt.BirtConfig;
 import it.mapsgroup.gzoom.dto.JsonTypeMap;
 import it.mapsgroup.gzoom.model.Result;
 import it.mapsgroup.gzoom.persistence.common.dto.enumeration.ReportActivityStatus;
-import it.mapsgroup.gzoom.querydsl.dto.ReportParam;
 import it.mapsgroup.gzoom.querydsl.dto.ReportParams;
 import it.mapsgroup.gzoom.report.querydsl.dao.ReportActivityDao;
 import it.mapsgroup.gzoom.report.report.dto.CreateReport;
@@ -28,7 +27,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.List;
@@ -63,6 +61,8 @@ public class ReportJobService {
     }
 
     public String add(CreateReport report) {
+    	//TODO aggiugo oda
+    	report.getParams().put("odaDialect", config.getOdaDialect());
         ReportActivity record = save(report);
         taskService.addToQueue(new ReportTaskInfo(record.getActivityId()));
         return record.getActivityId();
@@ -139,13 +139,13 @@ public class ReportJobService {
         } else {
             //vado a prendere i parametri dal report
             //getReportParams(reportName); TODO
-    		List<ReportParam> list = new ArrayList<ReportParam>();
+    		/*List<ReportParam> list = new ArrayList<ReportParam>();
     		ReportParam param = new ReportParam();
         	param.setParamType("LIST");
         	param.setMandatory(false);
         	param.setParamName("workEffortId");
         	list.add(param);
-        	params.setParams(list);
+        	params.setParams(list);*/
         }
         return params;
     }

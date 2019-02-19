@@ -1,6 +1,11 @@
 package it.mapsgroup.gzoom.rest;
 
 
+import static org.slf4j.LoggerFactory.getLogger;
+
+
+
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -21,13 +26,14 @@ public class ReminderController {
         this.reminderService = reminderService;
     }    
     
-    @RequestMapping(value = "reminder-period", method = RequestMethod.POST)
+    @RequestMapping(value = "reminder-period", method = RequestMethod.GET)
     @ResponseBody
     public String reminderPeriodoScheduled() {
-        return Exec.exec("reminder-period", () -> reminderService.reminderPeriodoScheduled());
+        return Exec.exec("reminder-period", () ->  reminderService.reminderPeriodoScheduled());
     }
+        
     
-    @RequestMapping(value = "reminder-expiry", method = RequestMethod.POST)
+    @RequestMapping(value = "reminder-expiry", method = RequestMethod.GET)
     @ResponseBody
     public String reminderWorkEffortExpiry() {
         return Exec.exec("report/sendmail post", () -> reminderService.reminderWorkEffortExpiry());

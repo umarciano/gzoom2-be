@@ -146,9 +146,9 @@ public class PartyDao extends AbstractDao {
   				.innerJoin(qParty).on(qParty.partyId.eq(qPartyRole.partyId)) 
   				.innerJoin(qPartyParentRole).on(qPartyParentRole.partyId.eq(qParty.partyId)) 
   				.where(qPartyRole.parentRoleTypeId.eq("ORGANIZATION_UNIT")
-  						.and(qParty.statusId.eq("PARTY_ENABLED")))
-                 .orderBy(qPartyParentRole.parentRoleCode.asc(), qPartyParentRole.parentRoleCode.asc())
-                 .groupBy(qParty.partyId);
+  					.and(qParty.statusId.eq("PARTY_ENABLED")))
+                 .orderBy(qPartyParentRole.parentRoleCode.asc(), qPartyParentRole.parentRoleCode.asc());
+                // .groupBy(qParty.partyId);
          
          
          // se ho uno dei permessi uso la  lista filtrata di elementi

@@ -94,7 +94,7 @@ public class WorkEffortDao extends AbstractDao {
 						.and(qWorkEffortType.isRoot.eq(true))
 						.and(qWorkEffortType.parentTypeId.like("CTX%"))
 						.and(qWorkEffort.workEffortRevisionId.isNull()))  //TODO prendo solo quelli non storicizzati!!!!
-				.groupBy(qWorkEffort.workEffortId)
+			//	.groupBy(qWorkEffort.workEffortId)
 				.orderBy(qWorkEffortType.seqEsp.asc(), qWorkEffort.sourceReferenceId.asc(), qWorkEffort.workEffortName.asc(), qWorkEffortType.description.asc());
 
 		// se ho uno dei permessi uso la lista filtrata di elementi

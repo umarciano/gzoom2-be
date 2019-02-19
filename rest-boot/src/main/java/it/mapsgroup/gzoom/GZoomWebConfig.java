@@ -110,7 +110,7 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/logout", "/login", "/profile/18n").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/profile/18n").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/profile/18n", "/reminder-period", "/reminder-expiry").permitAll();
         http.authorizeRequests().antMatchers("/**").authenticated();
 
         JwtLoginFilter jwtLoginFilter = new JwtLoginFilter(authenticationManager, objectMapper);
@@ -123,7 +123,11 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
         RequestMatcher profile = new AntPathRequestMatcher("/profile/i18n");
         RequestMatcher logout = new AntPathRequestMatcher("/logout");
         RequestMatcher login = new AntPathRequestMatcher("/login");
-        RequestMatcher ignoredRequests = new OrRequestMatcher(profile, logout, login);
+        
+        RequestMatcher reminderPeriod = new AntPathRequestMatcher("/reminder-period"); //TODO
+        RequestMatcher reminderExipry = new AntPathRequestMatcher("/reminder-expiry"); //TODO
+        
+        RequestMatcher ignoredRequests = new OrRequestMatcher(profile, logout, login, reminderPeriod, reminderExipry);
 
         http.antMatcher("/**")
                 .addFilterAfter(new DelegateRequestMatchingFilter(ignoredRequests, jwtTokenFilter), JwtLogoutFilter.class);

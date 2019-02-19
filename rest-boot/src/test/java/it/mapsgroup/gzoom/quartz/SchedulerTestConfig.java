@@ -9,17 +9,15 @@ import it.mapsgroup.gzoom.querydsl.dao.AbstractDao;
 import it.mapsgroup.gzoom.querydsl.persistence.service.QueryDslPersistenceConfiguration;
 import it.mapsgroup.gzoom.report.service.ReportCallbackService;
 import it.mapsgroup.gzoom.service.GzoomReportClientConfig;
-import it.mapsgroup.gzoom.service.ReportClientService;
+import it.mapsgroup.gzoom.service.report.ReportClientService;
+
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.core.env.Environment;
 import org.springframework.web.client.RestTemplate;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -47,10 +45,13 @@ public class SchedulerTestConfig {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return objectMapper;
     }
-
+    
+    @Autowired
+    private GzoomReportClientConfig config;
+    
     @Bean
     public ReportClientService reportClientService() {
-        return new ReportClientService(new RestTemplate());
+        return new ReportClientService(new RestTemplate(), config);
     }
 /*
     @Bean

@@ -1,18 +1,9 @@
 package it.mapsgroup.gzoom.quartz;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import it.mapsgroup.gzoom.persistence.common.CommonPersistenceConfiguration;
-import it.mapsgroup.gzoom.querydsl.dao.AbstractDao;
-import it.mapsgroup.gzoom.querydsl.dao.ReportDao;
-import it.mapsgroup.gzoom.querydsl.persistence.service.QueryDslPersistenceConfiguration;
 import it.mapsgroup.gzoom.report.report.dto.CreateReport;
-import it.mapsgroup.gzoom.report.service.ReportCallbackService;
 import it.mapsgroup.gzoom.report.service.ReportCallbackType;
 import it.mapsgroup.gzoom.service.GzoomReportClientConfig;
-import it.mapsgroup.gzoom.service.ReportClientService;
+import it.mapsgroup.gzoom.service.report.ReportClientService;
 import it.memelabs.smartnebula.commons.DateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,10 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.RestTemplate;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -85,7 +74,7 @@ public class ReportClientServiceQuartzBulkIT {
         //
 
         for (int i = 0; i < 20; i++) {
-            String id = client.createReport(config.getServerReportUrl(), request);
+            String id = client.createReport(request);
             probeSchedulerService.scheduleReportProbe(id, ReportCallbackType.TEST, new HashMap<>());
             Thread.sleep(500);
         }

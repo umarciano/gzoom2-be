@@ -2,11 +2,6 @@ package com.mapsengineering.base.birt.util;
 
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import it.mapsgroup.gzoom.birt.BirtConfig;
-import it.memelabs.smartnebula.spring.boot.config.ApplicationContextProvider;
-
 public class UtilsConvertJdbc {
     
     public static final String DATE_FORMAT_ORACLE_DB = "MM/DD/YYYY";
@@ -16,8 +11,7 @@ public class UtilsConvertJdbc {
     
     
     @Deprecated
-    public static String getConvertDateToDateJdbc(Date date, Object delegator) {
-      
+    public static String getConvertDateToDateJdbc(Date date, Object delegator) {      
       return getConvertDateToDateJdbc(date, DEFAULT_DIALECT);
     }
     
@@ -27,11 +21,11 @@ public class UtilsConvertJdbc {
   * @param delegator
   * @return
   */
-	public static String getConvertDateToDateJdbc(Date date) {
-
+	public static String getConvertDateToDateJdbc(Date date, String odaDialect) {
+		String dialect = odaDialect == null ? DEFAULT_DIALECT : odaDialect;
+		
 		String dateString = "'" + UtilDateTime.toDateString(date, DATE_TIME_FORMAT) + "'";
 
-		String dialect = "mysql"; //TODO
 		if (isOracle(dialect)) {
 			dateString = getConvertDateToDateOracle(date);
 		}
@@ -85,10 +79,10 @@ public class UtilsConvertJdbc {
      * @param delegator
      * @return
      */
-    public static String getConvertAddDateToJdbc(String interval, String number, String date) {
-        
+    public static String getConvertAddDateToJdbc(String interval, String number, String date, String odaDialect) {
+    	String dialect = odaDialect == null ? DEFAULT_DIALECT : odaDialect;    
+    	
         String addDateString = "";
-        String dialect = "mysql"; //TODO
         if (isMsSql(dialect)) {
             addDateString = getConvertAddDateToDateMsSql(interval, number, date);
         } else if (isOracle(dialect)) {

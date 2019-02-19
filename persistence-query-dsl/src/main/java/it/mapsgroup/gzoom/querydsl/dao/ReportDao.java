@@ -99,8 +99,8 @@ public class ReportDao extends AbstractDao {
         				.where(qContentAssoc.contentId.eq("WE_PRINT")
         				.and(qWorkEffortType.parentTypeId.eq(parentTypeId))
         				.and(qWorkEffortTypeContent.isVisible.eq(true)))
-                        .orderBy(qWorkEffortTypeContent.sequenceNum.asc())
-                        .groupBy(qContent.contentId, qWorkEffortTypeContent.etch, qContent.description);
+                        .orderBy(qWorkEffortTypeContent.sequenceNum.asc());
+                      //  .groupBy(qContent.contentId, qWorkEffortTypeContent.etch, qContent.description);
         
         
         SQLBindings bindings = tupleSQLQuery.getSQL();
@@ -207,8 +207,8 @@ public class ReportDao extends AbstractDao {
         				.from(qWorkEffortType)
         				.innerJoin(qWorkEffortAnalysis).on(qWorkEffortType.workEffortTypeId.eq(qWorkEffortAnalysis.workEffortTypeId)) 
         				.innerJoin(qContent).on(qWorkEffortAnalysis.reportId.eq(qContent.contentId)) 
-        				.where(qWorkEffortType.parentTypeId.eq(parentTypeId))
-        				.groupBy(qContent.contentId, qWorkEffortAnalysis.description5, qContent.description);
+        				.where(qWorkEffortType.parentTypeId.eq(parentTypeId));
+        				//.groupBy(qContent.contentId, qWorkEffortAnalysis.description5, qContent.description);
                       //  .orderBy(qWorkEffortTypeContent.sequenceNum.asc());        
         	
         SQLBindings bindings = tupleSQLQuery.getSQL();
