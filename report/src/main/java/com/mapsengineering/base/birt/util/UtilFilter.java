@@ -13,6 +13,7 @@ public class UtilFilter {
     private String ORG_ADMIN = "ORG_ADMIN";
     private String ROLE_ADMIN = "ROLE_ADMIN";
     private String SUP_ADMIN = "SUP_ADMIN";
+    private String TOP_ADMIN = "TOP_ADMIN";
     
     private String FULLADMIN = "FULLADMIN";
 
@@ -25,22 +26,29 @@ public class UtilFilter {
              " INNER JOIN WORK_EFFORT_TYPE_STATUS FIL_STATUS ON FIL_W.WORK_EFFORT_TYPE_ID = FIL_STATUS.WORK_EFFORT_TYPE_ROOT_ID AND FIL_W.CURRENT_STATUS_ID = FIL_STATUS.CURRENT_STATUS_ID \n";
    
               
-    private String filterLeftJoin = " LEFT OUTER JOIN PARTY_RELATIONSHIP FIL_PRM ON FIL_W.ORG_UNIT_ROLE_TYPE_ID = FIL_PRM.ROLE_TYPE_ID_FROM AND FIL_W.ORG_UNIT_ID = FIL_PRM.PARTY_ID_FROM \n" +  
-                                    "       AND FIL_PRM.PARTY_RELATIONSHIP_TYPE_ID IN ('ORG_RESPONSIBLE', 'ORG_DELEGATE') AND FIL_PRM.FROM_DATE <= FIL_W.ESTIMATED_COMPLETION_DATE \n" +
-                                    "       AND (FIL_PRM.THRU_DATE IS NULL OR FIL_PRM.THRU_DATE >= FIL_W.ESTIMATED_COMPLETION_DATE) AND FIL_PRM.PARTY_ID_TO = FIL_U.UL_PARTY_ID \n" +
-                                    " LEFT OUTER JOIN PARTY_RELATIONSHIP FIL_PRS ON FIL_W.ORG_UNIT_ROLE_TYPE_ID = FIL_PRS.ROLE_TYPE_ID_TO AND FIL_W.ORG_UNIT_ID = FIL_PRS.PARTY_ID_TO \n" +
-                                    "       AND FIL_PRS.PARTY_RELATIONSHIP_TYPE_ID = 'GROUP_ROLLUP' AND FIL_PRS.FROM_DATE <= FIL_W.ESTIMATED_COMPLETION_DATE \n" +
-                                    "       AND (FIL_PRS.THRU_DATE IS NULL OR FIL_PRS.THRU_DATE >= FIL_W.ESTIMATED_COMPLETION_DATE) \n" + 
-                                    " LEFT OUTER JOIN PARTY_RELATIONSHIP FIL_PRS2 ON FIL_PRS.ROLE_TYPE_ID_FROM = FIL_PRS2.ROLE_TYPE_ID_FROM AND FIL_PRS.PARTY_ID_FROM = FIL_PRS2.PARTY_ID_FROM \n" +
-                                    "       AND FIL_PRS2.PARTY_RELATIONSHIP_TYPE_ID IN ('ORG_RESPONSIBLE', 'ORG_DELEGATE') AND FIL_PRS2.FROM_DATE <= FIL_W.ESTIMATED_COMPLETION_DATE \n" +
-                                    "       AND (FIL_PRS2.THRU_DATE IS NULL OR FIL_PRS2.THRU_DATE >= FIL_W.ESTIMATED_COMPLETION_DATE) AND FIL_PRS2.PARTY_ID_TO = FIL_U.UL_PARTY_ID \n" +
-                                    " LEFT OUTER JOIN WORK_EFFORT_PARTY_ASSIGNMENT FIL_WEPA ON FIL_W.WORK_EFFORT_ID = FIL_WEPA.WORK_EFFORT_ID AND FIL_W.ESTIMATED_COMPLETION_DATE = FIL_WEPA.THRU_DATE \n" +
-                                    "       AND FIL_WEPA.ROLE_TYPE_ID LIKE 'WEM%' AND FIL_WEPA.PARTY_ID = FIL_U.UL_PARTY_ID"; // TODO AND FIL_WEPA.ROLE_TYPE_ID = FIL_STATUS.MANAGEMENT_ROLE_TYPE_ID AND FIL_STATUS.MANAGEMENT_ROLE_TYPE_ID IS NOT NULL \n";
-
+    private String filterLeftJoin = "LEFT OUTER JOIN PARTY_RELATIONSHIP FIL_PRM ON FIL_W.ORG_UNIT_ROLE_TYPE_ID = FIL_PRM.ROLE_TYPE_ID_FROM AND FIL_W.ORG_UNIT_ID = FIL_PRM.PARTY_ID_FROM \n " +  
+                                    "       AND FIL_PRM.PARTY_RELATIONSHIP_TYPE_ID IN ('ORG_RESPONSIBLE', 'ORG_DELEGATE') AND FIL_PRM.FROM_DATE <= FIL_W.ESTIMATED_COMPLETION_DATE \n " +
+                                    "       AND (FIL_PRM.THRU_DATE IS NULL OR FIL_PRM.THRU_DATE >= FIL_W.ESTIMATED_COMPLETION_DATE) AND FIL_PRM.PARTY_ID_TO = FIL_U.UL_PARTY_ID \n " +
+                                    "LEFT OUTER JOIN PARTY_RELATIONSHIP FIL_PRS ON FIL_W.ORG_UNIT_ROLE_TYPE_ID = FIL_PRS.ROLE_TYPE_ID_TO AND FIL_W.ORG_UNIT_ID = FIL_PRS.PARTY_ID_TO \n " +
+                                    "       AND FIL_PRS.PARTY_RELATIONSHIP_TYPE_ID = 'GROUP_ROLLUP' AND FIL_PRS.FROM_DATE <= FIL_W.ESTIMATED_COMPLETION_DATE \n " +
+                                    "       AND (FIL_PRS.THRU_DATE IS NULL OR FIL_PRS.THRU_DATE >= FIL_W.ESTIMATED_COMPLETION_DATE) \n " + 
+                                    "LEFT OUTER JOIN PARTY_RELATIONSHIP FIL_PRS2 ON FIL_PRS.ROLE_TYPE_ID_FROM = FIL_PRS2.ROLE_TYPE_ID_FROM AND FIL_PRS.PARTY_ID_FROM = FIL_PRS2.PARTY_ID_FROM \n " +
+                                    "       AND FIL_PRS2.PARTY_RELATIONSHIP_TYPE_ID IN ('ORG_RESPONSIBLE', 'ORG_DELEGATE') AND FIL_PRS2.FROM_DATE <= FIL_W.ESTIMATED_COMPLETION_DATE \n " +
+                                    "       AND (FIL_PRS2.THRU_DATE IS NULL OR FIL_PRS2.THRU_DATE >= FIL_W.ESTIMATED_COMPLETION_DATE) AND FIL_PRS2.PARTY_ID_TO = FIL_U.UL_PARTY_ID \n " +                                    
+									"LEFT OUTER JOIN PARTY_RELATIONSHIP FIL_Z2 ON FIL_PRS.ROLE_TYPE_ID_FROM = FIL_Z2.ROLE_TYPE_ID_TO AND FIL_PRS.PARTY_ID_FROM = FIL_Z2.PARTY_ID_TO \n " +
+									"		AND FIL_Z2.PARTY_RELATIONSHIP_TYPE_ID = 'GROUP_ROLLUP' AND FIL_Z2.FROM_DATE <= FIL_W.ESTIMATED_COMPLETION_DATE \n " +
+									"		AND (FIL_Z2.THRU_DATE IS NULL OR FIL_Z2.THRU_DATE >= FIL_W.ESTIMATED_COMPLETION_DATE) \n " +
+									"LEFT OUTER JOIN PARTY_RELATIONSHIP FIL_Y2 ON FIL_Z2.ROLE_TYPE_ID_FROM = FIL_Y2.ROLE_TYPE_ID_FROM AND FIL_Z2.PARTY_ID_FROM = FIL_Y2.PARTY_ID_FROM \n " +
+									"		AND FIL_Y2.PARTY_RELATIONSHIP_TYPE_ID IN ('ORG_RESPONSIBLE', 'ORG_DELEGATE') AND FIL_Y2.FROM_DATE <= FIL_W.ESTIMATED_COMPLETION_DATE \n " +
+									" 		AND (FIL_Y2.THRU_DATE IS NULL OR FIL_Y2.THRU_DATE >= FIL_W.ESTIMATED_COMPLETION_DATE) \n " +
+									"		AND FIL_Y2.PARTY_ID_TO = FIL_U.UL_PARTY_ID \n " + 
+                                    "LEFT OUTER JOIN WORK_EFFORT_PARTY_ASSIGNMENT FIL_WEPA ON FIL_W.WORK_EFFORT_ID = FIL_WEPA.WORK_EFFORT_ID AND FIL_W.ESTIMATED_COMPLETION_DATE = FIL_WEPA.THRU_DATE \n " +
+                                    "       AND FIL_WEPA.ROLE_TYPE_ID LIKE 'WEM%' AND FIL_WEPA.PARTY_ID = FIL_U.UL_PARTY_ID"; 
     
-    private String filterWherIsOrg = " OR FIL_PRM.PARTY_ID_TO IS NOT NULL"; //" OR (FIL_STATUS.MANAG_WE_STATUS_ENUM_ID = 'ORGMANAGER' AND FIL_PRM.PARTY_ID_TO IS NOT NULL) ";    
+    private String filterWhereIsTop = " OR FIL_Y2.PARTY_ID_TO IS NOT NULL";
+    private String filterWhereIsOrg = " OR FIL_PRM.PARTY_ID_TO IS NOT NULL"; //" OR (FIL_STATUS.MANAG_WE_STATUS_ENUM_ID = 'ORGMANAGER' AND FIL_PRM.PARTY_ID_TO IS NOT NULL) ";    
     private String filterWhereIsSup = " OR FIL_PRS2.PARTY_ID_TO IS NOT NULL"; //" OR (FIL_STATUS.MANAG_WE_STATUS_ENUM_ID = 'SUPMANAGER' AND FIL_PRS2.PARTY_ID_TO IS NOT NULL) ";
-    private String filterWherIsRole = " OR  FIL_WEPA.PARTY_ID IS NOT NULL";  //" OR (FIL_STATUS.MANAG_WE_STATUS_ENUM_ID = 'ROLE' AND FIL_WEPA.ROLE_TYPE_ID = FIL_STATUS.MANAGEMENT_ROLE_TYPE_ID AND FIL_WEPA.PARTY_ID IS NOT NULL) ";   
+    private String filterWhereIsRole = " OR  FIL_WEPA.PARTY_ID IS NOT NULL";  //" OR (FIL_STATUS.MANAG_WE_STATUS_ENUM_ID = 'ROLE' AND FIL_WEPA.ROLE_TYPE_ID = FIL_STATUS.MANAGEMENT_ROLE_TYPE_ID AND FIL_WEPA.PARTY_ID IS NOT NULL) ";   
     private String filterUserLogin  = " AND FIL_U.ULVR_USER_LOGIN_ID = ";
     
     private boolean isFullAdmin = false;
@@ -110,15 +118,19 @@ public class UtilFilter {
         where += " AND (1 = 0 " ;
         String permission = permissionService.permissionLocalDispatcherName(localDispatcherName);
         if (permissionService.hasPermission(permission + ORG_ADMIN, userLoginId)) {
-            where += filterWherIsOrg;
+            where += filterWhereIsOrg;
         }
         
         if (permissionService.hasPermission(permission + ROLE_ADMIN, userLoginId)) {
-            where += filterWherIsRole;
+            where += filterWhereIsRole;
         }
         
         if (permissionService.hasPermission(permission + SUP_ADMIN, userLoginId)) {
             where += filterWhereIsSup;
+        }
+        
+        if (permissionService.hasPermission(permission + TOP_ADMIN, userLoginId)) {
+            where += filterWhereIsTop;
         }
         where +=  ") ";
         

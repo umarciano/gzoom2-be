@@ -43,14 +43,16 @@ public class PartyDao extends AbstractDao {
     private static final Logger LOG = getLogger(PartyDao.class);
 
     private final SequenceGenerator sequenceGenerator;
-    private SQLQueryFactory queryFactory;
-    private PermissionService permissionService;
+    private final SQLQueryFactory queryFactory;
+    private final PermissionService permissionService;
+    private final FilterPermissionDao filterPermissionDao;
     
     @Autowired
-    public PartyDao(SequenceGenerator sequenceGenerator, SQLQueryFactory queryFactory, PermissionService permissionService) {
+    public PartyDao(SequenceGenerator sequenceGenerator, SQLQueryFactory queryFactory, PermissionService permissionService, FilterPermissionDao filterPermissionDao) {
         this.sequenceGenerator = sequenceGenerator;
         this.queryFactory = queryFactory;
         this.permissionService = permissionService;
+        this.filterPermissionDao = filterPermissionDao;
     }
 
     @Transactional
@@ -84,13 +86,19 @@ public class PartyDao extends AbstractDao {
     }
     
     @Transactional
-    public List<Party> getPartys() {
+    public List<Party> getPartys(String userLoginId, String parentTypeId) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
         }
         QParty qParty = QParty.party;
-        SQLQuery<Party> pSQLQuery = queryFactory.select(qParty).from(qParty).where(qParty.partyTypeId.eq("PERSON")).orderBy(qParty.partyName.asc());
+        
+        SQLQuery<Party> pSQLQuery = queryFactory.select(qParty)
+        		.from(qParty)        		
+        		.orderBy(qParty.partyName.asc());
+        
+        pSQLQuery = (SQLQuery<Party>) filterPermissionDao.getFilterQueryPerson(pSQLQuery, qParty, userLoginId, parentTypeId);
+        
         SQLBindings bindings = pSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
@@ -135,7 +143,7 @@ public class PartyDao extends AbstractDao {
              TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
              status.getClass();
          }
-    	 String permission = ContextPermissionPrefixEnum.getPermissionPrefix(parentTypeId);
+    	 
     	 
          QParty qParty = QParty.party;
          QPartyParentRole qPartyParentRole = QPartyParentRole.partyParentRole;
@@ -147,63 +155,11 @@ public class PartyDao extends AbstractDao {
   				.innerJoin(qPartyParentRole).on(qPartyParentRole.partyId.eq(qParty.partyId)) 
   				.where(qPartyRole.parentRoleTypeId.eq("ORGANIZATION_UNIT")
   					.and(qParty.statusId.eq("PARTY_ENABLED")))
-                 .orderBy(qPartyParentRole.parentRoleCode.asc(), qPartyParentRole.parentRoleCode.asc());
+                 .orderBy(qPartyParentRole.parentRoleCode.asc());
                 // .groupBy(qParty.partyId);
          
          
-         // se ho uno dei permessi uso la  lista filtrata di elementi
-         boolean isOrgMgr = permissionService.isOrgMgr(userLoginId, permission);
-         boolean isSup = permissionService.isSup(userLoginId, permission);
-         boolean isTop = permissionService.isTop(userLoginId, permission);
-         
-         if (isOrgMgr || isSup || isTop) {
-        	 
-        	 QUserLoginPersistent qUserLogin = QUserLoginPersistent.userLogin;        	 
-        	 QPartyRelationship qPartyRelationshipE = new QPartyRelationship("E");
-             QPartyRelationship qPartyRelationshipY = new QPartyRelationship("Y");
-             QPartyRelationship qPartyRelationshipZ = new QPartyRelationship("Z");
-             QPartyRelationship qPartyRelationshipZ2 = new QPartyRelationship("Z2");
-             QPartyRelationship qPartyRelationshipY2 = new QPartyRelationship("Y2");  
-             
-             
-             tupleSQLQuery.innerJoin(qUserLogin).on(qUserLogin.userLoginId.eq(userLoginId)) 
-             .leftJoin(qPartyRelationshipE).on(qPartyRelationshipE.roleTypeIdFrom.eq(qPartyRole.roleTypeId)
-						.and(qPartyRelationshipE.partyIdFrom.eq(qPartyRole.partyId))
-						.and(qPartyRelationshipE.partyRelationshipTypeId.in("ORG_RESPONSIBLE", "ORG_DELEGATE"))
-						.and(qPartyRelationshipE.thruDate.isNull())
-						.and(qPartyRelationshipE.partyIdTo.eq(qUserLogin.partyId)))             
-             .leftJoin(qPartyRelationshipZ).on(qPartyRelationshipZ.roleTypeIdTo.eq(qPartyRole.roleTypeId)
-						.and(qPartyRelationshipZ.partyIdTo.eq(qPartyRole.partyId))
-						.and(qPartyRelationshipZ.partyRelationshipTypeId.eq("GROUP_ROLLUP"))
-						.and(qPartyRelationshipZ.thruDate.isNull()))             
-             .leftJoin(qPartyRelationshipY).on(qPartyRelationshipY.roleTypeIdFrom.eq(qPartyRelationshipZ.roleTypeIdFrom)
-						.and(qPartyRelationshipY.partyIdFrom.eq(qPartyRelationshipZ.partyIdFrom))
-						.and(qPartyRelationshipY.partyRelationshipTypeId.in("ORG_RESPONSIBLE", "ORG_DELEGATE"))
-						.and(qPartyRelationshipY.thruDate.isNull())
-						.and(qPartyRelationshipY.partyIdTo.eq(qUserLogin.partyId)))
-             .leftJoin(qPartyRelationshipZ2).on(qPartyRelationshipZ2.roleTypeIdTo.eq(qPartyRelationshipZ.roleTypeIdFrom)
-						.and(qPartyRelationshipZ2.partyIdTo.eq(qPartyRelationshipZ.partyIdFrom))
-						.and(qPartyRelationshipZ2.partyRelationshipTypeId.eq("GROUP_ROLLUP"))
-						.and(qPartyRelationshipZ2.thruDate.isNull()))
-			.leftJoin(qPartyRelationshipY2).on(qPartyRelationshipY2.roleTypeIdFrom.eq(qPartyRelationshipZ2.roleTypeIdFrom)
-						.and(qPartyRelationshipY2.partyIdFrom.eq(qPartyRelationshipZ2.partyIdFrom))
-						.and(qPartyRelationshipY2.partyRelationshipTypeId.in("ORG_RESPONSIBLE", "ORG_DELEGATE"))
-						.and(qPartyRelationshipY2.thruDate.isNull())
-						.and(qPartyRelationshipY2.partyIdTo.eq(qUserLogin.partyId)));           
-             
-             List<Predicate> predicates = new ArrayList<>();
-             
-             if (isOrgMgr) {
-            	 predicates.add(qPartyRelationshipE.partyIdTo.isNotNull());
-             }
-             if (isSup) {
-            	 predicates.add(qPartyRelationshipY.partyIdTo.isNotNull());
-             }
-             if (isTop) {
-            	 predicates.add(qPartyRelationshipY2.partyIdTo.isNotNull());
-             }
-             tupleSQLQuery.where(predicates.toArray(new Predicate[0]));
-         }
+         tupleSQLQuery = (SQLQuery<Tuple>) filterPermissionDao.getFilterQuery(tupleSQLQuery, qPartyRole, userLoginId, parentTypeId);
          
 		 SQLBindings bindings = tupleSQLQuery.getSQL();
 		 LOG.info("{}", bindings.getSQL());
@@ -217,5 +173,8 @@ public class PartyDao extends AbstractDao {
 		 LOG.info("size = {}", ret.size()); 
 		 return ret;    
     }
+    
+    
+    
 
 }

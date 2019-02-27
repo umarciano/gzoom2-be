@@ -42,7 +42,7 @@ public class WorkEffortTypeContentDao extends AbstractDao {
 	    }
 
 	    /**
-	     * prendo la lista dei tipi selezionato un report TODO aggiungere il nome del report nella condizione
+	     * prendo la lista dei tipi selezionato un report 
 	     * @param parentTypeId
 	     * @param reportContentId
 	     * @param reportName

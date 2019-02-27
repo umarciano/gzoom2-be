@@ -34,7 +34,7 @@ public class UserLoginDao {
             status.getClass();
         }
 
-                QUserLoginPersistent qUserLogin = QUserLoginPersistent.userLogin;
+        QUserLoginPersistent qUserLogin = QUserLoginPersistent.userLogin;
         QParty qParty = QParty.party;
         QPerson qPerson = QPerson.person;
         QBean<UserLogin> userLoginExQBean = bean(UserLogin.class,

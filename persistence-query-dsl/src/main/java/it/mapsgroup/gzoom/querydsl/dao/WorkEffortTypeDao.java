@@ -1,5 +1,7 @@
 package it.mapsgroup.gzoom.querydsl.dao;
 
+import static com.querydsl.core.types.Projections.bean;
+import static it.mapsgroup.gzoom.querydsl.QBeanUtils.merge;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.List;
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
+import com.querydsl.core.Tuple;
 import com.querydsl.core.group.GroupBy;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.QBean;
@@ -18,9 +21,12 @@ import com.querydsl.sql.SQLBindings;
 import com.querydsl.sql.SQLQuery;
 import com.querydsl.sql.SQLQueryFactory;
 
+import it.mapsgroup.gzoom.querydsl.dto.Content;
+import it.mapsgroup.gzoom.querydsl.dto.QContent;
 import it.mapsgroup.gzoom.querydsl.dto.QWorkEffortType;
 import it.mapsgroup.gzoom.querydsl.dto.QWorkEffortTypeContent;
 import it.mapsgroup.gzoom.querydsl.dto.WorkEffortType;
+import it.mapsgroup.gzoom.querydsl.dto.WorkEffortTypeContentExt;
 
 @Service
 public class WorkEffortTypeDao extends AbstractDao {
@@ -50,25 +56,33 @@ public class WorkEffortTypeDao extends AbstractDao {
 	}
 	
 	@Transactional
-	public List<WorkEffortType> getWorkEffortTypeReminderActive(String contentId) {
+	public List<WorkEffortTypeContentExt> getWorkEffortTypeReminderActive(String contentId) {
 		if (TransactionSynchronizationManager.isActualTransactionActive()) {
 			TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
 			status.getClass();
 		}
 		QWorkEffortType qWorkEffortType = QWorkEffortType.workEffortType;
 		QWorkEffortTypeContent qWTC = QWorkEffortTypeContent.workEffortTypeContent;
+		QContent qContent = QContent.content;
 		
-		SQLQuery<WorkEffortType> tupleSQLQuery = queryFactory.select(qWorkEffortType)
+		SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qWorkEffortType, qWTC, qContent)
 				.from(qWorkEffortType)
 				.innerJoin(qWTC).on(qWTC.workEffortTypeId.eq(qWorkEffortType.workEffortTypeId))
+				.innerJoin(qContent).on(qWTC.contentId.eq(qContent.contentId))
 				.where(qWTC.contentId.eq(contentId)
 						.and(qWorkEffortType.reminderActive.eq(true)));
 		
 		SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
-        QBean<WorkEffortType> wa = Projections.bean(WorkEffortType.class, qWorkEffortType.all());
-        List<WorkEffortType> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWorkEffortType.workEffortTypeId).list(wa));
+        
+        QBean<WorkEffortTypeContentExt> qBean = bean(WorkEffortTypeContentExt.class,
+                merge(qWTC.all(),
+                        bean(WorkEffortType.class, qWorkEffortType.all()).as("workEffortType"),
+                        bean(Content.class, qContent.all()).as("content")
+                        ));
+ 
+        List<WorkEffortTypeContentExt> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWorkEffortType.workEffortTypeId).list(qBean));
         LOG.info("size = {}", ret.size());
         return ret;
 	}

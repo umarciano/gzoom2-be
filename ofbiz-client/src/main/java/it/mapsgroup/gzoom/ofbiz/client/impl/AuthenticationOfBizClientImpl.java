@@ -82,7 +82,6 @@ public class AuthenticationOfBizClientImpl extends OfBizClient implements Authen
      * @return
      */
     @Override
-
     public Map<String, Object> getSessionContext(Map<String, Object> paramMap, String sessionId) {
         Map<String, Object> result = execute("gnFindContextById", sessionId, paramMap);
         String resp = (String) result.get("result");
@@ -95,5 +94,21 @@ public class AuthenticationOfBizClientImpl extends OfBizClient implements Authen
         return null;
     }
 
+    
+    public Map<String, Object> changePassword(String sessionId, String username, String password, String newPassword) {
+        Map<String, String> paramMap = new HashMap<String, String>();
+        paramMap.put("login.username", username);
+        paramMap.put("login.password", password);
+        
+        paramMap.put("userLoginId", username);
+        paramMap.put("currentPassword", password);
+        paramMap.put("newPassword", newPassword);
+        paramMap.put("newPasswordVerify", newPassword);
+        
+        paramMap.put("sessionId", sessionId);
+        
+        Map<String, Object> result = execute("gzChangePassword", sessionId, paramMap);
+        return result;
+    }
 
 }

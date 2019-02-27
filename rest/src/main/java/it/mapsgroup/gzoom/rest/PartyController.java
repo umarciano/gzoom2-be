@@ -36,10 +36,10 @@ public class PartyController {
         return Exec.exec("party/person get", () -> partyService.getPersons());
     }
     
-    @RequestMapping(value = "party", method = RequestMethod.GET)
+    @RequestMapping(value = "party/{parentTypeId}", method = RequestMethod.GET)
     @ResponseBody
-    public Result<Party> getPartys() {
-        return Exec.exec("party get", () -> partyService.getPartys());
+    public Result<Party> getPartys(@PathVariable(value = "parentTypeId") String parentTypeId) {
+        return Exec.exec("party get", () -> partyService.getPartys(principal().getUserLoginId(), parentTypeId));
     }
     
     @RequestMapping(value = "orgUnits/{parentTypeId}", method = RequestMethod.GET)

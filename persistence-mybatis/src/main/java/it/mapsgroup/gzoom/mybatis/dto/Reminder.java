@@ -54,8 +54,13 @@ public class Reminder {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
-	
-	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Reminder [partyId=" + partyId + ", contactMechIdTo=" + contactMechIdTo + ", subject=" + subject
+				+ ", content=" + content + "]";
+	}
 	
 }

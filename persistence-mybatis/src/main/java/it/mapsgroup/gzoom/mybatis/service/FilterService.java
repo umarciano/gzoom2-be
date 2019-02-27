@@ -20,10 +20,10 @@ public class FilterService {
 	public HashMap<String, Object> setMapFilter(String userLoginId, String permission) {
 		HashMap<String, Object> param = new HashMap<>();
 		param.put("isFullAdmin", permissionService.isFullAdmin(userLoginId, permission));
-		param.put("isOrgMgr", permissionService.isFullAdmin(userLoginId, permission));
-		param.put("isRole", permissionService.isFullAdmin(userLoginId, permission));
-		param.put("isSup", permissionService.isFullAdmin(userLoginId, permission));
-		//param.put("isTop", false); TODO
+		param.put("isOrgMgr", permissionService.isOrgMgr(userLoginId, permission));
+		param.put("isRole", permissionService.isRole(userLoginId, permission));
+		param.put("isSup", permissionService.isSup(userLoginId, permission));
+		param.put("isTop", permissionService.isTop(userLoginId, permission));  
 		param.put("userLoginId", userLoginId);
 		
 		return param;

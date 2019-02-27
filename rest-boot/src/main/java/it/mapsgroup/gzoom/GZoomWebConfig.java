@@ -2,10 +2,10 @@ package it.mapsgroup.gzoom;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
 import it.mapsgroup.gzoom.ofbiz.client.OfBizClientConfig;
 import it.mapsgroup.gzoom.ofbiz.client.impl.AuthenticationOfBizClientImpl;
+import it.mapsgroup.gzoom.ofbiz.service.ChangePasswordServiceOfBiz;
 import it.mapsgroup.gzoom.ofbiz.service.LoginServiceOfBiz;
 import it.mapsgroup.gzoom.security.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,12 +53,21 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private Http403ForbiddenEntryPoint http403ForbiddenEntryPoint;
 
-
-
     @Bean
     @Autowired
     public LoginServiceOfBiz loginServiceOfBiz(OfBizClientConfig ofBizClientConfig) {
         return new LoginServiceOfBiz(new AuthenticationOfBizClientImpl(new OfBizClientConfig() {
+            @Override
+            public URL getServerXmlRpcUrl() {
+                return ofBizClientConfig.getServerXmlRpcUrl();
+            }
+        }));
+    }
+    
+    @Bean
+    @Autowired
+    public ChangePasswordServiceOfBiz changePasswordServiceOfBiz(OfBizClientConfig ofBizClientConfig) {
+        return new ChangePasswordServiceOfBiz(new AuthenticationOfBizClientImpl(new OfBizClientConfig() {
             @Override
             public URL getServerXmlRpcUrl() {
                 return ofBizClientConfig.getServerXmlRpcUrl();
@@ -80,7 +89,7 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     @Qualifier("jwtOfBizLoginAuthenticationProvider")
     JwtOfBizLoginAuthenticationProvider jwtOfBizLoginAuthenticationProvider;
-
+    
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -118,7 +127,7 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
 
         JwtLogoutFilter jwtLogoutFilter = new JwtLogoutFilter(restAuthenticationEntryPoint, permitsStorage, objectMapper);
         http.addFilterBefore(jwtLogoutFilter, LogoutFilter.class);
-
+                
         JwtTokenFilter jwtTokenFilter = new JwtTokenFilter(authenticationManager, restAuthenticationEntryPoint, objectMapper);
         RequestMatcher profile = new AntPathRequestMatcher("/profile/i18n");
         RequestMatcher logout = new AntPathRequestMatcher("/logout");

@@ -92,29 +92,21 @@ public class ReportAddService {
      * @return
      */
     public String add(Report req) {
-
         HashMap<String, Object> reportParameters = getReportParameters(req);
-
-        //TODO nel caso che ho un servizio da chiamare al posto della creazione dell stampa
-        //unico caso creazioen di uno zip in formato xls
-        //come si fa?
-
-
-        return add(reportParameters, req.getContentName());
+        return add(reportParameters, req.getContentName(), principal().getUserLoginId());
     }
 
 
     /**
      * @param reportParameters
-     * @param contentName
+     * @param contentName 
      * @return
      */
-    public String add(HashMap<String, Object> reportParameters, String contentName) {
-
+    public String add(HashMap<String, Object> reportParameters, String contentName, String userLoginId) {
         LOG.info("add  reportParameters-> " + reportParameters);
         CreateReport request = new CreateReport();
-        request.setCreatedByUserLogin(principal().getUserLoginId());
-        request.setModifiedByUserLogin(principal().getUserLoginId());
+        request.setCreatedByUserLogin(userLoginId);
+        request.setModifiedByUserLogin(userLoginId);
         request.setReportLocale("it_IT");
         request.setMimeTypeId(BirtContentTypeEnum.getContentType((String) reportParameters.get("outputFormat")));
         request.setReportName(contentName);

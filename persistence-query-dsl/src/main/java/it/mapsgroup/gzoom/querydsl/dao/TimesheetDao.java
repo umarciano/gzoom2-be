@@ -11,6 +11,8 @@ import com.querydsl.sql.SQLQueryFactory;
 
 import it.mapsgroup.gzoom.persistence.common.SequenceGenerator;
 import it.mapsgroup.gzoom.querydsl.dto.*;
+import it.mapsgroup.gzoom.querydsl.service.PermissionService;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,6 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
-import org.springframework.transaction.support.TransactionTemplate;
 
 import static com.querydsl.core.types.Projections.bean;
 import static it.mapsgroup.gzoom.querydsl.QBeanUtils.merge;
@@ -36,16 +37,15 @@ public class TimesheetDao extends AbstractDao {
 
     private final SQLQueryFactory queryFactory;
     private final SequenceGenerator sequenceGenerator;
-    private final TransactionTemplate transactionTemplate;
-    private final PermissionDao permissionDao;
+    private final PermissionService permissionService;
+    private final FilterPermissionDao filterPermissionDao;
     
     @Autowired
-    public TimesheetDao(SQLQueryFactory queryFactory, SequenceGenerator sequenceGenerator,
-                        TransactionTemplate transactionTemplate,  PermissionDao permissionDao) {
+    public TimesheetDao(SQLQueryFactory queryFactory, SequenceGenerator sequenceGenerator, PermissionService permissionService, FilterPermissionDao filterPermissionDao) {
         this.queryFactory = queryFactory;
         this.sequenceGenerator = sequenceGenerator;
-        this.transactionTemplate = transactionTemplate;
-        this.permissionDao = permissionDao;
+        this.permissionService = permissionService;
+        this.filterPermissionDao = filterPermissionDao;
     }
 
     @Transactional
@@ -57,81 +57,19 @@ public class TimesheetDao extends AbstractDao {
                
         QTimesheet qTimesheet = QTimesheet.timesheet;
         QParty qParty = QParty.party;
-        QPartyRelationship qPartyRelationshipUO = new QPartyRelationship("UO");
-        QPartyRelationship qPartyRelationshipE = new QPartyRelationship("E");
-        QPartyRelationship qPartyRelationshipY = new QPartyRelationship("Y");
-        QPartyRelationship qPartyRelationshipZ = new QPartyRelationship("Z");
-        QPartyRelationship qPartyRelationshipZ2 = new QPartyRelationship("Z2");
-        QPartyRelationship qPartyRelationshipY2 = new QPartyRelationship("Y2");        
-        QUserLoginPersistent qUserLogin = QUserLoginPersistent.userLogin;
-        
-        
-        
-        List<Predicate> predicates = new ArrayList<>();
-        predicates.add(qParty.statusId.eq("PARTY_ENABLED"));
-        
-        List<SecurityPermission> listSecurityPermission = permissionDao.getPermission(userLoginId, "PROCPERF");        
-        if(listSecurityPermission != null) {        	
-            listSecurityPermission.forEach(r -> {
-                String permissionId = r.getPermissionId();
-                
-                if (permissionId.contains("ROLE_ADMIN")) {
-                	predicates.add(qUserLogin.partyId.eq(qParty.partyId));
-                }
-                if (permissionId.contains("ORG_ADMIN")) {
-                	predicates.add(qPartyRelationshipE.partyIdTo.isNotNull());
-                }
-                if (permissionId.contains("SUP_ADMIN")) {
-                	predicates.add(qPartyRelationshipY.partyIdTo.isNotNull());
-                }
-                if (permissionId.contains("TOP_ADMIN")) {
-                	predicates.add(qPartyRelationshipY2.partyIdTo.isNotNull());
-                }
-            });            
-        }
-        
-
-        QBean<TimesheetEx> timesheetExQBean = bean(TimesheetEx.class, merge(qTimesheet.all(), bean(Party.class, qParty.all()).as("party")));
+       
         SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qTimesheet, qParty)
-        				.from(qTimesheet)
-        				.innerJoin(qParty).on(qParty.partyId.eq(qTimesheet.partyId)) 
-        				
-        				.innerJoin(qPartyRelationshipUO).on(qPartyRelationshipUO.partyIdTo.eq(qParty.partyId)
-        						.and(qPartyRelationshipUO.partyRelationshipTypeId.eq("ORG_EMPLOYMENT"))
-        						.and(qPartyRelationshipUO.thruDate.isNull()))         				
-        				.innerJoin(qUserLogin).on(qUserLogin.userLoginId.eq(userLoginId)) 
-        				
-        				.leftJoin(qPartyRelationshipE).on(qPartyRelationshipE.roleTypeIdFrom.eq(qPartyRelationshipUO.roleTypeIdFrom)
-        						.and(qPartyRelationshipE.partyIdFrom.eq(qPartyRelationshipUO.partyIdFrom))
-        						.and(qPartyRelationshipE.partyRelationshipTypeId.in("ORG_RESPONSIBLE", "ORG_DELEGATE"))
-        						.and(qPartyRelationshipE.thruDate.isNull())
-        						.and(qPartyRelationshipE.partyIdTo.eq(qUserLogin.partyId)))        				
-        				.leftJoin(qPartyRelationshipZ).on(qPartyRelationshipZ.roleTypeIdTo.eq(qPartyRelationshipUO.roleTypeIdFrom)
-        						.and(qPartyRelationshipZ.partyIdTo.eq(qPartyRelationshipUO.partyIdFrom))
-        						.and(qPartyRelationshipZ.partyRelationshipTypeId.eq("GROUP_ROLLUP"))
-        						.and(qPartyRelationshipZ.thruDate.isNull()))
-        				.leftJoin(qPartyRelationshipY).on(qPartyRelationshipY.roleTypeIdFrom.eq(qPartyRelationshipZ.roleTypeIdFrom)
-        						.and(qPartyRelationshipY.partyIdFrom.eq(qPartyRelationshipZ.partyIdFrom))
-        						.and(qPartyRelationshipY.partyRelationshipTypeId.in("ORG_RESPONSIBLE", "ORG_DELEGATE"))
-        						.and(qPartyRelationshipY.thruDate.isNull())
-        						.and(qPartyRelationshipY.partyIdTo.eq(qUserLogin.partyId)))
-        				.leftJoin(qPartyRelationshipZ2).on(qPartyRelationshipZ2.roleTypeIdTo.eq(qPartyRelationshipZ.roleTypeIdFrom)
-        						.and(qPartyRelationshipZ2.partyIdTo.eq(qPartyRelationshipZ.partyIdFrom))
-        						.and(qPartyRelationshipZ2.partyRelationshipTypeId.eq("GROUP_ROLLUP"))
-        						.and(qPartyRelationshipZ2.thruDate.isNull()))
-        				.leftJoin(qPartyRelationshipY2).on(qPartyRelationshipY2.roleTypeIdFrom.eq(qPartyRelationshipZ2.roleTypeIdFrom)
-        						.and(qPartyRelationshipY2.partyIdFrom.eq(qPartyRelationshipZ2.partyIdFrom))
-        						.and(qPartyRelationshipY2.partyRelationshipTypeId.in("ORG_RESPONSIBLE", "ORG_DELEGATE"))
-        						.and(qPartyRelationshipY2.thruDate.isNull())
-        						.and(qPartyRelationshipY2.partyIdTo.eq(qUserLogin.partyId)))
-        				.where(predicates.toArray(new Predicate[0]))
-        				.orderBy(qParty.partyName.asc());
+				.from(qTimesheet)
+				.innerJoin(qParty).on(qParty.partyId.eq(qTimesheet.partyId));
         
+        
+        tupleSQLQuery = (SQLQuery<Tuple>) filterPermissionDao.getFilterQueryPerson(tupleSQLQuery, qParty, userLoginId, "CTX_PR");
         
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
         //QBean<Timesheet> timesheets = Projections.bean(Timesheet.class, qTimesheet.all());
+        QBean<TimesheetEx> timesheetExQBean = bean(TimesheetEx.class, merge(qTimesheet.all(), bean(Party.class, qParty.all()).as("party")));
         List<TimesheetEx> ret = tupleSQLQuery.transform(GroupBy.groupBy(qTimesheet.timesheetId).list(timesheetExQBean));
         LOG.info("size = {}", ret.size());
         return ret;

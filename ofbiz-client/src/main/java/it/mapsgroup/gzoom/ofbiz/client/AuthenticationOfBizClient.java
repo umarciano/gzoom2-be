@@ -46,5 +46,16 @@ public interface AuthenticationOfBizClient {
 
 
     public abstract Map<String, Object> rollbackDb();
+    
+    
+   /**
+    * Change password
+    * @param username
+    * @param password
+    * @param newPassword
+    * @return
+    */
+    public abstract Map<String, Object> changePassword(String sessionId, String username, String password, String newPassword);
+
 
 }

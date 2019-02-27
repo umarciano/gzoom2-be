@@ -50,21 +50,17 @@ public class ReminderCallback extends ReportCallback {
     private void createCommunicationEvent(String reportActivityId, Map<String, Object> ele) {
 		LOG.info("reminder create communication event");
 		
-		CommunicationEvent communicationEvent = new CommunicationEvent();
+		CommunicationEvent communicationEvent = new CommunicationEvent();		
 		
+		communicationEvent.setContactMechIdFrom((String)ele.get("contactMechIdFrom"));	
 		communicationEvent.setContactMechIdTo((String)ele.get("contactMechIdTo"));
 		communicationEvent.setPartyIdTo((String)ele.get("partyId"));
+		communicationEvent.setPartyIdFrom((String)ele.get("partyIdFrom"));		
 		communicationEvent.setSubject((String)ele.get("subject"));
 		communicationEvent.setContent((String)ele.get("content"));
-		communicationEvent.setPartyIdFrom((String)ele.get("userLoginId"));
-		communicationEvent.setStatusId("COM_IN_PROGRESS");
 		communicationEvent.setStatusId("COM_IN_PROGRESS");
 		communicationEvent.setContentMimeTypeId("text/plain");
 		communicationEvent.setCommunicationEventTypeId("AUTO_EMAIL_COMM");
-		
-		
-		//TODO BHO li devo mettere tutti o ne basta uno??
-		communicationEvent.setContactMechIdFrom((String)ele.get("contactMechIdFrom"));			
 		
 		String communicationEventId = communicationEventDao.create(communicationEvent);
 		LOG.info("create communication event communicationEventId="+communicationEventId);

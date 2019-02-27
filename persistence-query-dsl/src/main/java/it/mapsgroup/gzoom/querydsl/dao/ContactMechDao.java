@@ -19,7 +19,7 @@ import com.querydsl.sql.SQLBindings;
 import com.querydsl.sql.SQLQuery;
 import com.querydsl.sql.SQLQueryFactory;
 
-import it.mapsgroup.gzoom.querydsl.dto.ContactMech;
+import it.mapsgroup.gzoom.querydsl.dto.PartyContactMech;
 import it.mapsgroup.gzoom.querydsl.dto.QContactMech;
 import it.mapsgroup.gzoom.querydsl.dto.QPartyContactMech;
 import it.mapsgroup.gzoom.querydsl.dto.QPartyRole;
@@ -37,7 +37,7 @@ public class ContactMechDao extends AbstractDao {
     }
     
     @Transactional
-    public List<ContactMech> getContactMechWorkEffortTypeRole(String workEffortType) {
+    public List<PartyContactMech> getContactMechWorkEffortTypeRole(String workEffortType) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
@@ -48,7 +48,7 @@ public class ContactMechDao extends AbstractDao {
         QPartyContactMech qPartyContactMech = QPartyContactMech.partyContactMech;
         QWorkEffortTypeRole qWorkEffortTypeRole = QWorkEffortTypeRole.workEffortTypeRole;
 
-        SQLQuery<ContactMech> tupleSQLQuery = queryFactory.select(qContactMech)
+        SQLQuery<PartyContactMech> tupleSQLQuery = queryFactory.select(qPartyContactMech)
         		.from(qPartyRole)
         		.innerJoin(qPartyContactMech).on(qPartyContactMech.partyId.eq(qPartyRole.partyId)
         				.and(filterByDate(qPartyContactMech.fromDate, qPartyContactMech.thruDate)))
@@ -61,8 +61,8 @@ public class ContactMechDao extends AbstractDao {
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
-        QBean<ContactMech> list = Projections.bean(ContactMech.class, qContactMech.all());
-        List<ContactMech> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContactMech.contactMechId).list(list));
+        QBean<PartyContactMech> list = Projections.bean(PartyContactMech.class, qPartyContactMech.all());
+        List<PartyContactMech> ret = tupleSQLQuery.transform(GroupBy.groupBy(qPartyContactMech.partyId, qPartyContactMech.contactMechId).list(list));
         LOG.info("size = {}", ret.size());
         return ret;
     }
