@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.annotation.Generated;
 
 import com.google.common.collect.Lists;
 import com.mysema.codegen.CodeWriter;
@@ -15,6 +14,9 @@ import com.mysema.codegen.model.Type;
 import com.querydsl.codegen.EntityType;
 import com.querydsl.codegen.Serializer;
 import com.querydsl.codegen.SerializerConfig;
+
+import javax.annotation.processing.Generated;
+
 /**
  * @author SIVI
  */

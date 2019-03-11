@@ -82,12 +82,12 @@
         </dependency>
 
 
-        <dependency>
+       <!-- <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.12.4</version>
             <scope>provided</scope>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>it.mapsgroup.gzoom</groupId>

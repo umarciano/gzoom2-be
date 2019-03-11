@@ -17,8 +17,7 @@
     <!-- Annotation based beans                                              -->
     <!-- =================================================================== -->
     <ctx:annotation-config/>
-    <ctx:component-scan base-package="it.memelabs.smartnebula.lmm.rest"/>
-    <ctx:component-scan base-package="it.memelabs.smartnebula.lmm.service"/>
+
 
 
 

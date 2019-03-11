@@ -75,10 +75,8 @@ public class ReportClientService {
         return reportId;
     }
 
-    //TODO sample rest call
     public String createReport(CreateReport request) {
-        // "http://localhost:8081/rest/report/add"
-        String reportId = restTemplate.postForObject(config.getServerReportUrl() + "/add", request, String.class);
+        String reportId = restTemplate.postForObject(config.getServerReportUrl() + "/add", request, String.class, request);
         LOG.info("ReportId {}", reportId);
         return reportId;
     }
@@ -101,7 +99,8 @@ public class ReportClientService {
 
 	public Result<ReportActivity> getReportDownloads(String userLoginId) {
 		List rest = (List) ((HashMap) restTemplate.getForObject(config.getServerReportUrl() + "/report-download/" + userLoginId, Object.class, userLoginId)).get("results");
-		return new Result<>(rest, rest.size());            }
+		return new Result<>(rest, rest.size());
+    }
 
 
     public String cancel(String id) {

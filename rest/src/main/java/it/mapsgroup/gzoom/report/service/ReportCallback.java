@@ -3,13 +3,18 @@ package it.mapsgroup.gzoom.report.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
+//import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.stereotype.Component;
+
 import java.util.Map;
 
 /**
  * @author Andrea Fossi.
  */
-public abstract class ReportCallback {
+public abstract class ReportCallback implements InitializingBean, DisposableBean  {
     private final ReportCallbackManager callBackManager;
 
     @Autowired
@@ -17,10 +22,19 @@ public abstract class ReportCallback {
         this.callBackManager = callBackManager;
     }
 
-    @PostConstruct
+    //@PostConstruct
     @SuppressWarnings("unchecked")
-    public void init() {
+    private void init() {
         this.callBackManager.register(this);
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        init();
+    }
+
+    @Override
+    public void destroy() throws Exception {
     }
 
     public abstract ReportCallbackType getType();

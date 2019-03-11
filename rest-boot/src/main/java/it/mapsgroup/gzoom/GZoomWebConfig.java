@@ -8,10 +8,12 @@ import it.mapsgroup.gzoom.ofbiz.client.impl.AuthenticationOfBizClientImpl;
 import it.mapsgroup.gzoom.ofbiz.service.ChangePasswordServiceOfBiz;
 import it.mapsgroup.gzoom.ofbiz.service.LoginServiceOfBiz;
 import it.mapsgroup.gzoom.security.*;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -21,6 +23,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
@@ -34,10 +37,11 @@ import java.net.URL;
  * @author Andrea Fossi.
  */
 
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+
 @EnableWebSecurity
 @Configuration
 public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
@@ -46,12 +50,14 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private ObjectMapper objectMapper;
+
     @Autowired
     private PermitsStorage permitsStorage;
 
-
-    @Autowired
-    private Http403ForbiddenEntryPoint http403ForbiddenEntryPoint;
+    @Bean
+    public AuthenticationEntryPoint http403ForbiddenEntryPoint() {
+        return new Http403ForbiddenEntryPoint();
+    }
 
     @Bean
     @Autowired
@@ -63,7 +69,7 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
             }
         }));
     }
-    
+
     @Bean
     @Autowired
     public ChangePasswordServiceOfBiz changePasswordServiceOfBiz(OfBizClientConfig ofBizClientConfig) {
@@ -75,13 +81,6 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
         }));
     }
 
-
-    /* @Autowired
-     @Qualifier("jwtDbLoginAuthenticationProvider")
-     JwtDbLoginAuthenticationProvider jwtDbLoginAuthenticationProvider;
-     @Autowired
-     @Qualifier("jwtADLoginAuthenticationProvider")
-     JwtADLoginAuthenticationProvider jwtADLoginAuthenticationProvider;*/
     @Autowired
     @Qualifier("jwtTokenAuthenticationProvider")
     JwtTokenAuthenticationProvider jwtTokenAuthenticationProvider;
@@ -89,7 +88,7 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     @Qualifier("jwtOfBizLoginAuthenticationProvider")
     JwtOfBizLoginAuthenticationProvider jwtOfBizLoginAuthenticationProvider;
-    
+
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -118,8 +117,8 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint);
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/logout", "/login", "/profile/18n").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/profile/18n", "/reminder-period", "/reminder-expiry").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/logout", "/login").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/profile/i18n", "/reminder-period", "/reminder-expiry").permitAll();
         http.authorizeRequests().antMatchers("/**").authenticated();
 
         JwtLoginFilter jwtLoginFilter = new JwtLoginFilter(authenticationManager, objectMapper);
@@ -127,15 +126,15 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
 
         JwtLogoutFilter jwtLogoutFilter = new JwtLogoutFilter(restAuthenticationEntryPoint, permitsStorage, objectMapper);
         http.addFilterBefore(jwtLogoutFilter, LogoutFilter.class);
-                
+
         JwtTokenFilter jwtTokenFilter = new JwtTokenFilter(authenticationManager, restAuthenticationEntryPoint, objectMapper);
         RequestMatcher profile = new AntPathRequestMatcher("/profile/i18n");
         RequestMatcher logout = new AntPathRequestMatcher("/logout");
         RequestMatcher login = new AntPathRequestMatcher("/login");
-        
+
         RequestMatcher reminderPeriod = new AntPathRequestMatcher("/reminder-period"); //TODO
         RequestMatcher reminderExipry = new AntPathRequestMatcher("/reminder-expiry"); //TODO
-        
+
         RequestMatcher ignoredRequests = new OrRequestMatcher(profile, logout, login, reminderPeriod, reminderExipry);
 
         http.antMatcher("/**")

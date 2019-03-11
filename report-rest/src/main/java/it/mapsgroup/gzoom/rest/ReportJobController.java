@@ -14,7 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author Fabio G. Strozzi
+ * @author
  */
 @RestController
 @RequestMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -30,8 +30,8 @@ public class ReportJobController {
 
     @RequestMapping(value = "/report/report-download/{userLoginId}", method = RequestMethod.GET)
     @ResponseBody
-    public Result<ReportActivity> getActvities(@PathVariable(value = "userLoginId") String userLoginId){
-        return Exec.exec("reports", () -> reportJobService.getActvities(userLoginId));
+    public Result<ReportActivity> getActities(@PathVariable(value = "userLoginId") String userLoginId){
+        return Exec.exec("reports", () -> reportJobService.getActivity(userLoginId));
     }
 
     @RequestMapping(value = "/report/add", method = RequestMethod.POST)

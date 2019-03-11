@@ -55,8 +55,8 @@ public class ReportJobService {
     }
 
 
-    public Result<ReportActivity> getActvities(String userLoginId) {
-    	List<ReportActivity> ret = reportDao.getActvities(userLoginId);
+    public Result<ReportActivity> getActivity(String userLoginId) {
+    	List<ReportActivity> ret = reportDao.getActivities(userLoginId);
         return new Result<>(ret, ret.size());
     }
 

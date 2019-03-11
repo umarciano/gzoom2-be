@@ -84,7 +84,7 @@ public class ReportActivityDao extends AbstractDao {
     }
 
     @Transactional
-    public List<ReportActivity> getActvities(ReportActvityFilter filter) {
+    public List<ReportActivity> getActivities(ReportActvityFilter filter) {
         QReportActivity qReportActivity = QReportActivity.reportActivity;
         SQLQuery<ReportActivity> pSQLQuery = queryFactory.select(qReportActivity).from(qReportActivity).orderBy(qReportActivity.activityId.asc());
         if (filter.getStates() != null)
@@ -92,8 +92,6 @@ public class ReportActivityDao extends AbstractDao {
         SQLBindings bindings = pSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
-        //QBean<ReportActivity> partys = Projections.bean(ReportActivity.class, qReportActivity.all());
-        //List<ReportActivity> ret = pSQLQuery.transform(GroupBy.groupBy(qReportActivity.activityId).list(partys));
         List<ReportActivity> ret = pSQLQuery.fetch();
         LOG.info("size = {}", ret.size());
         return ret;
@@ -101,7 +99,7 @@ public class ReportActivityDao extends AbstractDao {
     
     
     @Transactional
-    public List<ReportActivity> getActvities(String userLoginId) {
+    public List<ReportActivity> getActivities(String userLoginId) {
         QReportActivity qReportActivity = QReportActivity.reportActivity;
         SQLQuery<ReportActivity> pSQLQuery = queryFactory.select(qReportActivity).from(qReportActivity).where(qReportActivity.createdByUserLogin.eq(userLoginId)).orderBy(qReportActivity.createdStamp.desc());
         

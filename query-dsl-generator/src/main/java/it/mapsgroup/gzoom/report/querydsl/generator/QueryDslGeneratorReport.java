@@ -35,7 +35,7 @@ public class QueryDslGeneratorReport {
         //return DriverManager.getConnection("jdbc:mysql://localhost/gzoom_lite", "root", "root");
         //return DriverManager.getConnection("jdbc:mysql://localhost/gzoom?autoReconnect=true&amp;useOldAliasMetadataBehavior=true&amp;generateSimpleParameterMetadata=true", "root", "root");
         //return DriverManager.getConnection("jdbc:mysql://gzoom-tux-2/gzoom_comune_lecco?autoReconnect=true&amp;useOldAliasMetadataBehavior=true&amp;generateSimpleParameterMetadata=true", "gzoom_test", "gzoom_test");
-        return DriverManager.getConnection("jdbc:mysql://localhost/gzoom_lecco?autoReconnect=true&amp;useOldAliasMetadataBehavior=true&amp;generateSimpleParameterMetadata=true", "root", "root");
+        return DriverManager.getConnection("jdbc:mysql://gzoom-tux-2/gzoom_comune_lecco?serverTimezone=UTC", "gzoom_test", "gzoom_test");
     }
 
 

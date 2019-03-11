@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
@@ -29,10 +30,16 @@ import static org.slf4j.LoggerFactory.getLogger;
 /**
  * @author Andrea Fossi.
  */
-@SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class,})
+@SpringBootApplication(exclude = {
+        MongoAutoConfiguration.class,
+        MongoDataAutoConfiguration.class,
+        SecurityAutoConfiguration.class })
+
 @EnableConfigurationProperties
 @ComponentScan(basePackageClasses = {ReportJobService.class, ReportJobController.class})
-@Import({ReportModuleConfiguration.class})
+@Import({ReportModuleConfiguration.class, GZoomReportWebConfig.class})
+
+
 public class GZoomReportRun {
     private static final Logger LOG = getLogger(GZoomReportRun.class);
 

@@ -22,13 +22,13 @@ public class ReportActivityDaoIT extends AbstractReportDaoIT {
     @Autowired
     PlatformTransactionManager txManager;
 
-    @Autowired
-    ReportActivityDao activityDao;
+   // @Autowired
+    //ReportActivityDao activityDao;
 
     @Test
     @Transactional
     public void daoInsert() throws Exception {
-        transactionTemplate.execute(txStatus -> {
+       /* transactionTemplate.execute(txStatus -> {
             ReportActivity record = new ReportActivity();
             record.setReportData("Primo ReportActivity " + System.currentTimeMillis());
             record.setStatus(ReportActivityStatus.QUEUED);
@@ -38,9 +38,9 @@ public class ReportActivityDaoIT extends AbstractReportDaoIT {
             activityDao.create(record);
             LOG.debug("i" + record.getActivityId());
 
-            activityDao.getActvities(new ReportActvityFilter());
+            activityDao.getActivities(new ReportActvityFilter());
             return null;
-        });
+        });*/
 
     }
 

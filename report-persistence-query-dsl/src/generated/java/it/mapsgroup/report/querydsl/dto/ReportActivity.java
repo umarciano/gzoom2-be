@@ -1,6 +1,6 @@
 package it.mapsgroup.report.querydsl.dto;
 
-import javax.annotation.Generated;
+import javax.annotation.processing.Generated;
 import com.querydsl.sql.Column;
 import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 

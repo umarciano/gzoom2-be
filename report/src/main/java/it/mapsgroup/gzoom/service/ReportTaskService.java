@@ -91,9 +91,9 @@ public class ReportTaskService {
 
         ReportActvityFilter filter = new ReportActvityFilter();
         filter.getStates().add(ReportActivityStatus.QUEUED);
-        List<ReportActivity> actvities = reportDao.getActvities(filter);
-        actvities.forEach(a -> addToQueue(new ReportTaskInfo(a.getActivityId())));
-        LOG.info("Added to queue {} reports", actvities.size());
+        List<ReportActivity> activities = reportDao.getActivities(filter);
+        activities.forEach(a -> addToQueue(new ReportTaskInfo(a.getActivityId())));
+        LOG.info("Added to queue {} reports", activities.size());
     }
 
     public boolean cancel(String id, String reason) {

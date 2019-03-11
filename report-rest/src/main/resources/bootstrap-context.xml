@@ -11,7 +11,7 @@
     <!--load it.memelabs.smartnebula.lmm.persistence.PersistenceConfiguration-->
     <ctx:component-scan base-package="it.mapsgroup.gzoom.querydsl.dao"/>
 
-    <import resource="classpath:/lmm/spring/security-context.xml"/>
+    <!--<import resource="classpath:/lmm/spring/security-context.xml"/>-->
     <import resource="classpath:/lmm/spring/backend-context.xml"/>
     <!--<import resource="classpath:file-manager-context.xml"/>-->
     <!--<import resource="classpath:report-context.xml"/>-->

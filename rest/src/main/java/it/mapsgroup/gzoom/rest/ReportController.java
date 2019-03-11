@@ -55,5 +55,5 @@ public class ReportController {
     public String sendmail(@RequestBody Report req) {
         return Exec.exec("report/sendmail post", () -> reminderService.sendMail(req));
     }
-    
+
 }
