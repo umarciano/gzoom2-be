@@ -25,6 +25,7 @@ public class RestJwtPayloadMapper implements JwtPayloadMapper {
     private static final String PAYLOAD_ACTIVE_NODE_ID = "activeNodeId";
     private static final String PAYLOAD_SESSION_ID = "sessionId";
     private static final String PAYLOAD_EXTERNAL_LOGIN_KEY = "externalLoginKey";
+    private static final String PAYLOAD_USER_PREF_VALUE= "userPrefValue";
 
     @Override
     public Map<String, Object> map(UserLogin user) {
@@ -34,6 +35,7 @@ public class RestJwtPayloadMapper implements JwtPayloadMapper {
         payload.put(PAYLOAD_FIRST_NAME, user.getPerson().getFirstName());
         payload.put(PAYLOAD_LAST_NAME, user.getPerson().getLastName());
         payload.put(PAYLOAD_EMAIL, "");//TODO: user.getEmail());
+        payload.put(PAYLOAD_USER_PREF_VALUE, user.getUserPreference().getUserPrefValue());
         //payload.put(PAYLOAD_AUTH_TYPE, user.getAuthenticationType().toString());
         payload.put(PAYLOAD_PERMISSIONS, 1); //maskAll(fromList(user.getPermissions())));
         //payload.put(PAYLOAD_NODES, mapNodes(user.getNodes()));

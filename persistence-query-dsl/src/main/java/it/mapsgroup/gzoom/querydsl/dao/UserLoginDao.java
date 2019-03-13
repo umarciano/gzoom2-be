@@ -37,15 +37,20 @@ public class UserLoginDao {
         QUserLoginPersistent qUserLogin = QUserLoginPersistent.userLogin;
         QParty qParty = QParty.party;
         QPerson qPerson = QPerson.person;
+        QUserPreference qUserPreference = QUserPreference.userPreference;
+
         QBean<UserLogin> userLoginExQBean = bean(UserLogin.class,
                 merge(qUserLogin.all(),
                         bean(Party.class, qParty.all()).as("party"),
-                        bean(Person.class, qPerson.all()).as("person")));
+                        bean(Person.class, qPerson.all()).as("person"),
+                        bean(UserPreference.class, qUserPreference.all()).as("userPreference")));
 
-        List<UserLogin> ret = queryFactory.select(qUserLogin, qParty)
+        List<UserLogin> ret = queryFactory.select(qUserLogin, qParty, qUserPreference)
                 .from(qUserLogin)
                 .innerJoin(qUserLogin.userParty, qParty)
                 .innerJoin(qParty._personParty, qPerson)
+                .innerJoin(qUserPreference).on(qUserPreference.userLoginId.eq(qUserLogin.userLoginId)
+                    .and(qUserPreference.userPrefTypeId.eq("VISUAL_THEME")))
                 .where(qUserLogin.userLoginId.eq(username))
                 .transform(GroupBy.groupBy(qUserLogin.userLoginId)
                         .list(userLoginExQBean));
