@@ -29,6 +29,6 @@ Run application with the following command:
 ```
 java -Dgzoom.conf.dir=$HOME/config -Dserver.port=7000 -Dloader.path=./birt_lib/ -jar report-rest-boot.jar
 ```  
-the order of parameters is most important. `-Dloader.path` must be placed before `-jar`
+the parameters order is most important. `-Dloader.path` must be placed before `-jar`
 
 
