@@ -49,7 +49,7 @@ public class UserLoginDao {
                 .from(qUserLogin)
                 .innerJoin(qUserLogin.userParty, qParty)
                 .innerJoin(qParty._personParty, qPerson)
-                .innerJoin(qUserPreference).on(qUserPreference.userLoginId.eq(qUserLogin.userLoginId)
+                .leftJoin(qUserPreference).on(qUserPreference.userLoginId.eq(qUserLogin.userLoginId)
                     .and(qUserPreference.userPrefTypeId.eq("VISUAL_THEME")))
                 .where(qUserLogin.userLoginId.eq(username))
                 .transform(GroupBy.groupBy(qUserLogin.userLoginId)
