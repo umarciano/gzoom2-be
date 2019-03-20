@@ -63,7 +63,6 @@
         </dependency>
 
 
-
         <dependency>
             <groupId>it.mapsgroup.gzoom</groupId>
             <artifactId>commons-spring-boot</artifactId>
@@ -106,6 +105,16 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
+                <!--
+
+                https://docs.spring.io/spring-boot/docs/current/reference/html/executable-jar.html#executable-jar-launching
+                to use loader.path you muse to use ZIP layout
+
+                https://stackoverflow.com/questions/26140784/spring-boot-is-it-possible-to-use-external-application-properties-files-in-arbi?answertab=active#tab-top
+                -->
+                <configuration>  <!-- added -->
+                    <layout>ZIP</layout> <!-- to use PropertiesLaunchar -->
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
