@@ -3,6 +3,7 @@ package it.mapsgroup.gzoom.service.report;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,12 +18,15 @@ import it.mapsgroup.gzoom.querydsl.dto.WorkEffortTypeExt;
 import it.mapsgroup.gzoom.service.DtoMapper;
 import it.mapsgroup.gzoom.service.report.ReportClientService;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 /**
  * Profile service.
  *
  */
 @Service
 public class ReportService {
+    private static final Logger LOG = getLogger(ReportService.class);
 
     private final ReportClientService client;
     
@@ -47,12 +51,13 @@ public class ReportService {
         
     	List<it.mapsgroup.gzoom.querydsl.dto.Report> listAnalysis =  reportDao.getAnalysisReports(parentTypeId);
         ret.addAll(listAnalysis.stream().map(p -> dtoMapper.copy(p, new Report())).collect(Collectors.toList()));
-        
+
+        LOG.info("getReports size="+ ret.size());
         return new Result<>(ret, ret.size());
     }
 
     public Report getReport(String parentTypeId, String reportContentId, String reportName, boolean analysis) {
-        
+        LOG.info("Start getReport");
     	it.mapsgroup.gzoom.querydsl.dto.Report report = null;
     	List<WorkEffortTypeExt> workEffortTypes = null;
     	
@@ -65,18 +70,19 @@ public class ReportService {
     		workEffortTypes = workEffortTypeContentDao.getWorkEffortTypeContents(parentTypeId, reportContentId, reportName); 
     	}        
         Report ret = dtoMapper.copy(report, new Report());
-        ret.setWorkEffortTypes(workEffortTypes);  
-        
-        
+        ret.setWorkEffortTypes(workEffortTypes);
+
         //carico la lista di formati
         List<ReportType> outputFormats = reportDao.getReportType(reportContentId);
         ret.setOutputFormats(outputFormats);
-                
+        LOG.info("outputFormats="+outputFormats);
         
         ReportParams params = getParams(report.getContentName());
         ret.setParams(params.getParams());
         ret.setServices(params.getServices());
-        
+        LOG.info("params="+params);
+
+        LOG.info("End getReport=" + ret);
         return ret;
     }
     

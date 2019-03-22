@@ -28,37 +28,37 @@ public class ReportJobController {
     }
     
 
-    @RequestMapping(value = "/report/report-download/{userLoginId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/report-job/report-download/{userLoginId}", method = RequestMethod.GET)
     @ResponseBody
     public Result<ReportActivity> getActities(@PathVariable(value = "userLoginId") String userLoginId){
         return Exec.exec("reports", () -> reportJobService.getActivity(userLoginId));
     }
 
-    @RequestMapping(value = "/report/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/report-job/add", method = RequestMethod.POST)
     @ResponseBody
     public String add(@RequestBody CreateReport report) {
         return Exec.exec("addToQueue-report", () -> reportJobService.add(report));
     }
 
-    @RequestMapping(value = "/report/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/report-job/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public String cancel(@PathVariable(value = "id") String id, @RequestBody CancelReport cancelReport) {
         return Exec.exec("cancel-report", () -> reportJobService.cancel(id, cancelReport.getReason()));
     }
 
-    @RequestMapping(value = "/report/{id}/status", method = RequestMethod.GET)
+    @RequestMapping(value = "/report-job/{id}/status", method = RequestMethod.GET)
     @ResponseBody
     public ReportStatus status(@PathVariable(value = "id") String id) {
         return Exec.exec("status-report", () -> reportJobService.getStatus(id));
     }
     
-    @RequestMapping(value = "/report/params/{reportName}", method = RequestMethod.GET)
+    @RequestMapping(value = "/report-job/params/{reportName}", method = RequestMethod.GET)
     @ResponseBody
     public ReportParams params(@PathVariable(value = "reportName") String reportName) {
         return Exec.exec("getParams-report", () -> reportJobService.params(reportName));
     }
 
-    @RequestMapping(value = "/report/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/report-job/{id}", method = RequestMethod.GET)
     @ResponseBody
     public ReportActivity get(@PathVariable(value = "id") String id) {
         return Exec.exec("get-report", () -> reportJobService.get(id));

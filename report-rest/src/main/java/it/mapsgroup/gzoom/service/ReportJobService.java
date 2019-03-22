@@ -151,6 +151,7 @@ public class ReportJobService {
     }
 
     private ReportParams getParamsToFile(File file) {
+        LOG.info("getParamsToFile="+file.getPath());
         ObjectMapper mapper = new ObjectMapper();
         try {
             return mapper.readValue(file, ReportParams.class);
