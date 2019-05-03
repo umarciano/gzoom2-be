@@ -81,8 +81,8 @@ public class ReportClientService {
         return reportId;
     }
 
-    public ResponseEntity<ReportParams> getReportParams(String reportName) {
-        return restTemplate.getForEntity(config.getServerReportUrl() + "/params/" + reportName, ReportParams.class, reportName);
+    public ResponseEntity<ReportParams> getReportParams(String parentTypeId, String reportName) {
+        return restTemplate.getForEntity(config.getServerReportUrl() + "/params/" + parentTypeId + "/" + reportName, ReportParams.class, reportName);
     }
 
     /*public ResponseEntity<ReportStatus> getStatus(String id) {
