@@ -9,8 +9,8 @@ import java.util.Map;
  */
 public class BIRTReport extends Report {
 
-    public BIRTReport(String taskId, String name, Map<String, Object> reportParameters, Locale reportLocale) {
-        super(taskId, name, reportParameters, reportLocale);
+    public BIRTReport(String taskId, String name, String type, Map<String, Object> reportParameters, Locale reportLocale) {
+        super(taskId, name, type, reportParameters, reportLocale);
     }
 
 }

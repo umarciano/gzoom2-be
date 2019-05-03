@@ -83,7 +83,7 @@ public class BirtReportRunnerApplication {
         reportParameters.put("birtOutputFileName", "Timesheet");
         reportParameters.put("defaultOrganizationPartyId", "Company");
 
-        Report report = new BIRTReport(System.currentTimeMillis() + "", "StampaTimesheet/StampaTimesheet", reportParameters, Locale.ITALIAN);
+        Report report = new BIRTReport(System.currentTimeMillis() + "", "CTX_CO","StampaTimesheet/StampaTimesheet", reportParameters, Locale.ITALIAN);
         //Report report = new BIRTReport("CatalogoTreLivelli_ORI", reportParameters, reportRunner, Locale.ITALIAN).runReport();
         ReportHandler reportHandler = reportRunner.runReport(report);
         //Report report = new BIRTReport("simple_report", reportParameters, reportRunner, Locale.ITALIAN).runReport();

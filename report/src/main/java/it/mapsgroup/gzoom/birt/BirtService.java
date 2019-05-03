@@ -38,11 +38,12 @@ public class BirtService {
      *
      * @param taskId
      * @param reportName
+     * @param parentTypeId
      * @param reportParams
      * @param locale
      */
-    public Report build(String taskId, String reportName, Map<String, Object> reportParams, Locale locale) {
-        Report report = new BIRTReport(taskId, reportName, reportParams, locale);
+    public Report build(String taskId, String reportName, String parentTypeId, Map<String, Object> reportParams, Locale locale) {
+        Report report = new BIRTReport(taskId, reportName, parentTypeId, reportParams, locale);
         return report;
     }
 
