@@ -66,3 +66,11 @@ ps aux | grep java
 
 ! per vedere indirozzo e porte corrette
 netstat -tlpn | grep java
+
+
+PROBLEMATICHE:
+Nel caso il proxypass apache dia un errore di questo tipo: (13)Permission denied: [client 10.104.59.18:1500] Couldn't read /home/gzoom/gzoom-app/index.html, closing connection.
+verificare i permessi della dir dove si trova gzoom2 e nel caso impostarli a 755
+chmod -R 755 /home/gzoom/
+
+d
