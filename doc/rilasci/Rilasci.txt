@@ -19,6 +19,12 @@ il record con il nuov ambiente, e dopo bisogna riavviare il proxy.
 GZoom-doc\Develop\Apache-GZOOM-TUX-1\etc\apache2\sites-available
 )
 
+--> IMPORTANTE
+sempre nel primo rilascio bisogna creare le tabelle di QUARTZ
+tramite il link selezionare il DB del cliente ed eseguire lo script SQL.
+
+https://github.com/elventear/quartz-scheduler/tree/master/distribution/src/main/assembly/root/docs/dbTables
+
 *********************************
 
 Per fare un rilascio bisogna avere le cartelle:
