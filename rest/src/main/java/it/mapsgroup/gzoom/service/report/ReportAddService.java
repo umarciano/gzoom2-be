@@ -48,7 +48,7 @@ public class ReportAddService {
 
         Map<String, Object> paramsValue = req.getParamsValue();
         for (String key : paramsValue.keySet()) {
-            reportParameters.put(key, paramsValue.get(key) == null ? "" : paramsValue.get(key) == null);
+            reportParameters.put(key, paramsValue.get(key) == null ? "" : paramsValue.get(key));
         }
 
         //devo convertire la data in Date 
