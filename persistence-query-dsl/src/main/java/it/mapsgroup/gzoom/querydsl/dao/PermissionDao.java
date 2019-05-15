@@ -51,7 +51,7 @@ public class PermissionDao {
         QBean<SecurityPermission> perm = Projections.bean(SecurityPermission.class, qsgp.permissionId);
         
         List<SecurityPermission> ret = tupleSQLQuery.transform(GroupBy.groupBy(qsgp.permissionId).list(perm));
-        
+        LOG.info("size = {}", ret.size());
         
         return ret.isEmpty() ? null : ret;
     }
