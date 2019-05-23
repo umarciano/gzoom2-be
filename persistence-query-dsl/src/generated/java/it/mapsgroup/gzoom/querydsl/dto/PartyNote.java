@@ -5,10 +5,13 @@ import com.querydsl.sql.Column;
 import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 
 /**
- * UserLoginSecurityGroup is a Querydsl bean type
+ * PartyNote is a Querydsl bean type
  */
 @Generated("com.querydsl.codegen.BeanSerializer")
-public class UserLoginSecurityGroup implements AbstractIdentity {
+public class PartyNote implements AbstractIdentity {
+
+    @Column("CREATED_BY_USER_LOGIN")
+    private String createdByUserLogin;
 
     @Column("CREATED_STAMP")
     private java.time.LocalDateTime createdStamp;
@@ -16,11 +19,8 @@ public class UserLoginSecurityGroup implements AbstractIdentity {
     @Column("CREATED_TX_STAMP")
     private java.time.LocalDateTime createdTxStamp;
 
-    @Column("FROM_DATE")
-    private java.time.LocalDateTime fromDate;
-
-    @Column("GROUP_ID")
-    private String groupId;
+    @Column("LAST_MODIFIED_BY_USER_LOGIN")
+    private String lastModifiedByUserLogin;
 
     @Column("LAST_UPDATED_STAMP")
     private java.time.LocalDateTime lastUpdatedStamp;
@@ -28,11 +28,19 @@ public class UserLoginSecurityGroup implements AbstractIdentity {
     @Column("LAST_UPDATED_TX_STAMP")
     private java.time.LocalDateTime lastUpdatedTxStamp;
 
-    @Column("THRU_DATE")
-    private java.time.LocalDateTime thruDate;
+    @Column("NOTE_ID")
+    private String noteId;
 
-    @Column("USER_LOGIN_ID")
-    private String userLoginId;
+    @Column("PARTY_ID")
+    private String partyId;
+
+    public String getCreatedByUserLogin() {
+        return createdByUserLogin;
+    }
+
+    public void setCreatedByUserLogin(String createdByUserLogin) {
+        this.createdByUserLogin = createdByUserLogin;
+    }
 
     public java.time.LocalDateTime getCreatedStamp() {
         return createdStamp;
@@ -50,20 +58,12 @@ public class UserLoginSecurityGroup implements AbstractIdentity {
         this.createdTxStamp = createdTxStamp;
     }
 
-    public java.time.LocalDateTime getFromDate() {
-        return fromDate;
+    public String getLastModifiedByUserLogin() {
+        return lastModifiedByUserLogin;
     }
 
-    public void setFromDate(java.time.LocalDateTime fromDate) {
-        this.fromDate = fromDate;
-    }
-
-    public String getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
+    public void setLastModifiedByUserLogin(String lastModifiedByUserLogin) {
+        this.lastModifiedByUserLogin = lastModifiedByUserLogin;
     }
 
     public java.time.LocalDateTime getLastUpdatedStamp() {
@@ -82,20 +82,20 @@ public class UserLoginSecurityGroup implements AbstractIdentity {
         this.lastUpdatedTxStamp = lastUpdatedTxStamp;
     }
 
-    public java.time.LocalDateTime getThruDate() {
-        return thruDate;
+    public String getNoteId() {
+        return noteId;
     }
 
-    public void setThruDate(java.time.LocalDateTime thruDate) {
-        this.thruDate = thruDate;
+    public void setNoteId(String noteId) {
+        this.noteId = noteId;
     }
 
-    public String getUserLoginId() {
-        return userLoginId;
+    public String getPartyId() {
+        return partyId;
     }
 
-    public void setUserLoginId(String userLoginId) {
-        this.userLoginId = userLoginId;
+    public void setPartyId(String partyId) {
+        this.partyId = partyId;
     }
 
 }

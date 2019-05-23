@@ -5,7 +5,7 @@ import static com.querydsl.core.types.PathMetadataFactory.*;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
-import javax.annotation.processing.Generated;
+import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 
 import com.querydsl.sql.ColumnMetadata;
@@ -96,17 +96,17 @@ public class QPartyContactMech extends com.querydsl.sql.RelationalPathBase<Party
         addMetadata(comments, ColumnMetadata.named("COMMENTS").withIndex(9).ofType(Types.VARCHAR).withSize(255));
         addMetadata(contactMechId, ColumnMetadata.named("CONTACT_MECH_ID").withIndex(2).ofType(Types.VARCHAR).withSize(20).notNull());
         addMetadata(createdByUserLogin, ColumnMetadata.named("CREATED_BY_USER_LOGIN").withIndex(17).ofType(Types.VARCHAR).withSize(250));
-        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(14).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(15).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(14).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(15).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(extension, ColumnMetadata.named("EXTENSION").withIndex(7).ofType(Types.VARCHAR).withSize(255));
-        addMetadata(fromDate, ColumnMetadata.named("FROM_DATE").withIndex(3).ofType(Types.TIMESTAMP).withSize(19).notNull());
+        addMetadata(fromDate, ColumnMetadata.named("FROM_DATE").withIndex(3).ofType(Types.TIMESTAMP).withSize(26).notNull());
         addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(16).ofType(Types.VARCHAR).withSize(250));
-        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(12).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(13).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(12).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(13).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(monthsWithContactMech, ColumnMetadata.named("MONTHS_WITH_CONTACT_MECH").withIndex(11).ofType(Types.DECIMAL).withSize(20));
         addMetadata(partyId, ColumnMetadata.named("PARTY_ID").withIndex(1).ofType(Types.VARCHAR).withSize(20).notNull());
         addMetadata(roleTypeId, ColumnMetadata.named("ROLE_TYPE_ID").withIndex(5).ofType(Types.VARCHAR).withSize(20));
-        addMetadata(thruDate, ColumnMetadata.named("THRU_DATE").withIndex(4).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(thruDate, ColumnMetadata.named("THRU_DATE").withIndex(4).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(verified, ColumnMetadata.named("VERIFIED").withIndex(8).ofType(Types.CHAR).withSize(1));
         addMetadata(yearsWithContactMech, ColumnMetadata.named("YEARS_WITH_CONTACT_MECH").withIndex(10).ofType(Types.DECIMAL).withSize(20));
     }

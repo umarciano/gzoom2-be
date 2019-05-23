@@ -100,7 +100,10 @@
             <version>1.14</version>
             <scope>compile</scope>
         </dependency>
-
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+        </dependency>
 
     </dependencies>
 

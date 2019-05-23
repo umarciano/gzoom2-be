@@ -5,7 +5,7 @@ import static com.querydsl.core.types.PathMetadataFactory.*;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
-import javax.annotation.processing.Generated;
+import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 
 import com.querydsl.sql.ColumnMetadata;
@@ -80,21 +80,21 @@ public class QContent extends com.querydsl.sql.RelationalPathBase<Content> {
 
     public final com.querydsl.sql.PrimaryKey<Content> primary = createPrimaryKey(contentId);
 
-    public final com.querydsl.sql.ForeignKey<DataResource> contentToTmpdata = createForeignKey(templateDataResourceId, "DATA_RESOURCE_ID");
-
-    public final com.querydsl.sql.ForeignKey<StatusItem> contentStatus = createForeignKey(statusId, "STATUS_ID");
-
-    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> contentLmbUlgn = createForeignKey(lastModifiedByUserLogin, "USER_LOGIN_ID");
-
     public final com.querydsl.sql.ForeignKey<DataResource> contentToData = createForeignKey(dataResourceId, "DATA_RESOURCE_ID");
-
-    public final com.querydsl.sql.ForeignKey<Content> contentPcntnt = createForeignKey(ownerContentId, "CONTENT_ID");
 
     public final com.querydsl.sql.ForeignKey<Content> contentIofcnt = createForeignKey(instanceOfContentId, "CONTENT_ID");
 
-    public final com.querydsl.sql.ForeignKey<Content> contentDcntnt = createForeignKey(decoratorContentId, "CONTENT_ID");
+    public final com.querydsl.sql.ForeignKey<StatusItem> contentStatus = createForeignKey(statusId, "STATUS_ID");
+
+    public final com.querydsl.sql.ForeignKey<DataResource> contentToTmpdata = createForeignKey(templateDataResourceId, "DATA_RESOURCE_ID");
+
+    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> contentLmbUlgn = createForeignKey(lastModifiedByUserLogin, "USER_LOGIN_ID");
 
     public final com.querydsl.sql.ForeignKey<UserLoginPersistent> contentCbUlgn = createForeignKey(createdByUserLogin, "USER_LOGIN_ID");
+
+    public final com.querydsl.sql.ForeignKey<Content> contentDcntnt = createForeignKey(decoratorContentId, "CONTENT_ID");
+
+    public final com.querydsl.sql.ForeignKey<Content> contentPcntnt = createForeignKey(ownerContentId, "CONTENT_ID");
 
     public final com.querydsl.sql.ForeignKey<SecurityGroupContent> _secgrpCntCnt = createInvForeignKey(contentId, "CONTENT_ID");
 
@@ -117,6 +117,8 @@ public class QContent extends com.querydsl.sql.RelationalPathBase<Content> {
     public final com.querydsl.sql.ForeignKey<ContentAssoc> _contentasscTo = createInvForeignKey(contentId, "CONTENT_ID_TO");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortAnalysis> _weaCntFk = createInvForeignKey(contentId, "REPORT_ID");
+
+    public final com.querydsl.sql.ForeignKey<PartyContent> _partyCntCnt = createInvForeignKey(contentId, "CONTENT_ID");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetIconcnt = createInvForeignKey(contentId, "ICON_CONTENT_ID");
 
@@ -157,9 +159,9 @@ public class QContent extends com.querydsl.sql.RelationalPathBase<Content> {
         addMetadata(contentName, ColumnMetadata.named("CONTENT_NAME").withIndex(12).ofType(Types.VARCHAR).withSize(100));
         addMetadata(contentTypeId, ColumnMetadata.named("CONTENT_TYPE_ID").withIndex(2).ofType(Types.VARCHAR).withSize(20));
         addMetadata(createdByUserLogin, ColumnMetadata.named("CREATED_BY_USER_LOGIN").withIndex(20).ofType(Types.VARCHAR).withSize(250));
-        addMetadata(createdDate, ColumnMetadata.named("CREATED_DATE").withIndex(19).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(25).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(26).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(createdDate, ColumnMetadata.named("CREATED_DATE").withIndex(19).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(25).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(26).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(dataResourceId, ColumnMetadata.named("DATA_RESOURCE_ID").withIndex(6).ofType(Types.VARCHAR).withSize(20));
         addMetadata(dataSourceId, ColumnMetadata.named("DATA_SOURCE_ID").withIndex(8).ofType(Types.VARCHAR).withSize(20));
         addMetadata(decoratorContentId, ColumnMetadata.named("DECORATOR_CONTENT_ID").withIndex(4).ofType(Types.VARCHAR).withSize(20));
@@ -167,9 +169,9 @@ public class QContent extends com.querydsl.sql.RelationalPathBase<Content> {
         addMetadata(descriptionLang, ColumnMetadata.named("DESCRIPTION_LANG").withIndex(27).ofType(Types.VARCHAR).withSize(255));
         addMetadata(instanceOfContentId, ColumnMetadata.named("INSTANCE_OF_CONTENT_ID").withIndex(5).ofType(Types.VARCHAR).withSize(20));
         addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(22).ofType(Types.VARCHAR).withSize(250));
-        addMetadata(lastModifiedDate, ColumnMetadata.named("LAST_MODIFIED_DATE").withIndex(21).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(23).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(24).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(lastModifiedDate, ColumnMetadata.named("LAST_MODIFIED_DATE").withIndex(21).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(23).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(24).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(localeString, ColumnMetadata.named("LOCALE_STRING").withIndex(14).ofType(Types.VARCHAR).withSize(10));
         addMetadata(mimeTypeId, ColumnMetadata.named("MIME_TYPE_ID").withIndex(15).ofType(Types.VARCHAR).withSize(60));
         addMetadata(ownerContentId, ColumnMetadata.named("OWNER_CONTENT_ID").withIndex(3).ofType(Types.VARCHAR).withSize(20));

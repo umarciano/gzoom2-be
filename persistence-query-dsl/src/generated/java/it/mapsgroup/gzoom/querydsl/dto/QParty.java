@@ -5,7 +5,7 @@ import static com.querydsl.core.types.PathMetadataFactory.*;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
-import javax.annotation.processing.Generated;
+import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 
 import com.querydsl.sql.ColumnMetadata;
@@ -70,13 +70,13 @@ public class QParty extends com.querydsl.sql.RelationalPathBase<Party> {
 
     public final com.querydsl.sql.PrimaryKey<Party> primary = createPrimaryKey(partyId);
 
-    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> partyLmcul = createForeignKey(lastModifiedByUserLogin, "USER_LOGIN_ID");
+    public final com.querydsl.sql.ForeignKey<StatusItem> partyStatusitm = createForeignKey(statusId, "STATUS_ID");
 
     public final com.querydsl.sql.ForeignKey<Uom> partyPrefCrncy = createForeignKey(preferredCurrencyUomId, "UOM_ID");
 
-    public final com.querydsl.sql.ForeignKey<StatusItem> partyStatusitm = createForeignKey(statusId, "STATUS_ID");
-
     public final com.querydsl.sql.ForeignKey<UserLoginPersistent> partyCul = createForeignKey(createdByUserLogin, "USER_LOGIN_ID");
+
+    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> partyLmcul = createForeignKey(lastModifiedByUserLogin, "USER_LOGIN_ID");
 
     public final com.querydsl.sql.ForeignKey<TimeEntry> _timeEntPrty = createInvForeignKey(partyId, "PARTY_ID");
 
@@ -84,11 +84,17 @@ public class QParty extends com.querydsl.sql.RelationalPathBase<Party> {
 
     public final com.querydsl.sql.ForeignKey<Timesheet> _timesheetPrty = createInvForeignKey(partyId, "PARTY_ID");
 
+    public final com.querydsl.sql.ForeignKey<NoteData> _noteDataPty = createInvForeignKey(partyId, "NOTE_PARTY");
+
+    public final com.querydsl.sql.ForeignKey<PartyNote> _partyNoteParty = createInvForeignKey(partyId, "PARTY_ID");
+
     public final com.querydsl.sql.ForeignKey<CommunicationEvent> _comEvntFpty = createInvForeignKey(partyId, "PARTY_ID_FROM");
 
     public final com.querydsl.sql.ForeignKey<Person> _personParty = createInvForeignKey(partyId, "PARTY_ID");
 
     public final com.querydsl.sql.ForeignKey<Timesheet> _timesheetCpty = createInvForeignKey(partyId, "CLIENT_PARTY_ID");
+
+    public final com.querydsl.sql.ForeignKey<PartyContent> _partyCntParty = createInvForeignKey(partyId, "PARTY_ID");
 
     public final com.querydsl.sql.ForeignKey<CommunicationEvent> _comEvntTpty = createInvForeignKey(partyId, "PARTY_ID_TO");
 
@@ -125,20 +131,20 @@ public class QParty extends com.querydsl.sql.RelationalPathBase<Party> {
 
     public void addMetadata() {
         addMetadata(createdByUserLogin, ColumnMetadata.named("CREATED_BY_USER_LOGIN").withIndex(8).ofType(Types.VARCHAR).withSize(250));
-        addMetadata(createdDate, ColumnMetadata.named("CREATED_DATE").withIndex(7).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(15).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(16).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(createdDate, ColumnMetadata.named("CREATED_DATE").withIndex(7).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(15).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(16).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(dataSourceId, ColumnMetadata.named("DATA_SOURCE_ID").withIndex(11).ofType(Types.VARCHAR).withSize(20));
         addMetadata(description, ColumnMetadata.named("DESCRIPTION").withIndex(5).ofType(Types.VARCHAR).withSize(2000));
         addMetadata(descriptionLang, ColumnMetadata.named("DESCRIPTION_LANG").withIndex(22).ofType(Types.VARCHAR).withSize(2000));
-        addMetadata(endDate, ColumnMetadata.named("END_DATE").withIndex(20).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(endDate, ColumnMetadata.named("END_DATE").withIndex(20).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(externalId, ColumnMetadata.named("EXTERNAL_ID").withIndex(3).ofType(Types.VARCHAR).withSize(20));
         addMetadata(fiscalCode, ColumnMetadata.named("FISCAL_CODE").withIndex(17).ofType(Types.VARCHAR).withSize(20));
         addMetadata(isUnread, ColumnMetadata.named("IS_UNREAD").withIndex(12).ofType(Types.CHAR).withSize(1));
         addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(10).ofType(Types.VARCHAR).withSize(250));
-        addMetadata(lastModifiedDate, ColumnMetadata.named("LAST_MODIFIED_DATE").withIndex(9).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(13).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(14).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(lastModifiedDate, ColumnMetadata.named("LAST_MODIFIED_DATE").withIndex(9).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(13).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(14).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(partyId, ColumnMetadata.named("PARTY_ID").withIndex(1).ofType(Types.VARCHAR).withSize(20).notNull());
         addMetadata(partyName, ColumnMetadata.named("PARTY_NAME").withIndex(19).ofType(Types.VARCHAR).withSize(255));
         addMetadata(partyNameLang, ColumnMetadata.named("PARTY_NAME_LANG").withIndex(21).ofType(Types.VARCHAR).withSize(255));

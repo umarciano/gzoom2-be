@@ -5,7 +5,7 @@ import static com.querydsl.core.types.PathMetadataFactory.*;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
-import javax.annotation.processing.Generated;
+import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 
 import com.querydsl.sql.ColumnMetadata;
@@ -64,13 +64,13 @@ public class QContentAssoc extends com.querydsl.sql.RelationalPathBase<ContentAs
 
     public final com.querydsl.sql.PrimaryKey<ContentAssoc> primary = createPrimaryKey(contentAssocTypeId, contentId, contentIdTo, fromDate);
 
-    public final com.querydsl.sql.ForeignKey<Content> contentasscTo = createForeignKey(contentIdTo, "CONTENT_ID");
-
-    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> contentasscLmbur = createForeignKey(lastModifiedByUserLogin, "USER_LOGIN_ID");
-
     public final com.querydsl.sql.ForeignKey<UserLoginPersistent> contentasscCbusr = createForeignKey(createdByUserLogin, "USER_LOGIN_ID");
 
     public final com.querydsl.sql.ForeignKey<Content> contentasscFrom = createForeignKey(contentId, "CONTENT_ID");
+
+    public final com.querydsl.sql.ForeignKey<Content> contentasscTo = createForeignKey(contentIdTo, "CONTENT_ID");
+
+    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> contentasscLmbur = createForeignKey(lastModifiedByUserLogin, "USER_LOGIN_ID");
 
     public QContentAssoc(String variable) {
         super(ContentAssoc.class, forVariable(variable), "null", "CONTENT_ASSOC");
@@ -103,19 +103,19 @@ public class QContentAssoc extends com.querydsl.sql.RelationalPathBase<ContentAs
         addMetadata(contentId, ColumnMetadata.named("CONTENT_ID").withIndex(1).ofType(Types.VARCHAR).withSize(20).notNull());
         addMetadata(contentIdTo, ColumnMetadata.named("CONTENT_ID_TO").withIndex(2).ofType(Types.VARCHAR).withSize(20).notNull());
         addMetadata(createdByUserLogin, ColumnMetadata.named("CREATED_BY_USER_LOGIN").withIndex(13).ofType(Types.VARCHAR).withSize(250));
-        addMetadata(createdDate, ColumnMetadata.named("CREATED_DATE").withIndex(12).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(18).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(19).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(createdDate, ColumnMetadata.named("CREATED_DATE").withIndex(12).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(18).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(19).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(dataSourceId, ColumnMetadata.named("DATA_SOURCE_ID").withIndex(7).ofType(Types.VARCHAR).withSize(20));
-        addMetadata(fromDate, ColumnMetadata.named("FROM_DATE").withIndex(4).ofType(Types.TIMESTAMP).withSize(19).notNull());
+        addMetadata(fromDate, ColumnMetadata.named("FROM_DATE").withIndex(4).ofType(Types.TIMESTAMP).withSize(26).notNull());
         addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(15).ofType(Types.VARCHAR).withSize(250));
-        addMetadata(lastModifiedDate, ColumnMetadata.named("LAST_MODIFIED_DATE").withIndex(14).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(16).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(17).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(lastModifiedDate, ColumnMetadata.named("LAST_MODIFIED_DATE").withIndex(14).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(16).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(17).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(leftCoordinate, ColumnMetadata.named("LEFT_COORDINATE").withIndex(11).ofType(Types.DECIMAL).withSize(20));
         addMetadata(mapKey, ColumnMetadata.named("MAP_KEY").withIndex(9).ofType(Types.VARCHAR).withSize(100));
         addMetadata(sequenceNum, ColumnMetadata.named("SEQUENCE_NUM").withIndex(8).ofType(Types.DECIMAL).withSize(20));
-        addMetadata(thruDate, ColumnMetadata.named("THRU_DATE").withIndex(5).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(thruDate, ColumnMetadata.named("THRU_DATE").withIndex(5).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(upperCoordinate, ColumnMetadata.named("UPPER_COORDINATE").withIndex(10).ofType(Types.DECIMAL).withSize(20));
     }
 

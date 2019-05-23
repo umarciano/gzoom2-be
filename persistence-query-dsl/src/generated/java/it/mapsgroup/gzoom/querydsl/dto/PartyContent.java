@@ -5,28 +5,16 @@ import com.querydsl.sql.Column;
 import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 
 /**
- * ContentAssoc is a Querydsl bean type
+ * PartyContent is a Querydsl bean type
  */
 @Generated("com.querydsl.codegen.BeanSerializer")
-public class ContentAssoc implements AbstractIdentity {
-
-    @Column("CONTENT_ASSOC_PREDICATE_ID")
-    private String contentAssocPredicateId;
-
-    @Column("CONTENT_ASSOC_TYPE_ID")
-    private String contentAssocTypeId;
+public class PartyContent implements AbstractIdentity {
 
     @Column("CONTENT_ID")
     private String contentId;
 
-    @Column("CONTENT_ID_TO")
-    private String contentIdTo;
-
     @Column("CREATED_BY_USER_LOGIN")
     private String createdByUserLogin;
-
-    @Column("CREATED_DATE")
-    private java.time.LocalDateTime createdDate;
 
     @Column("CREATED_STAMP")
     private java.time.LocalDateTime createdStamp;
@@ -34,17 +22,11 @@ public class ContentAssoc implements AbstractIdentity {
     @Column("CREATED_TX_STAMP")
     private java.time.LocalDateTime createdTxStamp;
 
-    @Column("DATA_SOURCE_ID")
-    private String dataSourceId;
-
     @Column("FROM_DATE")
     private java.time.LocalDateTime fromDate;
 
     @Column("LAST_MODIFIED_BY_USER_LOGIN")
     private String lastModifiedByUserLogin;
-
-    @Column("LAST_MODIFIED_DATE")
-    private java.time.LocalDateTime lastModifiedDate;
 
     @Column("LAST_UPDATED_STAMP")
     private java.time.LocalDateTime lastUpdatedStamp;
@@ -52,36 +34,14 @@ public class ContentAssoc implements AbstractIdentity {
     @Column("LAST_UPDATED_TX_STAMP")
     private java.time.LocalDateTime lastUpdatedTxStamp;
 
-    @Column("LEFT_COORDINATE")
-    private java.math.BigInteger leftCoordinate;
+    @Column("PARTY_CONTENT_TYPE_ID")
+    private String partyContentTypeId;
 
-    @Column("MAP_KEY")
-    private String mapKey;
-
-    @Column("SEQUENCE_NUM")
-    private java.math.BigInteger sequenceNum;
+    @Column("PARTY_ID")
+    private String partyId;
 
     @Column("THRU_DATE")
     private java.time.LocalDateTime thruDate;
-
-    @Column("UPPER_COORDINATE")
-    private java.math.BigInteger upperCoordinate;
-
-    public String getContentAssocPredicateId() {
-        return contentAssocPredicateId;
-    }
-
-    public void setContentAssocPredicateId(String contentAssocPredicateId) {
-        this.contentAssocPredicateId = contentAssocPredicateId;
-    }
-
-    public String getContentAssocTypeId() {
-        return contentAssocTypeId;
-    }
-
-    public void setContentAssocTypeId(String contentAssocTypeId) {
-        this.contentAssocTypeId = contentAssocTypeId;
-    }
 
     public String getContentId() {
         return contentId;
@@ -91,28 +51,12 @@ public class ContentAssoc implements AbstractIdentity {
         this.contentId = contentId;
     }
 
-    public String getContentIdTo() {
-        return contentIdTo;
-    }
-
-    public void setContentIdTo(String contentIdTo) {
-        this.contentIdTo = contentIdTo;
-    }
-
     public String getCreatedByUserLogin() {
         return createdByUserLogin;
     }
 
     public void setCreatedByUserLogin(String createdByUserLogin) {
         this.createdByUserLogin = createdByUserLogin;
-    }
-
-    public java.time.LocalDateTime getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(java.time.LocalDateTime createdDate) {
-        this.createdDate = createdDate;
     }
 
     public java.time.LocalDateTime getCreatedStamp() {
@@ -131,14 +75,6 @@ public class ContentAssoc implements AbstractIdentity {
         this.createdTxStamp = createdTxStamp;
     }
 
-    public String getDataSourceId() {
-        return dataSourceId;
-    }
-
-    public void setDataSourceId(String dataSourceId) {
-        this.dataSourceId = dataSourceId;
-    }
-
     public java.time.LocalDateTime getFromDate() {
         return fromDate;
     }
@@ -153,14 +89,6 @@ public class ContentAssoc implements AbstractIdentity {
 
     public void setLastModifiedByUserLogin(String lastModifiedByUserLogin) {
         this.lastModifiedByUserLogin = lastModifiedByUserLogin;
-    }
-
-    public java.time.LocalDateTime getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public void setLastModifiedDate(java.time.LocalDateTime lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
     }
 
     public java.time.LocalDateTime getLastUpdatedStamp() {
@@ -179,28 +107,20 @@ public class ContentAssoc implements AbstractIdentity {
         this.lastUpdatedTxStamp = lastUpdatedTxStamp;
     }
 
-    public java.math.BigInteger getLeftCoordinate() {
-        return leftCoordinate;
+    public String getPartyContentTypeId() {
+        return partyContentTypeId;
     }
 
-    public void setLeftCoordinate(java.math.BigInteger leftCoordinate) {
-        this.leftCoordinate = leftCoordinate;
+    public void setPartyContentTypeId(String partyContentTypeId) {
+        this.partyContentTypeId = partyContentTypeId;
     }
 
-    public String getMapKey() {
-        return mapKey;
+    public String getPartyId() {
+        return partyId;
     }
 
-    public void setMapKey(String mapKey) {
-        this.mapKey = mapKey;
-    }
-
-    public java.math.BigInteger getSequenceNum() {
-        return sequenceNum;
-    }
-
-    public void setSequenceNum(java.math.BigInteger sequenceNum) {
-        this.sequenceNum = sequenceNum;
+    public void setPartyId(String partyId) {
+        this.partyId = partyId;
     }
 
     public java.time.LocalDateTime getThruDate() {
@@ -209,14 +129,6 @@ public class ContentAssoc implements AbstractIdentity {
 
     public void setThruDate(java.time.LocalDateTime thruDate) {
         this.thruDate = thruDate;
-    }
-
-    public java.math.BigInteger getUpperCoordinate() {
-        return upperCoordinate;
-    }
-
-    public void setUpperCoordinate(java.math.BigInteger upperCoordinate) {
-        this.upperCoordinate = upperCoordinate;
     }
 
 }

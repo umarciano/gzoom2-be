@@ -2,6 +2,7 @@ package it.mapsgroup.gzoom.querydsl.generator;
 
 import com.querydsl.codegen.BeanSerializer;
 import com.querydsl.sql.Configuration;
+import com.querydsl.sql.MySQLTemplates;
 import com.querydsl.sql.PostgreSQLTemplates;
 import com.querydsl.sql.types.JSR310LocalDateTimeType;
 import com.querydsl.sql.types.JSR310LocalDateType;
@@ -26,15 +27,21 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class QueryDslGenerator {
     private static final Logger LOG = getLogger(QueryDslGenerator.class);
 
-    public static final String TARGET_FOLDER = "../persistence-query-dsl/src/generated/java";
+    // public static final String TARGET_FOLDER = "../persistence-query-dsl/src/generated/java";
+    public static final String TARGET_FOLDER = "persistence-query-dsl\\src\\generated\\java";
 
     private Connection getConnection() throws SQLException {
     /*    return DriverManager.getConnection("jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle-maps.maps1.mapsengineering.com)(PORT=1521))" +
                 "(CONNECT_DATA=(SERVER = DEDICATED)(SERVICE_NAME= devdb.maps1.mapsengineering.com)))", "ANFO", "@4ndr34_77");*/
 //        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/ltprod", "lmm", "lmm");
         //return DriverManager.getConnection("jdbc:mysql://localhost/gzoom_lite", "root", "root");
-        //return DriverManager.getConnection("jdbc:mysql://localhost/gzoom?autoReconnect=true&amp;useOldAliasMetadataBehavior=true&amp;generateSimpleParameterMetadata=true", "root", "root");
-        return DriverManager.getConnection("jdbc:mysql://gzoom-tux-2/gzoom_comune_lecco?serverTimezone=UTC", "gzoom_test", "gzoom_test");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/gzoom_comune_lecco?serverTimezone=UTC", "root", "");
+        // connection.setCatalog("gzoom_comune_lecco");
+        // connection.setSchema("gzoom_comune_lecco");
+        // System.out.println(" getConnection() " + connection);
+        return connection;
+        //return DriverManager.getConnection("jdbc:mysql://localhost/gzoom_comune_lecco?serverTimezone=UTC", "root", "");
+        //return DriverManager.getConnection("jdbc:mysql://gzoom-tux-2/gzoom_comune_lecco?serverTimezone=UTC", "gzoom_test", "gzoom_test");
     }
 
 
@@ -52,7 +59,7 @@ public class QueryDslGenerator {
         beanSerializer.setAddToString(true);
         exporter.setBeanSerializer(beanSerializer);
         exporter.setColumnAnnotations(true);
-        Configuration configuration = new Configuration(new PostgreSQLTemplates());
+        Configuration configuration = new Configuration(new MySQLTemplates());
         exporter.setConfiguration(configuration);
         // configuration.register("company", "state_tag", new EnumByNameType<EntityStateTag>(EntityStateTag.class));
 
@@ -68,9 +75,12 @@ public class QueryDslGenerator {
         String tables = getTables();
         if (tables != null)
             exporter.setTableNamePattern(tables);
+        /*System.out.println(" getConnection() " + getConnection());
+        System.out.println(" getConnection() " + getConnection().getSchema());
+        exporter.setSchemaPattern("gzoom_comune_lecco");
+        */
         exporter.setNamingStrategy(new CustomNamingStrategy(tables));
         exporter.setExportInverseForeignKeys(true);
-
         exporter.export(getConnection().getMetaData());
 
     }

@@ -1,6 +1,6 @@
 package it.mapsgroup.gzoom.querydsl.dto;
 
-import javax.annotation.processing.Generated;
+import javax.annotation.Generated;
 import com.querydsl.sql.Column;
 import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 
@@ -63,6 +63,9 @@ public class WorkEffortAssoc implements AbstractIdentity {
 
     @Column("WORK_EFFORT_ID_TO")
     private String workEffortIdTo;
+
+    @Column("WORK_EFFORT_REVISION_ID")
+    private String workEffortRevisionId;
 
     public java.math.BigDecimal getAssocWeight() {
         return assocWeight;
@@ -206,6 +209,14 @@ public class WorkEffortAssoc implements AbstractIdentity {
 
     public void setWorkEffortIdTo(String workEffortIdTo) {
         this.workEffortIdTo = workEffortIdTo;
+    }
+
+    public String getWorkEffortRevisionId() {
+        return workEffortRevisionId;
+    }
+
+    public void setWorkEffortRevisionId(String workEffortRevisionId) {
+        this.workEffortRevisionId = workEffortRevisionId;
     }
 
 }

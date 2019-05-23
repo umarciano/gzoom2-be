@@ -5,7 +5,7 @@ import static com.querydsl.core.types.PathMetadataFactory.*;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
-import javax.annotation.processing.Generated;
+import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 
 import com.querydsl.sql.ColumnMetadata;
@@ -88,19 +88,19 @@ public class QCommunicationEvent extends com.querydsl.sql.RelationalPathBase<Com
 
     public final com.querydsl.sql.PrimaryKey<CommunicationEvent> primary = createPrimaryKey(communicationEventId);
 
-    public final com.querydsl.sql.ForeignKey<ContactMech> comEvntFcm = createForeignKey(contactMechIdFrom, "CONTACT_MECH_ID");
-
-    public final com.querydsl.sql.ForeignKey<Party> comEvntTpty = createForeignKey(partyIdTo, "PARTY_ID");
-
-    public final com.querydsl.sql.ForeignKey<Party> comEvntFpty = createForeignKey(partyIdFrom, "PARTY_ID");
-
     public final com.querydsl.sql.ForeignKey<RoleType> comEvntTrtyp = createForeignKey(roleTypeIdTo, "ROLE_TYPE_ID");
 
-    public final com.querydsl.sql.ForeignKey<RoleType> comEvntFrtyp = createForeignKey(roleTypeIdFrom, "ROLE_TYPE_ID");
+    public final com.querydsl.sql.ForeignKey<StatusItem> comEvntStts = createForeignKey(statusId, "STATUS_ID");
 
     public final com.querydsl.sql.ForeignKey<ContactMech> comEvntTcm = createForeignKey(contactMechIdTo, "CONTACT_MECH_ID");
 
-    public final com.querydsl.sql.ForeignKey<StatusItem> comEvntStts = createForeignKey(statusId, "STATUS_ID");
+    public final com.querydsl.sql.ForeignKey<Party> comEvntFpty = createForeignKey(partyIdFrom, "PARTY_ID");
+
+    public final com.querydsl.sql.ForeignKey<Party> comEvntTpty = createForeignKey(partyIdTo, "PARTY_ID");
+
+    public final com.querydsl.sql.ForeignKey<RoleType> comEvntFrtyp = createForeignKey(roleTypeIdFrom, "ROLE_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<ContactMech> comEvntFcm = createForeignKey(contactMechIdFrom, "CONTACT_MECH_ID");
 
     public final com.querydsl.sql.ForeignKey<CommEventContentAssoc> _commevCaCommev = createInvForeignKey(communicationEventId, "COMMUNICATION_EVENT_ID");
 
@@ -140,15 +140,15 @@ public class QCommunicationEvent extends com.querydsl.sql.RelationalPathBase<Com
         addMetadata(contactMechTypeId, ColumnMetadata.named("CONTACT_MECH_TYPE_ID").withIndex(6).ofType(Types.VARCHAR).withSize(20));
         addMetadata(content, ColumnMetadata.named("CONTENT").withIndex(18).ofType(Types.LONGVARCHAR).withSize(2147483647));
         addMetadata(contentMimeTypeId, ColumnMetadata.named("CONTENT_MIME_TYPE_ID").withIndex(17).ofType(Types.VARCHAR).withSize(60));
-        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(30).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(31).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(datetimeEnded, ColumnMetadata.named("DATETIME_ENDED").withIndex(15).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(datetimeStarted, ColumnMetadata.named("DATETIME_STARTED").withIndex(14).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(entryDate, ColumnMetadata.named("ENTRY_DATE").withIndex(13).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(30).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(31).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(datetimeEnded, ColumnMetadata.named("DATETIME_ENDED").withIndex(15).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(datetimeStarted, ColumnMetadata.named("DATETIME_STARTED").withIndex(14).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(entryDate, ColumnMetadata.named("ENTRY_DATE").withIndex(13).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(fromString, ColumnMetadata.named("FROM_STRING").withIndex(23).ofType(Types.LONGVARCHAR).withSize(2147483647));
         addMetadata(headerString, ColumnMetadata.named("HEADER_STRING").withIndex(22).ofType(Types.LONGVARCHAR).withSize(2147483647));
-        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(28).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(29).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(28).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(29).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(messageId, ColumnMetadata.named("MESSAGE_ID").withIndex(27).ofType(Types.VARCHAR).withSize(255));
         addMetadata(note, ColumnMetadata.named("NOTE").withIndex(19).ofType(Types.VARCHAR).withSize(255));
         addMetadata(origCommEventId, ColumnMetadata.named("ORIG_COMM_EVENT_ID").withIndex(3).ofType(Types.VARCHAR).withSize(20));
