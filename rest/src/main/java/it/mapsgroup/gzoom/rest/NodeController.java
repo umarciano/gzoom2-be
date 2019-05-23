@@ -1,0 +1,42 @@
+package it.mapsgroup.gzoom.rest;
+
+import it.mapsgroup.gzoom.common.Exec;
+import it.mapsgroup.gzoom.querydsl.dto.PartyNoteEx;
+import it.mapsgroup.gzoom.service.NodeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Locale;
+
+/**
+ * @author Fabio G. Strozzi
+ */
+@RestController
+@RequestMapping(value = "node", produces = {MediaType.APPLICATION_JSON_VALUE})
+public class NodeController {
+
+    public static final String APPLICATION_TITLE = "APPLICATION_TITLE";
+    public static final String LOGO_LOGIN = "LOGO_LOGIN";
+
+    private final NodeService nodeService;
+
+    @Autowired
+    public NodeController(NodeService nodeService) {
+        this.nodeService = nodeService;
+    }
+
+    @RequestMapping(value = "configuration/{partyId}", method = RequestMethod.GET)
+    @ResponseBody
+    public PartyNoteEx getApplicationTitle(@PathVariable(value = "partyId") String partyId) {
+        return Exec.exec("configuration get", () -> nodeService.getNodeConfiguration(partyId, APPLICATION_TITLE));
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "logo/{partyId}/{partyContentTypeId}")
+    @ResponseBody
+    public String stream(@PathVariable(value = "partyId") String partyId, @PathVariable(value = "partyContentTypeId") String partyContentTypeId, HttpServletRequest req, HttpServletResponse response) {
+        return Exec.exec("logo stream", () -> nodeService.stream(partyId, partyContentTypeId, req, response));
+    }
+}

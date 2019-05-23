@@ -67,6 +67,7 @@ public class ReportRunnableTask implements Runnable {
                 }
                 Report report = birtService.build(record.getActivityId(),
                         record.getReportName(),
+                        (String) params.get().get("parentTypeId"),
                         params.get(),
                         locale);
                 reportTask.setReport(report);

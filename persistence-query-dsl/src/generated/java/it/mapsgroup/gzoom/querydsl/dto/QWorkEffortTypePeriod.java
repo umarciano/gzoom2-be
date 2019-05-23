@@ -5,7 +5,7 @@ import static com.querydsl.core.types.PathMetadataFactory.*;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
-import javax.annotation.processing.Generated;
+import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 
 import com.querydsl.sql.ColumnMetadata;
@@ -80,15 +80,15 @@ public class QWorkEffortTypePeriod extends com.querydsl.sql.RelationalPathBase<W
     }
 
     public void addMetadata() {
-        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(12).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(13).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(12).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(13).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(customTimePeriodId, ColumnMetadata.named("CUSTOM_TIME_PERIOD_ID").withIndex(3).ofType(Types.VARCHAR).withSize(20));
         addMetadata(desProc, ColumnMetadata.named("DES_PROC").withIndex(8).ofType(Types.VARCHAR).withSize(255));
         addMetadata(glFiscalTypeEnumId, ColumnMetadata.named("GL_FISCAL_TYPE_ENUM_ID").withIndex(4).ofType(Types.VARCHAR).withSize(20));
-        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(10).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(11).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(perLavFrom, ColumnMetadata.named("PER_LAV_FROM").withIndex(6).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(perLavThru, ColumnMetadata.named("PER_LAV_THRU").withIndex(7).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(10).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(11).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(perLavFrom, ColumnMetadata.named("PER_LAV_FROM").withIndex(6).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(perLavThru, ColumnMetadata.named("PER_LAV_THRU").withIndex(7).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(statusEnumId, ColumnMetadata.named("STATUS_ENUM_ID").withIndex(9).ofType(Types.VARCHAR).withSize(20));
         addMetadata(statusTypeId, ColumnMetadata.named("STATUS_TYPE_ID").withIndex(5).ofType(Types.VARCHAR).withSize(20));
         addMetadata(workEffortTypeId, ColumnMetadata.named("WORK_EFFORT_TYPE_ID").withIndex(2).ofType(Types.VARCHAR).withSize(20));

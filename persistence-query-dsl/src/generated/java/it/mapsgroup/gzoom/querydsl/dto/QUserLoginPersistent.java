@@ -5,7 +5,7 @@ import static com.querydsl.core.types.PathMetadataFactory.*;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
-import javax.annotation.processing.Generated;
+import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 
 import com.querydsl.sql.ColumnMetadata;
@@ -120,11 +120,11 @@ public class QUserLoginPersistent extends com.querydsl.sql.RelationalPathBase<Us
     }
 
     public void addMetadata() {
-        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(17).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(18).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(17).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(18).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(currentPassword, ColumnMetadata.named("CURRENT_PASSWORD").withIndex(2).ofType(Types.VARCHAR).withSize(60));
         addMetadata(description, ColumnMetadata.named("DESCRIPTION").withIndex(21).ofType(Types.VARCHAR).withSize(255));
-        addMetadata(disabledDateTime, ColumnMetadata.named("DISABLED_DATE_TIME").withIndex(11).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(disabledDateTime, ColumnMetadata.named("DISABLED_DATE_TIME").withIndex(11).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(enabled, ColumnMetadata.named("ENABLED").withIndex(5).ofType(Types.CHAR).withSize(1));
         addMetadata(externalAuthId, ColumnMetadata.named("EXTERNAL_AUTH_ID").withIndex(13).ofType(Types.VARCHAR).withSize(250));
         addMetadata(externalSystem, ColumnMetadata.named("EXTERNAL_SYSTEM").withIndex(20).ofType(Types.VARCHAR).withSize(255));
@@ -133,8 +133,8 @@ public class QUserLoginPersistent extends com.querydsl.sql.RelationalPathBase<Us
         addMetadata(lastCurrencyUom, ColumnMetadata.named("LAST_CURRENCY_UOM").withIndex(8).ofType(Types.VARCHAR).withSize(20));
         addMetadata(lastLocale, ColumnMetadata.named("LAST_LOCALE").withIndex(9).ofType(Types.VARCHAR).withSize(10));
         addMetadata(lastTimeZone, ColumnMetadata.named("LAST_TIME_ZONE").withIndex(10).ofType(Types.VARCHAR).withSize(60));
-        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(15).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(16).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(15).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(16).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(partyId, ColumnMetadata.named("PARTY_ID").withIndex(19).ofType(Types.VARCHAR).withSize(20));
         addMetadata(passwordHint, ColumnMetadata.named("PASSWORD_HINT").withIndex(3).ofType(Types.VARCHAR).withSize(255));
         addMetadata(requirePasswordChange, ColumnMetadata.named("REQUIRE_PASSWORD_CHANGE").withIndex(7).ofType(Types.CHAR).withSize(1));

@@ -16,13 +16,15 @@ import java.util.Map;
 public abstract class Report {
 
     protected String name;
+    protected String type;
     protected Map<String, Object> parameters;
     protected Locale reportLocale;
     protected BirtServiceProgress birtServiceProgress;
     protected String taskId;
 
-    public Report(String taskId, String name, Map<String, Object> parameters, Locale reportLocale) {
+    public Report(String taskId, String name, String type, Map<String, Object> parameters, Locale reportLocale) {
         this.name = name;
+        this.type = type;
         this.parameters = parameters;
         this.reportLocale = reportLocale;
         this.taskId = taskId;
@@ -32,6 +34,10 @@ public abstract class Report {
 
     public String getName() {
         return name;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public Map<String, Object> getParameters() {

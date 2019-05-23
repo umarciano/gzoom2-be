@@ -52,10 +52,10 @@ public class ReportJobController {
         return Exec.exec("status-report", () -> reportJobService.getStatus(id));
     }
     
-    @RequestMapping(value = "/report-job/params/{reportName}", method = RequestMethod.GET)
+    @RequestMapping(value = "/report-job/params/{parentTypeId}/{reportName}", method = RequestMethod.GET)
     @ResponseBody
-    public ReportParams params(@PathVariable(value = "reportName") String reportName) {
-        return Exec.exec("getParams-report", () -> reportJobService.params(reportName));
+    public ReportParams params(@PathVariable(value = "parentTypeId") String parentTypeId, @PathVariable(value = "reportName") String reportName) {
+        return Exec.exec("getParams-report", () -> reportJobService.params(parentTypeId, reportName));
     }
 
     @RequestMapping(value = "/report-job/{id}", method = RequestMethod.GET)

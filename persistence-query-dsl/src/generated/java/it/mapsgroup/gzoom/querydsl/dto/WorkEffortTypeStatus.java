@@ -1,6 +1,6 @@
 package it.mapsgroup.gzoom.querydsl.dto;
 
-import javax.annotation.processing.Generated;
+import javax.annotation.Generated;
 import com.querydsl.sql.Column;
 import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 
@@ -57,6 +57,9 @@ public class WorkEffortTypeStatus implements AbstractIdentity {
 
     @Column("NEXT_STATUS_ID")
     private String nextStatusId;
+
+    @Column("ONLY_RESPONSIBLE")
+    private Boolean onlyResponsible;
 
     @Column("START_SOLL")
     private java.math.BigInteger startSoll;
@@ -193,6 +196,14 @@ public class WorkEffortTypeStatus implements AbstractIdentity {
 
     public void setNextStatusId(String nextStatusId) {
         this.nextStatusId = nextStatusId;
+    }
+
+    public Boolean getOnlyResponsible() {
+        return onlyResponsible;
+    }
+
+    public void setOnlyResponsible(Boolean onlyResponsible) {
+        this.onlyResponsible = onlyResponsible;
     }
 
     public java.math.BigInteger getStartSoll() {

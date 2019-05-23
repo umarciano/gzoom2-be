@@ -5,7 +5,7 @@ import static com.querydsl.core.types.PathMetadataFactory.*;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
-import javax.annotation.processing.Generated;
+import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 
 import com.querydsl.sql.ColumnMetadata;
@@ -48,11 +48,11 @@ public class QWorkEffortTypeType extends com.querydsl.sql.RelationalPathBase<Wor
 
     public final com.querydsl.sql.PrimaryKey<WorkEffortTypeType> primary = createPrimaryKey(workEffortTypeIdFrom, workEffortTypeIdRoot, workEffortTypeIdTo);
 
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> wttToFk = createForeignKey(workEffortTypeIdTo, "WORK_EFFORT_TYPE_ID");
-
     public final com.querydsl.sql.ForeignKey<WorkEffortType> wttRtFk = createForeignKey(workEffortTypeIdRoot, "WORK_EFFORT_TYPE_ID");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortType> wttFrFk = createForeignKey(workEffortTypeIdFrom, "WORK_EFFORT_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> wttToFk = createForeignKey(workEffortTypeIdTo, "WORK_EFFORT_TYPE_ID");
 
     public QWorkEffortTypeType(String variable) {
         super(WorkEffortTypeType.class, forVariable(variable), "null", "WORK_EFFORT_TYPE_TYPE");
@@ -82,11 +82,11 @@ public class QWorkEffortTypeType extends com.querydsl.sql.RelationalPathBase<Wor
     public void addMetadata() {
         addMetadata(comments, ColumnMetadata.named("COMMENTS").withIndex(5).ofType(Types.VARCHAR).withSize(255));
         addMetadata(createdByUserLogin, ColumnMetadata.named("CREATED_BY_USER_LOGIN").withIndex(7).ofType(Types.VARCHAR).withSize(250));
-        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(10).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(11).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(10).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(11).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(6).ofType(Types.VARCHAR).withSize(250));
-        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(8).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(9).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(8).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(9).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(sequenceNum, ColumnMetadata.named("SEQUENCE_NUM").withIndex(4).ofType(Types.DECIMAL).withSize(20));
         addMetadata(workEffortTypeIdFrom, ColumnMetadata.named("WORK_EFFORT_TYPE_ID_FROM").withIndex(2).ofType(Types.VARCHAR).withSize(20).notNull());
         addMetadata(workEffortTypeIdRoot, ColumnMetadata.named("WORK_EFFORT_TYPE_ID_ROOT").withIndex(1).ofType(Types.VARCHAR).withSize(20).notNull());

@@ -77,7 +77,7 @@ public class ReportService {
         ret.setOutputFormats(outputFormats);
         LOG.info("outputFormats="+outputFormats);
         
-        ReportParams params = getParams(report.getContentName());
+        ReportParams params = getParams(parentTypeId, report.getContentName());
         ret.setParams(params.getParams());
         ret.setServices(params.getServices());
         LOG.info("params="+params);
@@ -91,8 +91,8 @@ public class ReportService {
      * @param reportName
      * @return
      */
-	private ReportParams getParams(String reportName) {		
-		ResponseEntity<ReportParams> params = client.getReportParams(reportName);
+	private ReportParams getParams(String parentTypeId, String reportName) {
+		ResponseEntity<ReportParams> params = client.getReportParams(parentTypeId, reportName);
         return params.getBody();
     }	
 

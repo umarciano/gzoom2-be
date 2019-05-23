@@ -110,12 +110,28 @@ public class BIRTReportRunner implements ReportRunner {
 		Platform.shutdown();
 	}
 
-	public File getReportFromFilesystem(String reportName) throws RuntimeException {
+	/**
+	 * Leggo il report
+	 * 1. custom/reportName
+	 * 2. parentyTypeId/reportName
+	 * 3. reportName
+	 *
+	 * @param reportName
+	 * @return
+	 * @throws RuntimeException
+	 */
+	public File getReportFromFilesystem(String parentTypeId, String reportName) throws RuntimeException {
 		String reportDirectory = config.getBirtReportInputDir();
-		Path birtReport = Paths.get(reportDirectory + File.separator + reportName + File.separator + reportName + ".rptdesign");
-		if (!Files.isReadable(birtReport))
-			throw new RuntimeException("Report " + reportName + " either did not exist or was not writable.");
-
+		Path birtReport = Paths.get( reportDirectory + File.separator + "custom" + File.separator + reportName + File.separator + reportName + ".rptdesign");
+		if (!Files.isReadable(birtReport)) {
+			birtReport = Paths.get(reportDirectory + File.separator + parentTypeId + File.separator + reportName + File.separator + reportName + ".rptdesign");
+			if (!Files.isReadable(birtReport)) {
+				birtReport = Paths.get(reportDirectory + File.separator + reportName + File.separator + reportName + ".rptdesign");
+				if (!Files.isReadable(birtReport)) {
+					throw new RuntimeException("Report " + reportName + " either did not exist or was not writable.");
+				}
+			}
+		}
 		return birtReport.toFile();
 	}
 
@@ -143,7 +159,7 @@ public class BIRTReportRunner implements ReportRunner {
 
 		// get the path to the report design file
 		try {
-			rptDesignFile = getReportFromFilesystem(birtReport.getName());
+			rptDesignFile = getReportFromFilesystem(birtReport.getType(), birtReport.getName());
 		} catch (Exception e) {
 			logger.error("Error while loading rptdesign: {}.", e.getMessage());
 			throw new RuntimeException("Could not find report");

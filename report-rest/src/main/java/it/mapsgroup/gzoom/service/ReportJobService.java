@@ -130,10 +130,10 @@ public class ReportJobService {
      * @param reportName
      * @return
      */
-    public ReportParams params(String reportName) {
+    public ReportParams params(String parentTypeId, String reportName) {
         ReportParams params = new ReportParams();
 
-        Path path = getReportParamsPath(reportName);
+        Path path = getReportParamsPath(parentTypeId, reportName);
         if (Files.isReadable(path)) {
             return getParamsToFile(path.toFile());
         } else {
@@ -166,9 +166,17 @@ public class ReportJobService {
         return new ReportParams();
     }
 
-    private Path getReportParamsPath(String reportName) throws RuntimeException {
+    private Path getReportParamsPath(String parentTypeId, String reportName) throws RuntimeException {
         String reportDirectory = config.getBirtReportInputDir();
-        return Paths.get(reportDirectory + File.separator + reportName + File.separator + reportName + ".json");
+        //return Paths.get(reportDirectory + File.separator + reportName + File.separator + reportName + ".json");
+        Path path = Paths.get(reportDirectory + File.separator + "custom" + File.separator + reportName + File.separator + reportName + ".json");
+        if (!Files.isReadable(path)) {
+            path = Paths.get(reportDirectory + File.separator + parentTypeId + File.separator + reportName + File.separator + reportName + ".json");
+            if (!Files.isReadable(path)) {
+                path = Paths.get(reportDirectory + File.separator + reportName + File.separator + reportName + ".json");
+            }
+        }
+        return path;
     }
 
 

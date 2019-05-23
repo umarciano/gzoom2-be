@@ -260,9 +260,11 @@ public class MetaDataExporter {
     }
 
     private void handleTables(DatabaseMetaData md, String schemaPattern, String tablePattern, String[] types) throws SQLException {
-        ResultSet tables = md.getTables(null, schemaPattern, tablePattern, types);
+        // ResultSet tables = md.getTables(null, schemaPattern, tablePattern, types);
+        ResultSet tables = md.getTables("gzoom_comune_lecco", schemaPattern, tablePattern, types);
         try {
             while (tables.next()) {
+                System.out.println(" - tables " + tables);
                 handleTable(md, tables);
             }
         } finally {
@@ -329,10 +331,15 @@ public class MetaDataExporter {
     }
 
     private void handleTable(DatabaseMetaData md, ResultSet tables) throws SQLException {
+        System.out.println(" - tables " + tables);
+
         String catalog = tables.getString("TABLE_CAT");
         String schema = tables.getString("TABLE_SCHEM");
         String schemaName = normalize(tables.getString("TABLE_SCHEM"));
         String tableName = normalize(tables.getString("TABLE_NAME"));
+        System.out.println(" - tableName " + tableName);
+        System.out.println(" - schema " + schema);
+        System.out.println(" - catalog " + catalog);
 
         String normalizedSchemaName = namingStrategy.normalizeSchemaName(schemaName);
         String normalizedTableName = namingStrategy.normalizeTableName(tableName);
@@ -350,7 +357,7 @@ public class MetaDataExporter {
         if (exportPrimaryKeys) {
             // collect primary keys
             Map<String, PrimaryKeyData> primaryKeyData = keyDataFactory
-                    .getPrimaryKeys(md, catalog, schema, tableName);
+                    .getPrimaryKeys(md, "gzoom_comune_lecco", schema, tableName);
             if (!primaryKeyData.isEmpty()) {
                 classModel.getData().put(PrimaryKeyData.class, primaryKeyData.values());
             }

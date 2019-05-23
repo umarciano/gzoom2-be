@@ -44,10 +44,11 @@ public class ReportAddService {
         reportParameters.put("birtOutputFileName", req.getContentName());
         reportParameters.put("outputFormat", (req.getOutputFormat() == null ? DEFAULT_REPORT_OUTPUT_FORMAT : req.getOutputFormat()));
         reportParameters.put("localDispatcherName", ContextPermissionPrefixEnum.getPermissionPrefix(req.getParentTypeId())); //non serve piu
+        reportParameters.put("parentTypeId", req.getParentTypeId());
 
         Map<String, Object> paramsValue = req.getParamsValue();
         for (String key : paramsValue.keySet()) {
-            reportParameters.put(key, paramsValue.get(key));
+            reportParameters.put(key, paramsValue.get(key) == null ? "" : paramsValue.get(key));
         }
 
         //devo convertire la data in Date 

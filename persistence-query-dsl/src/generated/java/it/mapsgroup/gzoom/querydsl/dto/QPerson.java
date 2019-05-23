@@ -5,7 +5,7 @@ import static com.querydsl.core.types.PathMetadataFactory.*;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
-import javax.annotation.processing.Generated;
+import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 
 import com.querydsl.sql.ColumnMetadata;
@@ -150,12 +150,12 @@ public class QPerson extends com.querydsl.sql.RelationalPathBase<Person> {
         addMetadata(cardId, ColumnMetadata.named("CARD_ID").withIndex(32).ofType(Types.VARCHAR).withSize(60));
         addMetadata(comments, ColumnMetadata.named("COMMENTS").withIndex(25).ofType(Types.VARCHAR).withSize(255));
         addMetadata(createdByUserLogin, ColumnMetadata.named("CREATED_BY_USER_LOGIN").withIndex(44).ofType(Types.VARCHAR).withSize(250));
-        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(35).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(36).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(35).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(36).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(deceasedDate, ColumnMetadata.named("DECEASED_DATE").withIndex(16).ofType(Types.DATE).withSize(10));
         addMetadata(employmentAmount, ColumnMetadata.named("EMPLOYMENT_AMOUNT").withIndex(42).ofType(Types.DECIMAL).withSize(18).withDigits(2));
         addMetadata(employmentStatusEnumId, ColumnMetadata.named("EMPLOYMENT_STATUS_ENUM_ID").withIndex(26).ofType(Types.VARCHAR).withSize(20));
-        addMetadata(emplPositionTypeDate, ColumnMetadata.named("EMPL_POSITION_TYPE_DATE").withIndex(41).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(emplPositionTypeDate, ColumnMetadata.named("EMPL_POSITION_TYPE_DATE").withIndex(41).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(emplPositionTypeId, ColumnMetadata.named("EMPL_POSITION_TYPE_ID").withIndex(40).ofType(Types.VARCHAR).withSize(20));
         addMetadata(existingCustomer, ColumnMetadata.named("EXISTING_CUSTOMER").withIndex(31).ofType(Types.CHAR).withSize(1));
         addMetadata(firstName, ColumnMetadata.named("FIRST_NAME").withIndex(3).ofType(Types.VARCHAR).withSize(100));
@@ -165,8 +165,8 @@ public class QPerson extends com.querydsl.sql.RelationalPathBase<Person> {
         addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(43).ofType(Types.VARCHAR).withSize(250));
         addMetadata(lastName, ColumnMetadata.named("LAST_NAME").withIndex(5).ofType(Types.VARCHAR).withSize(100));
         addMetadata(lastNameLocal, ColumnMetadata.named("LAST_NAME_LOCAL").withIndex(11).ofType(Types.VARCHAR).withSize(100));
-        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(33).ofType(Types.TIMESTAMP).withSize(19));
-        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(34).ofType(Types.TIMESTAMP).withSize(19));
+        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(33).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(34).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(maritalStatus, ColumnMetadata.named("MARITAL_STATUS").withIndex(20).ofType(Types.CHAR).withSize(1));
         addMetadata(memberId, ColumnMetadata.named("MEMBER_ID").withIndex(13).ofType(Types.VARCHAR).withSize(20));
         addMetadata(middleName, ColumnMetadata.named("MIDDLE_NAME").withIndex(4).ofType(Types.VARCHAR).withSize(100));
