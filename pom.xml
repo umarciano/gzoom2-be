@@ -90,7 +90,7 @@
         <!-- Maps Artifacts server -->
         <repository>
             <id>Maps Artifacts</id>
-            <url>http://artifactory.maps1.mapsengineering.com:8081/artifactory/repo</url>
+            <url>http://artifactory.maps1.mapsengineering.com:8081/artifactory/mapslibs</url>
             <releases>
                 <enabled>true</enabled>
                 <checksumPolicy>ignore</checksumPolicy>

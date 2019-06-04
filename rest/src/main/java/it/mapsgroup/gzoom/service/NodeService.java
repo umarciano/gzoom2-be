@@ -10,6 +10,8 @@ import it.mapsgroup.report.querydsl.dto.ReportActivity;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import it.mapsgroup.gzoom.model.Result;
@@ -17,6 +19,7 @@ import it.mapsgroup.gzoom.model.Result;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -24,12 +27,16 @@ import static it.mapsgroup.gzoom.security.Principals.principal;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
- * Profile service.
+ * Node service.
  *
  */
 @Service
 public class NodeService {
     private static final Logger LOG = getLogger(NodeService.class);
+
+    public static final String DEFAULT_PATH_LOGO = "/lmm/images/gzoom_logo.jpg";
+    public static final String DEFAULT_PATH_LOGO_LOGIN = "/lmm/images/gzoom_logo_login.jpg";
+    public static final String DEFAULT_PATH_ICON = "/lmm/images/gzoom.ico";
 
     private final PartyNoteDao partyNoteDao;
     private final PartyContentDao partyContentDao;
@@ -54,19 +61,28 @@ public class NodeService {
      * @return
      */
     public String stream(String partyId, String partyContentTypeId, HttpServletRequest request, HttpServletResponse response) {
-        PartyContentEx partyContentEx = partyContentDao.getPartyContent(partyId, partyContentTypeId);
+        try  {
+            String imagePath = getDefaultImagePath(partyContentTypeId);
+            LOG.info("stream imagePath: " + imagePath);
+            File file = new ClassPathResource(imagePath).getFile();
+            String fileName = file.getName();
 
-        LOG.info("stream patch: "+partyContentEx.getDataResource().getObjectInfo());
-        File file = new File(partyContentEx.getDataResource().getObjectInfo());
+            PartyContentEx partyContentEx = partyContentDao.getPartyContent(partyId, partyContentTypeId);
 
-        try (InputStream bw = new BufferedInputStream(new FileInputStream(file))) {
-            //String outputFormat = reportActivity.getObjectInfo().substring(reportActivity.getContentName().length() -3);
-            //String contentType = BirtContentTypeEnum.getContentType(outputFormat);
+            if (partyContentEx != null) {
+                LOG.info("stream path: " + partyContentEx.getDataResource().getObjectInfo());
+                File partyContentFile = new File(partyContentEx.getDataResource().getObjectInfo());
+                if (partyContentFile.exists() && partyContentFile.canRead()) {
+                    file = partyContentFile;
+                    response.setContentType(partyContentEx.getDataResource().getMimeTypeId());
+                    fileName = partyContentEx.getContentName();
+                }
+            }
 
-            response.setContentType(partyContentEx.getDataResource().getMimeTypeId());
+            InputStream bw = new BufferedInputStream(new FileInputStream(file));
             response.setContentLength((int) file.length());
-            String fileName = partyContentEx.getContentName();
             response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\"");
+
             IOUtils.copy(bw, response.getOutputStream());
             response.flushBuffer();
         } catch (IOException e) {
@@ -75,4 +91,14 @@ public class NodeService {
         }
         return "";
     }
+
+    private String getDefaultImagePath(String partyContentTypeId) {
+        if ("LOGO".equals(partyContentTypeId)) {
+            return DEFAULT_PATH_LOGO;
+        } else if ("LOGO_LOGIN".equals(partyContentTypeId)) {
+            return DEFAULT_PATH_LOGO_LOGIN;
+        }
+        return DEFAULT_PATH_ICON;
+    }
+
 }
