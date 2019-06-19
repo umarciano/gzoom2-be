@@ -63,26 +63,26 @@ public class NodeService {
     public String stream(String partyId, String partyContentTypeId, HttpServletRequest request, HttpServletResponse response) {
         try  {
             String imagePath = getDefaultImagePath(partyContentTypeId);
-            LOG.info("stream imagePath: " + imagePath);
-            File file = new ClassPathResource(imagePath).getFile();
-            String fileName = file.getName();
+            LOG.info("stream default imagePath: " + imagePath);
+            InputStream bw = new ClassPathResource(imagePath).getInputStream();
+            String fileName = imagePath;
 
             PartyContentEx partyContentEx = partyContentDao.getPartyContent(partyId, partyContentTypeId);
 
             if (partyContentEx != null) {
-                LOG.info("stream path: " + partyContentEx.getDataResource().getObjectInfo());
+                LOG.info("stream partyContent path: " + partyContentEx.getDataResource().getObjectInfo());
                 File partyContentFile = new File(partyContentEx.getDataResource().getObjectInfo());
                 if (partyContentFile.exists() && partyContentFile.canRead()) {
-                    file = partyContentFile;
+                    File file = partyContentFile;
                     response.setContentType(partyContentEx.getDataResource().getMimeTypeId());
                     fileName = partyContentEx.getContentName();
+                    bw = new BufferedInputStream(new FileInputStream(file));
+                    response.setContentLength((int) file.length());
+                } else {
+                    LOG.info("No valid partyContent path found, use default " + imagePath);
                 }
             }
-
-            InputStream bw = new BufferedInputStream(new FileInputStream(file));
-            response.setContentLength((int) file.length());
             response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\"");
-
             IOUtils.copy(bw, response.getOutputStream());
             response.flushBuffer();
         } catch (IOException e) {
