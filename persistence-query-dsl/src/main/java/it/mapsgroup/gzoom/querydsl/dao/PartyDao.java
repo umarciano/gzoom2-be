@@ -9,14 +9,7 @@ import com.querydsl.sql.SQLBindings;
 import com.querydsl.sql.SQLQuery;
 import com.querydsl.sql.SQLQueryFactory;
 import it.mapsgroup.gzoom.persistence.common.SequenceGenerator;
-import it.mapsgroup.gzoom.querydsl.dto.Party;
-import it.mapsgroup.gzoom.querydsl.dto.PartyEx;
-import it.mapsgroup.gzoom.querydsl.dto.PartyParentRole;
-import it.mapsgroup.gzoom.querydsl.dto.QParty;
-import it.mapsgroup.gzoom.querydsl.dto.QPartyParentRole;
-import it.mapsgroup.gzoom.querydsl.dto.QPartyRelationship;
-import it.mapsgroup.gzoom.querydsl.dto.QPartyRole;
-import it.mapsgroup.gzoom.querydsl.dto.QUserLoginPersistent;
+import it.mapsgroup.gzoom.querydsl.dto.*;
 import it.mapsgroup.gzoom.querydsl.service.PermissionService;
 import it.mapsgroup.gzoom.querydsl.util.ContextPermissionPrefixEnum;
 
@@ -104,6 +97,29 @@ public class PartyDao extends AbstractDao {
         LOG.info("{}", bindings.getBindings());
         QBean<Party> partys = Projections.bean(Party.class, qParty.all());
         List<Party> ret = pSQLQuery.transform(GroupBy.groupBy(qParty.partyId).list(partys));
+        LOG.info("size = {}", ret.size());
+        return ret;
+    }
+
+    @Transactional
+    public List<PersonEx> getPartysExposed() {
+        if (TransactionSynchronizationManager.isActualTransactionActive()) {
+            TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
+            status.getClass();
+        }
+        QParty qParty = QParty.party;
+        QPerson qPerson = QPerson.person;
+
+        SQLQuery<Tuple> pSQLQuery = queryFactory.select(qPerson, qParty)
+                .from(qPerson)
+                .innerJoin(qParty).on(qParty.partyId.eq(qPerson.partyId))
+                .orderBy(qPerson.firstName.asc(), qPerson.lastName.asc());
+
+        SQLBindings bindings = pSQLQuery.getSQL();
+        LOG.info("{}", bindings.getSQL());
+        LOG.info("{}", bindings.getBindings());
+        QBean<PersonEx> partys = bean(PersonEx.class, merge(qPerson.all(), bean(Party.class, qParty.all()).as("party")));
+        List<PersonEx> ret = pSQLQuery.transform(GroupBy.groupBy(qParty.partyId).list(partys));
         LOG.info("size = {}", ret.size());
         return ret;
     }

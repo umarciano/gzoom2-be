@@ -605,7 +605,7 @@
         <module>persistence-query-dsl</module>
         <module>query-dsl-generator</module>
         <module>ofbiz-client</module>
-        <module>ofbiz/hot-deploy</module>
+<!--        <module>ofbiz/hot-deploy</module>-->
         <module>persistence-mybatis-generator</module>
         <module>jdbc-repo</module>
         <module>report</module>

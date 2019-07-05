@@ -6,6 +6,7 @@ import it.mapsgroup.gzoom.querydsl.dao.PersonDao;
 import it.mapsgroup.gzoom.querydsl.dto.Party;
 import it.mapsgroup.gzoom.querydsl.dto.PartyEx;
 import it.mapsgroup.gzoom.querydsl.dto.Person;
+import it.mapsgroup.gzoom.querydsl.dto.PersonEx;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,4 +49,8 @@ public class PartyService {
         return new Result<>(list, list.size());
     }
 
+    public Result<PersonEx> getPartysExposed() {
+        List<PersonEx> list = partyDao.getPartysExposed();
+        return new Result<>(list, list.size());
+    }
 }
