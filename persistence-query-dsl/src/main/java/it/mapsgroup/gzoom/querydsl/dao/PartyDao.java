@@ -102,23 +102,25 @@ public class PartyDao extends AbstractDao {
     }
 
     @Transactional
-    public List<PersonEx> getPartysExposed() {
+    public List<PersonEx> getPartiesExposed() {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
         }
         QParty qParty = QParty.party;
         QPerson qPerson = QPerson.person;
+        QPartyParentRole qPartyParentRole = QPartyParentRole.partyParentRole;
 
-        SQLQuery<Tuple> pSQLQuery = queryFactory.select(qPerson, qParty)
+        SQLQuery<Tuple> pSQLQuery = queryFactory.select(qPerson, qParty, qPartyParentRole)
                 .from(qPerson)
                 .innerJoin(qParty).on(qParty.partyId.eq(qPerson.partyId))
+                .innerJoin(qPartyParentRole).on(qPartyParentRole.partyId.eq(qPerson.partyId)).on(qPartyParentRole.roleTypeId.eq("EMPLOYEE"))
                 .orderBy(qPerson.firstName.asc(), qPerson.lastName.asc());
 
         SQLBindings bindings = pSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getBindings());
-        QBean<PersonEx> partys = bean(PersonEx.class, merge(qPerson.all(), bean(Party.class, qParty.all()).as("party")));
+        QBean<PersonEx> partys = bean(PersonEx.class, merge(qPerson.all(), bean(Party.class, qParty.all()).as("party"), bean(PartyParentRole.class, qPartyParentRole.all()).as("partyParentRole")));
         List<PersonEx> ret = pSQLQuery.transform(GroupBy.groupBy(qParty.partyId).list(partys));
         LOG.info("size = {}", ret.size());
         return ret;

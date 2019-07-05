@@ -104,4 +104,15 @@ public class DtoMapper {
         return to;
     }
 
+    public it.mapsgroup.gzoom.model.Person copy(it.mapsgroup.gzoom.querydsl.dto.PersonEx from , it.mapsgroup.gzoom.model.Person to) {
+        if (from == null) {
+            return to;
+        }
+        to.setFirstName(from.getFirstName());
+        to.setLastName(from.getLastName());
+
+        to.setParentRoleCode(from.getPartyParentRole() != null? from.getPartyParentRole().getParentRoleCode() : "");
+        return to;
+    }
+
 }

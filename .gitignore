@@ -13,6 +13,7 @@
 /commons-test/bin
 
 # Intellij files #
+*.iml
 .idea/
 *.iws
 *.ipr

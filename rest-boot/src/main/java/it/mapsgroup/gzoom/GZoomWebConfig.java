@@ -118,7 +118,7 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/logout", "/login").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/profile/i18n", "/reminder-period", "/reminder-expiry", "/node/configuration/*", "/node/logo/*/*", "/party/partysExposed").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/profile/i18n", "/reminder-period", "/reminder-expiry", "/node/configuration/*", "/node/logo/*/*", "/party/partiesExposed").permitAll();
         http.authorizeRequests().antMatchers("/**").authenticated();
 
         JwtLoginFilter jwtLoginFilter = new JwtLoginFilter(authenticationManager, objectMapper);
@@ -131,14 +131,14 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
         RequestMatcher profile = new AntPathRequestMatcher("/profile/i18n");
         RequestMatcher logout = new AntPathRequestMatcher("/logout");
         RequestMatcher login = new AntPathRequestMatcher("/login");
-        RequestMatcher partysExposed = new AntPathRequestMatcher("/party/partysExposed");
+        RequestMatcher partiesExposed = new AntPathRequestMatcher("/party/partiesExposed");
 
         RequestMatcher reminderPeriod = new AntPathRequestMatcher("/reminder-period"); //TODO
         RequestMatcher reminderExipry = new AntPathRequestMatcher("/reminder-expiry"); //TODO
         RequestMatcher configuration = new AntPathRequestMatcher("/node/configuration/*");
         RequestMatcher logo = new AntPathRequestMatcher("/node/logo/*/*");
 
-        RequestMatcher ignoredRequests = new OrRequestMatcher(profile, logout, login, reminderPeriod, reminderExipry, configuration, logo, partysExposed);
+        RequestMatcher ignoredRequests = new OrRequestMatcher(profile, logout, login, reminderPeriod, reminderExipry, configuration, logo, partiesExposed);
 
         http.antMatcher("/**")
                 .addFilterAfter(new DelegateRequestMatchingFilter(ignoredRequests, jwtTokenFilter), JwtLogoutFilter.class);

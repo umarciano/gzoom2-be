@@ -5,7 +5,6 @@ import it.mapsgroup.gzoom.model.Result;
 import it.mapsgroup.gzoom.querydsl.dto.Party;
 import it.mapsgroup.gzoom.querydsl.dto.PartyEx;
 import it.mapsgroup.gzoom.querydsl.dto.Person;
-import it.mapsgroup.gzoom.querydsl.dto.PersonEx;
 import it.mapsgroup.gzoom.service.PartyService;
 
 import static it.mapsgroup.gzoom.security.Principals.principal;
@@ -37,17 +36,17 @@ public class PartyController {
         return Exec.exec("party/person get", () -> partyService.getPersons());
     }
 
-    @RequestMapping(value = "party/partysExposed", method = RequestMethod.GET)
+    @RequestMapping(value = "party/partiesExposed", method = RequestMethod.GET)
     @ResponseBody
-    public Result<PersonEx> getPartysExposed() {
-        return Exec.exec("party get", () -> partyService.getPartysExposed());
+    public Result<it.mapsgroup.gzoom.model.Person> getPartiesExposed() {
+        return Exec.exec("party get", () -> partyService.getPartiesExposed());
     }
 
-//    @RequestMapping(value = "party/{parentTypeId}", method = RequestMethod.GET)
-//    @ResponseBody
-//    public Result<Party> getPartys(@PathVariable(value = "parentTypeId") String parentTypeId) {
-//        return Exec.exec("party get", () -> partyService.getPartys(principal().getUserLoginId(), parentTypeId));
-//    }
+    @RequestMapping(value = "party/{parentTypeId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Result<Party> getPartys(@PathVariable(value = "parentTypeId") String parentTypeId) {
+        return Exec.exec("party get", () -> partyService.getPartys(principal().getUserLoginId(), parentTypeId));
+    }
     
     @RequestMapping(value = "orgUnits/{parentTypeId}", method = RequestMethod.GET)
     @ResponseBody
