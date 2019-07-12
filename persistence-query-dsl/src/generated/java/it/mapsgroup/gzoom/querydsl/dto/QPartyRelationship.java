@@ -74,11 +74,11 @@ public class QPartyRelationship extends com.querydsl.sql.RelationalPathBase<Part
 
     public final com.querydsl.sql.ForeignKey<SecurityGroup> partyRelSecgrp = createForeignKey(securityGroupId, "GROUP_ID");
 
-    public final com.querydsl.sql.ForeignKey<Uom> uomFk01 = createForeignKey(valueUomId, "UOM_ID");
+    public final com.querydsl.sql.ForeignKey<StatusItem> partyRelStts = createForeignKey(statusId, "STATUS_ID");
 
     public final com.querydsl.sql.ForeignKey<PartyRole> partyRelFprole = createForeignKey(Arrays.asList(partyIdFrom, roleTypeIdFrom), Arrays.asList("PARTY_ID", "ROLE_TYPE_ID"));
 
-    public final com.querydsl.sql.ForeignKey<StatusItem> partyRelStts = createForeignKey(statusId, "STATUS_ID");
+    public final com.querydsl.sql.ForeignKey<Uom> uomFk01 = createForeignKey(valueUomId, "UOM_ID");
 
     public final com.querydsl.sql.ForeignKey<PartyRole> partyRelTprole = createForeignKey(Arrays.asList(partyIdTo, roleTypeIdTo), Arrays.asList("PARTY_ID", "ROLE_TYPE_ID"));
 

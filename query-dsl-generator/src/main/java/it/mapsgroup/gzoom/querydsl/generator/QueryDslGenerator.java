@@ -27,7 +27,10 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class QueryDslGenerator {
     private static final Logger LOG = getLogger(QueryDslGenerator.class);
 
-    // public static final String TARGET_FOLDER = "../persistence-query-dsl/src/generated/java";
+    //PATH LINUX: la cartella "." è la root del progetto backend su Linux
+    //PATH WINDOWS: va bene il path scommentato con i doppi slash
+
+    // public static final String TARGET_FOLDER = "";
     public static final String TARGET_FOLDER = "persistence-query-dsl\\src\\generated\\java";
 
     private Connection getConnection() throws SQLException {

@@ -110,8 +110,21 @@ public class DtoMapper {
         }
         to.setFirstName(from.getFirstName());
         to.setLastName(from.getLastName());
-
         to.setParentRoleCode(from.getPartyParentRole() != null? from.getPartyParentRole().getParentRoleCode() : "");
+
+        return to;
+    }
+
+    public it.mapsgroup.gzoom.model.Visitor copy(it.mapsgroup.gzoom.querydsl.dto.VisitorEx from, it.mapsgroup.gzoom.model.Visitor to) {
+        if (from == null) {
+            return to;
+        }
+        to.setFirstName(from.getFirstName());
+        to.setLastName(from.getLastName());
+        to.setUserLoginId(from.getUserLogin().getUserLoginId());
+        to.setParentRoleCode(from.getPartyParentRole().getParentRoleCode());
+        to.setLastUpdatedStamp(from.getVisitor().getLastUpdatedStamp());
+
         return to;
     }
 
