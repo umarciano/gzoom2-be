@@ -1,14 +1,14 @@
 package it.mapsgroup.gzoom.service;
 
 import it.mapsgroup.gzoom.model.Result;
-import it.mapsgroup.gzoom.model.Visitor;
-import it.mapsgroup.gzoom.querydsl.dao.VisitorDao;
-import it.mapsgroup.gzoom.querydsl.dto.VisitorEx;
+import it.mapsgroup.gzoom.mybatis.dao.VisitorDao;
+import it.mapsgroup.gzoom.mybatis.dto.Visitor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Method;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 
 /**
@@ -18,20 +18,16 @@ import java.util.stream.Collectors;
 @Service
 public class VisitorService {
 
-    private DtoMapper dtoMapper;
     private VisitorDao visitorDao;
 
     @Autowired
-    public VisitorService(DtoMapper dtoMapper, VisitorDao visitorDao) {
-        this.dtoMapper = dtoMapper;
+    public VisitorService(VisitorDao visitorDao) {
         this.visitorDao = visitorDao;
     }
 
-    public Result<Visitor> getVisitors() {
-        List<VisitorEx> visits = visitorDao.getVisitors();
-        List<it.mapsgroup.gzoom.model.Visitor> ret = visits.stream().map(v -> dtoMapper.copy(v,  new it.mapsgroup.gzoom.model.Visitor())).collect(Collectors.toList());
-        return new Result<>(ret, ret.size());
+    public Result<Visitor> getVisitors() throws Exception {
+        Method setNameMethod = VisitorDao.class.getMethod("selectVisit");
+        List<Visitor> list = (List<Visitor>)setNameMethod.invoke(visitorDao);
+        return new Result<>(list, list.size());
     }
-
-
 }
