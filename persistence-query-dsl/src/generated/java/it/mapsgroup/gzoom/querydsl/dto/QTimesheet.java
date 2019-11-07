@@ -56,13 +56,13 @@ public class QTimesheet extends com.querydsl.sql.RelationalPathBase<Timesheet> {
 
     public final com.querydsl.sql.PrimaryKey<Timesheet> primary = createPrimaryKey(timesheetId);
 
-    public final com.querydsl.sql.ForeignKey<Party> timesheetCpty = createForeignKey(clientPartyId, "PARTY_ID");
-
     public final com.querydsl.sql.ForeignKey<Party> timesheetPrty = createForeignKey(partyId, "PARTY_ID");
 
-    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> timesheetAbUl = createForeignKey(approvedByUserLoginId, "USER_LOGIN_ID");
+    public final com.querydsl.sql.ForeignKey<Party> timesheetCpty = createForeignKey(clientPartyId, "PARTY_ID");
 
     public final com.querydsl.sql.ForeignKey<StatusItem> timesheetSts = createForeignKey(statusId, "STATUS_ID");
+
+    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> timesheetAbUl = createForeignKey(approvedByUserLoginId, "USER_LOGIN_ID");
 
     public final com.querydsl.sql.ForeignKey<TimeEntry> _timeEntTsht = createInvForeignKey(timesheetId, "TIMESHEET_ID");
 

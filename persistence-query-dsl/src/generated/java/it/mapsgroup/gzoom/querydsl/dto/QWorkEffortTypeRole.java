@@ -44,9 +44,9 @@ public class QWorkEffortTypeRole extends com.querydsl.sql.RelationalPathBase<Wor
 
     public final com.querydsl.sql.PrimaryKey<WorkEffortTypeRole> primary = createPrimaryKey(roleTypeId, workEffortTypeId);
 
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> wetrWtFk = createForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID");
-
     public final com.querydsl.sql.ForeignKey<RoleType> wetrRtFk = createForeignKey(roleTypeId, "ROLE_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> wetrWtFk = createForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID");
 
     public QWorkEffortTypeRole(String variable) {
         super(WorkEffortTypeRole.class, forVariable(variable), "null", "WORK_EFFORT_TYPE_ROLE");

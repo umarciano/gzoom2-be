@@ -42,9 +42,9 @@ public class QPartyNote extends com.querydsl.sql.RelationalPathBase<PartyNote> {
 
     public final com.querydsl.sql.PrimaryKey<PartyNote> primary = createPrimaryKey(noteId, partyId);
 
-    public final com.querydsl.sql.ForeignKey<Party> partyNoteParty = createForeignKey(partyId, "PARTY_ID");
-
     public final com.querydsl.sql.ForeignKey<NoteData> partyNoteNote = createForeignKey(noteId, "NOTE_ID");
+
+    public final com.querydsl.sql.ForeignKey<Party> partyNoteParty = createForeignKey(partyId, "PARTY_ID");
 
     public QPartyNote(String variable) {
         super(PartyNote.class, forVariable(variable), "null", "PARTY_NOTE");
