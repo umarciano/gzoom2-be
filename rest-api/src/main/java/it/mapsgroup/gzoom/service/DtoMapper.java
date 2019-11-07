@@ -15,14 +15,6 @@ public class DtoMapper {
 
     private static final String SEP = " ";
 
-    /**
-     * Simplified user mapper (copy basic field only)
-     * for full copy {@link SecurityDtoMapper#copy(UserLogin, User)}
-     *
-     * @param userLogin
-     * @param user
-     * @return
-     */
 
     public Timesheet copy(it.mapsgroup.gzoom.querydsl.dto.TimesheetEx from, Timesheet to) {
 
@@ -112,18 +104,13 @@ public class DtoMapper {
         to.setLastName(from.getLastName());
         to.setParentRoleCode(from.getPartyParentRole() != null? from.getPartyParentRole().getParentRoleCode() : "");
 
-        return to;
-    }
+        to.setEmail(from.getContactMech() != null? from.getContactMech().getInfoString() : "");
+        // TODO to.setFromDate(from.getFirstName());
+        to.setEndDate(from.getParty() != null? from.getParty().getEndDate() : null);
+        to.setStatusDescription(from.getStatusItem() != null? from.getStatusItem().getDescription() : "");
 
-    public it.mapsgroup.gzoom.model.Visitor copy(it.mapsgroup.gzoom.querydsl.dto.VisitorEx from, it.mapsgroup.gzoom.model.Visitor to) {
-        if (from == null) {
-            return to;
-        }
-        to.setFirstName(from.getFirstName());
-        to.setLastName(from.getLastName());
-        to.setUserLoginId(from.getUserLogin().getUserLoginId());
-        to.setParentRoleCode(from.getPartyParentRole().getParentRoleCode());
-        to.setLastUpdatedStamp(from.getVisitor().getLastUpdatedStamp());
+        to.setEmplPositionTypeDescription(from.getEmplPositionType() != null? from.getEmplPositionType().getDescription() : "");
+        to.setEmploymentAmount(from.getEmploymentAmount());
 
         return to;
     }

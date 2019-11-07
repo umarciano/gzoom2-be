@@ -38,7 +38,7 @@ public class PartyService {
     }
     
     public Result<Party> getPartys(String userLoginId, String parentTypeId) {
-        List<Party> list = partyDao.getPartys(userLoginId, parentTypeId);
+        List<Party> list = partyDao.getParties(userLoginId, parentTypeId);
         return new Result<>(list, list.size());
     }
     
