@@ -58,6 +58,8 @@ public class QWorkEffortTypeStatus extends com.querydsl.sql.RelationalPathBase<W
 
     public final BooleanPath onlyResponsible = createBoolean("onlyResponsible");
 
+    public final StringPath params = createString("params");
+
     public final NumberPath<java.math.BigInteger> startSoll = createNumber("startSoll", java.math.BigInteger.class);
 
     public final BooleanPath sumVerify = createBoolean("sumVerify");
@@ -66,11 +68,11 @@ public class QWorkEffortTypeStatus extends com.querydsl.sql.RelationalPathBase<W
 
     public final com.querydsl.sql.PrimaryKey<WorkEffortTypeStatus> primary = createPrimaryKey(currentStatusId, workEffortTypeRootId);
 
-    public final com.querydsl.sql.ForeignKey<RoleType> wetsMgmrt = createForeignKey(managementRoleTypeId, "ROLE_TYPE_ID");
-
     public final com.querydsl.sql.ForeignKey<StatusItem> wetsCurrsi = createForeignKey(currentStatusId, "STATUS_ID");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortType> wetsRootwet = createForeignKey(workEffortTypeRootId, "WORK_EFFORT_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<RoleType> wetsMgmrt = createForeignKey(managementRoleTypeId, "ROLE_TYPE_ID");
 
     public final com.querydsl.sql.ForeignKey<StatusItem> wetsNextsi = createForeignKey(nextStatusId, "STATUS_ID");
 
@@ -117,6 +119,7 @@ public class QWorkEffortTypeStatus extends com.querydsl.sql.RelationalPathBase<W
         addMetadata(managWeStatusEnumId, ColumnMetadata.named("MANAG_WE_STATUS_ENUM_ID").withIndex(6).ofType(Types.VARCHAR).withSize(20));
         addMetadata(nextStatusId, ColumnMetadata.named("NEXT_STATUS_ID").withIndex(5).ofType(Types.VARCHAR).withSize(20));
         addMetadata(onlyResponsible, ColumnMetadata.named("ONLY_RESPONSIBLE").withIndex(20).ofType(Types.CHAR).withSize(1));
+        addMetadata(params, ColumnMetadata.named("PARAMS").withIndex(21).ofType(Types.VARCHAR).withSize(2000));
         addMetadata(startSoll, ColumnMetadata.named("START_SOLL").withIndex(17).ofType(Types.DECIMAL).withSize(20));
         addMetadata(sumVerify, ColumnMetadata.named("SUM_VERIFY").withIndex(8).ofType(Types.CHAR).withSize(1));
         addMetadata(workEffortTypeRootId, ColumnMetadata.named("WORK_EFFORT_TYPE_ROOT_ID").withIndex(1).ofType(Types.VARCHAR).withSize(20).notNull());

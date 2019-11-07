@@ -40,9 +40,11 @@ public class QVisitor extends com.querydsl.sql.RelationalPathBase<Visitor> {
 
     public final com.querydsl.sql.PrimaryKey<Visitor> primary = createPrimaryKey(visitorId);
 
+    public final com.querydsl.sql.ForeignKey<Party> visitorParty = createForeignKey(partyId, "PARTY_ID");
+
     public final com.querydsl.sql.ForeignKey<UserLoginPersistent> visitorUsrlgn = createForeignKey(userLoginId, "USER_LOGIN_ID");
 
-    public final com.querydsl.sql.ForeignKey<Party> visitorParty = createForeignKey(partyId, "PARTY_ID");
+    public final com.querydsl.sql.ForeignKey<Visit> _visitVisitor = createInvForeignKey(visitorId, "VISITOR_ID");
 
     public QVisitor(String variable) {
         super(Visitor.class, forVariable(variable), "null", "VISITOR");

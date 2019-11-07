@@ -61,6 +61,9 @@ public class WorkEffortTypeStatus implements AbstractIdentity {
     @Column("ONLY_RESPONSIBLE")
     private Boolean onlyResponsible;
 
+    @Column("PARAMS")
+    private String params;
+
     @Column("START_SOLL")
     private java.math.BigInteger startSoll;
 
@@ -204,6 +207,14 @@ public class WorkEffortTypeStatus implements AbstractIdentity {
 
     public void setOnlyResponsible(Boolean onlyResponsible) {
         this.onlyResponsible = onlyResponsible;
+    }
+
+    public String getParams() {
+        return params;
+    }
+
+    public void setParams(String params) {
+        this.params = params;
     }
 
     public java.math.BigInteger getStartSoll() {

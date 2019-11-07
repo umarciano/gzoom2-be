@@ -72,9 +72,9 @@ public class QTimeEntry extends com.querydsl.sql.RelationalPathBase<TimeEntry> {
 
     public final com.querydsl.sql.ForeignKey<Timesheet> timeEntTsht = createForeignKey(timesheetId, "TIMESHEET_ID");
 
-    public final com.querydsl.sql.ForeignKey<WorkEffort> timeEntWeff = createForeignKey(workEffortId, "WORK_EFFORT_ID");
-
     public final com.querydsl.sql.ForeignKey<Party> timeEntPrty = createForeignKey(partyId, "PARTY_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffort> timeEntWeff = createForeignKey(workEffortId, "WORK_EFFORT_ID");
 
     public QTimeEntry(String variable) {
         super(TimeEntry.class, forVariable(variable), "null", "TIME_ENTRY");
