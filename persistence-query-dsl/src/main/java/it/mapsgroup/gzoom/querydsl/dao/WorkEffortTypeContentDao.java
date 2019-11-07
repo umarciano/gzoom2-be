@@ -76,7 +76,7 @@ public class WorkEffortTypeContentDao extends AbstractDao {
 
 	        SQLBindings bindings = tupleSQLQuery.getSQL();
 	        LOG.info("{}", bindings.getSQL());
-	        LOG.info("{}", bindings.getBindings());
+	        LOG.info("{}", bindings.getNullFriendlyBindings());
 	        List<WorkEffortTypeExt> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWorkEffortType.workEffortTypeId).list(tupleExQBean));
 	        LOG.info("size = {}", ret.size());
 	        return ret;

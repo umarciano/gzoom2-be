@@ -5,7 +5,7 @@
     <parent>
         <groupId>it.mapsgroup.gzoom</groupId>
         <artifactId>gzoom2</artifactId>
-        <version>2.4.0rc3</version>
+        <version>2.4.0rc4</version>
     </parent>
 
     <artifactId>jdbc-repo</artifactId>

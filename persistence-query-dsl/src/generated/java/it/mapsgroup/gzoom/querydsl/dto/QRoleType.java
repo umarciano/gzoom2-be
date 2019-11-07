@@ -64,6 +64,8 @@ public class QRoleType extends com.querydsl.sql.RelationalPathBase<RoleType> {
 
     public final com.querydsl.sql.ForeignKey<RoleType> roleTypePar = createForeignKey(parentTypeId, "ROLE_TYPE_ID");
 
+    public final com.querydsl.sql.ForeignKey<Visit> _visitRoleType = createInvForeignKey(roleTypeId, "ROLE_TYPE_ID");
+
     public final com.querydsl.sql.ForeignKey<PartyRole> _partyRleRole = createInvForeignKey(roleTypeId, "ROLE_TYPE_ID");
 
     public final com.querydsl.sql.ForeignKey<CommunicationEvent> _comEvntTrtyp = createInvForeignKey(roleTypeId, "ROLE_TYPE_ID_TO");

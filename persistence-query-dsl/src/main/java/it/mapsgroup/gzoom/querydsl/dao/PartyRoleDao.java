@@ -42,7 +42,7 @@ public class PartyRoleDao extends AbstractDao {
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         QBean<PartyRole> partyRoles = Projections.bean(PartyRole.class, qPartyRole.all());
         List<PartyRole> ret = tupleSQLQuery.transform(GroupBy.groupBy(qPartyRole.roleTypeId).list(partyRoles));
         return ret.isEmpty() ? null : ret.get(0);

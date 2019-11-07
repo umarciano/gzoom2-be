@@ -49,7 +49,7 @@ private static final Logger LOG = getLogger(SecurityGroupPermissionDao.class);
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         List<SecurityGroupPermission> ret = tupleSQLQuery.transform(GroupBy.groupBy(qsgp.groupId, qsgp.permissionId).list(qsgps));
         return ret;
     } 

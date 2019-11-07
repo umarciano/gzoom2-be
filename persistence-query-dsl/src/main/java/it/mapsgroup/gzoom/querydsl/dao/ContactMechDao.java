@@ -60,7 +60,7 @@ public class ContactMechDao extends AbstractDao {
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         QBean<PartyContactMech> list = Projections.bean(PartyContactMech.class, qPartyContactMech.all());
         List<PartyContactMech> ret = tupleSQLQuery.transform(GroupBy.groupBy(qPartyContactMech.partyId, qPartyContactMech.contactMechId).list(list));
         LOG.info("size = {}", ret.size());

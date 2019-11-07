@@ -15,14 +15,6 @@ public class DtoMapper {
 
     private static final String SEP = " ";
 
-    /**
-     * Simplified user mapper (copy basic field only)
-     * for full copy {@link SecurityDtoMapper#copy(UserLogin, User)}
-     *
-     * @param userLogin
-     * @param user
-     * @return
-     */
 
     public Timesheet copy(it.mapsgroup.gzoom.querydsl.dto.TimesheetEx from, Timesheet to) {
 
@@ -101,6 +93,25 @@ public class DtoMapper {
         //TODO gestire il LANG
         to.setReportName(to.getEtch() == null ? to.getDescription() : to.getEtch());
         
+        return to;
+    }
+
+    public it.mapsgroup.gzoom.model.Person copy(it.mapsgroup.gzoom.querydsl.dto.PersonEx from , it.mapsgroup.gzoom.model.Person to) {
+        if (from == null) {
+            return to;
+        }
+        to.setFirstName(from.getFirstName());
+        to.setLastName(from.getLastName());
+        to.setParentRoleCode(from.getPartyParentRole() != null? from.getPartyParentRole().getParentRoleCode() : "");
+
+        to.setEmail(from.getContactMech() != null? from.getContactMech().getInfoString() : "");
+        // TODO to.setFromDate(from.getFirstName());
+        to.setEndDate(from.getParty() != null? from.getParty().getEndDate() : null);
+        to.setStatusDescription(from.getStatusItem() != null? from.getStatusItem().getDescription() : "");
+
+        to.setEmplPositionTypeDescription(from.getEmplPositionType() != null? from.getEmplPositionType().getDescription() : "");
+        to.setEmploymentAmount(from.getEmploymentAmount());
+
         return to;
     }
 

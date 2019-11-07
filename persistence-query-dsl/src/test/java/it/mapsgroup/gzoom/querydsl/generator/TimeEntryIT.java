@@ -90,7 +90,7 @@ public class TimeEntryIT extends AbstractDaoIT {
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
 
     }
 

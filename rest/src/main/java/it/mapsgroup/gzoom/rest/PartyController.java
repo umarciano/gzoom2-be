@@ -35,7 +35,13 @@ public class PartyController {
     public Result<Person> getPersons() {
         return Exec.exec("party/person get", () -> partyService.getPersons());
     }
-    
+
+    @RequestMapping(value = "party/partiesExposed", method = RequestMethod.GET)
+    @ResponseBody
+    public Result<it.mapsgroup.gzoom.model.Person> getPartiesExposed() {
+        return Exec.exec("party get", () -> partyService.getPartiesExposed());
+    }
+
     @RequestMapping(value = "party/{parentTypeId}", method = RequestMethod.GET)
     @ResponseBody
     public Result<Party> getPartys(@PathVariable(value = "parentTypeId") String parentTypeId) {

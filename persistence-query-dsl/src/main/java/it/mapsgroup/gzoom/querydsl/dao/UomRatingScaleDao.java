@@ -56,7 +56,7 @@ public class UomRatingScaleDao extends AbstractDao {
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings()); // debug
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         List<UomRatingScaleEx> ret = tupleSQLQuery.transform(GroupBy.groupBy(uomRatingScale.uomRatingValue).list(uomRatingScaleExQBean));
 
         LOG.info("size = {}", ret.size());
@@ -83,7 +83,7 @@ public class UomRatingScaleDao extends AbstractDao {
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings()); // debug
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         List<UomRatingScaleEx> ret = tupleSQLQuery.transform(GroupBy.groupBy(uomRatingScale.uomRatingValue).list(uomRatingScaleExQBean));
 
         return ret.isEmpty() ? null : ret.get(0);

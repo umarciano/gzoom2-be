@@ -44,7 +44,7 @@ public class RoleTypeDao extends AbstractDao {
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         QBean<RoleType> roleTypes = Projections.bean(RoleType.class, qRoleType.all());
 
         List<RoleType> ret = tupleSQLQuery.transform(GroupBy.groupBy(qRoleType.roleTypeId).list(roleTypes));
@@ -65,7 +65,7 @@ public class RoleTypeDao extends AbstractDao {
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         QBean<RoleType> roleTypes = Projections.bean(RoleType.class, qRoleType.all());
         List<RoleType> ret = tupleSQLQuery.transform(GroupBy.groupBy(qRoleType.roleTypeId).list(roleTypes));
         return ret.isEmpty() ? null : ret.get(0);

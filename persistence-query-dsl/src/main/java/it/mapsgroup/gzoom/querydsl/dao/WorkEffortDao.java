@@ -60,7 +60,7 @@ public class WorkEffortDao extends AbstractDao {
 
 		SQLBindings bindings = tupleSQLQuery.getSQL();
 		LOG.info("{}", bindings.getSQL());
-		LOG.info("{}", bindings.getBindings());
+		LOG.info("{}", bindings.getNullFriendlyBindings());
 		QBean<WorkEffort> workEfforts = Projections.bean(WorkEffort.class, qWorkEffort.all());
 		List<WorkEffort> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWorkEffort.workEffortId).list(workEfforts));
 		LOG.info("size = {}", ret.size());
@@ -195,7 +195,7 @@ public class WorkEffortDao extends AbstractDao {
 
 		SQLBindings bindings = tupleSQLQuery.getSQL();
 		LOG.info("{}", bindings.getSQL());
-		LOG.info("{}", bindings.getBindings());
+		LOG.info("{}", bindings.getNullFriendlyBindings());
 		QBean<WorkEffort> workEfforts = Projections.bean(WorkEffort.class, qWorkEffort.all());
 		List<WorkEffort> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWorkEffort.workEffortId).list(workEfforts));
 		LOG.info("size = {}", ret.size());
@@ -215,7 +215,7 @@ public class WorkEffortDao extends AbstractDao {
 
 		SQLBindings bindings = tupleSQLQuery.getSQL();
 		LOG.info("{}", bindings.getSQL());
-		LOG.info("{}", bindings.getBindings());
+		LOG.info("{}", bindings.getNullFriendlyBindings());
 		QBean<WorkEffort> workEfforts = Projections.bean(WorkEffort.class, qWorkEffort.all());
 		List<WorkEffort> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWorkEffort.workEffortId).list(workEfforts));
 		LOG.info("size = {}", ret.size());

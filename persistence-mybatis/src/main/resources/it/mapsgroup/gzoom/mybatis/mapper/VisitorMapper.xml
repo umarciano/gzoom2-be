@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.mapsgroup.gzoom.mybatis.mapper.VisitorMapper">
+	
+
+  <resultMap id="BaseResultMap" type="it.mapsgroup.gzoom.mybatis.dto.Visitor">
+    <id column="visitor_id" jdbcType="VARCHAR" property="visitorId" />
+    <result column="min_from_date" jdbcType="DATETIMEOFFSET" property="minFromDate" />
+    <result column="max_thru_date" jdbcType="DATETIMEOFFSET" property="maxThruDate" />
+    <result column="user_login_id" jdbcType="VARCHAR" property="userLoginId" />
+    <result column="parent_role_code" jdbcType="VARCHAR" property="parentRoleCode" />
+    <result column="first_name" jdbcType="VARCHAR" property="firstName" />
+    <result column="last_name" jdbcType="VARCHAR" property="lastName" />
+  </resultMap>
+
+	<select id="selectVisit" resultMap="BaseResultMap" parameterType="java.util.Map">
+
+  SELECT VISITOR.VISITOR_ID, VISITOR.USER_LOGIN_ID, PARTY_PARENT_ROLE.PARENT_ROLE_CODE, PERSON.FIRST_NAME, PERSON.LAST_NAME, min(VISIT.FROM_DATE) AS MIN_FROM_DATE , max(THRU_DATE) AS MAX_THRU_DATE
+FROM VISITOR VISITOR
+INNER JOIN VISIT VISIT ON VISIT.VISITOR_ID = VISITOR.VISITOR_ID
+INNER JOIN USER_LOGIN USER_LOGIN ON USER_LOGIN.USER_LOGIN_ID = VISITOR.USER_LOGIN_ID
+INNER JOIN PARTY PARTY ON PARTY.PARTY_ID = VISITOR.PARTY_ID
+INNER JOIN PERSON PERSON ON PERSON.PARTY_ID = PARTY.PARTY_ID
+INNER JOIN PARTY_PARENT_ROLE PARTY_PARENT_ROLE ON PARTY_PARENT_ROLE.PARTY_ID = PARTY.PARTY_ID AND PARTY_PARENT_ROLE.ROLE_TYPE_ID = 'EMPLOYEE'
+group by VISITOR.VISITOR_ID
+   </select>
+
+</mapper>

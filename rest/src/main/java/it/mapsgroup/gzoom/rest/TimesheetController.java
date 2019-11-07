@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  */
 @RestController
-@RequestMapping(value = "", produces = { MediaType.APPLICATION_JSON_VALUE })
+@RequestMapping(value = "timesheet", produces = { MediaType.APPLICATION_JSON_VALUE })
 public class TimesheetController {
 
     private final TimesheetService timesheetService;
@@ -22,34 +22,34 @@ public class TimesheetController {
         this.timesheetService = timesheetService;
     }
 
-    @RequestMapping(value = "timesheet/timesheet", method = RequestMethod.GET)
+    @RequestMapping(value = "timesheet", method = RequestMethod.GET)
     @ResponseBody
     public Result<Timesheet> getTimesheets() {
-        return Exec.exec("timesheet/timesheet get", () -> timesheetService.getTimesheets());
+        return Exec.exec("timesheet get", () -> timesheetService.getTimesheets());
     }
     
-    @RequestMapping(value = "timesheet/timesheet/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "timesheet/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Timesheet getTimesheet(@PathVariable(value = "id") String id) {
-        return Exec.exec("timesheet/timesheet get", () -> timesheetService.getTimesheet(id));
+        return Exec.exec("timesheet get", () -> timesheetService.getTimesheet(id));
     }
 
-    @RequestMapping(value = "timesheet/timesheet" , method = RequestMethod.POST)
+    @RequestMapping(value = "timesheet" , method = RequestMethod.POST)
     @ResponseBody
     public String createTimesheet(@RequestBody Timesheet req) {
-        return Exec.exec( "timesheet/timesheet-post", () -> timesheetService.createTimesheet(req));
+        return Exec.exec( "timesheet-post", () -> timesheetService.createTimesheet(req));
     }
 
-    @RequestMapping(value = "timesheet/timesheet/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "timesheet/{id}", method = RequestMethod.PUT)
     @ResponseBody
     public String updateTimesheet(@PathVariable(value = "id") String id, @RequestBody Timesheet req) {
-        return Exec.exec("timesheet/timesheet put", () -> timesheetService.updateTimesheet(id, req));
+        return Exec.exec("timesheet put", () -> timesheetService.updateTimesheet(id, req));
     }
 
-    @RequestMapping(value = "timesheet/timesheet/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "timesheet/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public String deleteTimesheet(@PathVariable(value = "id") String id) {
-        return Exec.exec("timesheet/timesheet delete", () -> timesheetService.deleteTimesheet(id));
+        return Exec.exec("timesheet delete", () -> timesheetService.deleteTimesheet(id));
     }
 
 }

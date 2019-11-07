@@ -27,7 +27,10 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class QueryDslGenerator {
     private static final Logger LOG = getLogger(QueryDslGenerator.class);
 
-    // public static final String TARGET_FOLDER = "../persistence-query-dsl/src/generated/java";
+    //PATH LINUX: la cartella "." è la root del progetto backend su Linux
+    //PATH WINDOWS: va bene il path scommentato con i doppi slash
+
+    // public static final String TARGET_FOLDER = "";
     public static final String TARGET_FOLDER = "persistence-query-dsl\\src\\generated\\java";
 
     private Connection getConnection() throws SQLException {
@@ -35,6 +38,7 @@ public class QueryDslGenerator {
                 "(CONNECT_DATA=(SERVER = DEDICATED)(SERVICE_NAME= devdb.maps1.mapsengineering.com)))", "ANFO", "@4ndr34_77");*/
 //        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/ltprod", "lmm", "lmm");
         //return DriverManager.getConnection("jdbc:mysql://localhost/gzoom_lite", "root", "root");
+        // Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/gzoom_regione_campania", "postgres", "P0stgres81");
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/gzoom_comune_lecco?serverTimezone=UTC", "root", "");
         // connection.setCatalog("gzoom_comune_lecco");
         // connection.setSchema("gzoom_comune_lecco");

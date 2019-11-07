@@ -46,9 +46,9 @@ public class QCommEventContentAssoc extends com.querydsl.sql.RelationalPathBase<
 
     public final com.querydsl.sql.PrimaryKey<CommEventContentAssoc> primary = createPrimaryKey(communicationEventId, contentId, fromDate);
 
-    public final com.querydsl.sql.ForeignKey<CommunicationEvent> commevCaCommev = createForeignKey(communicationEventId, "COMMUNICATION_EVENT_ID");
-
     public final com.querydsl.sql.ForeignKey<Content> commevCaFrom = createForeignKey(contentId, "CONTENT_ID");
+
+    public final com.querydsl.sql.ForeignKey<CommunicationEvent> commevCaCommev = createForeignKey(communicationEventId, "COMMUNICATION_EVENT_ID");
 
     public QCommEventContentAssoc(String variable) {
         super(CommEventContentAssoc.class, forVariable(variable), "null", "COMM_EVENT_CONTENT_ASSOC");

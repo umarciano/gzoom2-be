@@ -9,14 +9,7 @@ import com.querydsl.sql.SQLBindings;
 import com.querydsl.sql.SQLQuery;
 import com.querydsl.sql.SQLQueryFactory;
 import it.mapsgroup.gzoom.persistence.common.SequenceGenerator;
-import it.mapsgroup.gzoom.querydsl.dto.Party;
-import it.mapsgroup.gzoom.querydsl.dto.PartyEx;
-import it.mapsgroup.gzoom.querydsl.dto.PartyParentRole;
-import it.mapsgroup.gzoom.querydsl.dto.QParty;
-import it.mapsgroup.gzoom.querydsl.dto.QPartyParentRole;
-import it.mapsgroup.gzoom.querydsl.dto.QPartyRelationship;
-import it.mapsgroup.gzoom.querydsl.dto.QPartyRole;
-import it.mapsgroup.gzoom.querydsl.dto.QUserLoginPersistent;
+import it.mapsgroup.gzoom.querydsl.dto.*;
 import it.mapsgroup.gzoom.querydsl.service.PermissionService;
 import it.mapsgroup.gzoom.querydsl.util.ContextPermissionPrefixEnum;
 
@@ -44,14 +37,12 @@ public class PartyDao extends AbstractDao {
 
     private final SequenceGenerator sequenceGenerator;
     private final SQLQueryFactory queryFactory;
-    private final PermissionService permissionService;
     private final FilterPermissionDao filterPermissionDao;
     
     @Autowired
-    public PartyDao(SequenceGenerator sequenceGenerator, SQLQueryFactory queryFactory, PermissionService permissionService, FilterPermissionDao filterPermissionDao) {
+    public PartyDao(SequenceGenerator sequenceGenerator, SQLQueryFactory queryFactory, FilterPermissionDao filterPermissionDao) {
         this.sequenceGenerator = sequenceGenerator;
         this.queryFactory = queryFactory;
-        this.permissionService = permissionService;
         this.filterPermissionDao = filterPermissionDao;
     }
 
@@ -86,7 +77,7 @@ public class PartyDao extends AbstractDao {
     }
     
     @Transactional
-    public List<Party> getPartys(String userLoginId, String parentTypeId) {
+    public List<Party> getParties(String userLoginId, String parentTypeId) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
@@ -101,9 +92,49 @@ public class PartyDao extends AbstractDao {
         
         SQLBindings bindings = pSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
-        QBean<Party> partys = Projections.bean(Party.class, qParty.all());
-        List<Party> ret = pSQLQuery.transform(GroupBy.groupBy(qParty.partyId).list(partys));
+        LOG.info("{}", bindings.getNullFriendlyBindings());
+        QBean<Party> parties = Projections.bean(Party.class, qParty.all());
+        List<Party> ret = pSQLQuery.transform(GroupBy.groupBy(qParty.partyId).list(parties));
+        LOG.info("size = {}", ret.size());
+        return ret;
+    }
+
+    @Transactional
+    public List<PersonEx> getPartiesExposed() {
+        if (TransactionSynchronizationManager.isActualTransactionActive()) {
+            TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
+            status.getClass();
+        }
+        QParty qParty = QParty.party;
+        QPerson qPerson = QPerson.person;
+        QPartyParentRole qPartyParentRole = QPartyParentRole.partyParentRole;
+        QEmplPositionType qEmplPositionType = QEmplPositionType.emplPositionType;
+        QStatusItem qStatusItem = QStatusItem.statusItem;
+        QPartyContactMech qPartyContactMech = QPartyContactMech.partyContactMech;
+        QContactMech qContactMech = QContactMech.contactMech;
+
+        SQLQuery<Tuple> pSQLQuery = queryFactory.select(qPerson, qParty)
+                .from(qPerson)
+                .innerJoin(qParty).on(qParty.partyId.eq(qPerson.partyId))
+                .innerJoin(qPartyParentRole).on(qPartyParentRole.partyId.eq(qPerson.partyId)).on(qPartyParentRole.roleTypeId.eq("EMPLOYEE"))
+                .leftJoin(qEmplPositionType).on(qEmplPositionType.emplPositionTypeId.eq(qPerson.emplPositionTypeId))
+                .innerJoin(qStatusItem).on(qStatusItem.statusId.eq(qParty.statusId))
+                .leftJoin(qPartyContactMech).on(qPartyContactMech.partyId.eq(qParty.partyId)).on(qPartyContactMech.thruDate.isNull())
+                .leftJoin(qContactMech).on(qContactMech.contactMechId.eq(qPartyContactMech.contactMechId))
+                .where(qContactMech.contactMechTypeId.eq("EMAIL_ADDRESS").or(qContactMech.contactMechTypeId.isNull()))
+                .orderBy(qPerson.lastName.asc(), qPerson.firstName.asc());
+
+       SQLBindings bindings = pSQLQuery.getSQL();
+        LOG.info("{}", bindings.getSQL());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
+        QBean<PersonEx> parties = bean(PersonEx.class, merge(qPerson.all(),
+                bean(Party.class, qParty.all()).as("party"),
+                bean(PartyParentRole.class, qPartyParentRole.all()).as("partyParentRole"),
+                bean(StatusItem.class, qStatusItem.all()).as("statusItem"),
+                bean(EmplPositionType.class, qEmplPositionType.all()).as("emplPositionType"),
+                bean(ContactMech.class, qContactMech.all()).as("contactMech")
+        ));
+        List<PersonEx> ret = pSQLQuery.transform(GroupBy.groupBy(qParty.partyId).list(parties));
         LOG.info("size = {}", ret.size());
         return ret;
     }
@@ -125,7 +156,7 @@ public class PartyDao extends AbstractDao {
         							.orderBy(qParty.partyName.asc());
         SQLBindings bindings = pSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         QBean<Party> partys = Projections.bean(Party.class, qParty.all());
         List<Party> ret = pSQLQuery.transform(GroupBy.groupBy(qParty.partyId).list(partys));
         LOG.info("size = {}", ret.size());
@@ -163,7 +194,7 @@ public class PartyDao extends AbstractDao {
          
 		 SQLBindings bindings = tupleSQLQuery.getSQL();
 		 LOG.info("{}", bindings.getSQL());
-		 LOG.info("{}", bindings.getBindings());
+		 LOG.info("{}", bindings.getNullFriendlyBindings());
 		 
          QBean<PartyEx> partyQBean = bean(PartyEx.class, 
         		merge(qParty.all(), 

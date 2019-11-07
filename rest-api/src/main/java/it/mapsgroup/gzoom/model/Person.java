@@ -1,235 +1,99 @@
 package it.mapsgroup.gzoom.model;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 
-public class Person extends Identity {
+public class Person {
 
-    private String taxIdentificationNumber;
     private String firstName;
     private String lastName;
-    private PostalAddress address;
-    private Date birthDate;
-    private PostalAddress birthLocation;
-    private String gender;
-    private Boolean residencyPermit;
-    private String note;
-    //personEmployment.cardNumber
-    private Long peCardNumber;
-    //personEmployment.badge
-    private String peBadge;
-    //personEmployment.peStateTag
-    private String peStateTag;
-    private String peStateDescription;
-    private String compDescription;
-    private String secondmentCompanyDescription;
-    private String role;
-    private String job;
-    private String jobDescription;
-    private String level;
-    private Date assumptionDate;
-    private Date dismissalDate;
-    private Date startDate;
-    private Date endDate;
-    private String companyStateTag;
-    private String companyStateDescription;
+    private String parentRoleCode;
 
-    public String getTaxIdentificationNumber() {
-        return taxIdentificationNumber;
+
+    private String email;
+    private LocalDateTime fromDate;
+    private LocalDateTime endDate;
+    private String statusDescription;
+    private String emplPositionTypeDescription;
+    private BigDecimal employmentAmount;
+
+    public String getEmail() {
+        return email;
     }
 
-    public void setTaxIdentificationNumber(String taxIdentificationNumber) {
-        this.taxIdentificationNumber = taxIdentificationNumber;
+    public LocalDateTime getFromDate() {
+        return fromDate;
+    }
+
+    public LocalDateTime getEndDate() {
+        return endDate;
+    }
+
+    public String getStatusDescription() {
+        return statusDescription;
+    }
+
+    public String getEmplPositionTypeDescription() {
+        return emplPositionTypeDescription;
+    }
+
+    public BigDecimal getEmploymentAmount() {
+        return employmentAmount;
+    }
+
+    public String getParentRoleCode() {
+
+        return parentRoleCode;
+    }
+
+    public void setParentRoleCode(String parentRoleCode) {
+
+        this.parentRoleCode = parentRoleCode;
     }
 
     public String getFirstName() {
+
         return firstName;
     }
 
     public void setFirstName(String firstName) {
+
         this.firstName = firstName;
     }
 
     public String getLastName() {
+
         return lastName;
     }
 
     public void setLastName(String lastName) {
+
         this.lastName = lastName;
     }
 
-    public PostalAddress getAddress() {
-        return address;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setAddress(PostalAddress address) {
-        this.address = address;
+    public void setFromDate(LocalDateTime fromDate) {
+        this.fromDate = fromDate;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public Boolean getResidencyPermit() {
-        return residencyPermit;
-    }
-
-    public void setResidencyPermit(Boolean residencyPermit) {
-        this.residencyPermit = residencyPermit;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public void setPeCardNumber(Long peCardNumber) {
-        this.peCardNumber = peCardNumber;
-    }
-
-    public Long getPeCardNumber() {
-        return peCardNumber;
-    }
-
-    public void setPeBadge(String peBadgeNumber) {
-        this.peBadge = peBadgeNumber;
-    }
-
-    public String getPeBadge() {
-        return peBadge;
-    }
-
-    public void setPeStateDescription(String peStateDescription) {
-        this.peStateDescription = peStateDescription;
-    }
-
-    public void setCompDescription(String compDescription) {
-        this.compDescription = compDescription;
-    }
-
-    public String getPeStateDescription() {
-        return peStateDescription;
-    }
-
-    public String getCompDescription() {
-        return compDescription;
-    }
-
-    public PostalAddress getBirthLocation() {
-        return birthLocation;
-    }
-
-    public void setBirthLocation(PostalAddress birthLocation) {
-        this.birthLocation = birthLocation;
-    }
-
-    public void setSecondmentCompanyDescription(String secondmentCompanyDescription) {
-        this.secondmentCompanyDescription = secondmentCompanyDescription;
-    }
-
-    public String getSecondmentCompanyDescription() {
-        return secondmentCompanyDescription;
-    }
-
-    public Date getDismissalDate() {
-        return dismissalDate;
-    }
-
-    public void setDismissalDate(Date dismissalDate) {
-        this.dismissalDate = dismissalDate;
-    }
-
-    public Date getAssumptionDate() {
-        return assumptionDate;
-    }
-
-    public void setAssumptionDate(Date assumptionDate) {
-        this.assumptionDate = assumptionDate;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 
-    public String getRole() {
-        return role;
+    public void setStatusDescription(String statusDescription) {
+        this.statusDescription = statusDescription;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setEmplPositionTypeDescription(String emplPositionTypeDescription) {
+        this.emplPositionTypeDescription = emplPositionTypeDescription;
     }
 
-    public String getJob() {
-        return job;
+    public void setEmploymentAmount(BigDecimal employmentAmount) {
+        this.employmentAmount = employmentAmount;
     }
 
-    public void setJob(String job) {
-        this.job = job;
-    }
-
-    public String getJobDescription() {
-        return jobDescription;
-    }
-
-    public void setJobDescription(String jobDescription) {
-        this.jobDescription = jobDescription;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public String getPeStateTag() {
-        return peStateTag;
-    }
-
-    public void setPeStateTag(String peStateTag) {
-        this.peStateTag = peStateTag;
-    }
-
-    public String getCompanyStateTag() {
-        return companyStateTag;
-    }
-
-    public void setCompanyStateTag(String companyStateTag) {
-        this.companyStateTag = companyStateTag;
-    }
-
-    public String getCompanyStateDescription() {
-        return companyStateDescription;
-    }
-
-    public void setCompanyStateDescription(String companyStateDescription) {
-        this.companyStateDescription = companyStateDescription;
-    }
 }

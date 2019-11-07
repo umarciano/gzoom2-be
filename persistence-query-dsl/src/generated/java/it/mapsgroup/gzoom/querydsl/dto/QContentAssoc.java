@@ -64,11 +64,11 @@ public class QContentAssoc extends com.querydsl.sql.RelationalPathBase<ContentAs
 
     public final com.querydsl.sql.PrimaryKey<ContentAssoc> primary = createPrimaryKey(contentAssocTypeId, contentId, contentIdTo, fromDate);
 
+    public final com.querydsl.sql.ForeignKey<Content> contentasscTo = createForeignKey(contentIdTo, "CONTENT_ID");
+
     public final com.querydsl.sql.ForeignKey<UserLoginPersistent> contentasscCbusr = createForeignKey(createdByUserLogin, "USER_LOGIN_ID");
 
     public final com.querydsl.sql.ForeignKey<Content> contentasscFrom = createForeignKey(contentId, "CONTENT_ID");
-
-    public final com.querydsl.sql.ForeignKey<Content> contentasscTo = createForeignKey(contentIdTo, "CONTENT_ID");
 
     public final com.querydsl.sql.ForeignKey<UserLoginPersistent> contentasscLmbur = createForeignKey(lastModifiedByUserLogin, "USER_LOGIN_ID");
 

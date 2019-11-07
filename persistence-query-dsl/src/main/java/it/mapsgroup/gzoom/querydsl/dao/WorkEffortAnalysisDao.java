@@ -44,7 +44,7 @@ public class WorkEffortAnalysisDao {
         SQLQuery<WorkEffortAnalysis> tupleSQLQuery = queryFactory.select(qWa).from(qWa).where(qWa.workEffortAnalysisId.eq(workEffortAnalysisId));
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         QBean<WorkEffortAnalysis> wa = Projections.bean(WorkEffortAnalysis.class, qWa.all());
         List<WorkEffortAnalysis> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWa.workEffortAnalysisId).list(wa));
         return ret.isEmpty() ? null : ret.get(0);

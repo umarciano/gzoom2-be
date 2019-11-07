@@ -5,7 +5,7 @@
 
     <groupId>it.mapsgroup.gzoom</groupId>
     <artifactId>gzoom2</artifactId>
-    <version>2.4.0rc3</version>
+    <version>2.4.0rc4</version>
     <packaging>pom</packaging>
 
     <name>GZoom2 (parent)</name>
@@ -90,7 +90,7 @@
         <!-- Maps Artifacts server -->
         <repository>
             <id>Maps Artifacts</id>
-            <url>http://artifactory.maps1.mapsengineering.com:8081/artifactory/repo</url>
+            <url>http://artifactory.maps1.mapsengineering.com:8081/artifactory/mapslibs</url>
             <releases>
                 <enabled>true</enabled>
                 <checksumPolicy>ignore</checksumPolicy>
@@ -605,7 +605,7 @@
         <module>persistence-query-dsl</module>
         <module>query-dsl-generator</module>
         <module>ofbiz-client</module>
-        <module>ofbiz/hot-deploy</module>
+<!--        <module>ofbiz/hot-deploy</module>-->
         <module>persistence-mybatis-generator</module>
         <module>jdbc-repo</module>
         <module>report</module>
