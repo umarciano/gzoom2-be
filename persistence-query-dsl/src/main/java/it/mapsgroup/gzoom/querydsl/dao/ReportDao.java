@@ -60,7 +60,7 @@ public class ReportDao extends AbstractDao {
         
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         List<ReportType> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContent.contentId).list(reportTypeQBean));
         LOG.info("size = {}", ret.size());
         return ret;
@@ -105,7 +105,7 @@ public class ReportDao extends AbstractDao {
         
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         List<Report> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContent.contentId, qWorkEffortTypeContent.etch, qContent.description).list(reportQBean));
         LOG.info("size = {}", ret.size()); 
         return ret;
@@ -146,7 +146,7 @@ public class ReportDao extends AbstractDao {
         
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         List<Report> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContent.contentId).list(reportQBean));
         return ret.isEmpty() ? null : ret.get(0);
     }
@@ -173,7 +173,7 @@ public class ReportDao extends AbstractDao {
         
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         List<ReportType> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContentAssoc.contentId).list(reportQBean));
         LOG.info("size = {}", ret.size()); 
         return ret;
@@ -213,7 +213,7 @@ public class ReportDao extends AbstractDao {
         	
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         List<Report> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContent.contentId, qWorkEffortAnalysis.description5, qContent.description).list(reportQBean));
         LOG.info("size = {}", ret.size()); 
         return ret;
@@ -250,7 +250,7 @@ public class ReportDao extends AbstractDao {
         	
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         List<WorkEffortTypeExt> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWorkEffortAnalysis.description).list(tupleExQBean));
         LOG.info("size = {}", ret.size()); 
         return ret;
@@ -290,7 +290,7 @@ public class ReportDao extends AbstractDao {
         	
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         List<Report> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContent.contentId).list(reportQBean));        
         return ret.isEmpty() ? null : ret.get(0);
     }  
@@ -326,7 +326,7 @@ public class ReportDao extends AbstractDao {
         
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         QBean<WorkEffortAssoc> workEffortAssocQBean = Projections.bean(WorkEffortAssoc.class, qWorkEffortAssoc.all());
         List<WorkEffortAssoc> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWorkEffortAssoc.workEffortIdTo, qWorkEffortAssoc.workEffortIdFrom,
         		qWorkEffortAssoc.workEffortAssocTypeId, qWorkEffortAssoc.fromDate).list(workEffortAssocQBean));

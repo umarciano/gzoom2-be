@@ -50,7 +50,7 @@ public class UomDao extends AbstractDao {
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings()); // debug
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         List<UomEx> ret = tupleSQLQuery.transform(GroupBy.groupBy(uom.uomId).list(uomExQBean));
 
         LOG.info("size = {}", ret.size());
@@ -73,7 +73,7 @@ public class UomDao extends AbstractDao {
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings()); // debug
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         List<UomEx> ret = tupleSQLQuery.transform(GroupBy.groupBy(uom.uomId).list(uomExQBean));
 
         return ret.isEmpty() ? null : ret.get(0);

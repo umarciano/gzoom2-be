@@ -46,7 +46,7 @@ public class UomTypeDao extends AbstractDao {
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         QBean<UomType> uomTypes = Projections.bean(UomType.class, qUomType.all());
 
         List<UomType> ret = tupleSQLQuery.transform(GroupBy.groupBy(qUomType.uomTypeId).list(uomTypes));
@@ -67,7 +67,7 @@ public class UomTypeDao extends AbstractDao {
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         QBean<UomType> uomTypes = Projections.bean(UomType.class, qUomType.all());
         List<UomType> ret = tupleSQLQuery.transform(GroupBy.groupBy(qUomType.uomTypeId).list(uomTypes));
         return ret.isEmpty() ? null : ret.get(0);
@@ -87,7 +87,7 @@ public class UomTypeDao extends AbstractDao {
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         QBean<UomType> uomTypes = Projections.bean(UomType.class, qUomType.all());
 
         tupleSQLQuery.offset(pageNumber * pageSize).limit(pageSize);

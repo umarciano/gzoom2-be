@@ -49,7 +49,7 @@ public class WorkEffortTypeDao extends AbstractDao {
 		SQLQuery<WorkEffortType> tupleSQLQuery = queryFactory.select(qWorkEffortType).from(qWorkEffortType).where(qWorkEffortType.workEffortTypeId.eq(workEffortTypeId));
 		SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         QBean<WorkEffortType> wa = Projections.bean(WorkEffortType.class, qWorkEffortType.all());
         List<WorkEffortType> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWorkEffortType.workEffortTypeId).list(wa));
         return ret.isEmpty() ? null : ret.get(0);
@@ -74,7 +74,7 @@ public class WorkEffortTypeDao extends AbstractDao {
 		
 		SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         
         QBean<WorkEffortTypeContentExt> qBean = bean(WorkEffortTypeContentExt.class,
                 merge(qWTC.all(),

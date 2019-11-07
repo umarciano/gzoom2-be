@@ -47,7 +47,7 @@ public class PermissionDao {
                 // .where(qulsg.userLoginId.eq(userLoginId).and(qsp.enabled.isTrue()))
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         QBean<SecurityPermission> perm = Projections.bean(SecurityPermission.class, qsgp.permissionId);
         
         List<SecurityPermission> ret = tupleSQLQuery.transform(GroupBy.groupBy(qsgp.permissionId).list(perm));
@@ -71,7 +71,7 @@ public class PermissionDao {
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         QBean<SecurityPermission> perm = Projections.bean(SecurityPermission.class, qsgp.permissionId);
         
         List<SecurityPermission> ret = tupleSQLQuery.transform(GroupBy.groupBy(qsgp.permissionId).list(perm));

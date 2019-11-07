@@ -67,7 +67,7 @@ public class TimesheetDao extends AbstractDao {
         
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         //QBean<Timesheet> timesheets = Projections.bean(Timesheet.class, qTimesheet.all());
         QBean<TimesheetEx> timesheetExQBean = bean(TimesheetEx.class, merge(qTimesheet.all(), bean(Party.class, qParty.all()).as("party")));
         List<TimesheetEx> ret = tupleSQLQuery.transform(GroupBy.groupBy(qTimesheet.timesheetId).list(timesheetExQBean));
@@ -91,7 +91,7 @@ public class TimesheetDao extends AbstractDao {
         
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings()); // debug
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         List<TimesheetEx> ret = tupleSQLQuery.transform(GroupBy.groupBy(qTimesheet.timesheetId).list(timesheetExQBean));
 
         return ret.isEmpty() ? null : ret.get(0);
@@ -123,7 +123,7 @@ public class TimesheetDao extends AbstractDao {
         SQLQuery<Timesheet> tSQLQuery = queryFactory.select(qTimesheet).from(qTimesheet).where(qTimesheet.timesheetId.eq(timesheetId));
         SQLBindings bindings = tSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         QBean<Timesheet> timesheets = Projections.bean(Timesheet.class, qTimesheet.all());
         List<Timesheet> ret = tSQLQuery.transform(GroupBy.groupBy(qTimesheet.timesheetId).list(timesheets));
 

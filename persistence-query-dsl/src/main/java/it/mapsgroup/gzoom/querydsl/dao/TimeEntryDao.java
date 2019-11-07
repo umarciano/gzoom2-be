@@ -70,7 +70,7 @@ public class TimeEntryDao extends AbstractDao {
                 .where(qte.timesheetId.eq(id));
         SQLBindings bindings = tSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
 
         //QBean<TimeEntryEx> timeEntries = Projections.bean(TimeEntryEx.class, qte.all());
         QBean<TimeEntryEx> timeEntries = bean(TimeEntryEx.class,
@@ -150,7 +150,7 @@ public class TimeEntryDao extends AbstractDao {
                 .where(ts.timesheetId.eq(id));
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
 
         List<Activity> ret = tupleSQLQuery.transform(GroupBy.groupBy(l3.workEffortId).list(teExQBean));
         LOG.info("size = {}", ret.size());
@@ -197,7 +197,7 @@ public class TimeEntryDao extends AbstractDao {
         SQLQuery<TimeEntry> tSQLQuery = queryFactory.select(qTimeEntry).from(qTimeEntry).where(qTimeEntry.timeEntryId.eq(timeEntryId));
         SQLBindings bindings = tSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         QBean<TimeEntry> timeEntry = Projections.bean(TimeEntry.class, qTimeEntry.all());
         List<TimeEntry> ret = tSQLQuery.transform(GroupBy.groupBy(qTimeEntry.timeEntryId).list(timeEntry));
 

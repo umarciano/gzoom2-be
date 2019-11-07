@@ -66,7 +66,7 @@ public class StatusItemDao {
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         List<StatusItemExt> ret = tupleSQLQuery.transform(GroupBy.groupBy(qStatusItem.description).list(tupleExQBean));
         LOG.info("size = {}", ret.size());
         return ret;

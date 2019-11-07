@@ -41,7 +41,7 @@ public class PersonDao extends AbstractDao {
         SQLQuery<Person> pSQLQuery = queryFactory.select(qPerson).from(qPerson);
         SQLBindings bindings = pSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         QBean<Person> timesheets = Projections.bean(Person.class, qPerson.all());
         List<Person> ret = pSQLQuery.transform(GroupBy.groupBy(qPerson.partyId).list(timesheets));
         LOG.info("size = {}", ret.size());

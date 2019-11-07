@@ -51,7 +51,7 @@ public class UserLoginSecurityGroupDao extends AbstractDao {
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         QBean<UserLoginSecurityGroup> qUlsgs = Projections.bean(UserLoginSecurityGroup.class, qUlsg.all());
         List<UserLoginSecurityGroup> ret = tupleSQLQuery.transform(GroupBy.groupBy(qUlsg.userLoginId).list(qUlsgs));
         return ret;
@@ -75,7 +75,7 @@ public class UserLoginSecurityGroupDao extends AbstractDao {
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         QBean<UserLoginSecurityGroup> qUlsgs = Projections.bean(UserLoginSecurityGroup.class, qUlsg.all());
         List<UserLoginSecurityGroup> ret = tupleSQLQuery.transform(GroupBy.groupBy(qUlsg.groupId).list(qUlsgs));
         return ret;

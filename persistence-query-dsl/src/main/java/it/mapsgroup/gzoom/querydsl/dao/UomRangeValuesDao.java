@@ -49,7 +49,7 @@ public class UomRangeValuesDao {
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         QBean<UomRangeValues> uoms = Projections.bean(UomRangeValues.class, qUomRangeValues.all());
         List<UomRangeValues> ret = tupleSQLQuery.transform(GroupBy.groupBy(qUomRangeValues.uomRangeValuesId).list(uoms));
         LOG.info("size = {}", ret.size());

@@ -72,7 +72,7 @@ public class ContentDao extends AbstractDao {
 
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         QBean<Content> list = Projections.bean(Content.class, qContent.all());
         List<Content> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContent.contentId).list(list));
         return ret.isEmpty() ? null : ret.get(0);

@@ -108,7 +108,7 @@ public class ContentAndAttributesDao extends AbstractDao {
                 .orderBy(qContentAssoc.sequenceNum.asc());
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         List<ContentAndAttributes> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContent.contentId).list(contentAndAttributesExQBean));
         LOG.info("size = {}", ret.size());
         return ret;
@@ -143,7 +143,7 @@ public class ContentAndAttributesDao extends AbstractDao {
                 .orderBy(qContent.contentId.asc());
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         List<ContentAndAttributes> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContent.contentId).list(contentAndAttributesExQBean));
         LOG.info("size = {}", ret.size());
         return ret;
@@ -180,7 +180,7 @@ public class ContentAndAttributesDao extends AbstractDao {
                 .orderBy(qContentAssoc.sequenceNum.asc());
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         List<ContentAndAttributes> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContent.contentId).list(contentAndAttributesExQBean));
         LOG.info("size = {}", ret.size());
         return ret;
