@@ -108,7 +108,7 @@ public class ContentAndAttributesIT extends AbstractDaoIT {
                 .orderBy(qContent.contentId.asc());
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}",bindings.getSQL());
-        LOG.info("{}",bindings.getBindings()); // debug
+        LOG.info("{}",bindings.getNullFriendlyBindings());
         List<ContentAndAttributes> ret = tupleSQLQuery
                 .transform(GroupBy.groupBy(qContent.contentId).list(contentAndAttributesExQBean));
         

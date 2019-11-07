@@ -91,7 +91,7 @@ public class ReportActivityDao extends AbstractDao {
             pSQLQuery.where(qReportActivity.status.in(filter.states));
         SQLBindings bindings = pSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         List<ReportActivity> ret = pSQLQuery.fetch();
         LOG.info("size = {}", ret.size());
         return ret;
@@ -105,7 +105,7 @@ public class ReportActivityDao extends AbstractDao {
         
         SQLBindings bindings = pSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
-        LOG.info("{}", bindings.getBindings());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
         List<ReportActivity> ret = pSQLQuery.fetch();
         LOG.info("size = {}", ret.size());
         return ret;

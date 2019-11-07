@@ -52,7 +52,7 @@ public class UomIT extends AbstractDaoIT {
                 
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}",bindings.getSQL());
-        LOG.info("{}",bindings.getBindings()); // debug
+        LOG.info("{}",bindings.getNullFriendlyBindings());
         List<UomEx> ret = tupleSQLQuery
                 .transform(GroupBy.groupBy(uom.uomId).list(uomExQBean));
                 
