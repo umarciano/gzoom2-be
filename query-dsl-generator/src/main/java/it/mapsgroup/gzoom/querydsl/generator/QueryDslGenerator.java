@@ -38,6 +38,7 @@ public class QueryDslGenerator {
                 "(CONNECT_DATA=(SERVER = DEDICATED)(SERVICE_NAME= devdb.maps1.mapsengineering.com)))", "ANFO", "@4ndr34_77");*/
 //        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/ltprod", "lmm", "lmm");
         //return DriverManager.getConnection("jdbc:mysql://localhost/gzoom_lite", "root", "root");
+        // Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/gzoom_regione_campania", "postgres", "P0stgres81");
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/gzoom_comune_lecco?serverTimezone=UTC", "root", "");
         // connection.setCatalog("gzoom_comune_lecco");
         // connection.setSchema("gzoom_comune_lecco");
