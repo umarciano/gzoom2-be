@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Gn Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="gnCreateUpdateContactList" engine="java" auth="true"
+             location="it.memelabs.gn.services.communication.ContactListServices"
+             invoke="gnCreateUpdateContactList"
+             export="true" default-entity-name="ContactList">
+        <description>Create or Update ContactList</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="CREATE"/>
+
+            <permission-service service-name="gnAdminPermissionCheck" main-action="UPDATE"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="UPDATE"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="UPDATE"/>
+        </required-permissions>
+        <implements service="gnCreateContactList"/>
+        <implements service="gnAuditEventInterface"/>
+        <attribute mode="INOUT" name="contactListId" type="String" optional="true"/>
+    </service>
+
+    <service name="gnCreateContactList" engine="java" auth="true"
+             location="it.memelabs.gn.services.communication.ContactListServices"
+             invoke="gnCreateContactList"
+             export="false" default-entity-name="ContactList">
+        <description>Create contact list</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="CREATE"/>
+        </required-permissions>
+        <implements service="gnAuditEventInterface"/>
+        <attribute mode="IN" name="userLoginIds" type="java.util.List" optional="true"/>
+        <attribute mode="IN" name="eventTypeIds" type="java.util.List" optional="true"/>
+        <attribute mode="IN" name="communicationEventTypeIds" type="java.util.List" optional="true"/>
+        <attribute mode="IN" name="nodeKey" type="String" optional="true"/>
+        <attribute mode="IN" name="partyId" type="String" optional="true"/>
+        <attribute mode="IN" name="contactListName" type="String" optional="false"/>
+
+        <attribute mode="OUT" name="contactListId" type="String" optional="false"/>
+    </service>
+
+    <service name="gnUpdateContactList" engine="java" auth="true"
+             location="it.memelabs.gn.services.communication.ContactListServices"
+             invoke="gnUpdateContactList"
+             export="false" default-entity-name="ContactList">
+        <description>Update contact list</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="UPDATE"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="UPDATE"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="UPDATE"/>
+        </required-permissions>
+        <implements service="gnAuditEventInterface"/>
+        <implements service="gnCreateContactList"/>
+        <attribute mode="INOUT" name="contactListId" type="String" optional="false"/>
+    </service>
+
+    <service name="gnFindContactListById" engine="java" auth="true"
+             location="it.memelabs.gn.services.communication.ContactListServices"
+             invoke="gnFindContactListById"
+             export="true" default-entity-name="ContactList">
+        <description>Find ContactList by id</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="VIEW"/>
+        </required-permissions>
+        <attribute mode="IN" name="contactListId" type="String" optional="false"/>
+        <attribute mode="OUT" name="contactList" type="java.util.Map" optional="false"/>
+    </service>
+
+    <service name="gnFindContactList" engine="java" auth="true"
+             location="it.memelabs.gn.services.communication.ContactListServices"
+             invoke="gnFindContactList"
+             export="false" default-entity-name="ContactList">
+        <description>Find ContactList by owner party</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="VIEW"/>
+        </required-permissions>
+        <attribute mode="IN" name="ownerPartyIds" type="java.util.List" optional="true"/>
+        <attribute mode="IN" name="eventTypeIds" type="java.util.List" optional="true"/>
+        <attribute mode="OUT" name="contactLists" type="java.util.List" optional="false"/>
+    </service>
+
+    <service name="gnFindContactListWithoutPermission" engine="java" auth="true"
+             location="it.memelabs.gn.services.communication.ContactListServices"
+             invoke="gnFindContactList"
+             export="false" default-entity-name="ContactList">
+        <description>Find ContactList by owner party</description>
+
+        <attribute mode="IN" name="ownerPartyIds" type="java.util.List" optional="true"/>
+        <attribute mode="IN" name="eventTypeIds" type="java.util.List" optional="true"/>
+        <attribute mode="OUT" name="contactLists" type="java.util.List" optional="false"/>
+    </service>
+
+    <service name="gnRemoveContactList" engine="java" auth="true"
+             location="it.memelabs.gn.services.communication.ContactListServices"
+             invoke="gnRemoveContactList"
+             export="true" default-entity-name="ContactList">
+        <description>Remove ContactList by id</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="DELETE"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="DELETE"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="DELETE"/>
+        </required-permissions>
+        <implements service="gnAuditEventInterface"/>
+        <attribute mode="IN" name="contactListId" type="String" optional="false"/>
+    </service>
+
+
+    <service name="gnCreateCommunicationEvent" engine="java" auth="true"
+             location="it.memelabs.gn.services.communication.CommunicationEventServices"
+             invoke="gnCreateCommunicationEvent"
+             export="true" default-entity-name="CommunicationEvent">
+        <description>Create CommunicationEvent</description>
+        <permission-service service-name="gnCommunicationAdminPermissionCheck"/>
+        <implements service="createCommunicationEventInterface"/>
+        <attribute mode="IN" name="userLoginIdTo" type="String" optional="false"/>
+        <attribute mode="IN" name="eventTypeId" type="String" optional="false"/>
+        <attribute mode="IN" name="attributes" type="java.util.Map" optional="true"/>
+
+        <attribute mode="OUT" name="communicationEventId" type="String" optional="false"/>
+    </service>
+
+    <service name="gnCreateCommunicationEventWithoutPermission" engine="java" auth="true"
+             location="it.memelabs.gn.services.communication.CommunicationEventServices"
+             invoke="gnCreateCommunicationEvent"
+             export="false" default-entity-name="CommunicationEvent">
+        <description>Create CommunicationEvent</description>
+        <implements service="createCommunicationEventInterface"/>
+        <attribute mode="IN" name="userLoginIdTo" type="String" optional="true"/>
+        <attribute mode="IN" name="eventTypeId" type="String" optional="false"/>
+        <attribute mode="IN" name="attributes" type="java.util.Map" optional="true"/>
+
+        <attribute mode="OUT" name="communicationEventId" type="String" optional="false"/>
+    </service>
+
+    <service name="gnFindCommunicationEventById" engine="java" auth="true"
+             location="it.memelabs.gn.services.communication.CommunicationEventServices"
+             invoke="gnFindCommunicationEventById"
+             export="true" default-entity-name="CommunicationEvent">
+        <description>Find CommunicationEvent by id</description>
+        <permission-service service-name="gnCommunicationAdminPermissionCheck"/>
+        <attribute mode="IN" name="communicationEventId" type="String" optional="false"/>
+
+        <attribute mode="OUT" name="communicationEvent" type="Map" optional="false"/>
+    </service>
+
+    <service name="gnFindCommunicationEventByIdWithoutPermission" engine="java" auth="true"
+             location="it.memelabs.gn.services.communication.CommunicationEventServices"
+             invoke="gnFindCommunicationEventById"
+             export="false" default-entity-name="CommunicationEvent">
+        <description>Find CommunicationEvent by id</description>
+        <attribute mode="IN" name="communicationEventId" type="String" optional="false"/>
+
+        <attribute mode="OUT" name="communicationEvent" type="Map" optional="false"/>
+    </service>
+
+    <service name="gnFindCommunicationEvent" engine="java" auth="true"
+             location="it.memelabs.gn.services.communication.CommunicationEventServices"
+             invoke="gnFindCommunicationEvent"
+             export="false" default-entity-name="CommunicationEvent">
+        <implements service="gnFindCommunicationEventFilteredByUser"/>
+        <attribute mode="IN" name="partyIdsTo" type="List" optional="true">
+            <description>NotificationChannelKind</description>
+        </attribute>
+    </service>
+
+    <service name="gnFindCommunicationEventFilteredByUser" engine="java" auth="true"
+             location="it.memelabs.gn.services.communication.CommunicationEventServices"
+             invoke="gnFindCommunicationEventFilteredByUser"
+             export="true" default-entity-name="CommunicationEvent">
+        <description>Find CommunicationEvent</description>
+        <attribute mode="IN" name="communicationEventIds" type="List" optional="true"/>
+        <attribute mode="IN" name="statusIds" type="List" optional="true">
+            <description>NotificationState</description>
+        </attribute>
+        <attribute mode="IN" name="eventTypeIds" type="List" optional="true">
+            <description>EventKind</description>
+        </attribute>
+        <attribute mode="IN" name="communicationEventTypeIds" type="List" optional="true">
+            <description>NotificationChannelKind</description>
+        </attribute>
+        <attribute name="page" type="Integer" mode="IN" optional="true" default-value="0"/>
+        <attribute name="size" type="Integer" mode="IN" optional="true" default-value="0"/>
+        <attribute name="orderBy" mode="IN" type="List" optional="true"/>
+
+        <attribute mode="OUT" name="communicationEventList" type="java.util.List" optional="false"/>
+        <attribute mode="OUT" name="communicationEventListSize" type="java.lang.Integer" optional="false"/>
+    </service>
+
+    <service name="gnUpdateCommunicationEventStatus" engine="java" auth="true"
+             location="it.memelabs.gn.services.communication.CommunicationEventServices"
+             invoke="gnUpdateCommunicationEventStatus"
+             export="true" default-entity-name="CommunicationEvent">
+        <description>Update CommunicationEvent statusId</description>
+        <attribute mode="IN" name="communicationEventId" type="String" optional="false"/>
+        <attribute mode="IN" name="statusId" type="String" optional="false"/>
+    </service>
+
+    <service name="gnRemoveCommunicationEvent" engine="java" auth="true"
+             location="it.memelabs.gn.services.communication.CommunicationEventServices"
+             invoke="gnRemoveCommunicationEvent"
+             export="true" default-entity-name="CommunicationEvent">
+        <description>Remove CommunicationEvent by id</description>
+        <attribute mode="IN" name="communicationEventId" type="String" optional="false"/>
+    </service>
+
+    <service name="gnSendCommunicationEventToContactList" engine="java" auth="true"
+             location="it.memelabs.gn.services.communication.CommunicationEventRoutingServices"
+             invoke="gnSendCommunicationEventToContactList"
+             export="false" default-entity-name="CommunicationEvent">
+        <description>Send CommunicationEvent to ContactList</description>
+        <attribute mode="IN" name="ownerPartyId" type="String" optional="false"/>
+        <attribute mode="IN" name="eventTypeId" type="String" optional="false"/>
+        <attribute mode="IN" name="attributes" type="Map" optional="false"/>
+        <attribute mode="OUT" name="communicationEventIds" type="List" optional="false"/>
+    </service>
+
+    <service name="gnSendCommunicationEventToContactListEM" engine="java" auth="true"
+             location="it.memelabs.gn.services.communication.CommunicationEventRoutingServices"
+             invoke="gnSendCommunicationEventToContactListEM"
+             export="false" default-entity-name="CommunicationEvent">
+        <description>Send CommunicationEvent to ContactList</description>
+        <attribute mode="IN" name="ownerPartyId" type="String" optional="false"/>
+        <attribute mode="IN" name="eventTypeId" type="String" optional="false"/>
+        <attribute mode="IN" name="overrideEventTypeId" type="String" optional="true"/>
+        <attribute mode="IN" name="attributes" type="Map" optional="false"/>
+        <attribute mode="OUT" name="communicationEvents" type="List" optional="false"/>
+    </service>
+
+    <service name="gnSendCommunicationEventToUser" engine="java" auth="true"
+             location="it.memelabs.gn.services.communication.CommunicationEventRoutingServices"
+             invoke="gnSendCommunicationEventToUser"
+             export="false" default-entity-name="CommunicationEvent">
+        <description>Send CommunicationEvent to User</description>
+        <attribute mode="IN" name="userLoginId" type="String" optional="false"/>
+        <attribute mode="IN" name="eventTypeId" type="String" optional="false"/>
+        <attribute mode="IN" name="communicationEventTypeId" type="String" optional="false"/>
+        <attribute mode="IN" name="attributes" type="Map" optional="false"/>
+        <attribute mode="OUT" name="communicationEventIds" type="List" optional="false"/>
+    </service>
+
+    <service name="gnSendCommunicationEventInterface" engine="interface" location="" invoke="">
+        <description>interface that return communication events</description>
+        <attribute mode="OUT" name="communicationEventToSendList" type="List" optional="true"/>
+        <attribute mode="OUT" name="communicationEventToSendListSize" type="Integer" optional="true"/>
+    </service>
+
+    <service name="gnUpdateCommunicationEventStatusEM" engine="java" auth="true"
+             location="it.memelabs.gn.services.communication.CommunicationEventServices"
+             invoke="gnUpdateCommunicationEventStatusEM"
+             export="true" default-entity-name="CommunicationEvent">
+        <description>Update CommunicationEvent statusId</description>
+        <attribute mode="IN" name="communicationEventId" type="String" optional="false"/>
+        <attribute mode="IN" name="delivered" type="String" optional="false"/>
+    </service>
+
+</services>

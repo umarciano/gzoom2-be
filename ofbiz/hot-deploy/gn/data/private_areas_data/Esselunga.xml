@@ -1,0 +1,281 @@
+    <!-- ================================================================================================= -->
+    <!--                                Company Esselunga S.p.A.                                           -->
+    <!-- ================================================================================================= -->
+    <Party partyId="GN_ESS" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="Esselunga S.p.A."/>
+    <PartyGroup partyId="GN_ESS" groupName="Esselunga S.p.A."/>
+    <GnPartyNode partyId="GN_ESS" nodeKey="GN_ESS@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY"
+                 taxIdentificationNumber="01255720169" VATnumber="04916380159"
+                 name="Esselunga S.p.A."/>
+    <PartyRole partyId="GN_ESS" roleTypeId="GN_COMPANY"/>
+    <PartyRole partyId="GN_ESS" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ESS" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <PartyAttribute partyId="GN_ESS" attrName="ROOT_PUBLISH" attrValue="N"/>
+    <PartyAttribute partyId="GN_ESS" attrName="PRIVATE_AUTH_PUBLISH" attrValue="N"/>
+
+
+    <!-- ================================================-->
+    <!-- Main company base Esselunga S.p.A. Milano       -->
+    <!-- ================================================-->
+    <Party partyId="GN_ESS_MI" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="Esselunga S.p.A. - Milano"/>
+    <PartyGroup partyId="GN_ESS_MI" groupName="Esselunga S.p.A. - Milano"/>
+    <GnPartyNode partyId="GN_ESS_MI" nodeKey="GN_ESS_MI@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber="1063068"
+                 registeredOffice="Y" authorizationOwner="N"/>
+    <PartyRole partyId="GN_ESS_MI" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_ESS_MI" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ESS_MI" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_ESS_MI" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_ESS_MI"
+                      contactMechId="CM_ESS_MI"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_ESS_MI"
+                   toName="Esselunga S.p.A. - Milano"
+                   address1="Via Vittor Pisani"
+                   streetNumber="20"
+                   village=""
+                   city="Milano"
+                   postalCode="20124"
+                   postalCodeGeoId="IT-GN-CAP-20124"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-LOMBARDIA"
+                   stateProvinceGeoId="IT-GN-015"
+                   municipalityGeoId="IT-GN-015146"/>
+
+    <PartyRelationship partyIdFrom="GN_ESS" partyIdTo="GN_ESS_MI"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: Esselunga detiene Esselunga Milano"/>
+    <PartyRelationship partyIdFrom="GN_ESS_MI" partyIdTo="GN_ESS"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: Esselunga Milano appartiene a Esselunga"/>
+
+    <!-- ========================= -->
+    <!--     Esselunga users       -->
+    <!-- ========================= -->
+	
+    <!--user inviti.ess / pw: essinviti-->
+    <Party partyId="U_ESS_INVITI" partyTypeId="PERSON"/>
+    <Person partyId="U_ESS_INVITI" lastName="inviti" firstName="Esselunga "/>
+    <UserLogin userLoginId="inviti.ess" partyId="U_ESS_INVITI"
+               currentPassword="{SHA}f67350224df98d2e284b68822dd7d6cc672638a8" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="inviti.ess" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="U_ESS_INVITI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="inviti.ess" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_ESS_INVITI" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="support@greennebula.it"/>
+    <PartyContactMech partyId="U_ESS_INVITI" contactMechId="CM_ESS_INVITI"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_ESS_INVITI" contactMechId="CM_ESS_INVITI"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_ESS_INVITI" partyIdTo="GN_ESS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (inviti.ess) impiegato in azienda (Esselunga)"/>	
+
+    <!--user roberto.polito@esselunga.it / pw: polito-->
+    <Party partyId="U_ESS_POLITO" partyTypeId="PERSON"/>
+    <Person partyId="U_ESS_POLITO" lastName="Polito" firstName="Roberto "/>
+    <UserLogin userLoginId="roberto.polito@esselunga.it" partyId="U_ESS_POLITO"
+               currentPassword="{SHA}c6f00aa330c199f4f4be814d04a350cd20cf179d" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="roberto.polito@esselunga.it" enumId="GN_LOG_SRC_WEB_UI"/>
+	<GnUserLoginSource userLoginId="roberto.polito@esselunga.it" enumId="GN_LOG_SRC_MOBILE"/>
+    <PartyRole partyId="U_ESS_POLITO" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="roberto.polito@esselunga.it" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_ESS_POLITO" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="roberto.polito@esselunga.it"/>
+    <PartyContactMech partyId="U_ESS_POLITO" contactMechId="CM_ESS_POLITO"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_ESS_POLITO" contactMechId="CM_ESS_POLITO"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_ESS_POLITO" partyIdTo="GN_ESS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (roberto.polito@esselunga.it) impiegato in azienda (Esselunga)"/>
+					   
+    <!--user giuseppe.balistreri@esselunga.it / pw: balistreri-->
+    <Party partyId="U_ESS_BALISTRERI" partyTypeId="PERSON"/>
+    <Person partyId="U_ESS_BALISTRERI" lastName="Balistreri" firstName="Giuseppe "/>
+    <UserLogin userLoginId="giuseppe.balistreri@esselunga.it" partyId="U_ESS_BALISTRERI"
+               currentPassword="{SHA}dbb2d8e6ba84bea181fbb6097979cd029c54746d" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="giuseppe.balistreri@esselunga.it" enumId="GN_LOG_SRC_WEB_UI"/>
+	<GnUserLoginSource userLoginId="giuseppe.balistreri@esselunga.it" enumId="GN_LOG_SRC_MOBILE"/>
+    <PartyRole partyId="U_ESS_BALISTRERI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="giuseppe.balistreri@esselunga.it" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_ESS_BALISTRERI" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="giuseppe.balistreri@esselunga.it"/>
+    <PartyContactMech partyId="U_ESS_BALISTRERI" contactMechId="CM_ESS_BALISTRERI"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_ESS_BALISTRERI" contactMechId="CM_ESS_BALISTRERI"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_ESS_BALISTRERI" partyIdTo="GN_ESS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (giuseppe.balistreri@esselunga.it) impiegato in azienda (Esselunga)"/>
+
+    <!--user sonia.paladini@esselunga.it / pw: paladini-->
+    <Party partyId="U_ESS_PALADINI" partyTypeId="PERSON"/>
+    <Person partyId="U_ESS_PALADINI" lastName="Paladini" firstName="Sonia "/>
+    <UserLogin userLoginId="sonia.paladini@esselunga.it" partyId="U_ESS_PALADINI"
+               currentPassword="{SHA}a1e3a3907b0870a25edf5e467cfebc4def7266ef" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="sonia.paladini@esselunga.it" enumId="GN_LOG_SRC_WEB_UI"/>
+	<GnUserLoginSource userLoginId="sonia.paladini@esselunga.it" enumId="GN_LOG_SRC_MOBILE"/>
+    <PartyRole partyId="U_ESS_PALADINI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="sonia.paladini@esselunga.it" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_ESS_PALADINI" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="sonia.paladini@esselunga.it"/>
+    <PartyContactMech partyId="U_ESS_PALADINI" contactMechId="CM_ESS_PALADINI"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_ESS_PALADINI" contactMechId="CM_ESS_PALADINI"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_ESS_PALADINI" partyIdTo="GN_ESS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (sonia.paladini@esselunga.it) impiegato in azienda (Esselunga)"/>
+
+    <!--user sonia.distaso@esselunga.it / pw: distaso-->
+    <Party partyId="U_ESS_DISTASO" partyTypeId="PERSON"/>
+    <Person partyId="U_ESS_DISTASO" lastName="Di Staso" firstName="Sonia "/>
+    <UserLogin userLoginId="sonia.distaso@esselunga.it" partyId="U_ESS_DISTASO"
+               currentPassword="{SHA}fb5a78e72c054d6194197460e6f57b2ab1b44dda" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="sonia.distaso@esselunga.it" enumId="GN_LOG_SRC_WEB_UI"/>
+	<GnUserLoginSource userLoginId="sonia.distaso@esselunga.it" enumId="GN_LOG_SRC_MOBILE"/>
+    <PartyRole partyId="U_ESS_DISTASO" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="sonia.distaso@esselunga.it" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_ESS_DISTASO" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="sonia.distaso@esselunga.it"/>
+    <PartyContactMech partyId="U_ESS_DISTASO" contactMechId="CM_ESS_DISTASO"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_ESS_DISTASO" contactMechId="CM_ESS_DISTASO"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_ESS_DISTASO" partyIdTo="GN_ESS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (sonia.distaso@esselunga.it) impiegato in azienda (Esselunga)"/>
+
+    <!--user greennebula@territorioambiente.com / pw: greentea-->
+    <Party partyId="U_ESS_GNTEA" partyTypeId="PERSON"/>
+    <Person partyId="U_ESS_GNTEA" lastName="TeA" firstName="Greennebula "/>
+    <UserLogin userLoginId="greennebula@territorioambiente.com" partyId="U_ESS_GNTEA"
+               currentPassword="{SHA}c93b845c954ce9375d0b8cd40f826742a5b810f8" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="greennebula@territorioambiente.com" enumId="GN_LOG_SRC_WEB_UI"/>
+	<GnUserLoginSource userLoginId="greennebula@territorioambiente.com" enumId="GN_LOG_SRC_MOBILE"/>
+    <PartyRole partyId="U_ESS_GNTEA" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="greennebula@territorioambiente.com" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_ESS_GNTEA" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="greennebula@territorioambiente.com"/>
+    <PartyContactMech partyId="U_ESS_GNTEA" contactMechId="CM_ESS_GNTEA"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_ESS_GNTEA" contactMechId="CM_ESS_GNTEA"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_ESS_GNTEA" partyIdTo="GN_ESS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (greennebula@territorioambiente.com) impiegato in azienda (Esselunga)"/>
+
+	   <!-- Esselunga point of sale users -->
+	   
+    <!--user 099 (direttore Pioltello) / pw: pioltello-->
+    <Party partyId="U_ESS_D_PIOLTELLO" partyTypeId="PERSON"/>
+    <Person partyId="U_ESS_D_PIOLTELLO" lastName="p.v. Pioltello" firstName="Direttore "/>
+    <UserLogin userLoginId="099" partyId="U_ESS_D_PIOLTELLO"
+               currentPassword="{SHA}6c14471ba3e2af6c4aabedc024dc73abbee4b845" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="099" enumId="GN_LOG_SRC_WEB_UI"/>
+	<GnUserLoginSource userLoginId="099" enumId="GN_LOG_SRC_MOBILE"/>
+    <PartyRole partyId="U_ESS_D_PIOLTELLO" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="099" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_ESS_D_PIOLTELLO" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="099"/>
+    <PartyContactMech partyId="U_ESS_D_PIOLTELLO" contactMechId="CM_ESS_D_PIOLTELLO"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_ESS_D_PIOLTELLO" contactMechId="CM_ESS_D_PIOLTELLO"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_ESS_D_PIOLTELLO" partyIdTo="GN_ESS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (099) impiegato in azienda (Esselunga)"/>
+					   
+    <!--user 105 (direttore Segrate) / pw: segrate-->
+    <Party partyId="U_ESS_D_SEGRATE" partyTypeId="PERSON"/>
+    <Person partyId="U_ESS_D_SEGRATE" lastName="p.v. Segrate" firstName="Direttore "/>
+    <UserLogin userLoginId="105" partyId="U_ESS_D_SEGRATE"
+               currentPassword="{SHA}f3d340bd70e523ca9cd4a6063976073a84639bc2" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="105" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="U_ESS_D_SEGRATE" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="105" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_ESS_D_SEGRATE" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="105"/>
+    <PartyContactMech partyId="U_ESS_D_SEGRATE" contactMechId="CM_ESS_D_SEGRATE"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_ESS_D_SEGRATE" contactMechId="CM_ESS_D_SEGRATE"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_ESS_D_SEGRATE" partyIdTo="GN_ESS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (105) impiegato in azienda (Esselunga)"/>
+	   <!-- Esselunga point of sale users -->	   
+					   
+
+       <!-- Esselunga web API users -->
+    <Party partyId="U_ESS_WEBAPI" partyTypeId="PERSON"/>
+    <Person partyId="U_ESS_WEBAPI" lastName="utente web API" firstName="Esselunga "/>
+    <UserLogin userLoginId="esselungawebapi" partyId="U_ESS_WEBAPI"
+               currentPassword="{SHA}766d248d1ee62e64616698a505aff60fda38ab95" originId="GN_AUTH_ORG_APP"/>
+    <GnUserLoginSource userLoginId="esselungawebapi" enumId="GN_LOG_SRC_WEB_API"/>
+    <PartyRole partyId="U_ESS_WEBAPI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="esselungawebapi" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="cm_esselungawebapi" contactMechTypeId="EMAIL_ADDRESS" infoString=""/>
+    <PartyContactMech partyId="U_ESS_WEBAPI" contactMechId="cm_esselungawebapi" fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_ESS_WEBAPI" contactMechId="cm_esselungawebapi"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+							 
+    <PartyRelationship partyIdFrom="U_ESS_WEBAPI" partyIdTo="GN_ESS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (esselungawebapi) impiegato in azienda (Esselunga)"/>
+       <!-- Esselunga web API users end -->
+    <!--     Esselunga users end     -->
+
+    <!-- ================================================================================================= -->
+    <!--                                                Company Esselunga S.p.A.                           -->
+    <!-- ================================================================================================= -->

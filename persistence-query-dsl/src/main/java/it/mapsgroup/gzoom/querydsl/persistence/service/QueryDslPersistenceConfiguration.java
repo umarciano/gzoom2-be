@@ -37,6 +37,7 @@ public class QueryDslPersistenceConfiguration {
 
 
     public com.querydsl.sql.Configuration querydslConfiguration(Environment env) {
+        LOG.info("querydslConfiguration" + env);
         String queryDslTemplate = env.getProperty("persistence.main.querydsl.templates");        
         
         if (StringUtils.isEmpty(queryDslTemplate)) {

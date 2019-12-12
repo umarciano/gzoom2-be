@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+    <!-- E N T I T Y -->
+
+    <!--
+      Needed substitutions:
+        * <human> -> human user id
+        * <human_name> -> human name
+        * <human_lastname> -> human surname
+        * <human_email> -> human email address
+        * <webapi> -> web api user id
+        * <webapi_app_dex> -> application (or web api user) description
+        * <webapi_email> -> web api email address
+        * <company_id> -> company id
+        * <company_dex> -> company description
+    -->
+
+    <!--human user-->
+    <Party partyId="U_<human>" partyTypeId="PERSON"/>
+    <Person partyId="U_<human>" lastName="<human_lastname>" firstName="<human_name> "/>
+    <UserLogin userLoginId="<human_email>" partyId="U_<human>"
+               currentPassword="{SHA}<MD5>" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="<human_email>" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="U_<human>" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="<human_email>" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_M_<human>" contactMechTypeId="EMAIL_ADDRESS" infoString="<human_email>"/>
+    <PartyContactMech partyId="U_<human>" contactMechId="CM_M_<human>" fromDate="2001-05-13 00:00:00.000" />
+    <PartyContactMechPurpose partyId="U_<human>" contactMechId="CM_M_<human>" contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_<human>" partyIdTo="<company_id>"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente <human_email> impiegato in azienda (<company_dex>)"/>
+
+    <!--web api user-->
+    <Party partyId="U_<webapi>" partyTypeId="PERSON"/>
+    <Person partyId="U_<webapi>" lastName="<webapi_app_dex>" firstName="Applicazione "/>
+    <UserLogin userLoginId="<webapi>" partyId="USER_<webapi>"
+               currentPassword="{SHA}225cdee58b0b5197460757e71e2d219e66946c78" originId="GN_AUTH_ORG_APP"
+               loginSourceId="GN_LOG_SRC_WEB_API"/>
+    <GnUserLoginSource userLoginId="<webapi>" enumId="GN_LOG_SRC_WEB_API"/>
+    <PartyRole partyId="U_<webapi>" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="<webapi>" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_M_<webapi>" contactMechTypeId="EMAIL_ADDRESS" infoString="<webapi_email>"/>
+    <PartyContactMech partyId="U_<webapi>" contactMechId="CM_M_<webapi>" fromDate="2001-05-13 00:00:00.000" />
+    <PartyContactMechPurpose partyId="U_<webapi>" contactMechId="CM_M_<webapi>" contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_<webapi>" partyIdTo="<company_id>"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (<webapi>) impiegato in azienda (<company_dex>)"/>
+    <!--E N T I T Y  -  E N D-->
+
+</entity-engine-xml>

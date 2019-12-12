@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Gn Tree navigation Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+
+    <service name="gnUserProfileFindCompanies" engine="java" auth="false"
+             location="it.memelabs.gn.services.node.NodeTreeServices" invoke="gnUserProfileFindCompanies"
+             export="true">
+        <description>
+        </description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnUserPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnCompanyPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnCompanyTreePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnCompanyBasePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnAuthorizationPermissionCheck" main-action="VIEW"/>
+        </required-permissions>
+        <attribute name="partyNodes" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnGetTreeFromContext" default-entity-name="" engine="java"
+             location="it.memelabs.gn.services.node.NodeTreeServices"
+             invoke="gnGetTreeFromContext"
+             auth="true" export="true">
+        <description>Get the tree from a node and a relationship</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnCompanyPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnCompanyTreePermissionCheck" main-action="VIEW"/>
+        </required-permissions>
+        <!--gnPartyNodeId start-->
+        <attribute name="contextId" type="String" mode="IN" optional="false"/>
+        <attribute name="partyRelationshipTypeId" type="String" mode="IN" optional="false"/>
+        <auto-attributes mode="OUT" entity-name="GnPartyGroupPartyNode" optional="true"/>
+        <attribute name="address" type="java.util.Map" mode="OUT" optional="true"/>
+        <attribute name="contact" type="java.util.Map" mode="OUT" optional="true"/>
+        <attribute name="partyRelationships" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnGetTree" default-entity-name="GnPartyNode" engine="java"
+             location="it.memelabs.gn.services.node.NodeTreeServices"
+             invoke="gnGetTree"
+             auth="true" export="false">
+
+        <description>Get the tree from a node and a relationship</description>
+        <!--gnPartyNodeId start-->
+        <attribute name="partyId" type="String" mode="IN" optional="false"/>
+        <attribute name="partyRelationshipTypeId" type="String" mode="IN" optional="false"/>
+        <auto-attributes mode="OUT" entity-name="GnPartyGroupPartyNode" optional="true"/>
+        <attribute name="partyRelationships" type="List" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnFindParentWhoPropagatesToNode" default-entity-name="GnPartyNode" engine="java"
+             location="it.memelabs.gn.services.node.NodeTreeServices"
+             invoke="gnFindParentWhoPropagatesToNode"
+             auth="true" export="false">
+
+        <description>Get the id of the parent party in the propagation relationship</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="VIEW"/>
+        </required-permissions>
+        <attribute name="partyId" type="String" mode="IN" optional="false"/>
+        <auto-attributes mode="OUT" entity-name="GnPartyGroupPartyNode" optional="true"/>
+        <attribute name="partyId" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnSetFalseSynchroAllowed" default-entity-name="GnPartyNode" engine="java"
+             location="it.memelabs.gn.services.node.NodeTreeServices"
+             invoke="gnSetFalseSynchroAllowed"
+             auth="true" export="false">
+
+        <description>Set false flag synchronization allowed in the receive from relationship</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="VIEW"/>
+        </required-permissions>
+        <attribute name="partyId" type="String" mode="IN" optional="false"/>
+        <auto-attributes mode="OUT" entity-name="GnPartyGroupPartyNode" optional="true"/>
+    </service>
+
+    <!--     <service name="gnSynchronizeNode" engine="group" auth="true" export="true" use-transaction="false"> -->
+    <!--         <group> -->
+    <!--             <invoke name="gnSetSynchronizationActive" parameters="preserve"/> -->
+    <!--             <invoke name="gnInternalSynchronizeNode" parameters="preserve"/> -->
+    <!--             <invoke name="gnSetSynchronizationDisactive" parameters="preserve"/> -->
+    <!--         </group> -->
+    <!--     </service> -->
+
+    <service name="gnSynchronizeNode" engine="java" location="it.memelabs.gn.services.node.NodeTreeServices"
+             invoke="gnSynchronizeNode" auth="true" use-transaction="false" export="true">
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+        <attribute name="nodeKey" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="gnInternalSynchronizeNode" engine="java" export="false" use-transaction="false"
+             location="it.memelabs.gn.services.node.NodeTreeServices"
+             invoke="gnInternalSynchronizeNode"
+             auth="true">
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+        <attribute name="nodeKey" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="gnSynchronizeNodeForHolderCompany" engine="java"
+             location="it.memelabs.gn.services.node.NodeTreeServices"
+             invoke="gnSynchronizeNodeForHolderCompany"
+             auth="true" export="false">
+        <attribute name="nodePartyId" type="String" mode="IN" optional="true"/>
+        <attribute name="taxIdentificationNumber" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="gnSetSynchronizationActive" engine="java"
+             location="it.memelabs.gn.services.node.NodeTreeServices"
+             invoke="gnSetSynchronizationActive"
+             auth="true">
+
+        <description>Set true flag isSynchronizationActive in the receive from relationship</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="VIEW"/>
+        </required-permissions>
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+        <attribute name="nodeKey" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="gnSetSynchronizationDisactive" engine="java"
+             location="it.memelabs.gn.services.node.NodeTreeServices"
+             invoke="gnSetSynchronizationDisactive"
+             auth="true">
+
+        <description>Set false flag isSynchronizationActive in the receive from relationship</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="VIEW"/>
+        </required-permissions>
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+        <attribute name="nodeKey" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="gnCanSynchronize" engine="java"
+             location="it.memelabs.gn.services.node.NodeTreeServices"
+             invoke="gnCanSynchronize"
+             auth="true" export="true">
+        <description>Tells if synchronization is allowed on a node</description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="VIEW"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="VIEW"/>
+        </required-permissions>
+        <attribute name="nodeKey" mode="IN" type="String" optional="false"></attribute>
+        <attribute name="canSynchronize" mode="OUT" type="Boolean" optional="false"></attribute>
+    </service>
+</services>

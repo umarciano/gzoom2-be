@@ -1,34 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="20 seconds">
 
-<!--
- For assistance related to logback-translator or configuration
- files in general, please contact the logback user mailing list
- at http://www.qos.ch/mailman/listinfo/logback-user
+    <!--
+    Includes default configuration pieces, but not all!
+    Please note that org/springframework/boot/logging/logback/base.xml should not be
+    included as it not only defines the FILE appender, but also uses the same <File>
+    destination: if included it will cause a collision.
+    -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/spring.log}"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
 
- For professional support please see
-    http://www.qos.ch/shop/products/professionalSupport
-
--->
-<configuration>
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <!-- encoders are assigned the type
-             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+    <!-- Rewrites the file appender -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_FILE}</File>
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36}:%line - %msg%n</pattern>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
         </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover, inferred from file name pattern -->
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
     </appender>
 
-    <root level="info">
-        <appender-ref ref="STDOUT"/>
+    <!-- Overrides the root logging levels -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
     </root>
-    <logger name="it.memelabs" level="debug"/>
-    <logger name="org.springframework.security" level="info"/>
-    <logger name="org.springframework" level="info"/>
 
-    <logger name="it.memelabs.smartnebula.lmm.security.JwtTokenFilter" level="debug" additivity="false"/>
-    <logger name="it.memelabs.smartnebula.lmm.security.JwtLoginFilter" level="info"/>
-    <logger name="it.memelabs.smartnebula.lmm.security.JwtLogoutFilter" level="info"/>
+    <!-- Following are the basic levels for own and third party code -->
+    <logger name="it.mapsgroup" level="DEBUG"/>
+    <logger name="org.mybatis" level="INFO"/>
+    <logger name="org.apache.ibatis" level="INFO"/>
+    <logger name="org.springframework" level="INFO"/>
+
+    <!--
+    Change level of mappers to DEBUG in order to print SQL statements. Leave to INFO
+    to suppress printing.
+    -->
+    <!-- <logger name="it.mapsgroup.clinika.gap.persistence.mapper" level="INFO"/> -->
+
 </configuration>
-
-
-

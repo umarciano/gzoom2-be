@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Gn Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <!-- &lt;!&ndash; Returns hasPermission=true if user has one of the base PARTYMGR CRUD+ADMIN permissions &ndash;&gt;
+     <service name="gnUserRolePermissionCheck" engine="java"
+              location="it.memelabs.gn.services.security.SecurityService"
+              invoke="gnUserRolePermissionCheck">
+         <description>
+             Performs a party role security check. The user must have one of the base PARTYMGR or
+             PARTYMGR_ROLE CRUD+ADMIN permissions.
+         </description>
+         <implements service="permissionInterface"/>
+         <attribute name="entity" type="java.lang.String" mode="IN" default-value="GN_TEST"/>
+     </service>-->
+
+    <!-- Returns hasPermission=true if user has one of the base PARTYMGR CRUD+ADMIN permissions -->
+    <!--TODO: deprecated-->
+    <service name="gnAdminPermissionCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnGenericPermissionCheck">
+        <description>
+            GN_ADMIN_ROLE
+        </description>
+        <implements service="permissionInterface"/>
+        <!--GN_ADMIN-->
+        <attribute name="permission" type="java.lang.String" mode="IN" default-value="GN_ADMIN"/>
+    </service>
+
+    <!-- Returns hasPermission=true if user has one of the base PARTYMGR CRUD+ADMIN permissions -->
+    <service name="gnTreePermissionCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnUserRolePermissionCheck">
+        <description>
+            GN_TREE_ADMIN/GN_TREE_*
+        </description>
+        <implements service="permissionInterface"/>
+        <!--GN_TREE_ADMIN-->
+        <attribute name="entity" type="java.lang.String" mode="IN" default-value="GN_TREE"/>
+    </service>
+
+    <!-- Returns hasPermission=true if user has one of the base PARTYMGR CRUD+ADMIN permissions -->
+    <service name="gnNodePermissionCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnUserRolePermissionCheck">
+        <description>
+            GN_NODE_ADMIN/GN_NODE_*
+        </description>
+        <implements service="permissionInterface"/>
+        <!--GN_NODE_ADMIN-->
+        <attribute name="entity" type="java.lang.String" mode="IN" default-value="GN_NODE"/>
+    </service>
+
+    <!-- Returns hasPermission=true if user has one of the base PARTYMGR CRUD+ADMIN permissions -->
+    <service name="gnUserPermissionCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnUserRolePermissionCheck">
+        <description>
+            GN_USER_ADMIN/GN_USER_*
+        </description>
+        <implements service="permissionInterface"/>
+        <!--GN_USER_ADMIN-->
+        <attribute name="entity" type="java.lang.String" mode="IN" default-value="GN_USER"/>
+    </service>
+
+    <!-- Returns hasPermission=true if user has INVITE permission -->
+    <service name="gnInviterCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnGenericPermissionCheck">
+        <description>
+            GN_INVITE
+        </description>
+        <implements service="permissionInterface"/>
+        <!--GN_INVITE-->
+        <attribute name="permission" type="java.lang.String" mode="IN" default-value="GN_INVITE"/>
+    </service>
+
+    <!-- Returns hasPermission=true if user has one of the base PARTYMGR CRUD+ADMIN permissions -->
+    <service name="gnCompanyPermissionCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnUserRolePermissionCheck">
+        <description>
+            GN_COMPANY_ADMIN/GN_COMPANY_*
+        </description>
+        <implements service="permissionInterface"/>
+        <!--GN_COMPANY_ADMIN-->
+        <attribute name="entity" type="java.lang.String" mode="IN" default-value="GN_COMPANY"/>
+    </service>
+
+    <!-- Returns hasPermission=true if user has one of the base PARTYMGR CRUD+ADMIN permissions -->
+    <service name="gnCompanyTreePermissionCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnUserRolePermissionCheck">
+        <description>
+            GN_COMPANY_TREE_ADMIN/GN_COMPANY_TREE_*
+        </description>
+        <implements service="permissionInterface"/>
+        <!--GN_COMPANY_ADMIN-->
+        <attribute name="entity" type="java.lang.String" mode="IN" default-value="GN_COMPANY_TREE"/>
+    </service>
+
+    <!-- Returns hasPermission=true if user has one of the base PARTYMGR CRUD+ADMIN permissions -->
+    <service name="gnCompanyBasePermissionCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnUserRolePermissionCheck">
+        <description>
+            GN_COMPANY_BASE_ADMIN/GN_COMPANY_BASE_*
+        </description>
+        <implements service="permissionInterface"/>
+        <!--GN_COMPANY_ADMIN-->
+        <attribute name="entity" type="java.lang.String" mode="IN" default-value="GN_COMPANY_BASE"/>
+    </service>
+
+    <!-- Returns hasPermission=true if user has one of the base GN_AUTH_ CRUD+ADMIN permissions -->
+    <service name="gnAuthorizationPermissionCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnUserRolePermissionCheck">
+        <description>
+            GN_AUTH_ADMIN/GN_AUTH_*
+        </description>
+        <implements service="permissionInterface"/>
+        <!--GN_COMPANY_ADMIN-->
+        <attribute name="entity" type="java.lang.String" mode="IN" default-value="GN_AUTH"/>
+    </service>
+
+    <service name="gnAuthorizationRootPermissionCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnUserRolePermissionCheck">
+        <description>
+            GN_AUTH_ROOT_VIEW
+        </description>
+        <implements service="permissionInterface"/>
+        <!--GN_COMPANY_ADMIN-->
+        <attribute name="entity" type="java.lang.String" mode="IN" default-value="GN_AUTH_ROOT"/>
+    </service>
+
+    <service name="gnAuthDraftPermissionCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnGenericPermissionCheck">
+        <description>
+            GN_AUTH_DRAFT
+        </description>
+        <implements service="permissionInterface"/>
+        <!--GN_AUTH_DRAFT-->
+        <attribute name="permission" type="java.lang.String" mode="IN" default-value="GN_AUTH_DRAFT"/>
+    </service>
+
+    <service name="gnAuthPrivateDraftPermissionCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnGenericPermissionCheck">
+        <description>
+            GN_AUTH_PVT_DRAFT
+        </description>
+        <implements service="permissionInterface"/>
+        <!--GN_AUTH_PVT_DRAFT-->
+        <attribute name="permission" type="java.lang.String" mode="IN" default-value="GN_AUTH_PVT_DRAFT"/>
+    </service>
+
+    <service name="gnAuthPublishPermissionCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnGenericPermissionCheck">
+        <description>
+            AUTH_PUBLISH
+        </description>
+        <implements service="permissionInterface"/>
+        <!--GN_AUTH_DRAFT-->
+        <attribute name="permission" type="java.lang.String" mode="IN" default-value="GN_AUTH_PUBLISH"/>
+    </service>
+
+    <service name="gnAuthPrivatePublishPermissionCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnGenericPermissionCheck">
+        <description>
+            AUTH_PVT_PUBLISH
+        </description>
+        <implements service="permissionInterface"/>
+        <!--GN_AUTH_DRAFT-->
+        <attribute name="permission" type="java.lang.String" mode="IN" default-value="GN_AUTH_PVT_PUBLISH"/>
+    </service>
+
+    <service name="gnAuthReceivePermissionCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnGenericPermissionCheck">
+        <description>
+            AUTH_RECEIVE
+        </description>
+        <implements service="permissionInterface"/>
+        <!--GN_AUTH_RECEIVE-->
+        <attribute name="permission" type="java.lang.String" mode="IN" default-value="GN_AUTH_RECEIVE"/>
+    </service>
+
+    <service name="gnInvitationAdminPermissionCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnGenericPermissionCheck">
+        <description>
+            PARTY_INVITATION_ADMIN
+        </description>
+        <implements service="permissionInterface"/>
+        <!--GN_PARTY_INV_ADMIN-->
+        <attribute name="permission" type="java.lang.String" mode="IN" default-value="GN_PARTY_INV_ADMIN"/>
+    </service>
+
+    <service name="gnCommunicationAdminPermissionCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnGenericPermissionCheck">
+        <description>
+            GN_COMMUNICATION_ADMIN
+        </description>
+        <implements service="permissionInterface"/>
+        <!--GN_COMMUNICATION_ADMIN-->
+        <attribute name="permission" type="java.lang.String" mode="IN" default-value="GN_COMM_ADMIN"/>
+    </service>
+
+    <service name="gnAuthValidatePermissionCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnGenericPermissionCheck">
+        <description>
+            AUTH_VALIDATE
+        </description>
+        <implements service="permissionInterface"/>
+        <!--AUTH_VALIDATE-->
+        <attribute name="permission" type="java.lang.String" mode="IN" default-value="GN_AUTH_VALIDATE"/>
+    </service>
+
+
+    <service name="gnCheckUserLoginContextValidity" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnCheckUserLoginContextValidity">
+        <description>
+            check if user has valid context associated
+        </description>
+        <implements service="permissionInterface"/>
+        <attribute name="hasPermission" type="Boolean" mode="OUT" optional="false">
+            <description>Contains true if the requested permission has been granted.</description>
+        </attribute>
+        <attribute name="failMessage" type="String" mode="OUT" optional="true">
+            <description>Contains an explanation if the permission was denied.</description>
+        </attribute>
+    </service>
+
+    <service name="gnAuthCheckPermissionCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnGenericPermissionCheck">
+        <description>
+            GN_AUTH_CHECK
+        </description>
+        <implements service="permissionInterface"/>
+        <!--GN_AUTH_CHECK-->
+        <attribute name="permission" type="java.lang.String" mode="IN" default-value="GN_AUTH_CHECK"/>
+    </service>
+
+
+    <service name="gnFindSecurityGroups" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnFindSecurityGroups" auth="true" export="true">
+        <description>
+            Returned SecurityGroup objects must include the set of Permissions they are associated to.
+        </description>
+        <required-permissions join-type="OR">
+            <permission-service service-name="gnAdminPermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnTreePermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnNodePermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnUserPermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnCompanyPermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnCompanyTreePermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnCompanyBasePermissionCheck" main-action="CREATE"/>
+            <permission-service service-name="gnAuthorizationPermissionCheck" main-action="CREATE"/>
+        </required-permissions>
+        <attribute name="securityGroups" type="java.util.List" mode="OUT" optional="false"/>
+    </service>
+
+
+    <!-- Party to SecurityGroup services -->
+    <service name="gnAddPartyToSecurityGroup" engine="entity-auto" invoke="create"
+             default-entity-name="GnPartySecurityGroup" auth="true">
+        <description>Add a Party to a SecurityGroup</description>
+        <!--<permission-service service-name="securityPermissionCheck" main-action="CREATE"/>-->
+        <attribute name="partyId" type="String" mode="IN" optional="false"/>
+        <attribute name="groupId" type="String" mode="IN" optional="false"/>
+        <attribute name="fromDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="thruDate" type="Timestamp" mode="IN" optional="true"/>
+    </service>
+
+    <service name="gnUpdatePartyToSecurityGroup" engine="entity-auto" invoke="update"
+             default-entity-name="GnPartySecurityGroup" auth="true">
+        <description>Update a Party to SecurityGroup Appl</description>
+        <permission-service service-name="securityPermissionCheck" main-action="UPDATE"/>
+        <attribute name="partyId" type="String" mode="IN" optional="false"/>
+        <attribute name="groupId" type="String" mode="IN" optional="false"/>
+        <attribute name="fromDate" type="Timestamp" mode="IN" optional="false"/>
+        <attribute name="thruDate" type="Timestamp" mode="IN" optional="true"/>
+    </service>
+    <service name="gnRemovePartyFromSecurityGroup" engine="entity-auto" invoke="delete"
+             default-entity-name="GnPartySecurityGroup" auth="true">
+        <description>Remove a Party from a SecurityGroup</description>
+        <permission-service service-name="securityPermissionCheck" main-action="DELETE"/>
+        <attribute name="partyId" type="String" mode="IN" optional="false"/>
+        <attribute name="groupId" type="String" mode="IN" optional="false"/>
+        <attribute name="fromDate" type="Timestamp" mode="IN" optional="false"/>
+    </service>
+    <service name="gnAddUserLoginToSecurityGroup" engine="entity-auto" invoke="create"
+             default-entity-name="UserLoginSecurityGroup" auth="true">
+        <description>Add a UserLogin to a SecurityGroup</description>
+        <!--<permission-service service-name="securityPermissionCheck" main-action="CREATE"/>-->
+        <attribute name="userLoginId" type="String" mode="IN" optional="false"/>
+        <attribute name="groupId" type="String" mode="IN" optional="false"/>
+        <attribute name="fromDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="thruDate" type="Timestamp" mode="IN" optional="true"/>
+    </service>
+
+    <service name="gnHasPermission" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService" invoke="gnHasPermission"
+             default-entity-name="" auth="true" export="true">
+        <description>Add a UserLogin to a SecurityGroup</description>
+        <attribute name="entityId" type="String" mode="IN" optional="true"/>
+        <attribute name="entityTypeId" type="String" mode="IN" optional="true"/>
+        <attribute name="permissionId" type="String" mode="IN" optional="false"/>
+        <attribute name="partyNodeKey" type="String" mode="OUT" optional="false"/>
+    </service>
+
+    <!-- Check the company profile -->
+
+    <service name="gnRootPublishProfileCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnRootPublishProfileCheck">
+        <description>
+            CompanyAttributeOfbiz.ROOT_PUBLISH
+        </description>
+        <!--<implements service="permissionInterface"/>-->
+        <attribute name="forcedCompanyPartyId" type="String" mode="IN" optional="true"/>
+        <attribute name="hasPermission" type="java.lang.String" mode="OUT" optional="false"/>
+        <attribute name="failMessage" type="java.lang.String" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnPrivateAuthPublishProfileCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnPrivateAuthPublishProfileCheck">
+        <description>
+            CompanyAttributeOfbiz.PRIVATE_AUTH_PUBLISH
+        </description>
+        <!--<implements service="permissionInterface"/>-->
+        <attribute name="forcedCompanyPartyId" type="String" mode="IN" optional="true"/>
+        <attribute name="hasPermission" type="java.lang.String" mode="OUT" optional="false"/>
+        <attribute name="failMessage" type="java.lang.String" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnPrivateAuthCheckProfileCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnPrivateAuthCheckProfileCheck">
+        <description>
+            CompanyAttributeOfbiz.PRIVATE_AUTH_CHECK
+        </description>
+        <!--<implements service="permissionInterface"/>-->
+        <attribute name="forcedCompanyPartyId" type="String" mode="IN" optional="true"/>
+        <attribute name="hasPermission" type="java.lang.String" mode="OUT" optional="false"/>
+        <attribute name="failMessage" type="java.lang.String" mode="OUT" optional="true"/>
+    </service>
+
+
+    <!--<service name="gnTestUserPermissionCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnTestUserPermissionCheck">
+    -->
+    <service name="gnTestUserPermissionCheck" engine="java"
+             location="it.memelabs.gn.services.security.SecurityService"
+             invoke="gnGenericPermissionCheck">
+        <description>
+            test permission GN_UNIT_TEST_SC used in unit tests only
+        </description>
+        <implements service="permissionInterface"/>
+        <attribute name="permission" type="java.lang.String" mode="IN" default-value="GN_UNIT_TEST"/>
+    </service>
+
+</services>

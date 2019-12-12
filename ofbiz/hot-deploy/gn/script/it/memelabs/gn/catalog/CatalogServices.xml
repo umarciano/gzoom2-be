@@ -1,0 +1,79 @@
+<simple-methods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns=""
+                xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/simple-methods.xsd">
+    <simple-method method-name="gnFindWasteCerCodes" short-description="return cer catalog">
+        <!--WasteCerCode-->
+        <find-by-and entity-name="GnWasteCerCode" map="" list="wasteCerCodes" use-cache="true"
+                     order-by-list="wasteCerCodeId"/>
+        <field-to-result field="wasteCerCodes" result-name="wasteCerCodes"/>
+    </simple-method>
+
+    <simple-method method-name="gnFindPackaging" short-description="return packagings catalog">
+        <!--Operations-->
+        <find-by-and entity-name="GnPackaging" map="" list="packagings" use-cache="true"
+                     order-by-list="packagingId"/>
+        <field-to-result field="packagings" result-name="packagings"/>
+    </simple-method>
+
+    <simple-method method-name="gnFindOperations" short-description="return operation catalog">
+        <!--Operations-->
+        <find-by-and entity-name="GnOperation" map="" list="operations" use-cache="true"
+                     order-by-list="operationId"/>
+        <field-to-result field="operations" result-name="operations"/>
+    </simple-method>
+
+    <simple-method method-name="gnFindIssuers" short-description="return issuer+issuerBase catalog">
+        <!--Operations-->
+        <set field="issuersFilter.nodeType" value="ISSUER"/>
+        <find-by-and entity-name="GnPartyGroupPartyNode" map="issuersFilter" list="_issuers" use-cache="false"
+                     order-by-list="issuerId"/>
+        <set field="issuers" type="List"/>
+        <iterate entry="_issuer" list="_issuers">
+            <clear-field field="issuer"/>
+            <map-to-map map="_issuer" to-map="issuer"/>
+            <set field="issuerId" from-field="issuer.partyId"/>
+            <!--<log level="error" message="issuerId ${issuerId}"/>-->
+            <set field="issuerBasesRelFilter.partyIdFrom" from-field="issuerId"/>
+            <set field="issuerBasesRelFilter.roleTypeIdFrom" value="GN_ISSUER"/>
+            <set field="issuerBasesRelFilter.roleTypeIdTo" value="GN_ISSUER_BASE"/>
+            <set field="issuerBasesRelFilter.partyRelationshipTypeId" value="GN_OWNS"/>
+            <set field="issuer.partyRelationships" type="List"/>
+            <find-by-and entity-name="PartyRelationship" list="rels" map="issuerBasesRelFilter"/>
+            <iterate entry="_rel" list="rels">
+                <clear-field field="rel"/>
+                <clear-field field="addressCondition"/>
+                <clear-field field="issuerBaseMap"/>
+                <map-to-map map="_rel" to-map="rel"/>
+                <clear-field field="issuerBase"/>
+                <!--<log level="error" message="issuerBaseId ${issuerBaseId}"/>-->
+                <!--issueBaseId-->
+                <set field="ibf.partyId" from-field="rel.partyIdTo"/>
+                <find-by-primary-key map="ibf" value-field="issuerBase" use-cache="false"
+                                     entity-name="GnPartyGroupPartyNode"/>
+                <set field="addressCondition.partyId" from-field="issuerBase.partyId"/>
+                <find-by-and entity-name="GnPartyAndPostalAddress" list="addressList" map="addressCondition"
+                             use-cache="false"/>
+                <first-from-list entry="postalAddress" list="addressList"/>
+
+                <call-object-method obj-field="issuerBase" method-name="getAllFields" ret-field="issuerBaseMap"/>
+                <set field="issuerBaseMap.address" type="NewMap"></set>
+                <set field="issuerBaseMap.address.stateProvinceGeoId" from-field="postalAddress.stateProvinceGeoId"/>
+                <set field="issuerBaseMap.address.regionGeoId" from-field="postalAddress.regionGeoId"/>
+
+                <set field="rel.target" from-field="issuerBaseMap"/>
+                <field-to-list field="rel" list="issuer.partyRelationships"/>
+            </iterate>
+            <!--<log level="error" message="add to list ${issuer.partyId}"/>-->
+            <field-to-list field="issuer" list="issuers"/>
+        </iterate>
+
+        <field-to-result field="issuers" result-name="partyNodes"/>
+    </simple-method>
+
+    <simple-method method-name="gnFindCategoriesAndClasses" short-description="return categoriesAndClasses catalog">
+        <!--Categories And Classes-->
+        <find-by-and entity-name="GnCategoryClassEnum" map="" list="categoriesAndClasses" use-cache="true"
+                     order-by-list="sequenceId"/>
+        <field-to-result field="categoriesAndClasses" result-name="categoriesAndClasses"/>
+    </simple-method>
+
+</simple-methods>

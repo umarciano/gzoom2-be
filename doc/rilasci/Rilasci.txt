@@ -1,20 +1,27 @@
-PRIMA RILASCIO
+PRIMO RILASCIO
+
+CREAZIONE CARTELLE
 copiare tutte le cartelle che sono dentro la cartella rilasci
 
+CONFIGURAZIONE IP E PORTE
 Se è un primo rilascio dopo aver fatto tutti i passaggi serve dire a bruno il path dove è presente gzoom2 (gzoom-app),
-per aprire la porta.
+per aprire la porta e configurare il proxy.
 
-
---> IMPORTANTE
-Bisogna anche aggiungere alle properties dell'ambiente la porta dello startofbiz.sh
-nel GzoomLegacy
-
+su GzoomLegacy, per gli ambienti che rispondono al proxy di gzoom-tux-1
+bisogna configurare le properties con indirizzo e porta sull GzoomLegacy, per il file startofbiz.sh:
 ofbiz.rmi.bound-host=127.AB.CD.E
 startofbiz.ADMIN_PORT=EDCBA
 
+inserendo l'indirizzo che si trova dentro: GZoom-doc\Local_installations\hosts
 
-nel file application.properties sia di gzoom-bin che gzoom-bin-report
-inserire l'indirizzo che si trova dentro: GZoom-doc\Local_installations\hosts
+su Gzoom2, per tutti
+nella cartella config, nel file gzoom.properties configurare:
+server.address=127.62.52.2
+server.port=6000
+management.port=6002
+management.address=127.62.52.2
+che vanno a sovrascrivere le properties di application.properties sia di gzoom-bin che gzoom-bin-report
+
 
 nel file dentro config/gzoom.properties e config/gzoom-report.properties cambiare la properties
 ofbiz.server.xmlrpc.url=http://<ip>:<port>/gzoom/control/xmlrpc (sono su gzoom-lan URL alternativo)
@@ -22,11 +29,17 @@ ofbiz.server.xmlrpc.url=http://<ip>:<port>/gzoom/control/xmlrpc (sono su gzoom-l
 nel file dentro config/gzoom.properties
 gzoom.server.report.url=http://<ip>:8099/rest/report
 
+
 (Bruno va ad aprire il file che si chiama gzoom....conf e aggiungere in fondo al file
-il record con il nuov ambiente, e dopo bisogna riavviare il proxy.
+il record con il nuovo ambiente, e dopo bisogna riavviare il proxy.
 
 GZoom-doc\Develop\Apache-GZOOM-TUX-1\etc\apache2\sites-available
 )
+
+CONFIGURAZIONE DATABASE
+
+I dati relativi alle nuove voci di menu e ai permessi per i gruppi di sicurezza
+vengono caricati nel run-install-custom-seed del GzoomLegacy
 
 --> IMPORTANTE
 sempre nel primo rilascio bisogna creare le tabelle di QUARTZ
@@ -41,7 +54,7 @@ Per fare un rilascio bisogna avere le cartelle:
 gzoom: che contine il gzoom legacy
 
 gzoom-bin: che contine il back-end guardare esempio del contenuto nella cartella oltre al .jar che viene creato nel modulo rest-boot/target
-    1. Cambiare la versione sostituendo 2.0.11rc1 con la versioen nuova nei pom.xls
+    1. Cambiare la versione sostituendo 2.0.11rc1 con la versione nuova nei pom.xls
     2. fare la commit e push
     3. creare il TAG e fare la push
     4. creare il pacchetto eseguendo dalla cartella gzoom2-backend => mvn package -Dmaven.test.skip=true

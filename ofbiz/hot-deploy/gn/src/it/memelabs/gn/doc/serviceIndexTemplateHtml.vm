@@ -1,0 +1,10 @@
+#* @vtlvariable name="services" type="java.util.Set"  *#
+<html>
+<head></head>
+<body>
+    #foreach($sName in $services)
+    <A HREF="${sName}.html" title="$sName" target="classFrame">$sName</A><br>
+
+    #end
+</body>
+</html>

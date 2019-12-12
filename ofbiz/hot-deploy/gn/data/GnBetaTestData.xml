@@ -1,0 +1,1620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+    <!-- See GNBetaTestData document for detailed informations on BetaTestData -->
+
+    <!-- ****************************** -->
+    <!-- ********** E N E L  ********** -->
+    <!-- ****************************** -->
+
+    <!-- E N T I T Y -->
+    <!--Company Enel S.p.A.-->
+    <Party partyId="GN_ENELSPA" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="Enel S.p.A."/>
+    <PartyGroup partyId="GN_ENELSPA" groupName="Enel S.p.A."/>
+    <GnPartyNode partyId="GN_ENELSPA" nodeKey="GN_ENELSPA@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY"
+                 taxIdentificationNumber="00811720580" VATnumber="00934061003"
+                 name="Enel S.p.A."/>
+    <PartyRole partyId="GN_ENELSPA" roleTypeId="GN_COMPANY"/>
+    <PartyRole partyId="GN_ENELSPA" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ENELSPA" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <PartyAttribute partyId="GN_ENELSPA" attrName="ROOT_PUBLISH" attrValue="N"/>
+    <PartyAttribute partyId="GN_ENELSPA" attrName="PRIVATE_AUTH_PUBLISH" attrValue="Y"/>
+
+    <!--Company Base Enel S.p.A. (registered office) -->
+    <Party partyId="GN_ENELSPA_RM" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="Enel S.p.A. - Roma"/>
+    <PartyGroup partyId="GN_ENELSPA_RM" groupName="Enel S.p.A. - Roma"/>
+    <GnPartyNode partyId="GN_ENELSPA_RM" nodeKey="GN_ENELSPA_RM@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber="756032"
+                 registeredOffice="Y" authorizationOwner="N"/>
+    <PartyRole partyId="GN_ENELSPA_RM" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_ENELSPA_RM" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ENELSPA_RM" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_ENELSPA_RM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_ENELSPA_RM"
+                      contactMechId="CM_ENELSPA_RM"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_ENELSPA_RM"
+                   toName="Enel S.p.A. - Roma"
+                   address1="viale Regina Margherita"
+                   streetNumber="137"
+                   village=""
+                   city="Roma"
+                   postalCode="00198"
+                   postalCodeGeoId="IT-GN-CAP-00198"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-LAZIO"
+                   stateProvinceGeoId="IT-GN-058"
+                   municipalityGeoId="IT-GN-058091"/>
+
+    <!--user enelspaadmin / pw: eneltest-->
+    <Party partyId="USER_ENELSPAADMIN" partyTypeId="PERSON"/>
+    <Person partyId="USER_ENELSPAADMIN" lastName="Enel S.p.A." firstName="Amministratore "/>
+    <UserLogin userLoginId="enelspaadmin" partyId="USER_ENELSPAADMIN"
+               currentPassword="{SHA}087d28deec24b37be75bced68c72720b5a6e971f" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="enelspaadmin" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="USER_ENELSPAADMIN" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="enelspaadmin" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <!--Enel S.p.A. relationships-->
+    <!--user-->
+    <PartyRelationship partyIdFrom="USER_ENELSPAADMIN" partyIdTo="GN_ENELSPA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (enelspaadmin) impiegato in azienda (Enel S.p.A.)"/>
+
+    <!--company/company base-->
+    <PartyRelationship partyIdFrom="GN_ENELSPA" partyIdTo="GN_ENELSPA_RM"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: Enel spa detiene Enel spa Roma"/>
+    <PartyRelationship partyIdFrom="GN_ENELSPA_RM" partyIdTo="GN_ENELSPA"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: Enel spa Roma appartiene a Enel spa"/>
+    <!--Company Enel S.p.A. end-->
+
+
+    <!--Company Enel distribuzione-->
+    <Party partyId="GN_ENELDIS" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="Enel distribuzione S.p.A."/>
+    <PartyGroup partyId="GN_ENELDIS" groupName="Enel distribuzione S.p.A."/>
+    <GnPartyNode partyId="GN_ENELDIS" nodeKey="GN_ENELDIS@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY"
+                 taxIdentificationNumber="05779711000" VATnumber="05779711000"
+                 name="Enel distribuzione S.p.A."/>
+    <PartyRole partyId="GN_ENELDIS" roleTypeId="GN_COMPANY"/>
+    <PartyRole partyId="GN_ENELDIS" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ENELDIS" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <PartyAttribute partyId="GN_ENELDIS" attrName="ROOT_PUBLISH" attrValue="N"/>
+    <PartyAttribute partyId="GN_ENELDIS" attrName="PRIVATE_AUTH_PUBLISH" attrValue="Y"/>
+
+    <!--Company Base Enel distribuzione (registered office) -->
+    <Party partyId="GN_ENELDIS_RM" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="Enel distribuzione - Roma"/>
+    <PartyGroup partyId="GN_ENELDIS_RM" groupName="Enel distribuzione - Roma"/>
+    <GnPartyNode partyId="GN_ENELDIS_RM" nodeKey="GN_ENELDIS_RM@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber="922436"
+                 registeredOffice="Y" authorizationOwner="N"/>
+    <PartyRole partyId="GN_ENELDIS_RM" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_ENELDIS_RM" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ENELDIS_RM" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_ENELDIS_RM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_ENELDIS_RM"
+                      contactMechId="CM_ENELDIS_RM"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_ENELDIS_RM"
+                   toName="Enel distribuzione - Roma"
+                   address1="via Ombrone"
+                   streetNumber="2"
+                   village=""
+                   city="Roma"
+                   postalCode="00198"
+                   postalCodeGeoId="IT-GN-CAP-00198"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-LAZIO"
+                   stateProvinceGeoId="IT-GN-058"
+                   municipalityGeoId="IT-GN-058091"/>
+
+    <!--Company Base Enel distribuzione (Venezia operational unit) -->
+    <Party partyId="GN_ENELDIS_VE" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="u.o. Venezia"/>
+    <PartyGroup partyId="GN_ENELDIS_VE" groupName="u.o. Venezia"/>
+    <GnPartyNode partyId="GN_ENELDIS_VE" nodeKey="GN_ENELDIS_VE@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber="922436"
+                 registeredOffice="N" authorizationOwner="N"/>
+    <PartyRole partyId="GN_ENELDIS_VE" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_ENELDIS_VE" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ENELDIS_VE" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_ENELDIS_VE" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_ENELDIS_VE"
+                      contactMechId="CM_ENELDIS_VE"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_ENELDIS_VE"
+                   toName="u.o. Venezia"
+                   address1="via Veneto"
+                   streetNumber="2"
+                   village=""
+                   city="Venezia"
+                   postalCode="30121"
+                   postalCodeGeoId="IT-GN-CAP-30121"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-VENETO"
+                   stateProvinceGeoId="IT-GN-027"
+                   municipalityGeoId="IT-GN-027042"/>
+
+    <!--Company Base Enel distribuzione (Treviso operational unit) -->
+    <Party partyId="GN_ENELDIS_TV" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="u.o. Treviso"/>
+    <PartyGroup partyId="GN_ENELDIS_TV" groupName="u.o. Treviso"/>
+    <GnPartyNode partyId="GN_ENELDIS_TV" nodeKey="GN_ENELDIS_TV@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber="922436"
+                 registeredOffice="N" authorizationOwner="N"/>
+    <PartyRole partyId="GN_ENELDIS_TV" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_ENELDIS_TV" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ENELDIS_TV" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_ENELDIS_TV" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_ENELDIS_TV"
+                      contactMechId="CM_ENELDIS_TV"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_ENELDIS_TV"
+                   toName="u.o. Treviso"
+                   address1="via Trevigiana"
+                   streetNumber="3"
+                   village=""
+                   city="Treviso"
+                   postalCode="31100"
+                   postalCodeGeoId="IT-GN-CAP-31100"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-VENETO"
+                   stateProvinceGeoId="IT-GN-026"
+                   municipalityGeoId="IT-GN-026086"/>
+
+    <!--Company Base Enel distribuzione (Livorno operational unit) -->
+    <Party partyId="GN_ENELDIS_LI" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="u.o. Livorno"/>
+    <PartyGroup partyId="GN_ENELDIS_LI" groupName="u.o. Livorno"/>
+    <GnPartyNode partyId="GN_ENELDIS_LI" nodeKey="GN_ENELDIS_LI@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber="922436"
+                 registeredOffice="N" authorizationOwner="N"/>
+    <PartyRole partyId="GN_ENELDIS_LI" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_ENELDIS_LI" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ENELDIS_LI" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_ENELDIS_LI" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_ENELDIS_LI"
+                      contactMechId="CM_ENELDIS_LI"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_ENELDIS_LI"
+                   toName="u.o. Livorno"
+                   address1="via Livornese"
+                   streetNumber="28"
+                   village=""
+                   city="Livorno"
+                   postalCode="57121"
+                   postalCodeGeoId="IT-GN-CAP-57121"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-TOSCANA"
+                   stateProvinceGeoId="IT-GN-049"
+                   municipalityGeoId="IT-GN-049009"/>
+
+    <!--Company Base Enel distribuzione (Firenze operational unit) -->
+    <Party partyId="GN_ENELDIS_FI" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="u.o. Firenze"/>
+    <PartyGroup partyId="GN_ENELDIS_FI" groupName="u.o. Firenze"/>
+    <GnPartyNode partyId="GN_ENELDIS_FI" nodeKey="GN_ENELDIS_FI@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber="922436"
+                 registeredOffice="N" authorizationOwner="N"/>
+    <PartyRole partyId="GN_ENELDIS_FI" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_ENELDIS_FI" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ENELDIS_FI" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_ENELDIS_FI" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_ENELDIS_FI"
+                      contactMechId="CM_ENELDIS_FI"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_ENELDIS_FI"
+                   toName="u.o. Firenze"
+                   address1="via Fiorentina"
+                   streetNumber="12"
+                   village=""
+                   city="Firenze"
+                   postalCode="50121"
+                   postalCodeGeoId="IT-GN-CAP-50121"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-TOSCANA"
+                   stateProvinceGeoId="IT-GN-048"
+                   municipalityGeoId="IT-GN-048017"/>
+
+    <!--organization node DTR1-->
+    <Party partyId="GN_ENELDIS_ON_DTR1" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="DTR1"/>
+    <PartyGroup partyId="GN_ENELDIS_ON_DTR1" groupName="DTR1"/>
+    <GnPartyNode partyId="GN_ENELDIS_ON_DTR1" nodeKey="GN_ENELDIS_ON_DTR1@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="ORGANIZATION"
+                 code="DTR1"
+                 name="DTR1"/>
+    <PartyRole partyId="GN_ENELDIS_ON_DTR1" roleTypeId="GN_ORGANIZATION_NODE"/>
+    <PartyRole partyId="GN_ENELDIS_ON_DTR1" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ENELDIS_ON_DTR1" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <!--organization node DTR2-->
+    <Party partyId="GN_ENELDIS_ON_DTR2" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="DTR2"/>
+    <PartyGroup partyId="GN_ENELDIS_ON_DTR2" groupName="DTR2"/>
+    <GnPartyNode partyId="GN_ENELDIS_ON_DTR2" nodeKey="GN_ENELDIS_ON_DTR2@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="ORGANIZATION"
+                 code="DTR2"
+                 name="DTR2"/>
+    <PartyRole partyId="GN_ENELDIS_ON_DTR2" roleTypeId="GN_ORGANIZATION_NODE"/>
+    <PartyRole partyId="GN_ENELDIS_ON_DTR2" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ENELDIS_ON_DTR2" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <!--organization node ZONA1-->
+    <Party partyId="GN_ENELDIS_ON_ZONA1" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="ZONA 1"/>
+    <PartyGroup partyId="GN_ENELDIS_ON_ZONA1" groupName="ZONA 1"/>
+    <GnPartyNode partyId="GN_ENELDIS_ON_ZONA1" nodeKey="GN_ENELDIS_ON_ZONA1@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="ORGANIZATION"
+                 code="ZONA1"
+                 name="ZONA 1"/>
+    <PartyRole partyId="GN_ENELDIS_ON_ZONA1" roleTypeId="GN_ORGANIZATION_NODE"/>
+    <PartyRole partyId="GN_ENELDIS_ON_ZONA1" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ENELDIS_ON_ZONA1" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <!--organization node ZONA2-->
+    <Party partyId="GN_ENELDIS_ON_ZONA2" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="ZONA 2"/>
+    <PartyGroup partyId="GN_ENELDIS_ON_ZONA2" groupName="ZONA 2"/>
+    <GnPartyNode partyId="GN_ENELDIS_ON_ZONA2" nodeKey="GN_ENELDIS_ON_ZONA2@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="ORGANIZATION"
+                 code="ZONA2"
+                 name="ZONA 2"/>
+    <PartyRole partyId="GN_ENELDIS_ON_ZONA2" roleTypeId="GN_ORGANIZATION_NODE"/>
+    <PartyRole partyId="GN_ENELDIS_ON_ZONA2" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ENELDIS_ON_ZONA2" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <!--Users Enel distribuzione-->
+    <!--user m.salvadori / pw: eneltest-->
+    <Party partyId="USER_MSALVADORI" partyTypeId="PERSON"/>
+    <Person partyId="USER_MSALVADORI" lastName="Salvadori " firstName="Mauro "/>
+    <UserLogin userLoginId="m.salvadori" partyId="USER_MSALVADORI"
+               currentPassword="{SHA}087d28deec24b37be75bced68c72720b5a6e971f" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="m.salvadori" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="USER_MSALVADORI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="m.salvadori" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="cm_mail_msalvadori" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="salvadori.mauro@enel.it"/>
+    <PartyContactMech partyId="USER_MSALVADORI" contactMechId="cm_mail_msalvadori" fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="USER_MSALVADORI" contactMechId="cm_mail_msalvadori"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <!--user l.duni / pw: eneltest-->
+    <Party partyId="USER_LDUNI" partyTypeId="PERSON"/>
+    <Person partyId="USER_LDUNI" lastName="Duni " firstName="Leonardo "/>
+    <UserLogin userLoginId="l.duni" partyId="USER_LDUNI"
+               currentPassword="{SHA}087d28deec24b37be75bced68c72720b5a6e971f" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="l.duni" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="USER_LDUNI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="l.duni" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="cm_mail_lduni" contactMechTypeId="EMAIL_ADDRESS" infoString="leonardo.duni@enel.com"/>
+    <PartyContactMech partyId="USER_LDUNI" contactMechId="cm_mail_lduni" fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="USER_LDUNI" contactMechId="cm_mail_lduni" contactMechPurposeTypeId="PRIMARY_EMAIL"
+                             fromDate="2001-05-13 00:00:00.000"/>
+
+    <!--Enel distribuzione relationships-->
+
+    <!--company/company base-->
+    <PartyRelationship partyIdFrom="GN_ENELDIS" partyIdTo="GN_ENELDIS_RM"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: Enel distribuzione detiene Enel distribuzione Roma"/>
+    <PartyRelationship partyIdFrom="GN_ENELDIS_RM" partyIdTo="GN_ENELDIS"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: Enel distribuzione Roma appartiene a Enel distribuzione"/>
+
+    <PartyRelationship partyIdFrom="GN_ENELDIS" partyIdTo="GN_ENELDIS_VE"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: Enel distribuzione detiene Enel distribuzione Venezia"/>
+    <PartyRelationship partyIdFrom="GN_ENELDIS_VE" partyIdTo="GN_ENELDIS"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: Enel distribuzione Venezia appartiene a Enel distribuzione"/>
+
+    <PartyRelationship partyIdFrom="GN_ENELDIS" partyIdTo="GN_ENELDIS_TV"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: Enel distribuzione detiene Enel distribuzione Treviso"/>
+    <PartyRelationship partyIdFrom="GN_ENELDIS_TV" partyIdTo="GN_ENELDIS"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: Enel distribuzione Treviso appartiene a Enel distribuzione"/>
+
+    <PartyRelationship partyIdFrom="GN_ENELDIS" partyIdTo="GN_ENELDIS_LI"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: Enel distribuzione detiene Enel distribuzione Livorno"/>
+    <PartyRelationship partyIdFrom="GN_ENELDIS_LI" partyIdTo="GN_ENELDIS"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: Enel distribuzione Livorno appartiene a Enel distribuzione"/>
+
+    <PartyRelationship partyIdFrom="GN_ENELDIS" partyIdTo="GN_ENELDIS_FI"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: Enel distribuzione detiene Enel distribuzione Firenze"/>
+    <PartyRelationship partyIdFrom="GN_ENELDIS_FI" partyIdTo="GN_ENELDIS"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: Enel distribuzione Firenze appartiene a Enel distribuzione"/>
+
+    <PartyRelationship partyIdFrom="USER_MSALVADORI" partyIdTo="GN_ENELDIS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (eneldis) impiegato in azienda (Enel distribuzione)"/>
+
+    <PartyRelationship partyIdFrom="USER_LDUNI" partyIdTo="GN_ENELDIS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (l.duni) impiegato in azienda (Enel distribuzione)"/>
+    <!--Company Enel distribuzione end-->
+
+    <!--Company Enel Green Power -->
+    <Party partyId="GN_ENELGP" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="Enel Green Power S.p.A."/>
+    <PartyGroup partyId="GN_ENELGP" groupName="Enel Green Power S.p.A."/>
+    <GnPartyNode partyId="GN_ENELGP" nodeKey="GN_ENELGP@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY"
+                 taxIdentificationNumber="10236451000" VATnumber="10236451000"
+                 name="Enel Green Power S.p.A."/>
+    <PartyRole partyId="GN_ENELGP" roleTypeId="GN_COMPANY"/>
+    <PartyRole partyId="GN_ENELGP" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ENELGP" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <PartyAttribute partyId="GN_ENELGP" attrName="ROOT_PUBLISH" attrValue="N"/>
+    <PartyAttribute partyId="GN_ENELGP" attrName="PRIVATE_AUTH_PUBLISH" attrValue="Y"/>
+
+    <!--Company Base Enel Green Power (registered office) -->
+    <Party partyId="GN_ENELGP_RM" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="Enel Green Power - Roma"/>
+    <PartyGroup partyId="GN_ENELGP_RM" groupName="Enel Green Power - Roma"/>
+    <GnPartyNode partyId="GN_ENELGP_RM" nodeKey="GN_ENELGP_RM@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber="1219253"
+                 registeredOffice="Y" authorizationOwner="N"/>
+    <PartyRole partyId="GN_ENELGP_RM" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_ENELGP_RM" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ENELGP_RM" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_ENELGP_RM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_ENELGP_RM"
+                      contactMechId="CM_ENELGP_RM"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_ENELGP_RM"
+                   toName="Enel Green Power - Roma"
+                   address1="viale Regina Margherita"
+                   streetNumber="125"
+                   village=""
+                   city="Roma"
+                   postalCode="00198"
+                   postalCodeGeoId="IT-GN-CAP-00198"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-LAZIO"
+                   stateProvinceGeoId="IT-GN-058"
+                   municipalityGeoId="IT-GN-058091"/>
+
+    <!--Company Base Enel Green Power (Parma operational unit) -->
+    <Party partyId="GN_ENELGP_PR" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="Enel Green Power - Parma"/>
+    <PartyGroup partyId="GN_ENELGP_PR" groupName="Enel Green Power - Parma"/>
+    <GnPartyNode partyId="GN_ENELGP_PR" nodeKey="GN_ENELGP_PR@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber="1219253"
+                 registeredOffice="N" authorizationOwner="N"/>
+    <PartyRole partyId="GN_ENELGP_PR" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_ENELGP_PR" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ENELGP_PR" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_ENELGP_PR" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_ENELGP_PR"
+                      contactMechId="CM_ENELGP_PR"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_ENELGP_PR"
+                   toName="Enel Green Power - Parma"
+                   address1="via Parmense"
+                   streetNumber="125"
+                   village=""
+                   city="Parma"
+                   postalCode="43121"
+                   postalCodeGeoId="IT-GN-CAP-43121"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-EMILIAROMAGNA"
+                   stateProvinceGeoId="IT-GN-034"
+                   municipalityGeoId="IT-GN-034027"/>
+
+    <!--Company Base Enel Green Power (Bologna operational unit) -->
+    <Party partyId="GN_ENELGP_BO" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="Enel Green Power - Bologna"/>
+    <PartyGroup partyId="GN_ENELGP_BO" groupName="Enel Green Power - Bologna"/>
+    <GnPartyNode partyId="GN_ENELGP_BO" nodeKey="GN_ENELGP_BO@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber="1219253"
+                 registeredOffice="N" authorizationOwner="N"/>
+    <PartyRole partyId="GN_ENELGP_BO" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_ENELGP_BO" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ENELGP_BO" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_ENELGP_BO" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_ENELGP_BO"
+                      contactMechId="CM_ENELGP_BO"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_ENELGP_BO"
+                   toName="Enel Green Power - Bologna"
+                   address1="via Bolognese"
+                   streetNumber="380"
+                   village=""
+                   city="Bologna"
+                   postalCode="40121"
+                   postalCodeGeoId="IT-GN-CAP-40121"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-EMILIAROMAGNA"
+                   stateProvinceGeoId="IT-GN-037"
+                   municipalityGeoId="IT-GN-037006"/>
+
+    <!--Company Base Enel Green Power (Milano operational unit) -->
+    <Party partyId="GN_ENELGP_MI" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="Enel Green Power - Milano"/>
+    <PartyGroup partyId="GN_ENELGP_MI" groupName="Enel Green Power - Milano"/>
+    <GnPartyNode partyId="GN_ENELGP_MI" nodeKey="GN_ENELGP_MI@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber="1219253"
+                 registeredOffice="N" authorizationOwner="N"/>
+    <PartyRole partyId="GN_ENELGP_MI" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_ENELGP_MI" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ENELGP_MI" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_ENELGP_MI" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_ENELGP_MI"
+                      contactMechId="CM_ENELGP_MI"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_ENELGP_MI"
+                   toName="Enel Green Power - Milano"
+                   address1="via Milanese"
+                   streetNumber="12"
+                   village=""
+                   city="Milano"
+                   postalCode="20121"
+                   postalCodeGeoId="IT-GN-CAP-20121"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-LOMBARDIA"
+                   stateProvinceGeoId="IT-GN-015"
+                   municipalityGeoId="IT-GN-015146"/>
+
+    <!--Company Base Enel Green Power (Mantova operational unit) -->
+    <Party partyId="GN_ENELGP_MN" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="Enel Green Power - Mantova"/>
+    <PartyGroup partyId="GN_ENELGP_MN" groupName="Enel Green Power - Mantova"/>
+    <GnPartyNode partyId="GN_ENELGP_MN" nodeKey="GN_ENELGP_MN@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber="1219253"
+                 registeredOffice="N" authorizationOwner="N"/>
+    <PartyRole partyId="GN_ENELGP_MN" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_ENELGP_MN" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ENELGP_MN" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_ENELGP_MN" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_ENELGP_MN"
+                      contactMechId="CM_ENELGP_MN"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_ENELGP_MN"
+                   toName="Enel Green Power - Mantova"
+                   address1="via Mantovana"
+                   streetNumber="98"
+                   village=""
+                   city="Mantova"
+                   postalCode="46100"
+                   postalCodeGeoId="IT-GN-CAP-46100"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-LOMBARDIA"
+                   stateProvinceGeoId="IT-GN-020"
+                   municipalityGeoId="IT-GN-020030"/>
+
+    <!--user c.vecchi / pw: egptest-->
+    <Party partyId="USER_CVECCHI" partyTypeId="PERSON"/>
+    <Person partyId="USER_CVECCHI" lastName="Vecchi " firstName="Claudio Angelo "/>
+    <UserLogin userLoginId="c.vecchi" partyId="USER_CVECCHI"
+               currentPassword="{SHA}c1b3f8b6264d57aced7171c535fd981c73aea462" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="c.vecchi" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="USER_CVECCHI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="c.vecchi" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="cm_mail_cvecchi" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="claudioangelo.vecchi@enel.com"/>
+    <PartyContactMech partyId="USER_CVECCHI" contactMechId="cm_mail_cvecchi" fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="USER_CVECCHI" contactMechId="cm_mail_cvecchi"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <!--user m.angelini / pw: egptest-->
+    <Party partyId="USER_MANGELINI" partyTypeId="PERSON"/>
+    <Person partyId="USER_MANGELINI" lastName="Angelini " firstName="Marcello "/>
+    <UserLogin userLoginId="m.angelini" partyId="USER_MANGELINI"
+               currentPassword="{SHA}c1b3f8b6264d57aced7171c535fd981c73aea462" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="m.angelini" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="USER_MANGELINI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="m.angelini" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="cm_mail_mangelini" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="marcello.angelini@enel.com"/>
+    <PartyContactMech partyId="USER_MANGELINI" contactMechId="cm_mail_mangelini" fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="USER_MANGELINI" contactMechId="cm_mail_mangelini"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+    <!--Enel Green Power relationships-->
+
+    <!--company/company base-->
+    <PartyRelationship partyIdFrom="GN_ENELGP" partyIdTo="GN_ENELGP_RM"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: Enel Green Power detiene Enel Green Power Roma"/>
+    <PartyRelationship partyIdFrom="GN_ENELGP_RM" partyIdTo="GN_ENELGP"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: Enel Green Power Roma appartiene a Enel Green Power"/>
+
+    <PartyRelationship partyIdFrom="GN_ENELGP" partyIdTo="GN_ENELGP_PR"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: Enel Green Power detiene Enel Green Power Parma"/>
+    <PartyRelationship partyIdFrom="GN_ENELGP_PR" partyIdTo="GN_ENELGP"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: Enel Green Power Parna appartiene a Enel Green Power"/>
+
+    <PartyRelationship partyIdFrom="GN_ENELGP" partyIdTo="GN_ENELGP_BO"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: Enel Green Power detiene Enel Green Power Bologna"/>
+    <PartyRelationship partyIdFrom="GN_ENELGP_BO" partyIdTo="GN_ENELGP"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: Enel Green Power Bologna appartiene a Enel Green Power"/>
+
+    <PartyRelationship partyIdFrom="GN_ENELGP" partyIdTo="GN_ENELGP_MI"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: Enel Green Power detiene Enel Green Power Milano"/>
+    <PartyRelationship partyIdFrom="GN_ENELGP_MI" partyIdTo="GN_ENELGP"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: Enel Green Power Milano appartiene a Enel Green Power"/>
+
+    <PartyRelationship partyIdFrom="GN_ENELGP" partyIdTo="GN_ENELGP_MN"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: Enel Green Power detiene Enel Green Power Mantova"/>
+    <PartyRelationship partyIdFrom="GN_ENELGP_MN" partyIdTo="GN_ENELGP"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: Enel Green Power Mantova appartiene a Enel Green Power"/>
+
+    <PartyRelationship partyIdFrom="USER_CVECCHI" partyIdTo="GN_ENELGP"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (c.vecchi) impiegato in azienda (Enel Green Power)"/>
+    <PartyRelationship partyIdFrom="USER_MANGELINI" partyIdTo="GN_ENELGP"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (m.angelini) impiegato in azienda (Enel Green Power)"/>
+
+    <!--Company Enel Green Power end-->
+
+    <!--Company Alfarec -->
+    <Party partyId="GN_ALFAREC" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="Alfarec S.p.A. - Servizi Ambientali"/>
+    <PartyGroup partyId="GN_ALFAREC" groupName="Alfarec S.p.A. - Servizi Ambientali"/>
+    <GnPartyNode partyId="GN_ALFAREC" nodeKey="GN_ALFAREC@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY"
+                 taxIdentificationNumber="03298810379" VATnumber="00610691206"
+                 name="Alfarec S.p.A. - Servizi Ambientali"/>
+    <PartyRole partyId="GN_ALFAREC" roleTypeId="GN_COMPANY"/>
+    <PartyRole partyId="GN_ALFAREC" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ALFAREC" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <PartyAttribute partyId="GN_ALFAREC" attrName="ROOT_PUBLISH" attrValue="Y"/>
+    <PartyAttribute partyId="GN_ALFAREC" attrName="PRIVATE_AUTH_PUBLISH" attrValue="N"/>
+
+    <!--Company Base Alfarec Bologna-->
+    <Party partyId="GN_ALFAREC_BO" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="Alfarec S.p.A. - Pianoro (BO)"/>
+    <PartyGroup partyId="GN_ALFAREC_BO" groupName="Alfarec S.p.A. - Pianoro (BO)"/>
+    <GnPartyNode partyId="GN_ALFAREC_BO" nodeKey="GN_ALFAREC_BO@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="620100" reaNumber="522042"
+                 registeredOffice="Y" authorizationOwner="Y"/>
+    <PartyRole partyId="GN_ALFAREC_BO" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_ALFAREC_BO" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ALFAREC_BO" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_ALFAREC_BO" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_ALFAREC_BO"
+                      contactMechId="CM_ALFAREC_BO"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_ALFAREC_BO"
+                   toName="Alfarec S.p.A. - Pianoro (BO)"
+                   address1="via Pietro Nenni"
+                   streetNumber="4"
+                   village="Pian di Macina"
+                   city="Pianoro"
+                   postalCode="40065"
+                   postalCodeGeoId="IT-GN-CAP-40065"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-EMILIAROMAGNA"
+                   stateProvinceGeoId="IT-GN-037"
+                   municipalityGeoId="IT-GN-037006"/>
+
+    <!--user alfarec / pw: alfatest-->
+    <Party partyId="USER_ALFAREC" partyTypeId="PERSON"/>
+    <Person partyId="USER_ALFAREC" lastName="Alfarec" firstName="Utente "/>
+    <UserLogin userLoginId="alfarec" partyId="USER_ALFAREC"
+               currentPassword="{SHA}225cdee58b0b5197460757e71e2d219e66946c78" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="alfarec" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="USER_ALFAREC" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="alfarec" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="cm_mail_alfarec" contactMechTypeId="EMAIL_ADDRESS" infoString="colla@alfarec.it"/>
+    <PartyContactMech partyId="USER_ALFAREC" contactMechId="cm_mail_alfarec" fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="USER_ALFAREC" contactMechId="cm_mail_alfarec"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <!--user alfagest / pw: alfatest (used to interact with external software)-->
+    <Party partyId="USER_ALFAGEST" partyTypeId="PERSON"/>
+    <Person partyId="USER_ALFAGEST" lastName="Alfarec" firstName="Gestionale "/>
+    <UserLogin userLoginId="alfagest" partyId="USER_ALFAGEST"
+               currentPassword="{SHA}225cdee58b0b5197460757e71e2d219e66946c78" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="alfagest" enumId="GN_LOG_SRC_WEB_API"/>
+    <PartyRole partyId="USER_ALFAGEST" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="alfagest" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <!--company base operating user context for Alfarec company -->
+    <Party partyId="GN_C_UOSEDE_ALFBO" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="Alfarec - inserimento e pubblicazione autorizzazioni"/>
+    <PartyGroup partyId="GN_C_UOSEDE_ALFBO" groupName="Alfarec - inserimento e pubblicazione autorizzazioni"/>
+    <PartyRole partyId="GN_C_UOSEDE_ALFBO" roleTypeId="GN_CONTEXT"/>
+    <PartyRole partyId="GN_C_UOSEDE_ALFBO" roleTypeId="_NA_"/>
+    <GnPartySecurityGroup partyId="GN_C_UOSEDE_ALFBO" groupId="GN_UOSEDE" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="GN_C_UOSEDE_ALFBO" groupId="GN_AAZIEN" fromDate="2000-01-01 00:00:00.000"/>
+
+    <!--Alfarec relationships-->
+
+    <!--company/company base-->
+    <PartyRelationship partyIdFrom="GN_ALFAREC" partyIdTo="GN_ALFAREC_BO"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: Alfarec detiene Alfarec Bologna"/>
+    <PartyRelationship partyIdFrom="GN_ALFAREC_BO" partyIdTo="GN_ALFAREC"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: Alfarec Bologna appartiene a Alfarec"/>
+
+    <PartyRelationship partyIdFrom="GN_ALFAREC" partyIdTo="GN_ROOT"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_ROOT"
+                       partyRelationshipTypeId="GN_PUBLISHES_TO_ROOT" fromDate="2000-01-01 00:00:00.000"
+                       validationRequired="N"
+                       relationshipName="Pubblicazione: Alfarec pubblica su root"/>
+    <!--user-->
+    <PartyRelationship partyIdFrom="USER_ALFAREC" partyIdTo="GN_ALFAREC"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (alfarec) impiegato in azienda (Alfarec)"/>
+    <PartyRelationship partyIdFrom="USER_ALFAGEST" partyIdTo="GN_ALFAREC"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (alfagest) impiegato in azienda (Alfarec)"/>
+    <!--context-->
+    <PartyRelationship partyIdFrom="GN_C_UOSEDE_ALFBO" partyIdTo="USER_ALFAREC"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto UOSEDE Alfarec Bologna abilita utente alfarec"/>
+
+    <PartyRelationship partyIdFrom="GN_C_UOSEDE_ALFBO" partyIdTo="USER_ALFAGEST"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto UOSEDE Alfarec Bologna abilita utente alfagest"/>
+    <PartyRelationship partyIdFrom="GN_C_UOSEDE_ALFBO" partyIdTo="GN_ALFAREC"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_NODE_CONTEXT"
+                       partyRelationshipTypeId="GN_CONTEXT_NODE" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Posizionamento: contesto UOSEDE Alfarec Bologna posizionato su nodo Alfarec"/>
+
+    <PartyRelationship partyIdFrom="GN_C_UOSEDE_ALFBO" partyIdTo="GN_ALFAREC_BO"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_CONTEXT_CBASE" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Pubblicazione: contesto UOSEDE Alfarec Bologna pubblica autorizz. di Alfarec Bologna"/>
+    <!--Company Alfarec end-->
+
+    <!--Company Ecos -->
+    <Party partyId="GN_ECOS" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="Ecos S.r.l."/>
+    <PartyGroup partyId="GN_ECOS" groupName="Ecos S.r.l."/>
+    <GnPartyNode partyId="GN_ECOS" nodeKey="GN_ECOS@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY"
+                 taxIdentificationNumber="00756180527" VATnumber="04424560482"
+                 name="Ecos S.r.l."/>
+    <PartyRole partyId="GN_ECOS" roleTypeId="GN_COMPANY"/>
+    <PartyRole partyId="GN_ECOS" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ECOS" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <PartyAttribute partyId="GN_ECOS" attrName="ROOT_PUBLISH" attrValue="Y"/>
+    <PartyAttribute partyId="GN_ECOS" attrName="PRIVATE_AUTH_PUBLISH" attrValue="N"/>
+
+    <!--Company Base Ecos Barberino v. d'Elsa-->
+    <Party partyId="GN_ECOS_FI" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="Ecos S.r.l. - Barberino Val d'Elsa (FI)"/>
+    <PartyGroup partyId="GN_ECOS_FI" groupName="Ecos S.r.l. - Barberino Val d'Elsa (FI)"/>
+    <GnPartyNode partyId="GN_ECOS_FI" nodeKey="GN_ECOS_FI@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber=""
+                 registeredOffice="Y" authorizationOwner="Y"/>
+    <PartyRole partyId="GN_ECOS_FI" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_ECOS_FI" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_ECOS_FI" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_ECOS_FI" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_ECOS_FI"
+                      contactMechId="CM_ECOS_FI"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_ECOS_FI"
+                   toName="Ecos S.r.l. - Barberino Val d'Elsa (FI)"
+                   address1="via Pisana"
+                   streetNumber="47"
+                   village="Barberino Val d'Elsa"
+                   city=""
+                   postalCode="50021"
+                   postalCodeGeoId="IT-GN-CAP-50021"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-TOSCANA"
+                   stateProvinceGeoId="IT-GN-048"
+                   municipalityGeoId="IT-GN-048003"/>
+
+    <!--user ecos / pw: ecostest-->
+    <Party partyId="USER_ECOS" partyTypeId="PERSON"/>
+    <Person partyId="USER_ECOS" lastName="Ecos" firstName="Utente "/>
+    <UserLogin userLoginId="ecos" partyId="USER_ECOS"
+               currentPassword="{SHA}c085826e4c5d36729ece4f0e54c06042c6718db8" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="ecos" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="USER_ECOS" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="ecos" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="cm_mail_ecos" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="massimo.barani@ecos-italia.it"/>
+    <PartyContactMech partyId="USER_ECOS" contactMechId="cm_mail_ecos" fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="USER_ECOS" contactMechId="cm_mail_ecos" contactMechPurposeTypeId="PRIMARY_EMAIL"
+                             fromDate="2001-05-13 00:00:00.000"/>
+
+    <!--company base operating user context for Ecos company -->
+    <Party partyId="GN_C_UOSEDE_ECOSFI" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="Ecos - inserimento e pubblicazione autorizzazioni"/>
+    <PartyGroup partyId="GN_C_UOSEDE_ECOSFI" groupName="Ecos - inserimento e pubblicazione autorizzazioni"/>
+    <PartyRole partyId="GN_C_UOSEDE_ECOSFI" roleTypeId="GN_CONTEXT"/>
+    <PartyRole partyId="GN_C_UOSEDE_ECOSFI" roleTypeId="_NA_"/>
+    <GnPartySecurityGroup partyId="GN_C_UOSEDE_ECOSFI" groupId="GN_UOSEDE" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="GN_C_UOSEDE_ECOSFI" groupId="GN_AAZIEN" fromDate="2000-01-01 00:00:00.000"/>
+
+    <!--Ecos relationships-->
+
+    <!--company/company base-->
+    <PartyRelationship partyIdFrom="GN_ECOS" partyIdTo="GN_ECOS_FI"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: Ecos detiene Ecos Firenze"/>
+    <PartyRelationship partyIdFrom="GN_ECOS_FI" partyIdTo="GN_ECOS"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: Ecos Firenze appartiene a Ecos"/>
+
+    <PartyRelationship partyIdFrom="GN_ECOS" partyIdTo="GN_ROOT"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_ROOT"
+                       partyRelationshipTypeId="GN_PUBLISHES_TO_ROOT" fromDate="2000-01-01 00:00:00.000"
+                       validationRequired="N"
+                       relationshipName="Pubblicazione: Ecos pubblica su root"/>
+    <!--user-->
+    <PartyRelationship partyIdFrom="USER_ECOS" partyIdTo="GN_ECOS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (Ecos) impiegato in azienda (Ecos)"/>
+    <!--context-->
+    <PartyRelationship partyIdFrom="GN_C_UOSEDE_ECOSFI" partyIdTo="USER_ECOS"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto UOSEDE Ecos Firenze abilita utente Ecos"/>
+    <PartyRelationship partyIdFrom="GN_C_UOSEDE_ECOSFI" partyIdTo="GN_ECOS"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_NODE_CONTEXT"
+                       partyRelationshipTypeId="GN_CONTEXT_NODE" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Posizionamento: contesto UOSEDE Ecos Firenze posizionato su nodo Ecos"/>
+    <PartyRelationship partyIdFrom="GN_C_UOSEDE_ECOSFI" partyIdTo="GN_ECOS_FI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_CONTEXT_CBASE" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Pubblicazione: contesto UOSEDE Ecos Firenze pubblica autorizz. di Ecos Firenze"/>
+    <!--Company Ecos end-->
+
+    <!--Company Tecnologie d'impresa -->
+    <Party partyId="GN_TECIMP" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="Tecnologie d'impresa srl"/>
+    <PartyGroup partyId="GN_TECIMP" groupName="Tecnologie d'impresa srl"/>
+    <GnPartyNode partyId="GN_TECIMP" nodeKey="GN_TECIMP@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY"
+                 taxIdentificationNumber="05100520153" VATnumber="02061610131"
+                 name="Tecnologie d'impresa srl"/>
+    <PartyRole partyId="GN_TECIMP" roleTypeId="GN_COMPANY"/>
+    <PartyRole partyId="GN_TECIMP" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_TECIMP" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <PartyAttribute partyId="GN_TECIMP" attrName="ROOT_PUBLISH" attrValue="N"/>
+    <PartyAttribute partyId="GN_TECIMP" attrName="PRIVATE_AUTH_PUBLISH" attrValue="Y"/>
+
+    <!--Company Base Tecnologie d'impresa Como-->
+    <Party partyId="GN_TECIMP_CO" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="Tecnologie d'impresa srl - Cabiate (CO)"/>
+    <PartyGroup partyId="GN_TECIMP_CO" groupName="Tecnologie d'impresa srl - Cabiate (CO)"/>
+    <GnPartyNode partyId="GN_TECIMP_CO" nodeKey="GN_TECIMP_CO@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber=""
+                 registeredOffice="Y" authorizationOwner="N"/>
+    <PartyRole partyId="GN_TECIMP_CO" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_TECIMP_CO" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_TECIMP_CO" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_TECIMP_CO" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_TECIMP_CO"
+                      contactMechId="CM_TECIMP_CO"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_TECIMP_CO"
+                   toName="Tecnologie d'impresa srl - Cabiate (CO)"
+                   address1="via Don Minzoni"
+                   streetNumber="15"
+                   village=""
+                   city="Cabiate"
+                   postalCode="22060"
+                   postalCodeGeoId="IT-GN-CAP-22060_2"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-LOMBARDIA"
+                   stateProvinceGeoId="IT-GN-013"
+                   municipalityGeoId="IT-GN-013035"/>
+
+    <!--user e.sincinelli / pw: tditest-->
+    <Party partyId="USER_ESINCINELLI" partyTypeId="PERSON"/>
+    <Person partyId="USER_ESINCINELLI" lastName="Sincinelli" firstName="Emanuela "/>
+    <UserLogin userLoginId="e.sincinelli" partyId="USER_ESINCINELLI"
+               currentPassword="{SHA}f36e3a265c5e8ca5e4d30ac3169c6cfc24342be8" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="e.sincinelli" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="USER_ESINCINELLI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="e.sincinelli" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="cm_mail_esincinelli" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="emanuela.sincinelli@tecnoimp.it"/>
+    <PartyContactMech partyId="USER_ESINCINELLI" contactMechId="cm_mail_esincinelli"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="USER_ESINCINELLI" contactMechId="cm_mail_esincinelli"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <!--user d.esposito / pw: tditest-->
+    <Party partyId="USER_DESPOSITO" partyTypeId="PERSON"/>
+    <Person partyId="USER_DESPOSITO" lastName="Esposito" firstName="Davide "/>
+    <UserLogin userLoginId="d.esposito" partyId="USER_DESPOSITO"
+               currentPassword="{SHA}f36e3a265c5e8ca5e4d30ac3169c6cfc24342be8" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="d.esposito" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="USER_DESPOSITO" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="d.esposito" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="cm_mail_desposito" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="davide.esposito@tecnoimp.it"/>
+    <PartyContactMech partyId="USER_DESPOSITO" contactMechId="cm_mail_desposito" fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="USER_DESPOSITO" contactMechId="cm_mail_desposito"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <!--Tecnologie d'impresa relationships-->
+
+    <!--company/company base-->
+    <PartyRelationship partyIdFrom="GN_TECIMP" partyIdTo="GN_TECIMP_CO"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: Tecnologie d'impresa detiene Tecnologie d'impresa Como"/>
+    <PartyRelationship partyIdFrom="GN_TECIMP_CO" partyIdTo="GN_TECIMP"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: Tecnologie d'impresa Como appartiene a Tecnologie d'impresa"/>
+
+
+    <PartyRelationship partyIdFrom="USER_ESINCINELLI" partyIdTo="GN_TECIMP"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (e.sincinelli) impiegato in azienda (Tecnologie d'impresa)"/>
+    <PartyRelationship partyIdFrom="USER_DESPOSITO" partyIdTo="GN_TECIMP"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (d.esposito) impiegato in azienda (Tecnologie d'impresa)"/>
+    <!--Company Tecnologie d'impresa end-->
+
+    <!--Company RFI -->
+    <Party partyId="GN_RFI" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="RFI S.p.A."/>
+    <PartyGroup partyId="GN_RFI" groupName="RFI S.p.A."/>
+    <GnPartyNode partyId="GN_RFI" nodeKey="GN_RFI@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY"
+                 taxIdentificationNumber="01008081000" VATnumber="01008081000"
+                 name="RFI S.p.A."/>
+    <PartyRole partyId="GN_RFI" roleTypeId="GN_COMPANY"/>
+    <PartyRole partyId="GN_RFI" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_RFI" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <PartyAttribute partyId="GN_RFI" attrName="ROOT_PUBLISH" attrValue="N"/>
+    <PartyAttribute partyId="GN_RFI" attrName="PRIVATE_AUTH_PUBLISH" attrValue="Y"/>
+
+    <!--Company Base RFI Roma-->
+    <Party partyId="GN_RFI_RM" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="RFI S.p.A. - Roma"/>
+    <PartyGroup partyId="GN_RFI_RM" groupName="RFI S.p.A. - Roma"/>
+    <GnPartyNode partyId="GN_RFI_RM" nodeKey="GN_RFI_RM@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber=""
+                 registeredOffice="Y" authorizationOwner="N"/>
+    <PartyRole partyId="GN_RFI_RM" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_RFI_RM" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_RFI_RM" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_RFI_RM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_RFI_RM"
+                      contactMechId="CM_RFI_RM"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_RFI_RM"
+                   toName="RFI S.p.A. - Roma"
+                   address1="piazza della Croce Rossa"
+                   streetNumber="1"
+                   village=""
+                   city="Roma"
+                   postalCode="00161"
+                   postalCodeGeoId="IT-GN-CAP-00161"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-LAZIO"
+                   stateProvinceGeoId="IT-GN-058"
+                   municipalityGeoId="IT-GN-058091"/>
+
+    <!--Company Base RFI Viterbo-->
+    <Party partyId="GN_RFI_VT" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="RFI S.p.A. - Viterbo"/>
+    <PartyGroup partyId="GN_RFI_VT" groupName="RFI S.p.A. - Viterbo"/>
+    <GnPartyNode partyId="GN_RFI_VT" nodeKey="GN_RFI_VT@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber=""
+                 registeredOffice="N" authorizationOwner="N"/>
+    <PartyRole partyId="GN_RFI_VT" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_RFI_VT" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_RFI_VT" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_RFI_VT" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_RFI_VT"
+                      contactMechId="CM_RFI_VT"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_RFI_VT"
+                   toName="RFI S.p.A. - Viterbo"
+                   address1="via Viterbese"
+                   streetNumber="65"
+                   village=""
+                   city="Viterbo"
+                   postalCode="01100"
+                   postalCodeGeoId="IT-GN-CAP-01100"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-LAZIO"
+                   stateProvinceGeoId="IT-GN-056"
+                   municipalityGeoId="IT-GN-056059"/>
+
+    <!--Company Base RFI Latina-->
+    <Party partyId="GN_RFI_LT" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="RFI S.p.A. - Latina"/>
+    <PartyGroup partyId="GN_RFI_LT" groupName="RFI S.p.A. - Latina"/>
+    <GnPartyNode partyId="GN_RFI_LT" nodeKey="GN_RFI_LT@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber=""
+                 registeredOffice="N" authorizationOwner="N"/>
+    <PartyRole partyId="GN_RFI_LT" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_RFI_LT" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_RFI_LT" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_RFI_LT" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_RFI_LT"
+                      contactMechId="CM_RFI_LT"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_RFI_LT"
+                   toName="RFI S.p.A. - Latina"
+                   address1="via Latinorum"
+                   streetNumber="125"
+                   village=""
+                   city="Latina"
+                   postalCode="04100"
+                   postalCodeGeoId="IT-GN-CAP-04100"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-LAZIO"
+                   stateProvinceGeoId="IT-GN-059"
+                   municipalityGeoId="IT-GN-059011"/>
+
+    <!--Company Base RFI Grosseto-->
+    <Party partyId="GN_RFI_GR" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="RFI S.p.A. - Grosseto"/>
+    <PartyGroup partyId="GN_RFI_GR" groupName="RFI S.p.A. - Grosseto"/>
+    <GnPartyNode partyId="GN_RFI_GR" nodeKey="GN_RFI_GR@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber=""
+                 registeredOffice="N" authorizationOwner="N"/>
+    <PartyRole partyId="GN_RFI_GR" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_RFI_GR" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_RFI_GR" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_RFI_GR" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_RFI_GR"
+                      contactMechId="CM_RFI_GR"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_RFI_GR"
+                   toName="RFI S.p.A. - Grosseto"
+                   address1="via Grossetana"
+                   streetNumber="28"
+                   village=""
+                   city="Grosseto"
+                   postalCode="58100"
+                   postalCodeGeoId="IT-GN-CAP-58100"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-TOSCANA"
+                   stateProvinceGeoId="IT-GN-053"
+                   municipalityGeoId="IT-GN-053011"/>
+
+    <!--Company Base RFI Arezzo-->
+    <Party partyId="GN_RFI_AR" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="RFI S.p.A. - Arezzo"/>
+    <PartyGroup partyId="GN_RFI_AR" groupName="RFI S.p.A. - Arezzo"/>
+    <GnPartyNode partyId="GN_RFI_AR" nodeKey="GN_RFI_AR@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber=""
+                 registeredOffice="N" authorizationOwner="N"/>
+    <PartyRole partyId="GN_RFI_AR" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_RFI_AR" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_RFI_AR" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_RFI_AR" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_RFI_AR"
+                      contactMechId="CM_RFI_AR"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_RFI_AR"
+                   toName="RFI S.p.A. - Arezzo"
+                   address1="via Aretina"
+                   streetNumber="16"
+                   village=""
+                   city="Arezzo"
+                   postalCode="52100"
+                   postalCodeGeoId="IT-GN-CAP-52100"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-TOSCANA"
+                   stateProvinceGeoId="IT-GN-051"
+                   municipalityGeoId="IT-GN-051002"/>
+
+    <!--user m.mozzetti / pw: rfitest-->
+    <Party partyId="USER_MMOZZETTI" partyTypeId="PERSON"/>
+    <Person partyId="USER_MMOZZETTI" lastName="Mozzetti" firstName="Massimiliano "/>
+    <UserLogin userLoginId="m.mozzetti" partyId="USER_MMOZZETTI"
+               currentPassword="{SHA}11bc52f37f81a12e1f38db4da58f71b6558e2057" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="m.mozzetti" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="USER_MMOZZETTI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="m.mozzetti" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="cm_mail_mmozzetti" contactMechTypeId="EMAIL_ADDRESS" infoString="m.mozzetti@rfi.it"/>
+    <PartyContactMech partyId="USER_MMOZZETTI" contactMechId="cm_mail_mmozzetti" fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="USER_MMOZZETTI" contactMechId="cm_mail_mmozzetti"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <!--user m.rossi / pw: rfitest-->
+    <Party partyId="USER_MROSSI" partyTypeId="PERSON"/>
+    <Person partyId="USER_MROSSI" lastName="Rossi" firstName="Mario "/>
+    <UserLogin userLoginId="m.rossi" partyId="USER_MROSSI"
+               currentPassword="{SHA}11bc52f37f81a12e1f38db4da58f71b6558e2057" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="m.rossi" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="USER_MROSSI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="m.rossi" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <!--RFI relationships-->
+    <!--user-->
+    <PartyRelationship partyIdFrom="USER_MMOZZETTI" partyIdTo="GN_RFI"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (m.mozzetti) impiegato in azienda (RFI S.p.A.)"/>
+
+    <PartyRelationship partyIdFrom="USER_MROSSI" partyIdTo="GN_RFI"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (m.rossi) impiegato in azienda (RFI S.p.A.)"/>
+
+    <!--company/company base-->
+    <PartyRelationship partyIdFrom="GN_RFI" partyIdTo="GN_RFI_RM"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: RFI detiene RFI Roma"/>
+    <PartyRelationship partyIdFrom="GN_RFI_RM" partyIdTo="GN_RFI"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: RFI Roma appartiene a RFI"/>
+
+    <PartyRelationship partyIdFrom="GN_RFI" partyIdTo="GN_RFI_VT"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: RFI detiene RFI Viterbo"/>
+    <PartyRelationship partyIdFrom="GN_RFI_VT" partyIdTo="GN_RFI"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: RFI Viterbo appartiene a RFI"/>
+
+    <PartyRelationship partyIdFrom="GN_RFI" partyIdTo="GN_RFI_LT"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: RFI detiene RFI Latina"/>
+    <PartyRelationship partyIdFrom="GN_RFI_LT" partyIdTo="GN_RFI"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: RFI Latina appartiene a RFI"/>
+
+    <PartyRelationship partyIdFrom="GN_RFI" partyIdTo="GN_RFI_GR"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: RFI detiene RFI Grosseto"/>
+    <PartyRelationship partyIdFrom="GN_RFI_GR" partyIdTo="GN_RFI"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: RFI Grosserto appartiene a RFI"/>
+
+    <PartyRelationship partyIdFrom="GN_RFI" partyIdTo="GN_RFI_AR"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: RFI detiene RFI Arezzo"/>
+    <PartyRelationship partyIdFrom="GN_RFI_AR" partyIdTo="GN_RFI"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: RFI Arezzo appartiene a RFI"/>
+    <!--Company RFI end-->
+
+    <!--propagation-->
+    <PartyRelationship partyIdFrom="GN_ROOT" partyIdTo="GN_ENELSPA"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_PROPAGATES_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Propagazione: Root propaga a Enel S.p.A."/>
+
+    <PartyRelationship partyIdFrom="GN_ROOT" partyIdTo="GN_RFI"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_PROPAGATES_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Propagazione: Root propaga a RFI"/>
+
+    <PartyRelationship partyIdFrom="GN_RFI" partyIdTo="GN_ROOT"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_RECEIVES_FROM" fromDate="2000-01-01 00:00:00.000"
+                       validationRequired="Y" acceptAllIfEmptyFilters="Y"
+                       relationshipName="Ricezione: RFI riceve da root (con validazione)"/>
+
+    <PartyRelationship partyIdFrom="GN_ENELSPA" partyIdTo="GN_ROOT"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_RECEIVES_FROM" fromDate="2000-01-01 00:00:00.000"
+                       validationRequired="N" acceptAllIfEmptyFilters="Y"
+                       relationshipName="Ricezione: Enel S.p.A. riceve da root"/>
+    <PartyRelationship partyIdFrom="GN_ENELSPA" partyIdTo="GN_ENELDIS"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_PROPAGATES_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Propagazione: Enel S.p.A. propaga a Enel distribuzione"/>
+    <PartyRelationship partyIdFrom="GN_ENELSPA" partyIdTo="GN_ENELGP"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_PROPAGATES_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Propagazione: Enel S.p.A. propaga a Enel Green power"/>
+
+    <PartyRelationship partyIdFrom="GN_ENELGP" partyIdTo="GN_ENELSPA"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_RECEIVES_FROM" fromDate="2000-01-01 00:00:00.000"
+                       validationRequired="Y" acceptAllIfEmptyFilters="Y"
+                       relationshipName="Ricezione: Enel Green Power riceve da Enel S.p.A. (con validazione)"/>
+
+    <PartyRelationship partyIdFrom="GN_ENELDIS" partyIdTo="GN_ENELSPA"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_RECEIVES_FROM" fromDate="2000-01-01 00:00:00.000"
+                       validationRequired="N" acceptAllIfEmptyFilters="Y"
+                       relationshipName="Ricezione: Enel distribuzione riceve da Enel S.p.A."/>
+    <PartyRelationship partyIdFrom="GN_ENELDIS" partyIdTo="GN_ENELDIS_ON_DTR1"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_PROPAGATES_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Propagazione: Enel distribuzione propaga a DTR1"/>
+    <PartyRelationship partyIdFrom="GN_ENELDIS" partyIdTo="GN_ENELDIS_ON_DTR2"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_PROPAGATES_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Propagazione: Enel distribuzione propaga a DTR2"/>
+
+    <PartyRelationship partyIdFrom="GN_ENELDIS_ON_DTR1" partyIdTo="GN_ENELDIS"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_RECEIVES_FROM" fromDate="2000-01-01 00:00:00.000"
+                       validationRequired="N" acceptAllIfEmptyFilters="Y"
+                       relationshipName="Ricezione: DTR1 riceve da Enel distribuzione"/>
+    <PartyRelationship partyIdFrom="GN_ENELDIS_ON_DTR1" partyIdTo="GN_ENELDIS_ON_ZONA1"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_PROPAGATES_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Propagazione: DTR1 propaga a Zona1"/>
+
+    <PartyRelationship partyIdFrom="GN_ENELDIS_ON_DTR2" partyIdTo="GN_ENELDIS"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_RECEIVES_FROM" fromDate="2000-01-01 00:00:00.000"
+                       validationRequired="N" acceptAllIfEmptyFilters="Y"
+                       relationshipName="Ricezione: DTR2 riceve da Enel distribuzione"/>
+    <PartyRelationship partyIdFrom="GN_ENELDIS_ON_DTR2" partyIdTo="GN_ENELDIS_ON_ZONA2"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_PROPAGATES_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Propagazione: DTR2 propaga a Zona2"/>
+
+    <PartyRelationship partyIdFrom="GN_ENELDIS_ON_ZONA1" partyIdTo="GN_ENELDIS_ON_DTR1"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_RECEIVES_FROM" fromDate="2000-01-01 00:00:00.000"
+                       validationRequired="N" acceptAllIfEmptyFilters="Y"
+                       relationshipName="Ricezione: Zona1 riceve da DTR1"/>
+    <PartyRelationship partyIdFrom="GN_ENELDIS_ON_ZONA1" partyIdTo="GN_ENELDIS_VE"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_PROPAGATES_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Propagazione: Zona1 propaga a u.o. Venezia"/>
+    <PartyRelationship partyIdFrom="GN_ENELDIS_ON_ZONA1" partyIdTo="GN_ENELDIS_TV"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_PROPAGATES_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Propagazione: Zona1 propaga a u.o. Treviso"/>
+
+    <PartyRelationship partyIdFrom="GN_ENELDIS_ON_ZONA2" partyIdTo="GN_ENELDIS_ON_DTR2"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_RECEIVES_FROM" fromDate="2000-01-01 00:00:00.000"
+                       validationRequired="N" acceptAllIfEmptyFilters="Y"
+                       relationshipName="Ricezione: Zona2 riceve da DTR2"/>
+    <PartyRelationship partyIdFrom="GN_ENELDIS_ON_ZONA2" partyIdTo="GN_ENELDIS_LI"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_PROPAGATES_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Propagazione: Zona2 propaga a u.o. Livorno"/>
+    <PartyRelationship partyIdFrom="GN_ENELDIS_ON_ZONA2" partyIdTo="GN_ENELDIS_FI"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_PROPAGATES_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Propagazione: Zona2 propaga a u.o. Firenze"/>
+
+    <PartyRelationship partyIdFrom="GN_ENELDIS_VE" partyIdTo="GN_ENELDIS_ON_ZONA1"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_RECEIVES_FROM" fromDate="2000-01-01 00:00:00.000"
+                       validationRequired="N" acceptAllIfEmptyFilters="Y"
+                       relationshipName="Ricezione: u.o. Venezia riceve da Zona1"/>
+
+    <PartyRelationship partyIdFrom="GN_ENELDIS_TV" partyIdTo="GN_ENELDIS_ON_ZONA1"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_RECEIVES_FROM" fromDate="2000-01-01 00:00:00.000"
+                       validationRequired="N" acceptAllIfEmptyFilters="Y"
+                       relationshipName="Ricezione: u.o. Treviso riceve da Zona1"/>
+
+    <PartyRelationship partyIdFrom="GN_ENELDIS_LI" partyIdTo="GN_ENELDIS_ON_ZONA2"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_RECEIVES_FROM" fromDate="2000-01-01 00:00:00.000"
+                       validationRequired="N" acceptAllIfEmptyFilters="Y"
+                       relationshipName="Ricezione: u.o. Livorno riceve da Zona2"/>
+
+    <PartyRelationship partyIdFrom="GN_ENELDIS_FI" partyIdTo="GN_ENELDIS_ON_ZONA2"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_RECEIVES_FROM" fromDate="2000-01-01 00:00:00.000"
+                       validationRequired="N" acceptAllIfEmptyFilters="Y"
+                       relationshipName="Ricezione: u.o. Firenze riceve da Zona2"/>
+
+    <!--Enel S.p.A. tree administration context-->
+    <Party partyId="GN_C_AMTREE_ENELSPA" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="amministrazione Enel S.p.A."/>
+    <PartyGroup partyId="GN_C_AMTREE_ENELSPA" groupName="amministrazione Enel S.p.A."/>
+    <PartyRole partyId="GN_C_AMTREE_ENELSPA" roleTypeId="GN_CONTEXT"/>
+    <PartyRole partyId="GN_C_AMTREE_ENELSPA" roleTypeId="_NA_"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_ENELSPA" groupId="GN_AMTREE" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_ENELSPA" groupId="GN_UCONSU" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_ENELSPA" groupId="GN_AAZIEN" fromDate="2000-01-01 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_ENELSPA" partyIdTo="USER_ENELSPAADMIN"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE Enel S.p.A. abilita utente enelspaadmin"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_ENELSPA" partyIdTo="GN_ENELSPA"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_NODE_CONTEXT"
+                       partyRelationshipTypeId="GN_CONTEXT_NODE" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Posizionamento: contesto AMTREE Enel S.p.A. posizionato su nodo Enel S.p.A."/>
+
+    <!--Enel distribuzione contexts-->
+    <Party partyId="GN_C_AMTREE_ENELDIS" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="amministrazione Enel distribuzione"/>
+    <PartyGroup partyId="GN_C_AMTREE_ENELDIS" groupName="amministrazione Enel distribuzione"/>
+    <PartyRole partyId="GN_C_AMTREE_ENELDIS" roleTypeId="GN_CONTEXT"/>
+    <PartyRole partyId="GN_C_AMTREE_ENELDIS" roleTypeId="_NA_"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_ENELDIS" groupId="GN_AMTREE" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_ENELDIS" groupId="GN_UCONSU" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_ENELDIS" groupId="GN_AAZIEN" fromDate="2000-01-01 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_ENELDIS" partyIdTo="USER_LDUNI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE Enel distribuzione abilita utente l.duni"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_ENELDIS" partyIdTo="USER_MSALVADORI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE Enel distribuzione abilita utente m.salvadori"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_ENELDIS" partyIdTo="GN_ENELDIS"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_NODE_CONTEXT"
+                       partyRelationshipTypeId="GN_CONTEXT_NODE" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Posizionamento: contesto AMTREE Enel distribuzione posizionato su nodo Enel distribuzione"/>
+
+    <Party partyId="GN_C_AMTREE_DTR1" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="amministrazione DTR1"/>
+    <PartyGroup partyId="GN_C_AMTREE_DTR1" groupName="amministrazione DTR1"/>
+    <PartyRole partyId="GN_C_AMTREE_DTR1" roleTypeId="GN_CONTEXT"/>
+    <PartyRole partyId="GN_C_AMTREE_DTR1" roleTypeId="_NA_"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_DTR1" groupId="GN_AMTREE" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_DTR1" groupId="GN_UCONSU" fromDate="2000-01-01 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_DTR1" partyIdTo="USER_LDUNI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE DTR1 abilita utente l.duni"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_DTR1" partyIdTo="USER_MSALVADORI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE DTR1 abilita utente m.salvadori"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_DTR1" partyIdTo="GN_ENELDIS_ON_DTR1"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_NODE_CONTEXT"
+                       partyRelationshipTypeId="GN_CONTEXT_NODE" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Posizionamento: contesto AMTREE DTR1 posizionato su nodo DTR1"/>
+
+    <Party partyId="GN_C_AMTREE_DTR2" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="amministrazione DTR2"/>
+    <PartyGroup partyId="GN_C_AMTREE_DTR2" groupName="amministrazione DTR2"/>
+    <PartyRole partyId="GN_C_AMTREE_DTR2" roleTypeId="GN_CONTEXT"/>
+    <PartyRole partyId="GN_C_AMTREE_DTR2" roleTypeId="_NA_"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_DTR2" groupId="GN_AMTREE" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_DTR2" groupId="GN_UCONSU" fromDate="2000-01-01 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_DTR2" partyIdTo="USER_LDUNI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE DTR2 abilita utente l.duni"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_DTR2" partyIdTo="USER_MSALVADORI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE DTR2 abilita utente m.salvadori"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_DTR2" partyIdTo="GN_ENELDIS_ON_DTR2"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_NODE_CONTEXT"
+                       partyRelationshipTypeId="GN_CONTEXT_NODE" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Posizionamento: contesto AMTREE DTR2 posizionato su nodo DTR2"/>
+
+    <Party partyId="GN_C_AMTREE_ZONA1" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="amministrazione ZONA1"/>
+    <PartyGroup partyId="GN_C_AMTREE_ZONA1" groupName="amministrazione ZONA1"/>
+    <PartyRole partyId="GN_C_AMTREE_ZONA1" roleTypeId="GN_CONTEXT"/>
+    <PartyRole partyId="GN_C_AMTREE_ZONA1" roleTypeId="_NA_"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_ZONA1" groupId="GN_AMTREE" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_ZONA1" groupId="GN_UCONSU" fromDate="2000-01-01 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_ZONA1" partyIdTo="USER_LDUNI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE ZONA1 abilita utente l.duni"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_ZONA1" partyIdTo="USER_MSALVADORI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE ZONA1 abilita utente m.salvadori"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_ZONA1" partyIdTo="GN_ENELDIS_ON_ZONA1"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_NODE_CONTEXT"
+                       partyRelationshipTypeId="GN_CONTEXT_NODE" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Posizionamento: contesto AMTREE ZONA1 posizionato su nodo ZONA1"/>
+
+    <Party partyId="GN_C_AMTREE_ZONA2" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="amministrazione ZONA2"/>
+    <PartyGroup partyId="GN_C_AMTREE_ZONA2" groupName="amministrazione ZONA2"/>
+    <PartyRole partyId="GN_C_AMTREE_ZONA2" roleTypeId="GN_CONTEXT"/>
+    <PartyRole partyId="GN_C_AMTREE_ZONA2" roleTypeId="_NA_"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_ZONA2" groupId="GN_AMTREE" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_ZONA2" groupId="GN_UCONSU" fromDate="2000-01-01 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_ZONA2" partyIdTo="USER_LDUNI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE ZONA2 abilita utente l.duni"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_ZONA2" partyIdTo="USER_MSALVADORI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE ZONA2 abilita utente m.salvadori"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_ZONA2" partyIdTo="GN_ENELDIS_ON_ZONA2"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_NODE_CONTEXT"
+                       partyRelationshipTypeId="GN_CONTEXT_NODE" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Posizionamento: contesto AMTREE ZONA2 posizionato su nodo ZONA2"/>
+
+    <Party partyId="GN_C_AMTREE_UO_VE" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="amministrazione u.o. Venezia"/>
+    <PartyGroup partyId="GN_C_AMTREE_UO_VE" groupName="amministrazione u.o. Venezia"/>
+    <PartyRole partyId="GN_C_AMTREE_UO_VE" roleTypeId="GN_CONTEXT"/>
+    <PartyRole partyId="GN_C_AMTREE_UO_VE" roleTypeId="_NA_"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_UO_VE" groupId="GN_AMTREE" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_UO_VE" groupId="GN_UCONSU" fromDate="2000-01-01 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_UO_VE" partyIdTo="USER_LDUNI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE u.o. Venezia abilita utente l.duni"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_UO_VE" partyIdTo="USER_MSALVADORI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE u.o. Venezia abilita utente m.salvadori"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_UO_VE" partyIdTo="GN_ENELDIS_VE"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_NODE_CONTEXT"
+                       partyRelationshipTypeId="GN_CONTEXT_NODE" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Posizionamento: contesto AMTREE u.o. Venezia posizionato su nodo u.o. Venezia"/>
+
+    <Party partyId="GN_C_AMTREE_UO_TV" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="amministrazione u.o. Treviso"/>
+    <PartyGroup partyId="GN_C_AMTREE_UO_TV" groupName="amministrazione u.o. Treviso"/>
+    <PartyRole partyId="GN_C_AMTREE_UO_TV" roleTypeId="GN_CONTEXT"/>
+    <PartyRole partyId="GN_C_AMTREE_UO_TV" roleTypeId="_NA_"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_UO_TV" groupId="GN_AMTREE" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_UO_TV" groupId="GN_UCONSU" fromDate="2000-01-01 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_UO_TV" partyIdTo="USER_LDUNI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE u.o. Treviso abilita utente l.duni"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_UO_TV" partyIdTo="USER_MSALVADORI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE u.o. Treviso abilita utente m.salvadori"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_UO_TV" partyIdTo="GN_ENELDIS_TV"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_NODE_CONTEXT"
+                       partyRelationshipTypeId="GN_CONTEXT_NODE" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Posizionamento: contesto AMTREE u.o. Treviso posizionato su nodo u.o. Treviso"/>
+
+    <Party partyId="GN_C_AMTREE_UO_LI" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="amministrazione u.o. Livorno"/>
+    <PartyGroup partyId="GN_C_AMTREE_UO_LI" groupName="amministrazione u.o. Livorno"/>
+    <PartyRole partyId="GN_C_AMTREE_UO_LI" roleTypeId="GN_CONTEXT"/>
+    <PartyRole partyId="GN_C_AMTREE_UO_LI" roleTypeId="_NA_"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_UO_LI" groupId="GN_AMTREE" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_UO_LI" groupId="GN_UCONSU" fromDate="2000-01-01 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_UO_LI" partyIdTo="USER_LDUNI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE u.o. Livorno abilita utente l.duni"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_UO_LI" partyIdTo="USER_MSALVADORI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE u.o. Livorno abilita utente m.salvadori"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_UO_LI" partyIdTo="GN_ENELDIS_LI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_NODE_CONTEXT"
+                       partyRelationshipTypeId="GN_CONTEXT_NODE" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Posizionamento: contesto AMTREE u.o. Livorno posizionato su nodo u.o. Livorno"/>
+
+    <Party partyId="GN_C_AMTREE_UO_FI" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="amministrazione u.o. Firenze"/>
+    <PartyGroup partyId="GN_C_AMTREE_UO_FI" groupName="amministrazione u.o. Firenze"/>
+    <PartyRole partyId="GN_C_AMTREE_UO_FI" roleTypeId="GN_CONTEXT"/>
+    <PartyRole partyId="GN_C_AMTREE_UO_FI" roleTypeId="_NA_"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_UO_FI" groupId="GN_AMTREE" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_UO_FI" groupId="GN_UCONSU" fromDate="2000-01-01 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_UO_FI" partyIdTo="USER_LDUNI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE u.o. Firenze abilita utente l.duni"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_UO_FI" partyIdTo="USER_MSALVADORI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE u.o. Firenze abilita utente m.salvadori"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_UO_FI" partyIdTo="GN_ENELDIS_FI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_NODE_CONTEXT"
+                       partyRelationshipTypeId="GN_CONTEXT_NODE" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Posizionamento: contesto AMTREE u.o. Firenze posizionato su nodo u.o. Firenze"/>
+    <!--Enel distribuzione contexts end-->
+
+    <!--Enel Green Power contexts-->
+    <Party partyId="GN_C_AMTREE_ENELGP" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="amministrazione Enel Green Power"/>
+    <PartyGroup partyId="GN_C_AMTREE_ENELGP" groupName="amministrazione Enel Green Power"/>
+    <PartyRole partyId="GN_C_AMTREE_ENELGP" roleTypeId="GN_CONTEXT"/>
+    <PartyRole partyId="GN_C_AMTREE_ENELGP" roleTypeId="_NA_"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_ENELGP" groupId="GN_AMTREE" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_ENELGP" groupId="GN_UCONSU" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_ENELGP" groupId="GN_UVALID" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_ENELGP" groupId="GN_AAZIEN" fromDate="2000-01-01 00:00:00.000"/>
+
+
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_ENELGP" partyIdTo="USER_CVECCHI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE Enel Green Power abilita utente c.vecchi"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_ENELGP" partyIdTo="USER_MANGELINI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE Enel Green Power abilita utente m.angelini"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_ENELGP" partyIdTo="GN_ENELGP"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_NODE_CONTEXT"
+                       partyRelationshipTypeId="GN_CONTEXT_NODE" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Posizionamento: contesto AMTREE Enel Green Power posizionato su nodo Enel Green Power"/>
+    <!--Enel Green Power contexts end-->
+
+    <!--RFI contexts-->
+    <Party partyId="GN_C_AMTREE_RFI" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="amministrazione RFI"/>
+    <PartyGroup partyId="GN_C_AMTREE_RFI" groupName="amministrazione RFI"/>
+    <PartyRole partyId="GN_C_AMTREE_RFI" roleTypeId="GN_CONTEXT"/>
+    <PartyRole partyId="GN_C_AMTREE_RFI" roleTypeId="_NA_"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_RFI" groupId="GN_AMTREE" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_RFI" groupId="GN_UCONSU" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="GN_C_AMTREE_RFI" groupId="GN_AAZIEN" fromDate="2000-01-01 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_RFI" partyIdTo="USER_MMOZZETTI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto AMTREE RFI abilita utente m.mozzetti"/>
+    <PartyRelationship partyIdFrom="GN_C_AMTREE_RFI" partyIdTo="GN_RFI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_NODE_CONTEXT"
+                       partyRelationshipTypeId="GN_CONTEXT_NODE" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Posizionamento: contesto AMTREE RFI posizionato su nodo RFI"/>
+
+    <Party partyId="GN_C_TECIMP_RFI" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="RFI - validazione e consultazione"/>
+    <PartyGroup partyId="GN_C_TECIMP_RFI" groupName="RFI - validazione e consultazione"/>
+    <PartyRole partyId="GN_C_TECIMP_RFI" roleTypeId="GN_CONTEXT"/>
+    <PartyRole partyId="GN_C_TECIMP_RFI" roleTypeId="_NA_"/>
+    <GnPartySecurityGroup partyId="GN_C_TECIMP_RFI" groupId="GN_UVALID" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="GN_C_TECIMP_RFI" groupId="GN_UCONSU" fromDate="2000-01-01 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="GN_C_TECIMP_RFI" partyIdTo="USER_ESINCINELLI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto TECIMP RFI abilita utente e.sincinelli"/>
+    <PartyRelationship partyIdFrom="GN_C_TECIMP_RFI" partyIdTo="USER_DESPOSITO"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_USER"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Abilitazione: contesto TECIMP RFI abilita utente d.esposito"/>
+    <PartyRelationship partyIdFrom="GN_C_TECIMP_RFI" partyIdTo="GN_RFI"
+                       roleTypeIdFrom="GN_CONTEXT" roleTypeIdTo="GN_NODE_CONTEXT"
+                       partyRelationshipTypeId="GN_CONTEXT_NODE" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Posizionamento: contesto TECIMP RFI posizionato su nodo RFI"/>
+    <!--RFI contexts end-->
+
+    <!--propagation end-->
+</entity-engine-xml>

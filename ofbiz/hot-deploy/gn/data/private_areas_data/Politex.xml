@@ -1,0 +1,127 @@
+    <!-- ================================================================================================= -->
+    <!--                                Company Politex S.a.s.                                             -->
+    <!-- ================================================================================================= -->
+    <Party partyId="GN_PTX" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="POLITEX S.a.s. di Freudenberg Politex S.r.l."/>
+    <PartyGroup partyId="GN_PTX" groupName="POLITEX S.a.s. di Freudenberg Politex S.r.l."/>
+    <GnPartyNode partyId="GN_PTX" nodeKey="GN_PTX@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY"
+                 taxIdentificationNumber="01836330157" VATnumber="01836330157"
+                 name="Politex S.a.s."/>
+    <PartyRole partyId="GN_PTX" roleTypeId="GN_COMPANY"/>
+    <PartyRole partyId="GN_PTX" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_PTX" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <PartyAttribute partyId="GN_PTX" attrName="ROOT_PUBLISH" attrValue="N"/>
+    <PartyAttribute partyId="GN_PTX" attrName="PRIVATE_AUTH_PUBLISH" attrValue="N"/>
+
+
+    <!-- ================================================-->
+    <!-- Main company base Politex S.a.s. Milano       -->
+    <!-- ================================================-->
+    <Party partyId="GN_PTX_MI" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="POLITEX - Milano"/>
+    <PartyGroup partyId="GN_PTX_MI" groupName="Politex S.a.s. - Milano"/>
+    <GnPartyNode partyId="GN_PTX_MI" nodeKey="GN_PTX_MI@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber="903690"
+                 registeredOffice="Y" authorizationOwner="N"/>
+    <PartyRole partyId="GN_PTX_MI" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_PTX_MI" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_PTX_MI" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_PTX_MI" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_PTX_MI"
+                      contactMechId="CM_PTX_MI"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_PTX_MI"
+                   toName="Politex S.a.s. - Milano"
+                   address1="Via Tommaso Grossi"
+                   streetNumber="2"
+                   village=""
+                   city="Milano"
+                   postalCode="20121"
+                   postalCodeGeoId="IT-GN-CAP-20121"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-LOMBARDIA"
+                   stateProvinceGeoId="IT-GN-015"
+                   municipalityGeoId="IT-GN-015146"/>
+
+    <PartyRelationship partyIdFrom="GN_PTX" partyIdTo="GN_PTX_MI"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: Politex detiene Politex Milano"/>
+    <PartyRelationship partyIdFrom="GN_PTX_MI" partyIdTo="GN_PTX"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: Politex Milano appartiene a Politex"/>
+
+    <!-- ========================= -->
+    <!--     Politex users       -->
+    <!-- ========================= -->
+
+    <!--user tommaso.lattuada@freudenberg-pm.com / pw: ptxlattuada-->
+    <Party partyId="U_PTX_TLATTUADA" partyTypeId="PERSON"/>
+    <Person partyId="U_PTX_TLATTUADA" lastName="Lattuada" firstName="Tommaso "/>
+    <UserLogin userLoginId="tommaso.lattuada@freudenberg-pm.com" partyId="U_PTX_TLATTUADA"
+               currentPassword="{SHA}bdc5ca137648f06333ee053bf8f245874b7a8d28" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="tommaso.lattuada@freudenberg-pm.com" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="U_PTX_TLATTUADA" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="tommaso.lattuada@freudenberg-pm.com" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_M_PTX_TLATTUADA" contactMechTypeId="EMAIL_ADDRESS" infoString="tommaso.lattuada@freudenberg-pm.com"/>
+    <PartyContactMech partyId="U_PTX_TLATTUADA" contactMechId="CM_M_PTX_TLATTUADA" fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_PTX_TLATTUADA" contactMechId="CM_M_PTX_TLATTUADA"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_PTX_TLATTUADA" partyIdTo="GN_PTX"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (tommaso.lattuada@freudenberg-pm.com) impiegato in azienda (Politex)"/>
+
+     <!--user piergiorgio.sanvito@freudenberg-pm.com / pw: ptxsanvito-->					   
+    <Party partyId="U_PTX_PGSANVITO" partyTypeId="PERSON"/>
+    <Person partyId="U_PTX_PGSANVITO" lastName="Sanvito" firstName="Piergiorgio "/>
+    <UserLogin userLoginId="piergiorgio.sanvito@freudenberg-pm.com" partyId="U_PTX_PGSANVITO"
+               currentPassword="{SHA}db867ea3eaa10bd6efa558484373ab1ad1a5c4ab" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="piergiorgio.sanvito@freudenberg-pm.com" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="U_PTX_PGSANVITO" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="piergiorgio.sanvito@freudenberg-pm.com" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_M_PTX_PGSANVITO" contactMechTypeId="EMAIL_ADDRESS" infoString="piergiorgio.sanvito@freudenberg-pm.com"/>
+    <PartyContactMech partyId="U_PTX_PGSANVITO" contactMechId="CM_M_PTX_PGSANVITO" fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_PTX_PGSANVITO" contactMechId="CM_M_PTX_PGSANVITO"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_PTX_PGSANVITO" partyIdTo="GN_PTX"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (piergiorgio.sanvito@freudenberg-pm.com) impiegato in azienda (Politex)"/>					   
+
+    <!--user marco.borgonovo@freudenberg-pm.com / pw: ptxborgonovo-->					   
+    <Party partyId="U_PTX_MBORGONOVO" partyTypeId="PERSON"/>
+    <Person partyId="U_PTX_MBORGONOVO" lastName="Borgonovo" firstName="Marco "/>
+    <UserLogin userLoginId="marco.borgonovo@freudenberg-pm.com" partyId="U_PTX_MBORGONOVO"
+               currentPassword="{SHA}20fe4ca91291a149e0d3a9abd665e4186cba6d31" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="marco.borgonovo@freudenberg-pm.com" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="U_PTX_MBORGONOVO" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="marco.borgonovo@freudenberg-pm.com" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_M_PTX_MBORGONOVO" contactMechTypeId="EMAIL_ADDRESS" infoString="marco.borgonovo@freudenberg-pm.com"/>
+    <PartyContactMech partyId="U_PTX_MBORGONOVO" contactMechId="CM_M_PTX_MBORGONOVO" fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_PTX_MBORGONOVO" contactMechId="CM_M_PTX_MBORGONOVO"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_PTX_MBORGONOVO" partyIdTo="GN_PTX"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (marco.borgonovo@freudenberg-pm.com) impiegato in azienda (Politex)"/>
+	
+	<!--     Politex users end     -->
+
+    <!-- ================================================================================================= -->
+    <!--                                                Company Politex S.a.s.                           -->
+    <!-- ================================================================================================= -->

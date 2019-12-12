@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+
+    <RoleType description="Contesto" hasTable="N" parentTypeId="" roleTypeId="GN_CONTEXT"/>
+    <RoleType description="Utente" hasTable="N" parentTypeId="" roleTypeId="GN_USER"/>
+
+    <!--Node role types-->
+    <RoleType description="Azienda" hasTable="N" parentTypeId="" roleTypeId="GN_COMPANY"/>
+    <RoleType description="Sede" hasTable="N" parentTypeId="" roleTypeId="GN_COMPANY_BASE"/>
+    <RoleType description="Emittente" hasTable="N" parentTypeId="" roleTypeId="GN_ISSUER"/>
+    <RoleType description="Sede emittente" hasTable="N" parentTypeId="" roleTypeId="GN_ISSUER_BASE"/>
+    <RoleType description="Nodo organizzativo" hasTable="N" parentTypeId="" roleTypeId="GN_ORGANIZATION_NODE"/>
+    <RoleType description="Nodo distaccato" hasTable="N" parentTypeId="" roleTypeId="GN_STUB_NODE"/>
+    <RoleType description="Nodo root" hasTable="N" parentTypeId="" roleTypeId="GN_ROOT"/>
+
+    <RoleType description="Azienda (propagazione)" hasTable="N" parentTypeId="" roleTypeId="GN_PVT_COMPANY"/>
+    <RoleType description="Sede (propagazione)" hasTable="N" parentTypeId="" roleTypeId="GN_PVT_COMPANY_BASE"/>
+    <RoleType description="Azienda (invitata)" hasTable="N" parentTypeId="" roleTypeId="GN_INVITED_COMPANY"/>
+
+    <!--GN_PGN_AUTH_ITEM_TYPE_ORDINARYROPAGATION_NODE-->
+    <RoleType description="Nodo per propagazione" hasTable="N" parentTypeId="" roleTypeId="GN_PROPAGATION_NODE"/>
+    <!--GN_NODE_CONTEXT: a node that can be linked to a context as working node-->
+    <RoleType description="Nodo per contesto" hasTable="N" parentTypeId="" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <PartyRelationshipType description="" hasTable="N" parentTypeId="" partyRelationshipName="Context-User"
+                           partyRelationshipTypeId="GN_CONTEXT_USER" roleTypeIdValidFrom="GN_CONTEXT"
+                           roleTypeIdValidTo="GN_USER"/>
+    <PartyRelationshipType description="" hasTable="N" parentTypeId="" partyRelationshipName="Context-Node"
+                           partyRelationshipTypeId="GN_CONTEXT_NODE" roleTypeIdValidFrom="GN_CONTEXT"
+                           roleTypeIdValidTo="GN_NODE_CONTEXT"/>
+    <PartyRelationshipType description="" hasTable="N" parentTypeId="" partyRelationshipName="Context-CompanyBase"
+                           partyRelationshipTypeId="GN_CONTEXT_CBASE" roleTypeIdValidFrom="GN_CONTEXT"
+                           roleTypeIdValidTo="GN_COMPANY_BASE"/>
+    <PartyRelationshipType description="" hasTable="N" parentTypeId="" partyRelationshipName="Node-owns-Node"
+                           partyRelationshipTypeId="GN_OWNS" roleTypeIdValidFrom="" roleTypeIdValidTo=""/>
+    <!--TODO VERIFY ABSTRACT NODE: Company/Issuer -> CompanyBase/IssuerBase -->
+    <PartyRelationshipType description="" hasTable="N" parentTypeId="" partyRelationshipName="Node-belongsTo-Node"
+                           partyRelationshipTypeId="GN_BELONGS_TO" roleTypeIdValidFrom="" roleTypeIdValidTo=""/>
+    <!--TODO VERIFY ABSTRACT NODE CompanyBase/IssuerBase -> Company/Issuer -->
+    <PartyRelationshipType description="" hasTable="N" parentTypeId=""
+                           partyRelationshipName="CompanyBase-delegates-CompanyBase"
+                           partyRelationshipTypeId="GN_CBASE_DELEGATES" roleTypeIdValidFrom="GN_COMPANY_BASE"
+                           roleTypeIdValidTo="GN_COMPANY_BASE"/>
+    <PartyRelationshipType description="" hasTable="N" parentTypeId="" partyRelationshipName="Node-propagatesTo-Node"
+                           partyRelationshipTypeId="GN_PROPAGATES_TO" roleTypeIdValidFrom="GN_PROPAGATION_NODE"
+                           roleTypeIdValidTo="GN_PROPAGATION_NODE"/>
+    <PartyRelationshipType description="" hasTable="N" parentTypeId="" partyRelationshipName="Node-receivesFrom-Node"
+                           partyRelationshipTypeId="GN_RECEIVES_FROM" roleTypeIdValidFrom="GN_PROPAGATION_NODE"
+                           roleTypeIdValidTo="GN_PROPAGATION_NODE"/>
+    <PartyRelationshipType description="" hasTable="N" parentTypeId="" partyRelationshipName="Node-publishesTo-Root"
+                           partyRelationshipTypeId="GN_PUBLISHES_TO_ROOT" roleTypeIdValidFrom="GN_COMPANY"
+                           roleTypeIdValidTo="GN_ROOT"/>
+    <!--========-->
+
+    <AgreementType agreementTypeId="GN_AUTHORIZATION" description="GnAuthorization" hasTable="Y" parentTypeId=""/>
+    <AgreementType agreementTypeId="GN_AUTH_FILTER" description="GnAuthorizationFilter" hasTable="Y" parentTypeId=""/>
+    <AgreementType agreementTypeId="GN_AUTH_SLI_FILTER" description="GnAuthorizationSlicingFilter" hasTable="Y"
+                   parentTypeId=""/>
+
+    <EnumerationType description="Authorization Status" enumTypeId="GN_AUTH_STATUS" hasTable="N" parentTypeId=""/>
+    <Enumeration description="Bozza" enumCode="DRAFT" enumId="GN_AUTH_DRAFT" sequenceId="01"
+                 enumTypeId="GN_AUTH_STATUS"/>
+    <Enumeration description="Pubblicata" enumCode="PUBLISHED" enumId="GN_AUTH_PUBLISHED" sequenceId="02"
+                 enumTypeId="GN_AUTH_STATUS"/>
+    <Enumeration description="Annullata" enumCode="CANCELLED" enumId="GN_AUTH_CANCELLED" sequenceId="03"
+                 enumTypeId="GN_AUTH_STATUS"/>
+    <Enumeration description="Annullata" enumCode="DELETED" enumId="GN_AUTH_DELETED" sequenceId="04"
+                 enumTypeId="GN_AUTH_STATUS"/>
+    <Enumeration description="Da validare" enumCode="TO_BE_VALIDATED" enumId="GN_AUTH_TO_BE_VALID" sequenceId="05"
+                 enumTypeId="GN_AUTH_STATUS"/>
+    <Enumeration description="Non validata" enumCode="NOT_VALIDATED" enumId="GN_AUTH_NOT_VALID" sequenceId="06"
+                 enumTypeId="GN_AUTH_STATUS"/>
+    <Enumeration description="In conflitto" enumCode="CONFLICTING" enumId="GN_AUTH_CONFLICTING" sequenceId="07"
+                 enumTypeId="GN_AUTH_STATUS"/>
+
+
+    <EnumerationType description="Authorization Status" enumTypeId="GN_AUTH_INT_STATUS" hasTable="N" parentTypeId=""/>
+    <Enumeration description="Da eliminare" enumCode="TO_BE_DELETED" enumId="GN_AUTH_TO_BE_DELET" sequenceId="01"
+                 enumTypeId="GN_AUTH_INT_STATUS"/>
+    <Enumeration description="Da ricevere" enumCode="TO_BE_RECEIVED" enumId="GN_AUTH_TO_BE_RECEI" sequenceId="02"
+                 enumTypeId="GN_AUTH_INT_STATUS"/>
+    <Enumeration description="Pending document merge" enumCode="PENDING_MERGE" enumId="GN_AUTH_PEND_MERGE"
+                 sequenceId="03" enumTypeId="GN_AUTH_INT_STATUS"/>
+
+
+    <EnumerationType description="Authorization origin" enumTypeId="GN_AUTH_ORIGIN" hasTable="N" parentTypeId=""/>
+    <Enumeration description="GN_AUTH_ORG_HUMAN" enumCode="GN_AUTH_ORG_HUMAN" enumId="GN_AUTH_ORG_HUMAN" sequenceId="01"
+                 enumTypeId="GN_AUTH_ORIGIN"/>
+    <Enumeration description="GN_AUTH_ORG_SCRAPING" enumCode="GN_AUTH_ORG_SCRAPING" enumId="GN_AUTH_ORG_SCRAPING"
+                 sequenceId="02" enumTypeId="GN_AUTH_ORIGIN"/>
+    <Enumeration description="GN_AUTH_ORG_APPLICATION" enumCode="GN_AUTH_ORG_APP" enumId="GN_AUTH_ORG_APP"
+                 sequenceId="03" enumTypeId="GN_AUTH_ORIGIN"/>
+
+
+    <!--AIA,    ALBO,    AUA,    OTHER-->
+    <EnumerationType description="Authorization Type" enumTypeId="GN_AUTH_TYPE" hasTable="N" parentTypeId=""/>
+    <Enumeration description="ALBO NAZIONALE GESTORI AMBIENTALI" enumCode="ALBO" enumId="GN_AUTH_ALBO" sequenceId="01"
+                 enumTypeId="GN_AUTH_TYPE"/>
+    <Enumeration description="AUTORIZZAZIONE PROVINCIALE" enumCode="PROVINCIALE" enumId="GN_AUTH_PROVINCE"
+                 sequenceId="02" enumTypeId="GN_AUTH_TYPE"/>
+    <Enumeration description="AIA" enumCode="AIA" enumId="GN_AUTH_AIA" sequenceId="03" enumTypeId="GN_AUTH_TYPE"/>
+    <Enumeration description="AUA" enumCode="AUA" enumId="GN_AUTH_AUA" sequenceId="04" enumTypeId="GN_AUTH_TYPE"/>
+    <Enumeration description="ALTRO" enumCode="ALTRO" enumId="GN_AUTH_OTHER" sequenceId="05" enumTypeId="GN_AUTH_TYPE"/>
+
+    <EnumerationType description="Agreement Relation Type" enumTypeId="GN_AGRMNT_REL" hasTable="N" parentTypeId=""/>
+    <Enumeration description="Revoke" enumCode="REVOKE" enumId="GN_AGRMNT_REL_RVK" sequenceId="01"
+                 enumTypeId="GN_AGRMNT_REL"/>
+
+    <AgreementItemType agreementItemTypeId="GN_AUTH_ITEM" description="Authorization Item" hasTable="Y"
+                       parentTypeId=""/>
+
+    <!--holderRole  PRODUCER, CARRIER, RECIPIENT, BROKER-->
+    <EnumerationType description="Authorizaion holderCompanyBase role" enumTypeId="GN_AUTH_HOLDER_ROLE" hasTable="N"
+                     parentTypeId=""/>
+
+    <Enumeration description="Produttore" enumCode="GN_PRODUCER" enumId="GN_PRODUCER" sequenceId="01"
+                 enumTypeId="GN_AUTH_HOLDER_ROLE"/>
+    <Enumeration description="Trasportatore" enumCode="GN_CARRIER" enumId="GN_CARRIER" sequenceId="02"
+                 enumTypeId="GN_AUTH_HOLDER_ROLE"/>
+    <Enumeration description="Destinatario" enumCode="GN_RECIPIENT" enumId="GN_RECIPIENT" sequenceId="03"
+                 enumTypeId="GN_AUTH_HOLDER_ROLE"/>
+    <Enumeration description="Intermediario" enumCode="GN_BROKER" enumId="GN_BROKER" sequenceId="04"
+                 enumTypeId="GN_AUTH_HOLDER_ROLE"/>
+
+
+    <!--GN_ACTIVITY_JOB data  SCHEDULED, MISFIRE, CANCELLED, CONSUMED, COMMITTED, INCOMPLETE, FAILED-->
+    <EnumerationType description="GnActivityJob status (DEPRECATED can be deleted)" enumTypeId="GN_ACT_JOB_STATUS"
+                     hasTable="N" parentTypeId=""/>
+
+    <Enumeration description="Job scheduled" enumCode="GN_ACT_JOB_SCHEDULED" enumId="GN_ACT_JOB_SCHEDULED"
+                 sequenceId="01" enumTypeId="GN_ACT_JOB_STATUS"/>
+    <Enumeration description="Job scheduled" enumCode="GN_ACT_JOB_MISFIRE" enumId="GN_ACT_JOB_MISFIRE" sequenceId="02"
+                 enumTypeId="GN_ACT_JOB_STATUS"/>
+    <Enumeration description="Job scheduled" enumCode="GN_ACT_JOB_CANCELLED" enumId="GN_ACT_JOB_CANCELLED"
+                 sequenceId="03" enumTypeId="GN_ACT_JOB_STATUS"/>
+    <Enumeration description="Job scheduled" enumCode="GN_ACT_JOB_CONSUMED" enumId="GN_ACT_JOB_CONSUMED" sequenceId="04"
+                 enumTypeId="GN_ACT_JOB_STATUS"/>
+    <Enumeration description="Job scheduled" enumCode="GN_ACT_JOB_COMMITTED" enumId="GN_ACT_JOB_COMMITTED"
+                 sequenceId="05" enumTypeId="GN_ACT_JOB_STATUS"/>
+    <Enumeration description="Job scheduled" enumCode="GN_ACT_JOB_INCOMPLETE" enumId="GN_ACT_JOB_INCOMPLET"
+                 sequenceId="06" enumTypeId="GN_ACT_JOB_STATUS"/>
+    <Enumeration description="Job scheduled" enumCode="GN_ACT_JOB_FAILED" enumId="GN_ACT_JOB_FAILED" sequenceId="07"
+                 enumTypeId="GN_ACT_JOB_STATUS"/>
+
+    <!--GN_ACTIVITY_JOB data  SCHEDULED, MISFIRE, CANCELLED, CONSUMED, COMMITTED, INCOMPLETE, FAILED-->
+    <GnEnumerationType description="GnActivityJob status" enumTypeId="GN_ACT_JOB_STATUS" hasTable="N" parentTypeId=""/>
+
+    <GnEnumeration description="Job scheduled" enumCode="GN_ACT_JOB_SCHEDULED" enumId="GN_ACT_JOB_SCHEDULED"
+                   sequenceId="01" enumTypeId="GN_ACT_JOB_STATUS"/>
+    <GnEnumeration description="Job scheduled" enumCode="GN_ACT_JOB_MISFIRE" enumId="GN_ACT_JOB_MISFIRE" sequenceId="02"
+                   enumTypeId="GN_ACT_JOB_STATUS"/>
+    <GnEnumeration description="Job scheduled" enumCode="GN_ACT_JOB_CANCELLED" enumId="GN_ACT_JOB_CANCELLED"
+                   sequenceId="03" enumTypeId="GN_ACT_JOB_STATUS"/>
+    <GnEnumeration description="Job scheduled" enumCode="GN_ACT_JOB_CONSUMED" enumId="GN_ACT_JOB_CONSUMED"
+                   sequenceId="04"
+                   enumTypeId="GN_ACT_JOB_STATUS"/>
+    <GnEnumeration description="Job scheduled" enumCode="GN_ACT_JOB_COMMITTED" enumId="GN_ACT_JOB_COMMITTED"
+                   sequenceId="05" enumTypeId="GN_ACT_JOB_STATUS"/>
+    <GnEnumeration description="Job scheduled" enumCode="GN_ACT_JOB_INCOMPLETE" enumId="GN_ACT_JOB_INCOMPLETE"
+                   sequenceId="06" enumTypeId="GN_ACT_JOB_STATUS"/>
+    <GnEnumeration description="Job scheduled" enumCode="GN_ACT_JOB_FAILED" enumId="GN_ACT_JOB_FAILED" sequenceId="07"
+                   enumTypeId="GN_ACT_JOB_STATUS"/>
+
+
+    <!--Activity job job type DEPRECATED-->
+    <EnumerationType description="GnActivityJob type (DEPRECATED can be removed)" enumTypeId="GN_JOB_TYPE" hasTable="N"
+                     parentTypeId=""/>
+    <Enumeration description="Empty test job" enumCode="GN_JOB_NOP"
+                 enumId="GN_JOB_NOP" sequenceId="00" enumTypeId="GN_JOB_TYPE"/>
+    <Enumeration description="Authorization expiration job" enumCode="GN_ACT_JOB_AUTHORIZATION_EXPIRING"
+                 enumId="GN_JOB_AUTH_EXPIR" sequenceId="01" enumTypeId="GN_JOB_TYPE"/>
+    <Enumeration description="Mange old Authorization job" enumCode="GN_ACT_JOB_AUTHORIZATION_EXPIRING_MANAGE_OLD"
+                 enumId="GN_JOB_AUTH_EX_OLD" sequenceId="03" enumTypeId="GN_JOB_TYPE"/>
+    <Enumeration description="Party invitation notification job pending"
+                 enumCode="GN_ACT_JOB_PARTY_INVITATION_NOTIFICATION_PENDING"
+                 enumId="GN_JOB_PRT_INV_PEN" sequenceId="04" enumTypeId="GN_JOB_TYPE"/>
+    <Enumeration description="Party invitation mark expired"
+                 enumCode="GN_ACT_JOB_PARTY_INVITATION_MARK_EXPIRED"
+                 enumId="GN_JOB_PRT_INV_EXP" sequenceId="05" enumTypeId="GN_JOB_TYPE"/>
+    <Enumeration description="Party invitation expiration job"
+                 enumCode="GN_ACT_JOB_PARTY_INVITATION_JOB_MANAGE_OLD"
+                 enumId="GN_JOB_PRT_INV_OLD" sequenceId="06" enumTypeId="GN_JOB_TYPE"/>
+    <Enumeration description="Authorization publication reminder"
+                 enumCode="GN_ACT_JOB_AUTHORIZATION_PUBLICATION_REMINDER"
+                 enumId="GN_JOB_AUTH_PUBREM" sequenceId="07" enumTypeId="GN_JOB_TYPE"/>
+    <Enumeration description="Authorization publication reminder"
+                 enumCode="GN_ACT_JOB_AUTHORIZATION_PUBLICATION_REMINDER_MANAGE_OLD"
+                 enumId="GN_JOB_AUTHPUBREMO" sequenceId="08" enumTypeId="GN_JOB_TYPE"/>
+    <Enumeration description="Authorization to be validated reminder"
+                 enumCode="GN_ACT_JOB_AUTHORIZATION_TO_BE_VALIDATED_REMINDER"
+                 enumId="GN_JOB_AUTH_TO_VAL" sequenceId="09" enumTypeId="GN_JOB_TYPE"/>
+    <Enumeration description="Manage previous authorization to be validated reminder"
+                 enumCode="GN_ACT_JOB_AUTHORIZATION_TO_BE_VALIDATED_REMINDER_MANAGE_OLD"
+                 enumId="GN_JOB_AUTHTOVALOL" sequenceId="10" enumTypeId="GN_JOB_TYPE"/>
+
+    <!--Activity job job type NEW-->
+    <GnEnumerationType description="GnActivityJob type" enumTypeId="GN_JOB_TYPE" hasTable="N" parentTypeId=""/>
+    <GnEnumeration description="Empty test job" enumCode="GN_JOB_NOP"
+                   enumId="GN_JOB_NOP" sequenceId="00" enumTypeId="GN_JOB_TYPE"/>
+    <GnEnumeration description="Authorization expiration job" enumCode="GN_ACT_JOB_AUTHORIZATION_EXPIRING"
+                   enumId="GN_ACT_JOB_AUTHORIZATION_EXPIRING" sequenceId="01" enumTypeId="GN_JOB_TYPE"/>
+    <GnEnumeration description="Mange old Authorization job" enumCode="GN_ACT_JOB_AUTHORIZATION_EXPIRING_MANAGE_OLD"
+                   enumId="GN_ACT_JOB_AUTHORIZATION_EXPIRING_MANAGE_OLD" sequenceId="03" enumTypeId="GN_JOB_TYPE"/>
+    <GnEnumeration description="Party invitation notification job pending"
+                   enumCode="GN_ACT_JOB_PARTY_INVITATION_NOTIFICATION_PENDING"
+                   enumId="GN_ACT_JOB_PARTY_INVITATION_NOTIFICATION_PENDING" sequenceId="04" enumTypeId="GN_JOB_TYPE"/>
+    <GnEnumeration description="Party invitation mark expired"
+                   enumCode="GN_ACT_JOB_PARTY_INVITATION_MARK_EXPIRED"
+                   enumId="GN_ACT_JOB_PARTY_INVITATION_MARK_EXPIRED" sequenceId="05" enumTypeId="GN_JOB_TYPE"/>
+    <GnEnumeration description="Party invitation expiration job"
+                   enumCode="GN_ACT_JOB_PARTY_INVITATION_JOB_MANAGE_OLD"
+                   enumId="GN_ACT_JOB_PARTY_INVITATION_JOB_MANAGE_OLD" sequenceId="06" enumTypeId="GN_JOB_TYPE"/>
+    <GnEnumeration description="Authorization publication reminder"
+                   enumCode="GN_ACT_JOB_AUTHORIZATION_PUBLICATION_REMINDER"
+                   enumId="GN_ACT_JOB_AUTHORIZATION_PUBLICATION_REMINDER" sequenceId="07" enumTypeId="GN_JOB_TYPE"/>
+    <GnEnumeration description="Authorization publication reminder"
+                   enumCode="GN_ACT_JOB_AUTHORIZATION_PUBLICATION_REMINDER_MANAGE_OLD"
+                   enumId="GN_ACT_JOB_AUTHORIZATION_PUBLICATION_REMINDER_MANAGE_OLD" sequenceId="08"
+                   enumTypeId="GN_JOB_TYPE"/>
+    <GnEnumeration description="Authorization to be validated reminder"
+                   enumCode="GN_ACT_JOB_AUTHORIZATION_TO_BE_VALIDATED_REMINDER"
+                   enumId="GN_ACT_JOB_AUTHORIZATION_TO_BE_VALIDATED_REMINDER" sequenceId="09" enumTypeId="GN_JOB_TYPE"/>
+    <GnEnumeration description="Manage previous authorization to be validated reminder"
+                   enumCode="GN_ACT_JOB_AUTHORIZATION_TO_BE_VALIDATED_REMINDER_MANAGE_OLD"
+                   enumId="GN_ACT_JOB_AUTHORIZATION_TO_BE_VALIDATED_REMINDER_MANAGE_OLD" sequenceId="10"
+                   enumTypeId="GN_JOB_TYPE"/>
+
+    <!--Generic Attribute type-->
+    <EnumerationType description="Generic internal attribute type" enumTypeId="GN_ATTRIBUTE_TYPE" hasTable="N"
+                     parentTypeId=""/>
+    <Enumeration description="STRING Attribute" enumCode="GN_ATTRIBUTE_TYPE_STRING"
+                 enumId="GN_ATTR_STRING" sequenceId="01" enumTypeId="GN_ATTRIBUTE_TYPE"/>
+    <Enumeration description="STRING Attribute" enumCode="GN_ATTRIBUTE_TYPE_XML"
+                 enumId="GN_ATTR_XML" sequenceId="02" enumTypeId="GN_ATTRIBUTE_TYPE"/>
+
+    <!--Category and Classes-->
+    <GnCategoryClassEnum enumId="GN_CAT_1_A" subCategoryCode="" sequenceId="0" categoryCode="1"
+                         categoryDescription="Raccolta e trasporto di rifiuti urbani (ordinaria)" classCode="A"
+                         classDescription="500.000 o più abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1_B" subCategoryCode="" sequenceId="1" categoryCode="1"
+                         categoryDescription="Raccolta e trasporto di rifiuti urbani (ordinaria)" classCode="B"
+                         classDescription="tra 100.000 e 500.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1_C" subCategoryCode="" sequenceId="2" categoryCode="1"
+                         categoryDescription="Raccolta e trasporto di rifiuti urbani (ordinaria)" classCode="C"
+                         classDescription="tra 50.000 e 100.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1_D" subCategoryCode="" sequenceId="3" categoryCode="1"
+                         categoryDescription="Raccolta e trasporto di rifiuti urbani (ordinaria)" classCode="D"
+                         classDescription="tra 20.000 e 50.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1_E" subCategoryCode="" sequenceId="4" categoryCode="1"
+                         categoryDescription="Raccolta e trasporto di rifiuti urbani (ordinaria)" classCode="E"
+                         classDescription="tra 5.000 e 20.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1_F" subCategoryCode="" sequenceId="5" categoryCode="1"
+                         categoryDescription="Raccolta e trasporto di rifiuti urbani (ordinaria)" classCode="F"
+                         classDescription="meno di 5.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1_10_A" subCategoryCode="" sequenceId="6" categoryCode="1c10"
+                         categoryDescription="Raccolta e trasporto di rifiuti urbani (comma 10)"
+                         classCode="A" classDescription="500.000 o più abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1_10_B" subCategoryCode="" sequenceId="7" categoryCode="1c10"
+                         categoryDescription="Raccolta e trasporto di rifiuti urbani (comma 10)"
+                         classCode="B" classDescription="tra 100.000 e 500.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1_10_C" subCategoryCode="" sequenceId="8" categoryCode="1c10"
+                         categoryDescription="Raccolta e trasporto di rifiuti urbani (comma 10)"
+                         classCode="C" classDescription="tra 50.000 e 100.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1_10_D" subCategoryCode="" sequenceId="9" categoryCode="1c10"
+                         categoryDescription="Raccolta e trasporto di rifiuti urbani (comma 10)"
+                         classCode="D" classDescription="tra 20.000 e 50.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1_10_E" subCategoryCode="" sequenceId="10" categoryCode="1c10"
+                         categoryDescription="Raccolta e trasporto di rifiuti urbani (comma 10)"
+                         classCode="E" classDescription="tra 5.000 e 20.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1_10_F" subCategoryCode="" sequenceId="11" categoryCode="1c10"
+                         categoryDescription="Raccolta e trasporto di rifiuti urbani (comma 10)"
+                         classCode="F" classDescription="meno di 5.000 abitanti"/>
+
+    <GnCategoryClassEnum enumId="GN_CAT_1s1_A" subCategoryCode="1" sequenceId="12" categoryCode="1"
+                         categoryDescription="Raccolta e trasporto di rifiuti ingombranti/raccolta differenziata di rifiuti urbani"
+                         classCode="A" classDescription="500.000 o più abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s1_B" subCategoryCode="1" sequenceId="13" categoryCode="1"
+                         categoryDescription="Raccolta e trasporto di rifiuti ingombranti/raccolta differenziata di rifiuti urbani"
+                         classCode="B" classDescription="tra 100.000 e 500.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s1_C" subCategoryCode="1" sequenceId="14" categoryCode="1"
+                         categoryDescription="Raccolta e trasporto di rifiuti ingombranti/raccolta differenziata di rifiuti urbani"
+                         classCode="C" classDescription="tra 50.000 e 100.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s1_D" subCategoryCode="1" sequenceId="15" categoryCode="1"
+                         categoryDescription="Raccolta e trasporto di rifiuti ingombranti/raccolta differenziata di rifiuti urbani"
+                         classCode="D" classDescription="tra 20.000 e 50.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s1_E" subCategoryCode="1" sequenceId="16" categoryCode="1"
+                         categoryDescription="Raccolta e trasporto di rifiuti ingombranti/raccolta differenziata di rifiuti urbani"
+                         classCode="E" classDescription="tra 5.000 e 20.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s1_F" subCategoryCode="1" sequenceId="17" categoryCode="1"
+                         categoryDescription="Raccolta e trasporto di rifiuti ingombranti/raccolta differenziata di rifiuti urbani"
+                         classCode="F" classDescription="meno di 5.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s2_A" subCategoryCode="2" sequenceId="18" categoryCode="1"
+                         categoryDescription="Attività esclusiva di raccolta differenziata di una o più tipologie di rifiuti urbani"
+                         classCode="A" classDescription="500.000 o più abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s2_B" subCategoryCode="2" sequenceId="19" categoryCode="1"
+                         categoryDescription="Attività esclusiva di raccolta differenziata di una o più tipologie di rifiuti urbani"
+                         classCode="B" classDescription="tra 100.000 e 500.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s2_C" subCategoryCode="2" sequenceId="20" categoryCode="1"
+                         categoryDescription="Attività esclusiva di raccolta differenziata di una o più tipologie di rifiuti urbani"
+                         classCode="C" classDescription="tra 50.000 e 100.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s2_D" subCategoryCode="2" sequenceId="21" categoryCode="1"
+                         categoryDescription="Attività esclusiva di raccolta differenziata di una o più tipologie di rifiuti urbani"
+                         classCode="D" classDescription="tra 20.000 e 50.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s2_E" subCategoryCode="2" sequenceId="22" categoryCode="1"
+                         categoryDescription="Attività esclusiva di raccolta differenziata di una o più tipologie di rifiuti urbani"
+                         classCode="E" classDescription="tra 5.000 e 20.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s2_F" subCategoryCode="2" sequenceId="23" categoryCode="1"
+                         categoryDescription="Attività esclusiva di raccolta differenziata di una o più tipologie di rifiuti urbani"
+                         classCode="F" classDescription="meno di 5.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s3_A" subCategoryCode="3" sequenceId="24" categoryCode="1"
+                         categoryDescription="Raccolta e trasporto di rifiuti vegetali provenienti da aree verdi"
+                         classCode="A" classDescription="500.000 o più abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s3_B" subCategoryCode="3" sequenceId="25" categoryCode="1"
+                         categoryDescription="Raccolta e trasporto di rifiuti vegetali provenienti da aree verdi"
+                         classCode="B" classDescription="tra 100.000 e 500.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s3_C" subCategoryCode="3" sequenceId="26" categoryCode="1"
+                         categoryDescription="Raccolta e trasporto di rifiuti vegetali provenienti da aree verdi"
+                         classCode="C" classDescription="tra 50.000 e 100.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s3_D" subCategoryCode="3" sequenceId="27" categoryCode="1"
+                         categoryDescription="Raccolta e trasporto di rifiuti vegetali provenienti da aree verdi"
+                         classCode="D" classDescription="tra 20.000 e 50.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s3_E" subCategoryCode="3" sequenceId="28" categoryCode="1"
+                         categoryDescription="Raccolta e trasporto di rifiuti vegetali provenienti da aree verdi"
+                         classCode="E" classDescription="tra 5.000 e 20.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s3_F" subCategoryCode="3" sequenceId="29" categoryCode="1"
+                         categoryDescription="Raccolta e trasporto di rifiuti vegetali provenienti da aree verdi"
+                         classCode="F" classDescription="meno di 5.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s4_A" subCategoryCode="4" sequenceId="30" categoryCode="1"
+                         categoryDescription="Attività esclusiva di trasporto di rifiuti urbani da centri di stoccaggio a impianti di smaltimento finale"
+                         classCode="A" classDescription="500.000 o più abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s4_B" subCategoryCode="4" sequenceId="31" categoryCode="1"
+                         categoryDescription="Attività esclusiva di trasporto di rifiuti urbani da centri di stoccaggio a impianti di smaltimento finale"
+                         classCode="B" classDescription="tra 100.000 e 500.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s4_C" subCategoryCode="4" sequenceId="32" categoryCode="1"
+                         categoryDescription="Attività esclusiva di trasporto di rifiuti urbani da centri di stoccaggio a impianti di smaltimento finale"
+                         classCode="C" classDescription="tra 50.000 e 100.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s4_D" subCategoryCode="4" sequenceId="33" categoryCode="1"
+                         categoryDescription="Attività esclusiva di trasporto di rifiuti urbani da centri di stoccaggio a impianti di smaltimento finale"
+                         classCode="D" classDescription="tra 20.000 e 50.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s4_E" subCategoryCode="4" sequenceId="34" categoryCode="1"
+                         categoryDescription="Attività esclusiva di trasporto di rifiuti urbani da centri di stoccaggio a impianti di smaltimento finale"
+                         classCode="E" classDescription="tra 5.000 e 20.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s4_F" subCategoryCode="4" sequenceId="35" categoryCode="1"
+                         categoryDescription="Attività esclusiva di trasporto di rifiuti urbani da centri di stoccaggio a impianti di smaltimento finale"
+                         classCode="F" classDescription="meno di 5.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s5_A" subCategoryCode="5" sequenceId="36" categoryCode="1"
+                         categoryDescription="Raccolta multimateriale di rifiuti urbani" classCode="A"
+                         classDescription="500.000 o più abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s5_B" subCategoryCode="5" sequenceId="37" categoryCode="1"
+                         categoryDescription="Raccolta multimateriale di rifiuti urbani" classCode="B"
+                         classDescription="tra 100.000 e 500.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s5_C" subCategoryCode="5" sequenceId="38" categoryCode="1"
+                         categoryDescription="Raccolta multimateriale di rifiuti urbani" classCode="C"
+                         classDescription="tra 50.000 e 100.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s5_D" subCategoryCode="5" sequenceId="39" categoryCode="1"
+                         categoryDescription="Raccolta multimateriale di rifiuti urbani" classCode="D"
+                         classDescription="tra 20.000 e 50.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s5_E" subCategoryCode="5" sequenceId="40" categoryCode="1"
+                         categoryDescription="Raccolta multimateriale di rifiuti urbani" classCode="E"
+                         classDescription="tra 5.000 e 20.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s5_F" subCategoryCode="5" sequenceId="41" categoryCode="1"
+                         categoryDescription="Raccolta multimateriale di rifiuti urbani" classCode="F"
+                         classDescription="meno di 5.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s6_A" subCategoryCode="6" sequenceId="42" categoryCode="1"
+                         categoryDescription="Attività di spazzamento meccanizzato" classCode="A"
+                         classDescription="500.000 o più abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s6_B" subCategoryCode="6" sequenceId="43" categoryCode="1"
+                         categoryDescription="Attività di spazzamento meccanizzato" classCode="B"
+                         classDescription="tra 100.000 e 500.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s6_C" subCategoryCode="6" sequenceId="44" categoryCode="1"
+                         categoryDescription="Attività di spazzamento meccanizzato" classCode="C"
+                         classDescription="tra 50.000 e 100.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s6_D" subCategoryCode="6" sequenceId="45" categoryCode="1"
+                         categoryDescription="Attività di spazzamento meccanizzato" classCode="D"
+                         classDescription="tra 20.000 e 50.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s6_E" subCategoryCode="6" sequenceId="46" categoryCode="1"
+                         categoryDescription="Attività di spazzamento meccanizzato" classCode="E"
+                         classDescription="tra 5.000 e 20.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s6_F" subCategoryCode="6" sequenceId="47" categoryCode="1"
+                         categoryDescription="Attività di spazzamento meccanizzato" classCode="F"
+                         classDescription="meno di 5.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s7_A" subCategoryCode="7" sequenceId="48" categoryCode="1"
+                         categoryDescription="Gestione dei centri di raccolta rifiuti urbani" classCode="A"
+                         classDescription="500.000 o più abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s7_B" subCategoryCode="7" sequenceId="49" categoryCode="1"
+                         categoryDescription="Gestione dei centri di raccolta rifiuti urbani" classCode="B"
+                         classDescription="tra 100.000 e 500.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s7_C" subCategoryCode="7" sequenceId="50" categoryCode="1"
+                         categoryDescription="Gestione dei centri di raccolta rifiuti urbani" classCode="C"
+                         classDescription="tra 50.000 e 100.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s7_D" subCategoryCode="7" sequenceId="51" categoryCode="1"
+                         categoryDescription="Gestione dei centri di raccolta rifiuti urbani" classCode="D"
+                         classDescription="tra 20.000 e 50.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s7_E" subCategoryCode="7" sequenceId="52" categoryCode="1"
+                         categoryDescription="Gestione dei centri di raccolta rifiuti urbani" classCode="E"
+                         classDescription="tra 5.000 e 20.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1s7_F" subCategoryCode="7" sequenceId="53" categoryCode="1"
+                         categoryDescription="Gestione dei centri di raccolta rifiuti urbani" classCode="F"
+                         classDescription="meno di 5.000 abitanti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_2_A" subCategoryCode="" sequenceId="54" categoryCode="2"
+                         categoryDescription="[ABROGATA] raccolta e trasporto di rifiuti non pericolosi, avviati al recupero in modo effettivo ed oggettivo"
+                         classCode="A" classDescription="quantità annua uguale o superiore a 200.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_2_B" subCategoryCode="" sequenceId="55" categoryCode="2"
+                         categoryDescription="[ABROGATA] raccolta e trasporto di rifiuti non pericolosi, avviati al recupero in modo effettivo ed oggettivo"
+                         classCode="B" classDescription="quantità annua tra 60.000 e 200.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_2_C" subCategoryCode="" sequenceId="56" categoryCode="2"
+                         categoryDescription="[ABROGATA] raccolta e trasporto di rifiuti non pericolosi, avviati al recupero in modo effettivo ed oggettivo"
+                         classCode="C" classDescription="quantità annua tra 15.000 e 60.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_2_D" subCategoryCode="" sequenceId="57" categoryCode="2"
+                         categoryDescription="[ABROGATA] raccolta e trasporto di rifiuti non pericolosi, avviati al recupero in modo effettivo ed oggettivo"
+                         classCode="D" classDescription="quantità annua tra 6.000 e 15.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_2_E" subCategoryCode="" sequenceId="58" categoryCode="2"
+                         categoryDescription="[ABROGATA] raccolta e trasporto di rifiuti non pericolosi, avviati al recupero in modo effettivo ed oggettivo"
+                         classCode="E" classDescription="quantità annua tra 3.000 e 6.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_2_F" subCategoryCode="" sequenceId="59" categoryCode="2"
+                         categoryDescription="[ABROGATA] raccolta e trasporto di rifiuti non pericolosi, avviati al recupero in modo effettivo ed oggettivo"
+                         classCode="F" classDescription="quantità annua inferiore a 3.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_3_A" subCategoryCode="" sequenceId="60" categoryCode="3"
+                         categoryDescription="[ABROGATA] raccolta e trasporto di rifiuti pericolosi, avviati al recupero in modo effettivo ed oggettivo"
+                         classCode="A" classDescription="quantità annua uguale o superiore a 200.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_3_B" subCategoryCode="" sequenceId="61" categoryCode="3"
+                         categoryDescription="[ABROGATA] raccolta e trasporto di rifiuti pericolosi, avviati al recupero in modo effettivo ed oggettivo"
+                         classCode="B" classDescription="quantità annua tra 60.000 e 200.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_3_C" subCategoryCode="" sequenceId="62" categoryCode="3"
+                         categoryDescription="[ABROGATA] raccolta e trasporto di rifiuti pericolosi, avviati al recupero in modo effettivo ed oggettivo"
+                         classCode="C" classDescription="quantità annua tra 15.000 e 60.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_3_D" subCategoryCode="" sequenceId="63" categoryCode="3"
+                         categoryDescription="[ABROGATA] raccolta e trasporto di rifiuti pericolosi, avviati al recupero in modo effettivo ed oggettivo"
+                         classCode="D" classDescription="quantità annua tra 6.000 e 15.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_3_E" subCategoryCode="" sequenceId="64" categoryCode="3"
+                         categoryDescription="[ABROGATA] raccolta e trasporto di rifiuti pericolosi, avviati al recupero in modo effettivo ed oggettivo"
+                         classCode="E" classDescription="quantità annua tra 3.000 e 6.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_3_F" subCategoryCode="" sequenceId="65" categoryCode="3"
+                         categoryDescription="[ABROGATA] raccolta e trasporto di rifiuti pericolosi, avviati al recupero in modo effettivo ed oggettivo"
+                         classCode="F" classDescription="quantità annua inferiore a 3.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_4_A" subCategoryCode="" sequenceId="66" categoryCode="4"
+                         categoryDescription="raccolta e trasporto di rifiuti speciali non pericolosi" classCode="A"
+                         classDescription="quantità annua uguale o superiore a 200.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_4_B" subCategoryCode="" sequenceId="67" categoryCode="4"
+                         categoryDescription="raccolta e trasporto di rifiuti speciali non pericolosi" classCode="B"
+                         classDescription="quantità annua tra 60.000 e 200.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_4_C" subCategoryCode="" sequenceId="68" categoryCode="4"
+                         categoryDescription="raccolta e trasporto di rifiuti speciali non pericolosi" classCode="C"
+                         classDescription="quantità annua tra 15.000 e 60.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_4_D" subCategoryCode="" sequenceId="69" categoryCode="4"
+                         categoryDescription="raccolta e trasporto di rifiuti speciali non pericolosi" classCode="D"
+                         classDescription="quantità annua tra 6.000 e 15.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_4_E" subCategoryCode="" sequenceId="70" categoryCode="4"
+                         categoryDescription="raccolta e trasporto di rifiuti speciali non pericolosi" classCode="E"
+                         classDescription="quantità annua tra 3.000 e 6.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_4_F" subCategoryCode="" sequenceId="71" categoryCode="4"
+                         categoryDescription="raccolta e trasporto di rifiuti speciali non pericolosi" classCode="F"
+                         classDescription="quantità annua inferiore a 3.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_5_A" subCategoryCode="" sequenceId="72" categoryCode="5"
+                         categoryDescription="raccolta e trasporto di rifiuti pericolosi" classCode="A"
+                         classDescription="quantità annua uguale o superiore a 200.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_5_B" subCategoryCode="" sequenceId="73" categoryCode="5"
+                         categoryDescription="raccolta e trasporto di rifiuti pericolosi" classCode="B"
+                         classDescription="quantità annua tra 60.000 e 200.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_5_C" subCategoryCode="" sequenceId="74" categoryCode="5"
+                         categoryDescription="raccolta e trasporto di rifiuti pericolosi" classCode="C"
+                         classDescription="quantità annua tra 15.000 e 60.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_5_D" subCategoryCode="" sequenceId="75" categoryCode="5"
+                         categoryDescription="raccolta e trasporto di rifiuti pericolosi" classCode="D"
+                         classDescription="quantità annua tra 6.000 e 15.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_5_E" subCategoryCode="" sequenceId="76" categoryCode="5"
+                         categoryDescription="raccolta e trasporto di rifiuti pericolosi" classCode="E"
+                         classDescription="quantità annua tra 3.000 e 6.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_5_F" subCategoryCode="" sequenceId="77" categoryCode="5"
+                         categoryDescription="raccolta e trasporto di rifiuti pericolosi" classCode="F"
+                         classDescription="quantità annua inferiore a 3.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_8_A" subCategoryCode="" sequenceId="78" categoryCode="8"
+                         categoryDescription="intermediazione e commercio di rifiuti senza detenzione dei rifiuti stessi"
+                         classCode="A" classDescription="quantità annua uguale o superiore a 200.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_8_B" subCategoryCode="" sequenceId="79" categoryCode="8"
+                         categoryDescription="intermediazione e commercio di rifiuti senza detenzione dei rifiuti stessi"
+                         classCode="B" classDescription="quantità annua tra 60.000 e 200.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_8_C" subCategoryCode="" sequenceId="80" categoryCode="8"
+                         categoryDescription="intermediazione e commercio di rifiuti senza detenzione dei rifiuti stessi"
+                         classCode="C" classDescription="quantità annua tra 15.000 e 60.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_8_D" subCategoryCode="" sequenceId="81" categoryCode="8"
+                         categoryDescription="intermediazione e commercio di rifiuti senza detenzione dei rifiuti stessi"
+                         classCode="D" classDescription="quantità annua tra 6.000 e 15.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_8_E" subCategoryCode="" sequenceId="82" categoryCode="8"
+                         categoryDescription="intermediazione e commercio di rifiuti senza detenzione dei rifiuti stessi"
+                         classCode="E" classDescription="quantità annua tra 3.000 e 6.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_8_F" subCategoryCode="" sequenceId="83" categoryCode="8"
+                         categoryDescription="intermediazione e commercio di rifiuti senza detenzione dei rifiuti stessi"
+                         classCode="F" classDescription="quantità annua inferiore a 3.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_9_A" subCategoryCode="" sequenceId="84" categoryCode="9"
+                         categoryDescription="bonifica di siti" classCode="A"
+                         classDescription="importo lavori oltre 7.746.853,49 euro"/>
+    <GnCategoryClassEnum enumId="GN_CAT_9_B" subCategoryCode="" sequenceId="85" categoryCode="9"
+                         categoryDescription="bonifica di siti" classCode="B"
+                         classDescription="importo lavori fino a 7.746.853,49 euro"/>
+    <GnCategoryClassEnum enumId="GN_CAT_9_C" subCategoryCode="" sequenceId="86" categoryCode="9"
+                         categoryDescription="bonifica di siti" classCode="C"
+                         classDescription="importo lavori fino a 1.549.370,70 euro"/>
+    <GnCategoryClassEnum enumId="GN_CAT_9_D" subCategoryCode="" sequenceId="87" categoryCode="9"
+                         categoryDescription="bonifica di siti" classCode="D"
+                         classDescription="importo lavori fino a 413.165,52 euro"/>
+    <GnCategoryClassEnum enumId="GN_CAT_9_E" subCategoryCode="" sequenceId="88" categoryCode="9"
+                         categoryDescription="bonifica di siti" classCode="E"
+                         classDescription="importo lavori fino a 51.645,69 euro"/>
+    <GnCategoryClassEnum enumId="GN_CAT_10A_A" subCategoryCode="A" sequenceId="89" categoryCode="10A"
+                         categoryDescription="attività di bonifica di beni contenenti amianto effettuata su: materiali edili contenenti amianto legato in matrici cementizie o resinoidi."
+                         classCode="A" classDescription="importo lavori oltre 7.746.853,49 euro"/>
+    <GnCategoryClassEnum enumId="GN_CAT_10A_B" subCategoryCode="A" sequenceId="90" categoryCode="10A"
+                         categoryDescription="attività di bonifica di beni contenenti amianto effettuata su: materiali edili contenenti amianto legato in matrici cementizie o resinoidi."
+                         classCode="B" classDescription="importo lavori fino a 7.746.853,49 euro"/>
+    <GnCategoryClassEnum enumId="GN_CAT_10A_C" subCategoryCode="A" sequenceId="91" categoryCode="10A"
+                         categoryDescription="attività di bonifica di beni contenenti amianto effettuata su: materiali edili contenenti amianto legato in matrici cementizie o resinoidi."
+                         classCode="C" classDescription="importo lavori fino a 1.549.370,70 euro"/>
+    <GnCategoryClassEnum enumId="GN_CAT_10A_D" subCategoryCode="A" sequenceId="92" categoryCode="10A"
+                         categoryDescription="attività di bonifica di beni contenenti amianto effettuata su: materiali edili contenenti amianto legato in matrici cementizie o resinoidi."
+                         classCode="D" classDescription="importo lavori fino a 413.165,52 euro"/>
+    <GnCategoryClassEnum enumId="GN_CAT_10A_E" subCategoryCode="A" sequenceId="93" categoryCode="10A"
+                         categoryDescription="attività di bonifica di beni contenenti amianto effettuata su: materiali edili contenenti amianto legato in matrici cementizie o resinoidi."
+                         classCode="E" classDescription="importo lavori fino a 51.645,69 euro"/>
+    <GnCategoryClassEnum enumId="GN_CAT_10B_A" subCategoryCode="B" sequenceId="94" categoryCode="10B"
+                         categoryDescription="attività di bonifica di beni contenenti amianto effettuata su: materiali d'attrito, materiali isolanti, contenitori a pressione, apparecchiature fuori uso, altri materiali incoerenti."
+                         classCode="A" classDescription="importo lavori oltre 7.746.853,49 euro"/>
+    <GnCategoryClassEnum enumId="GN_CAT_10B_B" subCategoryCode="B" sequenceId="95" categoryCode="10B"
+                         categoryDescription="attività di bonifica di beni contenenti amianto effettuata su: materiali d'attrito, materiali isolanti, contenitori a pressione, apparecchiature fuori uso, altri materiali incoerenti."
+                         classCode="B" classDescription="importo lavori fino a 7.746.853,49 euro"/>
+    <GnCategoryClassEnum enumId="GN_CAT_10B_C" subCategoryCode="B" sequenceId="96" categoryCode="10B"
+                         categoryDescription="attività di bonifica di beni contenenti amianto effettuata su: materiali d'attrito, materiali isolanti, contenitori a pressione, apparecchiature fuori uso, altri materiali incoerenti."
+                         classCode="C" classDescription="importo lavori fino a 1.549.370,70 euro"/>
+    <GnCategoryClassEnum enumId="GN_CAT_10B_D" subCategoryCode="B" sequenceId="97" categoryCode="10B"
+                         categoryDescription="attività di bonifica di beni contenenti amianto effettuata su: materiali d'attrito, materiali isolanti, contenitori a pressione, apparecchiature fuori uso, altri materiali incoerenti."
+                         classCode="D" classDescription="importo lavori fino a 413.165,52 euro"/>
+    <GnCategoryClassEnum enumId="GN_CAT_10B_E" subCategoryCode="B" sequenceId="98" categoryCode="10B"
+                         categoryDescription="attività di bonifica di beni contenenti amianto effettuata su: materiali d'attrito, materiali isolanti, contenitori a pressione, apparecchiature fuori uso, altri materiali incoerenti."
+                         classCode="E" classDescription="importo lavori fino a 51.645,69 euro"/>
+    <GnCategoryClassEnum enumId="GN_CAT_null_2bis" subCategoryCode="" sequenceId="99" categoryCode="2-BIS"
+                         categoryDescription="Trasporto dei propri rifiuti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_null_3bis" subCategoryCode="" sequenceId="100" categoryCode="3-BIS"
+                         categoryDescription="Rifiuti da apparecchiature elettriche ed elettroniche (RAEE)"/>
+    <GnCategoryClassEnum enumId="GN_CAT_null_6" subCategoryCode="" sequenceId="101" categoryCode="6"
+                         categoryDescription="Imprese che effettuano il solo esercizio dei trasporti transfrontalieri di rifiuti"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1_null" subCategoryCode="" sequenceId="102" categoryCode="1"
+                         categoryDescription="Raccolta e trasporto di rifiuti urbani (ordinaria)"/>
+    <GnCategoryClassEnum enumId="GN_CAT_1_10_null" subCategoryCode="" sequenceId="103" categoryCode="1c10"
+                         categoryDescription="Raccolta e trasporto di rifiuti urbani (comma 10)"/>
+    <GnCategoryClassEnum enumId="GN_CAT_7_A" subCategoryCode="" sequenceId="104" categoryCode="7"
+                         categoryDescription="operatori logistici (trasporto intermodale)"
+                         classCode="A" classDescription="quantità annua uguale o superiore a 200.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_7_B" subCategoryCode="" sequenceId="105" categoryCode="7"
+                         categoryDescription="operatori logistici (trasporto intermodale)"
+                         classCode="B" classDescription="quantità annua tra 60.000 e 200.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_7_C" subCategoryCode="" sequenceId="106" categoryCode="7"
+                         categoryDescription="operatori logistici (trasporto intermodale)"
+                         classCode="C" classDescription="quantità annua tra 15.000 e 60.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_7_D" subCategoryCode="" sequenceId="107" categoryCode="7"
+                         categoryDescription="operatori logistici (trasporto intermodale)"
+                         classCode="D" classDescription="quantità annua tra 6.000 e 15.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_7_E" subCategoryCode="" sequenceId="108" categoryCode="7"
+                         categoryDescription="operatori logistici (trasporto intermodale)"
+                         classCode="E" classDescription="quantità annua tra 3.000 e 6.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_7_F" subCategoryCode="" sequenceId="109" categoryCode="7"
+                         categoryDescription="operatori logistici (trasporto intermodale)"
+                         classCode="F" classDescription="quantità annua inferiore a 3.000 t."/>
+    <GnCategoryClassEnum enumId="GN_CAT_10A_Er" subCategoryCode="A" sequenceId="110" categoryCode="10A"
+                         categoryDescription="attività di bonifica di beni contenenti amianto effettuata su: materiali edili contenenti amianto legato in matrici cementizie o resinoidi."
+                         classCode="e" classDescription="classe E ridotta"/>
+    <GnCategoryClassEnum enumId="GN_CAT_10B_Er" subCategoryCode="B" sequenceId="111" categoryCode="10B"
+                         categoryDescription="attività di bonifica di beni contenenti amianto effettuata su: materiali d'attrito, materiali isolanti, contenitori a pressione, apparecchiature fuori uso, altri materiali incoerenti."
+                         classCode="e" classDescription="classe E ridotta"/>
+
+    <!--constraints type-->
+    <TermType description="Gestione" hasTable="N" parentTypeId="" termTypeId="GN_CNS_WASTE_ENTRY"/>
+    <TermType description="Giacenza" hasTable="N" parentTypeId="" termTypeId="GN_CNS_WASTE_STOCK"/>
+    <TermType description="Trattabilità" hasTable="N" parentTypeId="" termTypeId="GN_CNS_WASTE_TRTMNT"/>
+    <TermType description="Operazione" hasTable="N" parentTypeId="" termTypeId="GN_CNS_OPERATION"/>
+    <TermType description="Targa" hasTable="N" parentTypeId="" termTypeId="GN_CNS_VEHICLE_REG_N"/>
+    <TermType description="Imballaggio" hasTable="N" parentTypeId="" termTypeId="GN_CNS_PACKAGING"/>
+    <TermType description="Rifiuto" hasTable="N" parentTypeId="" termTypeId="GN_CNS_WASTE"/>
+    <TermType description="Tipologia soggetto" hasTable="N" parentTypeId="" termTypeId="GN_CNS_SUBJECT_KIND"/>
+    <TermType description="Funzione soggetto" hasTable="N" parentTypeId="" termTypeId="GN_CNS_SUBJ_COMPANY"/>
+
+    <!--filter type-->
+    <TermType description="Tipo autorizzazione" hasTable="N" parentTypeId="" termTypeId="GN_CNS_AUTH_TYPE"/>
+    <TermType description="Ruolo soggetto" hasTable="N" parentTypeId="" termTypeId="GN_CNS_SUBJ_ROLE"/>
+    <TermType description="Detentore" hasTable="N" parentTypeId="" termTypeId="GN_CNS_HOLDER"/>
+    <!--slicing filter-->
+    <TermType description="Categoria a classe" hasTable="N" parentTypeId="" termTypeId="GN_CNS_CAT_CLASS"/>
+
+
+    <!--HazardousnessType ANY, HAZARDOUS, NOT_HAZARDOUS-->
+    <EnumerationType description="Hazardousness Type" enumTypeId="GN_HAZARD_TYPE" hasTable="N" parentTypeId=""/>
+    <Enumeration description="Tutti" enumCode="GN_HAZARDOUS_ANY" enumId="GN_HAZARDOUS_ANY" sequenceId="01"
+                 enumTypeId="GN_HAZARD_TYPE"/>
+    <Enumeration description="Pericoloso" enumCode="GN_HAZARDOUS" enumId="GN_HAZARDOUS" sequenceId="02"
+                 enumTypeId="GN_HAZARD_TYPE"/>
+    <Enumeration description="Non pericoloso" enumCode="GN_NOT_HAZARDOUS" enumId="GN_NOT_HAZARDOUS" sequenceId="03"
+                 enumTypeId="GN_HAZARD_TYPE"/>
+
+    <!--SubjectType   PRIVATE, COMPANY, MUNICIPALITY, RECYCLING_DEPOT, WASTE_DUMP-->
+    <EnumerationType description="Subject Type" enumTypeId="GN_SUBJECT_TYPE" hasTable="N" parentTypeId=""/>
+    <Enumeration description="PRIVATE" enumCode="GN_ST_PRIVATE" enumId="GN_ST_PRIVATE" sequenceId="01"
+                 enumTypeId="GN_SUBJECT_TYPE"/>
+    <Enumeration description="COMPANY" enumCode="GN_ST_COMPANY" enumId="GN_ST_COMPANY" sequenceId="02"
+                 enumTypeId="GN_SUBJECT_TYPE"/>
+    <Enumeration description="MUNICIPALITY" enumCode="GN_ST_MUNICIPALITY" enumId="GN_ST_MUNICIPALITY" sequenceId="03"
+                 enumTypeId="GN_SUBJECT_TYPE"/>
+    <Enumeration description="RECYCLING_DEPOT" enumCode="GN_ST_RECYCLING_DEPOT" enumId="GN_ST_RECYCLING_DEP"
+                 sequenceId="04" enumTypeId="GN_SUBJECT_TYPE"/>
+    <Enumeration description="WASTE_DUMP" enumCode="GN_ST_WASTE_DUMP" enumId="GN_ST_WASTE_DUMP" sequenceId="05"
+                 enumTypeId="GN_SUBJECT_TYPE"/>
+
+    <ContactMechPurposeType contactMechPurposeTypeId="CONTACT_NOTE" description="Note"/>
+    <ContactMechPurposeType contactMechPurposeTypeId="CONTACT_DESCRIPTION" description="Description"/>
+
+    <ContactMechTypePurpose contactMechPurposeTypeId="CONTACT_NOTE" contactMechTypeId="INTERNAL_PARTYID"/>
+    <ContactMechTypePurpose contactMechPurposeTypeId="CONTACT_DESCRIPTION" contactMechTypeId="INTERNAL_PARTYID"/>
+
+
+    <!--Notification Group - Communication Channel-->
+    <EnumerationType description="Communication Event Type" enumTypeId="GN_COM_EVENT_TYPE" hasTable="N"
+                     parentTypeId=""/>
+    <Enumeration description="EVENT_AUTHORIZATION_TO_BE_VALIDATED" enumCode="EVENT_AUTHORIZATION_TO_BE_VALIDATED"
+                 enumId="GN_COM_EV_AUTH_TO_VA" sequenceId="01" enumTypeId="GN_COM_EVENT_TYPE"/>
+    <Enumeration description="EVENT_AUTHORIZATION_REJECTED" enumCode="EVENT_AUTHORIZATION_REJECTED"
+                 enumId="GN_COM_EV_AUTH_REJ" sequenceId="02" enumTypeId="GN_COM_EVENT_TYPE"/>
+    <Enumeration description="EVENT_AUTHORIZATION_PUBLISHED" enumCode="EVENT_AUTHORIZATION_PUBLISHED"
+                 enumId="GN_COM_EV_AUTH_PUB" sequenceId="03" enumTypeId="GN_COM_EVENT_TYPE"/>
+    <Enumeration description="EVENT_AUTHORIZATION_MODIFIED" enumCode="EVENT_AUTHORIZATION_MODIFIED"
+                 enumId="GN_COM_EV_AUTH_MOD" sequenceId="04" enumTypeId="GN_COM_EVENT_TYPE"/>
+    <Enumeration description="EVENT_AUTHORIZATION_CREATED" enumCode="EVENT_AUTHORIZATION_CREATED"
+                 enumId="GN_COM_EV_AUTH_CRE" sequenceId="05" enumTypeId="GN_COM_EVENT_TYPE"/>
+    <Enumeration description="GN_COM_EV_AUTH_IMPORTED" enumCode="GN_COM_EV_AUTH_IMPORTED" enumId="GN_COM_EV_AUTH_IMP"
+                 sequenceId="06" enumTypeId="GN_COM_EVENT_TYPE"/>
+    <Enumeration description="EVENT_PASSWORD_RECOVER" enumCode="EVENT_PASSWORD_RECOVER" enumId="GN_COM_EV_RST_PWD"
+                 sequenceId="07" enumTypeId="GN_COM_EVENT_TYPE"/>
+    <Enumeration description="EVENT_USER_REENABLED" enumCode="EVENT_USER_REENABLED" enumId="GN_COM_EV_USR_RNBL"
+                 sequenceId="08" enumTypeId="GN_COM_EVENT_TYPE"/>
+    <Enumeration description="EVENT_USER_FIRST_LOGIN" enumCode="EVENT_USER_FIRST_LOGIN" enumId="GN_COM_EV_USR_FSTLGN"
+                 sequenceId="09" enumTypeId="GN_COM_EVENT_TYPE"/>
+    <Enumeration description="Published Authorization must be deleted" enumCode="GN_COM_EV_AUTH_PUB_DEL"
+                 enumId="GN_COM_EV_AUTH_NDEL" sequenceId="10" enumTypeId="GN_COM_EVENT_TYPE"/>
+    <!--job-->
+    <Enumeration description="AUTH_EXPIRING" enumCode="GN_COM_EV_AUTH_EXPIR"
+                 enumId="GN_COM_EV_AUTH_EXPIR" sequenceId="11" enumTypeId="GN_COM_EVENT_TYPE"/>
+    <Enumeration description="INVITATION_EXPIRING" enumCode="GN_COM_EV_INVI_EXP"
+                 enumId="GN_COM_EV_INVI_EXP" sequenceId="12" enumTypeId="GN_COM_EVENT_TYPE"/>
+    <Enumeration description="AUTH_VALIDATION_PENDING" enumCode="GN_COM_EV_AUTH_V_PND"
+                 enumId="GN_COM_EV_AUTH_V_PND" sequenceId="13" enumTypeId="GN_COM_EVENT_TYPE"/>
+    <Enumeration description="AUTH_PUBLICATION_PENDING" enumCode="GN_COM_EV_AUTH_PB_PN"
+                 enumId="GN_COM_EV_AUTH_PB_PN" sequenceId="14" enumTypeId="GN_COM_EVENT_TYPE"/>
+    <Enumeration description="INVITATION_EXPIRED" enumCode="GN_COM_EV_INV_EXPD"
+                 enumId="GN_COM_EV_INV_EXPD" sequenceId="15" enumTypeId="GN_COM_EVENT_TYPE"/>
+    <!--__________________-->
+
+    <CommunicationEventType communicationEventTypeId="SMS_COMMUNICATION" description="SMS" hasTable="N"
+                            parentTypeId=""/>
+
+    <CommunicationEventPrpTyp communicationEventPrpTypId="GN_INTERNAL_COMM" description="GN_INTERNAL_COMMUNICATION"
+                              hasTable="N" parentTypeId=""/>
+
+    <ContactListType contactListTypeId="GN_NOTIFICATION_GRP" description="Notification Group"/>
+
+    <StatusItem description="Not Delivered" sequenceId="08" statusCode="COM_NOT_DELIVERED" statusId="COM_NOT_DELIVERED"
+                statusTypeId="COM_EVENT_STATUS"/>
+
+    <PartyTypeAttr partyTypeId="PARTY_GROUP" attrName="GN_SHARE_AUTHORIZATION"/>
+
+    <!--UserLogin Login Source-->
+    <EnumerationType description="Communication Event Type" enumTypeId="GN_LOGIN_SOURCE" hasTable="N" parentTypeId=""/>
+    <Enumeration description="GN_LOGIN_SOURCE_INTERNAL" enumCode="GN_LOGIN_SOURCE_INTERNAL" enumId="GN_LOG_SRC_INTERNAL"
+                 sequenceId="01" enumTypeId="GN_LOGIN_SOURCE"/>
+
+    <Enumeration description="GN_LOGIN_SOURCE_WEB_API" enumCode="GN_LOGIN_SOURCE_WEB_API" enumId="GN_LOG_SRC_WEB_API"
+                 sequenceId="02" enumTypeId="GN_LOGIN_SOURCE"/>
+
+    <Enumeration description="GN_LOGIN_SOURCE_WEB_UI" enumCode="GN_LOGIN_SOURCE_WEB_UI" enumId="GN_LOG_SRC_WEB_UI"
+                 sequenceId="03" enumTypeId="GN_LOGIN_SOURCE"/>
+
+    <Enumeration description="GN_LOG_SRC_MOBILE" enumCode="GN_LOG_SRC_MOBILE" enumId="GN_LOG_SRC_MOBILE" sequenceId="04"
+                 enumTypeId="GN_LOGIN_SOURCE"/>
+
+    <StatusItem description="Invitation Unsent" sequenceId="11" statusCode="UNSENT" statusId="PARTYINV_UNSENT"
+                statusTypeId="PARTY_INV_STATUS"/>
+
+    <StatusItem description="Invitation already sent by other" sequenceId="11" statusCode="INVAGAIN"
+                statusId="PARTYINV_INVAGAIN" statusTypeId="PARTY_INV_STATUS"/>
+
+</entity-engine-xml>

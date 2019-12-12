@@ -1,0 +1,399 @@
+    <!-- ================================================================================================= -->
+    <!--                                Company A2A S.p.A.                                                 -->
+    <!-- ================================================================================================= -->
+    <Party partyId="GN_A2A" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="A2A SPA"/>
+    <PartyGroup partyId="GN_A2A" groupName="A2A SPA"/>
+    <GnPartyNode partyId="GN_A2A" nodeKey="GN_A2A@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY"
+                 taxIdentificationNumber="11957540153" VATnumber="11957540153"
+                 name="A2A SPA"/>
+    <PartyRole partyId="GN_A2A" roleTypeId="GN_COMPANY"/>
+    <PartyRole partyId="GN_A2A" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_A2A" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <PartyAttribute partyId="GN_A2A" attrName="ROOT_PUBLISH" attrValue="N"/>
+    <PartyAttribute partyId="GN_A2A" attrName="PRIVATE_AUTH_PUBLISH" attrValue="N"/>
+    <!-- ================================================-->
+    <!-- Main company base A2A S.p.A. Brescia            -->
+    <!-- ================================================-->
+    <Party partyId="GN_A2A_BS" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="A2A S.p.A. - Brescia"/>
+    <PartyGroup partyId="GN_A2A_BS" groupName="A2A S.p.A. - Brescia"/>
+    <GnPartyNode partyId="GN_A2A_BS" nodeKey="GN_A2A_BS@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber=""
+                 registeredOffice="Y" authorizationOwner="N"/>
+    <PartyRole partyId="GN_A2A_BS" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_A2A_BS" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_A2A_BS" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_A2A_BS" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_A2A_BS"
+                      contactMechId="CM_A2A_BS"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_A2A_BS"
+                   toName="A2A S.p.A. - Brescia"
+                   address1="VIA LAMARMORA"
+                   streetNumber="230"
+                   village=""
+                   city="Brescia"
+                   postalCode="25124"
+                   postalCodeGeoId="IT-GN-CAP-25124"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-LOMBARDIA"
+                   stateProvinceGeoId="IT-GN-017"
+                   municipalityGeoId="IT-GN-017029"/>
+
+    <PartyRelationship partyIdFrom="GN_A2A" partyIdTo="GN_A2A_BS"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: A2A detiene A2A Brescia"/>
+    <PartyRelationship partyIdFrom="GN_A2A_BS" partyIdTo="GN_A2A"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: A2A Brescia appartiene a A2A"/>
+
+    <!-- ================================================================================================= -->
+    <!--                                Company AMSA S.p.A.                                                -->
+    <!-- ================================================================================================= -->
+    <Party partyId="GN_AMSA" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="AMSA SPA - AZIENDA MILANESE SERVIZI AMBIENTALI"/>
+    <PartyGroup partyId="GN_AMSA" groupName="AMSA SPA - AZIENDA MILANESE SERVIZI AMBIENTALI"/>
+    <GnPartyNode partyId="GN_AMSA" nodeKey="GN_AMSA@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY"
+                 taxIdentificationNumber="05908960965" VATnumber="05908960965"
+                 name="AMSA SPA - AZIENDA MILANESE SERVIZI AMBIENTALI"/>
+    <PartyRole partyId="GN_AMSA" roleTypeId="GN_COMPANY"/>
+    <PartyRole partyId="GN_AMSA" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_AMSA" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <PartyAttribute partyId="GN_AMSA" attrName="ROOT_PUBLISH" attrValue="N"/>
+    <PartyAttribute partyId="GN_AMSA" attrName="PRIVATE_AUTH_PUBLISH" attrValue="N"/>
+    <!-- ================================================-->
+    <!-- Main company base AMSA S.p.A. Milano            -->
+    <!-- ================================================-->
+    <Party partyId="GN_AMSA_MI" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="AMSA S.p.A. - Milano"/>
+    <PartyGroup partyId="GN_AMSA_MI" groupName="AMSA S.p.A. - Milano"/>
+    <GnPartyNode partyId="GN_AMSA_MI" nodeKey="GN_AMSA_MI@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 activityNumber="" reaNumber=""
+                 registeredOffice="Y" authorizationOwner="N"/>
+    <PartyRole partyId="GN_AMSA_MI" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_AMSA_MI" roleTypeId="GN_PROPAGATION_NODE"/>
+    <PartyRole partyId="GN_AMSA_MI" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--Address-->
+    <ContactMech contactMechId="CM_AMSA_MI" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_AMSA_MI"
+                      contactMechId="CM_AMSA_MI"
+                      allowSolicitation="Y"
+                      fromDate="2000-01-01 00:00:00.000"/>
+    <PostalAddress contactMechId="CM_AMSA_MI"
+                   toName="AMSA S.p.A. - Milano"
+                   address1="VIA OLGETTINA"
+                   streetNumber="25"
+                   village=""
+                   city="Milano"
+                   postalCode="20132"
+                   postalCodeGeoId="IT-GN-CAP-20132"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-LOMBARDIA"
+                   stateProvinceGeoId="IT-GN-015"
+                   municipalityGeoId="IT-GN-015146"/>
+
+    <PartyRelationship partyIdFrom="GN_AMSA" partyIdTo="GN_AMSA_MI"
+                       roleTypeIdFrom="GN_COMPANY" roleTypeIdTo="GN_COMPANY_BASE"
+                       partyRelationshipTypeId="GN_OWNS" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Detenzione: AMSA detiene AMSA Milano"/>
+    <PartyRelationship partyIdFrom="GN_AMSA_MI" partyIdTo="GN_AMSA"
+                       roleTypeIdFrom="GN_COMPANY_BASE" roleTypeIdTo="GN_COMPANY"
+                       partyRelationshipTypeId="GN_BELONGS_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Appartenenza: AMSA Milano appartiene a AMSA"/>
+
+    <!-- ========================= -->
+    <!--     AMSA users            -->
+    <!-- ========================= -->
+
+    <!--user  roberto.ipogino@amsa.it / pw: amsaipogino -->
+    <Party partyId="U_AMSA_IPOGINO" partyTypeId="PERSON"/>
+    <Person partyId="U_AMSA_IPOGINO" lastName="Ipogino" firstName="Roberto "/>
+    <UserLogin userLoginId="roberto.ipogino@amsa.it" partyId="U_AMSA_IPOGINO"
+               currentPassword="{SHA}9a172ad0df8a3178a347b824ddcfc4b185b28b15" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="roberto.ipogino@amsa.it" enumId="GN_LOG_SRC_WEB_UI"/>
+	<GnUserLoginSource userLoginId="roberto.ipogino@amsa.it" enumId="GN_LOG_SRC_MOBILE"/>
+    <PartyRole partyId="U_AMSA_IPOGINO" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="roberto.ipogino@amsa.it" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_AMSA_IPOGINO" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="roberto.ipogino@amsa.it"/>
+    <PartyContactMech partyId="U_AMSA_IPOGINO" contactMechId="CM_AMSA_IPOGINO"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_AMSA_IPOGINO" contactMechId="CM_AMSA_IPOGINO"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_AMSA_IPOGINO" partyIdTo="GN_AMSA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (roberto.ipogino@amsa.it) impiegato in azienda (AMSA)"/>
+					   
+    <!--user  carmen.tafuri@amsa.it / pw: amsatafuri -->
+	<Party partyId="U_AMSA_CAFURI" partyTypeId="PERSON"/>
+    <Person partyId="U_AMSA_CAFURI" lastName="Tafuri" firstName="Carmen "/>
+    <UserLogin userLoginId="carmen.tafuri@amsa.it" partyId="U_AMSA_CAFURI"
+               currentPassword="{SHA}2a0368ac5aaa90ca3c28887d03c396aa40cb2016" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="carmen.tafuri@amsa.it" enumId="GN_LOG_SRC_WEB_UI"/>
+	<GnUserLoginSource userLoginId="carmen.tafuri@amsa.it" enumId="GN_LOG_SRC_MOBILE"/>
+    <PartyRole partyId="U_AMSA_CAFURI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="carmen.tafuri@amsa.it" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_AMSA_CAFURI" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="carmen.tafuri@amsa.it"/>
+    <PartyContactMech partyId="U_AMSA_CAFURI" contactMechId="CM_AMSA_CAFURI"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_AMSA_CAFURI" contactMechId="CM_AMSA_CAFURI"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_AMSA_CAFURI" partyIdTo="GN_AMSA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (carmen.tafuri@amsa.it) impiegato in azienda (AMSA)"/>
+
+    <!--user  filippo.orsini@amsa.it / pw: amsaorsini -->
+	<Party partyId="U_AMSA_ORSINI" partyTypeId="PERSON"/>
+    <Person partyId="U_AMSA_ORSINI" lastName="Orsini" firstName="Filippo "/>
+    <UserLogin userLoginId="filippo.orsini@amsa.it" partyId="U_AMSA_ORSINI"
+               currentPassword="{SHA}73c48b1f9b21ca459f582e87124e168e6e552df3" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="filippo.orsini@amsa.it" enumId="GN_LOG_SRC_WEB_UI"/>
+	<GnUserLoginSource userLoginId="filippo.orsini@amsa.it" enumId="GN_LOG_SRC_MOBILE"/>
+    <PartyRole partyId="U_AMSA_ORSINI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="filippo.orsini@amsa.it" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_AMSA_ORSINI" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="filippo.orsini@amsa.it"/>
+    <PartyContactMech partyId="U_AMSA_ORSINI" contactMechId="CM_AMSA_ORSINI"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_AMSA_ORSINI" contactMechId="CM_AMSA_ORSINI"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_AMSA_ORSINI" partyIdTo="GN_AMSA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (filippo.orsini@amsa.it) impiegato in azienda (AMSA)"/>					   
+					   
+    <!--user  alice.locatelli@amsa.it / pw: amsalocatelli -->
+    <Party partyId="U_AMSA_LOCATELLI" partyTypeId="PERSON"/>
+    <Person partyId="U_AMSA_LOCATELLI" lastName="Locatelli" firstName="Alice "/>
+    <UserLogin userLoginId="alice.locatelli@amsa.it" partyId="U_AMSA_LOCATELLI"
+               currentPassword="{SHA}1c05c4170e3fc53ebcfbabe30d367eda38d4dd0a" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="alice.locatelli@amsa.it" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="U_AMSA_LOCATELLI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="alice.locatelli@amsa.it" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_AMSA_LOCATELLI" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="alice.locatelli@amsa.it"/>
+    <PartyContactMech partyId="U_AMSA_LOCATELLI" contactMechId="CM_AMSA_LOCATELLI"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_AMSA_LOCATELLI" contactMechId="CM_AMSA_LOCATELLI"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_AMSA_LOCATELLI" partyIdTo="GN_AMSA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (alice.locatelli@amsa.it) impiegato in azienda (AMSA)"/>
+
+    <!--user  manuela.borgoglio@amsa.it / pw: amsaborgoglio -->
+    <Party partyId="U_AMSA_BORGOGLIO" partyTypeId="PERSON"/>
+    <Person partyId="U_AMSA_BORGOGLIO" lastName="Borgoglio" firstName="Manuela "/>
+    <UserLogin userLoginId="manuela.borgoglio@amsa.it" partyId="U_AMSA_BORGOGLIO"
+               currentPassword="{SHA}d3ca26d09ee14c5baf03fa7176af164e4b54dd39" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="manuela.borgoglio@amsa.it" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="U_AMSA_BORGOGLIO" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="manuela.borgoglio@amsa.it" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_AMSA_BORGOGLIO" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="manuela.borgoglio@amsa.it"/>
+    <PartyContactMech partyId="U_AMSA_BORGOGLIO" contactMechId="CM_AMSA_BORGOGLIO"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_AMSA_BORGOGLIO" contactMechId="CM_AMSA_BORGOGLIO"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_AMSA_BORGOGLIO" partyIdTo="GN_AMSA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (manuela.borgoglio@amsa.it) impiegato in azienda (AMSA)"/>
+
+    <!--user  elena.rossi@amsa.it / pw: amsarossi -->
+    <Party partyId="U_AMSA_ROSSI" partyTypeId="PERSON"/>
+    <Person partyId="U_AMSA_ROSSI" lastName="Rossi" firstName="Elena "/>
+    <UserLogin userLoginId="elena.rossi@amsa.it" partyId="U_AMSA_ROSSI"
+               currentPassword="{SHA}4e5e681b3b05bb0616115c6ead4b984461afa89d" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="elena.rossi@amsa.it" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="U_AMSA_ROSSI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="elena.rossi@amsa.it" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_AMSA_ROSSI" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="elena.rossi@amsa.it"/>
+    <PartyContactMech partyId="U_AMSA_ROSSI" contactMechId="CM_AMSA_ROSSI"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_AMSA_ROSSI" contactMechId="CM_AMSA_ROSSI"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_AMSA_ROSSI" partyIdTo="GN_AMSA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (elena.rossi@amsa.it) impiegato in azienda (AMSA)"/>
+					   
+    <!--user  antonio.meloni@amsa.it / pw: amsameloni -->
+    <Party partyId="U_AMSA_MELONI" partyTypeId="PERSON"/>
+    <Person partyId="U_AMSA_MELONI" lastName="Meloni" firstName="Antonio "/>
+    <UserLogin userLoginId="antonio.meloni@amsa.it" partyId="U_AMSA_MELONI"
+               currentPassword="{SHA}957cf6e9c2bb532230abb6631254461d53840d74" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="antonio.meloni@amsa.it" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="U_AMSA_MELONI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="antonio.meloni@amsa.it" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_AMSA_MELONI" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="antonio.meloni@amsa.it"/>
+    <PartyContactMech partyId="U_AMSA_MELONI" contactMechId="CM_AMSA_MELONI"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_AMSA_MELONI" contactMechId="CM_AMSA_MELONI"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_AMSA_MELONI" partyIdTo="GN_AMSA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (antonio.meloni@amsa.it) impiegato in azienda (AMSA)"/>
+
+    <!--user  eris.torriani@amsa.it / pw: amsatorriani -->
+    <Party partyId="U_AMSA_TORRIANI" partyTypeId="PERSON"/>
+    <Person partyId="U_AMSA_TORRIANI" lastName="Torriani" firstName="Eris "/>
+    <UserLogin userLoginId="eris.torriani@amsa.it" partyId="U_AMSA_TORRIANI"
+               currentPassword="{SHA}6f5e6cbf4ff6125ae88cca4bd83b8b242e37e579" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="eris.torriani@amsa.it" enumId="GN_LOG_SRC_WEB_UI"/>
+	<GnUserLoginSource userLoginId="eris.torriani@amsa.it" enumId="GN_LOG_SRC_MOBILE"/>
+    <PartyRole partyId="U_AMSA_TORRIANI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="eris.torriani@amsa.it" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_AMSA_TORRIANI" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="eris.torriani@amsa.it"/>
+    <PartyContactMech partyId="U_AMSA_TORRIANI" contactMechId="CM_AMSA_TORRIANI"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_AMSA_TORRIANI" contactMechId="CM_AMSA_TORRIANI"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_AMSA_TORRIANI" partyIdTo="GN_AMSA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (eris.torriani@amsa.it) impiegato in azienda (AMSA)"/>
+
+    <!--user  maurizio.tremolada@amsa.it / pw: amsatremolada -->
+    <Party partyId="U_AMSA_TREMOLADA" partyTypeId="PERSON"/>
+    <Person partyId="U_AMSA_TREMOLADA" lastName="Tremolada" firstName="Maurizio "/>
+    <UserLogin userLoginId="maurizio.tremolada@amsa.it" partyId="U_AMSA_TREMOLADA"
+               currentPassword="{SHA}cc5d3351910883a7ab26bba488f66f1de1b8a770" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="maurizio.tremolada@amsa.it" enumId="GN_LOG_SRC_WEB_UI"/>
+	<GnUserLoginSource userLoginId="maurizio.tremolada@amsa.it" enumId="GN_LOG_SRC_MOBILE"/>
+    <PartyRole partyId="U_AMSA_TREMOLADA" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="maurizio.tremolada@amsa.it" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_AMSA_TREMOLADA" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="maurizio.tremolada@amsa.it"/>
+    <PartyContactMech partyId="U_AMSA_TREMOLADA" contactMechId="CM_AMSA_TREMOLADA"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_AMSA_TREMOLADA" contactMechId="CM_AMSA_TREMOLADA"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_AMSA_TREMOLADA" partyIdTo="GN_AMSA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (maurizio.tremolada@amsa.it) impiegato in azienda (AMSA)"/>
+					   
+    <!--user  francesco.bruni@a2a.eu / pw: bruni -->
+    <Party partyId="U_A2A_BRUNI" partyTypeId="PERSON"/>
+    <Person partyId="U_A2A_BRUNI" lastName="Bruni" firstName="Francesco "/>
+    <UserLogin userLoginId="francesco.bruni@a2a.eu" partyId="U_A2A_BRUNI"
+               currentPassword="{SHA}a003b89fb9dbd9f6e4129750b3600ecbec90d4f5" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="francesco.bruni@a2a.eu" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="U_A2A_BRUNI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="francesco.bruni@a2a.eu" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_A2A_BRUNI" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="francesco.bruni@a2a.eu"/>
+    <PartyContactMech partyId="U_A2A_BRUNI" contactMechId="CM_A2A_BRUNI"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_A2A_BRUNI" contactMechId="CM_A2A_BRUNI"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_A2A_BRUNI" partyIdTo="GN_AMSA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (francesco.bruni@a2a.eu) impiegato in azienda (AMSA)"/>					   
+
+    <!--user inviti.amsa / pw: amsainviti-->
+    <Party partyId="U_AMSA_INVITI" partyTypeId="PERSON"/>
+    <Person partyId="U_AMSA_INVITI" lastName="inviti" firstName="Amsa "/>
+    <UserLogin userLoginId="inviti.amsa" partyId="U_AMSA_INVITI"
+               currentPassword="{SHA}f164b287f429840cceb9d708bd71b41cb4bb299a" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="inviti.amsa" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="U_AMSA_INVITI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="inviti.amsa" groupId="BIZADMIN"
+                            fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_AMSA_INVITI" contactMechTypeId="EMAIL_ADDRESS"
+                 infoString="support@greennebula.it"/>
+    <PartyContactMech partyId="U_AMSA_INVITI" contactMechId="CM_AMSA_INVITI"
+                      fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_AMSA_INVITI" contactMechId="CM_AMSA_INVITI"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="U_AMSA_INVITI" partyIdTo="GN_AMSA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (inviti.amsa) impiegato in azienda (Amsa)"/>					   
+
+       <!-- AMSA web API users -->
+    <Party partyId="U_AMSA_WEBAPI" partyTypeId="PERSON"/>
+    <Person partyId="U_AMSA_WEBAPI" lastName="utente web API" firstName="AMSA "/>
+    <UserLogin userLoginId="amsawebapi" partyId="U_AMSA_WEBAPI"
+               currentPassword="{SHA}4449b696cbb2454bdc84b0113e4d208cc8189882" originId="GN_AUTH_ORG_APP"/>
+    <GnUserLoginSource userLoginId="amsawebapi" enumId="GN_LOG_SRC_WEB_API"/>
+    <PartyRole partyId="U_AMSA_WEBAPI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="amsawebapi" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="cm_amsawebapi" contactMechTypeId="EMAIL_ADDRESS" infoString=""/>
+    <PartyContactMech partyId="U_AMSA_WEBAPI" contactMechId="cm_amsawebapi" fromDate="2001-05-13 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="U_AMSA_WEBAPI" contactMechId="cm_amsawebapi"
+                             contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+							 
+    <PartyRelationship partyIdFrom="U_AMSA_WEBAPI" partyIdTo="GN_AMSA"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (amsawebapi) impiegato in azienda (AMSA)"/>
+       <!-- AMSA web API users end -->
+    <!--     AMSA users end     -->
+
+    <!-- ================================================================================================= -->
+    <!--                                                Company AMSA S.p.A.                           -->
+    <!-- ================================================================================================= -->

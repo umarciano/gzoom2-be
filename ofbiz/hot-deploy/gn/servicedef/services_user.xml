@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Gn Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="gnGetUserProfile" engine="java" auth="true"
+             location="it.memelabs.gn.services.user.UserServices" invoke="gnGetUserProfile"
+             export="true" use-transaction="true">
+        <description>Get UserLogin info with related GnContext</description>
+        <attribute name="userLoginId" type="java.lang.String" mode="INOUT" optional="false"/>
+
+        <attribute name="lastName" type="java.lang.String" mode="OUT" optional="false"/>
+        <attribute name="firstName" type="java.lang.String" mode="OUT" optional="false"/>
+        <attribute name="contexts" type="java.util.List" mode="OUT" optional="false"/>
+        <!--default context-->
+        <attribute name="contextId" type="java.lang.String" mode="OUT" optional="true"/>
+        <attribute name="contact" type="java.util.Map" mode="OUT" optional="true"/>
+        <attribute name="company" type="java.util.Map" mode="OUT" optional="true"/>
+        <attribute name="companyProfile" type="java.util.Map" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnGetUser" engine="java" auth="true"
+             location="it.memelabs.gn.services.user.UserServices" invoke="gnGetUser"
+             export="false">
+        <description>Get UserLogin Info</description>
+        <attribute name="userLoginId" type="java.lang.String" mode="INOUT" optional="false"/>
+        <attribute name="lastName" type="java.lang.String" mode="OUT" optional="true"/>
+        <attribute name="firstName" type="java.lang.String" mode="OUT" optional="true"/>
+        <attribute name="contact" type="java.util.Map" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnFindContextById" engine="java" auth="true"
+             location="it.memelabs.gn.services.user.GnContextServices" invoke="gnFindContextById"
+             export="true">
+        <description>Get GnContext with belong users (UserLogin). Input (partyId-->contextId)</description>
+        <attribute name="partyId" type="java.lang.String" mode="INOUT" optional="false">
+            <description>contextId</description>
+        </attribute>
+
+        <attribute name="excludeCompanyBases" mode="IN" type="String" optional="true" default-value="N"/>
+        <attribute name="excludeSecurityGroups" mode="IN" type="String" optional="true" default-value="N"/>
+        <attribute name="excludePartyNode" mode="IN" type="String" optional="true" default-value="N"/>
+        <attribute name="excludeUsers" mode="IN" type="String" optional="true" default-value="N"/>
+
+        <attribute name="description" type="java.lang.String" mode="OUT" optional="true"/>
+        <attribute name="companyBases" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="securityGroups" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="partyNode" type="java.util.Map" mode="OUT" optional="true"/>
+        <attribute name="users" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnFindContextByIdInternal" engine="java" auth="false"
+             location="it.memelabs.gn.services.user.UserServices" invoke="gnFindContextById"
+             export="false">
+        <description>Get GnContext with belong users (UserLogin). Input (partyId-->contextId).
+            Service doesn't require authentication because is for internal use only.
+        </description>
+        <implements service="gnFindContextById"/>
+    </service>
+
+    <service name="gnFindCompanyWhereUserIsEmployed" engine="java" auth="false"
+             location="it.memelabs.gn.services.user.UserServices" invoke="gnFindCompanyWhereUserIsEmployed">
+        <description>
+        </description>
+        <attribute name="userLoginPartyId" type="java.lang.String" mode="IN" optional="false"/>
+        <attribute name="partyNode" type="java.util.Map" mode="OUT" optional="true"/>
+    </service>
+
+
+    <service name="gnUserProfileFindUsers" engine="java" auth="true"
+             location="it.memelabs.gn.services.user.UserServices" invoke="gnUserProfileFindUsers"
+             export="true">
+        <description>Find Users by employing companyId</description>
+        <permission-service service-name="gnCheckUserLoginContextValidity" main-action="VIEW"/>
+        <attribute name="partyId" type="java.lang.String" mode="IN" optional="true">
+            <description>employing companyId</description>
+        </attribute>
+        <attribute name="nodeKey" type="java.lang.String" mode="IN" optional="true">
+            <description>employing companyNodeKey</description>
+        </attribute>
+
+        <attribute name="users" type="java.util.List" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="gnGetPasswordConstraints" engine="java" auth="true"
+             location="it.memelabs.gn.services.user.UserServices" invoke="gnGetPasswordConstraints"
+             export="true">
+        <description>Find Users by employing companyId</description>
+        <attribute name="passwordConstraints" type="java.lang.String" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnInternalGetPasswordConstraints" engine="java" auth="false"
+             location="it.memelabs.gn.services.user.UserServices" invoke="gnInternalGetPasswordConstraints"
+             export="false">
+        <description>Find Users by employing companyId</description>
+        <attribute name="userLoginId" type="java.lang.String" mode="IN" optional="false"/>
+        <attribute name="passwordConstraints" type="java.lang.String" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="gnFindUsersByEmployingCompany" engine="java" auth="true"
+             location="it.memelabs.gn.services.user.UserServices" invoke="gnFindUsersByEmployingCompany"
+             export="false">
+        <description>Find Users by employing companyId</description>
+        <permission-service service-name="gnCheckUserLoginContextValidity" main-action="VIEW"/>
+        <attribute name="partyId" type="java.lang.String" mode="IN" optional="true">
+            <description>employing companyId</description>
+        </attribute>
+        <attribute name="nodeKey" type="java.lang.String" mode="IN" optional="true">
+            <description>employing companyNodeKey</description>
+        </attribute>
+
+        <attribute name="users" type="java.util.List" mode="OUT" optional="false"/>
+    </service>
+
+
+    <service name="gnFindUsers" engine="java" auth="true"
+             location="it.memelabs.gn.services.user.UserServices" invoke="gnFindUsers"
+             export="true">
+        <description>Find Users</description>
+        <attribute name="userLoginId" type="String" mode="IN" optional="true"/>
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+
+        <attribute name="users" type="java.util.List" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="gnUpdatePassword" engine="java" auth="true"
+             location="it.memelabs.gn.services.user.UserServices" invoke="gnUpdatePassword"
+             export="true">
+        <description>Updates user's password</description>
+        <attribute name="request" type="javax.servlet.http.HttpServletRequest" mode="IN" optional="false"/>
+        <attribute name="currentPassword" type="String" mode="IN" optional="false"/>
+        <attribute name="newPassword" type="String" mode="IN" optional="false"/>
+        <attribute name="newPasswordVerify" type="String" mode="IN" optional="false"/>
+    </service>
+
+    <service name="gnResetPassword" engine="java" auth="true"
+             location="it.memelabs.gn.services.user.UserServices" invoke="gnResetPassword"
+             export="true">
+        <description>Resets user's password having the uuid</description>
+        <attribute name="userLoginId" mode="IN" type="String" optional="false"/>
+        <attribute name="uuid" mode="IN" type="String" optional="false"/>
+        <attribute name="password" mode="IN" type="String" optional="false"/>
+    </service>
+
+    <service name="gnRecoverPassword" engine="java" auth="true"
+             location="it.memelabs.gn.services.user.UserServices" invoke="gnRecoverPassword"
+             export="true">
+        <description>Creates the password recovery uuid</description>
+        <implements service="gnSendCommunicationEventInterface"/>
+        <attribute name="userLoginId" mode="IN" type="String" optional="false"/>
+        <attribute name="email" mode="OUT" type="String" optional="true"/>
+        <attribute name="uuid" mode="OUT" type="String" optional="false"/>
+    </service>
+
+    <service name="gnIsValidResetPassword" engine="java" auth="true"
+             location="it.memelabs.gn.services.user.UserServices" invoke="gnIsValidResetPassword"
+             export="true">
+        <description>Verifies the given password reset uuid. If it isn't valid, the service throws an exception
+        </description>
+        <attribute name="uuid" mode="IN" type="String" optional="false"/>
+        <attribute name="passwordConstraints" mode="OUT" type="String" optional="true"/>
+    </service>
+
+    <service name="gnReenableUserLogin" engine="java" auth="true"
+             location="it.memelabs.gn.services.user.UserServices" invoke="gnReenableUserLogin"
+             export="true">
+        <description>Enable an existing userLoginId</description>
+        <implements service="gnSendCommunicationEventInterface"/>
+        <attribute name="userLoginId" mode="IN" type="String" optional="false"/>
+        <attribute name="previousDisabled" type="java.lang.String" mode="OUT" optional="false"/>
+    </service>
+
+</services>

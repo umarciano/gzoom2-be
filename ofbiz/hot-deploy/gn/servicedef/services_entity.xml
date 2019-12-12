@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Gn Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="gnFindEntity" engine="java" auth="true"
+             location="it.memelabs.gn.services.EntityServices" invoke="findEntity"
+             export="true">
+        <description>Find Users</description>
+        <attribute name="entityName" type="String" mode="IN" optional="false"/>
+        <attribute name="entityFilterFields" type="java.util.List" mode="IN" optional="true"/>
+
+        <attribute name="entityListSize" type="java.lang.Integer" mode="OUT" optional="false"/>
+        <attribute name="entityList" type="java.util.List" mode="OUT" optional="false"/>
+    </service>
+
+
+</services>

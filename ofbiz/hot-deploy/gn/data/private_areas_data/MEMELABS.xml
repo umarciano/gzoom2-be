@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+    <Party partyId="USER_MEMELABS" partyTypeId="PERSON"/>
+    <Person partyId="USER_MEMELABS" lastName="Memelabs" firstName="Amministratore "/>
+    <UserLogin userLoginId="memelabs" partyId="USER_MEMELABS"
+               currentPassword="{SHA}3c5e332bf4ebfcab832cf7369c32aa144ae91c0b" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="memelabs" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="USER_MEMELABS" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="memelabs" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <PartyRelationship partyIdFrom="USER_MEMELABS" partyIdTo="GN_MEMELABS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (memelabs) impiegato in azienda (Memelabs)"/>
+
+    <Party partyId="USER_MEMEUSER" partyTypeId="PERSON"/>
+    <Person partyId="USER_MEMEUSER" lastName="Memelabs" firstName="Utente "/>
+    <UserLogin userLoginId="memeuser" partyId="USER_MEMEUSER"
+               currentPassword="{SHA}3c5e332bf4ebfcab832cf7369c32aa144ae91c0b" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="memeuser" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="USER_MEMEUSER" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="memeuser" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <PartyRelationship partyIdFrom="USER_MEMEUSER" partyIdTo="GN_MEMELABS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (memeuser) impiegato in azienda (Memelabs)"/>
+					   
+    <Party partyId="USER_EUROUSER" partyTypeId="PERSON"/>
+    <Person partyId="USER_EUROUSER" lastName="EuroInformatica" firstName="Utente "/>
+    <UserLogin userLoginId="eurouser" partyId="USER_EUROUSER"
+               currentPassword="{SHA}cf8032db817cd1ef6b2e84b916c6c3ec0d37437e" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="eurouser" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="USER_EUROUSER" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="eurouser" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <PartyRelationship partyIdFrom="USER_EUROUSER" partyIdTo="GN_MEMELABS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (eurouser) impiegato in azienda (Memelabs)"/>					   
+
+    <Party partyId="USER_ANDREA_MANNELLI" partyTypeId="PERSON"/>
+    <Person partyId="USER_ANDREA_MANNELLI" lastName="Mannelli" firstName="Andrea "/>
+    <UserLogin userLoginId="andrea.mannelli@memelabs.it" partyId="USER_ANDREA_MANNELLI"
+               currentPassword="{SHA}2517b193382b04c93325b07bd6c279dcd7d26ee3" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="andrea.mannelli@memelabs.it" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="USER_ANDREA_MANNELLI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="andrea.mannelli@memelabs.it" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_ANDREA_MANNELLI" contactMechTypeId="EMAIL_ADDRESS" infoString="andrea.mannelli@memelabs.it"/>
+    <PartyContactMech partyId="USER_ANDREA_MANNELLI" contactMechId="CM_ANDREA_MANNELLI" fromDate="2001-05-13 00:00:00.000" />
+    <PartyContactMechPurpose partyId="USER_ANDREA_MANNELLI" contactMechId="CM_ANDREA_MANNELLI" contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="USER_ANDREA_MANNELLI" partyIdTo="GN_MEMELABS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (andrea.mannelli@memelabs.it) impiegato in azienda (Memelabs)"/>
+
+    <Party partyId="USER_OSGARIGLIA" partyTypeId="PERSON"/>
+    <Person partyId="USER_OSGARIGLIA" lastName="Sgariglia" firstName="Ottavio "/>
+    <UserLogin userLoginId="ottavio.sgariglia@memelabs.it" partyId="USER_OSGARIGLIA"
+               currentPassword="{SHA}43e41234ac0f3105429d0afd610c55b9b44b4478" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="ottavio.sgariglia@memelabs.it" enumId="GN_LOG_SRC_WEB_UI"/>
+    <GnUserLoginSource userLoginId="ottavio.sgariglia@memelabs.it" enumId="GN_LOG_SRC_MOBILE"/>
+    <PartyRole partyId="USER_OSGARIGLIA" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="gnadmin" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_OSGARIGLIA" contactMechTypeId="EMAIL_ADDRESS" infoString="ottavio.sgariglia@memelabs.it"/>
+    <PartyContactMech partyId="USER_OSGARIGLIA" contactMechId="CM_OSGARIGLIA" fromDate="2001-05-13 00:00:00.000" />
+    <PartyContactMechPurpose partyId="USER_OSGARIGLIA" contactMechId="CM_OSGARIGLIA" contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="USER_OSGARIGLIA" partyIdTo="GN_MEMELABS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (ottavio.sgariglia@memelabs.it) impiegato in azienda (Memelabs)"/>
+
+    <Party partyId="USER_ANDREA_FOSSI" partyTypeId="PERSON"/>
+    <Person partyId="USER_ANDREA_FOSSI" lastName="Fossi" firstName="Andrea "/>
+    <UserLogin userLoginId="andrea.fossi@memelabs.it" partyId="USER_ANDREA_FOSSI"
+               currentPassword="{SHA}9b39ef70df41689527f6a60183dd526a3ae76c7f" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="andrea.fossi@memelabs.it" enumId="GN_LOG_SRC_WEB_UI"/>
+    <GnUserLoginSource userLoginId="andrea.fossi@memelabs.it" enumId="GN_LOG_SRC_MOBILE"/>
+    <PartyRole partyId="USER_ANDREA_FOSSI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="andrea.fossi@memelabs.it" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_ANDREA_FOSSI" contactMechTypeId="EMAIL_ADDRESS" infoString="andrea.fossi@memelabs.it"/>
+    <PartyContactMech partyId="USER_ANDREA_FOSSI" contactMechId="CM_ANDREA_FOSSI" fromDate="2001-05-13 00:00:00.000" />
+    <PartyContactMechPurpose partyId="USER_ANDREA_FOSSI" contactMechId="CM_ANDREA_FOSSI" contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="USER_ANDREA_FOSSI" partyIdTo="GN_MEMELABS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (andrea.fossi@memelabs.it) impiegato in azienda (Memelabs)"/>
+
+    <Party partyId="USER_ELISA_SPADA" partyTypeId="PERSON"/>
+    <Person partyId="USER_ELISA_SPADA" lastName="Spada" firstName="Elisa "/>
+    <UserLogin userLoginId="elisa.spada@memelabs.it" partyId="USER_ELISA_SPADA"
+               currentPassword="{SHA}9b39ef70df41689527f6a60183dd526a3ae76c7f" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="elisa.spada@memelabs.it" enumId="GN_LOG_SRC_WEB_UI"/>
+    <GnUserLoginSource userLoginId="elisa.spada@memelabs.it" enumId="GN_LOG_SRC_MOBILE"/>
+    <PartyRole partyId="USER_ELISA_SPADA" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="elisa.spada@memelabs.it" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_ELISA_SPADA" contactMechTypeId="EMAIL_ADDRESS" infoString="elisa.spada@memelabs.it"/>
+    <PartyContactMech partyId="USER_ELISA_SPADA" contactMechId="CM_ELISA_SPADA" fromDate="2001-05-13 00:00:00.000" />
+    <PartyContactMechPurpose partyId="USER_ELISA_SPADA" contactMechId="CM_ELISA_SPADA" contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="USER_ELISA_SPADA" partyIdTo="GN_MEMELABS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (elisa.spada@memelabs.it) impiegato in azienda (Memelabs)"/>
+
+    <Party partyId="USER_FABIO_STROZZI" partyTypeId="PERSON"/>
+    <Person partyId="USER_FABIO_STROZZI" lastName="Strozzi" firstName="Fabio "/>
+    <UserLogin userLoginId="fabio.strozzi@mapsengineering.com" partyId="USER_FABIO_STROZZI"
+               currentPassword="{SHA}9b39ef70df41689527f6a60183dd526a3ae76c7f" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="fabio.strozzi@mapsengineering.com" enumId="GN_LOG_SRC_WEB_UI"/>
+    <GnUserLoginSource userLoginId="fabio.strozzi@mapsengineering.com" enumId="GN_LOG_SRC_MOBILE"/>
+    <PartyRole partyId="USER_FABIO_STROZZI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="fabio.strozzi@mapsengineering.com" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_FABIO_STROZZI" contactMechTypeId="EMAIL_ADDRESS" infoString="fabio.strozzi@mapsengineering.com"/>
+    <PartyContactMech partyId="USER_FABIO_STROZZI" contactMechId="CM_FABIO_STROZZI" fromDate="2001-05-13 00:00:00.000" />
+    <PartyContactMechPurpose partyId="USER_FABIO_STROZZI" contactMechId="CM_FABIO_STROZZI" contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="USER_FABIO_STROZZI" partyIdTo="GN_MEMELABS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (fabio.strozzi@mapsengineering.com) impiegato in azienda (Memelabs)"/>
+					   
+    <!-- Utente Web API -->
+	<Party partyId="USER_MEMEWAPI" partyTypeId="PERSON"/>
+    <Person partyId="USER_MEMEWAPI" lastName="Memelabs Web API" firstName="Utente "/>
+    <UserLogin userLoginId="memewapi" partyId="USER_MEMEWAPI"
+               currentPassword="{SHA}a424ea61780c68da6fc23f9fbf8703eec8285cb9" originId="GN_AUTH_ORG_HUMAN"/>
+	<GnUserLoginSource userLoginId="memewapi" enumId="GN_LOG_SRC_WEB_API"/>
+    <PartyRole partyId="USER_MEMEWAPI" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="memewapi" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <PartyRelationship partyIdFrom="USER_MEMEWAPI" partyIdTo="GN_MEMELABS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (memewapi) impiegato in azienda (Memelabs)"/>					   
+
+    <!-- Utente apple per testare la app (richiesto per la pubblicazione della app) pw: b0c@Gv_=!w -->
+    <Party partyId="USER_APPLE_TEST" partyTypeId="PERSON"/>
+    <Person partyId="USER_APPLE_TEST" lastName="Test" firstName="Apple "/>
+    <UserLogin userLoginId="appletest" partyId="USER_APPLE_TEST"
+               currentPassword="{SHA}c28457fd77f0970c92a9d9a0f55c92fd9d4dcbaf" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="appletest" enumId="GN_LOG_SRC_WEB_UI"/>
+	<GnUserLoginSource userLoginId="appletest" enumId="GN_LOG_SRC_MOBILE"/>
+    <PartyRole partyId="USER_APPLE_TEST" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="appletest" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <ContactMech contactMechId="CM_APPLE_TEST" contactMechTypeId="EMAIL_ADDRESS" infoString="appletest"/>
+    <PartyContactMech partyId="USER_APPLE_TEST" contactMechId="CM_APPLE_TEST" fromDate="2001-05-13 00:00:00.000" />
+    <PartyContactMechPurpose partyId="USER_APPLE_TEST" contactMechId="CM_APPLE_TEST" contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2001-05-13 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="USER_APPLE_TEST" partyIdTo="GN_MEMELABS"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"
+                       relationshipName="Impiego: utente (appletest) impiegato in azienda (Memelabs)"/>					   
+</entity-engine-xml>

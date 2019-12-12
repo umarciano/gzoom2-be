@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+    <!--company1-->
+    <Party partyId="GN_COMPANY1" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="Company 1"/>
+    <PartyGroup partyId="GN_COMPANY1" groupName="Company 1"/>
+    <GnPartyNode partyId="GN_COMPANY1" nodeKey="GN_COMPANY1@memelabs" ownerNodeKey="GN_ROOT@memelabs" nodeType="COMPANY"
+                 taxIdentificationNumber="01234567890" VATnumber="01234567890" name="Company 1 s.r.l."/>
+    <PartyRole partyId="GN_COMPANY1" roleTypeId="GN_COMPANY"/>
+    <!--<PartyRole partyId="GN_COMPANY1" roleTypeId="GN_NODE_CONTEXT"/>-->
+    <PartyRole partyId="GN_COMPANY1" roleTypeId="GN_PROPAGATION_NODE"/>
+
+    <PartyAttribute partyId="GN_COMPANY1" attrName="ROOT_PUBLISH" attrValue="N"/>
+    <PartyAttribute partyId="GN_COMPANY1" attrName="PRIVATE_AUTH_PUBLISH" attrValue="Y"/>
+
+    <!--company1base1-->
+    <Party partyId="GN_COMPANY1_BASE1" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="Company 1 Base 1"
+           lastModifiedDate="2000-01-01 00:00:00.000"/>
+    <!--lastModifiedByUserLogin="user1"-->
+    <PartyGroup partyId="GN_COMPANY1_BASE1" groupName="Company 1 Base 1"/>
+    <GnPartyNode partyId="GN_COMPANY1_BASE1" nodeKey="GN_COMPANY1_BASE1@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 taxIdentificationNumber="" VATnumber="" activityNumber="123" registeredOffice="Y"
+                 authorizationOwner="Y" reaNumber="22"/>
+    <PartyRole partyId="GN_COMPANY1_BASE1" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_COMPANY1_BASE1" roleTypeId="GN_NODE_CONTEXT"/>
+    <PartyRole partyId="GN_COMPANY1_BASE1" roleTypeId="GN_PROPAGATION_NODE"/>
+
+    <!--company1base2-->
+    <Party partyId="GN_COMPANY1_BASE2" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="Company 1 Base 2"
+           lastModifiedDate="2000-01-01 00:00:00.000"/>
+    <PartyGroup partyId="GN_COMPANY1_BASE2" groupName="Company 1 Base 2"/>
+    <GnPartyNode partyId="GN_COMPANY1_BASE2" nodeKey="GN_COMPANY1_BASE2@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY_BASE"
+                 taxIdentificationNumber="" VATnumber="" activityNumber="1234" registeredOffice="Y"
+                 authorizationOwner="Y" reaNumber="22"/>
+    <PartyRole partyId="GN_COMPANY1_BASE2" roleTypeId="GN_COMPANY_BASE"/>
+    <PartyRole partyId="GN_COMPANY1_BASE2" roleTypeId="GN_NODE_CONTEXT"/>
+    <PartyRole partyId="GN_COMPANY1_BASE2" roleTypeId="GN_PROPAGATION_NODE"/>
+
+    <ContactMech contactMechId="9000" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GN_COMPANY1_BASE1" contactMechId="9000" fromDate="2000-01-01 00:00:00.000"
+                      allowSolicitation="Y"/>
+    <PostalAddress contactMechId="9000" toName="Company 1"
+                   address1="via traversa pistoese"
+                   streetNumber="83"
+                   village="Galciana"
+                   city="Prato"
+                   postalCode="59100"
+                   postalCodeGeoId="IT-GN-CAP-59100"
+                   countryGeoId="ITA"
+                   regionGeoId="IT-GN-TOSCANA"
+                   stateProvinceGeoId="IT-GN-100"
+                   municipalityGeoId="IT-GN-100005"/>
+    <!--geoPointId="9000"/>-->
+    <!--<PartyContactMechPurpose partyId="Company" contactMechId="9000" contactMechPurposeTypeId="PAYMENT_LOCATION" fromDate="2000-01-01 00:00:00.000"/>-->
+    <!--<PartyGeoPoint partyId="Company" geoPointId="9000" fromDate="2009-01-09 00:00:00.000"/>-->
+
+    <!--user1-->
+    <Party partyId="USER1" partyTypeId="PERSON"/>
+    <Person partyId="USER1" lastName="User 1" firstName="Company 1"/>
+    <UserLogin userLoginId="user1" partyId="USER1" currentPassword="{SHA}47b56994cbc2b6d10aa1be30f70165adb305a41a"
+               originId="GN_AUTH_ORG_HUMAN"/>
+    <PartyRole partyId="USER1" roleTypeId="GN_USER"/>
+
+    <GnUserLoginSource userLoginId="user1" enumId="GN_LOG_SRC_WEB_UI"/>
+    <GnUserLoginSource userLoginId="user1" enumId="GN_LOG_SRC_MOBILE"/>
+
+    <!--<UserLoginSecurityGroup groupId="FULLADMIN" userLoginId="user1" fromDate="2001-01-01 12:00:00.0"/>-->
+    <UserLoginSecurityGroup groupId="BIZADMIN" userLoginId="user1" fromDate="2001-01-01 12:00:00.0"/>
+
+    <!--context-->
+    <Party partyId="CONTEXT1" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="context 1 (GN_ASISTE)"/>
+    <PartyGroup partyId="CONTEXT1" groupName="Context1"/>
+    <PartyRole partyId="CONTEXT1" roleTypeId="GN_CONTEXT"/>
+
+    <GnPartySecurityGroup partyId="CONTEXT1" groupId="GN_ASISTE" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="CONTEXT1" groupId="GN_INVITER" fromDate="2000-01-01 00:00:00.000"/>
+
+    <Party partyId="CONTEXT2" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="context 2 (GN_ASISTE)"/>
+    <PartyGroup partyId="CONTEXT2" groupName="Context2"/>
+    <PartyRole partyId="CONTEXT2" roleTypeId="GN_CONTEXT"/>
+
+    <GnPartySecurityGroup partyId="CONTEXT2" groupId="GN_ASISTE" fromDate="2000-01-01 00:00:00.000"/>
+
+    <Party partyId="CONTEXT3" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="context 3 Private on ORG2 ()GN_UOAPSEDE)"/>
+    <PartyGroup partyId="CONTEXT3" groupName="Context3"/>
+    <PartyRole partyId="CONTEXT3" roleTypeId="GN_CONTEXT"/>
+
+    <GnPartySecurityGroup partyId="CONTEXT3" groupId="GN_UOAPSEDE" fromDate="2000-01-01 00:00:00.000"/>
+
+    <Party partyId="CONTEXT4" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="context 4 Private on BASE2 (GN_UOAPSEDE)"/>
+    <PartyGroup partyId="CONTEXT4" groupName="Context4"/>
+    <PartyRole partyId="CONTEXT4" roleTypeId="GN_CONTEXT"/>
+
+    <GnPartySecurityGroup partyId="CONTEXT4" groupId="GN_UOAPSEDE" fromDate="2000-01-01 00:00:00.000"/>
+    <GnPartySecurityGroup partyId="CONTEXT4" groupId="GN_UVALID" fromDate="2000-01-01 00:00:00.000"/>
+
+    <!--organization node-->
+    <Party partyId="GN_ORG_NODE_1" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="organization node 1"/>
+    <PartyGroup partyId="GN_ORG_NODE_1" groupName="organization node 1"/>
+    <GnPartyNode partyId="GN_ORG_NODE_1" nodeKey="GN_ORG_NODE_1@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="ORGANIZATION"
+                 name="GN_ORG_N_1"/>
+    <PartyRole partyId="GN_ORG_NODE_1" roleTypeId="GN_ORGANIZATION_NODE"/>
+    <PartyRole partyId="GN_ORG_NODE_1" roleTypeId="GN_NODE_CONTEXT"/>
+
+    <Party partyId="GN_ORG_NODE_2" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="organization node 2"/>
+    <PartyGroup partyId="GN_ORG_NODE_2" groupName="organization node 2"/>
+    <GnPartyNode partyId="GN_ORG_NODE_2" nodeKey="GN_ORG_NODE_2@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="ORGANIZATION"
+                 name="GN_ORG_N_2"/>
+    <PartyRole partyId="GN_ORG_NODE_2" roleTypeId="GN_ORGANIZATION_NODE"/>
+    <PartyRole partyId="GN_ORG_NODE_2" roleTypeId="GN_NODE_CONTEXT"/>
+    <PartyRole partyId="GN_ORG_NODE_2" roleTypeId="GN_PROPAGATION_NODE"/>
+
+
+    <!--relationships-->
+    <PartyRelationship partyIdFrom="GN_COMPANY1" roleTypeIdFrom="GN_COMPANY" partyIdTo="GN_COMPANY1_BASE1"
+                       roleTypeIdTo="GN_COMPANY_BASE" fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="GN_OWNS"/>
+    <PartyRelationship partyIdFrom="GN_COMPANY1_BASE1" roleTypeIdFrom="GN_COMPANY_BASE" partyIdTo="GN_COMPANY1"
+                       roleTypeIdTo="GN_COMPANY" fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="GN_BELONGS_TO"/>
+
+    <PartyRelationship partyIdFrom="GN_COMPANY1" roleTypeIdFrom="GN_COMPANY" partyIdTo="GN_COMPANY1_BASE2"
+                       roleTypeIdTo="GN_COMPANY_BASE" fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="GN_OWNS"/>
+    <PartyRelationship partyIdFrom="GN_COMPANY1_BASE2" roleTypeIdFrom="GN_COMPANY_BASE" partyIdTo="GN_COMPANY1"
+                       roleTypeIdTo="GN_COMPANY" fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="GN_BELONGS_TO"/>
+
+    <!--USER1  CONTEXT1 -->
+    <PartyRelationship partyIdFrom="CONTEXT1" roleTypeIdFrom="GN_CONTEXT"
+                       partyIdTo="USER1" roleTypeIdTo="GN_USER"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" relationshipName="connect CONTEXT1 with USER1"/>
+
+    <PartyRelationship partyIdFrom="CONTEXT1" roleTypeIdFrom="GN_CONTEXT"
+                       partyIdTo="GN_COMPANY1_BASE1" roleTypeIdTo="GN_COMPANY_BASE"
+                       fromDate="2000-01-01 00:00:00.000" partyRelationshipTypeId="GN_CONTEXT_CBASE"/>
+
+    <PartyRelationship partyIdFrom="CONTEXT1" roleTypeIdFrom="GN_CONTEXT"
+                       partyIdTo="GN_ORG_NODE_1" roleTypeIdTo="GN_NODE_CONTEXT"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="GN_CONTEXT_NODE"/>
+    <!--USER1  CONTEXT1 -->
+
+    <!--USER1  CONTEXT2 GN_COMPANY1_BASE1-->
+    <PartyRelationship partyIdFrom="CONTEXT2" roleTypeIdFrom="GN_CONTEXT"
+                       partyIdTo="USER1" roleTypeIdTo="GN_USER"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" relationshipName="connect CONTEXT2 with USER1"/>
+
+    <PartyRelationship partyIdFrom="CONTEXT2" roleTypeIdFrom="GN_CONTEXT"
+                       partyIdTo="GN_COMPANY1_BASE1" roleTypeIdTo="GN_COMPANY_BASE"
+                       fromDate="2000-01-01 00:00:00.000" partyRelationshipTypeId="GN_CONTEXT_CBASE"/>
+
+    <PartyRelationship partyIdFrom="CONTEXT2" roleTypeIdFrom="GN_CONTEXT"
+                       partyIdTo="GN_COMPANY1_BASE1" roleTypeIdTo="GN_NODE_CONTEXT"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="GN_CONTEXT_NODE"/>
+
+    <!--USER1  CONTEXT3  GN_ORG_NODE_2-->
+    <PartyRelationship partyIdFrom="CONTEXT3" roleTypeIdFrom="GN_CONTEXT"
+                       partyIdTo="USER1" roleTypeIdTo="GN_USER"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" relationshipName="connect CONTEXT3 with USER1"/>
+
+    <PartyRelationship partyIdFrom="CONTEXT3" roleTypeIdFrom="GN_CONTEXT"
+                       partyIdTo="GN_COMPANY1_BASE2" roleTypeIdTo="GN_COMPANY_BASE"
+                       fromDate="2000-01-01 00:00:00.000" partyRelationshipTypeId="GN_CONTEXT_CBASE"/>
+
+    <PartyRelationship partyIdFrom="CONTEXT3" roleTypeIdFrom="GN_CONTEXT"
+                       partyIdTo="GN_ORG_NODE_2" roleTypeIdTo="GN_NODE_CONTEXT"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="GN_CONTEXT_NODE"/>
+    <!--USER1  CONTEXT1 GN_ORG_NODE_2-->
+
+    <!--USER1  CONTEXT4  GN_COMPANY1_BASE2-->
+    <PartyRelationship partyIdFrom="CONTEXT4" roleTypeIdFrom="GN_CONTEXT"
+                       partyIdTo="USER1" roleTypeIdTo="GN_USER"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="GN_CONTEXT_USER" relationshipName="connect CONTEXT4 with USER1"/>
+
+    <PartyRelationship partyIdFrom="CONTEXT4" roleTypeIdFrom="GN_CONTEXT"
+                       partyIdTo="GN_COMPANY1_BASE2" roleTypeIdTo="GN_COMPANY_BASE"
+                       fromDate="2000-01-01 00:00:00.000" partyRelationshipTypeId="GN_CONTEXT_CBASE"/>
+
+    <PartyRelationship partyIdFrom="CONTEXT4" roleTypeIdFrom="GN_CONTEXT"
+                       partyIdTo="GN_COMPANY1_BASE2" roleTypeIdTo="GN_NODE_CONTEXT"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="GN_CONTEXT_NODE"/>
+    <!--USER1  CONTEXT1 GN_ORG_NODE_2-->
+
+    <!--user1 company1 EMPLOYMENT-->
+    <PartyRelationship partyIdFrom="USER1" partyIdTo="GN_COMPANY1"
+                       roleTypeIdFrom="GN_USER" roleTypeIdTo="GN_COMPANY"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="EMPLOYMENT"/>
+
+    <!-- Propagation relationships -->
+    <PartyRelationship partyIdFrom="GN_COMPANY1" partyIdTo="GN_COMPANY1_BASE1"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_PROPAGATES_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Propagazione: Root propaga a RFI"/>
+
+    <PartyRelationship partyIdFrom="GN_COMPANY1_BASE1" partyIdTo="GN_COMPANY1"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_RECEIVES_FROM" fromDate="2000-01-01 00:00:00.000"
+                       validationRequired="N" acceptAllIfEmptyFilters="Y"
+                       relationshipName="Ricezione: GN_COMPANY1_BASE1 riceve da GN_COMPANY1 (senza validazione)"/>
+
+    <PartyRelationship partyIdFrom="GN_COMPANY1" partyIdTo="GN_ORG_NODE_2"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_PROPAGATES_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Propagazione: COMPAN1 propaga a ORG2"/>
+
+    <PartyRelationship partyIdFrom="GN_ORG_NODE_2" partyIdTo="GN_COMPANY1"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_RECEIVES_FROM" fromDate="2000-01-01 00:00:00.000"
+                       validationRequired="Y" acceptAllIfEmptyFilters="Y"
+                       relationshipName="Ricezione: GN_ORG_NODE_2 riceve da GN_COMPANY1 (senza validazione)"/>
+
+    <PartyRelationship partyIdFrom="GN_ORG_NODE_2" partyIdTo="GN_COMPANY1_BASE2"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_PROPAGATES_TO" fromDate="2000-01-01 00:00:00.000"
+                       relationshipName="Propagazione: GN_ORG_NODE_2 propaga a GN_COMPANY1_BASE1"/>
+
+    <PartyRelationship partyIdFrom="GN_COMPANY1_BASE2" partyIdTo="GN_ORG_NODE_2"
+                       roleTypeIdFrom="GN_PROPAGATION_NODE" roleTypeIdTo="GN_PROPAGATION_NODE"
+                       partyRelationshipTypeId="GN_RECEIVES_FROM" fromDate="2000-01-01 00:00:00.000"
+                       validationRequired="Y" acceptAllIfEmptyFilters="Y"
+                       relationshipName="Ricezione: GN_COMPANY1_BASE2 riceve da GN_ORG_NODE_2 (con validazione)"/>
+
+    <!--communication group-->
+    <ContactList contactListId="GN_9000" contactListTypeId="GN_NOTIFICATION_GRP" contactMechTypeId=""
+                 marketingCampaignId=""
+                 contactListName="GnTestContactList" description="GN_COMPANY1_BASE1 ContactList" comments=""
+                 isPublic="Y" ownerPartyId="GN_COMPANY1_BASE1"
+                 verifyEmailFrom="" verifyEmailScreen="" verifyEmailSubject="" verifyEmailWebSiteId=""/>
+    <ContactListParty contactListId="GN_9000" partyId="USER1" preferredContactMechId="" statusId="CLPT_IN_USE"
+                      fromDate="2001-05-13 00:00:00"/>
+
+    <GnContactListEventTypeAssoc contactListId="GN_9000" enumId="GN_COM_EV_AUTH_PUB"/>
+
+    <GnContactListCommunicationEventTypeAssoc contactListId="GN_9000" communicationEventTypeId="SMS_COMMUNICATION"/>
+
+
+    <!-- contact mech -->
+    <!-- <ContactMech contactMechId="u1" contactMechTypeId="POSTAL_ADDRESS"/>
+     <PostalAddress contactMechId="u1" toName="Demo Customer" address1="2004 Factory Blvd" city="Orem"
+                    stateProvinceGeoId="UT" postalCode="84057" countryGeoId="USA" geoPointId="9000"/>
+     <PartyContactMech partyId="USER1" contactMechId="u1" fromDate="2001-05-13 00:00:00.000" allowSolicitation="Y"/>
+
+     <ContactMech contactMechId="u2" contactMechTypeId="TELECOM_NUMBER" infoString="444-4444"/>
+     <PartyContactMech partyId="USER1" contactMechId="u2" fromDate="2001-05-13 00:00:00.000" />
+     <PartyContactMechPurpose partyId="USER1" contactMechId="u2" contactMechPurposeTypeId="PRIMARY_PHONE" fromDate="2001-05-13 00:00:00.000"/>
+
+ -->
+
+    <!-- Password Reset Test Data -->
+    <UserLogin userLoginId="user2" currentPassword="{SHA}47b56994cbc2b6d10aa1be30f70165adb305a41a"/>
+    <GnUserLoginSource userLoginId="user2" enumId="GN_LOG_SRC_WEB_UI"/>
+    <GnUserLoginPasswordReset userLoginId="user2" uuid="uuid2"/>
+
+    <Party partyId="disabledUser" partyTypeId="PERSON"/>
+    <Person partyId="disabledUser" lastName="Disabled" firstName="User"/>
+    <UserLogin userLoginId="disabledLogin" currentPassword="{SHA}47b56994cbc2b6d10aa1be30f70165adb305a41a"
+               enabled="N" partyId="disabledUser"/>
+    <GnUserLoginSource userLoginId="disabledLogin" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="disabledUser" roleTypeId="GN_USER"/>
+
+
+    <UserLogin userLoginId="testUser" currentPassword="{SHA}47b56994cbc2b6d10aa1be30f70165adb305a41a"/>
+    <GnUserLoginSource userLoginId="testUser" enumId="GN_LOG_SRC_WEB_UI"/>
+
+    <!--user unit test-->
+    <Party partyId="USER_TEST_ADMIN" partyTypeId="PERSON"/>
+    <Person partyId="USER_TEST_ADMIN" lastName="testAdmin" firstName="Amministratore Green Nebula per i tests"/>
+    <UserLogin userLoginId="testAdmin" partyId="USER_TEST_ADMIN"
+               currentPassword="{SHA}47b56994cbc2b6d10aa1be30f70165adb305a41a" originId="GN_AUTH_ORG_HUMAN"/>
+    <GnUserLoginSource userLoginId="testAdmin" enumId="GN_LOG_SRC_WEB_UI"/>
+    <PartyRole partyId="USER_TEST_ADMIN" roleTypeId="GN_USER"/>
+    <UserLoginSecurityGroup userLoginId="testAdmin" groupId="BIZADMIN" fromDate="2001-01-01 12:00:00.0"/>
+
+    <SecurityGroup description="Greennebula - security group for unit test" groupId="GN_UNIT_TEST_SC"/>
+    <SecurityPermission description="GN_UNIT_TEST" permissionId="GN_UNIT_TEST"/>
+    <SecurityGroupPermission groupId="GN_UNIT_TEST_SC" permissionId="GN_UNIT_TEST"/>
+
+
+    <Party partyId="UNIT_TEST_CONTEXT" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"
+           description="unit test context on root"/>
+    <PartyGroup partyId="UNIT_TEST_CONTEXT" groupName="Context1"/>
+    <PartyRole partyId="UNIT_TEST_CONTEXT" roleTypeId="GN_CONTEXT"/>
+
+    <GnPartySecurityGroup partyId="UNIT_TEST_CONTEXT" groupId="GN_UNIT_TEST_SC" fromDate="2000-01-01 00:00:00.000"/>
+
+    <PartyRelationship partyIdFrom="UNIT_TEST_CONTEXT" roleTypeIdFrom="GN_CONTEXT"
+                       partyIdTo="USER_TEST_ADMIN" roleTypeIdTo="GN_USER"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="GN_CONTEXT_USER"
+                       relationshipName="connect UNIT_TEST_CONTEXT with USER_TEST_ADMIN"/>
+
+
+    <Party partyId="GN_COMPANY_TEST" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED" description="Company 1"/>
+    <PartyGroup partyId="GN_COMPANY_TEST" groupName="Company 1"/>
+    <GnPartyNode partyId="GN_COMPANY_TEST" nodeKey="GN_COMPANY_TEST@memelabs" ownerNodeKey="GN_ROOT@memelabs"
+                 nodeType="COMPANY"
+                 taxIdentificationNumber="12345678901" VATnumber="12345678901" name="Company 1 s.r.l."/>
+    <PartyRole partyId="GN_COMPANY_TEST" roleTypeId="GN_COMPANY"/>
+    <PartyRole partyId="GN_COMPANY_TEST" roleTypeId="GN_NODE_CONTEXT"/>
+    <!--<PartyRole partyId="GN_COMPANY_TEST" roleTypeId="GN_PROPAGATION_NODE"/>-->
+
+    <!--    <PartyRelationship partyIdFrom="CONTEXT1" roleTypeIdFrom="GN_CONTEXT"
+                           partyIdTo="GN_COMPANY1_BASE1" roleTypeIdTo="GN_COMPANY_BASE"
+                           fromDate="2000-01-01 00:00:00.000" partyRelationshipTypeId="GN_CONTEXT_CBASE"/>-->
+
+    <!--    <PartyRelationship partyIdFrom="UNIT_TEST_CONTEXT" roleTypeIdFrom="GN_CONTEXT"
+                           partyIdTo="GN_ROOT" roleTypeIdTo="GN_NODE_CONTEXT"
+                           fromDate="2000-01-01 00:00:00.000"
+                           partyRelationshipTypeId="GN_CONTEXT_NODE"/>-->
+    <PartyRelationship partyIdFrom="UNIT_TEST_CONTEXT" roleTypeIdFrom="GN_CONTEXT"
+                       partyIdTo="GN_COMPANY_TEST" roleTypeIdTo="GN_NODE_CONTEXT"
+                       fromDate="2000-01-01 00:00:00.000"
+                       partyRelationshipTypeId="GN_CONTEXT_NODE"/>
+    <!--end user unit test-->
+
+</entity-engine-xml>

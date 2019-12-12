@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Gn Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+
+    <service name="gnFindApplicationProperty" default-entity-name="GnApplicationProperty" engine="java"
+             location="it.memelabs.gn.services.system.GnSystemServices" invoke="gnFindApplicationProperty"
+             auth="true" export="false">
+
+        <description>find application property</description>
+        <attribute name="name" type="java.lang.String" mode="IN" optional="false"/>
+        <auto-attributes mode="OUT" entity-name="GnApplicationProperty" optional="true"/>
+    </service>
+
+    <service name="gnCreateApplicationProperty" default-entity-name="" engine="java"
+             location="it.memelabs.gn.services.system.GnSystemServices" invoke="gnCreateApplicationProperty"
+             auth="true" export="false">
+
+        <description>create application property</description>
+        <attribute name="name" type="java.lang.String" mode="IN" optional="false"/>
+        <attribute name="value" type="java.lang.String" mode="IN" optional="true"/>
+        <attribute name="comment" type="java.lang.String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="gnUpdateApplicationProperty" default-entity-name="" engine="java"
+             location="it.memelabs.gn.services.system.GnSystemServices" invoke="gnUpdateApplicationProperty"
+             auth="true" export="false">
+
+        <description>update application property</description>
+        <attribute name="name" type="java.lang.String" mode="IN" optional="false"/>
+        <attribute name="value" type="java.lang.String" mode="IN" optional="true"/>
+        <attribute name="comment" type="java.lang.String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="gnRemoveApplicationProperty" default-entity-name="" engine="java"
+             location="it.memelabs.gn.services.system.GnSystemServices" invoke="gnRemoveApplicationProperty"
+             auth="true" export="false">
+
+        <description>remove application property</description>
+        <attribute name="name" type="java.lang.String" mode="IN" optional="false"/>
+        <auto-attributes mode="OUT" entity-name="GnApplicationProperty" optional="true"/>
+    </service>
+
+    <service name="gnFindServiceInvocationLog" default-entity-name="" engine="java"
+             location="it.memelabs.gn.services.system.GnSystemServices" invoke="gnFindServiceInvocationLog"
+             auth="true" export="false">
+
+        <description>find application property</description>
+        <attribute name="serviceName" type="java.lang.String" mode="IN" optional="false"/>
+        <attribute name="userLoginId" type="java.lang.String" mode="IN" optional="false"/>
+        <attribute name="contextId" type="java.lang.String" mode="IN" optional="false"/>
+
+        <attribute name="list" type="java.util.List" mode="OUT" optional="false"/>
+        <attribute name="listSize" type="java.lang.Integer" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="gnCreateServiceInvocationLog" default-entity-name="" engine="java"
+             location="it.memelabs.gn.services.system.GnSystemServices" invoke="gnCreateServiceInvocationLog"
+             auth="true" export="false">
+
+        <description>create application property</description>
+        <attribute name="serviceName" type="java.lang.String" mode="IN" optional="false"/>
+        <attribute name="userLoginId" type="java.lang.String" mode="IN" optional="false"/>
+        <attribute name="contextId" type="java.lang.String" mode="IN" optional="false"/>
+        <attribute name="invocationDate" type="java.sql.Timestamp" mode="IN" optional="true"/>
+
+        <auto-attributes mode="OUT" optional="true" entity-name="GnServiceInvocationLog"/>
+    </service>
+
+</services>
