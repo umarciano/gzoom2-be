@@ -2,9 +2,12 @@ PRIMO RILASCIO
 
 CREAZIONE CARTELLE
 copiare tutte le cartelle che sono dentro la cartella rilasci
+in ambienti linux, attenziona al file gzoom-ismea.target
+che va spostato nella cartella dei servizi
 
 CONFIGURAZIONE IP E PORTE
-Se è un primo rilascio dopo aver fatto tutti i passaggi serve dire a bruno il path dove è presente gzoom2 (gzoom-app),
+Se è un primo rilascio dopo aver fatto tutti i passaggi serve dire a Bruno
+il path dove è presente gzoom2 (gzoom-app),
 per aprire la porta e configurare il proxy.
 
 su GzoomLegacy, per gli ambienti che rispondono al proxy di gzoom-tux-1
@@ -100,5 +103,3 @@ PROBLEMATICHE:
 Nel caso il proxypass apache dia un errore di questo tipo: (13)Permission denied: [client 10.104.59.18:1500] Couldn't read /home/gzoom/gzoom-app/index.html, closing connection.
 verificare i permessi della dir dove si trova gzoom2 e nel caso impostarli a 755
 chmod -R 755 /home/gzoom/
-
-d

@@ -1,44 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration scan="true" scanPeriod="20 seconds">
 
-    <!--
-    Includes default configuration pieces, but not all!
-    Please note that org/springframework/boot/logging/logback/base.xml should not be
-    included as it not only defines the FILE appender, but also uses the same <File>
-    destination: if included it will cause a collision.
-    -->
+<!-- For assistance related to logback-translator or configuration  -->
+<!-- files in general, please contact the logback user mailing list -->
+<!-- at http://www.qos.ch/mailman/listinfo/logback-user             -->
+<!--                                                                -->
+<!-- For professional support please see                            -->
+<!--    http://www.qos.ch/shop/products/professionalSupport         -->
+<!--                                                                -->
+
+
+<configuration>
+
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
-    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/spring.log}"/>
     <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
 
-    <!-- Rewrites the file appender -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>${LOG_FILE}</File>
+        <!--See http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
+        <!--and http://logback.qos.ch/manual/appenders.html#TimeBasedRollingPolicy-->
+        <!--for further documentation-->
+        <File>C:\projects\Gzoom2\logs\gzoom2-be.log</File>
+        <!-- <File>home/comunelecco/gzoom2/log/gzoom2-be.log</File> -->
         <encoder>
-            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <pattern>%-5p %d{yyyy-MM-dd HH:mm:ss.SSS,Europe/Rome} %C{1}:%M [%t] - %m%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- daily rollover, inferred from file name pattern -->
-            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}</fileNamePattern>
+            <!-- daily rollover -->
+            <fileNamePattern>/C:\projects\Gzoom2\logs\gzoom2-be.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <!--<fileNamePattern>home/comunelecco/gzoom2/log/gzoom2-be.log.%d{'.'yyyy-MM-dd}</fileNamePattern>-->
         </rollingPolicy>
     </appender>
 
-    <!-- Overrides the root logging levels -->
+    <appender name="ACCESS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>C:\projects\Gzoom2\logs\gzoom2-be-access.log</File>
+        <!-- <File>home/comunelecco/gzoom2/log/gzoom2-be.access.log</File> -->
+        <encoder>
+            <pattern>%-5p %d{yyyy-MM-dd HH:mm:ss.SSS,Europe/Rome} %C{1} [%t] - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>C:\projects\Gzoom2\logs\gzoom2-be-access.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <!--<fileNamePattern>home/comunelecco/gzoom2/log/gzoom2-be-access.log.%d{'.'yyyy-MM-dd}</fileNamePattern>-->
+        </rollingPolicy>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d %p [%t] %C{1} - %m%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <logger name="it.mapsgroup.gzoom.security.JwtTokenFilter" level="DEBUG">
+        <appender-ref ref="ACCESS"/>
+    </logger>
+    <logger name="it.mapsgroup.gzoom.security.JwtLoginFilter" level="INFO">
+        <appender-ref ref="ACCESS"/>
+    </logger>
+    <logger name="it.mapsgroup.gzoom.security.JwtLogoutFilter" level="INFO">
+        <appender-ref ref="ACCESS"/>
+    </logger>
+
+
     <root level="INFO">
         <appender-ref ref="CONSOLE" />
-        <appender-ref ref="FILE" />
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
     </root>
 
-    <!-- Following are the basic levels for own and third party code -->
-    <logger name="it.mapsgroup" level="DEBUG"/>
-    <logger name="org.mybatis" level="INFO"/>
-    <logger name="org.apache.ibatis" level="INFO"/>
-    <logger name="org.springframework" level="INFO"/>
-
-    <!--
-    Change level of mappers to DEBUG in order to print SQL statements. Leave to INFO
-    to suppress printing.
-    -->
-    <!-- <logger name="it.mapsgroup.clinika.gap.persistence.mapper" level="INFO"/> -->
+    <!-- <logger name="org.springframework" level="INFO" additivity="false">
+         <appender-ref ref="FILE"/>
+     </logger>-->
+    <logger name="httpclient.wire" level="ERROR" additivity="false">
+        <appender-ref ref="FILE"/>
+    </logger>
+    <logger name="it.mapsgroup" level="INFO" additivity="false">
+        <appender-ref ref="FILE"/>
+    </logger>
+    <logger name="org.apache.commons" level="WARN" additivity="false">
+        <appender-ref ref="FILE"/>
+    </logger>
 
 </configuration>
