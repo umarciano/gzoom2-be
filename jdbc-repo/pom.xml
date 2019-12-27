@@ -59,21 +59,20 @@
 
 
         <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/sqljdbc4 -->
-        <dependency>
+<!--        <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>sqljdbc4</artifactId>
-            <version>4.0</version>
-        </dependency>
+            <version>4.2.6225.100</version>
+        </dependency>-->
 
 
 
         <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
-       <!-- <dependency>
+        <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
-            <version>6.2.0.jre8</version>
-            <scope>test</scope>
-        </dependency>-->
+            <version>6.2.2.jre8</version>
+        </dependency>
 
     </dependencies>
 
