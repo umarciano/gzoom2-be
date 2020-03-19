@@ -23,10 +23,13 @@ public class UserPreferenceDao extends AbstractDao {
     }
 
     @Transactional
-    public boolean update(UserPreference record) {
+    public boolean update(String loginId, UserPreference record) {
         QUserPreference qUserPreference = QUserPreference.userPreference;
         setUpdateTimestamp(record);
-        long i = queryFactory.update(qUserPreference).populate(record).execute();
+        long i = queryFactory.update(qUserPreference)
+                .where(qUserPreference.userLoginId.eq(loginId)
+                .and(qUserPreference.userPrefTypeId.eq(record.getUserPrefTypeId())))
+                .populate(record).execute();
         LOG.debug("updated records: {}", i);
         return i > 0;
     }

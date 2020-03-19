@@ -21,7 +21,11 @@ public class Messages {
     public static final String UOM_RATING_SCALE_REQUIRED = "An uomRatingScale is required";
     public static final String UOM_RATING_SCALE_DESCRIPTION_REQUIRED = "UomRatingScale description is required";
     public static final String UOM_RATING_VALUE_REQUIRED = "UomRatingValue is required";
-    
+
+    public static final String USER_PREFERENCE_REQUIRED = "User Preference is required";
+    public static final String USER_LOGIN_ID_REQUIRED = "User Login Id is required";
+    public static final String USER_PREFERENCE_TYPE_ID_REQUIRED = "User Preference Type ID is required";
+
     public static final String CANNOT_UPDATE_USER = "Cannot update user";
     public static final String INVALID_DATE = "Invalid date";
     public static final String INVALID_DATE_ORDER = "Start date is not before end date";
