@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import com.ibm.icu.text.SimpleDateFormat;
-import com.ibm.icu.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class UtilDateTime {
 	
@@ -72,8 +72,8 @@ public class UtilDateTime {
 			int month = Integer.valueOf(monthStr);
 			if (month >= FIRST_MONTH && month <= LAST_MONTH) {
 				Calendar cal = Calendar.getInstance();
-				cal.set(year, month-1, cal.getActualMaximum(Calendar.DAY_OF_MONTH), cal.getMaximum(Calendar.HOUR), cal.getMaximum(Calendar.MINUTE), cal.getMaximum(Calendar.SECOND));
-				cal.getMaximum(Calendar.MILLISECOND);
+				cal.set(year,month-1,1,0,0,0);
+				cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
 				return cal.getTime();
 			}
 		}
