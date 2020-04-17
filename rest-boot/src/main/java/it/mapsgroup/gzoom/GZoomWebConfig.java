@@ -27,6 +27,8 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.firewall.HttpFirewall;
+import org.springframework.security.web.firewall.StrictHttpFirewall;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
@@ -71,6 +73,14 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+    public HttpFirewall allowUrlEncodePercentHttpFirewall() {
+        StrictHttpFirewall firewall = new StrictHttpFirewall();
+        firewall.setAllowUrlEncodedPercent(true);
+
+        return firewall;
+    }
+
+    @Bean
     @Autowired
     public ChangePasswordServiceOfBiz changePasswordServiceOfBiz(OfBizClientConfig ofBizClientConfig) {
         return new ChangePasswordServiceOfBiz(new AuthenticationOfBizClientImpl(new OfBizClientConfig() {
@@ -105,7 +115,10 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+        //@formatter:off
+        super.configure(web);
         web.ignoring().antMatchers("/profile/i18n");
+        web.httpFirewall(allowUrlEncodePercentHttpFirewall());
     }
 
 
