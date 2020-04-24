@@ -11,11 +11,7 @@ import static it.mapsgroup.gzoom.security.Principals.principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  */
@@ -58,6 +54,12 @@ public class PartyController {
     @ResponseBody
     public Result<Party> getRoleTypePartys(@PathVariable(value = "roleTypeId") String roleTypeId) {
         return Exec.exec("party get", () -> partyService.getRoleTypePartys(roleTypeId));
+    }
+
+    @GetMapping("party/roleType/between/{roleTypeId}")
+    @ResponseBody
+    public Result<Party> getRoleTypePartysBetween(@PathVariable(value = "roleTypeId") String roleTypeId) {
+        return Exec.exec("party get between", () -> partyService.getRoleTypePartysBetween(roleTypeId));
     }
 
 }

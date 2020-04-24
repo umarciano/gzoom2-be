@@ -5,6 +5,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.querydsl.core.BooleanBuilder;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
@@ -84,13 +85,20 @@ public class WorkEffortDao extends AbstractDao {
 		}
 		String permission = ContextPermissionPrefixEnum.getPermissionPrefix(parentTypeId);
 
+
 		QWorkEffort qWorkEffort = QWorkEffort.workEffort;
 		QWorkEffortType qWorkEffortType = QWorkEffortType.workEffortType;
-		
+
+		BooleanBuilder builder = new BooleanBuilder();
+		for(String workEffortTypeIdItem : workEffortTypeId.split(",")) {
+			builder.or(qWorkEffort.workEffortTypeId.like(workEffortTypeIdItem));
+		}
+
 		SQLQuery<WorkEffort> tupleSQLQuery = queryFactory.select(qWorkEffort)
 				.from(qWorkEffort)
 				.innerJoin(qWorkEffortType).on(qWorkEffortType.workEffortTypeId.eq(qWorkEffort.workEffortTypeId))
-				.where(qWorkEffort.workEffortTypeId.eq(workEffortTypeId)
+				.where(//qWorkEffort.workEffortTypeId.like(workEffortTypeId)
+						builder
 						.and(qWorkEffortType.isRoot.eq(true))
 						.and(qWorkEffortType.parentTypeId.like("CTX%"))
 						.and(qWorkEffort.workEffortRevisionId.isNull()))  //TODO prendo solo quelli non storicizzati!!!!

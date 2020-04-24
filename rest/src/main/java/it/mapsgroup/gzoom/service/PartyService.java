@@ -52,6 +52,11 @@ public class PartyService {
         return new Result<>(list, list.size());
     }
 
+    public Result<Party> getRoleTypePartysBetween(String roleTypeId) {
+        List<Party> list = partyDao.getRoleTypePartysBetween(roleTypeId);
+        return new Result<>(list, list.size());
+    }
+
     public Result<it.mapsgroup.gzoom.model.Person> getPartiesExposed() {
         List<PersonEx> list = partyDao.getPartiesExposed();
         List<it.mapsgroup.gzoom.model.Person> ret = list.stream().map(p -> dtoMapper.copy(p, new it.mapsgroup.gzoom.model.Person())).collect(Collectors.toList());

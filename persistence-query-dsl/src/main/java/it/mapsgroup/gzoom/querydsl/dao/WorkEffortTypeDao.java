@@ -6,6 +6,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.List;
 
+import com.querydsl.core.BooleanBuilder;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
@@ -54,7 +55,29 @@ public class WorkEffortTypeDao extends AbstractDao {
         List<WorkEffortType> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWorkEffortType.workEffortTypeId).list(wa));
         return ret.isEmpty() ? null : ret.get(0);
 	}
-	
+
+	@Transactional
+	public List<WorkEffortType> getWorkEffortTypes(String workEffortTypeId) {
+		if (TransactionSynchronizationManager.isActualTransactionActive()) {
+			TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
+			status.getClass();
+		}
+		QWorkEffortType qWorkEffortType = QWorkEffortType.workEffortType;
+
+		BooleanBuilder builder = new BooleanBuilder();
+		for(String workEffortTypeIdItem : workEffortTypeId.split(",")) {
+			builder.or(qWorkEffortType.workEffortTypeId.like(workEffortTypeIdItem));
+		}
+
+		SQLQuery<WorkEffortType> tupleSQLQuery = queryFactory.select(qWorkEffortType).from(qWorkEffortType).where(builder);
+		SQLBindings bindings = tupleSQLQuery.getSQL();
+		LOG.info("{}", bindings.getSQL());
+		LOG.info("{}", bindings.getNullFriendlyBindings());
+		QBean<WorkEffortType> wa = Projections.bean(WorkEffortType.class, qWorkEffortType.all());
+		List<WorkEffortType> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWorkEffortType.workEffortTypeId).list(wa));
+		return ret;
+	}
+
 	@Transactional
 	public List<WorkEffortTypeContentExt> getWorkEffortTypeReminderActive(String contentId) {
 		if (TransactionSynchronizationManager.isActualTransactionActive()) {

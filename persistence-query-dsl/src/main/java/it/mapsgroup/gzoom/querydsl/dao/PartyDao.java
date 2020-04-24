@@ -1,5 +1,6 @@
 package it.mapsgroup.gzoom.querydsl.dao;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.group.GroupBy;
 import com.querydsl.core.types.Predicate;
@@ -162,7 +163,32 @@ public class PartyDao extends AbstractDao {
         LOG.info("size = {}", ret.size());
         return ret;
     }
-    
+
+    @Transactional
+    public List<Party> getRoleTypePartysBetween(String roleTypeId) {
+        if (TransactionSynchronizationManager.isActualTransactionActive()) {
+            TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
+            status.getClass();
+        }
+
+        QParty qParty = QParty.party;
+        QPartyRole qPartyRole = QPartyRole.partyRole;
+
+        SQLQuery<Party> pSQLQuery = queryFactory.select(qParty)
+                .from(qParty)
+                .innerJoin(qPartyRole).on(qPartyRole.partyId.eq(qParty.partyId))
+                .where(qPartyRole.roleTypeId.between(roleTypeId.split(",")[0],roleTypeId.split(",")[1])
+                        .and(qParty.partyTypeId.eq("PERSON")))
+                .orderBy(qParty.partyName.asc());
+        SQLBindings bindings = pSQLQuery.getSQL();
+        LOG.info("{}", bindings.getSQL());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
+        QBean<Party> partys = Projections.bean(Party.class, qParty.all());
+        List<Party> ret = pSQLQuery.transform(GroupBy.groupBy(qParty.partyId).list(partys));
+        LOG.info("size = {}", ret.size());
+        return ret;
+    }
+
     /**
      * Restituisce una lista di party filtrata in base al ruolo se non sono admin
      * @return
