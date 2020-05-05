@@ -68,6 +68,7 @@ public class WorkEffortTypeContentDao extends AbstractDao {
 	        					.innerJoin(qWorkEffortType).on(qWorkEffortType.workEffortTypeId.eq(qWorkEffortTypeContent.workEffortTypeId)) 
 	        					.innerJoin(qContent).on(qContent.contentId.eq(qWorkEffortTypeContent.contentId))
 	        					.where(qWorkEffortTypeContent.weTypeContentTypeId.eq("REPORT")
+										.and(qWorkEffortTypeContent.isVisible.isTrue())
 	        							.and(qWorkEffortTypeContent.contentId.eq(reportContentId))
 	        							.and(qWorkEffortType.parentTypeId.eq(parentTypeId))
 	       								.and(qWorkEffortTypeContent.etch.eq(reportName)
@@ -75,10 +76,10 @@ public class WorkEffortTypeContentDao extends AbstractDao {
 
 
 	        SQLBindings bindings = tupleSQLQuery.getSQL();
-	        LOG.info("{}", bindings.getSQL());
-	        LOG.info("{}", bindings.getNullFriendlyBindings());
+	        LOG.info("getWorkEffortTypeContents {}", bindings.getSQL());
+	        LOG.info("getWorkEffortTypeContents {}", bindings.getNullFriendlyBindings());
 	        List<WorkEffortTypeExt> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWorkEffortType.workEffortTypeId).list(tupleExQBean));
-	        LOG.info("size = {}", ret.size());
+	        LOG.info("getWorkEffortTypeContents size = {}", ret.size());
 	        return ret;
 	    }
 }

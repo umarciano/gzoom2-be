@@ -61,6 +61,22 @@ public class BirtUtil {
 		}
 		
 	}
+
+	/**
+	 * verifica workEffortId e workEffortIdChild senza settare i campi orgUnit
+	 * @param context
+	 */
+	public void checkChildRootEqualityWithoutOrgUnit(Map<String, Object> context) {
+		String orgUnitId = (String) context.get("orgUnitId");
+		String orgUnitRoleTypeId = (String) context.get("orgUnitRoleTypeId");
+		checkChildRootEquality(context);
+		if (orgUnitId != null) {
+			context.remove("orgUnitId");
+		}
+		if (orgUnitRoleTypeId != null) {
+			context.remove("orgUnitRoleTypeId");
+		}
+	}
 	
 	public void cleanRootValue(Map<String, Object> context) {
 		String workEffortId = (String)context.get("workEffortId");
