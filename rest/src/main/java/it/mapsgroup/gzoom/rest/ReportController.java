@@ -35,13 +35,13 @@ public class ReportController {
         return Exec.exec("report get", () -> reportService.getReports(parentTypeId));
     }
 
-    @RequestMapping(value = "report/{parentTypeId}/{reportContentId}/{reportName}/{analysis}", method = RequestMethod.GET)
+    @RequestMapping(value = "report/{parentTypeId}/{reportContentId}/{resourceName}/{analysis}", method = RequestMethod.GET)
     @ResponseBody
     public Report getReport(@PathVariable(value = "parentTypeId") String parentTypeId, 
     		@PathVariable(value = "reportContentId") String reportContentId, 
-    		@PathVariable(value = "reportName") String reportName,
+    		@PathVariable(value = "resourceName") String resourceName,
     		@PathVariable(value = "analysis") boolean analysis) {
-        return Exec.exec("report get", () -> reportService.getReport(parentTypeId, reportContentId, reportName, analysis));
+        return Exec.exec("report get", () -> reportService.getReport(parentTypeId, reportContentId, resourceName, analysis));
     }
     
     @RequestMapping(value = "report/add", method = RequestMethod.POST)

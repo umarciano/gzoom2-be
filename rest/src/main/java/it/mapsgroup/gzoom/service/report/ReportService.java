@@ -56,18 +56,18 @@ public class ReportService {
         return new Result<>(ret, ret.size());
     }
 
-    public Report getReport(String parentTypeId, String reportContentId, String reportName, boolean analysis) {
+    public Report getReport(String parentTypeId, String reportContentId, String resourceName, boolean analysis) {
         LOG.info("Start getReport");
     	it.mapsgroup.gzoom.querydsl.dto.Report report = null;
     	List<WorkEffortTypeExt> workEffortTypes = null;
     	
     	if (analysis) {
-    		report = reportDao.getAnalysisReport(parentTypeId, reportContentId, reportName);
-    		workEffortTypes = reportDao.getAnalysisWorkEffortTypeContents(parentTypeId, reportContentId, reportName); 
+    		report = reportDao.getAnalysisReport(parentTypeId, reportContentId, resourceName);
+    		workEffortTypes = reportDao.getAnalysisWorkEffortTypeContents(parentTypeId, reportContentId, resourceName);
     		
     	} else {
-    		report = reportDao.getReport(parentTypeId, reportContentId, reportName);
-    		workEffortTypes = workEffortTypeContentDao.getWorkEffortTypeContents(parentTypeId, reportContentId, reportName); 
+    		report = reportDao.getReport(parentTypeId, reportContentId, resourceName);
+    		workEffortTypes = workEffortTypeContentDao.getWorkEffortTypeContents(parentTypeId, reportContentId, resourceName);
     	}        
         Report ret = dtoMapper.copy(report, new Report());
         ret.setWorkEffortTypes(workEffortTypes);
@@ -77,7 +77,7 @@ public class ReportService {
         ret.setOutputFormats(outputFormats);
         LOG.info("outputFormats="+outputFormats);
         
-        ReportParams params = getParams(parentTypeId, report.getContentName());
+        ReportParams params = getParams(parentTypeId, ret.getResourceName());
         ret.setParams(params.getParams());
         ret.setServices(params.getServices());
         LOG.info("params="+params);

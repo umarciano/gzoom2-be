@@ -82,20 +82,23 @@ public class ReportDao extends AbstractDao {
         QContentAssoc qContentAssoc = QContentAssoc.contentAssoc;
         QWorkEffortType qWorkEffortType = QWorkEffortType.workEffortType;
         QWorkEffortTypeContent qWorkEffortTypeContent = QWorkEffortTypeContent.workEffortTypeContent;
-        
+        QDataResource qDataResource = QDataResource.dataResource;
+
         QBean<Report> reportQBean = bean(Report.class,
                 merge(qContent.all(),
                         bean(WorkEffortType.class, qWorkEffortType.all()).as("workEffortType"),
-                        bean(WorkEffortTypeContent.class, qWorkEffortTypeContent.all()).as("workEffortTypeContent")
+                        bean(WorkEffortTypeContent.class, qWorkEffortTypeContent.all()).as("workEffortTypeContent"),
+                        bean(DataResource.class, qDataResource.all()).as("dataResource")
                         ));
         
         
-        SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qContent, qWorkEffortType, qWorkEffortTypeContent)
+        SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qContent, qWorkEffortType, qWorkEffortTypeContent, qDataResource)
         				.from(qWorkEffortType)
         				.innerJoin(qWorkEffortTypeContent).on(qWorkEffortType.workEffortTypeId.eq(qWorkEffortTypeContent.workEffortTypeId)) 
         				.innerJoin(qContent).on(qWorkEffortTypeContent.contentId.eq(qContent.contentId)) 
         				.innerJoin(qContentAssoc).on(qContentAssoc.contentIdTo.eq(qContent.contentId).
-        						and(qContentAssoc.contentAssocTypeId.eq("REP_PERM")))         				
+        						and(qContentAssoc.contentAssocTypeId.eq("REP_PERM")))
+                        .innerJoin(qDataResource).on(qDataResource.dataResourceId.eq(qContent.dataResourceId))
         				.where(qContentAssoc.contentId.eq("WE_PRINT")
         				.and(qWorkEffortType.parentTypeId.eq(parentTypeId))
         				.and(qWorkEffortTypeContent.isVisible.eq(true)))
@@ -118,7 +121,7 @@ public class ReportDao extends AbstractDao {
      * @return
      */
     @Transactional
-    public Report getReport(String parentTypeId, String reportContentId, String reportName) {
+    public Report getReport(String parentTypeId, String reportContentId, String resourceName) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
@@ -127,18 +130,21 @@ public class ReportDao extends AbstractDao {
         QContent qContent = QContent.content;
         QWorkEffortType qWorkEffortType = QWorkEffortType.workEffortType;
         QWorkEffortTypeContent qWorkEffortTypeContent = QWorkEffortTypeContent.workEffortTypeContent;
-        
+        QDataResource qDataResource = QDataResource.dataResource;
+
         QBean<Report> reportQBean = bean(Report.class,
                 merge(qContent.all(),
                         bean(WorkEffortType.class, qWorkEffortType.all()).as("workEffortType"),
-                        bean(WorkEffortTypeContent.class, qWorkEffortTypeContent.all()).as("workEffortTypeContent")
+                        bean(WorkEffortTypeContent.class, qWorkEffortTypeContent.all()).as("workEffortTypeContent"),
+                        bean(DataResource.class, qDataResource.all()).as("dataResource")
                         ));
         
         
         SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qContent, qWorkEffortType, qWorkEffortTypeContent)
         				.from(qWorkEffortType)
         				.innerJoin(qWorkEffortTypeContent).on(qWorkEffortType.workEffortTypeId.eq(qWorkEffortTypeContent.workEffortTypeId)) 
-        				.innerJoin(qContent).on(qWorkEffortTypeContent.contentId.eq(qContent.contentId)) 
+        				.innerJoin(qContent).on(qWorkEffortTypeContent.contentId.eq(qContent.contentId))
+                        .innerJoin(qDataResource).on(qDataResource.dataResourceId.eq(qContent.dataResourceId))
         				.where(qContent.contentId.eq(reportContentId)
         						.and(qWorkEffortType.parentTypeId.eq(parentTypeId)))
                         .orderBy(qWorkEffortTypeContent.sequenceNum.asc());

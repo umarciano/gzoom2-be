@@ -14,7 +14,8 @@ import org.springframework.stereotype.Component;
 public class DtoMapper {
 
     private static final String SEP = " ";
-
+    private static final String DOT = ".";
+    private static final String RPTDESIGN = ".rptdesign";
 
     public Timesheet copy(it.mapsgroup.gzoom.querydsl.dto.TimesheetEx from, Timesheet to) {
 
@@ -69,6 +70,7 @@ public class DtoMapper {
         to.setServiceName(from.getServiceName());
         to.setReportContentId(from.getContentId());
         to.setContentName(from.getContentName());
+
         
     	//workEffortAnalysis campi provenente dall'analisi
         if (from.getWorkEffortAnalysis() != null) {
@@ -88,6 +90,11 @@ public class DtoMapper {
             to.setEtchLang(from.getWorkEffortTypeContent().getEtchLang()); 
             to.setUseFilter(from.getWorkEffortTypeContent().getUseFilter());
         	
+        }
+
+        //dataResource campi provenienti dal dataresource
+        if(from.getDataResource()!= null) {
+            to.setResourceName(from.getDataResource().getDataResourceName().substring(0, from.getDataResource().getDataResourceName().indexOf(RPTDESIGN)));
         }
         
         //TODO gestire il LANG

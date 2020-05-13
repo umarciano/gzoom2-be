@@ -8,7 +8,7 @@ public class Report extends Content {
     private WorkEffortType workEffortType;
     private WorkEffortTypeContent workEffortTypeContent;
     private WorkEffortAnalysis workEffortAnalysis;
-    
+	private DataResource dataResource;
     
     private List<ReportParams> params;
     private List<ReportType> outputFormats;
@@ -36,7 +36,15 @@ public class Report extends Content {
 
 	public void setWorkEffortAnalysis(WorkEffortAnalysis workEffortAnalysis) {
 		this.workEffortAnalysis = workEffortAnalysis;
-	}		
+	}
+
+	public DataResource getDataResource() {
+		return dataResource;
+	}
+
+	public void setDataResource(DataResource dataResource) {
+		this.dataResource = dataResource;
+	}
 
 	/**
      * @return the params

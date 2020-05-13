@@ -6,6 +6,7 @@ public class ReportParam {
     private Object paramDefault;
     private String paramType;
     private Boolean mandatory;
+    private Boolean display = true;
    
 	/**
 	 * @return the paramName
@@ -71,4 +72,8 @@ public class ReportParam {
     public void setMandatory(Boolean mandatory) {
         this.mandatory = mandatory;
     }
+
+    public Boolean getDisplay() {return display;}
+
+    public void setDisplay(Boolean display) {this.display = display;}
 }

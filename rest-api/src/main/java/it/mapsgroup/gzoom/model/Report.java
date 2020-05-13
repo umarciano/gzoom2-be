@@ -29,7 +29,9 @@ public class Report extends Identifiable {
 	private String outputFormat;
 	private String contentName;
 	private boolean analysis;
-	
+
+	private String resourceName;
+
 	private List<ReportParam> params;
 	private List<ReportParamService> services;
     private List<ReportType> outputFormats;
@@ -248,7 +250,14 @@ public class Report extends Identifiable {
 		this.outputFormats = outputFormats;
 	}
 
-	
+
+	public String getResourceName() {
+		return resourceName;
+	}
+
+	public void setResourceName(String resourceName) {
+		this.resourceName = resourceName;
+	}
 
 	/**
 	 * @return the workEffortTypes
