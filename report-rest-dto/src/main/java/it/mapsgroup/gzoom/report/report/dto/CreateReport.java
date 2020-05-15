@@ -25,6 +25,8 @@ public class CreateReport {
     private String contentName;
     private String mimeTypeId;
 
+    private String resourceName;
+
     public CreateReport() {
         this.params = new HashMap<>();
     }
@@ -84,4 +86,12 @@ public class CreateReport {
 	public void setMimeTypeId(String mimeTypeId) {
 		this.mimeTypeId = mimeTypeId;
 	}
+
+    public String getResourceName() {
+        return resourceName;
+    }
+
+    public void setResourceName(String resourceName) {
+        this.resourceName = resourceName;
+    }
 }

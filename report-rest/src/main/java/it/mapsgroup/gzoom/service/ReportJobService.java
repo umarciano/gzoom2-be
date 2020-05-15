@@ -82,7 +82,7 @@ public class ReportJobService {
         Validators.assertNotNull(locale, "Locale cannot be null");
 
         record.setStatus(ReportActivityStatus.QUEUED);
-        record.setTemplateName(report.getReportName());
+        record.setTemplateName(report.getResourceName());
         record.setReportName(report.getReportName());
         record.setReportLocale(report.getReportLocale());
         record.setCreatedByUserLogin(report.getCreatedByUserLogin());
@@ -127,13 +127,13 @@ public class ReportJobService {
      * (i vecchi report i valori non sono settati in modo corretto ed è meglio metterlil
      * in file di configurazione, mentre si può pensare nei nuovi di andarlia pescare dal report)
      *
-     * @param reportName
+     * @param contentName
      * @return
      */
-    public ReportParams params(String parentTypeId,String resourceName, String reportName) {
+    public ReportParams params(String parentTypeId,String resourceName, String contentName) {
         ReportParams params = new ReportParams();
 
-        Path path = getReportParamsPath(parentTypeId,resourceName, reportName);
+        Path path = getReportParamsPath(parentTypeId,resourceName, contentName);
         if (Files.isReadable(path)) {
             return getParamsToFile(path.toFile());
         } else {
@@ -166,14 +166,14 @@ public class ReportJobService {
         return new ReportParams();
     }
 
-    private Path getReportParamsPath(String parentTypeId, String resourceName, String reportName) throws RuntimeException {
+    private Path getReportParamsPath(String parentTypeId, String resourceName, String contentName) throws RuntimeException {
         String reportDirectory = config.getBirtReportInputDir();
         //return Paths.get(reportDirectory + File.separator + reportName + File.separator + reportName + ".json");
-        Path path = Paths.get(reportDirectory + File.separator + "custom" + File.separator + resourceName + File.separator + reportName + ".json");
+        Path path = Paths.get(reportDirectory + File.separator + "custom" + File.separator + resourceName + File.separator + contentName + ".json");
         if (!Files.isReadable(path)) {
-            path = Paths.get(reportDirectory + File.separator + parentTypeId + File.separator + resourceName + File.separator + reportName + ".json");
+            path = Paths.get(reportDirectory + File.separator + parentTypeId + File.separator + resourceName + File.separator + contentName + ".json");
             if (!Files.isReadable(path)) {
-                path = Paths.get(reportDirectory + File.separator + resourceName + File.separator + reportName + ".json");
+                path = Paths.get(reportDirectory + File.separator + resourceName + File.separator + contentName + ".json");
             }
         }
         return path;

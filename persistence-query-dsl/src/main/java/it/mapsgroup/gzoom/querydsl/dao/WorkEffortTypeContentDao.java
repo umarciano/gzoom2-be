@@ -70,9 +70,7 @@ public class WorkEffortTypeContentDao extends AbstractDao {
 	        					.where(qWorkEffortTypeContent.weTypeContentTypeId.eq("REPORT")
 										.and(qWorkEffortTypeContent.isVisible.isTrue())
 	        							.and(qWorkEffortTypeContent.contentId.eq(reportContentId))
-	        							.and(qWorkEffortType.parentTypeId.eq(parentTypeId))
-	       								.and(qWorkEffortTypeContent.etch.eq(reportName)
-	       										.or(qContent.description.eq(reportName).and(qWorkEffortTypeContent.etch.isNull()))));
+	        							.and(qWorkEffortType.parentTypeId.eq(parentTypeId)));
 
 
 	        SQLBindings bindings = tupleSQLQuery.getSQL();

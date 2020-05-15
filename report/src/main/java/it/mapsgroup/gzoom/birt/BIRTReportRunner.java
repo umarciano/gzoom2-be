@@ -116,19 +116,19 @@ public class BIRTReportRunner implements ReportRunner {
 	 * 2. parentyTypeId/reportName
 	 * 3. reportName
 	 *
-	 * @param reportName
+	 * @param resourceName
 	 * @return
 	 * @throws RuntimeException
 	 */
-	public File getReportFromFilesystem(String parentTypeId, String reportName) throws RuntimeException {
+	public File getReportFromFilesystem(String parentTypeId, String resourceName) throws RuntimeException {
 		String reportDirectory = config.getBirtReportInputDir();
-		Path birtReport = Paths.get( reportDirectory + File.separator + "custom" + File.separator + reportName + File.separator + reportName + ".rptdesign");
+		Path birtReport = Paths.get( reportDirectory + File.separator + "custom" + File.separator + resourceName + File.separator + resourceName + ".rptdesign");
 		if (!Files.isReadable(birtReport)) {
-			birtReport = Paths.get(reportDirectory + File.separator + parentTypeId + File.separator + reportName + File.separator + reportName + ".rptdesign");
+			birtReport = Paths.get(reportDirectory + File.separator + parentTypeId + File.separator + resourceName + File.separator + resourceName + ".rptdesign");
 			if (!Files.isReadable(birtReport)) {
-				birtReport = Paths.get(reportDirectory + File.separator + reportName + File.separator + reportName + ".rptdesign");
+				birtReport = Paths.get(reportDirectory + File.separator + resourceName + File.separator + resourceName + ".rptdesign");
 				if (!Files.isReadable(birtReport)) {
-					throw new RuntimeException("Report " + reportName + " either did not exist or was not writable.");
+					throw new RuntimeException("Report " + resourceName + " either did not exist or was not writable.");
 				}
 			}
 		}

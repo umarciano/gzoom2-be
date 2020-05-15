@@ -66,7 +66,7 @@ public class ReportRunnableTask implements Runnable {
                     locale = Locale.ITALIAN;
                 }
                 Report report = birtService.build(record.getActivityId(),
-                        record.getReportName(),
+                        record.getTemplateName(),
                         (String) params.get().get("parentTypeId"),
                         params.get(),
                         locale);

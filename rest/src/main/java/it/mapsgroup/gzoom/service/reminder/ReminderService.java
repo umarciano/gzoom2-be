@@ -149,7 +149,8 @@ public class ReminderService {
     		
     		appMap.put("partyId", reminder.getPartyId());
     		LOG.info("generated report  appMap= "+ appMap.toString());
-    		String activityId = reportAddService.add(reportParameters, contentName, userLoginId);
+    		//TODO - Aggiornare il secondo contentName con il resourceName
+    		String activityId = reportAddService.add(reportParameters, contentName, contentName, userLoginId);
     		LOG.info("reminder activityId= "+ activityId);    		
     		
     		Map<String, Object> ele = new HashMap<>();
@@ -168,7 +169,8 @@ public class ReminderService {
     	if (list.size() > 0) {
     		//invio mail di riepilogo
     		//invio la mail a chi ha lanciato l'invio massivo oppure alla mail di default
-    		String activityId = reportAddService.add(reportParameters, contentName, userLoginId);
+			//TODO - Aggiornare il secondo contentName con il resourceName
+    		String activityId = reportAddService.add(reportParameters, contentName, contentName, userLoginId);
     		LOG.info("reminder adminisrtator activityId= "+ activityId);
     		contactMechIdFromList.forEach(contactMech -> {
     			LOG.info("reminder adminisrtator contactMech="+ contactMech.getContactMechId() + " party=" + contactMech.getPartyId());

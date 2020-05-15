@@ -43,7 +43,7 @@ public class ReportAddService {
         reportParameters.put("userLoginId", principal().getUserLoginId());
         reportParameters.put("birtOutputFileName", req.getContentName());
         reportParameters.put("outputFormat", (req.getOutputFormat() == null ? DEFAULT_REPORT_OUTPUT_FORMAT : req.getOutputFormat()));
-        reportParameters.put("localDispatcherName", ContextPermissionPrefixEnum.getPermissionPrefix(req.getParentTypeId())); //non serve piu
+        reportParameters.put("localDispatcherName", ContextPermissionPrefixEnum.getPermissionPrefix(req.getParentTypeId()));
         reportParameters.put("parentTypeId", req.getParentTypeId());
 
         Map<String, Object> paramsValue = req.getParamsValue();
@@ -94,7 +94,7 @@ public class ReportAddService {
      */
     public String add(Report req) {
         HashMap<String, Object> reportParameters = getReportParameters(req);
-        return add(reportParameters, req.getContentName(), principal().getUserLoginId());
+        return add(reportParameters, req.getContentName(), req.getResourceName(), principal().getUserLoginId());
     }
 
 
@@ -103,7 +103,7 @@ public class ReportAddService {
      * @param contentName 
      * @return
      */
-    public String add(HashMap<String, Object> reportParameters, String contentName, String userLoginId) {
+    public String add(HashMap<String, Object> reportParameters, String contentName,String resourceName, String userLoginId) {
         LOG.info("add  reportParameters-> " + reportParameters);
         CreateReport request = new CreateReport();
         request.setCreatedByUserLogin(userLoginId);
@@ -113,7 +113,7 @@ public class ReportAddService {
         request.setReportName(contentName);
         request.setContentName(contentName + "." + reportParameters.get("outputFormat"));
         request.setParams(reportParameters);
-
+        request.setResourceName(resourceName);
         String id = client.createReport(request);
         ResponseEntity<ReportStatus> status = client.getStatus(id);
         LOG.info(status.getBody().toString());
