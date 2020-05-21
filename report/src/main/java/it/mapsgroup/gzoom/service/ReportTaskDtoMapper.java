@@ -17,7 +17,7 @@ public class ReportTaskDtoMapper {
         to.setDataResourceId(dataResourceId);//data resource id
         to.setStatusId("CTNT_INITIAL_DRAFT");
         to.setServiceName(from.getActivityId());//scheduled job id
-        to.setContentName(from.getContentName());//report file name (when downloaded)
+        to.setContentName(from.getReportName());//report file name (when downloaded)
         to.setMimeTypeId("application/pdf");
         to.setCreatedByUserLogin(from.getCreatedByUserLogin());
         to.setLastModifiedByUserLogin(from.getLastModifiedByUserLogin());
@@ -29,7 +29,7 @@ public class ReportTaskDtoMapper {
         to.setDataResourceTypeId("LOCAL_FILE");
         to.setDataTemplateTypeId("NONE");
         to.setStatusId("CTNT_IN_PROGRESS");
-        to.setDataResourceName(from.getContentName());
+        to.setDataResourceName(from.getReportName());
         to.setMimeTypeId("application/pdf");
         to.setObjectInfo(from.getObjectInfo());
         to.setIsPublic(false);

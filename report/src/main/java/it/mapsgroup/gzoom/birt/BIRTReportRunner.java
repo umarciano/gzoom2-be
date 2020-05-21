@@ -215,9 +215,9 @@ public class BIRTReportRunner implements ReportRunner {
 							
 			RenderOption options = new RenderOption();
 			String outputFormat = (String) reportParameters.get("outputFormat");
-			if ("xls".equals(outputFormat)) {
+			if ("xlsx".equals(outputFormat)) {
 				 EXCELRenderOption excelRenderOption= new EXCELRenderOption();
-				 excelRenderOption.setEnableMultipleSheet(true);				 
+				 excelRenderOption.setEnableMultipleSheet(true);
 			} else if ("doc".equals(outputFormat)) {
 				options.setOption(IRenderOption.HTML_PAGINATION, true);
 			} else {

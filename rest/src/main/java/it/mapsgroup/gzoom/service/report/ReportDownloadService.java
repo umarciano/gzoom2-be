@@ -85,7 +85,8 @@ public class ReportDownloadService {
         	
             response.setContentType(reportActivity.getMimeTypeId()); 
             response.setContentLength((int) file.length());
-            String fileName = reportActivity.getContentName(); 
+            //String fileName = reportActivity.getContentName();
+            String fileName = reportActivity.getReportName();
             response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\"");
             IOUtils.copy(bw, response.getOutputStream());
             response.flushBuffer();

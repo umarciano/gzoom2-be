@@ -41,7 +41,7 @@ public class ReportAddService {
         reportParameters.put("workEffortTypeId", req.getWorkEffortTypeId());
         reportParameters.put("reportContentId", req.getReportContentId());
         reportParameters.put("userLoginId", principal().getUserLoginId());
-        reportParameters.put("birtOutputFileName", req.getContentName());
+        reportParameters.put("birtOutputFileName", req.getEtch()!=null?req.getEtch():req.getDescription()!=null?req.getDescription():req.getContentName());
         reportParameters.put("outputFormat", (req.getOutputFormat() == null ? DEFAULT_REPORT_OUTPUT_FORMAT : req.getOutputFormat()));
         reportParameters.put("localDispatcherName", ContextPermissionPrefixEnum.getPermissionPrefix(req.getParentTypeId()));
         reportParameters.put("parentTypeId", req.getParentTypeId());
@@ -110,8 +110,11 @@ public class ReportAddService {
         request.setModifiedByUserLogin(userLoginId);
         request.setReportLocale("it_IT");
         request.setMimeTypeId(BirtContentTypeEnum.getContentType((String) reportParameters.get("outputFormat")));
-        request.setReportName(contentName);
-        request.setContentName(contentName + "." + reportParameters.get("outputFormat"));
+        request.setReportName(contentName + "." + reportParameters.get("outputFormat"));
+        if (reportParameters.get("birtOutputFileName") != null) {
+            request.setReportName(reportParameters.get("birtOutputFileName") + "." + reportParameters.get("outputFormat")); // nome del file pdf, xls, ecc...
+        }
+        request.setContentName(contentName ); // nome del json
         request.setParams(reportParameters);
         request.setResourceName(resourceName);
         String id = client.createReport(request);

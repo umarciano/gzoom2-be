@@ -18,13 +18,15 @@ public class CreateReport {
      */
     @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
     private Map<String, Object> params;
+    // nome mostrato alll'utente, che deriva da content.description oppure da workEffortTypeContent.etch se valorizzato
     private String reportName;
     private String reportLocale;
     private String createdByUserLogin;
     private String modifiedByUserLogin;
+    //Nome del file JSON dove ci sono i parametri
     private String contentName;
     private String mimeTypeId;
-
+    //Nome dell'rptdesign e della cartella
     private String resourceName;
 
     public CreateReport() {

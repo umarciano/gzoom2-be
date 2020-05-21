@@ -13,7 +13,8 @@ public enum BirtContentTypeEnum {
 	
     pdf("pdf", "application/pdf"),
     xls("xls", "application/vnd.ms-excel"),
-    doc("doc", "application/vnd.ms-word");
+    doc("doc", "application/vnd.ms-word"),
+    xlsx("xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 	
     private final String outputFormat;
 	

@@ -82,11 +82,14 @@ public class ReportJobService {
         Validators.assertNotNull(locale, "Locale cannot be null");
 
         record.setStatus(ReportActivityStatus.QUEUED);
+        //Nome dell rptdesign e della cartella
         record.setTemplateName(report.getResourceName());
+        //Nome mostrato all'utente
         record.setReportName(report.getReportName());
         record.setReportLocale(report.getReportLocale());
         record.setCreatedByUserLogin(report.getCreatedByUserLogin());
         record.setLastModifiedByUserLogin(report.getModifiedByUserLogin());
+        //Nome del file JSON con i parametri
         record.setContentName(report.getContentName());
         record.setMimeTypeId(report.getMimeTypeId());
 
