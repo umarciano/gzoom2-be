@@ -39,7 +39,7 @@ public class Manifests {
             Manifest manifest = res.get();
             Attributes attribs = manifest.getMainAttributes();
             String title = attribs.getValue("Implementation-Title");
-            LOG.info("enum Implementation-Title " + title);
+            // LOG.info("enum Implementation-Title " + title);
             if (implementationTitle.equals(title)) {
                 version = initProductVersion(attribs);
                 LOG.info("getProductInfo" + version);

@@ -16,8 +16,7 @@ public class VersionServiceOfBiz {
     }
 
     public String version() {
-        Map<String, Object> response = versionClient.getVersion();
-//        Map<String, Object> response = loginClient.login("admin", "MapsGzoom01",null);
+        Map<String, Object> response = versionClient.getVersions();
         String version = (String) response.get("versions");
         return version;
     }

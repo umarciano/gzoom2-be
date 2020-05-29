@@ -4,6 +4,6 @@ import java.util.Map;
 
 public interface VersionOfBizClient {
 
-    public Map<String, Object> getVersion();
+    Map<String, Object> getVersions();
 
 }
