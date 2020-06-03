@@ -32,4 +32,9 @@ public class WorkEffortTypeService {
         return new Result<>(list, list.size());
     }
 
+    public Result<WorkEffortType> getWorkEffortTypesParametric(String workEffortTypeId) {
+        List<WorkEffortType> list = workEffortTypeDao.getWorkEffortTypesParametric(workEffortTypeId);
+        return new Result<>(list, list.size());
+    }
+
 }

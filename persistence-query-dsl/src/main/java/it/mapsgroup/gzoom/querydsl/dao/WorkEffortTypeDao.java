@@ -7,6 +7,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 import java.util.List;
 
 import com.querydsl.core.BooleanBuilder;
+import it.mapsgroup.gzoom.querydsl.dto.*;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
@@ -21,13 +22,6 @@ import com.querydsl.core.types.QBean;
 import com.querydsl.sql.SQLBindings;
 import com.querydsl.sql.SQLQuery;
 import com.querydsl.sql.SQLQueryFactory;
-
-import it.mapsgroup.gzoom.querydsl.dto.Content;
-import it.mapsgroup.gzoom.querydsl.dto.QContent;
-import it.mapsgroup.gzoom.querydsl.dto.QWorkEffortType;
-import it.mapsgroup.gzoom.querydsl.dto.QWorkEffortTypeContent;
-import it.mapsgroup.gzoom.querydsl.dto.WorkEffortType;
-import it.mapsgroup.gzoom.querydsl.dto.WorkEffortTypeContentExt;
 
 @Service
 public class WorkEffortTypeDao extends AbstractDao {
@@ -70,6 +64,25 @@ public class WorkEffortTypeDao extends AbstractDao {
 		}
 
 		SQLQuery<WorkEffortType> tupleSQLQuery = queryFactory.select(qWorkEffortType).from(qWorkEffortType).where(builder);
+		SQLBindings bindings = tupleSQLQuery.getSQL();
+		LOG.info("{}", bindings.getSQL());
+		LOG.info("{}", bindings.getNullFriendlyBindings());
+		QBean<WorkEffortType> wa = Projections.bean(WorkEffortType.class, qWorkEffortType.all());
+		List<WorkEffortType> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWorkEffortType.workEffortTypeId).list(wa));
+		return ret;
+	}
+
+	@Transactional
+	public List<WorkEffortType> getWorkEffortTypesParametric(String workEffortTypeId) {
+		if (TransactionSynchronizationManager.isActualTransactionActive()) {
+			TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
+			status.getClass();
+		}
+		QWorkEffortType qWorkEffortType = QWorkEffortType.workEffortType;
+		QWorkEffortTypeType qWorkEffortTypeType = QWorkEffortTypeType.workEffortTypeType;
+
+		SQLQuery<WorkEffortType> tupleSQLQuery = queryFactory.select(qWorkEffortType).from(qWorkEffortType).where(
+				qWorkEffortType.workEffortTypeId.in(queryFactory.select(qWorkEffortTypeType.workEffortTypeIdFrom).from(qWorkEffortTypeType).where(qWorkEffortTypeType.workEffortTypeIdRoot.eq(workEffortTypeId))));
 		SQLBindings bindings = tupleSQLQuery.getSQL();
 		LOG.info("{}", bindings.getSQL());
 		LOG.info("{}", bindings.getNullFriendlyBindings());

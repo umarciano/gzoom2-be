@@ -30,4 +30,11 @@ public class WorkEffortTypeController {
     public Result<WorkEffortType> getWorkEffortTypes(@PathVariable(value = "workEffortType") String workEffortTypeId) {
         return Exec.exec("workEffortType get", () -> workEffortTypeService.getWorkEffortTypes(workEffortTypeId));
     }
+
+    @RequestMapping(value = "work-effort-type/parametric/{workEffortType}", method = RequestMethod.GET)
+    @ResponseBody
+    public Result<WorkEffortType> getWorkEffortTypesParametric(@PathVariable(value = "workEffortType") String workEffortTypeId) {
+        return Exec.exec("workEffortType get", () -> workEffortTypeService.getWorkEffortTypesParametric(workEffortTypeId));
+    }
+
 }
