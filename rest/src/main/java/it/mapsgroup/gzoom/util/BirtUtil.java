@@ -4,10 +4,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,6 +73,44 @@ public class BirtUtil {
 		if (orgUnitRoleTypeId != null) {
 			context.remove("orgUnitRoleTypeId");
 		}
+	}
+
+
+	/**
+	 * converte il workEffortIdParametric in una stringa
+	 * @param context
+	 */
+	public void convertWorkEffortIdParametricToString(Map<String, Object> context) {
+		/** Gestisto il reperimento dei parametri con un try catch in quanto se dal front end non è selezionata nessuna voce,
+		 il cast implicito va in errore perchè gli arriva al beckend una stringa vuota e non un array */
+		ArrayList workEffortIdParametric = new ArrayList();
+		try {workEffortIdParametric = (ArrayList) context.get("workEffortIdParametric"); } catch (Exception e) {e.printStackTrace();}
+		ArrayList workEffortIdParametric2 = new ArrayList();
+		try {workEffortIdParametric2 = (ArrayList) context.get("workEffortIdParametric2"); } catch (Exception e) {e.printStackTrace();}
+		ArrayList workEffortIdParametric3 = new ArrayList();
+		try {workEffortIdParametric3 = (ArrayList) context.get("workEffortIdParametric3"); } catch (Exception e) {e.printStackTrace();}
+		String workEffortConverted = "";
+
+		if (workEffortIdParametric != null && workEffortIdParametric.size()>0) {
+			workEffortConverted = "'"+String.join("','", workEffortIdParametric)+"'";
+		}
+		if(workEffortIdParametric2 != null && workEffortIdParametric2.size()>0) {
+			workEffortConverted += !workEffortConverted.equals("")
+									? "," + "'"+String.join("','", workEffortIdParametric2)+"'"
+									:"'"+String.join("','", workEffortIdParametric2)+"'";
+		}
+		if(workEffortIdParametric3 != null && workEffortIdParametric3.size()>0) {
+			workEffortConverted += !workEffortConverted.equals("")
+									? "," + "'"+String.join("','", workEffortIdParametric3)+"'"
+									:"'"+String.join("','", workEffortIdParametric3)+"'";
+		}
+
+		/** Rimuovo tutti i parametri e passo alla stampa una stringa con i valori separati da , */
+		context.remove("workEffortIdParametric");
+		context.remove("workEffortIdParametric2");
+		context.remove("workEffortIdParametric3");
+		context.put("workEffortIdParametric",workEffortConverted);
+
 	}
 	
 	public void cleanRootValue(Map<String, Object> context) {

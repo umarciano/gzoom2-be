@@ -38,4 +38,16 @@ public class NodeController {
     public String stream(@PathVariable(value = "partyId") String partyId, @PathVariable(value = "partyContentTypeId") String partyContentTypeId, HttpServletRequest req, HttpServletResponse response) {
         return Exec.exec("logo stream", () -> nodeService.stream(partyId, partyContentTypeId, req, response));
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/version/legacy")
+    @ResponseBody
+    public String versionLegacy() {
+        return Exec.exec("legacy versions", () -> nodeService.versionLegacy());
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/version/rest")
+    @ResponseBody
+    public String versionREST() {
+        return Exec.exec("rest versions", () -> nodeService.versionREST());
+    }
 }

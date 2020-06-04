@@ -7,6 +7,8 @@ import it.mapsgroup.gzoom.ofbiz.client.OfBizClientConfig;
 import it.mapsgroup.gzoom.ofbiz.client.impl.AuthenticationOfBizClientImpl;
 import it.mapsgroup.gzoom.ofbiz.service.ChangePasswordServiceOfBiz;
 import it.mapsgroup.gzoom.ofbiz.service.LoginServiceOfBiz;
+import it.mapsgroup.gzoom.ofbiz.service.VersionServiceOfBiz;
+import it.mapsgroup.gzoom.ofbiz.client.impl.VersionOfBizClientImpl;
 import it.mapsgroup.gzoom.security.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +75,18 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+    @Autowired
+    public VersionServiceOfBiz versionServiceOfBiz(OfBizClientConfig ofBizClientConfig) {
+        return new VersionServiceOfBiz(new VersionOfBizClientImpl(new OfBizClientConfig() {
+            @Override
+            public URL getServerXmlRpcUrl() {
+                return ofBizClientConfig.getServerXmlRpcUrl();
+            }
+        }));
+    }
+
+
+    @Bean
     public HttpFirewall allowUrlEncodePercentHttpFirewall() {
         StrictHttpFirewall firewall = new StrictHttpFirewall();
         firewall.setAllowUrlEncodedPercent(true);
@@ -131,7 +145,7 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/logout", "/login").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/profile/i18n", "/reminder-period", "/reminder-expiry", "/node/configuration/*", "/node/logo/*/*", "/party/partiesExposed").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/profile/i18n", "/reminder-period", "/reminder-expiry", "/node/configuration/*", "/node/version/*", "/node/logo/*/*", "/party/partiesExposed").permitAll();
         http.authorizeRequests().antMatchers("/**").authenticated();
 
         JwtLoginFilter jwtLoginFilter = new JwtLoginFilter(authenticationManager, objectMapper);
@@ -149,9 +163,10 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
         RequestMatcher reminderPeriod = new AntPathRequestMatcher("/reminder-period"); //TODO
         RequestMatcher reminderExipry = new AntPathRequestMatcher("/reminder-expiry"); //TODO
         RequestMatcher configuration = new AntPathRequestMatcher("/node/configuration/*");
+        RequestMatcher version = new AntPathRequestMatcher("/node/version/*");
         RequestMatcher logo = new AntPathRequestMatcher("/node/logo/*/*");
 
-        RequestMatcher ignoredRequests = new OrRequestMatcher(profile, logout, login, reminderPeriod, reminderExipry, configuration, logo, partiesExposed);
+        RequestMatcher ignoredRequests = new OrRequestMatcher(profile, logout, login, reminderPeriod, reminderExipry, configuration, version, logo, partiesExposed);
 
         http.antMatcher("/**")
                 .addFilterAfter(new DelegateRequestMatchingFilter(ignoredRequests, jwtTokenFilter), JwtLogoutFilter.class);
