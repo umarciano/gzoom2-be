@@ -5,7 +5,7 @@
 
     <groupId>it.mapsgroup.gzoom</groupId>
     <artifactId>gzoom2</artifactId>
-    <version>2.5.1rc1</version>
+    <version>2.5.20rc1</version>
     <packaging>pom</packaging>
 
     <name>GZoom2 (parent)</name>
