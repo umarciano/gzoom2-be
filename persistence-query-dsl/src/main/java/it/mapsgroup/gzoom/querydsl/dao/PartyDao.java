@@ -148,12 +148,18 @@ public class PartyDao extends AbstractDao {
         }
         QParty qParty = QParty.party;
         QPartyRole qPartyRole = QPartyRole.partyRole;
+        QPartyRelationship qPartyRelationship = QPartyRelationship.partyRelationship;
         
         SQLQuery<Party> pSQLQuery = queryFactory.select(qParty)
         							.from(qParty)
         							.innerJoin(qPartyRole).on(qPartyRole.partyId.eq(qParty.partyId))
         							.where(qParty.partyTypeId.eq("PERSON")
-        									.and(qPartyRole.roleTypeId.eq(roleTypeId)))        							
+                                        .and(qPartyRole.roleTypeId.eq(roleTypeId))
+                                        .and(qParty.partyId.in(
+                                                queryFactory.select(qPartyRelationship.partyIdTo)
+                                                        .from(qPartyRelationship)
+                                                        .where(qPartyRelationship.partyRelationshipTypeId.eq("ORG_RESPONSIBLE")
+                                                                .and(qPartyRelationship.roleTypeIdFrom.in("20DIR","30SET"))))))
         							.orderBy(qParty.partyName.asc());
         SQLBindings bindings = pSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
@@ -211,7 +217,8 @@ public class PartyDao extends AbstractDao {
   				.innerJoin(qParty).on(qParty.partyId.eq(qPartyRole.partyId)) 
   				.innerJoin(qPartyParentRole).on(qPartyParentRole.partyId.eq(qParty.partyId)) 
   				.where(qPartyRole.parentRoleTypeId.eq("ORGANIZATION_UNIT")
-  					.and(qParty.statusId.eq("PARTY_ENABLED")))
+  					.and(qParty.statusId.eq("PARTY_ENABLED"))
+                    .and(qPartyRole.roleTypeId.in("20DIR","30SET")))
                  .orderBy(qPartyParentRole.parentRoleCode.asc());
                 // .groupBy(qParty.partyId);
          

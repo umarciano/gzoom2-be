@@ -99,7 +99,7 @@ public class WorkEffortDao extends AbstractDao {
 				.innerJoin(qWorkEffortType).on(qWorkEffortType.workEffortTypeId.eq(qWorkEffort.workEffortTypeId))
 				.where(//qWorkEffort.workEffortTypeId.like(workEffortTypeId)
 						builder
-						.and(qWorkEffortType.isRoot.eq(true))
+						//.and(qWorkEffortType.isRoot.eq(true))//TODO creare un metodo o modificare il metodo per gestire il Root
 						.and(qWorkEffortType.parentTypeId.like("CTX%"))
 						.and(qWorkEffort.workEffortRevisionId.isNull()))  //TODO prendo solo quelli non storicizzati!!!!
 			//	.groupBy(qWorkEffort.workEffortId)
