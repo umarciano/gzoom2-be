@@ -161,7 +161,6 @@ public class TimeEntryDao extends AbstractDao {
     public boolean create(TimeEntry record, String userLoginId) {
         QTimeEntry qTimeEntry = QTimeEntry.timeEntry;
         setCreatedTimestamp(record);
-        TimeEntry t = new TimeEntry();
         String id = sequenceGenerator.getNextSeqId("TimeEntry");
         LOG.debug("new timeEntryId" + id);
         record.setTimeEntryId(id);
