@@ -1,7 +1,17 @@
 package com.mapsengineering.base.birt.util;
 
 
+import org.slf4j.Logger;
+
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
+
+import static org.slf4j.LoggerFactory.getLogger;
+
 public class UtilNumber {
+	private static final Logger LOG = getLogger(UtilNumber.class);
 
 	private static int concatRomanToken(StringBuffer roman, int number, int tokenValue, String romanToken){
 		int n = number;		
@@ -71,5 +81,17 @@ public class UtilNumber {
 		return pattern;
 	}
 
-        	
+	public static String getValueFormatted(String value, String pattern) {
+		if (value == null) {
+			return "";
+		}
+		DecimalFormat commaFormat;
+		commaFormat = new DecimalFormat(pattern);
+		BigDecimal valueObject = new BigDecimal(value);
+		if (pattern.indexOf("%") != -1) {
+			valueObject = valueObject.divide(new BigDecimal(100));
+		}
+		LOG.info("valueObject = " + commaFormat.format(valueObject));
+		return commaFormat.format(valueObject);
+	}
 }
