@@ -91,7 +91,6 @@ public class UtilNumber {
 		if (pattern.indexOf("%") != -1) {
 			valueObject = valueObject.divide(new BigDecimal(100));
 		}
-		LOG.info("valueObject = " + commaFormat.format(valueObject));
 		return commaFormat.format(valueObject);
 	}
 }
