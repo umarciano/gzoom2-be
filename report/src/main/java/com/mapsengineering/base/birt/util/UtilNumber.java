@@ -85,8 +85,10 @@ public class UtilNumber {
 		if (value == null) {
 			return "";
 		}
-		DecimalFormat commaFormat;
-		commaFormat = new DecimalFormat(pattern);
+		NumberFormat nf = NumberFormat.getNumberInstance(Locale.ITALIAN);
+		DecimalFormat commaFormat = (DecimalFormat) nf;
+		commaFormat.applyPattern(pattern);
+
 		BigDecimal valueObject = new BigDecimal(value);
 		if (pattern.indexOf("%") != -1) {
 			valueObject = valueObject.divide(new BigDecimal(100));
