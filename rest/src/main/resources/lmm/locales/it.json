@@ -1883,6 +1883,7 @@
     "ScoreAwardable": "Punteggio assegnabile",
     "ScoreAwarded": "Punteggio assegnato",
     "ScoreLevelNotNullValidation": "Il campo <em>Livello punteggio<\/em> è obbligatorio",
+    "scorePreview": "Previsione Risultato",
     "Scostamento": "Scostamento",
     "Search": "Ricerca",
     "Search file in ${directoryPathInXls}": "Inizio ricerca file per ${entityCode} in ${directoryPathInXls}",
