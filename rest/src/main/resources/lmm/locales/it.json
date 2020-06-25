@@ -1903,6 +1903,7 @@
     "Select language for printing": "Seleziona lingua per la stampa",
     "Select statusItem": "Seleziona stato",
     "Select party": "Seleziona Soggetto",
+    "Select revision": "Seleziona Revisione",
     "Select WorkEffort": "Seleziona Scheda",
     "Select WorkEffortType": "Seleziona Tipo Obiettivo",
     "Select WorkEffortChild": "Seleziona Obiettivo",
@@ -2363,6 +2364,7 @@
     "WorkEffortNoteAndDataFolderScreenLabel": "Note",
     "WorkEffortPartyAssignments": "Soggetti Obiettivi",
     "WorkEffortPurposeAccountComments": " Commento Finalità",
+    "workEffortRevision": "Revisione",
     "WorkEffortRootCode": "Codice Scheda",
     "WorkEffortRootDescription": "Descrizione Scheda",
     "WorkEffortRootInqyPartySummaryViewList": "Schede Valutazione",
@@ -2510,5 +2512,5 @@
     "dayNames":["Domenica","Lunedì","Martedì","Mercoledì","Giovedì","Venerdì","Sabato"],
     "dayNamesShort":["Dom","Lun","Mar","Mer","Gio","Ven","Sab"],
     "dayNamesMin":["Do","Lu","Ma","Me","Gi","Ve","Sa"]
-    }
+  }
 }

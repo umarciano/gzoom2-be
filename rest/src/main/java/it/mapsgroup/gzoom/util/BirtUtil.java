@@ -84,11 +84,11 @@ public class BirtUtil {
 		/** Gestisto il reperimento dei parametri con un try catch in quanto se dal front end non è selezionata nessuna voce,
 		 il cast implicito va in errore perchè gli arriva al beckend una stringa vuota e non un array */
 		ArrayList workEffortIdParametric = new ArrayList();
-		try {workEffortIdParametric = (ArrayList) context.get("workEffortIdParametric"); } catch (Exception e) {e.printStackTrace();}
+		try {workEffortIdParametric = (ArrayList) context.get("workEffortIdParametric"); } catch (Exception e) {}
 		ArrayList workEffortIdParametric2 = new ArrayList();
-		try {workEffortIdParametric2 = (ArrayList) context.get("workEffortIdParametric2"); } catch (Exception e) {e.printStackTrace();}
+		try {workEffortIdParametric2 = (ArrayList) context.get("workEffortIdParametric2"); } catch (Exception e) {}
 		ArrayList workEffortIdParametric3 = new ArrayList();
-		try {workEffortIdParametric3 = (ArrayList) context.get("workEffortIdParametric3"); } catch (Exception e) {e.printStackTrace();}
+		try {workEffortIdParametric3 = (ArrayList) context.get("workEffortIdParametric3"); } catch (Exception e) {}
 		String workEffortConverted = "";
 
 		if (workEffortIdParametric != null && workEffortIdParametric.size()>0) {
