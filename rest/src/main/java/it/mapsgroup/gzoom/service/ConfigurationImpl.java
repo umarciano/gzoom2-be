@@ -1,5 +1,8 @@
 package it.mapsgroup.gzoom.service;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 import it.mapsgroup.gzoom.ofbiz.client.OfBizClientConfig;
 import it.mapsgroup.gzoom.quartz.SchedulerConfig;
 import it.mapsgroup.gzoom.security.model.SecurityConfiguration;
@@ -11,10 +14,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
+import java.util.function.BiFunction;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static it.mapsgroup.gzoom.common.JsonLocalizationReader.readClasspathResources;
 import static it.mapsgroup.gzoom.common.JsonLocalizationReader.readDirectory;
@@ -146,7 +149,22 @@ public class ConfigurationImpl implements Configuration, SecurityConfiguration, 
     private Map<String, Map<String, Object>> initLocalization() {
         Map<String, Map<String, Object>> cpLoc = readClasspathResources(translationResources);
         Map<String, Map<String, Object>> dirLoc = readDirectory(localeDirPath);
-        cpLoc.putAll(dirLoc);
+
+
+        dirLoc.forEach((key, dirLocLang) -> {
+            if (cpLoc.containsKey(key)) {
+                Map<String, Object> cpLocLang = cpLoc.get(key);
+                dirLocLang.forEach((key2, dirLocLangItem) ->
+                {
+                    if (cpLocLang.containsKey(key2))
+                        ((Map<String, Object>) cpLocLang.get(key2)).putAll((Map<String, Object>) dirLocLangItem);
+                    else cpLocLang.put(key2, dirLocLangItem);
+                });
+            } else {
+                cpLoc.put(key, dirLocLang);
+            }
+        });
+
         return cpLoc;
     }
 
