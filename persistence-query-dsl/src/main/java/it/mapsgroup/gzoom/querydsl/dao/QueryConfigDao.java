@@ -38,7 +38,7 @@ public class QueryConfigDao extends AbstractDao {
     }
 
     @Transactional
-    public List<QueryConfig> getAllQueryConfig() {
+    public List<QueryConfig> getAllQueryConfig(String parentTypeId,String queryType) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
@@ -50,6 +50,16 @@ public class QueryConfigDao extends AbstractDao {
                 .from(qQueryConfig)
                 //.where(qEnumeration.enumTypeId.eq(enumTypeId))
                 .orderBy(qQueryConfig.queryId.asc());
+
+        if(parentTypeId!=null && !parentTypeId.equals("")) {
+            pSQLQuery.where(qQueryConfig.queryCtx.eq(parentTypeId).and(qQueryConfig.queryPublic.eq(true)));
+            if(parentTypeId!=null && queryType.equals("E")) {
+                pSQLQuery.where(qQueryConfig.queryType.eq("E"));
+            }
+            else if(parentTypeId!=null && !queryType.equals("") && !queryType.equals("E")) {
+                pSQLQuery.where(qQueryConfig.queryType.notEqualsIgnoreCase("E"));
+            }
+        }
 
         SQLBindings bindings = pSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());

@@ -29,7 +29,14 @@ public class QueryConfigController {
     @RequestMapping(value = "query-config/all", method = RequestMethod.GET)
     @ResponseBody
     public Result<QueryConfig> getAllQueryConfig() {
-        return Exec.exec("get query-config",() -> queryConfigService.getAllQueryConfig());
+        return Exec.exec("get query-config",() -> queryConfigService.getAllQueryConfig(null,null));
+    }
+
+    @RequestMapping(value = "query-config/all/{parentTypeId}/{queryType}", method = RequestMethod.GET)
+    @ResponseBody
+    public Result<QueryConfig> getAllQueryConfigWithParent(@PathVariable(value = "parentTypeId") String parentTypeId,
+                                                           @PathVariable(value = "queryType") String queryType) {
+        return Exec.exec("get query-config",() -> queryConfigService.getAllQueryConfig(parentTypeId,queryType));
     }
 
     @RequestMapping(value = "query-config/id/{id}", method = RequestMethod.GET)

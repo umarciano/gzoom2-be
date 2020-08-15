@@ -1,14 +1,15 @@
 package it.mapsgroup.gzoom.service;
 
 import it.mapsgroup.gzoom.querydsl.dao.QueryConfigDao;
-import it.mapsgroup.gzoom.querydsl.dto.QQueryConfig;
 import it.mapsgroup.gzoom.querydsl.dto.QueryConfig;
+import it.mapsgroup.gzoom.rest.ValidationException;
+import org.apache.ibatis.jdbc.ScriptRunner;
+import org.apache.ibatis.jdbc.SqlRunner;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpHeaders;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
@@ -19,11 +20,16 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-import java.io.FileOutputStream;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.sql.*;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import org.slf4j.Logger;
+
+import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * Query Executor service.
@@ -35,6 +41,7 @@ public class QueryExecutorService {
 
     private final DataSource dataSource;
     private final QueryConfigDao queryConfigDao;
+    private static final Logger LOG = getLogger(QueryExecutorService.class);
 
     private final Map<String, String> TIPO_QUERY = new HashMap<String, String>() {{
         put("SELECT", "E");
@@ -48,7 +55,7 @@ public class QueryExecutorService {
     }
 
     @Transactional
-    public String execQuery(QueryConfig query, HttpServletRequest req, HttpServletResponse response) {
+    public String execQuery(QueryConfig query, HttpServletRequest req, HttpServletResponse response) throws Exception {
 
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
@@ -85,15 +92,13 @@ public class QueryExecutorService {
 
         try {
 
-            //Connection connection = DriverManager.getConnection("jdbc:sqlserver://MG-19BT\\\\SQLEXPRESS:55975;databaseName=gzoom_comune_genovanew;SelectMethod=cursor;", "sa", "sa.12345");
             Connection connection = dataSource.getConnection();
-
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(finalQuery);
 
             //Se la query è una select crea un file xlsx
             if(query.getQueryType().equals(TIPO_QUERY.get("SELECT")))
             {
+                Statement stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery(finalQuery);
                 ResultSetMetaData rsmd = rs.getMetaData();
 
                 int maxColumn = rsmd.getColumnCount();
@@ -139,10 +144,6 @@ public class QueryExecutorService {
 
                 }
 
-                //create file
-               // FileOutputStream outputStream = new FileOutputStream(excelFilePath);
-               // wb.write(outputStream);
-               // wb.close();
 
                 response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
                 response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"query_" + query.getQueryId() + ".xlsx\"");
@@ -154,9 +155,33 @@ public class QueryExecutorService {
                 stmt.close();
 
             }
+            //Altrimenti Eseguo la query come se fosse sempre uno script
+            else {
+                ScriptRunner scriptRunner = null;
+                StringWriter errorWriter = new StringWriter();
+                try {
+                    long start = System.currentTimeMillis();
+                    LOG.info("Executing: {} ", finalQuery.replaceAll("\n", " "));
+                    scriptRunner = new ScriptRunner(connection);
+                    scriptRunner.setStopOnError(true);
+                    scriptRunner.setErrorLogWriter(new PrintWriter(errorWriter));
+                    scriptRunner.runScript(new StringReader(finalQuery));
 
-        } catch (Exception e) {
-          return e.getMessage();
+                    if (LOG.isInfoEnabled()) {
+                        LOG.info("Time execute query: {}ms", System.currentTimeMillis() - start);
+                    }
+                }
+                catch (Exception e)
+                {
+                        LOG.error("Error executing query: " + finalQuery, e +"\n RUNNER ERROR: "+errorWriter.toString());
+                        throw new RuntimeException(e);
+                }
+            }
+
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException(e);
         }
 
         return null;
