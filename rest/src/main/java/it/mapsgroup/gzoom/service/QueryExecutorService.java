@@ -69,25 +69,25 @@ public class QueryExecutorService {
             finalQuery = query.getQueryInfo();
             //Replace Condition
             if(query.getCond0Info()!=null && !query.getCond0Info().equals(""))
-                finalQuery = finalQuery.toUpperCase().replace("#COND0#",query.getCond0Info());
+                finalQuery = finalQuery.replaceAll("(?i)#COND0#",query.getCond0Info());
             if(query.getCond1Info()!=null && !query.getCond1Info().equals(""))
-                finalQuery = finalQuery.toUpperCase().replace("#COND1#",query.getCond1Info());
+                finalQuery = finalQuery.replaceAll("(?i)#COND1#",query.getCond1Info());
             if(query.getCond2Info()!=null && !query.getCond2Info().equals(""))
-                finalQuery = finalQuery.toUpperCase().replace("#COND2#",query.getCond2Info());
+                finalQuery = finalQuery.replaceAll("(?i)#COND2#",query.getCond2Info());
             if(query.getCond3Info()!=null && !query.getCond3Info().equals(""))
-                finalQuery = finalQuery.toUpperCase().replace("#COND3#",query.getCond3Info());
+                finalQuery = finalQuery.replaceAll("(?i)#COND3#",query.getCond3Info());
             if(query.getCond4Info()!=null && !query.getCond4Info().equals(""))
-                finalQuery = finalQuery.toUpperCase().replace("#COND4#",query.getCond4Info());
+                finalQuery = finalQuery.replaceAll("(?i)#COND4#",query.getCond4Info());
             if(query.getCond5Info()!=null && !query.getCond5Info().equals(""))
-                finalQuery = finalQuery.toUpperCase().replace("#COND5#",query.getCond5Info());
+                finalQuery = finalQuery.replaceAll("(?i)#COND5#",query.getCond5Info());
             if(query.getCond6Info()!=null && !query.getCond6Info().equals(""))
-                finalQuery = finalQuery.toUpperCase().replace("#COND6#",query.getCond6Info());
+                finalQuery = finalQuery.replaceAll("(?i)#COND6#",query.getCond6Info());
             if(query.getCond7Info()!=null && !query.getCond7Info().equals(""))
-                finalQuery = finalQuery.toUpperCase().replace("#COND7#",query.getCond7Info());
+                finalQuery = finalQuery.replaceAll("(?i)#COND7#",query.getCond7Info());
             if(query.getCond8Info()!=null && !query.getCond8Info().equals(""))
-                finalQuery = finalQuery.toUpperCase().replace("#COND8#",query.getCond8Info());
+                finalQuery = finalQuery.replaceAll("(?i)#COND8#",query.getCond8Info());
 
-            finalQuery = finalQuery.toUpperCase().replace("#USERID#",SecurityContextHolder.getContext().getAuthentication().getName());
+            finalQuery = finalQuery.replaceAll("(?i)#USERID#",SecurityContextHolder.getContext().getAuthentication().getName());
         }
 
         try {
