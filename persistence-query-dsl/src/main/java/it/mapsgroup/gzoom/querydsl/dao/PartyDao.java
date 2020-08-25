@@ -141,11 +141,16 @@ public class PartyDao extends AbstractDao {
     }
     
     @Transactional
-    public List<Party> getRoleTypePartys(String roleTypeId) {
+    public List<Party> getRoleTypePartys(String roleTypeId, String roleTypeIdFrom) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
         }
+
+        String[] roleTypeIdFromArray = {"20DIR","30SETT"};
+        if(roleTypeIdFrom!=null)
+            roleTypeIdFromArray = roleTypeIdFrom.split(",");
+
         QParty qParty = QParty.party;
         QPartyRole qPartyRole = QPartyRole.partyRole;
         QPartyRelationship qPartyRelationship = QPartyRelationship.partyRelationship;
@@ -159,7 +164,7 @@ public class PartyDao extends AbstractDao {
                                                 queryFactory.select(qPartyRelationship.partyIdTo)
                                                         .from(qPartyRelationship)
                                                         .where(qPartyRelationship.partyRelationshipTypeId.eq("ORG_RESPONSIBLE")
-                                                                .and(qPartyRelationship.roleTypeIdFrom.in("20DIR","30SET"))))))
+                                                                .and(qPartyRelationship.roleTypeIdFrom.in(roleTypeIdFromArray))))))
         							.orderBy(qParty.partyName.asc());
         SQLBindings bindings = pSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
@@ -201,13 +206,17 @@ public class PartyDao extends AbstractDao {
      */
     
     @Transactional
-    public List<PartyEx> getOrgUnits(String userLoginId, String parentTypeId) {
+    public List<PartyEx> getOrgUnits(String userLoginId, String parentTypeId, String roleTypeId) {
     	 if (TransactionSynchronizationManager.isActualTransactionActive()) {
              TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
              status.getClass();
          }
-    	 
-    	 
+
+    	 String[] roleType = {"20DIR","30SETT"};
+    	 if(roleTypeId!=null)
+    	    roleType = roleTypeId.split(",");
+
+
          QParty qParty = QParty.party;
          QPartyParentRole qPartyParentRole = QPartyParentRole.partyParentRole;
          QPartyRole qPartyRole = QPartyRole.partyRole;
@@ -218,7 +227,7 @@ public class PartyDao extends AbstractDao {
   				.innerJoin(qPartyParentRole).on(qPartyParentRole.partyId.eq(qParty.partyId)) 
   				.where(qPartyRole.parentRoleTypeId.eq("ORGANIZATION_UNIT")
   					.and(qParty.statusId.eq("PARTY_ENABLED"))
-                    .and(qPartyRole.roleTypeId.in("20DIR","30SET")))
+                    .and(qPartyRole.roleTypeId.in(roleType)))
                  .orderBy(qPartyParentRole.parentRoleCode.asc());
                 // .groupBy(qParty.partyId);
          

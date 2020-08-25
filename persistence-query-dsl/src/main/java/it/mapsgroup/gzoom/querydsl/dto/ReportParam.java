@@ -1,12 +1,15 @@
 package it.mapsgroup.gzoom.querydsl.dto;
 
 
+import java.util.ArrayList;
+
 public class ReportParam {
     private String paramName;
     private Object paramDefault;
     private String paramType;
     private Boolean mandatory;
     private Boolean display = true;
+    private String options;
    
 	/**
 	 * @return the paramName
@@ -28,6 +31,11 @@ public class ReportParam {
 	public Object getParamDefault() {
 		return paramDefault;
 	}
+
+	/**
+	 * @return the options
+	 */
+	public String getOptions() {return options;}
 
 	/**
 	 * @param paramDefault the paramDefault to set
@@ -76,4 +84,6 @@ public class ReportParam {
     public Boolean getDisplay() {return display;}
 
     public void setDisplay(Boolean display) {this.display = display;}
+
+    public void setOptions(String options) {this.options = options; }
 }

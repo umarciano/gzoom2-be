@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 /**
  */
 @RestController
@@ -46,14 +48,16 @@ public class PartyController {
     
     @RequestMapping(value = "orgUnits/{parentTypeId}", method = RequestMethod.GET)
     @ResponseBody
-    public Result<PartyEx> getOrgUnits(@PathVariable(value = "parentTypeId") String parentTypeId) {
-        return Exec.exec("orgUnit get", () -> partyService.getOrgUnits(principal().getUserLoginId(), parentTypeId));
+    public Result<PartyEx> getOrgUnits(@PathVariable(value = "parentTypeId") String parentTypeId,
+    @RequestParam("roleTypeId") Optional<String> roleTypeId) {
+        return Exec.exec("orgUnit get", () -> partyService.getOrgUnits(principal().getUserLoginId(), parentTypeId, roleTypeId.isPresent()?roleTypeId.get():null));
     }
     
     @RequestMapping(value = "party/roleType/{roleTypeId}", method = RequestMethod.GET)
     @ResponseBody
-    public Result<Party> getRoleTypePartys(@PathVariable(value = "roleTypeId") String roleTypeId) {
-        return Exec.exec("party get", () -> partyService.getRoleTypePartys(roleTypeId));
+    public Result<Party> getRoleTypePartys(@PathVariable(value = "roleTypeId") String roleTypeId,
+    @RequestParam("roleTypeIdFrom") Optional<String> roleTypeIdFrom) {
+        return Exec.exec("party get", () -> partyService.getRoleTypePartys(roleTypeId,roleTypeIdFrom.isPresent()?roleTypeIdFrom.get():null));
     }
 
     @GetMapping("party/roleType/between/{roleTypeId}")
