@@ -89,7 +89,7 @@ public class ContentAndAttributesDao extends AbstractDao {
                 key = "STRATPERF";
             }
             
-            builder.or(qContentAttrLink.attrValue.like("/" + key + "%"));
+            builder.or(qContentAttrLink.attrValue.toUpperCase().like("/" + key + "%"));
         }
 
         SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qContent, qContentAttrTitle)
