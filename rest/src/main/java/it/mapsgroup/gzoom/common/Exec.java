@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.access.AccessDeniedException;
 
+import java.security.Principal;
+
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
@@ -25,7 +27,11 @@ public class Exec {
         } catch (InternalServerException | ValidationException | AccessDeniedException | DataAccessException e) {
             throw e;
         } catch (Exception e) {
-            LOG.error("Unexpected exception [user={}, phase={}]", Principals.username(), phase, e);
+            if (Principals.username() != null) {
+                LOG.error("Unexpected exception [user={}, phase={}]", Principals.username(), phase, e);
+            } else {
+                LOG.error("Unexpected exception [user={}, phase={}]", "anonimo", phase, e);
+            }
             throw new InternalServerException( e.getMessage());
         }
     }
