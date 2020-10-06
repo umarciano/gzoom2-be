@@ -40,7 +40,13 @@ public class MenuService {
 
     public FolderMenu getMenu() {
         Permissions perms = profileService.getUserPermission();
-        Map<String, List<String>> mappa = perms.getPermissions();
+
+        //Get permissions and Filter only permission with ADMIN or VIEW
+        Map<String, List<String>> mappa = perms.getPermissions().entrySet().stream().filter(e ->
+                e.getValue().contains("VIEW") || e.getValue().contains("ADMIN")
+        ).collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
+
+        LOG.info("mappa2 " + mappa);
         List<String> keys = new ArrayList<String>(mappa.keySet());
         
         FolderMenu root = new FolderMenu();
