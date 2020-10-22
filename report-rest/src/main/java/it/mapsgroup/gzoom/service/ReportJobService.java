@@ -173,10 +173,13 @@ public class ReportJobService {
         String reportDirectory = config.getBirtReportInputDir();
         //return Paths.get(reportDirectory + File.separator + reportName + File.separator + reportName + ".json");
         Path path = Paths.get(reportDirectory + File.separator + "custom" + File.separator + resourceName + File.separator + contentName + ".json");
+        LOG.info("Error while loading params: {}."+path);
         if (!Files.isReadable(path)) {
             path = Paths.get(reportDirectory + File.separator + parentTypeId + File.separator + resourceName + File.separator + contentName + ".json");
+            LOG.info("Error while loading params2: {}."+path);
             if (!Files.isReadable(path)) {
                 path = Paths.get(reportDirectory + File.separator + resourceName + File.separator + contentName + ".json");
+                LOG.info("Error while loading params3: {}."+path);
             }
         }
         return path;

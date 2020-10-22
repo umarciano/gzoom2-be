@@ -122,11 +122,15 @@ public class BIRTReportRunner implements ReportRunner {
 	 */
 	public File getReportFromFilesystem(String parentTypeId, String resourceName) throws RuntimeException {
 		String reportDirectory = config.getBirtReportInputDir();
+
 		Path birtReport = Paths.get( reportDirectory + File.separator + "custom" + File.separator + resourceName + File.separator + resourceName + ".rptdesign");
+		logger.info("Error while loading rptdesign: {}."+birtReport);
 		if (!Files.isReadable(birtReport)) {
 			birtReport = Paths.get(reportDirectory + File.separator + parentTypeId + File.separator + resourceName + File.separator + resourceName + ".rptdesign");
+			logger.info("Error while loading rptdesign 2: {}."+birtReport);
 			if (!Files.isReadable(birtReport)) {
 				birtReport = Paths.get(reportDirectory + File.separator + resourceName + File.separator + resourceName + ".rptdesign");
+				logger.info("Error while loading rptdesign 3: {}."+birtReport);
 				if (!Files.isReadable(birtReport)) {
 					throw new RuntimeException("Report " + resourceName + " either did not exist or was not writable.");
 				}
