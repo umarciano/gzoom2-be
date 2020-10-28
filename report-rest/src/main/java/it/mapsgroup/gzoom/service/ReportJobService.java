@@ -172,7 +172,11 @@ public class ReportJobService {
     private Path getReportParamsPath(String parentTypeId, String resourceName, String contentName) throws RuntimeException {
         String reportDirectory = config.getBirtReportInputDir();
         //return Paths.get(reportDirectory + File.separator + reportName + File.separator + reportName + ".json");
-        Path path = Paths.get(reportDirectory + File.separator + "custom" + File.separator + resourceName + File.separator + contentName + ".json");
+        Path path;
+        if(config.getDeveloperBirtPath()!=null && !config.getDeveloperBirtPath().equals(""))
+            path = Paths.get(reportDirectory + File.separator + "project" + File.separator + config.getDeveloperBirtPath() + File.separator + resourceName + File.separator + contentName + ".json");
+        else
+            path = Paths.get(reportDirectory + File.separator + "custom" + File.separator + resourceName + File.separator + contentName + ".json");
         LOG.info("Error while loading params: {}."+path);
         if (!Files.isReadable(path)) {
             path = Paths.get(reportDirectory + File.separator + parentTypeId + File.separator + resourceName + File.separator + contentName + ".json");

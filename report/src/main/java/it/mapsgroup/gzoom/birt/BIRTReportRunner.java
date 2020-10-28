@@ -39,6 +39,8 @@ public class BIRTReportRunner implements ReportRunner {
 
 	private final BirtConfig config;
 
+	private String developerBirtPath;
+
 	@Autowired
 	public BIRTReportRunner(BirtConfig config) {
 		this.config = config;
@@ -98,6 +100,7 @@ public class BIRTReportRunner implements ReportRunner {
 		}
 
 		reportTempDirectory = config.getBirtTempFileOutputDir();
+		developerBirtPath = config.getDeveloperBirtPath();
 	}
 
 	/**
@@ -123,7 +126,11 @@ public class BIRTReportRunner implements ReportRunner {
 	public File getReportFromFilesystem(String parentTypeId, String resourceName) throws RuntimeException {
 		String reportDirectory = config.getBirtReportInputDir();
 
-		Path birtReport = Paths.get( reportDirectory + File.separator + "custom" + File.separator + resourceName + File.separator + resourceName + ".rptdesign");
+		Path birtReport;
+		if (developerBirtPath!=null && !developerBirtPath.equals(""))
+			birtReport = Paths.get( reportDirectory + File.separator + "project" + File.separator + developerBirtPath + File.separator + resourceName + File.separator + resourceName + ".rptdesign");
+		else
+			birtReport = Paths.get( reportDirectory + File.separator + "custom" + File.separator + resourceName + File.separator + resourceName + ".rptdesign");
 		logger.info("Error while loading rptdesign: {}."+birtReport);
 		if (!Files.isReadable(birtReport)) {
 			birtReport = Paths.get(reportDirectory + File.separator + parentTypeId + File.separator + resourceName + File.separator + resourceName + ".rptdesign");
