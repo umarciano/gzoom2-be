@@ -212,7 +212,7 @@ public class PartyDao extends AbstractDao {
              status.getClass();
          }
 
-    	 String[] roleType = {"20DIR","30SETT"};
+    	 String[] roleType = new String[]{};
     	 if(roleTypeId!=null)
     	    roleType = roleTypeId.split(",");
 
@@ -227,9 +227,10 @@ public class PartyDao extends AbstractDao {
   				.innerJoin(qPartyParentRole).on(qPartyParentRole.partyId.eq(qParty.partyId)) 
   				.where(qPartyRole.parentRoleTypeId.eq("ORGANIZATION_UNIT")
   					.and(qParty.statusId.eq("PARTY_ENABLED"))
-                    .and(qPartyRole.roleTypeId.in(roleType)))
+                    .and(roleType!=null&&roleType.length>0?qPartyRole.roleTypeId.in(roleType):qPartyRole.roleTypeId.isNotNull()))
                  .orderBy(qPartyParentRole.parentRoleCode.asc());
                 // .groupBy(qParty.partyId);
+
          
          
          tupleSQLQuery = (SQLQuery<Tuple>) filterPermissionDao.getFilterQuery(tupleSQLQuery, qPartyRole, userLoginId, parentTypeId);
