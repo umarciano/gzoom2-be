@@ -131,18 +131,20 @@ public class BIRTReportRunner implements ReportRunner {
 			birtReport = Paths.get( reportDirectory + File.separator + "project" + File.separator + developerBirtPath + File.separator + resourceName + File.separator + resourceName + ".rptdesign");
 		else
 			birtReport = Paths.get( reportDirectory + File.separator + "custom" + File.separator + resourceName + File.separator + resourceName + ".rptdesign");
-		logger.info("Error while loading rptdesign: {}."+birtReport);
+
 		if (!Files.isReadable(birtReport)) {
+			logger.info("Cannot loading rptdesign project/custom: "+birtReport);
 			birtReport = Paths.get(reportDirectory + File.separator + parentTypeId + File.separator + resourceName + File.separator + resourceName + ".rptdesign");
-			logger.info("Error while loading rptdesign 2: {}."+birtReport);
 			if (!Files.isReadable(birtReport)) {
+				logger.info("Cannot loading rptdesign 2nd step: "+birtReport);
 				birtReport = Paths.get(reportDirectory + File.separator + resourceName + File.separator + resourceName + ".rptdesign");
-				logger.info("Error while loading rptdesign 3: {}."+birtReport);
 				if (!Files.isReadable(birtReport)) {
+					logger.info("Cannot loading rptdesign 3th step: "+birtReport);
 					throw new RuntimeException("Report " + resourceName + " either did not exist or was not writable.");
 				}
 			}
 		}
+
 		return birtReport.toFile();
 	}
 

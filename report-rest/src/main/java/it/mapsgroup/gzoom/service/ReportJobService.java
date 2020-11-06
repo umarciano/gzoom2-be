@@ -177,13 +177,15 @@ public class ReportJobService {
             path = Paths.get(reportDirectory + File.separator + "project" + File.separator + config.getDeveloperBirtPath() + File.separator + resourceName + File.separator + contentName + ".json");
         else
             path = Paths.get(reportDirectory + File.separator + "custom" + File.separator + resourceName + File.separator + contentName + ".json");
-        LOG.info("Error while loading params: {}."+path);
+
         if (!Files.isReadable(path)) {
+            LOG.info("Cannot loading json for project/custom rptdesign: "+path);
             path = Paths.get(reportDirectory + File.separator + parentTypeId + File.separator + resourceName + File.separator + contentName + ".json");
-            LOG.info("Error while loading params2: {}."+path);
             if (!Files.isReadable(path)) {
+                LOG.info("Cannot loading json 2nd step: "+path);
                 path = Paths.get(reportDirectory + File.separator + resourceName + File.separator + contentName + ".json");
-                LOG.info("Error while loading params3: {}."+path);
+                if(!Files.isReadable(path))
+                    LOG.info("Cannot loading json 3th step: "+path);
             }
         }
         return path;
