@@ -50,7 +50,7 @@ public class WorkEffortTypeContentDao extends AbstractDao {
 	     */
 	    
 	    @Transactional
-	    public List<WorkEffortTypeExt> getWorkEffortTypeContents(String parentTypeId, String reportContentId, String reportName) {
+	    public List<WorkEffortTypeExt> getWorkEffortTypeContents(String parentTypeId, String reportContentId, String reportName, String workEffortTypeId) {
 	        if (TransactionSynchronizationManager.isActualTransactionActive()) {
 	            TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
 	            status.getClass();
@@ -69,6 +69,7 @@ public class WorkEffortTypeContentDao extends AbstractDao {
 	        					.innerJoin(qContent).on(qContent.contentId.eq(qWorkEffortTypeContent.contentId))
 	        					.where(qWorkEffortTypeContent.weTypeContentTypeId.eq("REPORT")
 										.and(qWorkEffortTypeContent.isVisible.isTrue())
+										.and(workEffortTypeId!=null && !workEffortTypeId.equals("")? qWorkEffortTypeContent.workEffortTypeId.eq(workEffortTypeId): qWorkEffortTypeContent.workEffortTypeId.isNotNull())
 	        							.and(qWorkEffortTypeContent.contentId.eq(reportContentId))
 	        							.and(qWorkEffortType.parentTypeId.eq(parentTypeId)));
 

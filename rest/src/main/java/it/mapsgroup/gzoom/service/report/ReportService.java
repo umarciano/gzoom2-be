@@ -56,7 +56,7 @@ public class ReportService {
         return new Result<>(ret, ret.size());
     }
 
-    public Report getReport(String parentTypeId, String reportContentId, String resourceName, boolean analysis) {
+    public Report getReport(String parentTypeId, String reportContentId, String resourceName, String workEffortTypeId, boolean analysis) {
         LOG.info("Start getReport");
     	it.mapsgroup.gzoom.querydsl.dto.Report report = null;
     	List<WorkEffortTypeExt> workEffortTypes = null;
@@ -67,7 +67,7 @@ public class ReportService {
     		
     	} else {
     		report = reportDao.getReport(parentTypeId, reportContentId, resourceName);
-    		workEffortTypes = workEffortTypeContentDao.getWorkEffortTypeContents(parentTypeId, reportContentId, resourceName);
+    		workEffortTypes = workEffortTypeContentDao.getWorkEffortTypeContents(parentTypeId, reportContentId, resourceName, workEffortTypeId);
     	}        
         Report ret = dtoMapper.copy(report, new Report());
         ret.setWorkEffortTypes(workEffortTypes);
