@@ -24,6 +24,7 @@ import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -128,8 +129,12 @@ public class QueryExecutorService {
                             cell.setCellValue((Boolean) valueObject);
                         else if (valueObject instanceof Integer)
                             cell.setCellValue((int) valueObject);
+                        else if (valueObject instanceof BigDecimal)
+                            cell.setCellValue(((BigDecimal) valueObject).doubleValue());
                         else if (valueObject instanceof Double)
                             cell.setCellValue((double) valueObject);
+                        else if (valueObject instanceof Long)
+                            cell.setCellValue((long) valueObject);
                         else if (valueObject instanceof Float)
                             cell.setCellValue((float) valueObject);
                         else if (valueObject instanceof Date) {
