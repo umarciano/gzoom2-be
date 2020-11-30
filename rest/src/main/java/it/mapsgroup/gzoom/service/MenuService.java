@@ -28,6 +28,7 @@ public class MenuService {
     private static final Logger LOG = getLogger(MenuService.class);
     private static final String ROOT_MENU_ID = "GP_MENU";
     private static final String MENU_UI_LABELS = "MenuUiLabels";
+    private static final String DOT = ".";
     
     private final ContentAndAttributesDao contentAndAttributeDao;
     private final ProfileService profileService;
@@ -73,7 +74,7 @@ public class MenuService {
                 LeafMenu leaf = new LeafMenu();
                 leaf.setId(link.getContentId());
                 String label = link.getTitle().getAttrValue();
-                leaf.setLabel(label.substring(MENU_UI_LABELS.length() + 1));
+                leaf.setLabel(label.substring(DOT.length() + 1));
                 if (link.getClasses() != null) {
                     leaf.setClasses(link.getClasses().getAttrValue()); // TODO array o string?
                 }
@@ -91,7 +92,7 @@ public class MenuService {
                 FolderMenu folder = new FolderMenu();
                 folder.setId(item.getContentId());
                 String label = item.getTitle().getAttrValue();
-                folder.setLabel(label.substring(MENU_UI_LABELS.length() + 1));
+                folder.setLabel(label.substring(DOT.length() + 1));
                 if (item.getClasses() != null) {
                     folder.setClasses(item.getClasses().getAttrValue()); // TODO array o string?
                 }
