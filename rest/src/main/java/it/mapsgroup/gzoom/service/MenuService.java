@@ -74,7 +74,7 @@ public class MenuService {
                 LeafMenu leaf = new LeafMenu();
                 leaf.setId(link.getContentId());
                 String label = link.getTitle().getAttrValue();
-                leaf.setLabel(label.substring(DOT.length() + 1));
+                leaf.setLabel(label.substring(label.lastIndexOf(DOT)+1));
                 if (link.getClasses() != null) {
                     leaf.setClasses(link.getClasses().getAttrValue()); // TODO array o string?
                 }
@@ -92,7 +92,7 @@ public class MenuService {
                 FolderMenu folder = new FolderMenu();
                 folder.setId(item.getContentId());
                 String label = item.getTitle().getAttrValue();
-                folder.setLabel(label.substring(DOT.length() + 1));
+                folder.setLabel(label.substring(label.lastIndexOf(DOT)+1));
                 if (item.getClasses() != null) {
                     folder.setClasses(item.getClasses().getAttrValue()); // TODO array o string?
                 }
