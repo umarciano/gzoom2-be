@@ -121,7 +121,7 @@ public class ReportDao extends AbstractDao {
      * @return
      */
     @Transactional
-    public Report getReport(String parentTypeId, String reportContentId, String resourceName) {
+    public Report getReport(String parentTypeId, String reportContentId, String resourceName, String workEffortTypeId) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
@@ -146,7 +146,8 @@ public class ReportDao extends AbstractDao {
         				.innerJoin(qContent).on(qWorkEffortTypeContent.contentId.eq(qContent.contentId))
                         .innerJoin(qDataResource).on(qDataResource.dataResourceId.eq(qContent.dataResourceId))
         				.where(qContent.contentId.eq(reportContentId)
-        						.and(qWorkEffortType.parentTypeId.eq(parentTypeId)))
+        						.and(qWorkEffortType.parentTypeId.eq(parentTypeId))
+                                .and(workEffortTypeId!=null && !workEffortTypeId.equals("")? qWorkEffortTypeContent.workEffortTypeId.eq(workEffortTypeId): qWorkEffortTypeContent.workEffortTypeId.isNotNull()))
                         .orderBy(qWorkEffortTypeContent.sequenceNum.asc());
         
         
