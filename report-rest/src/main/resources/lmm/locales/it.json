@@ -538,6 +538,7 @@
     "exposeTrasversalObject": "Esponi obiettivi trasversali",
     "exposeCommentIndicator": "Commento consuntivo",
     "exposeOnlyIndex": "Esponi solo indice",
+    "exposeOnlyIndicator": "Esponi solo indicatori",
     "exposeDetailIndicator": "Esponi dettagli indicatore",
     "exposePaginator": "Esponi paginazione",
     "exposeReleaseDate": "Esponi data stampa",
