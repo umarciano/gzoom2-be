@@ -4,6 +4,7 @@ import com.querydsl.core.group.GroupBy;
 import com.querydsl.core.types.QBean;
 import com.querydsl.sql.SQLQueryFactory;
 import it.mapsgroup.gzoom.querydsl.dto.*;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,13 +15,14 @@ import java.util.List;
 
 import static com.querydsl.core.types.Projections.bean;
 import static it.mapsgroup.gzoom.querydsl.QBeanUtils.merge;
+import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * @author Andrea Fossi.
  */
 @Service
 public class UserLoginDao {
-
+    private static final Logger LOG = getLogger(UserLoginDao.class);
     private final SQLQueryFactory queryFactory;
 
     public UserLoginDao(SQLQueryFactory queryFactory) {
@@ -55,5 +57,17 @@ public class UserLoginDao {
                 .transform(GroupBy.groupBy(qUserLogin.userLoginId)
                         .list(userLoginExQBean));
         return ret.isEmpty() ? null : ret.get(0);
+    }
+
+    @Transactional
+    public boolean update(UserLogin user) {
+        QUserLoginPersistent userLoginPersistent = QUserLoginPersistent.userLogin;
+        long i = queryFactory.update(userLoginPersistent)
+                .set(userLoginPersistent.userLoginId,user.getUserLoginId())
+                .where(userLoginPersistent.userLoginId.eq(user.getUserLoginId()))
+                .populate(user)
+                .execute();
+        LOG.info("updated records: {}", i);
+        return i>0;
     }
 }

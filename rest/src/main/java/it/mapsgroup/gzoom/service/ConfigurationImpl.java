@@ -1,8 +1,5 @@
 package it.mapsgroup.gzoom.service;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 import it.mapsgroup.gzoom.ofbiz.client.OfBizClientConfig;
 import it.mapsgroup.gzoom.quartz.SchedulerConfig;
 import it.mapsgroup.gzoom.security.model.SecurityConfiguration;
@@ -15,9 +12,6 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.function.BiFunction;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static it.mapsgroup.gzoom.common.JsonLocalizationReader.readClasspathResources;
 import static it.mapsgroup.gzoom.common.JsonLocalizationReader.readDirectory;
@@ -31,7 +25,7 @@ public class ConfigurationImpl implements Configuration, SecurityConfiguration, 
 
     // Localizations
     private final Path localeDirPath;
-    private final List<String> translationResources;
+    private final List<String> translationResources = new ArrayList<>();
     private volatile Map<String, Map<String, Object>> localizations;
 
     // REST
@@ -51,12 +45,21 @@ public class ConfigurationImpl implements Configuration, SecurityConfiguration, 
 
     private final int reportProbeDelay;
     private final int reportProbeRetries;
+    private final List<String> languages;
+    private final String languageType;
 
     @Autowired
     public ConfigurationImpl(Environment env) {
         // localization
         this.localeDirPath = Paths.get(env.getProperty("gzoom.conf.dir") + "/locales");
-        this.translationResources = Arrays.asList("/lmm/locales/it.json", "/lmm/locales/en.json");
+        this.languageType = env.getProperty("language.multi.type");
+        this.languages = Arrays.asList(env.getProperty("language.locales.available").split(","));
+        this.translationResources.add("/lmm/locales/it.json");
+        //Add locals json if exists multiple lang
+        for(String l :languages) {
+            if(!this.translationResources.contains("/lmm/locales/"+l.split("_")[0]+".json"))
+                this.translationResources.add("/lmm/locales/"+l.split("_")[0]+".json");
+        }
         this.localizations = initLocalization();
 
         // rest properties
@@ -97,7 +100,6 @@ public class ConfigurationImpl implements Configuration, SecurityConfiguration, 
     public boolean isLocaleSupported(Locale locale) {
         return localizationOf(locale) != null;
     }
-
 
     @SuppressWarnings("unchecked")
     @Override
@@ -200,4 +202,10 @@ public class ConfigurationImpl implements Configuration, SecurityConfiguration, 
     public int getReportProbeRetries() {
         return this.reportProbeRetries;
     }
+
+    public List<String> getLanguages() {
+        return this.languages;
+    }
+
+    public String getLanguageType() { return this.languageType;}
 }

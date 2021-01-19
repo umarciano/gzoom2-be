@@ -1,5 +1,9 @@
 {
   "translations":   {
+    "it_IT": "Italian",
+    "en_EN": "English",
+    "de_DE": "German",
+    "fr_FR": "French",
     " differisce dal precedente ": " is differente from old score ",
     "% impiego": "% impiego",
     "@component-resource-name@Application": "@component-resource-name@ Application",

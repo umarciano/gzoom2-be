@@ -37,6 +37,11 @@ public class UserLoginController {
         return Exec.exec("change-password post", () -> userLoginService.changePassword(req, request));
     }
 
+    @RequestMapping(value = "change-language", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean changeLanguage(@RequestBody Map<String, String> req) {
+	    return Exec.exec("change-languages", () -> userLoginService.changeLang(req));
+    }
 
     @RequestMapping(value = "user-preference", method = RequestMethod.PUT)
     @ResponseBody

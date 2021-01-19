@@ -1,5 +1,6 @@
 package it.mapsgroup.gzoom.service;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -50,4 +51,10 @@ public interface Configuration {
      * @return The number of date before the threshold that identify the deadline date
      */
     int getDeadlineDays();
+
+    /**
+     * The supported languages
+     * @return
+     */
+    List<String> getLanguages();
 }

@@ -1,5 +1,9 @@
 {
   "translations":   {
+    "it_IT": "Italiano",
+    "en_EN": "Inglese",
+    "de_DE": "Tedesco",
+    "fr_FR": "Francese",
     " is differente from old score ": " differisce dal precedente ",
     "${entityView} read condition: ${emplPerfInsertFromTemplateParams}": "${entityView} parametri di recupero: ${emplPerfInsertFromTemplateParams}",
     "${person} do not have ${typeDescription}": "${person} non ha il ruolo ${typeDescription}",

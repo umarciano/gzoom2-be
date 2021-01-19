@@ -1,0 +1,35 @@
+{
+  "translations":   {
+    "GP_MENU_00001": "Grundinformationen",
+    "GP_MENU_00002": "MODELLO DI GOVERNANCE",
+    "GP_MENU_00003": "Manuale Operativo di Base",
+    "GP_MENU_00004": "Tipo Rilevazione",
+    "GP_MENU_00005": "Percorsi Approvativi",
+    "GP_MENU_00006": "Maßeinheit",
+    "GP_MENU_00007": "Fasce di Valori",
+    "GP_MENU_00008": "Periodicità",
+    "GP_MENU_00009": "Zeitraum"
+  },
+  "formats":   {
+    "first-day": 1,
+    "decimal-separator": ",",
+    "thousand-separator": ".",
+    "timestamp": "lll",
+    "date-short": "DD/MM/YYYY",
+    "date-long": "d MMM yyyy",
+    "date-range-short": "%d - %d",
+    "date-range-long": "Dal %D al %D",
+    "date-time-short": "DD/MM/YYYY, LTS",
+    "date-time-long": "d MMMM yyyy - LT",
+    "date-short-pcalendar": "dd/mm/yy",
+    "date-MMMM-YYYY": "MMMM yyyy"
+  },
+  "calendarLocale": {
+    "firstDayOfWeek": 1,
+    "monthNames":["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"],
+    "monthNamesShort":["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"],
+    "dayNames":["Domenica","Lunedì","Martedì","Mercoledì","Giovedì","Venerdì","Sabato"],
+    "dayNamesShort":["Dom","Lun","Mar","Mer","Gio","Ven","Sab"],
+    "dayNamesMin":["Do","Lu","Ma","Me","Gi","Ve","Sa"]
+  }
+}
