@@ -64,4 +64,8 @@ public class LocaleService {
         List<String> list = config.getLanguages();
         return new Result<>(list, list.size());
     }
+
+    public String getLanguageType() {
+        return config.getLanguageType();
+    }
 }

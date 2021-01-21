@@ -53,6 +53,12 @@ public class ProfileController {
     public Result<String> languages() {
         return Exec.exec("get-languages", () -> localeService.getLanguages());
     }
+
+    @RequestMapping(value = "/profile/i18n/language-type", method = RequestMethod.GET)
+    @ResponseBody
+    public String languageType() {
+        return Exec.exec("get-language-type", () -> localeService.getLanguageType());
+    }
     
     @RequestMapping(value = "/account/permissions", method = RequestMethod.GET)
     @ResponseBody

@@ -57,4 +57,10 @@ public interface Configuration {
      * @return
      */
     List<String> getLanguages();
+
+    /**
+     * The languages type
+     * @return
+     */
+    String getLanguageType();
 }
