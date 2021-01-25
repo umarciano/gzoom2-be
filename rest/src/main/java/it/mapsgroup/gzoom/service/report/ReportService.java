@@ -66,7 +66,7 @@ public class ReportService {
     		workEffortTypes = reportDao.getAnalysisWorkEffortTypeContents(parentTypeId, reportContentId, resourceName);
     		
     	} else {
-    		report = reportDao.getReport(parentTypeId, reportContentId, resourceName);
+    		report = reportDao.getReport(parentTypeId, reportContentId, resourceName, workEffortTypeId);
     		workEffortTypes = workEffortTypeContentDao.getWorkEffortTypeContents(parentTypeId, reportContentId, resourceName, workEffortTypeId);
     	}        
         Report ret = dtoMapper.copy(report, new Report());
