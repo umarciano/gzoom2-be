@@ -1534,6 +1534,8 @@
     "Orgunit ${parentCode} not found for code ${sourceId}": "Unità organizzativa ${parentCode} non presente in anagrafica per il codice ${sourceId}",
     "Orientation": "Orientamento",
     "orgUnitId": "Unità Responsabile",
+    "Select order": "Seleziona ordinamento",
+    "orderBil": "Seleziona ordinamento",
     "Original": "Originale",
     "Original End": "Fine Originale",
     "Original Start": "Inizio Originale",
