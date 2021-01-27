@@ -109,7 +109,7 @@ public class ReportDao extends AbstractDao {
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getNullFriendlyBindings());
-        List<Report> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContent.contentId, qWorkEffortTypeContent.etch, qContent.description).list(reportQBean));
+        List<Report> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContent.contentId, qWorkEffortTypeContent.etch, qContent.description, qWorkEffortTypeContent.workEffortTypeId).list(reportQBean));
         LOG.info("size = {}", ret.size()); 
         return ret;
     }
