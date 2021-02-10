@@ -18,4 +18,9 @@ public class ChangePasswordServiceOfBiz {
     public Map<String, Object> changePassword(String sessionId, String username, String password, String newPassword) {
     	return loginClient.changePassword(sessionId, username, password, newPassword);
     }
+
+    public Map<String, Object> changeSessionLocale(String sessionId,String username, String password, String locale) {
+        return loginClient.changeSessionLocale(sessionId,username,password,locale);
+    }
+
 }

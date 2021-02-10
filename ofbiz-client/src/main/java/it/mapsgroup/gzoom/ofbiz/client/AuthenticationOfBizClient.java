@@ -57,5 +57,11 @@ public interface AuthenticationOfBizClient {
     */
     public abstract Map<String, Object> changePassword(String sessionId, String username, String password, String newPassword);
 
-
+    /**
+     * Change Locale Session
+     * @param sessionId
+     * @param locale
+     * @return
+     */
+     public abstract Map<String, Object> changeSessionLocale(String sessionId, String username, String password, String locale);
 }

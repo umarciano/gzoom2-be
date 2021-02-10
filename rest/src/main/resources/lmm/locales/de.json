@@ -1,6 +1,9 @@
 {
   "translations" : {
-    "" : "",
+    "it_IT": "Italian",
+    "en_EN": "English",
+    "de_DE": "German",
+    "fr_FR": "French",
     " Commento FinalitÃ " : "Ziele Kommentar",
     " differisce dal precedente " : "Sie unterscheidet sich von der vorherigen",
     "${entityView} parametri di recupero: ${emplPerfInsertFromTemplateParams}" : "${entityView} wiederherstellungsparameter: ${emplPerfInsertFromTemplateParams}",
@@ -2013,5 +2016,13 @@
     "date-time-long" : "d MMMM yyyy - LT",
     "date-short-pcalendar" : "dd/mm/yy",
     "date-MMMM-YYYY" : "MMMM yyyy"
+  },
+  "calendarLocale": {
+    "firstDayOfWeek": 0,
+    "dayNames":["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    "dayNamesShort":["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    "dayNamesMin":["Su","Mo","Tu","We","Th","Fr","Sa"],
+    "monthNames":[ "January","February","March1","April","May","June","July","August","September","October","November","December" ],
+    "monthNamesShort":[ "Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ]
   }
 }
