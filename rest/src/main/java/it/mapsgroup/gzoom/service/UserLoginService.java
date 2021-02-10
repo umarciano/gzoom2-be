@@ -49,10 +49,10 @@ public class UserLoginService {
         UserLogin user = userLoginDao.getUserLogin(req.get("username"));
         String token = Tokens.token(request);
         if(user!=null) {
-            //this.changeService.changeSessionLocale(token,user.getUsername(),user.getCurrentPassword(),req.get("lang"));
-           user.setLastLocale(req.get("lang"));
-            return userLoginDao.update(user);
-           // return true;
+            //this.changeService.changeSessionLocale(token,user.getUsername(),user.getCurrentPassword(),req.get("lang")); //call update su legacy
+            // return true;
+            user.setLastLocale(req.get("lang")); //update sul gzoom2
+            return userLoginDao.update(user); //update sul gzoom2
         }
         return false;
     }
