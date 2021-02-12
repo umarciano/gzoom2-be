@@ -47,12 +47,16 @@ public class UserLoginService {
 
     public boolean changeLang(Map<String, String> req, HttpServletRequest request) {
         UserLogin user = userLoginDao.getUserLogin(req.get("username"));
-        String token = Tokens.token(request);
+        String externalLoginKey = req.get("externalLoginKey");
         if(user!=null) {
-            //this.changeService.changeSessionLocale(token,user.getUsername(),user.getCurrentPassword(),req.get("lang")); //call update su legacy
-            // return true;
-            user.setLastLocale(req.get("lang")); //update sul gzoom2
-            return userLoginDao.update(user); //update sul gzoom2
+            try {
+                user.setLastLocale(req.get("lang")); //update sul gzoom2
+                userLoginDao.update(user); //update sul gzoom2
+                this.changeService.changeSessionLocale(externalLoginKey,user.getUsername(),req.get("lang")); //call update su legacy
+                return true;
+            }catch (Exception e) {
+                return false;
+            }
         }
         return false;
     }

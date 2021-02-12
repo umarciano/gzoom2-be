@@ -111,16 +111,16 @@ public class AuthenticationOfBizClientImpl extends OfBizClient implements Authen
         return result;
     }
 
-    public Map<String, Object> changeSessionLocale(String sessionId, String username, String password, String locale) {
+    public Map<String, Object> changeSessionLocale(String externalLoginKey, String username, String locale) {
         Map<String, String> paramMap = new HashMap<>();
-        paramMap.put("login.username", username);
-        paramMap.put("login.password", "MapsGzoom01"); //TODO - sostituire con password che è in sha, non funziona attualmente
+        //paramMap.put("login.username", username);
+        //paramMap.put("login.password", "MapsGzoom01"); //TODO - sostituire con password che è in sha, non funziona attualmente
 
-        paramMap.put("sessionId", sessionId);
+        paramMap.put("externalLoginKey", externalLoginKey);
         paramMap.put("userLoginId",username);
         paramMap.put("newLocale", locale);
 
-        Map<String,Object> result = execute("gzChangeSessionLocale", sessionId, paramMap);
+        Map<String,Object> result = execute("gzChangeSessionLocale", externalLoginKey, paramMap);
         return result;
     }
 
