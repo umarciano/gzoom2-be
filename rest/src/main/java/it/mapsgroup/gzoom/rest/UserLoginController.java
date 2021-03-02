@@ -4,7 +4,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import it.mapsgroup.gzoom.querydsl.dto.UserPreference;
 import it.mapsgroup.gzoom.service.UserPreferenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -22,12 +21,10 @@ import it.mapsgroup.gzoom.service.UserLoginService;
 public class UserLoginController {
 	
 	private final UserLoginService userLoginService;
-    private final UserPreferenceService userPreferenceService;
-	
+
 	@Autowired
     public UserLoginController(UserLoginService userLoginService, UserPreferenceService userPreferenceService) {
 	    this.userLoginService = userLoginService;
-	    this. userPreferenceService = userPreferenceService;
     }
 	
 
@@ -41,11 +38,5 @@ public class UserLoginController {
     @ResponseBody
     public boolean changeLanguage(@RequestBody Map<String, String> req, HttpServletRequest request) {
 	    return Exec.exec("change-languages", () -> userLoginService.changeLang(req, request));
-    }
-
-    @RequestMapping(value = "user-preference", method = RequestMethod.PUT)
-    @ResponseBody
-    public String updateUserPreference(@RequestBody UserPreference req) {
-        return Exec.exec("user-preference put", () -> userPreferenceService.updateUserPreference(req));
     }
 }
