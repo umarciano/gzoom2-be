@@ -5,7 +5,7 @@
     <parent>
         <groupId>it.mapsgroup.gzoom</groupId>
         <artifactId>gzoom2</artifactId>
-        <version>2.6.14p1</version>
+        <version>2.6.14p2</version>
     </parent>
 
     <artifactId>persistence-mybatis-generator</artifactId>
