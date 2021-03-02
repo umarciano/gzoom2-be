@@ -58,6 +58,10 @@ public class QueryExecutorService {
     @Transactional
     public String execQuery(QueryConfig query, HttpServletRequest req, HttpServletResponse response) throws Exception {
 
+        Connection connection = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
@@ -93,13 +97,13 @@ public class QueryExecutorService {
 
         try {
 
-            Connection connection = dataSource.getConnection();
+            connection = dataSource.getConnection();
 
             //Se la query è una select crea un file xlsx
             if(query.getQueryType().equals(TIPO_QUERY.get("SELECT")))
             {
-                Statement stmt = connection.createStatement();
-                ResultSet rs = stmt.executeQuery(finalQuery);
+                stmt = connection.prepareStatement(finalQuery);
+                rs = stmt.executeQuery();
                 ResultSetMetaData rsmd = rs.getMetaData();
 
                 int maxColumn = rsmd.getColumnCount();
@@ -151,13 +155,10 @@ public class QueryExecutorService {
 
 
                 response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-                response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"query_" + query.getQueryId() + ".xlsx\"");
+                response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"export_" +query.getQueryName()+"_"+ query.getQueryId() + ".xlsx\"");
                 wb.write(response.getOutputStream());
                 response.flushBuffer();
                 wb.close();
-
-                //close statment
-                stmt.close();
 
             }
             //Altrimenti Eseguo la query come se fosse sempre uno script
@@ -187,6 +188,19 @@ public class QueryExecutorService {
         catch (Exception e)
         {
             throw new RuntimeException(e);
+        }finally
+        {
+            try {
+                if(rs!=null)
+                    rs.close();
+                if(stmt!=null)
+                    stmt.close();
+                if(connection!=null)
+                    connection.close();
+            }catch (Exception e) {
+                LOG.error("Error in close connection: "+e.getMessage());
+                throw new RuntimeException(e);
+            }
         }
 
         return null;
