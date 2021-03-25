@@ -39,7 +39,7 @@ public class ProfileController {
         });
     }
 
-    @RequestMapping(value = "/profile/i18n/{user}", method = RequestMethod.GET)
+    @RequestMapping(value = "/profile/i18n/{user}/", method = RequestMethod.GET)
     @ResponseBody
     public Localization i18n(HttpServletRequest req,@PathVariable(value = "user") String user) {
         return Exec.exec("profile-18n", () -> {
