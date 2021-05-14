@@ -10,6 +10,7 @@ public class ReportParam {
     private Boolean mandatory;
     private Boolean display = true;
     private String options;
+    private String label;
    
 	/**
 	 * @return the paramName
@@ -81,9 +82,21 @@ public class ReportParam {
         this.mandatory = mandatory;
     }
 
+
+	/**
+	 * @return the display
+	 */
     public Boolean getDisplay() {return display;}
 
     public void setDisplay(Boolean display) {this.display = display;}
 
     public void setOptions(String options) {this.options = options; }
+
+
+	/**
+	 * @return the label
+	 */
+    public String getLabel() { return label;}
+
+    public void setLabel(String label) {this.label = label;}
 }
