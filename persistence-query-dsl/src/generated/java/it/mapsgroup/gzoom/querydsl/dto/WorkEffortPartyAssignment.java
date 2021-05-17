@@ -79,6 +79,9 @@ public class WorkEffortPartyAssignment implements AbstractIdentity {
     @Column("ROLE_TYPE_WEIGHT_ACTUAL")
     private java.math.BigDecimal roleTypeWeightActual;
 
+    @Column("SEQUENCE_NUM")
+    private java.math.BigInteger sequenceNum;
+
     @Column("STATUS_DATE_TIME")
     private java.time.LocalDateTime statusDateTime;
 
@@ -279,6 +282,14 @@ public class WorkEffortPartyAssignment implements AbstractIdentity {
 
     public void setRoleTypeWeightActual(java.math.BigDecimal roleTypeWeightActual) {
         this.roleTypeWeightActual = roleTypeWeightActual;
+    }
+
+    public java.math.BigInteger getSequenceNum() {
+        return sequenceNum;
+    }
+
+    public void setSequenceNum(java.math.BigInteger sequenceNum) {
+        this.sequenceNum = sequenceNum;
     }
 
     public java.time.LocalDateTime getStatusDateTime() {

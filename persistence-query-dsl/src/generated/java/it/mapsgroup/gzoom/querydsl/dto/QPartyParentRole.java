@@ -38,6 +38,8 @@ public class QPartyParentRole extends com.querydsl.sql.RelationalPathBase<PartyP
 
     public final DateTimePath<java.time.LocalDateTime> lastUpdatedTxStamp = createDateTime("lastUpdatedTxStamp", java.time.LocalDateTime.class);
 
+    public final StringPath organizationId = createString("organizationId");
+
     public final StringPath parentRoleCode = createString("parentRoleCode");
 
     public final StringPath partyId = createString("partyId");
@@ -84,6 +86,7 @@ public class QPartyParentRole extends com.querydsl.sql.RelationalPathBase<PartyP
         addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(4).ofType(Types.VARCHAR).withSize(250));
         addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(6).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(7).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(organizationId, ColumnMetadata.named("ORGANIZATION_ID").withIndex(10).ofType(Types.VARCHAR).withSize(20));
         addMetadata(parentRoleCode, ColumnMetadata.named("PARENT_ROLE_CODE").withIndex(3).ofType(Types.VARCHAR).withSize(20));
         addMetadata(partyId, ColumnMetadata.named("PARTY_ID").withIndex(1).ofType(Types.VARCHAR).withSize(20).notNull());
         addMetadata(roleTypeId, ColumnMetadata.named("ROLE_TYPE_ID").withIndex(2).ofType(Types.VARCHAR).withSize(20).notNull());

@@ -40,6 +40,9 @@ public class WorkEffortTypeContent implements AbstractIdentity {
     @Column("LAST_UPDATED_TX_STAMP")
     private java.time.LocalDateTime lastUpdatedTxStamp;
 
+    @Column("ONLY_ADMIN")
+    private Boolean onlyAdmin;
+
     @Column("PARAMS")
     private String params;
 
@@ -136,6 +139,14 @@ public class WorkEffortTypeContent implements AbstractIdentity {
 
     public void setLastUpdatedTxStamp(java.time.LocalDateTime lastUpdatedTxStamp) {
         this.lastUpdatedTxStamp = lastUpdatedTxStamp;
+    }
+
+    public Boolean getOnlyAdmin() {
+        return onlyAdmin;
+    }
+
+    public void setOnlyAdmin(Boolean onlyAdmin) {
+        this.onlyAdmin = onlyAdmin;
     }
 
     public String getParams() {

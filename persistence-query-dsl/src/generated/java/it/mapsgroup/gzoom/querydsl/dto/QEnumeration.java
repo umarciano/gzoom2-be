@@ -42,7 +42,7 @@ public class QEnumeration extends com.querydsl.sql.RelationalPathBase<Enumeratio
 
     public final StringPath sequenceId = createString("sequenceId");
 
-    public final com.querydsl.sql.PrimaryKey<Enumeration> enumerationPk = createPrimaryKey(enumId);
+    public final com.querydsl.sql.PrimaryKey<Enumeration> primary = createPrimaryKey(enumId);
 
     public final com.querydsl.sql.ForeignKey<EnumerationType> enumToType = createForeignKey(enumTypeId, "ENUM_TYPE_ID");
 
@@ -62,11 +62,7 @@ public class QEnumeration extends com.querydsl.sql.RelationalPathBase<Enumeratio
 
     public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetFrameenumid = createInvForeignKey(enumId, "FRAME_ENUM_ID");
 
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetScperenum = createInvForeignKey(enumId, "SCORE_PERIOD_ENUM_ID");
-
     public final com.querydsl.sql.ForeignKey<WorkEffortAnalysis> _weaEnaFk = createInvForeignKey(enumId, "AVAILABILITY_ID");
-
-    public final com.querydsl.sql.ForeignKey<RoleType> _roleTypePe = createInvForeignKey(enumId, "WORK_EFFORT_PERIOD_ID");
 
     public final com.querydsl.sql.ForeignKey<WorkEffort> _weTotsonsenum = createInvForeignKey(enumId, "TOTAL_ENUM_ID_SONS");
 
@@ -77,8 +73,6 @@ public class QEnumeration extends com.querydsl.sql.RelationalPathBase<Enumeratio
     public final com.querydsl.sql.ForeignKey<WorkEffort> _weTotassenum = createInvForeignKey(enumId, "TOTAL_ENUM_ID_ASSOC");
 
     public final com.querydsl.sql.ForeignKey<Person> _personEmpsEnum = createInvForeignKey(enumId, "EMPLOYMENT_STATUS_ENUM_ID");
-
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetGpMenu = createInvForeignKey(enumId, "GP_MENU_ENUM_ID");
 
     public final com.querydsl.sql.ForeignKey<Person> _personRessEnum = createInvForeignKey(enumId, "RESIDENCE_STATUS_ENUM_ID");
 
@@ -99,7 +93,7 @@ public class QEnumeration extends com.querydsl.sql.RelationalPathBase<Enumeratio
     public final com.querydsl.sql.ForeignKey<WorkEffortTypeStatus> _wetsMantypenum = createInvForeignKey(enumId, "MANAG_WE_STATUS_ENUM_ID");
 
     public QEnumeration(String variable) {
-        super(Enumeration.class, forVariable(variable), "DBO", "ENUMERATION");
+        super(Enumeration.class, forVariable(variable), "null", "ENUMERATION");
         addMetadata();
     }
 
@@ -114,24 +108,24 @@ public class QEnumeration extends com.querydsl.sql.RelationalPathBase<Enumeratio
     }
 
     public QEnumeration(Path<? extends Enumeration> path) {
-        super(path.getType(), path.getMetadata(), "DBO", "ENUMERATION");
+        super(path.getType(), path.getMetadata(), "null", "ENUMERATION");
         addMetadata();
     }
 
     public QEnumeration(PathMetadata metadata) {
-        super(Enumeration.class, metadata, "DBO", "ENUMERATION");
+        super(Enumeration.class, metadata, "null", "ENUMERATION");
         addMetadata();
     }
 
     public void addMetadata() {
-        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(8).ofType(Types.TIMESTAMP).withSize(23).withDigits(3));
-        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(9).ofType(Types.TIMESTAMP).withSize(23).withDigits(3));
+        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(8).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(9).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(description, ColumnMetadata.named("DESCRIPTION").withIndex(5).ofType(Types.VARCHAR).withSize(255));
         addMetadata(enumCode, ColumnMetadata.named("ENUM_CODE").withIndex(3).ofType(Types.VARCHAR).withSize(60));
         addMetadata(enumId, ColumnMetadata.named("ENUM_ID").withIndex(1).ofType(Types.VARCHAR).withSize(20).notNull());
         addMetadata(enumTypeId, ColumnMetadata.named("ENUM_TYPE_ID").withIndex(2).ofType(Types.VARCHAR).withSize(20));
-        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(6).ofType(Types.TIMESTAMP).withSize(23).withDigits(3));
-        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(7).ofType(Types.TIMESTAMP).withSize(23).withDigits(3));
+        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(6).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(7).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(sequenceId, ColumnMetadata.named("SEQUENCE_ID").withIndex(4).ofType(Types.VARCHAR).withSize(20));
     }
 

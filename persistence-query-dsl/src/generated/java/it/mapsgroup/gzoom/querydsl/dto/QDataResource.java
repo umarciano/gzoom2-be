@@ -72,9 +72,9 @@ public class QDataResource extends com.querydsl.sql.RelationalPathBase<DataResou
 
     public final com.querydsl.sql.PrimaryKey<DataResource> primary = createPrimaryKey(dataResourceId);
 
-    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> dataRecCbUlgn = createForeignKey(createdByUserLogin, "USER_LOGIN_ID");
-
     public final com.querydsl.sql.ForeignKey<StatusItem> dtrsrcStatus = createForeignKey(statusId, "STATUS_ID");
+
+    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> dataRecCbUlgn = createForeignKey(createdByUserLogin, "USER_LOGIN_ID");
 
     public final com.querydsl.sql.ForeignKey<UserLoginPersistent> dataRecLmbUlgn = createForeignKey(lastModifiedByUserLogin, "USER_LOGIN_ID");
 
@@ -115,7 +115,7 @@ public class QDataResource extends com.querydsl.sql.RelationalPathBase<DataResou
         addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(23).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(dataCategoryId, ColumnMetadata.named("DATA_CATEGORY_ID").withIndex(4).ofType(Types.VARCHAR).withSize(20));
         addMetadata(dataResourceId, ColumnMetadata.named("DATA_RESOURCE_ID").withIndex(1).ofType(Types.VARCHAR).withSize(20).notNull());
-        addMetadata(dataResourceName, ColumnMetadata.named("DATA_RESOURCE_NAME").withIndex(7).ofType(Types.VARCHAR).withSize(100));
+        addMetadata(dataResourceName, ColumnMetadata.named("DATA_RESOURCE_NAME").withIndex(7).ofType(Types.VARCHAR).withSize(255));
         addMetadata(dataResourceTypeId, ColumnMetadata.named("DATA_RESOURCE_TYPE_ID").withIndex(2).ofType(Types.VARCHAR).withSize(20));
         addMetadata(dataSourceId, ColumnMetadata.named("DATA_SOURCE_ID").withIndex(5).ofType(Types.VARCHAR).withSize(20));
         addMetadata(dataTemplateTypeId, ColumnMetadata.named("DATA_TEMPLATE_TYPE_ID").withIndex(3).ofType(Types.VARCHAR).withSize(20));
@@ -125,7 +125,7 @@ public class QDataResource extends com.querydsl.sql.RelationalPathBase<DataResou
         addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(20).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(21).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(localeString, ColumnMetadata.named("LOCALE_STRING").withIndex(8).ofType(Types.VARCHAR).withSize(10));
-        addMetadata(mimeTypeId, ColumnMetadata.named("MIME_TYPE_ID").withIndex(9).ofType(Types.VARCHAR).withSize(60));
+        addMetadata(mimeTypeId, ColumnMetadata.named("MIME_TYPE_ID").withIndex(9).ofType(Types.VARCHAR).withSize(250));
         addMetadata(objectInfo, ColumnMetadata.named("OBJECT_INFO").withIndex(11).ofType(Types.VARCHAR).withSize(255));
         addMetadata(relatedDetailId, ColumnMetadata.named("RELATED_DETAIL_ID").withIndex(14).ofType(Types.VARCHAR).withSize(20));
         addMetadata(statusId, ColumnMetadata.named("STATUS_ID").withIndex(6).ofType(Types.VARCHAR).withSize(20));

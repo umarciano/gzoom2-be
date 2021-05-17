@@ -48,9 +48,9 @@ public class QPartyContent extends com.querydsl.sql.RelationalPathBase<PartyCont
 
     public final com.querydsl.sql.PrimaryKey<PartyContent> primary = createPrimaryKey(contentId, fromDate, partyContentTypeId, partyId);
 
-    public final com.querydsl.sql.ForeignKey<Party> partyCntParty = createForeignKey(partyId, "PARTY_ID");
-
     public final com.querydsl.sql.ForeignKey<Content> partyCntCnt = createForeignKey(contentId, "CONTENT_ID");
+
+    public final com.querydsl.sql.ForeignKey<Party> partyCntParty = createForeignKey(partyId, "PARTY_ID");
 
     public QPartyContent(String variable) {
         super(PartyContent.class, forVariable(variable), "null", "PARTY_CONTENT");

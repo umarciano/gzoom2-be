@@ -128,7 +128,7 @@ public class QueryConfig implements AbstractIdentity {
     private Boolean queryPublic;
 
     @Column("QUERY_TYPE")
-    private String queryType;
+    private Boolean queryType;
 
     public String getCond0Comm() {
         return cond0Comm;
@@ -442,11 +442,11 @@ public class QueryConfig implements AbstractIdentity {
         this.queryPublic = queryPublic;
     }
 
-    public String getQueryType() {
+    public Boolean getQueryType() {
         return queryType;
     }
 
-    public void setQueryType(String queryType) {
+    public void setQueryType(Boolean queryType) {
         this.queryType = queryType;
     }
 

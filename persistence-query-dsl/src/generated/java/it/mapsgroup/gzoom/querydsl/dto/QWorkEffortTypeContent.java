@@ -44,6 +44,8 @@ public class QWorkEffortTypeContent extends com.querydsl.sql.RelationalPathBase<
 
     public final DateTimePath<java.time.LocalDateTime> lastUpdatedTxStamp = createDateTime("lastUpdatedTxStamp", java.time.LocalDateTime.class);
 
+    public final BooleanPath onlyAdmin = createBoolean("onlyAdmin");
+
     public final StringPath params = createString("params");
 
     public final NumberPath<java.math.BigInteger> sequenceNum = createNumber("sequenceNum", java.math.BigInteger.class);
@@ -98,6 +100,7 @@ public class QWorkEffortTypeContent extends com.querydsl.sql.RelationalPathBase<
         addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(9).ofType(Types.VARCHAR).withSize(250));
         addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(11).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(12).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(onlyAdmin, ColumnMetadata.named("ONLY_ADMIN").withIndex(17).ofType(Types.CHAR).withSize(1));
         addMetadata(params, ColumnMetadata.named("PARAMS").withIndex(7).ofType(Types.VARCHAR).withSize(2000));
         addMetadata(sequenceNum, ColumnMetadata.named("SEQUENCE_NUM").withIndex(4).ofType(Types.DECIMAL).withSize(20));
         addMetadata(useFilter, ColumnMetadata.named("USE_FILTER").withIndex(16).ofType(Types.CHAR).withSize(1));

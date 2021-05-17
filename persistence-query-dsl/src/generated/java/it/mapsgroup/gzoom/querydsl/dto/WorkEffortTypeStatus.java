@@ -28,6 +28,9 @@ public class WorkEffortTypeStatus implements AbstractIdentity {
     @Column("CURRENT_STATUS_ID")
     private String currentStatusId;
 
+    @Column("DATA_SOLL")
+    private java.time.LocalDateTime dataSoll;
+
     @Column("FREQ_SOLL")
     private java.math.BigInteger freqSoll;
 
@@ -36,6 +39,9 @@ public class WorkEffortTypeStatus implements AbstractIdentity {
 
     @Column("HAS_MANDATORY_ATTR")
     private Boolean hasMandatoryAttr;
+
+    @Column("HAS_MANDATORY_ROLE")
+    private Boolean hasMandatoryRole;
 
     @Column("LAST_MODIFIED_BY_USER_LOGIN")
     private String lastModifiedByUserLogin;
@@ -54,6 +60,9 @@ public class WorkEffortTypeStatus implements AbstractIdentity {
 
     @Column("MANAG_WE_STATUS_ENUM_ID")
     private String managWeStatusEnumId;
+
+    @Column("NEXT_STATUS_DAYS")
+    private java.math.BigInteger nextStatusDays;
 
     @Column("NEXT_STATUS_ID")
     private String nextStatusId;
@@ -121,6 +130,14 @@ public class WorkEffortTypeStatus implements AbstractIdentity {
         this.currentStatusId = currentStatusId;
     }
 
+    public java.time.LocalDateTime getDataSoll() {
+        return dataSoll;
+    }
+
+    public void setDataSoll(java.time.LocalDateTime dataSoll) {
+        this.dataSoll = dataSoll;
+    }
+
     public java.math.BigInteger getFreqSoll() {
         return freqSoll;
     }
@@ -143,6 +160,14 @@ public class WorkEffortTypeStatus implements AbstractIdentity {
 
     public void setHasMandatoryAttr(Boolean hasMandatoryAttr) {
         this.hasMandatoryAttr = hasMandatoryAttr;
+    }
+
+    public Boolean getHasMandatoryRole() {
+        return hasMandatoryRole;
+    }
+
+    public void setHasMandatoryRole(Boolean hasMandatoryRole) {
+        this.hasMandatoryRole = hasMandatoryRole;
     }
 
     public String getLastModifiedByUserLogin() {
@@ -191,6 +216,14 @@ public class WorkEffortTypeStatus implements AbstractIdentity {
 
     public void setManagWeStatusEnumId(String managWeStatusEnumId) {
         this.managWeStatusEnumId = managWeStatusEnumId;
+    }
+
+    public java.math.BigInteger getNextStatusDays() {
+        return nextStatusDays;
+    }
+
+    public void setNextStatusDays(java.math.BigInteger nextStatusDays) {
+        this.nextStatusDays = nextStatusDays;
     }
 
     public String getNextStatusId() {

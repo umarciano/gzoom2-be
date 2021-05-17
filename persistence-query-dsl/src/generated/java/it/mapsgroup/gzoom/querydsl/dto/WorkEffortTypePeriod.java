@@ -31,6 +31,9 @@ public class WorkEffortTypePeriod implements AbstractIdentity {
     @Column("LAST_UPDATED_TX_STAMP")
     private java.time.LocalDateTime lastUpdatedTxStamp;
 
+    @Column("ORGANIZATION_ID")
+    private String organizationId;
+
     @Column("PER_LAV_FROM")
     private java.time.LocalDateTime perLavFrom;
 
@@ -103,6 +106,14 @@ public class WorkEffortTypePeriod implements AbstractIdentity {
 
     public void setLastUpdatedTxStamp(java.time.LocalDateTime lastUpdatedTxStamp) {
         this.lastUpdatedTxStamp = lastUpdatedTxStamp;
+    }
+
+    public String getOrganizationId() {
+        return organizationId;
+    }
+
+    public void setOrganizationId(String organizationId) {
+        this.organizationId = organizationId;
     }
 
     public java.time.LocalDateTime getPerLavFrom() {

@@ -30,6 +30,8 @@ public class QWorkEffortType extends com.querydsl.sql.RelationalPathBase<WorkEff
 
     public final BooleanPath applyScoreRange = createBoolean("applyScoreRange");
 
+    public final BooleanPath batchStatusActive = createBoolean("batchStatusActive");
+
     public final StringPath childTemplateId = createString("childTemplateId");
 
     public final StringPath codeCounter = createString("codeCounter");
@@ -128,6 +130,10 @@ public class QWorkEffortType extends com.querydsl.sql.RelationalPathBase<WorkEff
 
     public final StringPath orgUnitRoleTypeId = createString("orgUnitRoleTypeId");
 
+    public final StringPath orgUnitRoleTypeId2 = createString("orgUnitRoleTypeId2");
+
+    public final StringPath orgUnitRoleTypeId3 = createString("orgUnitRoleTypeId3");
+
     public final BooleanPath parentPeriodFilter = createBoolean("parentPeriodFilter");
 
     public final StringPath parentTypeId = createString("parentTypeId");
@@ -214,23 +220,41 @@ public class QWorkEffortType extends com.querydsl.sql.RelationalPathBase<WorkEff
 
     public final com.querydsl.sql.PrimaryKey<WorkEffortType> primary = createPrimaryKey(workEffortTypeId);
 
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> wetRult4wet = createForeignKey(ruleTypeId4, "WORK_EFFORT_TYPE_ID");
-
     public final com.querydsl.sql.ForeignKey<WorkEffortType> wkEffrtTypePar = createForeignKey(parentTypeId, "WORK_EFFORT_TYPE_ID");
-
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> wetChldtmplwet = createForeignKey(childTemplateId, "WORK_EFFORT_TYPE_ID");
-
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> wetRult3wet = createForeignKey(ruleTypeId3, "WORK_EFFORT_TYPE_ID");
-
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> wetRult2wet = createForeignKey(ruleTypeId2, "WORK_EFFORT_TYPE_ID");
-
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> wetRult1wet = createForeignKey(ruleTypeId1, "WORK_EFFORT_TYPE_ID");
 
     public final com.querydsl.sql.ForeignKey<Content> wetLnamecnt = createForeignKey(localNameContentId, "CONTENT_ID");
 
+    public final com.querydsl.sql.ForeignKey<Enumeration> wetLaytypenum = createForeignKey(weLayoutTypeEnumId, "ENUM_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> wetChldtmplwet = createForeignKey(childTemplateId, "WORK_EFFORT_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<Enumeration> wetEvalenumid = createForeignKey(evalEnumId, "ENUM_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> wetRult2wet = createForeignKey(ruleTypeId2, "WORK_EFFORT_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<Enumeration> wetTotkpienum = createForeignKey(totalEnumIdKpi, "ENUM_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> wetRult1wet = createForeignKey(ruleTypeId1, "WORK_EFFORT_TYPE_ID");
+
     public final com.querydsl.sql.ForeignKey<Uom> wetEffuom = createForeignKey(effortUomId, "UOM_ID");
 
+    public final com.querydsl.sql.ForeignKey<RoleType> wetOuRole = createForeignKey(orgUnitRoleTypeId, "ROLE_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<Enumeration> wetFrameenumid = createForeignKey(frameEnumId, "ENUM_ID");
+
+    public final com.querydsl.sql.ForeignKey<RoleType> wetRtAuto = createForeignKey(roleTypeIdAuto, "ROLE_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<Enumeration> wetPeriodenumid = createForeignKey(periodOpenEnumId, "ENUM_ID");
+
+    public final com.querydsl.sql.ForeignKey<Enumeration> wetTotassenum = createForeignKey(totalEnumIdAssoc, "ENUM_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> wetRult3wet = createForeignKey(ruleTypeId3, "WORK_EFFORT_TYPE_ID");
+
     public final com.querydsl.sql.ForeignKey<Content> wetIconcnt = createForeignKey(iconContentId, "CONTENT_ID");
+
+    public final com.querydsl.sql.ForeignKey<Enumeration> wetTotsonsenum = createForeignKey(totalEnumIdSons, "ENUM_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> wetRult4wet = createForeignKey(ruleTypeId4, "WORK_EFFORT_TYPE_ID");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortType> wetRult5wet = createForeignKey(ruleTypeId5, "WORK_EFFORT_TYPE_ID");
 
@@ -243,6 +267,8 @@ public class QWorkEffortType extends com.querydsl.sql.RelationalPathBase<WorkEff
     public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetRult2wet = createInvForeignKey(workEffortTypeId, "RULE_TYPE_ID2");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortType> _wkEffrtTypePar = createInvForeignKey(workEffortTypeId, "PARENT_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortRevision> _wefrevCxtWeft = createInvForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID_CTX");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortTypeType> _wttToFk = createInvForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID_TO");
 
@@ -273,6 +299,8 @@ public class QWorkEffortType extends com.querydsl.sql.RelationalPathBase<WorkEff
     public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetRult3wet = createInvForeignKey(workEffortTypeId, "RULE_TYPE_ID3");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortAnalysis> _weaWetFk = createInvForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortRevision> _wefrevFilWeft = createInvForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID_FIL");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortTypeType> _wttFrFk = createInvForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID_FROM");
 
@@ -307,11 +335,12 @@ public class QWorkEffortType extends com.querydsl.sql.RelationalPathBase<WorkEff
         addMetadata(allOrgAssigned, ColumnMetadata.named("ALL_ORG_ASSIGNED").withIndex(20).ofType(Types.CHAR).withSize(1));
         addMetadata(allRolesAssigned, ColumnMetadata.named("ALL_ROLES_ASSIGNED").withIndex(19).ofType(Types.CHAR).withSize(1));
         addMetadata(applyScoreRange, ColumnMetadata.named("APPLY_SCORE_RANGE").withIndex(73).ofType(Types.CHAR).withSize(1));
+        addMetadata(batchStatusActive, ColumnMetadata.named("BATCH_STATUS_ACTIVE").withIndex(95).ofType(Types.CHAR).withSize(1));
         addMetadata(childTemplateId, ColumnMetadata.named("CHILD_TEMPLATE_ID").withIndex(21).ofType(Types.VARCHAR).withSize(20));
         addMetadata(codeCounter, ColumnMetadata.named("CODE_COUNTER").withIndex(14).ofType(Types.VARCHAR).withSize(20));
         addMetadata(codePrefix, ColumnMetadata.named("CODE_PREFIX").withIndex(13).ofType(Types.VARCHAR).withSize(20));
         addMetadata(copy, ColumnMetadata.named("COPY").withIndex(70).ofType(Types.CHAR).withSize(1));
-        addMetadata(createdByUserLogin, ColumnMetadata.named("CREATED_BY_USER_LOGIN").withIndex(76).ofType(Types.VARCHAR).withSize(250));
+        addMetadata(createdByUserLogin, ColumnMetadata.named("CREATED_BY_USER_LOGIN").withIndex(84).ofType(Types.VARCHAR).withSize(250));
         addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(7).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(8).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(description, ColumnMetadata.named("DESCRIPTION").withIndex(4).ofType(Types.VARCHAR).withSize(255));
@@ -322,7 +351,7 @@ public class QWorkEffortType extends com.querydsl.sql.RelationalPathBase<WorkEff
         addMetadata(etch, ColumnMetadata.named("ETCH").withIndex(57).ofType(Types.VARCHAR).withSize(255));
         addMetadata(etchLang, ColumnMetadata.named("ETCH_LANG").withIndex(87).ofType(Types.VARCHAR).withSize(255));
         addMetadata(evalEnumId, ColumnMetadata.named("EVAL_ENUM_ID").withIndex(72).ofType(Types.VARCHAR).withSize(20));
-        addMetadata(forAllUsers, ColumnMetadata.named("FOR_ALL_USERS").withIndex(78).ofType(Types.CHAR).withSize(1));
+        addMetadata(forAllUsers, ColumnMetadata.named("FOR_ALL_USERS").withIndex(76).ofType(Types.CHAR).withSize(1));
         addMetadata(frameEnumId, ColumnMetadata.named("FRAME_ENUM_ID").withIndex(60).ofType(Types.VARCHAR).withSize(20));
         addMetadata(fromDate, ColumnMetadata.named("FROM_DATE").withIndex(22).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(gpMenuEnumId, ColumnMetadata.named("GP_MENU_ENUM_ID").withIndex(93).ofType(Types.VARCHAR).withSize(20));
@@ -335,11 +364,11 @@ public class QWorkEffortType extends com.querydsl.sql.RelationalPathBase<WorkEff
         addMetadata(initiallyCollapsed, ColumnMetadata.named("INITIALLY_COLLAPSED").withIndex(94).ofType(Types.VARCHAR).withSize(20));
         addMetadata(isIndicAuto, ColumnMetadata.named("IS_INDIC_AUTO").withIndex(59).ofType(Types.CHAR).withSize(1));
         addMetadata(isInOnlyOneCard, ColumnMetadata.named("IS_IN_ONLY_ONE_CARD").withIndex(18).ofType(Types.CHAR).withSize(1));
-        addMetadata(isRoleTypeIdAuto, ColumnMetadata.named("IS_ROLE_TYPE_ID_AUTO").withIndex(79).ofType(Types.CHAR).withSize(1));
+        addMetadata(isRoleTypeIdAuto, ColumnMetadata.named("IS_ROLE_TYPE_ID_AUTO").withIndex(77).ofType(Types.CHAR).withSize(1));
         addMetadata(isRoot, ColumnMetadata.named("IS_ROOT").withIndex(16).ofType(Types.CHAR).withSize(1));
         addMetadata(isRootActive, ColumnMetadata.named("IS_ROOT_ACTIVE").withIndex(90).ofType(Types.CHAR).withSize(1));
         addMetadata(isTemplate, ColumnMetadata.named("IS_TEMPLATE").withIndex(15).ofType(Types.CHAR).withSize(1));
-        addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(75).ofType(Types.VARCHAR).withSize(250));
+        addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(83).ofType(Types.VARCHAR).withSize(250));
         addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(5).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(6).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(localNameContentId, ColumnMetadata.named("LOCAL_NAME_CONTENT_ID").withIndex(17).ofType(Types.VARCHAR).withSize(20));
@@ -355,16 +384,18 @@ public class QWorkEffortType extends com.querydsl.sql.RelationalPathBase<WorkEff
         addMetadata(min5, ColumnMetadata.named("MIN5").withIndex(42).ofType(Types.DECIMAL).withSize(20));
         addMetadata(note, ColumnMetadata.named("NOTE").withIndex(12).ofType(Types.LONGVARCHAR).withSize(2147483647));
         addMetadata(noteLang, ColumnMetadata.named("NOTE_LANG").withIndex(88).ofType(Types.LONGVARCHAR).withSize(2147483647));
-        addMetadata(orgUnitRoleTypeId, ColumnMetadata.named("ORG_UNIT_ROLE_TYPE_ID").withIndex(77).ofType(Types.VARCHAR).withSize(20));
-        addMetadata(parentPeriodFilter, ColumnMetadata.named("PARENT_PERIOD_FILTER").withIndex(82).ofType(Types.CHAR).withSize(1));
+        addMetadata(orgUnitRoleTypeId, ColumnMetadata.named("ORG_UNIT_ROLE_TYPE_ID").withIndex(75).ofType(Types.VARCHAR).withSize(20));
+        addMetadata(orgUnitRoleTypeId2, ColumnMetadata.named("ORG_UNIT_ROLE_TYPE_ID2").withIndex(96).ofType(Types.VARCHAR).withSize(20));
+        addMetadata(orgUnitRoleTypeId3, ColumnMetadata.named("ORG_UNIT_ROLE_TYPE_ID3").withIndex(97).ofType(Types.VARCHAR).withSize(20));
+        addMetadata(parentPeriodFilter, ColumnMetadata.named("PARENT_PERIOD_FILTER").withIndex(80).ofType(Types.CHAR).withSize(1));
         addMetadata(parentTypeId, ColumnMetadata.named("PARENT_TYPE_ID").withIndex(2).ofType(Types.VARCHAR).withSize(20));
-        addMetadata(partyRelTypeIdAuto, ColumnMetadata.named("PARTY_REL_TYPE_ID_AUTO").withIndex(81).ofType(Types.VARCHAR).withSize(20));
-        addMetadata(periodOpenEnumId, ColumnMetadata.named("PERIOD_OPEN_ENUM_ID").withIndex(83).ofType(Types.VARCHAR).withSize(20));
+        addMetadata(partyRelTypeIdAuto, ColumnMetadata.named("PARTY_REL_TYPE_ID_AUTO").withIndex(79).ofType(Types.VARCHAR).withSize(20));
+        addMetadata(periodOpenEnumId, ColumnMetadata.named("PERIOD_OPEN_ENUM_ID").withIndex(81).ofType(Types.VARCHAR).withSize(20));
         addMetadata(periodTypeId, ColumnMetadata.named("PERIOD_TYPE_ID").withIndex(28).ofType(Types.VARCHAR).withSize(20));
         addMetadata(purposeEtch, ColumnMetadata.named("PURPOSE_ETCH").withIndex(71).ofType(Types.VARCHAR).withSize(255));
         addMetadata(purposeEtchLang, ColumnMetadata.named("PURPOSE_ETCH_LANG").withIndex(89).ofType(Types.VARCHAR).withSize(255));
         addMetadata(reminderActive, ColumnMetadata.named("REMINDER_ACTIVE").withIndex(91).ofType(Types.CHAR).withSize(1));
-        addMetadata(roleTypeIdAuto, ColumnMetadata.named("ROLE_TYPE_ID_AUTO").withIndex(80).ofType(Types.VARCHAR).withSize(20));
+        addMetadata(roleTypeIdAuto, ColumnMetadata.named("ROLE_TYPE_ID_AUTO").withIndex(78).ofType(Types.VARCHAR).withSize(20));
         addMetadata(ruleTypeId1, ColumnMetadata.named("RULE_TYPE_ID1").withIndex(33).ofType(Types.VARCHAR).withSize(20));
         addMetadata(ruleTypeId2, ColumnMetadata.named("RULE_TYPE_ID2").withIndex(34).ofType(Types.VARCHAR).withSize(20));
         addMetadata(ruleTypeId3, ColumnMetadata.named("RULE_TYPE_ID3").withIndex(35).ofType(Types.VARCHAR).withSize(20));
@@ -375,7 +406,7 @@ public class QWorkEffortType extends com.querydsl.sql.RelationalPathBase<WorkEff
         addMetadata(seqEsp, ColumnMetadata.named("SEQ_ESP").withIndex(92).ofType(Types.DECIMAL).withSize(20));
         addMetadata(seqOnlyId, ColumnMetadata.named("SEQ_ONLY_ID").withIndex(62).ofType(Types.CHAR).withSize(1));
         addMetadata(shortLabel, ColumnMetadata.named("SHORT_LABEL").withIndex(58).ofType(Types.VARCHAR).withSize(20));
-        addMetadata(showHierarchy, ColumnMetadata.named("SHOW_HIERARCHY").withIndex(84).ofType(Types.CHAR).withSize(1));
+        addMetadata(showHierarchy, ColumnMetadata.named("SHOW_HIERARCHY").withIndex(82).ofType(Types.CHAR).withSize(1));
         addMetadata(showScorekpi, ColumnMetadata.named("SHOW_SCOREKPI").withIndex(68).ofType(Types.CHAR).withSize(1));
         addMetadata(thruDate, ColumnMetadata.named("THRU_DATE").withIndex(23).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(totalEnumIdAssoc, ColumnMetadata.named("TOTAL_ENUM_ID_ASSOC").withIndex(53).ofType(Types.VARCHAR).withSize(20));

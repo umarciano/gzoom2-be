@@ -28,6 +28,9 @@ public class PartyParentRole implements AbstractIdentity {
     @Column("LAST_UPDATED_TX_STAMP")
     private java.time.LocalDateTime lastUpdatedTxStamp;
 
+    @Column("ORGANIZATION_ID")
+    private String organizationId;
+
     @Column("PARENT_ROLE_CODE")
     private String parentRoleCode;
 
@@ -83,6 +86,14 @@ public class PartyParentRole implements AbstractIdentity {
 
     public void setLastUpdatedTxStamp(java.time.LocalDateTime lastUpdatedTxStamp) {
         this.lastUpdatedTxStamp = lastUpdatedTxStamp;
+    }
+
+    public String getOrganizationId() {
+        return organizationId;
+    }
+
+    public void setOrganizationId(String organizationId) {
+        this.organizationId = organizationId;
     }
 
     public String getParentRoleCode() {

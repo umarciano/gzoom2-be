@@ -50,6 +50,8 @@ public class QEmplPositionType extends com.querydsl.sql.RelationalPathBase<EmplP
 
     public final com.querydsl.sql.ForeignKey<EmplPositionType> emplPosiTypPar = createForeignKey(parentTypeId, "EMPL_POSITION_TYPE_ID");
 
+    public final com.querydsl.sql.ForeignKey<Person> _personEmplPositionType = createInvForeignKey(emplPositionTypeId, "EMPL_POSITION_TYPE_ID");
+
     public final com.querydsl.sql.ForeignKey<WorkEffort> _weEpt = createInvForeignKey(emplPositionTypeId, "EMPL_POSITION_TYPE_ID");
 
     public final com.querydsl.sql.ForeignKey<EmplPositionType> _emplPosiTypPar = createInvForeignKey(emplPositionTypeId, "PARENT_TYPE_ID");
