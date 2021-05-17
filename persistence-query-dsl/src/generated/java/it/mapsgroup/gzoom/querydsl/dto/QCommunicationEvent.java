@@ -88,21 +88,21 @@ public class QCommunicationEvent extends com.querydsl.sql.RelationalPathBase<Com
 
     public final com.querydsl.sql.PrimaryKey<CommunicationEvent> primary = createPrimaryKey(communicationEventId);
 
-    public final com.querydsl.sql.ForeignKey<RoleType> comEvntFrtyp = createForeignKey(roleTypeIdFrom, "ROLE_TYPE_ID");
-
-    public final com.querydsl.sql.ForeignKey<Party> comEvntTpty = createForeignKey(partyIdTo, "PARTY_ID");
-
-    public final com.querydsl.sql.ForeignKey<RoleType> comEvntTrtyp = createForeignKey(roleTypeIdTo, "ROLE_TYPE_ID");
+    public final com.querydsl.sql.ForeignKey<Party> comEvntFpty = createForeignKey(partyIdFrom, "PARTY_ID");
 
     public final com.querydsl.sql.ForeignKey<Enumeration> comEvntResenum = createForeignKey(reasonEnumId, "ENUM_ID");
 
     public final com.querydsl.sql.ForeignKey<ContactMech> comEvntTcm = createForeignKey(contactMechIdTo, "CONTACT_MECH_ID");
 
-    public final com.querydsl.sql.ForeignKey<ContactMech> comEvntFcm = createForeignKey(contactMechIdFrom, "CONTACT_MECH_ID");
-
-    public final com.querydsl.sql.ForeignKey<Party> comEvntFpty = createForeignKey(partyIdFrom, "PARTY_ID");
+    public final com.querydsl.sql.ForeignKey<RoleType> comEvntFrtyp = createForeignKey(roleTypeIdFrom, "ROLE_TYPE_ID");
 
     public final com.querydsl.sql.ForeignKey<StatusItem> comEvntStts = createForeignKey(statusId, "STATUS_ID");
+
+    public final com.querydsl.sql.ForeignKey<RoleType> comEvntTrtyp = createForeignKey(roleTypeIdTo, "ROLE_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<ContactMech> comEvntFcm = createForeignKey(contactMechIdFrom, "CONTACT_MECH_ID");
+
+    public final com.querydsl.sql.ForeignKey<Party> comEvntTpty = createForeignKey(partyIdTo, "PARTY_ID");
 
     public final com.querydsl.sql.ForeignKey<CommEventContentAssoc> _commevCaCommev = createInvForeignKey(communicationEventId, "COMMUNICATION_EVENT_ID");
 

@@ -72,11 +72,11 @@ public class QDataResource extends com.querydsl.sql.RelationalPathBase<DataResou
 
     public final com.querydsl.sql.PrimaryKey<DataResource> primary = createPrimaryKey(dataResourceId);
 
+    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> dataRecLmbUlgn = createForeignKey(lastModifiedByUserLogin, "USER_LOGIN_ID");
+
     public final com.querydsl.sql.ForeignKey<StatusItem> dtrsrcStatus = createForeignKey(statusId, "STATUS_ID");
 
     public final com.querydsl.sql.ForeignKey<UserLoginPersistent> dataRecCbUlgn = createForeignKey(createdByUserLogin, "USER_LOGIN_ID");
-
-    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> dataRecLmbUlgn = createForeignKey(lastModifiedByUserLogin, "USER_LOGIN_ID");
 
     public final com.querydsl.sql.ForeignKey<Content> _contentToTmpdata = createInvForeignKey(dataResourceId, "TEMPLATE_DATA_RESOURCE_ID");
 

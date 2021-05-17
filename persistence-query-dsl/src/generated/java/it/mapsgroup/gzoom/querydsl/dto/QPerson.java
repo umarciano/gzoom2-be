@@ -116,13 +116,13 @@ public class QPerson extends com.querydsl.sql.RelationalPathBase<Person> {
 
     public final com.querydsl.sql.PrimaryKey<Person> primary = createPrimaryKey(partyId);
 
-    public final com.querydsl.sql.ForeignKey<EmplPositionType> personEmplPositionType = createForeignKey(emplPositionTypeId, "EMPL_POSITION_TYPE_ID");
-
     public final com.querydsl.sql.ForeignKey<Party> personParty = createForeignKey(partyId, "PARTY_ID");
 
-    public final com.querydsl.sql.ForeignKey<Enumeration> personEmpsEnum = createForeignKey(employmentStatusEnumId, "ENUM_ID");
-
     public final com.querydsl.sql.ForeignKey<Enumeration> personRessEnum = createForeignKey(residenceStatusEnumId, "ENUM_ID");
+
+    public final com.querydsl.sql.ForeignKey<EmplPositionType> personEmplPositionType = createForeignKey(emplPositionTypeId, "EMPL_POSITION_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<Enumeration> personEmpsEnum = createForeignKey(employmentStatusEnumId, "ENUM_ID");
 
     public QPerson(String variable) {
         super(Person.class, forVariable(variable), "null", "PERSON");

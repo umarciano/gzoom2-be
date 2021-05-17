@@ -70,13 +70,13 @@ public class QParty extends com.querydsl.sql.RelationalPathBase<Party> {
 
     public final com.querydsl.sql.PrimaryKey<Party> primary = createPrimaryKey(partyId);
 
-    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> partyLmcul = createForeignKey(lastModifiedByUserLogin, "USER_LOGIN_ID");
+    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> partyCul = createForeignKey(createdByUserLogin, "USER_LOGIN_ID");
 
     public final com.querydsl.sql.ForeignKey<StatusItem> partyStatusitm = createForeignKey(statusId, "STATUS_ID");
 
     public final com.querydsl.sql.ForeignKey<Uom> partyPrefCrncy = createForeignKey(preferredCurrencyUomId, "UOM_ID");
 
-    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> partyCul = createForeignKey(createdByUserLogin, "USER_LOGIN_ID");
+    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> partyLmcul = createForeignKey(lastModifiedByUserLogin, "USER_LOGIN_ID");
 
     public final com.querydsl.sql.ForeignKey<TimeEntry> _timeEntPrty = createInvForeignKey(partyId, "PARTY_ID");
 

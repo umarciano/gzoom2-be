@@ -66,6 +66,8 @@ public class QEnumeration extends com.querydsl.sql.RelationalPathBase<Enumeratio
 
     public final com.querydsl.sql.ForeignKey<WorkEffort> _weTotsonsenum = createInvForeignKey(enumId, "TOTAL_ENUM_ID_SONS");
 
+    public final com.querydsl.sql.ForeignKey<UomRangeValues> _color = createInvForeignKey(enumId, "COLOR_ENUM_ID");
+
     public final com.querydsl.sql.ForeignKey<WorkEffort> _wkEffrtScEnum = createInvForeignKey(enumId, "SCOPE_ENUM_ID");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetTotassenum = createInvForeignKey(enumId, "TOTAL_ENUM_ID_ASSOC");
