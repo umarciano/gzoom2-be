@@ -102,7 +102,7 @@ public class QQueryConfig extends com.querydsl.sql.RelationalPathBase<QueryConfi
 
     public final BooleanPath queryPublic = createBoolean("queryPublic");
 
-    public final BooleanPath queryType = createBoolean("queryType");
+    public final StringPath queryType = createString("queryType");
 
     public final com.querydsl.sql.PrimaryKey<QueryConfig> primary = createPrimaryKey(queryId);
 
