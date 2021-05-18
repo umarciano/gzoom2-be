@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.querydsl.core.types.Projections.bean;
+import static com.querydsl.core.types.Projections.tuple;
 import static it.mapsgroup.gzoom.querydsl.QBeanUtils.merge;
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -139,9 +140,9 @@ public class PartyDao extends AbstractDao {
         LOG.info("size = {}", ret.size());
         return ret;
     }
-    
+
     @Transactional
-    public List<Party> getRoleTypePartys(String roleTypeId, String roleTypeIdFrom) {
+    public List<Party> getRoleTypePartys(String roleTypeId, String roleTypeIdFrom, String workEffortTypeId) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
@@ -154,7 +155,19 @@ public class PartyDao extends AbstractDao {
         QParty qParty = QParty.party;
         QPartyRole qPartyRole = QPartyRole.partyRole;
         QPartyRelationship qPartyRelationship = QPartyRelationship.partyRelationship;
-        
+        QWorkEffortType qWorkEffortType = QWorkEffortType.workEffortType;
+
+        BooleanBuilder builder = new BooleanBuilder();
+        if(roleTypeIdFrom!=null) {
+            builder.and(qPartyRelationship.roleTypeIdFrom.in(roleTypeIdFromArray));
+        } else if (workEffortTypeId!=null && checkPartyRole(workEffortTypeId).size()>0) {
+            builder.and(
+                    qPartyRole.roleTypeId.in(queryFactory.select(qWorkEffortType.orgUnitRoleTypeId).from(qWorkEffortType).where(qWorkEffortType.workEffortTypeId.eq(workEffortTypeId)))
+                    .or(qPartyRole.roleTypeId.in(queryFactory.select(qWorkEffortType.orgUnitRoleTypeId2).from(qWorkEffortType).where(qWorkEffortType.workEffortTypeId.eq(workEffortTypeId)))
+                    .or(qPartyRole.roleTypeId.in(queryFactory.select(qWorkEffortType.orgUnitRoleTypeId3).from(qWorkEffortType).where(qWorkEffortType.workEffortTypeId.eq(workEffortTypeId)))
+                    )));
+        }
+
         SQLQuery<Party> pSQLQuery = queryFactory.select(qParty)
         							.from(qParty)
         							.innerJoin(qPartyRole).on(qPartyRole.partyId.eq(qParty.partyId))
@@ -163,8 +176,8 @@ public class PartyDao extends AbstractDao {
                                         .and(qParty.partyId.in(
                                                 queryFactory.select(qPartyRelationship.partyIdTo)
                                                         .from(qPartyRelationship)
-                                                        .where(qPartyRelationship.partyRelationshipTypeId.eq("ORG_RESPONSIBLE")
-                                                                .and(qPartyRelationship.roleTypeIdFrom.in(roleTypeIdFromArray))))))
+                                                        .where(builder.and(qPartyRelationship.partyRelationshipTypeId.eq("ORG_RESPONSIBLE")
+                                                        )))))
         							.orderBy(qParty.partyName.asc());
         SQLBindings bindings = pSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
@@ -206,7 +219,7 @@ public class PartyDao extends AbstractDao {
      */
     
     @Transactional
-    public List<PartyEx> getOrgUnits(String userLoginId, String parentTypeId, String roleTypeId) {
+    public List<PartyEx> getOrgUnits(String userLoginId, String parentTypeId, String roleTypeId, String workEffortTypeId) {
     	 if (TransactionSynchronizationManager.isActualTransactionActive()) {
              TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
              status.getClass();
@@ -220,17 +233,28 @@ public class PartyDao extends AbstractDao {
          QParty qParty = QParty.party;
          QPartyParentRole qPartyParentRole = QPartyParentRole.partyParentRole;
          QPartyRole qPartyRole = QPartyRole.partyRole;
-         
+         QWorkEffortType qWorkEffortType = QWorkEffortType.workEffortType;
+
+         BooleanBuilder builder = new BooleanBuilder();
+         if(roleTypeId!=null) {
+             builder.and(roleType!=null&&roleType.length>0?qPartyRole.roleTypeId.in(roleType):qPartyRole.roleTypeId.isNotNull());
+         } else if(workEffortTypeId!=null && checkPartyRole(workEffortTypeId).size()>0){
+             builder.and(
+                     qPartyRole.roleTypeId.in(queryFactory.select(qWorkEffortType.orgUnitRoleTypeId).from(qWorkEffortType).where(qWorkEffortType.workEffortTypeId.eq(workEffortTypeId)))
+                     .or(qPartyRole.roleTypeId.in(queryFactory.select(qWorkEffortType.orgUnitRoleTypeId2).from(qWorkEffortType).where(qWorkEffortType.workEffortTypeId.eq(workEffortTypeId)))
+                             .or(qPartyRole.roleTypeId.in(queryFactory.select(qWorkEffortType.orgUnitRoleTypeId3).from(qWorkEffortType).where(qWorkEffortType.workEffortTypeId.eq(workEffortTypeId)))
+                             )));
+         }
+
          SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qParty, qPartyParentRole)
   				.from(qPartyRole)
   				.innerJoin(qParty).on(qParty.partyId.eq(qPartyRole.partyId)) 
   				.innerJoin(qPartyParentRole).on(qPartyParentRole.partyId.eq(qParty.partyId)) 
-  				.where(qPartyRole.parentRoleTypeId.eq("ORGANIZATION_UNIT")
-  					.and(qParty.statusId.eq("PARTY_ENABLED"))
-                    .and(roleType!=null&&roleType.length>0?qPartyRole.roleTypeId.in(roleType):qPartyRole.roleTypeId.isNotNull()))
+  				.where(builder.and(qPartyRole.parentRoleTypeId.eq("ORGANIZATION_UNIT"))
+  					.and(qParty.statusId.eq("PARTY_ENABLED")))
+
                  .orderBy(qPartyParentRole.parentRoleCode.asc());
                 // .groupBy(qParty.partyId);
-
          
          
          tupleSQLQuery = (SQLQuery<Tuple>) filterPermissionDao.getFilterQuery(tupleSQLQuery, qPartyRole, userLoginId, parentTypeId);
@@ -247,8 +271,34 @@ public class PartyDao extends AbstractDao {
 		 LOG.info("size = {}", ret.size()); 
 		 return ret;    
     }
-    
-    
+
+    // Check if orgUnitRoleTypeId 2 3 fields are populated
+    @Transactional
+    public List<PartyRole> checkPartyRole(String workEffortTypeId) {
+        if (TransactionSynchronizationManager.isActualTransactionActive()) {
+            TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
+            status.getClass();
+
+        }
+
+        QPartyRole qPartyRole = QPartyRole.partyRole;
+        QWorkEffortType qWorkEffortType = QWorkEffortType.workEffortType;
+
+        SQLQuery<PartyRole> pSQLQuery = queryFactory.select(qPartyRole).from(qPartyRole).where(
+                qPartyRole.roleTypeId.in(queryFactory.select(qWorkEffortType.orgUnitRoleTypeId).from(qWorkEffortType).where(qWorkEffortType.workEffortTypeId.eq(workEffortTypeId)))
+                        .or(qPartyRole.roleTypeId.in(queryFactory.select(qWorkEffortType.orgUnitRoleTypeId2).from(qWorkEffortType).where(qWorkEffortType.workEffortTypeId.eq(workEffortTypeId)))
+                                .or(qPartyRole.roleTypeId.in(queryFactory.select(qWorkEffortType.orgUnitRoleTypeId3).from(qWorkEffortType).where(qWorkEffortType.workEffortTypeId.eq(workEffortTypeId)))
+                                ))
+        );
+
+        SQLBindings bindings = pSQLQuery.getSQL();
+        LOG.info("{}", bindings.getSQL());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
+        QBean<PartyRole> partys = Projections.bean(PartyRole.class, qPartyRole.all());
+        List<PartyRole> ret = pSQLQuery.transform(GroupBy.groupBy(qPartyRole.partyId).list(partys));
+        LOG.info("size = {}", ret.size());
+        return ret;
+    }
     
 
 }
