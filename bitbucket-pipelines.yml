@@ -13,5 +13,4 @@ pipelines:
             - tar -xzvf apache-maven-3.3.9-bin.tar.gz
             - popd
             - fi
-            - /opt/apache-maven-3.3.9/bin/mvn -s settings.xml -P bbpipeline -dskipTests clean deploy
-
+            - /opt/apache-maven-3.3.9/bin/mvn -s settings.xml -P bbpipeline -Dmaven.test.skip=true clean deploy
