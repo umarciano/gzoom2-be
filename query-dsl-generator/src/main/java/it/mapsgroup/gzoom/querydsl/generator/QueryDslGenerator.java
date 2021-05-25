@@ -34,18 +34,16 @@ public class QueryDslGenerator {
     public static final String TARGET_FOLDER = "persistence-query-dsl\\src\\generated\\java";
 
     private Connection getConnection() throws SQLException {
-    /*    return DriverManager.getConnection("jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle-maps.maps1.mapsengineering.com)(PORT=1521))" +
-                "(CONNECT_DATA=(SERVER = DEDICATED)(SERVICE_NAME= devdb.maps1.mapsengineering.com)))", "ANFO", "@4ndr34_77");*/
-//        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/ltprod", "lmm", "lmm");
-        //return DriverManager.getConnection("jdbc:mysql://localhost/gzoom_lite", "root", "root");
+        // Funziona solo con mysql, prima funzionava anche con jdk1.8 e postgres
+        // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/ltprod", "lmm", "lmm");
+        // Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/gzoom_comune_follonica", "postgres", "P0stgres.81");
         // Connection connection = DriverManager.getConnection("jdbc:postgresql://192.168.9.32:5432/gzoom_regione_campania", "gzoom_test", "gzoom_test");
-        Connection connection = DriverManager.getConnection("jdbc:sqlserver://MG-19BT\\\\SQLEXPRESS:55975;databaseName=gzoom_comune_genovanew;SelectMethod=cursor;", "sa", "sa.12345");
-        // connection.setCatalog("gzoom_comune_lecco");
-        // connection.setSchema("gzoom_comune_lecco");
-        // System.out.println(" getConnection() " + connection);
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/gzoom_comune_sanremo_test?nullDatabaseMeansCurrent=true&autoReconnect=true&useOldAliasMetadataBehavior=true&useSSL=false&serverTimezone=Europe/Rome", "root", "");
+        // Connection connection = DriverManager.getConnection("jdbc:sqlserver://MG-19BT\\\\SQLEXPRESS:55975;databaseName=gzoom_comune_genovanew;SelectMethod=cursor;", "sa", "sa.12345");
+        // return DriverManager.getConnection("jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle-maps.maps1.mapsengineering.com)(PORT=1521))" +
+        //        "(CONNECT_DATA=(SERVER = DEDICATED)(SERVICE_NAME= devdb.maps1.mapsengineering.com)))", "ANFO", "@4ndr34_77");*/
+        System.out.println(" getConnection() " + connection);
         return connection;
-        //return DriverManager.getConnection("jdbc:mysql://localhost/gzoom_comune_lecco?serverTimezone=UTC", "root", "");
-        //return DriverManager.getConnection("jdbc:mysql://gzoom-tux-2/gzoom_comune_lecco?serverTimezone=UTC", "gzoom_test", "gzoom_test");
     }
 
 
@@ -79,10 +77,11 @@ public class QueryDslGenerator {
         String tables = getTables();
         if (tables != null)
             exporter.setTableNamePattern(tables);
-        /*System.out.println(" getConnection() " + getConnection());
-        System.out.println(" getConnection() " + getConnection().getSchema());
-        exporter.setSchemaPattern("gzoom_comune_lecco");
-        */
+        System.out.println(" getConnection() " + getConnection());
+        System.out.println(" getConnection() getSchema " + getConnection().getSchema());
+        System.out.println(" getConnection() getCatalog " + getConnection().getCatalog());
+        // per farlo funzionare con mysql serve impostare come schemaPattern il catalog
+        exporter.setSchemaPattern(getConnection().getCatalog());
         exporter.setNamingStrategy(new CustomNamingStrategy(tables));
         exporter.setExportInverseForeignKeys(true);
         exporter.export(getConnection().getMetaData());

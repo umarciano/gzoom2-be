@@ -52,6 +52,8 @@ public class QStatusItem extends com.querydsl.sql.RelationalPathBase<StatusItem>
 
     public final com.querydsl.sql.PrimaryKey<StatusItem> primary = createPrimaryKey(statusId);
 
+    public final com.querydsl.sql.ForeignKey<Enumeration> siActstsenum = createForeignKey(actStEnumId, "ENUM_ID");
+
     public final com.querydsl.sql.ForeignKey<WorkEffort> _wkEffrtCurstts = createInvForeignKey(statusId, "CURRENT_STATUS_ID");
 
     public final com.querydsl.sql.ForeignKey<Party> _partyStatusitm = createInvForeignKey(statusId, "STATUS_ID");

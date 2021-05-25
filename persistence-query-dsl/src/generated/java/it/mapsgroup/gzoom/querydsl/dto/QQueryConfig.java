@@ -104,10 +104,10 @@ public class QQueryConfig extends com.querydsl.sql.RelationalPathBase<QueryConfi
 
     public final StringPath queryType = createString("queryType");
 
-    public final com.querydsl.sql.PrimaryKey<QueryConfig> queryConfigPk = createPrimaryKey(queryId);
+    public final com.querydsl.sql.PrimaryKey<QueryConfig> primary = createPrimaryKey(queryId);
 
     public QQueryConfig(String variable) {
-        super(QueryConfig.class, forVariable(variable), "DBO", "QUERY_CONFIG");
+        super(QueryConfig.class, forVariable(variable), "null", "QUERY_CONFIG");
         addMetadata();
     }
 
@@ -122,50 +122,50 @@ public class QQueryConfig extends com.querydsl.sql.RelationalPathBase<QueryConfi
     }
 
     public QQueryConfig(Path<? extends QueryConfig> path) {
-        super(path.getType(), path.getMetadata(), "DBO", "QUERY_CONFIG");
+        super(path.getType(), path.getMetadata(), "null", "QUERY_CONFIG");
         addMetadata();
     }
 
     public QQueryConfig(PathMetadata metadata) {
-        super(QueryConfig.class, metadata, "DBO", "QUERY_CONFIG");
+        super(QueryConfig.class, metadata, "null", "QUERY_CONFIG");
         addMetadata();
     }
 
     public void addMetadata() {
-        addMetadata(cond0Comm, ColumnMetadata.named("COND0_COMM").withIndex(11).ofType(Types.VARCHAR).withSize(2000));
+        addMetadata(cond0Comm, ColumnMetadata.named("COND0_COMM").withIndex(11).ofType(Types.VARCHAR).withSize(255));
         addMetadata(cond0Info, ColumnMetadata.named("COND0_INFO").withIndex(12).ofType(Types.VARCHAR).withSize(2000));
-        addMetadata(cond0Name, ColumnMetadata.named("COND0_NAME").withIndex(10).ofType(Types.VARCHAR).withSize(255));
-        addMetadata(cond1Comm, ColumnMetadata.named("COND1_COMM").withIndex(14).ofType(Types.VARCHAR).withSize(2000));
+        addMetadata(cond0Name, ColumnMetadata.named("COND0_NAME").withIndex(10).ofType(Types.VARCHAR).withSize(100));
+        addMetadata(cond1Comm, ColumnMetadata.named("COND1_COMM").withIndex(14).ofType(Types.VARCHAR).withSize(255));
         addMetadata(cond1Info, ColumnMetadata.named("COND1_INFO").withIndex(15).ofType(Types.VARCHAR).withSize(2000));
-        addMetadata(cond1Name, ColumnMetadata.named("COND1_NAME").withIndex(13).ofType(Types.VARCHAR).withSize(255));
-        addMetadata(cond2Comm, ColumnMetadata.named("COND2_COMM").withIndex(17).ofType(Types.VARCHAR).withSize(2000));
+        addMetadata(cond1Name, ColumnMetadata.named("COND1_NAME").withIndex(13).ofType(Types.VARCHAR).withSize(100));
+        addMetadata(cond2Comm, ColumnMetadata.named("COND2_COMM").withIndex(17).ofType(Types.VARCHAR).withSize(255));
         addMetadata(cond2Info, ColumnMetadata.named("COND2_INFO").withIndex(18).ofType(Types.VARCHAR).withSize(2000));
-        addMetadata(cond2Name, ColumnMetadata.named("COND2_NAME").withIndex(16).ofType(Types.VARCHAR).withSize(255));
-        addMetadata(cond3Comm, ColumnMetadata.named("COND3_COMM").withIndex(20).ofType(Types.VARCHAR).withSize(2000));
+        addMetadata(cond2Name, ColumnMetadata.named("COND2_NAME").withIndex(16).ofType(Types.VARCHAR).withSize(100));
+        addMetadata(cond3Comm, ColumnMetadata.named("COND3_COMM").withIndex(20).ofType(Types.VARCHAR).withSize(255));
         addMetadata(cond3Info, ColumnMetadata.named("COND3_INFO").withIndex(21).ofType(Types.VARCHAR).withSize(2000));
-        addMetadata(cond3Name, ColumnMetadata.named("COND3_NAME").withIndex(19).ofType(Types.VARCHAR).withSize(255));
-        addMetadata(cond4Comm, ColumnMetadata.named("COND4_COMM").withIndex(23).ofType(Types.VARCHAR).withSize(2000));
+        addMetadata(cond3Name, ColumnMetadata.named("COND3_NAME").withIndex(19).ofType(Types.VARCHAR).withSize(100));
+        addMetadata(cond4Comm, ColumnMetadata.named("COND4_COMM").withIndex(23).ofType(Types.VARCHAR).withSize(255));
         addMetadata(cond4Info, ColumnMetadata.named("COND4_INFO").withIndex(24).ofType(Types.VARCHAR).withSize(2000));
-        addMetadata(cond4Name, ColumnMetadata.named("COND4_NAME").withIndex(22).ofType(Types.VARCHAR).withSize(255));
-        addMetadata(cond5Comm, ColumnMetadata.named("COND5_COMM").withIndex(26).ofType(Types.VARCHAR).withSize(2000));
+        addMetadata(cond4Name, ColumnMetadata.named("COND4_NAME").withIndex(22).ofType(Types.VARCHAR).withSize(100));
+        addMetadata(cond5Comm, ColumnMetadata.named("COND5_COMM").withIndex(26).ofType(Types.VARCHAR).withSize(255));
         addMetadata(cond5Info, ColumnMetadata.named("COND5_INFO").withIndex(27).ofType(Types.VARCHAR).withSize(2000));
-        addMetadata(cond5Name, ColumnMetadata.named("COND5_NAME").withIndex(25).ofType(Types.VARCHAR).withSize(255));
-        addMetadata(cond6Comm, ColumnMetadata.named("COND6_COMM").withIndex(29).ofType(Types.VARCHAR).withSize(2000));
+        addMetadata(cond5Name, ColumnMetadata.named("COND5_NAME").withIndex(25).ofType(Types.VARCHAR).withSize(100));
+        addMetadata(cond6Comm, ColumnMetadata.named("COND6_COMM").withIndex(29).ofType(Types.VARCHAR).withSize(255));
         addMetadata(cond6Info, ColumnMetadata.named("COND6_INFO").withIndex(30).ofType(Types.VARCHAR).withSize(2000));
-        addMetadata(cond6Name, ColumnMetadata.named("COND6_NAME").withIndex(28).ofType(Types.VARCHAR).withSize(255));
-        addMetadata(cond7Comm, ColumnMetadata.named("COND7_COMM").withIndex(32).ofType(Types.VARCHAR).withSize(2000));
+        addMetadata(cond6Name, ColumnMetadata.named("COND6_NAME").withIndex(28).ofType(Types.VARCHAR).withSize(100));
+        addMetadata(cond7Comm, ColumnMetadata.named("COND7_COMM").withIndex(32).ofType(Types.VARCHAR).withSize(255));
         addMetadata(cond7Info, ColumnMetadata.named("COND7_INFO").withIndex(33).ofType(Types.VARCHAR).withSize(2000));
-        addMetadata(cond7Name, ColumnMetadata.named("COND7_NAME").withIndex(31).ofType(Types.VARCHAR).withSize(255));
-        addMetadata(cond8Comm, ColumnMetadata.named("COND8_COMM").withIndex(35).ofType(Types.VARCHAR).withSize(2000));
+        addMetadata(cond7Name, ColumnMetadata.named("COND7_NAME").withIndex(31).ofType(Types.VARCHAR).withSize(100));
+        addMetadata(cond8Comm, ColumnMetadata.named("COND8_COMM").withIndex(35).ofType(Types.VARCHAR).withSize(255));
         addMetadata(cond8Info, ColumnMetadata.named("COND8_INFO").withIndex(36).ofType(Types.VARCHAR).withSize(2000));
-        addMetadata(cond8Name, ColumnMetadata.named("COND8_NAME").withIndex(34).ofType(Types.VARCHAR).withSize(255));
-        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(42).ofType(Types.TIMESTAMP).withSize(23).withDigits(3));
-        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(43).ofType(Types.TIMESTAMP).withSize(23).withDigits(3));
-        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(40).ofType(Types.TIMESTAMP).withSize(23).withDigits(3));
-        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(41).ofType(Types.TIMESTAMP).withSize(23).withDigits(3));
+        addMetadata(cond8Name, ColumnMetadata.named("COND8_NAME").withIndex(34).ofType(Types.VARCHAR).withSize(100));
+        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(39).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(40).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(37).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(38).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(queryActive, ColumnMetadata.named("QUERY_ACTIVE").withIndex(8).ofType(Types.CHAR).withSize(1));
         addMetadata(queryCode, ColumnMetadata.named("QUERY_CODE").withIndex(2).ofType(Types.VARCHAR).withSize(20));
-        addMetadata(queryComm, ColumnMetadata.named("QUERY_COMM").withIndex(4).ofType(Types.VARCHAR).withSize(2000));
+        addMetadata(queryComm, ColumnMetadata.named("QUERY_COMM").withIndex(4).ofType(Types.VARCHAR).withSize(255));
         addMetadata(queryCtx, ColumnMetadata.named("QUERY_CTX").withIndex(6).ofType(Types.VARCHAR).withSize(20));
         addMetadata(queryId, ColumnMetadata.named("QUERY_ID").withIndex(1).ofType(Types.VARCHAR).withSize(20).notNull());
         addMetadata(queryInfo, ColumnMetadata.named("QUERY_INFO").withIndex(9).ofType(Types.LONGVARCHAR).withSize(2147483647));

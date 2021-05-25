@@ -245,12 +245,15 @@ public class MetaDataExporter {
         if (schemaPattern != null && schemaPattern.contains(",")) {
             schemas = ImmutableList.copyOf(schemaPattern.split(","));
         }
+        System.out.println(" - export tableNamePattern " + tableNamePattern);
         List<String> tables = Arrays.asList(tableNamePattern);
+        System.out.println(" - export tables " + tables);
         if (tableNamePattern != null && tableNamePattern.contains(",")) {
             tables = ImmutableList.copyOf(tableNamePattern.split(","));
         }
 
         for (String schema : schemas) {
+            System.out.println(" - export schema " + schema);
             schema = schema != null ? schema.trim() : null;
             for (String table : tables) {
                 table = table != null ? table.trim() : null;
@@ -260,8 +263,7 @@ public class MetaDataExporter {
     }
 
     private void handleTables(DatabaseMetaData md, String schemaPattern, String tablePattern, String[] types) throws SQLException {
-        // ResultSet tables = md.getTables(null, schemaPattern, tablePattern, types);
-        ResultSet tables = md.getTables("gzoom_comune_lecco", schemaPattern, tablePattern, types);
+        ResultSet tables = md.getTables(schemaPattern, schemaPattern, tablePattern, types);
         try {
             while (tables.next()) {
                 System.out.println(" - tables " + tables);
@@ -331,15 +333,10 @@ public class MetaDataExporter {
     }
 
     private void handleTable(DatabaseMetaData md, ResultSet tables) throws SQLException {
-        System.out.println(" - tables " + tables);
-
         String catalog = tables.getString("TABLE_CAT");
         String schema = tables.getString("TABLE_SCHEM");
         String schemaName = normalize(tables.getString("TABLE_SCHEM"));
         String tableName = normalize(tables.getString("TABLE_NAME"));
-        System.out.println(" - tableName " + tableName);
-        System.out.println(" - schema " + schema);
-        System.out.println(" - catalog " + catalog);
 
         String normalizedSchemaName = namingStrategy.normalizeSchemaName(schemaName);
         String normalizedTableName = namingStrategy.normalizeTableName(tableName);
@@ -357,7 +354,9 @@ public class MetaDataExporter {
         if (exportPrimaryKeys) {
             // collect primary keys
             Map<String, PrimaryKeyData> primaryKeyData = keyDataFactory
-                    .getPrimaryKeys(md, "gzoom_comune_lecco", schema, tableName);
+                    .getPrimaryKeys(md, catalog, schema, tableName);
+            /*Map<String, PrimaryKeyData> primaryKeyData = keyDataFactory
+                    .getPrimaryKeys(md, null, schema, tableName);*/
             if (!primaryKeyData.isEmpty()) {
                 classModel.getData().put(PrimaryKeyData.class, primaryKeyData.values());
             }

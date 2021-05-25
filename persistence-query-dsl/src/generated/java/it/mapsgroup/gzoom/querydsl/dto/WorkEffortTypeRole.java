@@ -22,6 +22,9 @@ public class WorkEffortTypeRole implements AbstractIdentity {
     @Column("CREATED_TX_STAMP")
     private java.time.LocalDateTime createdTxStamp;
 
+    @Column("IS_MANDATORY")
+    private Boolean isMandatory;
+
     @Column("LAST_MODIFIED_BY_USER_LOGIN")
     private String lastModifiedByUserLogin;
 
@@ -67,6 +70,14 @@ public class WorkEffortTypeRole implements AbstractIdentity {
 
     public void setCreatedTxStamp(java.time.LocalDateTime createdTxStamp) {
         this.createdTxStamp = createdTxStamp;
+    }
+
+    public Boolean getIsMandatory() {
+        return isMandatory;
+    }
+
+    public void setIsMandatory(Boolean isMandatory) {
+        this.isMandatory = isMandatory;
     }
 
     public String getLastModifiedByUserLogin() {

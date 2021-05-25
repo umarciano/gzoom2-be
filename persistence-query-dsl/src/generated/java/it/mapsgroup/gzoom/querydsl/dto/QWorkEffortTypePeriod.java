@@ -38,6 +38,8 @@ public class QWorkEffortTypePeriod extends com.querydsl.sql.RelationalPathBase<W
 
     public final DateTimePath<java.time.LocalDateTime> lastUpdatedTxStamp = createDateTime("lastUpdatedTxStamp", java.time.LocalDateTime.class);
 
+    public final StringPath organizationId = createString("organizationId");
+
     public final DateTimePath<java.time.LocalDateTime> perLavFrom = createDateTime("perLavFrom", java.time.LocalDateTime.class);
 
     public final DateTimePath<java.time.LocalDateTime> perLavThru = createDateTime("perLavThru", java.time.LocalDateTime.class);
@@ -53,6 +55,10 @@ public class QWorkEffortTypePeriod extends com.querydsl.sql.RelationalPathBase<W
     public final com.querydsl.sql.PrimaryKey<WorkEffortTypePeriod> primary = createPrimaryKey(workEffortTypePeriodId);
 
     public final com.querydsl.sql.ForeignKey<WorkEffortType> wtpWtype = createForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<Enumeration> wtpStatus = createForeignKey(statusEnumId, "ENUM_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffort> _wePeriod = createInvForeignKey(workEffortTypePeriodId, "WORK_EFFORT_TYPE_PERIOD_ID");
 
     public QWorkEffortTypePeriod(String variable) {
         super(WorkEffortTypePeriod.class, forVariable(variable), "null", "WORK_EFFORT_TYPE_PERIOD");
@@ -87,6 +93,7 @@ public class QWorkEffortTypePeriod extends com.querydsl.sql.RelationalPathBase<W
         addMetadata(glFiscalTypeEnumId, ColumnMetadata.named("GL_FISCAL_TYPE_ENUM_ID").withIndex(4).ofType(Types.VARCHAR).withSize(20));
         addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(10).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(11).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(organizationId, ColumnMetadata.named("ORGANIZATION_ID").withIndex(14).ofType(Types.VARCHAR).withSize(20));
         addMetadata(perLavFrom, ColumnMetadata.named("PER_LAV_FROM").withIndex(6).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(perLavThru, ColumnMetadata.named("PER_LAV_THRU").withIndex(7).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(statusEnumId, ColumnMetadata.named("STATUS_ENUM_ID").withIndex(9).ofType(Types.VARCHAR).withSize(20));

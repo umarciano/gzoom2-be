@@ -48,9 +48,9 @@ public class QUserLoginValidPartyRole extends com.querydsl.sql.RelationalPathBas
 
     public final com.querydsl.sql.PrimaryKey<UserLoginValidPartyRole> primary = createPrimaryKey(partyId, roleTypeId, userLoginId);
 
-    public final com.querydsl.sql.ForeignKey<PartyRole> ulvprPrFk = createForeignKey(Arrays.asList(partyId, roleTypeId), Arrays.asList("PARTY_ID", "ROLE_TYPE_ID"));
-
     public final com.querydsl.sql.ForeignKey<UserLoginPersistent> ulvprUlFk = createForeignKey(userLoginId, "USER_LOGIN_ID");
+
+    public final com.querydsl.sql.ForeignKey<PartyRole> ulvprPrFk = createForeignKey(Arrays.asList(partyId, roleTypeId), Arrays.asList("PARTY_ID", "ROLE_TYPE_ID"));
 
     public QUserLoginValidPartyRole(String variable) {
         super(UserLoginValidPartyRole.class, forVariable(variable), "null", "USER_LOGIN_VALID_PARTY_ROLE");

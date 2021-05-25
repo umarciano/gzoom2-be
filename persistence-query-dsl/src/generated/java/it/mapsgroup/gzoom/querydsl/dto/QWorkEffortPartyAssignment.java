@@ -72,6 +72,8 @@ public class QWorkEffortPartyAssignment extends com.querydsl.sql.RelationalPathB
 
     public final NumberPath<java.math.BigDecimal> roleTypeWeightActual = createNumber("roleTypeWeightActual", java.math.BigDecimal.class);
 
+    public final NumberPath<java.math.BigInteger> sequenceNum = createNumber("sequenceNum", java.math.BigInteger.class);
+
     public final DateTimePath<java.time.LocalDateTime> statusDateTime = createDateTime("statusDateTime", java.time.LocalDateTime.class);
 
     public final StringPath statusId = createString("statusId");
@@ -86,13 +88,17 @@ public class QWorkEffortPartyAssignment extends com.querydsl.sql.RelationalPathB
 
     public final com.querydsl.sql.PrimaryKey<WorkEffortPartyAssignment> primary = createPrimaryKey(fromDate, partyId, roleTypeId, workEffortId);
 
-    public final com.querydsl.sql.ForeignKey<StatusItem> wkeffPaStts = createForeignKey(statusId, "STATUS_ID");
+    public final com.querydsl.sql.ForeignKey<Enumeration> wkeffPaExpEnum = createForeignKey(expectationEnumId, "ENUM_ID");
+
+    public final com.querydsl.sql.ForeignKey<Enumeration> wkeffPaDelrEnm = createForeignKey(delegateReasonEnumId, "ENUM_ID");
+
+    public final com.querydsl.sql.ForeignKey<StatusItem> wkeffPaAvstts = createForeignKey(availabilityStatusId, "STATUS_ID");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortPartyAssignment> wepaFr = createForeignKey(Arrays.asList(workEffortIdFrom, partyIdFrom, roleTypeIdFrom, fromDateFrom), Arrays.asList("WORK_EFFORT_ID", "PARTY_ID", "ROLE_TYPE_ID", "FROM_DATE"));
 
-    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> wkeffPaAbusrlog = createForeignKey(assignedByUserLoginId, "USER_LOGIN_ID");
+    public final com.querydsl.sql.ForeignKey<StatusItem> wkeffPaStts = createForeignKey(statusId, "STATUS_ID");
 
-    public final com.querydsl.sql.ForeignKey<StatusItem> wkeffPaAvstts = createForeignKey(availabilityStatusId, "STATUS_ID");
+    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> wkeffPaAbusrlog = createForeignKey(assignedByUserLoginId, "USER_LOGIN_ID");
 
     public final com.querydsl.sql.ForeignKey<WorkEffort> wkeffPaWe = createForeignKey(workEffortId, "WORK_EFFORT_ID");
 
@@ -147,6 +153,7 @@ public class QWorkEffortPartyAssignment extends com.querydsl.sql.RelationalPathB
         addMetadata(roleTypeIdFrom, ColumnMetadata.named("ROLE_TYPE_ID_FROM").withIndex(26).ofType(Types.VARCHAR).withSize(20));
         addMetadata(roleTypeWeight, ColumnMetadata.named("ROLE_TYPE_WEIGHT").withIndex(19).ofType(Types.DECIMAL).withSize(18).withDigits(6));
         addMetadata(roleTypeWeightActual, ColumnMetadata.named("ROLE_TYPE_WEIGHT_ACTUAL").withIndex(20).ofType(Types.DECIMAL).withSize(18).withDigits(6));
+        addMetadata(sequenceNum, ColumnMetadata.named("SEQUENCE_NUM").withIndex(30).ofType(Types.DECIMAL).withSize(20));
         addMetadata(statusDateTime, ColumnMetadata.named("STATUS_DATE_TIME").withIndex(8).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(statusId, ColumnMetadata.named("STATUS_ID").withIndex(7).ofType(Types.VARCHAR).withSize(20));
         addMetadata(thruDate, ColumnMetadata.named("THRU_DATE").withIndex(5).ofType(Types.TIMESTAMP).withSize(26));

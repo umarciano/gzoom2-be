@@ -42,13 +42,13 @@ public class PartyService {
         return new Result<>(list, list.size());
     }
     
-    public Result<PartyEx> getOrgUnits(String userLoginId, String parentTypeId, String roleTypeId) {
-        List<PartyEx> list = partyDao.getOrgUnits(userLoginId, parentTypeId, roleTypeId);
+    public Result<PartyEx> getOrgUnits(String userLoginId, String parentTypeId, String roleTypeId, String workEffortTypeId) {
+        List<PartyEx> list = partyDao.getOrgUnits(userLoginId, parentTypeId, roleTypeId, workEffortTypeId);
         return new Result<>(list, list.size());
     }
     
-    public Result<Party> getRoleTypePartys(String roleTypeId, String roleTypeIdFrom) {
-        List<Party> list = partyDao.getRoleTypePartys(roleTypeId,roleTypeIdFrom);
+    public Result<Party> getRoleTypePartys(String roleTypeId, String roleTypeIdFrom, String workEffortTypeId) {
+        List<Party> list = partyDao.getRoleTypePartys(roleTypeId,roleTypeIdFrom,workEffortTypeId);
         return new Result<>(list, list.size());
     }
 

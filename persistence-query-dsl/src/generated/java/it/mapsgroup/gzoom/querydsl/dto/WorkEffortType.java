@@ -19,6 +19,9 @@ public class WorkEffortType implements AbstractIdentity {
     @Column("APPLY_SCORE_RANGE")
     private Boolean applyScoreRange;
 
+    @Column("BATCH_STATUS_ACTIVE")
+    private Boolean batchStatusActive;
+
     @Column("CHILD_TEMPLATE_ID")
     private String childTemplateId;
 
@@ -165,6 +168,12 @@ public class WorkEffortType implements AbstractIdentity {
 
     @Column("ORG_UNIT_ROLE_TYPE_ID")
     private String orgUnitRoleTypeId;
+
+    @Column("ORG_UNIT_ROLE_TYPE_ID2")
+    private String orgUnitRoleTypeId2;
+
+    @Column("ORG_UNIT_ROLE_TYPE_ID3")
+    private String orgUnitRoleTypeId3;
 
     @Column("PARENT_PERIOD_FILTER")
     private Boolean parentPeriodFilter;
@@ -314,6 +323,14 @@ public class WorkEffortType implements AbstractIdentity {
 
     public void setApplyScoreRange(Boolean applyScoreRange) {
         this.applyScoreRange = applyScoreRange;
+    }
+
+    public Boolean getBatchStatusActive() {
+        return batchStatusActive;
+    }
+
+    public void setBatchStatusActive(Boolean batchStatusActive) {
+        this.batchStatusActive = batchStatusActive;
     }
 
     public String getChildTemplateId() {
@@ -706,6 +723,22 @@ public class WorkEffortType implements AbstractIdentity {
 
     public void setOrgUnitRoleTypeId(String orgUnitRoleTypeId) {
         this.orgUnitRoleTypeId = orgUnitRoleTypeId;
+    }
+
+    public String getOrgUnitRoleTypeId2() {
+        return orgUnitRoleTypeId2;
+    }
+
+    public void setOrgUnitRoleTypeId2(String orgUnitRoleTypeId2) {
+        this.orgUnitRoleTypeId2 = orgUnitRoleTypeId2;
+    }
+
+    public String getOrgUnitRoleTypeId3() {
+        return orgUnitRoleTypeId3;
+    }
+
+    public void setOrgUnitRoleTypeId3(String orgUnitRoleTypeId3) {
+        this.orgUnitRoleTypeId3 = orgUnitRoleTypeId3;
     }
 
     public Boolean getParentPeriodFilter() {

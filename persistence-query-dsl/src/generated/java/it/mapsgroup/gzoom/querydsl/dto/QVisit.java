@@ -88,15 +88,15 @@ public class QVisit extends com.querydsl.sql.RelationalPathBase<Visit> {
 
     public final com.querydsl.sql.PrimaryKey<Visit> primary = createPrimaryKey(visitId);
 
-    public final com.querydsl.sql.ForeignKey<Party> visitParty = createForeignKey(partyId, "PARTY_ID");
+    public final com.querydsl.sql.ForeignKey<Visitor> visitVisitor = createForeignKey(visitorId, "VISITOR_ID");
 
     public final com.querydsl.sql.ForeignKey<PartyRole> visitPartyRole = createForeignKey(Arrays.asList(partyId, roleTypeId), Arrays.asList("PARTY_ID", "ROLE_TYPE_ID"));
 
-    public final com.querydsl.sql.ForeignKey<ContactMech> visitContMech = createForeignKey(contactMechId, "CONTACT_MECH_ID");
-
-    public final com.querydsl.sql.ForeignKey<Visitor> visitVisitor = createForeignKey(visitorId, "VISITOR_ID");
+    public final com.querydsl.sql.ForeignKey<Party> visitParty = createForeignKey(partyId, "PARTY_ID");
 
     public final com.querydsl.sql.ForeignKey<RoleType> visitRoleType = createForeignKey(roleTypeId, "ROLE_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<ContactMech> visitContMech = createForeignKey(contactMechId, "CONTACT_MECH_ID");
 
     public QVisit(String variable) {
         super(Visit.class, forVariable(variable), "null", "VISIT");

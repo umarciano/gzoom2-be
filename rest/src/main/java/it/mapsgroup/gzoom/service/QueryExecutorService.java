@@ -27,6 +27,7 @@ import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import org.slf4j.Logger;
 
@@ -117,6 +118,7 @@ public class QueryExecutorService {
                     String columnName = rsmd.getColumnName(i);
                     Cell headerCell = headerRow.createCell(i - 1);
                     headerCell.setCellValue(columnName);
+                    formatHeader(wb,headerCell);
                 }
 
                 //create detail
@@ -152,6 +154,9 @@ public class QueryExecutorService {
                     }
 
                 }
+
+                //Resize width column after population data
+                autoSizeColumns(wb);
 
 
                 response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
@@ -211,5 +216,32 @@ public class QueryExecutorService {
         CreationHelper creationHelper = workbook.getCreationHelper();
         cellStyle.setDataFormat(creationHelper.createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
         cell.setCellStyle(cellStyle);
+    }
+
+    private static void formatHeader(Workbook workbook, Cell cell) {
+        CellStyle cellStyle = workbook.createCellStyle();
+        cellStyle.setFillForegroundColor(IndexedColors.GREY_40_PERCENT.getIndex());
+        cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        Font font = workbook.createFont();
+        font.setBold(true);
+        cellStyle.setFont(font);
+        cell.setCellStyle(cellStyle);
+
+    }
+
+    private static void autoSizeColumns(Workbook workbook) {
+        int numberOfSheets = workbook.getNumberOfSheets();
+        for (int i = 0; i < numberOfSheets; i++) {
+            Sheet sheet = workbook.getSheetAt(i);
+            if (sheet.getPhysicalNumberOfRows() > 0) {
+                Row row = sheet.getRow(sheet.getFirstRowNum());
+                Iterator<Cell> cellIterator = row.cellIterator();
+                while (cellIterator.hasNext()) {
+                    Cell cell = cellIterator.next();
+                    int columnIndex = cell.getColumnIndex();
+                    sheet.autoSizeColumn(columnIndex);
+                }
+            }
+        }
     }
 }

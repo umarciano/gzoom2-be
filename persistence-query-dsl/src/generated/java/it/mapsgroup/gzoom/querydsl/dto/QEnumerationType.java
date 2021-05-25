@@ -40,7 +40,7 @@ public class QEnumerationType extends com.querydsl.sql.RelationalPathBase<Enumer
 
     public final StringPath parentTypeId = createString("parentTypeId");
 
-    public final com.querydsl.sql.PrimaryKey<EnumerationType> enumerationTypePk = createPrimaryKey(enumTypeId);
+    public final com.querydsl.sql.PrimaryKey<EnumerationType> primary = createPrimaryKey(enumTypeId);
 
     public final com.querydsl.sql.ForeignKey<EnumerationType> enumTypeParent = createForeignKey(parentTypeId, "ENUM_TYPE_ID");
 
@@ -49,7 +49,7 @@ public class QEnumerationType extends com.querydsl.sql.RelationalPathBase<Enumer
     public final com.querydsl.sql.ForeignKey<EnumerationType> _enumTypeParent = createInvForeignKey(enumTypeId, "PARENT_TYPE_ID");
 
     public QEnumerationType(String variable) {
-        super(EnumerationType.class, forVariable(variable), "DBO", "ENUMERATION_TYPE");
+        super(EnumerationType.class, forVariable(variable), "null", "ENUMERATION_TYPE");
         addMetadata();
     }
 
@@ -64,23 +64,23 @@ public class QEnumerationType extends com.querydsl.sql.RelationalPathBase<Enumer
     }
 
     public QEnumerationType(Path<? extends EnumerationType> path) {
-        super(path.getType(), path.getMetadata(), "DBO", "ENUMERATION_TYPE");
+        super(path.getType(), path.getMetadata(), "null", "ENUMERATION_TYPE");
         addMetadata();
     }
 
     public QEnumerationType(PathMetadata metadata) {
-        super(EnumerationType.class, metadata, "DBO", "ENUMERATION_TYPE");
+        super(EnumerationType.class, metadata, "null", "ENUMERATION_TYPE");
         addMetadata();
     }
 
     public void addMetadata() {
-        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(7).ofType(Types.TIMESTAMP).withSize(23).withDigits(3));
-        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(8).ofType(Types.TIMESTAMP).withSize(23).withDigits(3));
+        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(7).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(8).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(description, ColumnMetadata.named("DESCRIPTION").withIndex(4).ofType(Types.VARCHAR).withSize(255));
         addMetadata(enumTypeId, ColumnMetadata.named("ENUM_TYPE_ID").withIndex(1).ofType(Types.VARCHAR).withSize(20).notNull());
         addMetadata(hasTable, ColumnMetadata.named("HAS_TABLE").withIndex(3).ofType(Types.CHAR).withSize(1));
-        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(5).ofType(Types.TIMESTAMP).withSize(23).withDigits(3));
-        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(6).ofType(Types.TIMESTAMP).withSize(23).withDigits(3));
+        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(5).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(6).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(parentTypeId, ColumnMetadata.named("PARENT_TYPE_ID").withIndex(2).ofType(Types.VARCHAR).withSize(20));
     }
 

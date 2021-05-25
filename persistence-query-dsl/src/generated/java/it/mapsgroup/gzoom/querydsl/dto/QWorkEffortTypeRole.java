@@ -32,6 +32,8 @@ public class QWorkEffortTypeRole extends com.querydsl.sql.RelationalPathBase<Wor
 
     public final DateTimePath<java.time.LocalDateTime> createdTxStamp = createDateTime("createdTxStamp", java.time.LocalDateTime.class);
 
+    public final BooleanPath isMandatory = createBoolean("isMandatory");
+
     public final StringPath lastModifiedByUserLogin = createString("lastModifiedByUserLogin");
 
     public final DateTimePath<java.time.LocalDateTime> lastUpdatedStamp = createDateTime("lastUpdatedStamp", java.time.LocalDateTime.class);
@@ -44,9 +46,9 @@ public class QWorkEffortTypeRole extends com.querydsl.sql.RelationalPathBase<Wor
 
     public final com.querydsl.sql.PrimaryKey<WorkEffortTypeRole> primary = createPrimaryKey(roleTypeId, workEffortTypeId);
 
-    public final com.querydsl.sql.ForeignKey<RoleType> wetrRtFk = createForeignKey(roleTypeId, "ROLE_TYPE_ID");
-
     public final com.querydsl.sql.ForeignKey<WorkEffortType> wetrWtFk = createForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<RoleType> wetrRtFk = createForeignKey(roleTypeId, "ROLE_TYPE_ID");
 
     public QWorkEffortTypeRole(String variable) {
         super(WorkEffortTypeRole.class, forVariable(variable), "null", "WORK_EFFORT_TYPE_ROLE");
@@ -78,6 +80,7 @@ public class QWorkEffortTypeRole extends com.querydsl.sql.RelationalPathBase<Wor
         addMetadata(createdByUserLogin, ColumnMetadata.named("CREATED_BY_USER_LOGIN").withIndex(5).ofType(Types.VARCHAR).withSize(250));
         addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(8).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(9).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(isMandatory, ColumnMetadata.named("IS_MANDATORY").withIndex(10).ofType(Types.CHAR).withSize(1));
         addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(4).ofType(Types.VARCHAR).withSize(250));
         addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(6).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(7).ofType(Types.TIMESTAMP).withSize(26));
