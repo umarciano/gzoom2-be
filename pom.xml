@@ -82,27 +82,53 @@
         <javamail.version>1.4.5</javamail.version>
         <resources.plugin.version>2.5</resources.plugin.version>
 
+				<!--  artefactory                                                           
+				    These properties are used only for local build                          
+				    Bitbucket pipeline override the value with workspace variables          
+				    -->                                                                     
+				<mvn_artifactory_host>mapsgroup.jfrog.io</mvn_artifactory_host>             
+				<mvn_artifactory_publish_repo>gzoom2-backend-local</mvn_artifactory_publish_repo>
+				<mvn_artifactory_dependencies_repo>maps-mvn</mvn_artifactory_dependencies_repo>
+
         <mockitol.version>1.10.19</mockitol.version>
     </properties>
 
     <!-- ============================ Repositories ============================ -->
-    <repositories>
-        <!-- Maps Artifacts server -->
-        <repository>
-            <id>Maps Artifacts</id>
-            <url>http://artifactory.maps1.mapsengineering.com:8081/artifactory/mapslibs</url>
-            <releases>
-                <enabled>true</enabled>
-                <checksumPolicy>ignore</checksumPolicy>
-                <updatePolicy>always</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <checksumPolicy>ignore</checksumPolicy>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-    </repositories>
+
+		<repositories>                                                              
+						 <repository>                                                            
+								 <id>Maps Artifacts</id>                                             
+								 <url>https://${mvn_artifactory_host}/artifactory/${mvn_artifactory_dependencies_repo}</url>
+								 <releases>                                                          
+										 <enabled>true</enabled>                                         
+										 <checksumPolicy>ignore</checksumPolicy>                         
+										 <updatePolicy>always</updatePolicy>                             
+								 </releases>                                                         
+								 <snapshots>                                                         
+										 <enabled>true</enabled>                                         
+										 <checksumPolicy>ignore</checksumPolicy>                         
+										 <updatePolicy>always</updatePolicy>                             
+								 </snapshots>                                                        
+						 </repository>                                                           
+		 </repositories>                                                             
+
+		<pluginRepositories>                                                        
+				<pluginRepository>                                                      
+						<id>Maps Artifacts</id>                                             
+						 <url>https://${mvn_artifactory_host}/artifactory/${mvn_artifactory_dependencies_repo}</url>
+				</pluginRepository>                                                     
+		</pluginRepositories>     
+
+		<distributionManagement>                                                    
+				<repository>                                                            
+						<id>Maps Artifacts</id>                                             
+						<url>https://${mvn_artifactory_host}/artifactory/${mvn_artifactory_publish_repo}</url>
+				</repository>                                                           
+				<snapshotRepository>                                                    
+					<id>Maps Artifacts</id>                                             
+					<url>https://${mvn_artifactory_host}/artifactory/${mvn_artifactory_publish_repo}</url>
+				</snapshotRepository>                                                   
+		</distributionManagement>    
 
     <dependencyManagement>
 
