@@ -16,6 +16,9 @@ public class WorkEffortAssoc implements AbstractIdentity {
     @Column("COMMENTS")
     private String comments;
 
+    @Column("COMMENTS_LANG")
+    private String commentsLang;
+
     @Column("CREATED_BY_USER_LOGIN")
     private String createdByUserLogin;
 
@@ -81,6 +84,14 @@ public class WorkEffortAssoc implements AbstractIdentity {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public String getCommentsLang() {
+        return commentsLang;
+    }
+
+    public void setCommentsLang(String commentsLang) {
+        this.commentsLang = commentsLang;
     }
 
     public String getCreatedByUserLogin() {

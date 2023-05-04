@@ -15,6 +15,7 @@ import com.querydsl.core.types.dsl.DateTimePath;
 import it.mapsgroup.gzoom.persistence.common.CustomTransactionStatus;
 import it.mapsgroup.gzoom.querydsl.AbstractIdentity;
 
+
 /**
  * @author Andrea Fossi.
  */

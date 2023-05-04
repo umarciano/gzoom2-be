@@ -13,7 +13,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.web.filter.GenericFilterBean;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -21,6 +20,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -48,10 +48,31 @@ public class JwtTokenFilter extends GenericFilterBean {
         this.objectMapper = objectMapper;
     }
 
+
+
+
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
+        boolean oneLoginSamlSSOEnabled = true;
+
+        String path = ((HttpServletRequest)request).getRequestURI();
+        if (path.contains("/api/getToken")) {
+            System.out.println("Request : " + ((HttpServletRequest) request).getMethod() + " - " + getRequestUrl((HttpServletRequest)request));
+            ((HttpServletResponse) response).addHeader("Access-Control-Allow-Origin", "*");
+            ((HttpServletResponse) response).addHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+            ((HttpServletResponse) response).addHeader("Access-Control-Allow-Headers", "*");
+            ((HttpServletResponse) response).addHeader("Access-Control-Max-Age", "1728000");
+            chain.doFilter(request, response);
+            return;
+        }
+        else if(path.contains("/api/getLoginMethod") || path.contains("/api/getOneLogin-LoginUrl") || path.contains("/api/getOneLogin-LogoutUrl") || path.contains("/api/doLogout")){
+            chain.doFilter(request, response);
+            return;
+        }
+
 
         try {
             String token = Tokens.token(req);
@@ -79,4 +100,26 @@ public class JwtTokenFilter extends GenericFilterBean {
         }
     }
 
+
+    private String getRequestUrl(final HttpServletRequest req){
+        final String scheme = req.getScheme();
+        final int port = req.getServerPort();
+        final StringBuilder url = new StringBuilder(256);
+        url.append(scheme);
+        url.append("://");
+        url.append(req.getServerName());
+        if(!(("http".equals(scheme) && (port == 0 || port == 80))
+                || ("https".equals(scheme) && port == 443))){
+            url.append(':');
+            url.append(port);
+        }
+        url.append(req.getRequestURI());
+        final String qs = req.getQueryString();
+        if(qs != null){
+            url.append('?');
+            url.append(qs);
+        }
+        final String result = url.toString();
+        return result;
+    }
 }

@@ -17,7 +17,32 @@ public class LoginServiceOfBiz {
 
     public LoginResponseOfBiz login(String username, String password) {
         Map<String, Object> response = loginClient.login(username, password, null);
-//        Map<String, Object> response = loginClient.login("admin", "MapsGzoom01",null);
+        String externalLoginKey = (String) response.get("externalLoginKey");
+        String firstName = (String) response.get("firstName");
+        String lastName = (String) response.get("lastName");
+        LoginResponseOfBiz loginResponse = new LoginResponseOfBiz();
+        loginResponse.setExternalLoginKey(externalLoginKey);
+        loginResponse.setFirstName(firstName);
+        loginResponse.setLastName(lastName);
+        return loginResponse;
+    }
+
+
+    public LoginResponseOfBiz loginWithOnlyUserLoginId(String username) {
+        Map<String, Object> response = loginClient.login(username, null);
+        String externalLoginKey = (String) response.get("externalLoginKey");
+        String firstName = (String) response.get("firstName");
+        String lastName = (String) response.get("lastName");
+        LoginResponseOfBiz loginResponse = new LoginResponseOfBiz();
+        loginResponse.setExternalLoginKey(externalLoginKey);
+        loginResponse.setFirstName(firstName);
+        loginResponse.setLastName(lastName);
+        return loginResponse;
+    }
+
+
+    public LoginResponseOfBiz logout(String username) {
+        Map<String, Object> response = loginClient.logout(username, null);
         String externalLoginKey = (String) response.get("externalLoginKey");
         String firstName = (String) response.get("firstName");
         String lastName = (String) response.get("lastName");

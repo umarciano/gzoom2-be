@@ -28,14 +28,14 @@ public class WorkEffortTypeStatus implements AbstractIdentity {
     @Column("CURRENT_STATUS_ID")
     private String currentStatusId;
 
-    @Column("DATA_SOLL")
-    private java.time.LocalDateTime dataSoll;
-
     @Column("FREQ_SOLL")
     private java.math.BigInteger freqSoll;
 
     @Column("GL_FISCAL_TYPE_ID")
     private String glFiscalTypeId;
+
+    @Column("HAS_MANDATORY_ACCOUNT")
+    private Boolean hasMandatoryAccount;
 
     @Column("HAS_MANDATORY_ATTR")
     private Boolean hasMandatoryAttr;
@@ -130,14 +130,6 @@ public class WorkEffortTypeStatus implements AbstractIdentity {
         this.currentStatusId = currentStatusId;
     }
 
-    public java.time.LocalDateTime getDataSoll() {
-        return dataSoll;
-    }
-
-    public void setDataSoll(java.time.LocalDateTime dataSoll) {
-        this.dataSoll = dataSoll;
-    }
-
     public java.math.BigInteger getFreqSoll() {
         return freqSoll;
     }
@@ -152,6 +144,14 @@ public class WorkEffortTypeStatus implements AbstractIdentity {
 
     public void setGlFiscalTypeId(String glFiscalTypeId) {
         this.glFiscalTypeId = glFiscalTypeId;
+    }
+
+    public Boolean getHasMandatoryAccount() {
+        return hasMandatoryAccount;
+    }
+
+    public void setHasMandatoryAccount(Boolean hasMandatoryAccount) {
+        this.hasMandatoryAccount = hasMandatoryAccount;
     }
 
     public Boolean getHasMandatoryAttr() {

@@ -20,8 +20,8 @@ public class QueryConfigService {
         this.queryConfigDao = queryConfigDao;
     }
 
-    public Result<QueryConfig> getAllQueryConfig(String parentTypeId,String queryType) {
-        List<QueryConfig> list = queryConfigDao.getAllQueryConfig(parentTypeId,queryType);
+    public Result<QueryConfig> getAllQueryConfig(String parentTypeId,String queryType, String userLoginId) {
+        List<QueryConfig> list = queryConfigDao.getAllQueryConfig(parentTypeId,queryType, userLoginId);
         return new Result<>(list, list.size());
     }
 

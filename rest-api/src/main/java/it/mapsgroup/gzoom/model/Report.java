@@ -3,6 +3,7 @@ package it.mapsgroup.gzoom.model;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
+import java.util.Locale;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -29,8 +30,20 @@ public class Report extends Identifiable {
 	private String outputFormat;
 	private String contentName;
 	private boolean analysis;
-
+	private String defaultOrganizationUnitId;
+	private String langLocale;
+	private Locale birtLocale;
 	private String resourceName;
+
+	public String getReportContentTypeId() {
+		return reportContentTypeId;
+	}
+
+	public void setReportContentTypeId(String reportContentTypeId) {
+		this.reportContentTypeId = reportContentTypeId;
+	}
+
+	private String reportContentTypeId;
 
 	private List<ReportParam> params;
 	private List<ReportParamService> services;
@@ -52,6 +65,35 @@ public class Report extends Identifiable {
 	public void setAnalysis(boolean analysis) {
 		this.analysis = analysis;
 	}
+
+	/**
+	 * @return the getDefaultOrganizationUnitId
+	 */
+	public String getDefaultOrganizationUnitId() { return defaultOrganizationUnitId;}
+	/**
+	 * @param  defaultOrganizationUnitId
+	 */
+	public void setDefaultOrganizationUnitId(String defaultOrganizationUnitId) {this.defaultOrganizationUnitId = defaultOrganizationUnitId;}
+
+	/**
+	 * @return the langLocale
+	 */
+	public String getLangLocale() { return langLocale;}
+
+	/**
+	 * @param  langLocale
+	 */
+	public void setLangLocale(String langLocale) {this.langLocale = langLocale;}
+
+	/**
+	 +	 * @return the birtLocale
+	 +	 */
+	public Locale getBirtLocale() { return birtLocale;}
+
+	/**
+ 	 * @param  birtLocale
+ 	 */
+	public void setBirtLocale(Locale birtLocale) {this.birtLocale = birtLocale;}
 
 	/**
 	 * @return the reportName
@@ -328,7 +370,7 @@ public class Report extends Identifiable {
 	public void setServices(List<ReportParamService> services) {
 		this.services = services;
 	}
-	
+
 	
 	
 }

@@ -47,12 +47,13 @@ public class ConfigurationImpl implements Configuration, SecurityConfiguration, 
     private final int reportProbeRetries;
     private final List<String> languages;
     private final String languageType;
+    private final String organizationMultiType;
 
     @Autowired
     public ConfigurationImpl(Environment env) {
         // localization
         this.localeDirPath = Paths.get(env.getProperty("gzoom.conf.dir") + "/locales");
-        this.languageType = env.getProperty("language.multi.type");
+        this.languageType = env.getProperty("language.multi.type",String.class, "NONE");
         this.languages = Arrays.asList(env.getProperty("language.locales.available").split(","));
         this.translationResources.add("/lmm/locales/it.json");
         //Add locals json if exists multiple lang
@@ -62,13 +63,14 @@ public class ConfigurationImpl implements Configuration, SecurityConfiguration, 
         }
         this.localizations = initLocalization();
 
+        //multi tenant
+        this.organizationMultiType = env.getProperty("organizzation.multi.type", String.class, "N");
+
         // rest properties
         this.restPath = env.getProperty("rest.path", "../rest");
         this.tokenExpiryMinutes = env.getProperty("rest.token.expiry.minutes", Integer.class, 43200);
 
-
         this.deadlineDays = env.getProperty("deadline.days", Integer.class, 5);
-
 
         this.configurationPath = env.getProperty("gzoom.conf.dir");
 
@@ -208,4 +210,6 @@ public class ConfigurationImpl implements Configuration, SecurityConfiguration, 
     }
 
     public String getLanguageType() { return this.languageType;}
+
+    public String getOrganizationMultiType() {return this.organizationMultiType;}
 }

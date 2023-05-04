@@ -19,6 +19,9 @@ public class WorkEffortPartyAssignment implements AbstractIdentity {
     @Column("COMMENTS")
     private String comments;
 
+    @Column("COMMENTS_LANG")
+    private String commentsLang;
+
     @Column("CREATED_BY_USER_LOGIN")
     private String createdByUserLogin;
 
@@ -30,6 +33,18 @@ public class WorkEffortPartyAssignment implements AbstractIdentity {
 
     @Column("DELEGATE_REASON_ENUM_ID")
     private String delegateReasonEnumId;
+
+    @Column("END_CAUSE_ENUM_ID")
+    private String endCauseEnumId;
+
+    @Column("END_DATE")
+    private java.time.LocalDateTime endDate;
+
+    @Column("END_REPLACEMENT_ENUM_ID")
+    private String endReplacementEnumId;
+
+    @Column("END_WORK_EFFORT_ID")
+    private String endWorkEffortId;
 
     @Column("EXPECTATION_ENUM_ID")
     private String expectationEnumId;
@@ -124,6 +139,14 @@ public class WorkEffortPartyAssignment implements AbstractIdentity {
         this.comments = comments;
     }
 
+    public String getCommentsLang() {
+        return commentsLang;
+    }
+
+    public void setCommentsLang(String commentsLang) {
+        this.commentsLang = commentsLang;
+    }
+
     public String getCreatedByUserLogin() {
         return createdByUserLogin;
     }
@@ -154,6 +177,38 @@ public class WorkEffortPartyAssignment implements AbstractIdentity {
 
     public void setDelegateReasonEnumId(String delegateReasonEnumId) {
         this.delegateReasonEnumId = delegateReasonEnumId;
+    }
+
+    public String getEndCauseEnumId() {
+        return endCauseEnumId;
+    }
+
+    public void setEndCauseEnumId(String endCauseEnumId) {
+        this.endCauseEnumId = endCauseEnumId;
+    }
+
+    public java.time.LocalDateTime getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(java.time.LocalDateTime endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getEndReplacementEnumId() {
+        return endReplacementEnumId;
+    }
+
+    public void setEndReplacementEnumId(String endReplacementEnumId) {
+        this.endReplacementEnumId = endReplacementEnumId;
+    }
+
+    public String getEndWorkEffortId() {
+        return endWorkEffortId;
+    }
+
+    public void setEndWorkEffortId(String endWorkEffortId) {
+        this.endWorkEffortId = endWorkEffortId;
     }
 
     public String getExpectationEnumId() {

@@ -9,7 +9,7 @@ pipelines:
             - yum install -y wget tar gzip
             - pushd .
             - cd /opt 
-            - wget https://archive.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+            - wget --timeout=120 https://archive.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
             - tar -xzvf apache-maven-3.3.9-bin.tar.gz
             - popd
             - fi

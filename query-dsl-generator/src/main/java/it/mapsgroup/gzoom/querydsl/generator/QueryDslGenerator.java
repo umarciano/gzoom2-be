@@ -31,14 +31,14 @@ public class QueryDslGenerator {
     //PATH WINDOWS: va bene il path scommentato con i doppi slash
 
     // public static final String TARGET_FOLDER = "";
-    public static final String TARGET_FOLDER = "persistence-query-dsl\\src\\generated\\java";
+    public static final String TARGET_FOLDER = "persistence-query-dsl/src/generated/java";
 
     private Connection getConnection() throws SQLException {
         // Funziona solo con mysql, prima funzionava anche con jdk1.8 e postgres
         // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/ltprod", "lmm", "lmm");
         // Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/gzoom_comune_follonica", "postgres", "P0stgres.81");
         // Connection connection = DriverManager.getConnection("jdbc:postgresql://192.168.9.32:5432/gzoom_regione_campania", "gzoom_test", "gzoom_test");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/gzoom_comune_sanremo_test?nullDatabaseMeansCurrent=true&autoReconnect=true&useOldAliasMetadataBehavior=true&useSSL=false&serverTimezone=Europe/Rome", "root", "");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gzoom_milanocamcom?nullDatabaseMeansCurrent=true&autoReconnect=true&useOldAliasMetadataBehavior=true&useSSL=false&serverTimezone=Europe/Rome", "root", "F14Tomcat!");
         // Connection connection = DriverManager.getConnection("jdbc:sqlserver://MG-19BT\\\\SQLEXPRESS:55975;databaseName=gzoom_comune_genovanew;SelectMethod=cursor;", "sa", "sa.12345");
         // return DriverManager.getConnection("jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle-maps.maps1.mapsengineering.com)(PORT=1521))" +
         //        "(CONNECT_DATA=(SERVER = DEDICATED)(SERVICE_NAME= devdb.maps1.mapsengineering.com)))", "ANFO", "@4ndr34_77");*/

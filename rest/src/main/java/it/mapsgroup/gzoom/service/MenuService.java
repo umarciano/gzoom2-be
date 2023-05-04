@@ -1,14 +1,22 @@
 package it.mapsgroup.gzoom.service;
 
+import static com.querydsl.core.types.Projections.bean;
+import static it.mapsgroup.gzoom.querydsl.QBeanUtils.merge;
 import static it.mapsgroup.gzoom.security.Principals.principal;
 import static org.slf4j.LoggerFactory.getLogger;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import com.querydsl.core.Tuple;
+import com.querydsl.core.group.GroupBy;
+import com.querydsl.core.types.QBean;
+import com.querydsl.core.types.dsl.DateExpression;
+import com.querydsl.sql.SQLBindings;
+import com.querydsl.sql.SQLQuery;
+import com.querydsl.sql.SQLQueryFactory;
+import it.mapsgroup.gzoom.querydsl.dto.*;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +25,10 @@ import it.mapsgroup.gzoom.model.FolderMenu;
 import it.mapsgroup.gzoom.model.LeafMenu;
 import it.mapsgroup.gzoom.model.Permissions;
 import it.mapsgroup.gzoom.querydsl.dao.ContentAndAttributesDao;
-import it.mapsgroup.gzoom.querydsl.dto.ContentAndAttributes;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 /**
  * Profile service.
@@ -32,11 +43,13 @@ public class MenuService {
     
     private final ContentAndAttributesDao contentAndAttributeDao;
     private final ProfileService profileService;
+    private final SQLQueryFactory queryFactory;
     
     @Autowired
-    public MenuService(ContentAndAttributesDao contentAndAttributeDao, ProfileService profileService) {
+    public MenuService(ContentAndAttributesDao contentAndAttributeDao, ProfileService profileService, SQLQueryFactory queryFactory) {
         this.contentAndAttributeDao = contentAndAttributeDao;
         this.profileService = profileService;
+        this.queryFactory = queryFactory;
     }
 
     public FolderMenu getMenu() {
@@ -116,5 +129,65 @@ public class MenuService {
         }
         parent.setChildren(children.stream().filter(node -> !node.isToRemove()).collect(Collectors.toList()));
     }
-    
+
+    @Transactional
+    public String getHelpId(String contentIdTo) {
+        if (TransactionSynchronizationManager.isActualTransactionActive()) {
+            TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
+            status.getClass();
+        }
+
+        //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        //LocalDateTime now = LocalDateTime.now();
+
+        QContentAssoc qContentAssoc = QContentAssoc.contentAssoc;
+
+        SQLQuery<ContentAssoc> pSQLQuery = queryFactory.select(qContentAssoc)
+                .from(qContentAssoc)
+                .where(qContentAssoc.contentIdTo.eq(contentIdTo)
+                        .and(qContentAssoc.contentAssocTypeId.eq("HELP")));
+               // .and(qContentAssoc.fromDate.before(LocalDateTime.now())));
+
+        SQLBindings bindings = pSQLQuery.getSQL();
+        LOG.info("{}", bindings.getSQL());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
+        QBean<ContentAssoc> contentassocs = bean(ContentAssoc.class, qContentAssoc.all());
+        List<ContentAssoc> ret = pSQLQuery.transform(GroupBy.groupBy(qContentAssoc.contentId).list(contentassocs));
+        LOG.info("size = {}", ret.size());
+        return !ret.isEmpty()?ret.get(0).getContentId():"HELP_GP_HOMEPAGE";
+
+    }
+
+    @Transactional
+    public String getMenuPath(String contentIdTo) {
+        if (TransactionSynchronizationManager.isActualTransactionActive()) {
+            TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
+            status.getClass();
+        }
+
+        QContentAssoc qContentAssoc = QContentAssoc.contentAssoc;
+        QContentAssoc qParent = new QContentAssoc("parent");
+
+        SQLQuery<Tuple> pSQLQuery = queryFactory.select(qContentAssoc,qParent)
+                .from(qContentAssoc)
+                .join(qParent).on(qParent.contentIdTo.eq(qContentAssoc.contentId))
+                .where(qContentAssoc.contentIdTo.eq(contentIdTo)
+                .and(qContentAssoc.contentAssocTypeId.eq("TREE_CHILD"))
+                .and(qParent.fromDate.isNull().or(DateExpression.currentDate(LocalDateTime.class).goe(qParent.fromDate)))
+                .and(qParent.thruDate.isNull().or(DateExpression.currentDate(LocalDateTime.class).lt(qParent.thruDate))));
+
+        SQLBindings bindings = pSQLQuery.getSQL();
+        LOG.info("{}", bindings.getSQL());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
+
+        QBean<ContentAssocMenu> contentAssocMenuQBean = bean(ContentAssocMenu.class,
+                merge(qContentAssoc.all(),
+                        bean(ContentAssoc.class, qParent.all()).as("parent")));
+
+        List<ContentAssocMenu> ret = pSQLQuery.transform(GroupBy.groupBy(qContentAssoc.contentIdTo).list(contentAssocMenuQBean));
+        LOG.info("size = {}", ret.size());
+        return !ret.isEmpty()? "/"+ret.get(0).getParent().getContentId()
+                .concat("/"+ret.get(0).getContentId())
+                .concat("/"+ret.get(0).getContentIdTo()):"";
+    }
 }

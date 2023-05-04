@@ -48,6 +48,8 @@ public class QAllocationInterface extends com.querydsl.sql.RelationalPathBase<Al
 
     public final DateTimePath<java.time.LocalDateTime> refDate = createDateTime("refDate", java.time.LocalDateTime.class);
 
+    public final NumberPath<java.math.BigInteger> seq = createNumber("seq", java.math.BigInteger.class);
+
     public final StringPath stato = createString("stato");
 
     public final com.querydsl.sql.PrimaryKey<AllocationInterface> primary = createPrimaryKey(allocationFromDate, allocationOrgCode, dataSource, personCode, refDate);
@@ -90,6 +92,7 @@ public class QAllocationInterface extends com.querydsl.sql.RelationalPathBase<Al
         addMetadata(personCode, ColumnMetadata.named("PERSON_CODE").withIndex(6).ofType(Types.VARCHAR).withSize(20).notNull());
         addMetadata(personRoleTypeId, ColumnMetadata.named("PERSON_ROLE_TYPE_ID").withIndex(5).ofType(Types.VARCHAR).withSize(20));
         addMetadata(refDate, ColumnMetadata.named("REF_DATE").withIndex(4).ofType(Types.TIMESTAMP).withSize(26).notNull());
+        addMetadata(seq, ColumnMetadata.named("SEQ").withIndex(14).ofType(Types.DECIMAL).withSize(20));
         addMetadata(stato, ColumnMetadata.named("STATO").withIndex(2).ofType(Types.VARCHAR).withSize(20));
     }
 

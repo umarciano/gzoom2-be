@@ -44,13 +44,15 @@ public class ReportJobService {
     private final ReportActivityDao reportDao;
     private final ObjectMapper objectMapper;
     private final ReportTaskService taskService;
+    private final JasperReportTaskService jasperTaskService;
     private final BirtConfig config;
 
     @Autowired
-    public ReportJobService(ReportActivityDao reportDao, ObjectMapper objectMapper, ReportTaskService taskService, BirtConfig config) {
+    public ReportJobService(ReportActivityDao reportDao, ObjectMapper objectMapper, ReportTaskService taskService,JasperReportTaskService jasperTaskService,  BirtConfig config) {
         this.reportDao = reportDao;
         this.objectMapper = objectMapper;
         this.taskService = taskService;
+        this.jasperTaskService = jasperTaskService;
         this.config = config;
     }
 
@@ -64,7 +66,16 @@ public class ReportJobService {
     	//TODO aggiugo oda
     	report.getParams().put("odaDialect", config.getOdaDialect());
         ReportActivity record = save(report);
-        taskService.addToQueue(new ReportTaskInfo(record.getActivityId()));
+        boolean isJasperReport = false;
+        if(report.getContentTypeId().equalsIgnoreCase("JREPORT")){
+            isJasperReport = true;
+        }
+        if(isJasperReport){
+            jasperTaskService.addToQueue(new JasperReportTaskInfo(record.getActivityId()));
+        }
+        else{
+            taskService.addToQueue(new ReportTaskInfo(record.getActivityId()));
+        }
         return record.getActivityId();
     }
 

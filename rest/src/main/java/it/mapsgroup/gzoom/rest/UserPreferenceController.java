@@ -43,4 +43,9 @@ public class UserPreferenceController {
         return Exec.exec("user-preference", () -> userPreferenceService.updateUserPreference(userPreference));
     }
 
+    @RequestMapping(value = "/user-preference/default-portal-page", method = RequestMethod.GET)
+    @ResponseBody
+    public String getDefaultPortalPage() {
+        return Exec.exec("Default Portal Page", () -> userPreferenceService.getDefaultPortalPage());
+    }
 }

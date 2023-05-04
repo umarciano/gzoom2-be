@@ -2,7 +2,6 @@ package it.mapsgroup.gzoom;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import it.mapsgroup.gzoom.ofbiz.client.OfBizClientConfig;
 import it.mapsgroup.gzoom.ofbiz.client.impl.AuthenticationOfBizClientImpl;
 import it.mapsgroup.gzoom.ofbiz.service.ChangePasswordServiceOfBiz;
@@ -10,16 +9,13 @@ import it.mapsgroup.gzoom.ofbiz.service.LoginServiceOfBiz;
 import it.mapsgroup.gzoom.ofbiz.service.VersionServiceOfBiz;
 import it.mapsgroup.gzoom.ofbiz.client.impl.VersionOfBizClientImpl;
 import it.mapsgroup.gzoom.security.*;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -143,23 +139,19 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
         http.logout().disable();
         http.exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint);
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/logout", "/login").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/profile/i18n", "/reminder-period", "/reminder-expiry", "/user-preference-na/VISUAL_THEME", "/node/configuration/*", "/node/version/*", "/node/logo/*/*", "/party/partiesExposed").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/logout", "/login","/api/getToken","/api/doLogout").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/profile/i18n/*", "/reminder-period", "/reminder-expiry", "/user-preference-na/VISUAL_THEME", "/node/configuration/*", "/node/version/*", "/node/logo/*/*", "/party/partiesExposed","/api/getLoginMethod","/api/getOneLogin-LoginUrl","/api/getOneLogin-LogoutUrl").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/api/getToken").permitAll();
         http.authorizeRequests().antMatchers("/**").authenticated();
-
         JwtLoginFilter jwtLoginFilter = new JwtLoginFilter(authenticationManager, objectMapper);
         http.addFilterBefore(jwtLoginFilter, BasicAuthenticationFilter.class);
-
         JwtLogoutFilter jwtLogoutFilter = new JwtLogoutFilter(restAuthenticationEntryPoint, permitsStorage, objectMapper);
         http.addFilterBefore(jwtLogoutFilter, LogoutFilter.class);
-
         JwtTokenFilter jwtTokenFilter = new JwtTokenFilter(authenticationManager, restAuthenticationEntryPoint, objectMapper);
-        RequestMatcher profile = new AntPathRequestMatcher("/profile/i18n");
+        RequestMatcher profile = new AntPathRequestMatcher("/profile/i18n/*");
         RequestMatcher logout = new AntPathRequestMatcher("/logout");
         RequestMatcher login = new AntPathRequestMatcher("/login");
         RequestMatcher partiesExposed = new AntPathRequestMatcher("/party/partiesExposed");
-
         RequestMatcher reminderPeriod = new AntPathRequestMatcher("/reminder-period"); //TODO
         RequestMatcher reminderExipry = new AntPathRequestMatcher("/reminder-expiry"); //TODO
         RequestMatcher userPreferenceNA = new AntPathRequestMatcher("/user-preference-na/VISUAL_THEME");
@@ -167,12 +159,8 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
         RequestMatcher configuration = new AntPathRequestMatcher("/node/configuration/*");
         RequestMatcher version = new AntPathRequestMatcher("/node/version/*");
         RequestMatcher logo = new AntPathRequestMatcher("/node/logo/*/*");
-
         RequestMatcher ignoredRequests = new OrRequestMatcher(profile, logout, login, reminderPeriod, reminderExipry, userPreferenceNA, configuration, version, logo, partiesExposed);
-
-        http.antMatcher("/**")
-                .addFilterAfter(new DelegateRequestMatchingFilter(ignoredRequests, jwtTokenFilter), JwtLogoutFilter.class);
-
-
+        //RequestMatcher ignoredRequests = new OrRequestMatcher(profile, logout, login, reminderPeriod, reminderExipry, userPreferenceNA, configuration, logo, partiesExposed);
+        http.antMatcher("/**").addFilterAfter(new DelegateRequestMatchingFilter(ignoredRequests, jwtTokenFilter), JwtLogoutFilter.class);
     }
 }

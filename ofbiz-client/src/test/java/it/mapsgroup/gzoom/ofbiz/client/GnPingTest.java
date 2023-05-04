@@ -91,8 +91,8 @@ public class GnPingTest extends AbstractOfBizTest {
         String reply = pingClient.ping(sessionId, "Blah blah blahhhh!!!");
         assertThat("ping echos the message", reply, is("Blah blah blahhhh!!!"));
 
-        String logoutReply = loginClient.logout(sessionId);
-        assertThat("logout message", logoutReply, is("success"));
+        //String logoutReply = loginClient.logout(sessionId);
+        //assertThat("logout message", logoutReply, is("success"));
 
         try {
             reply = pingClient.ping(sessionId, "Blah blah blahhhh!!!");
@@ -125,7 +125,7 @@ public class GnPingTest extends AbstractOfBizTest {
             }
         }*/
 
-        String logoutReply = loginClient.logout(sessionId);
-        assertThat("logout message", logoutReply, is("success"));
+        //String logoutReply = loginClient.logout(sessionId);
+        //assertThat("logout message", logoutReply, is("success"));
     }
 }

@@ -44,7 +44,9 @@ public class QWorkEffortAnalysis extends com.querydsl.sql.RelationalPathBase<Wor
 
     public final StringPath description5 = createString("description5");
 
-    public final BooleanPath excludeValidity = createBoolean("excludeValidity");
+    public final StringPath descriptionLang = createString("descriptionLang");
+
+    public final StringPath excludeValidity = createString("excludeValidity");
 
     public final BooleanPath isMonitor = createBoolean("isMonitor");
 
@@ -158,28 +160,6 @@ public class QWorkEffortAnalysis extends com.querydsl.sql.RelationalPathBase<Wor
 
     public final com.querydsl.sql.PrimaryKey<WorkEffortAnalysis> primary = createPrimaryKey(workEffortAnalysisId);
 
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> weaWet4Fk = createForeignKey(workEffortTypeIdSez4, "WORK_EFFORT_TYPE_ID");
-
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> weaWet3Fk = createForeignKey(workEffortTypeIdSez3, "WORK_EFFORT_TYPE_ID");
-
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> weaWet2Fk = createForeignKey(workEffortTypeIdSez2, "WORK_EFFORT_TYPE_ID");
-
-    public final com.querydsl.sql.ForeignKey<WorkEffort> weaWeFk = createForeignKey(workEffortId, "WORK_EFFORT_ID");
-
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> weaWet5Fk = createForeignKey(workEffortTypeIdSez5, "WORK_EFFORT_TYPE_ID");
-
-    public final com.querydsl.sql.ForeignKey<Content> weaCntFk = createForeignKey(reportId, "CONTENT_ID");
-
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> weaWet1Fk = createForeignKey(workEffortTypeIdSez1, "WORK_EFFORT_TYPE_ID");
-
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> weaWetFk = createForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID");
-
-    public final com.querydsl.sql.ForeignKey<WorkEffortType> weaWet6Fk = createForeignKey(workEffortTypeIdSez6, "WORK_EFFORT_TYPE_ID");
-
-    public final com.querydsl.sql.ForeignKey<Enumeration> weaEnaFk = createForeignKey(availabilityId, "ENUM_ID");
-
-    public final com.querydsl.sql.ForeignKey<Enumeration> weaEnvFk = createForeignKey(dataVisibility, "ENUM_ID");
-
     public QWorkEffortAnalysis(String variable) {
         super(WorkEffortAnalysis.class, forVariable(variable), "null", "WORK_EFFORT_ANALYSIS");
         addMetadata();
@@ -216,6 +196,7 @@ public class QWorkEffortAnalysis extends com.querydsl.sql.RelationalPathBase<Wor
         addMetadata(description3, ColumnMetadata.named("DESCRIPTION3").withIndex(59).ofType(Types.VARCHAR).withSize(255));
         addMetadata(description4, ColumnMetadata.named("DESCRIPTION4").withIndex(60).ofType(Types.VARCHAR).withSize(255));
         addMetadata(description5, ColumnMetadata.named("DESCRIPTION5").withIndex(61).ofType(Types.VARCHAR).withSize(255));
+        addMetadata(descriptionLang, ColumnMetadata.named("DESCRIPTION_LANG").withIndex(67).ofType(Types.VARCHAR).withSize(255));
         addMetadata(excludeValidity, ColumnMetadata.named("EXCLUDE_VALIDITY").withIndex(62).ofType(Types.CHAR).withSize(1));
         addMetadata(isMonitor, ColumnMetadata.named("IS_MONITOR").withIndex(7).ofType(Types.CHAR).withSize(1));
         addMetadata(labelM1Prev, ColumnMetadata.named("LABEL_M1_PREV").withIndex(27).ofType(Types.VARCHAR).withSize(255));

@@ -42,6 +42,36 @@ public class QPersonInterface extends com.querydsl.sql.RelationalPathBase<Person
 
     public final StringPath contactMobile = createString("contactMobile");
 
+    public final DateTimePath<java.time.LocalDateTime> customDate01 = createDateTime("customDate01", java.time.LocalDateTime.class);
+
+    public final DateTimePath<java.time.LocalDateTime> customDate02 = createDateTime("customDate02", java.time.LocalDateTime.class);
+
+    public final DateTimePath<java.time.LocalDateTime> customDate03 = createDateTime("customDate03", java.time.LocalDateTime.class);
+
+    public final DateTimePath<java.time.LocalDateTime> customDate04 = createDateTime("customDate04", java.time.LocalDateTime.class);
+
+    public final DateTimePath<java.time.LocalDateTime> customDate05 = createDateTime("customDate05", java.time.LocalDateTime.class);
+
+    public final StringPath customText01 = createString("customText01");
+
+    public final StringPath customText02 = createString("customText02");
+
+    public final StringPath customText03 = createString("customText03");
+
+    public final StringPath customText04 = createString("customText04");
+
+    public final StringPath customText05 = createString("customText05");
+
+    public final NumberPath<java.math.BigDecimal> customValue01 = createNumber("customValue01", java.math.BigDecimal.class);
+
+    public final NumberPath<java.math.BigDecimal> customValue02 = createNumber("customValue02", java.math.BigDecimal.class);
+
+    public final NumberPath<java.math.BigDecimal> customValue03 = createNumber("customValue03", java.math.BigDecimal.class);
+
+    public final NumberPath<java.math.BigDecimal> customValue04 = createNumber("customValue04", java.math.BigDecimal.class);
+
+    public final NumberPath<java.math.BigDecimal> customValue05 = createNumber("customValue05", java.math.BigDecimal.class);
+
     public final StringPath dataSource = createString("dataSource");
 
     public final StringPath description = createString("description");
@@ -92,6 +122,8 @@ public class QPersonInterface extends com.querydsl.sql.RelationalPathBase<Person
 
     public final DateTimePath<java.time.LocalDateTime> refDate = createDateTime("refDate", java.time.LocalDateTime.class);
 
+    public final NumberPath<java.math.BigInteger> seq = createNumber("seq", java.math.BigInteger.class);
+
     public final StringPath stato = createString("stato");
 
     public final DateTimePath<java.time.LocalDateTime> thruDate = createDateTime("thruDate", java.time.LocalDateTime.class);
@@ -139,6 +171,21 @@ public class QPersonInterface extends com.querydsl.sql.RelationalPathBase<Person
         addMetadata(comments, ColumnMetadata.named("COMMENTS").withIndex(14).ofType(Types.VARCHAR).withSize(255));
         addMetadata(contactMail, ColumnMetadata.named("CONTACT_MAIL").withIndex(25).ofType(Types.VARCHAR).withSize(255));
         addMetadata(contactMobile, ColumnMetadata.named("CONTACT_MOBILE").withIndex(26).ofType(Types.VARCHAR).withSize(60));
+        addMetadata(customDate01, ColumnMetadata.named("CUSTOM_DATE01").withIndex(45).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(customDate02, ColumnMetadata.named("CUSTOM_DATE02").withIndex(46).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(customDate03, ColumnMetadata.named("CUSTOM_DATE03").withIndex(47).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(customDate04, ColumnMetadata.named("CUSTOM_DATE04").withIndex(48).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(customDate05, ColumnMetadata.named("CUSTOM_DATE05").withIndex(49).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(customText01, ColumnMetadata.named("CUSTOM_TEXT01").withIndex(40).ofType(Types.VARCHAR).withSize(255));
+        addMetadata(customText02, ColumnMetadata.named("CUSTOM_TEXT02").withIndex(41).ofType(Types.VARCHAR).withSize(255));
+        addMetadata(customText03, ColumnMetadata.named("CUSTOM_TEXT03").withIndex(42).ofType(Types.VARCHAR).withSize(255));
+        addMetadata(customText04, ColumnMetadata.named("CUSTOM_TEXT04").withIndex(43).ofType(Types.VARCHAR).withSize(255));
+        addMetadata(customText05, ColumnMetadata.named("CUSTOM_TEXT05").withIndex(44).ofType(Types.VARCHAR).withSize(255));
+        addMetadata(customValue01, ColumnMetadata.named("CUSTOM_VALUE01").withIndex(50).ofType(Types.DECIMAL).withSize(18).withDigits(6));
+        addMetadata(customValue02, ColumnMetadata.named("CUSTOM_VALUE02").withIndex(51).ofType(Types.DECIMAL).withSize(18).withDigits(6));
+        addMetadata(customValue03, ColumnMetadata.named("CUSTOM_VALUE03").withIndex(52).ofType(Types.DECIMAL).withSize(18).withDigits(6));
+        addMetadata(customValue04, ColumnMetadata.named("CUSTOM_VALUE04").withIndex(53).ofType(Types.DECIMAL).withSize(18).withDigits(6));
+        addMetadata(customValue05, ColumnMetadata.named("CUSTOM_VALUE05").withIndex(54).ofType(Types.DECIMAL).withSize(18).withDigits(6));
         addMetadata(dataSource, ColumnMetadata.named("DATA_SOURCE").withIndex(3).ofType(Types.VARCHAR).withSize(20));
         addMetadata(description, ColumnMetadata.named("DESCRIPTION").withIndex(15).ofType(Types.VARCHAR).withSize(255));
         addMetadata(employmentAmount, ColumnMetadata.named("EMPLOYMENT_AMOUNT").withIndex(8).ofType(Types.DECIMAL).withSize(18).withDigits(2));
@@ -164,6 +211,7 @@ public class QPersonInterface extends com.querydsl.sql.RelationalPathBase<Person
         addMetadata(qualifCode, ColumnMetadata.named("QUALIF_CODE").withIndex(10).ofType(Types.VARCHAR).withSize(20));
         addMetadata(qualifFromDate, ColumnMetadata.named("QUALIF_FROM_DATE").withIndex(11).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(refDate, ColumnMetadata.named("REF_DATE").withIndex(4).ofType(Types.TIMESTAMP).withSize(26).notNull());
+        addMetadata(seq, ColumnMetadata.named("SEQ").withIndex(55).ofType(Types.DECIMAL).withSize(20));
         addMetadata(stato, ColumnMetadata.named("STATO").withIndex(2).ofType(Types.VARCHAR).withSize(20));
         addMetadata(thruDate, ColumnMetadata.named("THRU_DATE").withIndex(17).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(userLoginId, ColumnMetadata.named("USER_LOGIN_ID").withIndex(27).ofType(Types.VARCHAR).withSize(250));

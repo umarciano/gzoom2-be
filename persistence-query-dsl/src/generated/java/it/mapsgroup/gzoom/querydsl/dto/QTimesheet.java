@@ -1,15 +1,14 @@
 package it.mapsgroup.gzoom.querydsl.dto;
 
-import static com.querydsl.core.types.PathMetadataFactory.*;
-
-import com.querydsl.core.types.dsl.*;
-
-import com.querydsl.core.types.PathMetadata;
-import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
-
+import com.querydsl.core.types.PathMetadata;
+import com.querydsl.core.types.dsl.*;
 import com.querydsl.sql.ColumnMetadata;
+
+import javax.annotation.Generated;
 import java.sql.Types;
+
+import static com.querydsl.core.types.PathMetadataFactory.forVariable;
 
 
 
@@ -38,6 +37,8 @@ public class QTimesheet extends com.querydsl.sql.RelationalPathBase<Timesheet> {
 
     public final DateTimePath<java.time.LocalDateTime> createdTxStamp = createDateTime("createdTxStamp", java.time.LocalDateTime.class);
 
+    public final StringPath effortUomId = createString("effortUomId");
+
     public final DateTimePath<java.time.LocalDateTime> fromDate = createDateTime("fromDate", java.time.LocalDateTime.class);
 
     public final DateTimePath<java.time.LocalDateTime> lastUpdatedStamp = createDateTime("lastUpdatedStamp", java.time.LocalDateTime.class);
@@ -54,17 +55,25 @@ public class QTimesheet extends com.querydsl.sql.RelationalPathBase<Timesheet> {
 
     public final BooleanPath transferFlag = createBoolean("transferFlag");
 
+    public final StringPath workEffortTypePeriodId = createString("workEffortTypePeriodId");
+
     public final com.querydsl.sql.PrimaryKey<Timesheet> primary = createPrimaryKey(timesheetId);
+
+    public final com.querydsl.sql.ForeignKey<Party> timesheetCpty = createForeignKey(clientPartyId, "PARTY_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortTypePeriod> timesheetPeriod = createForeignKey(workEffortTypePeriodId, "WORK_EFFORT_TYPE_PERIOD_ID");
+
+    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> timesheetAbUl = createForeignKey(approvedByUserLoginId, "USER_LOGIN_ID");
+
+    public final com.querydsl.sql.ForeignKey<Uom> timesheetUom = createForeignKey(effortUomId, "UOM_ID");
 
     public final com.querydsl.sql.ForeignKey<StatusItem> timesheetSts = createForeignKey(statusId, "STATUS_ID");
 
     public final com.querydsl.sql.ForeignKey<Party> timesheetPrty = createForeignKey(partyId, "PARTY_ID");
 
-    public final com.querydsl.sql.ForeignKey<Party> timesheetCpty = createForeignKey(clientPartyId, "PARTY_ID");
-
-    public final com.querydsl.sql.ForeignKey<UserLoginPersistent> timesheetAbUl = createForeignKey(approvedByUserLoginId, "USER_LOGIN_ID");
-
     public final com.querydsl.sql.ForeignKey<TimeEntry> _timeEntTsht = createInvForeignKey(timesheetId, "TIMESHEET_ID");
+
+    public final StringPath updatable = createString("updatable");
 
     public QTimesheet(String variable) {
         super(Timesheet.class, forVariable(variable), "null", "TIMESHEET");
@@ -99,6 +108,7 @@ public class QTimesheet extends com.querydsl.sql.RelationalPathBase<Timesheet> {
         addMetadata(contractHours, ColumnMetadata.named("CONTRACT_HOURS").withIndex(14).ofType(Types.DECIMAL).withSize(18).withDigits(6));
         addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(11).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(12).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(effortUomId, ColumnMetadata.named("EFFORT_UOM_ID").withIndex(17).ofType(Types.VARCHAR).withSize(20));
         addMetadata(fromDate, ColumnMetadata.named("FROM_DATE").withIndex(4).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(9).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(10).ofType(Types.TIMESTAMP).withSize(26));
@@ -107,6 +117,7 @@ public class QTimesheet extends com.querydsl.sql.RelationalPathBase<Timesheet> {
         addMetadata(thruDate, ColumnMetadata.named("THRU_DATE").withIndex(5).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(timesheetId, ColumnMetadata.named("TIMESHEET_ID").withIndex(1).ofType(Types.VARCHAR).withSize(20).notNull());
         addMetadata(transferFlag, ColumnMetadata.named("TRANSFER_FLAG").withIndex(13).ofType(Types.CHAR).withSize(1));
+        addMetadata(workEffortTypePeriodId, ColumnMetadata.named("WORK_EFFORT_TYPE_PERIOD_ID").withIndex(16).ofType(Types.VARCHAR).withSize(20));
     }
 
 }

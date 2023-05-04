@@ -65,4 +65,10 @@ public class ProfileController {
     public Permissions getUserPermission() {
         return Exec.exec("user-permission", () -> profileService.getUserPermission());
     }
+
+    @RequestMapping(value = "/profile/organization-multi-type", method = RequestMethod.GET)
+    @ResponseBody
+    public String getOranizationMultiType() {
+        return Exec.exec("get-organization-multi-type", () -> profileService.getOrganizationMultiType());
+    }
 }

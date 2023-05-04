@@ -28,6 +28,8 @@ public class QWorkEffortAssoc extends com.querydsl.sql.RelationalPathBase<WorkEf
 
     public final StringPath comments = createString("comments");
 
+    public final StringPath commentsLang = createString("commentsLang");
+
     public final StringPath createdByUserLogin = createString("createdByUserLogin");
 
     public final DateTimePath<java.time.LocalDateTime> createdStamp = createDateTime("createdStamp", java.time.LocalDateTime.class);
@@ -64,11 +66,11 @@ public class QWorkEffortAssoc extends com.querydsl.sql.RelationalPathBase<WorkEf
 
     public final com.querydsl.sql.PrimaryKey<WorkEffortAssoc> primary = createPrimaryKey(fromDate, workEffortAssocTypeId, workEffortIdFrom, workEffortIdTo);
 
+    public final com.querydsl.sql.ForeignKey<WorkEffortRevision> wkassRev = createForeignKey(workEffortRevisionId, "WORK_EFFORT_REVISION_ID");
+
     public final com.querydsl.sql.ForeignKey<WorkEffort> wkEffrtasscTwe = createForeignKey(workEffortIdTo, "WORK_EFFORT_ID");
 
     public final com.querydsl.sql.ForeignKey<WorkEffort> wkEffrtasscFwe = createForeignKey(workEffortIdFrom, "WORK_EFFORT_ID");
-
-    public final com.querydsl.sql.ForeignKey<WorkEffortRevision> wkassRev = createForeignKey(workEffortRevisionId, "WORK_EFFORT_REVISION_ID");
 
     public QWorkEffortAssoc(String variable) {
         super(WorkEffortAssoc.class, forVariable(variable), "null", "WORK_EFFORT_ASSOC");
@@ -98,12 +100,13 @@ public class QWorkEffortAssoc extends com.querydsl.sql.RelationalPathBase<WorkEf
     public void addMetadata() {
         addMetadata(assocWeight, ColumnMetadata.named("ASSOC_WEIGHT").withIndex(11).ofType(Types.DECIMAL).withSize(18).withDigits(6));
         addMetadata(comments, ColumnMetadata.named("COMMENTS").withIndex(12).ofType(Types.VARCHAR).withSize(2000));
-        addMetadata(createdByUserLogin, ColumnMetadata.named("CREATED_BY_USER_LOGIN").withIndex(18).ofType(Types.VARCHAR).withSize(250));
+        addMetadata(commentsLang, ColumnMetadata.named("COMMENTS_LANG").withIndex(18).ofType(Types.VARCHAR).withSize(2000));
+        addMetadata(createdByUserLogin, ColumnMetadata.named("CREATED_BY_USER_LOGIN").withIndex(20).ofType(Types.VARCHAR).withSize(250));
         addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(9).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(10).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(fromDate, ColumnMetadata.named("FROM_DATE").withIndex(5).ofType(Types.TIMESTAMP).withSize(26).notNull());
         addMetadata(isPosted, ColumnMetadata.named("IS_POSTED").withIndex(14).ofType(Types.CHAR).withSize(1));
-        addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(17).ofType(Types.VARCHAR).withSize(250));
+        addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(19).ofType(Types.VARCHAR).withSize(250));
         addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(7).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(8).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(note, ColumnMetadata.named("NOTE").withIndex(13).ofType(Types.VARCHAR).withSize(2000));
@@ -114,7 +117,7 @@ public class QWorkEffortAssoc extends com.querydsl.sql.RelationalPathBase<WorkEf
         addMetadata(workEffortAssocTypeId, ColumnMetadata.named("WORK_EFFORT_ASSOC_TYPE_ID").withIndex(3).ofType(Types.VARCHAR).withSize(20).notNull());
         addMetadata(workEffortIdFrom, ColumnMetadata.named("WORK_EFFORT_ID_FROM").withIndex(1).ofType(Types.VARCHAR).withSize(20).notNull());
         addMetadata(workEffortIdTo, ColumnMetadata.named("WORK_EFFORT_ID_TO").withIndex(2).ofType(Types.VARCHAR).withSize(20).notNull());
-        addMetadata(workEffortRevisionId, ColumnMetadata.named("WORK_EFFORT_REVISION_ID").withIndex(19).ofType(Types.VARCHAR).withSize(20));
+        addMetadata(workEffortRevisionId, ColumnMetadata.named("WORK_EFFORT_REVISION_ID").withIndex(17).ofType(Types.VARCHAR).withSize(20));
     }
 
 }

@@ -20,10 +20,12 @@ import it.mapsgroup.gzoom.querydsl.dto.SecurityPermission;
 public class ProfileService {
 
     private final PermissionDao permissionDao;
+    private final Configuration config;
 
     @Autowired
-    public ProfileService(PermissionDao permissionDao) {
+    public ProfileService(PermissionDao permissionDao,Configuration config) {
         this.permissionDao = permissionDao;
+        this.config = config;
     }
 
     public Permissions getUserPermission() {
@@ -46,5 +48,9 @@ public class ProfileService {
             });
         }
         return permissions;
+    }
+
+    public String getOrganizationMultiType() {
+        return config.getOrganizationMultiType();
     }
 }

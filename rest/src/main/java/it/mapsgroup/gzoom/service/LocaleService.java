@@ -40,12 +40,21 @@ public class LocaleService {
         if(user!=null) {
             UserLogin profile = userLoginDao.getUserLogin(user);
             if (profile!=null && profile.getLastLocale()!=null && !profile.getLastLocale().equals("")){
-                String [] locale = profile.getLastLocale().split("_");
-                return new Locale(locale[0],locale[1]);
+                return getLocation(user);
             }
         }
 
         return header != null ? req.getLocale() : null;
+    }
+
+    public Locale getLocation (String user) {
+        UserLogin profile = userLoginDao.getUserLogin(user);
+        if (profile!=null && profile.getLastLocale()!=null && !profile.getLastLocale().equals("")){
+            String [] locale = profile.getLastLocale().split("_");
+            return new Locale(locale[0],locale[1]);
+        }
+
+        return null;
     }
 
     public Localization getLocalization(Locale locale) {

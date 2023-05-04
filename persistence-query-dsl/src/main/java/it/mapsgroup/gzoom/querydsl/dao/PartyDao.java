@@ -3,7 +3,7 @@ package it.mapsgroup.gzoom.querydsl.dao;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.group.GroupBy;
-import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.QBean;
 import com.querydsl.sql.SQLBindings;
@@ -11,8 +11,6 @@ import com.querydsl.sql.SQLQuery;
 import com.querydsl.sql.SQLQueryFactory;
 import it.mapsgroup.gzoom.persistence.common.SequenceGenerator;
 import it.mapsgroup.gzoom.querydsl.dto.*;
-import it.mapsgroup.gzoom.querydsl.service.PermissionService;
-import it.mapsgroup.gzoom.querydsl.util.ContextPermissionPrefixEnum;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +20,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import static com.querydsl.core.types.Projections.bean;
 import static com.querydsl.core.types.Projections.tuple;
 import static it.mapsgroup.gzoom.querydsl.QBeanUtils.merge;
 import static org.slf4j.LoggerFactory.getLogger;
-
 /**
  * @author Andrea Fossi.
  */
@@ -40,12 +38,16 @@ public class PartyDao extends AbstractDao {
     private final SequenceGenerator sequenceGenerator;
     private final SQLQueryFactory queryFactory;
     private final FilterPermissionDao filterPermissionDao;
+    private final WorkEffortTypeContentDao workEffortTypeContentDao;
+    private final UserLoginDao userLoginDao;
     
     @Autowired
-    public PartyDao(SequenceGenerator sequenceGenerator, SQLQueryFactory queryFactory, FilterPermissionDao filterPermissionDao) {
+    public PartyDao(SequenceGenerator sequenceGenerator, SQLQueryFactory queryFactory, FilterPermissionDao filterPermissionDao, WorkEffortTypeContentDao workEffortTypeContentDao, UserLoginDao userLoginDao) {
         this.sequenceGenerator = sequenceGenerator;
         this.queryFactory = queryFactory;
         this.filterPermissionDao = filterPermissionDao;
+        this.workEffortTypeContentDao = workEffortTypeContentDao;
+        this.userLoginDao = userLoginDao;
     }
 
     @Transactional
@@ -59,6 +61,27 @@ public class PartyDao extends AbstractDao {
         LOG.debug("created records: {}", i);
 
         return i > 0;
+    }
+
+    @Transactional
+    public Party findByPartyId(String id) {
+        if (TransactionSynchronizationManager.isActualTransactionActive()) {
+            TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
+            status.getClass();
+        }
+        QParty qParty = QParty.party;
+
+        SQLQuery<Party> pSQLQuery = queryFactory.select(qParty)
+                .from(qParty)
+                .where(qParty.partyId.eq(id));
+
+        SQLBindings bindings = pSQLQuery.getSQL();
+        LOG.info("{}", bindings.getSQL());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
+        QBean<Party> party = Projections.bean(Party.class, qParty.all());
+        List<Party> ret = pSQLQuery.transform(GroupBy.groupBy(qParty.partyId).list(party));
+
+        return ret.isEmpty() ? null : ret.get(0);
     }
 
     /**
@@ -154,6 +177,7 @@ public class PartyDao extends AbstractDao {
 
         QParty qParty = QParty.party;
         QPartyRole qPartyRole = QPartyRole.partyRole;
+        QPartyRole qUO = QPartyRole.partyRole;
         QPartyRelationship qPartyRelationship = QPartyRelationship.partyRelationship;
         QWorkEffortType qWorkEffortType = QWorkEffortType.workEffortType;
 
@@ -162,7 +186,7 @@ public class PartyDao extends AbstractDao {
             builder.and(qPartyRelationship.roleTypeIdFrom.in(roleTypeIdFromArray));
         } else if (workEffortTypeId!=null && checkPartyRole(workEffortTypeId).size()>0) {
             builder.and(
-                    qPartyRole.roleTypeId.in(queryFactory.select(qWorkEffortType.orgUnitRoleTypeId).from(qWorkEffortType).where(qWorkEffortType.workEffortTypeId.eq(workEffortTypeId)))
+                    qUO.roleTypeId.in(queryFactory.select(qWorkEffortType.orgUnitRoleTypeId).from(qWorkEffortType).where(qWorkEffortType.workEffortTypeId.eq(workEffortTypeId)))
                     .or(qPartyRole.roleTypeId.in(queryFactory.select(qWorkEffortType.orgUnitRoleTypeId2).from(qWorkEffortType).where(qWorkEffortType.workEffortTypeId.eq(workEffortTypeId)))
                     .or(qPartyRole.roleTypeId.in(queryFactory.select(qWorkEffortType.orgUnitRoleTypeId3).from(qWorkEffortType).where(qWorkEffortType.workEffortTypeId.eq(workEffortTypeId)))
                     )));
@@ -173,9 +197,11 @@ public class PartyDao extends AbstractDao {
         							.innerJoin(qPartyRole).on(qPartyRole.partyId.eq(qParty.partyId))
         							.where(qParty.partyTypeId.eq("PERSON")
                                         .and(qPartyRole.roleTypeId.eq(roleTypeId))
+
                                         .and(qParty.partyId.in(
                                                 queryFactory.select(qPartyRelationship.partyIdTo)
                                                         .from(qPartyRelationship)
+                                                        .innerJoin(qUO).on(qUO.partyId.eq(qPartyRelationship.partyIdFrom))
                                                         .where(builder.and(qPartyRelationship.partyRelationshipTypeId.eq("ORG_RESPONSIBLE")
                                                         )))))
         							.orderBy(qParty.partyName.asc());
@@ -219,7 +245,7 @@ public class PartyDao extends AbstractDao {
      */
     
     @Transactional
-    public List<PartyEx> getOrgUnits(String userLoginId, String parentTypeId, String roleTypeId, String workEffortTypeId) {
+    public List<PartyEx> getOrgUnits(String userLoginId, String parentTypeId, String roleTypeId, String workEffortTypeId, String company, List<String> languages) {
     	 if (TransactionSynchronizationManager.isActualTransactionActive()) {
              TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
              status.getClass();
@@ -246,14 +272,28 @@ public class PartyDao extends AbstractDao {
                              )));
          }
 
+         String orderUoBy = "MAINCODE";
+         OrderSpecifier orderSpecifier = qPartyParentRole.parentRoleCode.asc();
+         Map<String, String> paramsMap = workEffortTypeContentDao.getWorkEffortTypeContentParams(parentTypeId, "WEFLD_MAIN");
+         if (paramsMap != null && paramsMap.size() > 0 && paramsMap.get("orderUoBy") != null) {
+             orderUoBy = (String) paramsMap.get("orderUoBy");
+         }
+         if ("EXTCODE".equals(orderUoBy)) {
+             orderSpecifier = qParty.externalId.asc();
+         }
+         if ("UONAME".equals(orderUoBy)) {
+             orderSpecifier = isLanguageLang(userLoginId, languages) ? qParty.partyNameLang.asc() : qParty.partyName.asc();
+         }
+
          SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qParty, qPartyParentRole)
   				.from(qPartyRole)
   				.innerJoin(qParty).on(qParty.partyId.eq(qPartyRole.partyId)) 
   				.innerJoin(qPartyParentRole).on(qPartyParentRole.partyId.eq(qParty.partyId)) 
   				.where(builder.and(qPartyRole.parentRoleTypeId.eq("ORGANIZATION_UNIT"))
-  					.and(qParty.statusId.eq("PARTY_ENABLED")))
+  					.and(qParty.statusId.eq("PARTY_ENABLED"))
+                    .and(qPartyParentRole.organizationId.eq(company)))
 
-                 .orderBy(qPartyParentRole.parentRoleCode.asc());
+                 .orderBy(orderSpecifier);
                 // .groupBy(qParty.partyId);
          
          
@@ -299,6 +339,18 @@ public class PartyDao extends AbstractDao {
         LOG.info("size = {}", ret.size());
         return ret;
     }
-    
+
+    private boolean isLanguageLang(String userLoginId, List<String> languages) {
+        boolean languageLang = false;
+        if (languages != null && languages.size() > 1) {
+            UserLogin profile = userLoginDao.getUserLogin(userLoginId);
+            if (profile != null && profile.getLastLocale() != null && !profile.getLastLocale().equals("")){
+                String [] localeStr = profile.getLastLocale().split("_");
+                Locale locale = new Locale(localeStr[0],localeStr[1]);
+                languageLang = locale != null && locale.toString().equals(languages.get(1));
+            }
+        }
+        return languageLang;
+    }
 
 }

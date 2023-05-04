@@ -28,6 +28,9 @@ public class WorkEffortTypeContent implements AbstractIdentity {
     @Column("ETCH_LANG")
     private String etchLang;
 
+    @Column("IS_MANDATORY")
+    private Boolean isMandatory;
+
     @Column("IS_VISIBLE")
     private Boolean isVisible;
 
@@ -107,6 +110,14 @@ public class WorkEffortTypeContent implements AbstractIdentity {
 
     public void setEtchLang(String etchLang) {
         this.etchLang = etchLang;
+    }
+
+    public Boolean getIsMandatory() {
+        return isMandatory;
+    }
+
+    public void setIsMandatory(Boolean isMandatory) {
+        this.isMandatory = isMandatory;
     }
 
     public Boolean getIsVisible() {

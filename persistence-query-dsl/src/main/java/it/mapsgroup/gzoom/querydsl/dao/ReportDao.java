@@ -1,5 +1,6 @@
 package it.mapsgroup.gzoom.querydsl.dao;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.group.GroupBy;
 import com.querydsl.core.types.Projections;
@@ -7,23 +8,22 @@ import com.querydsl.core.types.QBean;
 import com.querydsl.sql.SQLBindings;
 import com.querydsl.sql.SQLQuery;
 import com.querydsl.sql.SQLQueryFactory;
-
 import it.mapsgroup.gzoom.querydsl.dto.*;
-
+import it.mapsgroup.gzoom.querydsl.service.PermissionService;
+import it.mapsgroup.gzoom.querydsl.util.ContextPermissionPrefixEnum;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
-
 import static com.querydsl.core.types.Projections.bean;
 import static it.mapsgroup.gzoom.querydsl.QBeanUtils.merge;
-
 import static org.slf4j.LoggerFactory.getLogger;
-
 import java.util.List;
+
 
 /**
  */
@@ -32,10 +32,12 @@ public class ReportDao extends AbstractDao {
     private static final Logger LOG = getLogger(ReportDao.class);
 
     private final SQLQueryFactory queryFactory;
-    
+    private final PermissionService permissionService;
+
     @Autowired
-    public ReportDao(SQLQueryFactory queryFactory) {
+    public ReportDao(SQLQueryFactory queryFactory,PermissionService permissionService) {
         this.queryFactory = queryFactory;
+        this.permissionService = permissionService;
     }
 
     @Transactional
@@ -90,7 +92,17 @@ public class ReportDao extends AbstractDao {
                         bean(WorkEffortTypeContent.class, qWorkEffortTypeContent.all()).as("workEffortTypeContent"),
                         bean(DataResource.class, qDataResource.all()).as("dataResource")
                         ));
-        
+
+
+        String permission = ContextPermissionPrefixEnum.getPermissionPrefix(parentTypeId);
+        UserLogin ul = (UserLogin) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        boolean isFullAdmin = permissionService.isFullAdmin(ul.getUserLoginId(), permission);
+        BooleanBuilder builder = new BooleanBuilder();
+        if(!isFullAdmin){
+            builder.and(qWorkEffortTypeContent.onlyAdmin.isFalse());
+        }
+
+
         
         SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qContent, qWorkEffortType, qWorkEffortTypeContent, qDataResource)
         				.from(qWorkEffortType)
@@ -101,7 +113,8 @@ public class ReportDao extends AbstractDao {
                         .innerJoin(qDataResource).on(qDataResource.dataResourceId.eq(qContent.dataResourceId))
         				.where(qContentAssoc.contentId.eq("WE_PRINT")
         				.and(qWorkEffortType.parentTypeId.eq(parentTypeId))
-        				.and(qWorkEffortTypeContent.isVisible.eq(true)))
+        				.and(qWorkEffortTypeContent.isVisible.eq(true))
+                        .and(builder))
                         .orderBy(qWorkEffortTypeContent.sequenceNum.asc());
                       //  .groupBy(qContent.contentId, qWorkEffortTypeContent.etch, qContent.description);
         
@@ -138,8 +151,6 @@ public class ReportDao extends AbstractDao {
                         bean(WorkEffortTypeContent.class, qWorkEffortTypeContent.all()).as("workEffortTypeContent"),
                         bean(DataResource.class, qDataResource.all()).as("dataResource")
                         ));
-        
-        
         SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qContent, qWorkEffortType, qWorkEffortTypeContent)
         				.from(qWorkEffortType)
         				.innerJoin(qWorkEffortTypeContent).on(qWorkEffortType.workEffortTypeId.eq(qWorkEffortTypeContent.workEffortTypeId)) 
@@ -148,16 +159,57 @@ public class ReportDao extends AbstractDao {
         				.where(qContent.contentId.eq(reportContentId)
         						.and(qWorkEffortType.parentTypeId.eq(parentTypeId))
                                 .and(workEffortTypeId!=null && !workEffortTypeId.equals("")? qWorkEffortTypeContent.workEffortTypeId.eq(workEffortTypeId): qWorkEffortTypeContent.workEffortTypeId.isNotNull()))
-                        .orderBy(qWorkEffortTypeContent.sequenceNum.asc());
-        
-        
+                .orderBy(qWorkEffortTypeContent.sequenceNum.asc());
         SQLBindings bindings = tupleSQLQuery.getSQL();
         LOG.info("{}", bindings.getSQL());
         LOG.info("{}", bindings.getNullFriendlyBindings());
         List<Report> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContent.contentId).list(reportQBean));
         return ret.isEmpty() ? null : ret.get(0);
     }
-    
+
+    @Transactional
+    public List<Report> getReportsByWorkEffortTypeId(String workEffortTypeId) {
+        if (TransactionSynchronizationManager.isActualTransactionActive()) {
+            TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
+            status.getClass();
+        }
+
+        QContent qContent = QContent.content;
+        QContentAssoc qContentAssoc = QContentAssoc.contentAssoc;
+        QWorkEffortType qWorkEffortType = QWorkEffortType.workEffortType;
+        QWorkEffortTypeContent qWorkEffortTypeContent = QWorkEffortTypeContent.workEffortTypeContent;
+        QDataResource qDataResource = QDataResource.dataResource;
+
+        QBean<Report> reportQBean = bean(Report.class,
+                merge(qContent.all(),
+                        bean(WorkEffortType.class, qWorkEffortType.all()).as("workEffortType"),
+                        bean(WorkEffortTypeContent.class, qWorkEffortTypeContent.all()).as("workEffortTypeContent"),
+                        bean(DataResource.class, qDataResource.all()).as("dataResource")
+                ));
+
+
+        SQLQuery<Tuple> tupleSQLQuery = queryFactory.select(qContent, qWorkEffortType, qWorkEffortTypeContent, qDataResource)
+                .from(qWorkEffortType)
+                .innerJoin(qWorkEffortTypeContent).on(qWorkEffortType.workEffortTypeId.eq(qWorkEffortTypeContent.workEffortTypeId))
+                .innerJoin(qContent).on(qWorkEffortTypeContent.contentId.eq(qContent.contentId))
+                .innerJoin(qContentAssoc).on(qContentAssoc.contentIdTo.eq(qContent.contentId).
+                        and(qContentAssoc.contentAssocTypeId.eq("REP_PERM")))
+                .innerJoin(qDataResource).on(qDataResource.dataResourceId.eq(qContent.dataResourceId))
+                .where(qContentAssoc.contentId.eq("WE_PRINT")
+                        .and(qWorkEffortType.workEffortTypeId.eq(workEffortTypeId)))
+                       // .and(qWorkEffortTypeContent.isVisible.eq(true))) Da pulsante stampe devono vedersi sempre tutte anche se non visibili GN-4489
+                .orderBy(qWorkEffortTypeContent.sequenceNum.asc());
+        //  .groupBy(qContent.contentId, qWorkEffortTypeContent.etch, qContent.description);
+
+
+        SQLBindings bindings = tupleSQLQuery.getSQL();
+        LOG.info("{}", bindings.getSQL());
+        LOG.info("{}", bindings.getNullFriendlyBindings());
+        List<Report> ret = tupleSQLQuery.transform(GroupBy.groupBy(qContent.contentId, qWorkEffortTypeContent.etch, qContent.description, qWorkEffortTypeContent.workEffortTypeId).list(reportQBean));
+        LOG.info("size = {}", ret.size());
+        return ret;
+    }
+
     @Transactional
     public List<ReportType> getReportType(String reportContentId) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
@@ -340,5 +392,5 @@ public class ReportDao extends AbstractDao {
         LOG.info("size = {}", ret.size()); 
         return ret;
     }
-    
+
  }

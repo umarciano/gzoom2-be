@@ -1,69 +1,68 @@
 package it.mapsgroup.gzoom.rest;
 
 import it.mapsgroup.gzoom.common.Exec;
-import it.mapsgroup.gzoom.model.Activity;
 import it.mapsgroup.gzoom.model.Result;
 import it.mapsgroup.gzoom.model.TimeEntry;
-import it.mapsgroup.gzoom.model.Timesheet;
 import it.mapsgroup.gzoom.querydsl.dto.TimeEntryEx;
+import it.mapsgroup.gzoom.querydsl.dto.TimesheetEx;
+import it.mapsgroup.gzoom.querydsl.dto.WorkEffort;
 import it.mapsgroup.gzoom.service.TimeEntryService;
 import it.mapsgroup.gzoom.service.TimesheetService;
+import it.mapsgroup.gzoom.service.UserPreferenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static it.mapsgroup.gzoom.security.Principals.principal;
+
 /**
  */
 @RestController
-@RequestMapping(value = "", produces = { MediaType.APPLICATION_JSON_VALUE })
+@RequestMapping(value = "time-entry", produces = { MediaType.APPLICATION_JSON_VALUE })
 public class TimeEntryController {
 
     private final TimesheetService timesheetService;
     private final TimeEntryService timeEntryService;
+    private final UserPreferenceService userPreferenceService;
 
 
     @Autowired
-    public TimeEntryController(TimesheetService timesheetService, TimeEntryService timeEntryService) {
+    public TimeEntryController(TimesheetService timesheetService, TimeEntryService timeEntryService, UserPreferenceService userPreferenceService) {
         this.timesheetService = timesheetService;
         this.timeEntryService = timeEntryService;
+        this.userPreferenceService = userPreferenceService;
     }
 
-    @RequestMapping(value = "timesheet/time-entry", method = RequestMethod.GET)
+    @RequestMapping(value = "/time-entry-timesheet/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Result<Timesheet> getTimesheets() {
-        return Exec.exec("timesheet/timesheet get", () -> timesheetService.getTimesheets());
+    public Result<TimesheetEx> getTimesheet(@PathVariable(value = "id") String id) {
+        return Exec.exec("timesheet get", () -> timeEntryService.getTimesheet(id,principal().getUserLoginId()));
     }
 
-    @RequestMapping(value = "timesheet/time-entry/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/time-entry/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Result<TimeEntry> getTimeEntries(@PathVariable(value = "id") String id){
-        return Exec.exec("timesheet/time-entry get", () -> timeEntryService.getTimeEntries(id));
+    public Result<TimeEntryEx> getTimeEntries(@PathVariable(value = "id") String id){
+        return Exec.exec("time-entry get", () -> timeEntryService.getTimeEntries(id));
     }
 
-    @RequestMapping(value = "timesheet/time-entry-work-efforts/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/time-entry-work-efforts/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Result<Activity> getWorkEfforts(@PathVariable(value = "id") String id) {
+    public Result<WorkEffort> getWorkEfforts(@PathVariable(value = "id") String id) {
         return Exec.exec("timesheet/time-entry-workefforts get", () -> timeEntryService.getWorkEfforts(id));
     }
 
-    @RequestMapping(value = "timesheet/time-entry-create-or-update" , method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.PUT)
     @ResponseBody
-    public String createTimeEntry(@RequestBody List<TimeEntry> reqList) {
-        return Exec.exec( "timesheet/time-entry post", () -> timeEntryService.createOrUpdateTimeEntry(reqList));
+    public Boolean updateTimeEntry(@RequestBody List<TimeEntry> array) {
+        return Exec.exec("time-entry put", () -> timeEntryService.updateTimeEntry(array));
     }
 
-    /*@RequestMapping(value = "timesheet/time-entry-update/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{timeEntrys}", method = RequestMethod.DELETE)
     @ResponseBody
-    public String updateTimeEntry(@PathVariable(value = "id") String id, @RequestBody TimeEntry req) {
-        return Exec.exec("timesheet/time-entry put", () -> timeEntryService.updateTimeEntry(id, req));
-    }*/
-
-    @RequestMapping(value = "timesheet/time-entry-delete/{id}", method = RequestMethod.DELETE)
-    @ResponseBody
-    public String deleteTimeEntry(@PathVariable(value = "id") String id) {
-        return Exec.exec("timesheet/time-entry delete", () -> timeEntryService.deleteTimeEntry(id));
+    public Boolean deleteTimeEntry(@PathVariable(value = "timeEntrys") String[] timeEntrys) {
+        return Exec.exec("time-entry delete", () -> timeEntryService.deleteTimeEntry(timeEntrys));
     }
 
 }

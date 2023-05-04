@@ -8,6 +8,7 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 
+import com.querydsl.sql.Column;
 import com.querydsl.sql.ColumnMetadata;
 import java.sql.Types;
 
@@ -72,11 +73,10 @@ public class QQueryConfig extends com.querydsl.sql.RelationalPathBase<QueryConfi
 
     public final StringPath cond7Name = createString("cond7Name");
 
-    public final StringPath cond8Comm = createString("cond8Comm");
+    public final StringPath exportMimeType = createString("exportMimeType");
 
-    public final StringPath cond8Info = createString("cond8Info");
+    public final StringPath queryColumnsFormaParam = createString("queryColumnsFormaParam");
 
-    public final StringPath cond8Name = createString("cond8Name");
 
     public final DateTimePath<java.time.LocalDateTime> createdStamp = createDateTime("createdStamp", java.time.LocalDateTime.class);
 
@@ -156,13 +156,11 @@ public class QQueryConfig extends com.querydsl.sql.RelationalPathBase<QueryConfi
         addMetadata(cond7Comm, ColumnMetadata.named("COND7_COMM").withIndex(32).ofType(Types.VARCHAR).withSize(255));
         addMetadata(cond7Info, ColumnMetadata.named("COND7_INFO").withIndex(33).ofType(Types.VARCHAR).withSize(2000));
         addMetadata(cond7Name, ColumnMetadata.named("COND7_NAME").withIndex(31).ofType(Types.VARCHAR).withSize(100));
-        addMetadata(cond8Comm, ColumnMetadata.named("COND8_COMM").withIndex(35).ofType(Types.VARCHAR).withSize(255));
-        addMetadata(cond8Info, ColumnMetadata.named("COND8_INFO").withIndex(36).ofType(Types.VARCHAR).withSize(2000));
-        addMetadata(cond8Name, ColumnMetadata.named("COND8_NAME").withIndex(34).ofType(Types.VARCHAR).withSize(100));
-        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(39).ofType(Types.TIMESTAMP).withSize(26));
-        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(40).ofType(Types.TIMESTAMP).withSize(26));
-        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(37).ofType(Types.TIMESTAMP).withSize(26));
-        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(38).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(exportMimeType, ColumnMetadata.named("EXPORT_MIME_TYPE").withIndex(38).ofType(Types.VARCHAR).withSize(255));
+        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(36).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(37).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(34).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(35).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(queryActive, ColumnMetadata.named("QUERY_ACTIVE").withIndex(8).ofType(Types.CHAR).withSize(1));
         addMetadata(queryCode, ColumnMetadata.named("QUERY_CODE").withIndex(2).ofType(Types.VARCHAR).withSize(20));
         addMetadata(queryComm, ColumnMetadata.named("QUERY_COMM").withIndex(4).ofType(Types.VARCHAR).withSize(255));
@@ -172,7 +170,7 @@ public class QQueryConfig extends com.querydsl.sql.RelationalPathBase<QueryConfi
         addMetadata(queryName, ColumnMetadata.named("QUERY_NAME").withIndex(3).ofType(Types.VARCHAR).withSize(255));
         addMetadata(queryPublic, ColumnMetadata.named("QUERY_PUBLIC").withIndex(7).ofType(Types.CHAR).withSize(1));
         addMetadata(queryType, ColumnMetadata.named("QUERY_TYPE").withIndex(5).ofType(Types.CHAR).withSize(1));
+        addMetadata(queryColumnsFormaParam, ColumnMetadata.named("QUERY_COLUMNS_FORMAT_PARAM").withIndex(9).ofType(Types.LONGVARCHAR).withSize(2147483647));
     }
-
 }
 

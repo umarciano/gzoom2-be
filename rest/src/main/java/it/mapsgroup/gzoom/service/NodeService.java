@@ -1,8 +1,6 @@
 package it.mapsgroup.gzoom.service;
 
-import it.mapsgroup.commons.collect.Tuple2;
-import it.mapsgroup.gzoom.model.NodeConfiguration;
-import it.mapsgroup.gzoom.ofbiz.service.ChangePasswordServiceOfBiz;
+import it.mapsgroup.gzoom.commons.collect.Tuple2;
 import it.mapsgroup.gzoom.ofbiz.service.VersionServiceOfBiz;
 import it.mapsgroup.gzoom.querydsl.dao.PartyNoteDao;
 import it.mapsgroup.gzoom.querydsl.dao.PartyContentDao;

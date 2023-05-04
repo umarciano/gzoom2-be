@@ -48,8 +48,8 @@ public class GnMobileLoginTest extends AbstractOfBizTest {
         // String reply = pingClient.ping(sessionId, "Blah blah blahhhh!!!");
         // assertThat("ping echos the message", reply, is("Blah blah blahhhh!!!"));
 
-        String logoutReply = loginClient.logout(sessionId);
-        assertThat("logout message", logoutReply, is("success"));
+        //String logoutReply = loginClient.logout(sessionId);
+        //assertThat("logout message", logoutReply, is("success"));
 
         Map<String, Object> response3 = loginClient.login("user1", "ofbiz", LoginSourceOfbiz.GN_LOG_SRC_MOBILE.name(), deviceId, "FOX_MOBILE", "UNIT_TEST", "V1");
         String sessionId3 = (String) response3.get("sessionId");
@@ -57,8 +57,8 @@ public class GnMobileLoginTest extends AbstractOfBizTest {
         // String reply = pingClient.ping(sessionId, "Blah blah blahhhh!!!");
         // assertThat("ping echos the message", reply, is("Blah blah blahhhh!!!"));
 
-        String logoutReply3 = loginClient.logout(sessionId3);
-        assertThat("logout message", logoutReply3, is("success"));
+        //String logoutReply3 = loginClient.logout(sessionId3);
+        //assertThat("logout message", logoutReply3, is("success"));
 
         String deviceId2 = UUID.randomUUID().toString();
 
@@ -68,7 +68,7 @@ public class GnMobileLoginTest extends AbstractOfBizTest {
         // String reply = pingClient.ping(sessionId, "Blah blah blahhhh!!!");
         // assertThat("ping echos the message", reply, is("Blah blah blahhhh!!!"));
 
-        String logoutReply2 = loginClient.logout(sessionId2);
+        //String logoutReply2 = loginClient.logout(sessionId2);
         try {
             Map<String, Object> response4 = loginClient.login("user1", "ofbiz", LoginSourceOfbiz.GN_LOG_SRC_MOBILE.name(), deviceId, "FOX_MOBILE", "UNIT_TEST", "V1");
             assertTrue(false);

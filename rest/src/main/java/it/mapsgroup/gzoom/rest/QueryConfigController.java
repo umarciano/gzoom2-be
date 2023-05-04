@@ -9,6 +9,7 @@ import it.mapsgroup.gzoom.service.QueryExecutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import static it.mapsgroup.gzoom.security.Principals.principal;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,14 +30,14 @@ public class QueryConfigController {
     @RequestMapping(value = "query-config/all", method = RequestMethod.GET)
     @ResponseBody
     public Result<QueryConfig> getAllQueryConfig() {
-        return Exec.exec("get query-config",() -> queryConfigService.getAllQueryConfig(null,null));
+        return Exec.exec("get query-config",() -> queryConfigService.getAllQueryConfig(null,null, principal().getUserLoginId()));
     }
 
     @RequestMapping(value = "query-config/all/{parentTypeId}/{queryType}", method = RequestMethod.GET)
     @ResponseBody
     public Result<QueryConfig> getAllQueryConfigWithParent(@PathVariable(value = "parentTypeId") String parentTypeId,
                                                            @PathVariable(value = "queryType") String queryType) {
-        return Exec.exec("get query-config",() -> queryConfigService.getAllQueryConfig(parentTypeId,queryType));
+        return Exec.exec("get query-config",() -> queryConfigService.getAllQueryConfig(parentTypeId,queryType,principal().getUserLoginId()));
     }
 
     @RequestMapping(value = "query-config/id/{id}", method = RequestMethod.GET)

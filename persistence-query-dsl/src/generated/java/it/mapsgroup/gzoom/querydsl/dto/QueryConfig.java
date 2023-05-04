@@ -82,15 +82,6 @@ public class QueryConfig implements AbstractIdentity {
     @Column("COND7_NAME")
     private String cond7Name;
 
-    @Column("COND8_COMM")
-    private String cond8Comm;
-
-    @Column("COND8_INFO")
-    private String cond8Info;
-
-    @Column("COND8_NAME")
-    private String cond8Name;
-
     @Column("CREATED_STAMP")
     private java.time.LocalDateTime createdStamp;
 
@@ -129,6 +120,20 @@ public class QueryConfig implements AbstractIdentity {
 
     @Column("QUERY_TYPE")
     private String queryType;
+
+    @Column("EXPORT_MIME_TYPE")
+    private String exportMimeType;
+
+    @Column("QUERY_COLUMNS_FORMAT_PARAM")
+    private String queryColumnsFormaParam;
+
+    public String getQueryColumnsFormaParam() {
+        return queryColumnsFormaParam;
+    }
+
+    public void setQueryColumnsFormaParam(String queryColumnsFormaParam) {
+        this.queryColumnsFormaParam = queryColumnsFormaParam;
+    }
 
     public String getCond0Comm() {
         return cond0Comm;
@@ -322,30 +327,6 @@ public class QueryConfig implements AbstractIdentity {
         this.cond7Name = cond7Name;
     }
 
-    public String getCond8Comm() {
-        return cond8Comm;
-    }
-
-    public void setCond8Comm(String cond8Comm) {
-        this.cond8Comm = cond8Comm;
-    }
-
-    public String getCond8Info() {
-        return cond8Info;
-    }
-
-    public void setCond8Info(String cond8Info) {
-        this.cond8Info = cond8Info;
-    }
-
-    public String getCond8Name() {
-        return cond8Name;
-    }
-
-    public void setCond8Name(String cond8Name) {
-        this.cond8Name = cond8Name;
-    }
-
     public java.time.LocalDateTime getCreatedStamp() {
         return createdStamp;
     }
@@ -449,6 +430,15 @@ public class QueryConfig implements AbstractIdentity {
     public void setQueryType(String queryType) {
         this.queryType = queryType;
     }
+
+    public String getExportMimeType() {
+        return exportMimeType;
+    }
+
+    public void setExportMimeType(String exportMimeType) {
+        this.exportMimeType = exportMimeType;
+    }
+
 
 }
 

@@ -29,6 +29,12 @@ public class ReportController {
         this.reminderService = reminderService;
     }
 
+    @RequestMapping(value = "report/workEffortTypeId/{workEffortTypeId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Result<Report> getReportsByWorkEffortTypeId(@PathVariable(value = "workEffortTypeId") String workEffortTypeId) {
+        return Exec.exec("report get", () -> reportService.getReportsByWorkEffortTypeId(workEffortTypeId));
+    }
+
     @RequestMapping(value = "report/{parentTypeId}", method = RequestMethod.GET)
     @ResponseBody
     public Result<Report> getReports(@PathVariable(value = "parentTypeId") String parentTypeId) {

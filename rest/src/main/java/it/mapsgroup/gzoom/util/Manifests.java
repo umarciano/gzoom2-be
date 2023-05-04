@@ -1,6 +1,6 @@
 package it.mapsgroup.gzoom.util;
 
-import it.mapsgroup.commons.collect.Tuple2;
+import it.mapsgroup.gzoom.commons.collect.Tuple2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

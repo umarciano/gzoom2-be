@@ -1,6 +1,6 @@
 package it.mapsgroup.gzoom.common;
 
-import it.mapsgroup.commons.error.TrySupplier;
+import it.mapsgroup.gzoom.commons.error.TrySupplier;
 import it.mapsgroup.gzoom.rest.InternalServerException;
 import it.mapsgroup.gzoom.rest.ValidationException;
 import it.mapsgroup.gzoom.security.Principals;

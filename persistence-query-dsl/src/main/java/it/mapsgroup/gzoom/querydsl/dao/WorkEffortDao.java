@@ -97,12 +97,14 @@ public class WorkEffortDao extends AbstractDao {
 		SQLQuery<WorkEffort> tupleSQLQuery = queryFactory.select(qWorkEffort)
 				.from(qWorkEffort)
 				.innerJoin(qWorkEffortType).on(qWorkEffortType.workEffortTypeId.eq(qWorkEffort.workEffortTypeId))
+
 				.where(//qWorkEffort.workEffortTypeId.like(workEffortTypeId)
 						builder
 						//.and(qWorkEffortType.isRoot.eq(true))//TODO creare un metodo o modificare il metodo per gestire il Root
 						.and(qWorkEffortType.parentTypeId.like("CTX%"))
-						.and(qWorkEffort.workEffortRevisionId.isNull()))  //TODO prendo solo quelli non storicizzati!!!!
-			//	.groupBy(qWorkEffort.workEffortId)
+						.and(qWorkEffort.workEffortRevisionId.isNull())  //TODO prendo solo quelli non storicizzati!!!!
+						.and(qWorkEffort.organizationId.eq(this.permissionService.userPrefereceOrganizationUnitId(userLoginId))))
+		//	.groupBy(qWorkEffort.workEffortId)
 				.orderBy(qWorkEffortType.seqEsp.asc(), qWorkEffort.sourceReferenceId.asc(), qWorkEffort.workEffortName.asc(), qWorkEffortType.description.asc());
 
 		// se ho uno dei permessi uso la lista filtrata di elementi
@@ -138,8 +140,11 @@ public class WorkEffortDao extends AbstractDao {
 					.leftJoin(qPartyRelationshipE).on(
 							qPartyRelationshipE.roleTypeIdFrom.eq(qWorkEffort.orgUnitRoleTypeId)
 								.and(qPartyRelationshipE.partyIdFrom.eq(qWorkEffort.orgUnitId))
-								.and(qPartyRelationshipE.partyRelationshipTypeId.in("ORG_RESPONSIBLE", "ORG_DELEGATE"))
-								.and(qPartyRelationshipE.fromDate.loe(qWorkEffort.estimatedCompletionDate))
+								.and(qPartyRelationshipE.partyRelationshipTypeId.eq("ORG_RESPONSIBLE")
+										.or((qPartyRelationshipE.partyRelationshipTypeId.eq("ORG_DELEGATE").and(
+												qPartyRelationshipE.ctxEnabled.isNull().or(qPartyRelationshipE.ctxEnabled.like('%' + parentTypeId + '%'))
+										)))
+								).and(qPartyRelationshipE.fromDate.loe(qWorkEffort.estimatedCompletionDate))
 								.and(qPartyRelationshipE.thruDate.isNull().or(qPartyRelationshipE.thruDate.goe(qWorkEffort.estimatedCompletionDate)))							
 								.and(qPartyRelationshipE.partyIdTo.eq(qUserLogin.partyId))) 
 					
@@ -153,8 +158,11 @@ public class WorkEffortDao extends AbstractDao {
 					.leftJoin(qPartyRelationshipY).on(
 							qPartyRelationshipY.roleTypeIdFrom.eq(qPartyRelationshipZ.roleTypeIdFrom)
 								.and(qPartyRelationshipY.partyIdFrom.eq(qPartyRelationshipZ.partyIdFrom))
-								.and(qPartyRelationshipY.partyRelationshipTypeId.in("ORG_RESPONSIBLE", "ORG_DELEGATE"))
-								.and(qPartyRelationshipY.fromDate.loe(qWorkEffort.estimatedCompletionDate))
+								.and(qPartyRelationshipY.partyRelationshipTypeId.eq("ORG_RESPONSIBLE")
+									.or((qPartyRelationshipY.partyRelationshipTypeId.eq("ORG_DELEGATE").and(
+											qPartyRelationshipY.ctxEnabled.isNull().or(qPartyRelationshipY.ctxEnabled.like('%' + parentTypeId + '%'))
+									)))
+								).and(qPartyRelationshipY.fromDate.loe(qWorkEffort.estimatedCompletionDate))
 								.and(qPartyRelationshipY.thruDate.isNull().or(qPartyRelationshipY.thruDate.goe(qWorkEffort.estimatedCompletionDate)))
 								.and(qPartyRelationshipY.partyIdTo.eq(qUserLogin.partyId))) 
 				
@@ -169,8 +177,11 @@ public class WorkEffortDao extends AbstractDao {
 					.leftJoin(qPartyRelationshipY2).on(
 							qPartyRelationshipY2.roleTypeIdFrom.eq(qPartyRelationshipZ2.roleTypeIdFrom)
 								.and(qPartyRelationshipY2.partyIdFrom.eq(qPartyRelationshipZ2.partyIdFrom))
-								.and(qPartyRelationshipY2.partyRelationshipTypeId.in("ORG_RESPONSIBLE", "ORG_DELEGATE"))
-								.and(qPartyRelationshipY2.fromDate.loe(qWorkEffort.estimatedCompletionDate))
+									.and(qPartyRelationshipY2.partyRelationshipTypeId.eq("ORG_RESPONSIBLE")
+											.or((qPartyRelationshipY2.partyRelationshipTypeId.eq("ORG_DELEGATE").and(
+													qPartyRelationshipY2.ctxEnabled.isNull().or(qPartyRelationshipY2.ctxEnabled.like('%' + parentTypeId + '%'))
+											)))
+									).and(qPartyRelationshipY2.fromDate.loe(qWorkEffort.estimatedCompletionDate))
 								.and(qPartyRelationshipY2.thruDate.isNull().or(qPartyRelationshipY2.thruDate.goe(qWorkEffort.estimatedCompletionDate)))
 								.and(qPartyRelationshipY2.partyIdTo.eq(qUserLogin.partyId)))
 					
@@ -182,7 +193,7 @@ public class WorkEffortDao extends AbstractDao {
 					
 					.innerJoin(qParty).on(qParty.partyId.eq(qWorkEffort.orgUnitId))
 					.innerJoin(qPartyParentRole).on(qPartyParentRole.partyId.eq(qParty.partyId)
-							.and(qPartyParentRole.roleTypeId.eq("ORGANIZATION_UNIT"))); 
+							.and(qPartyParentRole.roleTypeId.eq("ORGANIZATION_UNIT")));
 					
 			List<Predicate> predicates = new ArrayList<>();
 

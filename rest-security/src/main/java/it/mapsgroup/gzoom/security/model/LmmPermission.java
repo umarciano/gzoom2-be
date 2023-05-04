@@ -12,7 +12,7 @@ import java.util.Set;
 import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Iterables.transform;
 import static com.google.common.collect.Sets.newEnumSet;
-import static it.mapsgroup.commons.Enums.parseMap;
+import static it.mapsgroup.gzoom.commons.Enums.parseMap;
 
 /**
  * Bond permissions.

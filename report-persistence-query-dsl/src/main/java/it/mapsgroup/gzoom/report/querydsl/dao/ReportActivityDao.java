@@ -14,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+import static java.time.LocalDateTime.now;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
@@ -67,6 +69,8 @@ public class ReportActivityDao extends AbstractDao {
             query.set(qReportActivity.error, error);
         if (StringUtils.isNotEmpty(objectInfo))
             query.set(qReportActivity.objectInfo, objectInfo);
+        if (ReportActivityStatus.DONE.equals(dest))
+            query.set(qReportActivity.completedStamp, now());
         query.set(qReportActivity.status, dest);
         query.where(qReportActivity.activityId.eq(id)
                 .and(qReportActivity.status.eq(src)));

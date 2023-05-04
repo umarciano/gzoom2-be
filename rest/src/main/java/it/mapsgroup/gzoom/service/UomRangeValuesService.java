@@ -3,11 +3,13 @@ package it.mapsgroup.gzoom.service;
 import it.mapsgroup.gzoom.model.Result;
 import it.mapsgroup.gzoom.querydsl.dao.UomRangeValuesDao;
 import it.mapsgroup.gzoom.querydsl.dto.UomRangeValues;
+import it.mapsgroup.gzoom.querydsl.dto.UomRangeValuesExt;
 import it.mapsgroup.gzoom.rest.UomRangeValuesController;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -26,6 +28,20 @@ public class UomRangeValuesService {
 
     public Result<UomRangeValues> getUomRangeValues(String uomRangeId) {
         List<UomRangeValues> list = uomRangeValuesDao.getUomRangeValues(uomRangeId);
+        return new Result<>(list, list.size());
+    }
+
+    public Result<BigDecimal> getUomRangeValuesMax(String uomRangeId) {
+        List<BigDecimal> list = uomRangeValuesDao.getUomRangeValuesMax(uomRangeId);
+        return new Result<>(list, list.size());
+    }
+
+    public BigDecimal getUomRangeValuesMin(String uomRangeId){
+        return uomRangeValuesDao.getUomRangeValuesMin(uomRangeId);
+    }
+
+    public Result<UomRangeValuesExt> getPathEmoticon(String rangeDefault, Float amount) {
+        List<UomRangeValuesExt> list = uomRangeValuesDao.getPathEmoticon(rangeDefault, amount);
         return new Result<>(list, list.size());
     }
 }

@@ -1,7 +1,7 @@
 package it.mapsgroup.gzoom.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import it.mapsgroup.commons.error.TrySupplier;
+import it.mapsgroup.gzoom.commons.error.TrySupplier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;

@@ -9,4 +9,10 @@
         <property name="maxPoolSize" value="5"/>
         <property name="queueCapacity" value="5000"/>
     </bean>
+
+    <bean id="jasperReportTaskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="2"/>
+        <property name="maxPoolSize" value="5"/>
+        <property name="queueCapacity" value="5000"/>
+    </bean>
 </beans>

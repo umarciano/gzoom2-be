@@ -3,7 +3,7 @@ package it.mapsgroup.gzoom.security.model;
 
 import com.google.common.collect.ImmutableMap;
 
-import static it.mapsgroup.commons.Enums.parseMap;
+import static it.mapsgroup.gzoom.commons.Enums.parseMap;
 
 /**
  * @author Andrea Fossi.

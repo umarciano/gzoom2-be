@@ -52,7 +52,7 @@ public class UserLoginDao {
                 .from(qUserLogin)
                 .innerJoin(qUserLogin.userParty, qParty)
                 .innerJoin(qParty._personParty, qPerson)
-                .where(qUserLogin.userLoginId.eq(username))
+                .where(qUserLogin.userLoginId.toLowerCase().eq(username.toLowerCase()))
                 .transform(GroupBy.groupBy(qUserLogin.userLoginId)
                         .list(userLoginExQBean));
         return ret.isEmpty() ? null : ret.get(0);

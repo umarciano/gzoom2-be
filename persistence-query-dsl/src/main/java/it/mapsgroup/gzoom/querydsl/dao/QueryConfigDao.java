@@ -9,6 +9,9 @@ import com.querydsl.sql.SQLQueryFactory;
 import it.mapsgroup.gzoom.persistence.common.SequenceGenerator;
 import it.mapsgroup.gzoom.querydsl.dto.QQueryConfig;
 import it.mapsgroup.gzoom.querydsl.dto.QueryConfig;
+import it.mapsgroup.gzoom.querydsl.service.PermissionService;
+
+import it.mapsgroup.gzoom.querydsl.util.ContextPermissionPrefixEnum;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,16 +32,20 @@ public class QueryConfigDao extends AbstractDao {
     private final SequenceGenerator sequenceGenerator;
     private final SQLQueryFactory queryFactory;
     private final FilterPermissionDao filterPermissionDao;
+    private final PermissionService permissionService;
+
 
     @Autowired
-    public QueryConfigDao(SequenceGenerator sequenceGenerator, SQLQueryFactory queryFactory, FilterPermissionDao filterPermissionDao) {
+    public QueryConfigDao(SequenceGenerator sequenceGenerator, SQLQueryFactory queryFactory,
+                          FilterPermissionDao filterPermissionDao, PermissionService permissionService) {
         this.sequenceGenerator = sequenceGenerator;
         this.queryFactory = queryFactory;
         this.filterPermissionDao = filterPermissionDao;
+        this.permissionService = permissionService;
     }
 
     @Transactional
-    public List<QueryConfig> getAllQueryConfig(String parentTypeId,String queryType) {
+    public List<QueryConfig> getAllQueryConfig(String parentTypeId,String queryType, String userLoginId) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             status.getClass();
@@ -51,13 +58,26 @@ public class QueryConfigDao extends AbstractDao {
                 //.where(qEnumeration.enumTypeId.eq(enumTypeId))
                 .orderBy(qQueryConfig.queryId.asc());
 
+
         if(parentTypeId!=null && !parentTypeId.equals("")) {
-            pSQLQuery.where(qQueryConfig.queryCtx.eq(parentTypeId).and(qQueryConfig.queryPublic.eq(true)));
-            if(parentTypeId!=null && queryType.equals("E")) {
-                pSQLQuery.where(qQueryConfig.queryType.eq("E"));
+
+            String permission = ContextPermissionPrefixEnum.getPermissionPrefix(parentTypeId);
+
+            // se ho uno dei permessi uso la lista filtrata di elementi
+            boolean isOrgMgr = permissionService.isOrgMgr(userLoginId, permission);
+            boolean isSup = permissionService.isSup(userLoginId, permission);
+            boolean isTop = permissionService.isTop(userLoginId, permission);
+            boolean isRole = permissionService.isRole(userLoginId, permission);
+
+            pSQLQuery.where(qQueryConfig.queryCtx.eq(parentTypeId));
+
+            //Se non sono un admin/responsabile devo vedere solo le query pubbliche
+            if (isOrgMgr || isSup || isTop) {
+                pSQLQuery.where(qQueryConfig.queryPublic.eq(true));
             }
-            else if(parentTypeId!=null && !queryType.equals("") && !queryType.equals("E")) {
-                pSQLQuery.where(qQueryConfig.queryType.notEqualsIgnoreCase("E"));
+
+            if(queryType!=null) {
+                pSQLQuery.where(qQueryConfig.queryType.eq(queryType));
             }
         }
 

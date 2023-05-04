@@ -20,4 +20,5 @@ public interface AbstractIdentity {
     java.time.LocalDateTime getLastUpdatedTxStamp();
 
     void setLastUpdatedTxStamp(java.time.LocalDateTime lastUpdatedTxStamp);
+
 }

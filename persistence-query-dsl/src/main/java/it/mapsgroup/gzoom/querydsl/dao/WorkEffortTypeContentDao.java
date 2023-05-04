@@ -4,8 +4,13 @@ import static com.querydsl.core.types.Projections.bean;
 import static it.mapsgroup.gzoom.querydsl.QBeanUtils.merge;
 import static org.slf4j.LoggerFactory.getLogger;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+import com.querydsl.core.types.Projections;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,7 +72,7 @@ public class WorkEffortTypeContentDao extends AbstractDao {
 	        					.from(qWorkEffortTypeContent)
 	        					.innerJoin(qWorkEffortType).on(qWorkEffortType.workEffortTypeId.eq(qWorkEffortTypeContent.workEffortTypeId)) 
 	        					.innerJoin(qContent).on(qContent.contentId.eq(qWorkEffortTypeContent.contentId))
-	        					.where(qWorkEffortTypeContent.weTypeContentTypeId.eq("REPORT")
+								.where((qWorkEffortTypeContent.weTypeContentTypeId.eq("REPORT").or(qWorkEffortTypeContent.weTypeContentTypeId.eq("JREPORT")))
 										.and(qWorkEffortTypeContent.isVisible.isTrue())
 										.and(workEffortTypeId!=null && !workEffortTypeId.equals("")? qWorkEffortTypeContent.workEffortTypeId.eq(workEffortTypeId): qWorkEffortTypeContent.workEffortTypeId.isNotNull())
 	        							.and(qWorkEffortTypeContent.contentId.eq(reportContentId))
@@ -81,4 +86,37 @@ public class WorkEffortTypeContentDao extends AbstractDao {
 	        LOG.info("getWorkEffortTypeContents size = {}", ret.size());
 	        return ret;
 	    }
+
+	@Transactional
+	public WorkEffortTypeContent getWorkEffortTypeContent(String workEffortTypeId, String contentId) {
+		if (TransactionSynchronizationManager.isActualTransactionActive()) {
+			TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
+			status.getClass();
+		}
+
+		QWorkEffortTypeContent qWorkEffortTypeContent = QWorkEffortTypeContent.workEffortTypeContent;
+
+		SQLQuery<WorkEffortTypeContent> tupleSQLQuery = queryFactory.select(qWorkEffortTypeContent)
+				.from(qWorkEffortTypeContent)
+				.where(qWorkEffortTypeContent.workEffortTypeId.eq(workEffortTypeId)
+						.and(qWorkEffortTypeContent.contentId.eq(contentId)));
+
+		SQLBindings bindings = tupleSQLQuery.getSQL();
+		LOG.info("{}", bindings.getSQL());
+		LOG.info("{}", bindings.getNullFriendlyBindings());
+
+		QBean<WorkEffortTypeContent> wa = Projections.bean(WorkEffortTypeContent.class, qWorkEffortTypeContent.all());
+		List<WorkEffortTypeContent> ret = tupleSQLQuery.transform(GroupBy.groupBy(qWorkEffortTypeContent.workEffortTypeId).list(wa));
+
+		return ret.isEmpty() ? null : ret.get(0);
+	}
+
+	@Transactional
+	public Map<String, String> getWorkEffortTypeContentParams(String workEffortTypeId, String contentId) {
+		WorkEffortTypeContent workEffortTypeContent = getWorkEffortTypeContent(workEffortTypeId, contentId);
+		if (workEffortTypeContent != null && workEffortTypeContent.getParams() != null && workEffortTypeContent.getParams().length() > 0) {
+            return Arrays.asList(workEffortTypeContent.getParams().split(";")).stream().map(s -> s.split("=")).collect(Collectors.toMap(e -> e[0].trim(), e -> e[1].replaceAll("\"", "")));
+		}
+		return new HashMap<String, String>();
+	}
 }

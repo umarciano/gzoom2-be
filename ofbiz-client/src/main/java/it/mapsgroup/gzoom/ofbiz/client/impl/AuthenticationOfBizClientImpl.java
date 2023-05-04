@@ -44,6 +44,23 @@ public class AuthenticationOfBizClientImpl extends OfBizClient implements Authen
         return result;
     }
 
+
+
+
+    @Override
+    public Map<String, Object> login(String username, String loginSourceId) {
+        Map<String, String> paramMap = new HashMap<String, String>();
+        paramMap.put("login.username", username);
+        //paramMap.put("login.password", "regFrm24334dc7M");
+        Map<String, Object> result = execute("gzSimpleLoginWithOnlyUserLoginId", paramMap);
+        String sessionId = (String) result.get("sessionId");
+        log.debug("Login reply sessionId: {}", sessionId);
+        return result;
+    }
+
+
+
+
     public Map<String, Object> login(String username, String password, String loginSourceId,
                                      String deviceId,String deviceDescription,String appId,String appVersion) {
         Map<String, String> paramMap = new HashMap<String, String>();
@@ -60,17 +77,18 @@ public class AuthenticationOfBizClientImpl extends OfBizClient implements Authen
     /**
      * Logout method.
      *
-     * @param sessionId
+     * @param username
      * @return
      */
     @Override
-    public String logout(String sessionId) {
+    public Map<String, Object> logout(String username, String logoutSourceId) {
         Map<String, String> paramMap = new HashMap<String, String>();
-
-        Map<String, Object> result = execute("gzLogout", sessionId, paramMap);
-        String resp = (String) result.get("result");
-        log.debug("Logout  reply message: {}", resp);
-        return resp;
+        paramMap.put("login.username", username);
+        Map<String, Object> result = execute("gzLogout", username, paramMap);
+        //String resp = (String) result.get("result");
+        //log.debug("Logout  reply message: {}", resp);
+        //return resp;
+        return result;
     }
 
 

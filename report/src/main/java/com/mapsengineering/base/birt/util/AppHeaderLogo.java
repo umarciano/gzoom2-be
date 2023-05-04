@@ -1,6 +1,9 @@
 package com.mapsengineering.base.birt.util;
 
+import it.mapsgroup.gzoom.querydsl.dto.UserPreference;
 import it.mapsgroup.gzoom.service.NodeService;
+import it.mapsgroup.gzoom.service.PartyService;
+import it.mapsgroup.gzoom.service.UserPreferenceService;
 import it.memelabs.smartnebula.spring.boot.config.ApplicationContextProvider;
 import org.slf4j.Logger;
 
@@ -118,5 +121,14 @@ public class AppHeaderLogo {
         }
 */
     }
-
+    public static String getCompany(String userLoginId){
+        String ret = "";
+        UserPreferenceService userPreferenceService = ApplicationContextProvider.getApplicationContext().getBean(UserPreferenceService.class);
+        PartyService partyService = ApplicationContextProvider.getApplicationContext().getBean(PartyService.class);
+        UserPreference up = userPreferenceService.getUserPreference(userLoginId);
+        if(up != null){
+            ret = partyService.getUserPreference(userLoginId,up.getUserPrefValue());
+        }
+        return ret;
+    }
 }

@@ -61,4 +61,14 @@ public class UtilStrings {
     }
 
 
+    public static int convertStringToNumber(String value){
+        int ret = 0;
+        try {
+            ret = Integer.parseInt(value);
+        }catch (NumberFormatException e){
+           return 0;
+        }
+        return ret;
+    }
+
 }

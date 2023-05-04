@@ -1,10 +1,11 @@
 package it.mapsgroup.gzoom.birt;
 
+import it.mapsgroup.gzoom.util.pdf.ConvertPDFtoA3;
+import it.mapsgroup.gzoom.util.pdf.PDFA3Components;
 import org.apache.xmlbeans.impl.common.IOUtil;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -58,13 +59,22 @@ public class BirtService {
         File outputPath = new File(config.getBirtReportOutputDir(), outputFileName + "." + outputFormat);
         try {
             FileOutputStream out = new FileOutputStream(outputPath);
-            //report.getReportContent().writeTo(out);
             IOUtil.copyCompletely(reportHandler.getReportContent(), out);
             reportHandler.close();
+            //GN-5131
+            //Convert BIRT generated pdf to pdf/a and overwrite the related output file
+            if(outputFileName.contains(".pdf")) {
+                PDFA3Components pdfa3Components = new PDFA3Components(outputPath.getPath(),outputPath.getPath());
+                ConvertPDFtoA3 converter = new ConvertPDFtoA3();
+                converter.Convert(pdfa3Components);
+            }
             return outputPath.getPath();
         } catch (IOException e) {
             LOG.error("Cannot save report", e);
             throw new RuntimeException(e);//fixme manage exception
+        } catch (Exception e) {
+            LOG.error("Cannot save report", e);
+            throw new RuntimeException(e);
         }
     }
 

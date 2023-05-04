@@ -62,7 +62,15 @@ public class QRoleType extends com.querydsl.sql.RelationalPathBase<RoleType> {
 
     public final com.querydsl.sql.PrimaryKey<RoleType> primary = createPrimaryKey(roleTypeId);
 
+    public final com.querydsl.sql.ForeignKey<Enumeration> roleTypePe = createForeignKey(workEffortPeriodId, "ENUM_ID");
+
     public final com.querydsl.sql.ForeignKey<RoleType> roleTypePar = createForeignKey(parentTypeId, "ROLE_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> roleTypeWet = createForeignKey(workEffortTypeId, "WORK_EFFORT_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetOuRole3 = createInvForeignKey(roleTypeId, "ORG_UNIT_ROLE_TYPE_ID3");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetOuRole2 = createInvForeignKey(roleTypeId, "ORG_UNIT_ROLE_TYPE_ID2");
 
     public final com.querydsl.sql.ForeignKey<Visit> _visitRoleType = createInvForeignKey(roleTypeId, "ROLE_TYPE_ID");
 
@@ -112,24 +120,24 @@ public class QRoleType extends com.querydsl.sql.RelationalPathBase<RoleType> {
     }
 
     public void addMetadata() {
-        addMetadata(createdByUserLogin, ColumnMetadata.named("CREATED_BY_USER_LOGIN").withIndex(13).ofType(Types.VARCHAR).withSize(250));
+        addMetadata(createdByUserLogin, ColumnMetadata.named("CREATED_BY_USER_LOGIN").withIndex(18).ofType(Types.VARCHAR).withSize(250));
         addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(7).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(8).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(description, ColumnMetadata.named("DESCRIPTION").withIndex(4).ofType(Types.VARCHAR).withSize(255));
-        addMetadata(descriptionLang, ColumnMetadata.named("DESCRIPTION_LANG").withIndex(17).ofType(Types.VARCHAR).withSize(255));
+        addMetadata(descriptionLang, ColumnMetadata.named("DESCRIPTION_LANG").withIndex(15).ofType(Types.VARCHAR).withSize(255));
         addMetadata(hasTable, ColumnMetadata.named("HAS_TABLE").withIndex(3).ofType(Types.CHAR).withSize(1));
         addMetadata(iconContentId, ColumnMetadata.named("ICON_CONTENT_ID").withIndex(10).ofType(Types.VARCHAR).withSize(20));
-        addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(12).ofType(Types.VARCHAR).withSize(250));
+        addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(17).ofType(Types.VARCHAR).withSize(250));
         addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(5).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(6).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(parentTypeId, ColumnMetadata.named("PARENT_TYPE_ID").withIndex(2).ofType(Types.VARCHAR).withSize(20));
         addMetadata(prevPartyTypeId, ColumnMetadata.named("PREV_PARTY_TYPE_ID").withIndex(11).ofType(Types.VARCHAR).withSize(20));
         addMetadata(roleTypeId, ColumnMetadata.named("ROLE_TYPE_ID").withIndex(1).ofType(Types.VARCHAR).withSize(20).notNull());
         addMetadata(shortLabel, ColumnMetadata.named("SHORT_LABEL").withIndex(9).ofType(Types.VARCHAR).withSize(20));
-        addMetadata(shortLabelLang, ColumnMetadata.named("SHORT_LABEL_LANG").withIndex(18).ofType(Types.VARCHAR).withSize(20));
-        addMetadata(workEffortAssocTypeId, ColumnMetadata.named("WORK_EFFORT_ASSOC_TYPE_ID").withIndex(15).ofType(Types.VARCHAR).withSize(20));
-        addMetadata(workEffortPeriodId, ColumnMetadata.named("WORK_EFFORT_PERIOD_ID").withIndex(16).ofType(Types.VARCHAR).withSize(20));
-        addMetadata(workEffortTypeId, ColumnMetadata.named("WORK_EFFORT_TYPE_ID").withIndex(14).ofType(Types.VARCHAR).withSize(20));
+        addMetadata(shortLabelLang, ColumnMetadata.named("SHORT_LABEL_LANG").withIndex(16).ofType(Types.VARCHAR).withSize(20));
+        addMetadata(workEffortAssocTypeId, ColumnMetadata.named("WORK_EFFORT_ASSOC_TYPE_ID").withIndex(13).ofType(Types.VARCHAR).withSize(20));
+        addMetadata(workEffortPeriodId, ColumnMetadata.named("WORK_EFFORT_PERIOD_ID").withIndex(14).ofType(Types.VARCHAR).withSize(20));
+        addMetadata(workEffortTypeId, ColumnMetadata.named("WORK_EFFORT_TYPE_ID").withIndex(12).ofType(Types.VARCHAR).withSize(20));
     }
 
 }

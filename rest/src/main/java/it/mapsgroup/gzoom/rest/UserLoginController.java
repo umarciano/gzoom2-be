@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import it.mapsgroup.gzoom.querydsl.dto.UserLogin;
 import it.mapsgroup.gzoom.service.UserPreferenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -26,7 +27,13 @@ public class UserLoginController {
     public UserLoginController(UserLoginService userLoginService, UserPreferenceService userPreferenceService) {
 	    this.userLoginService = userLoginService;
     }
-	
+
+
+    @RequestMapping(value = "user-login", method = RequestMethod.GET)
+    @ResponseBody
+    public UserLogin getUserLogin() {
+        return Exec.exec("user-login", () -> userLoginService.getUserLogin());
+    }
 
 	@RequestMapping(value = "change-password", method = RequestMethod.POST)
     @ResponseBody

@@ -36,11 +36,11 @@ public class QWorkEffortTypeStatus extends com.querydsl.sql.RelationalPathBase<W
 
     public final StringPath currentStatusId = createString("currentStatusId");
 
-    public final DateTimePath<java.time.LocalDateTime> dataSoll = createDateTime("dataSoll", java.time.LocalDateTime.class);
-
     public final NumberPath<java.math.BigInteger> freqSoll = createNumber("freqSoll", java.math.BigInteger.class);
 
     public final StringPath glFiscalTypeId = createString("glFiscalTypeId");
+
+    public final BooleanPath hasMandatoryAccount = createBoolean("hasMandatoryAccount");
 
     public final BooleanPath hasMandatoryAttr = createBoolean("hasMandatoryAttr");
 
@@ -74,17 +74,17 @@ public class QWorkEffortTypeStatus extends com.querydsl.sql.RelationalPathBase<W
 
     public final com.querydsl.sql.PrimaryKey<WorkEffortTypeStatus> primary = createPrimaryKey(currentStatusId, workEffortTypeRootId);
 
-    public final com.querydsl.sql.ForeignKey<Enumeration> wetsScoreenum = createForeignKey(ctrlScoreEnumId, "ENUM_ID");
-
-    public final com.querydsl.sql.ForeignKey<StatusItem> wetsCurrsi = createForeignKey(currentStatusId, "STATUS_ID");
+    public final com.querydsl.sql.ForeignKey<StatusItem> wetsNextsi = createForeignKey(nextStatusId, "STATUS_ID");
 
     public final com.querydsl.sql.ForeignKey<Enumeration> wetsMantypenum = createForeignKey(managWeStatusEnumId, "ENUM_ID");
 
-    public final com.querydsl.sql.ForeignKey<StatusItem> wetsNextsi = createForeignKey(nextStatusId, "STATUS_ID");
+    public final com.querydsl.sql.ForeignKey<RoleType> wetsMgmrt = createForeignKey(managementRoleTypeId, "ROLE_TYPE_ID");
+
+    public final com.querydsl.sql.ForeignKey<StatusItem> wetsCurrsi = createForeignKey(currentStatusId, "STATUS_ID");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortType> wetsRootwet = createForeignKey(workEffortTypeRootId, "WORK_EFFORT_TYPE_ID");
 
-    public final com.querydsl.sql.ForeignKey<RoleType> wetsMgmrt = createForeignKey(managementRoleTypeId, "ROLE_TYPE_ID");
+    public final com.querydsl.sql.ForeignKey<Enumeration> wetsScoreenum = createForeignKey(ctrlScoreEnumId, "ENUM_ID");
 
     public QWorkEffortTypeStatus(String variable) {
         super(WorkEffortTypeStatus.class, forVariable(variable), "null", "WORK_EFFORT_TYPE_STATUS");
@@ -113,27 +113,27 @@ public class QWorkEffortTypeStatus extends com.querydsl.sql.RelationalPathBase<W
 
     public void addMetadata() {
         addMetadata(checkIsMandatory, ColumnMetadata.named("CHECK_IS_MANDATORY").withIndex(10).ofType(Types.CHAR).withSize(1));
-        addMetadata(createdByUserLogin, ColumnMetadata.named("CREATED_BY_USER_LOGIN").withIndex(12).ofType(Types.VARCHAR).withSize(250));
-        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(15).ofType(Types.TIMESTAMP).withSize(26));
-        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(16).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(createdByUserLogin, ColumnMetadata.named("CREATED_BY_USER_LOGIN").withIndex(20).ofType(Types.VARCHAR).withSize(250));
+        addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(23).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(24).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(ctrlScoreEnumId, ColumnMetadata.named("CTRL_SCORE_ENUM_ID").withIndex(9).ofType(Types.VARCHAR).withSize(20));
         addMetadata(currentStatusId, ColumnMetadata.named("CURRENT_STATUS_ID").withIndex(2).ofType(Types.VARCHAR).withSize(20).notNull());
-        addMetadata(dataSoll, ColumnMetadata.named("DATA_SOLL").withIndex(20).ofType(Types.TIMESTAMP).withSize(26));
-        addMetadata(freqSoll, ColumnMetadata.named("FREQ_SOLL").withIndex(18).ofType(Types.DECIMAL).withSize(20));
+        addMetadata(freqSoll, ColumnMetadata.named("FREQ_SOLL").withIndex(12).ofType(Types.DECIMAL).withSize(20));
         addMetadata(glFiscalTypeId, ColumnMetadata.named("GL_FISCAL_TYPE_ID").withIndex(4).ofType(Types.VARCHAR).withSize(20));
+        addMetadata(hasMandatoryAccount, ColumnMetadata.named("HAS_MANDATORY_ACCOUNT").withIndex(18).ofType(Types.CHAR).withSize(1));
         addMetadata(hasMandatoryAttr, ColumnMetadata.named("HAS_MANDATORY_ATTR").withIndex(7).ofType(Types.CHAR).withSize(1));
-        addMetadata(hasMandatoryRole, ColumnMetadata.named("HAS_MANDATORY_ROLE").withIndex(24).ofType(Types.CHAR).withSize(1));
-        addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(11).ofType(Types.VARCHAR).withSize(250));
-        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(13).ofType(Types.TIMESTAMP).withSize(26));
-        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(14).ofType(Types.TIMESTAMP).withSize(26));
-        addMetadata(latSoll, ColumnMetadata.named("LAT_SOLL").withIndex(19).ofType(Types.DECIMAL).withSize(20));
+        addMetadata(hasMandatoryRole, ColumnMetadata.named("HAS_MANDATORY_ROLE").withIndex(17).ofType(Types.CHAR).withSize(1));
+        addMetadata(lastModifiedByUserLogin, ColumnMetadata.named("LAST_MODIFIED_BY_USER_LOGIN").withIndex(19).ofType(Types.VARCHAR).withSize(250));
+        addMetadata(lastUpdatedStamp, ColumnMetadata.named("LAST_UPDATED_STAMP").withIndex(21).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(lastUpdatedTxStamp, ColumnMetadata.named("LAST_UPDATED_TX_STAMP").withIndex(22).ofType(Types.TIMESTAMP).withSize(26));
+        addMetadata(latSoll, ColumnMetadata.named("LAT_SOLL").withIndex(13).ofType(Types.DECIMAL).withSize(20));
         addMetadata(managementRoleTypeId, ColumnMetadata.named("MANAGEMENT_ROLE_TYPE_ID").withIndex(3).ofType(Types.VARCHAR).withSize(20));
         addMetadata(managWeStatusEnumId, ColumnMetadata.named("MANAG_WE_STATUS_ENUM_ID").withIndex(6).ofType(Types.VARCHAR).withSize(20));
-        addMetadata(nextStatusDays, ColumnMetadata.named("NEXT_STATUS_DAYS").withIndex(23).ofType(Types.DECIMAL).withSize(20));
+        addMetadata(nextStatusDays, ColumnMetadata.named("NEXT_STATUS_DAYS").withIndex(16).ofType(Types.DECIMAL).withSize(20));
         addMetadata(nextStatusId, ColumnMetadata.named("NEXT_STATUS_ID").withIndex(5).ofType(Types.VARCHAR).withSize(20));
-        addMetadata(onlyResponsible, ColumnMetadata.named("ONLY_RESPONSIBLE").withIndex(21).ofType(Types.CHAR).withSize(1));
-        addMetadata(params, ColumnMetadata.named("PARAMS").withIndex(22).ofType(Types.VARCHAR).withSize(2000));
-        addMetadata(startSoll, ColumnMetadata.named("START_SOLL").withIndex(17).ofType(Types.DECIMAL).withSize(20));
+        addMetadata(onlyResponsible, ColumnMetadata.named("ONLY_RESPONSIBLE").withIndex(14).ofType(Types.CHAR).withSize(1));
+        addMetadata(params, ColumnMetadata.named("PARAMS").withIndex(15).ofType(Types.VARCHAR).withSize(2000));
+        addMetadata(startSoll, ColumnMetadata.named("START_SOLL").withIndex(11).ofType(Types.DECIMAL).withSize(20));
         addMetadata(sumVerify, ColumnMetadata.named("SUM_VERIFY").withIndex(8).ofType(Types.CHAR).withSize(1));
         addMetadata(workEffortTypeRootId, ColumnMetadata.named("WORK_EFFORT_TYPE_ROOT_ID").withIndex(1).ofType(Types.VARCHAR).withSize(20).notNull());
     }

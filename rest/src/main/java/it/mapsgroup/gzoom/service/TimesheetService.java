@@ -4,16 +4,14 @@ import it.mapsgroup.gzoom.model.Messages;
 import it.mapsgroup.gzoom.model.Result;
 import it.mapsgroup.gzoom.model.Timesheet;
 import it.mapsgroup.gzoom.querydsl.dao.TimesheetDao;
-
 import it.mapsgroup.gzoom.querydsl.dto.TimesheetEx;
-import it.mapsgroup.gzoom.rest.ValidationException;
+import it.mapsgroup.gzoom.querydsl.dto.WorkEffortTypeContentExt;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.sql.SQLException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static it.mapsgroup.gzoom.security.Principals.principal;
 import static org.slf4j.LoggerFactory.getLogger;
@@ -35,17 +33,18 @@ public class TimesheetService {
         this.dtoMapper = dtoMapper;
     }
 
-    public Result<Timesheet> getTimesheets() {
-        List<TimesheetEx> list = timesheetDao.getTimesheets(principal().getUserLoginId());
-        List<Timesheet> ret = list.stream().map(p -> dtoMapper.copy(p, new Timesheet())).collect(Collectors.toList());
-        return new Result<>(ret, ret.size());
+
+
+    public Result<TimesheetEx> getTimesheet(String userLoginId, String context, String organization) throws SQLException {
+        List<TimesheetEx> list = timesheetDao.getTimesheets(userLoginId, context, organization);
+        return new Result<>(list, list.size());
     }
-    
-    public Timesheet getTimesheet(String timesheetId) {
-    	TimesheetEx tm = timesheetDao.getTimesheetExt(timesheetId);
-    	Timesheet ret = dtoMapper.copy(tm, new Timesheet());
-        return ret;
+
+    public Result<WorkEffortTypeContentExt> getParamsTimesheet(String userLoginId, String context, String organization) {
+        List<WorkEffortTypeContentExt> list = timesheetDao.getParamsTimesheets(userLoginId, context, organization);
+        return new Result<>(list, list.size());
     }
+
 
     public String createTimesheet(Timesheet req) {
         Validators.assertNotNull(req, Messages.TIMESHEET_REQUIRED);
@@ -61,23 +60,25 @@ public class TimesheetService {
         return timesheet.getTimesheetId();
     }
 
-    public String updateTimesheet(String id, Timesheet req) {
-        Validators.assertNotNull(req, Messages.TIMESHEET_REQUIRED);
-        Validators.assertNotBlank(req.getPartyId(), Messages.PARTY_ID_REQUIRED);
+//    public String updateTimesheet(String id, Timesheet req) {
+//        Validators.assertNotNull(req, Messages.TIMESHEET_REQUIRED);
+//        Validators.assertNotBlank(req.getPartyId(), Messages.PARTY_ID_REQUIRED);
+//
+//        it.mapsgroup.gzoom.querydsl.dto.Timesheet record = timesheetDao.getTimesheet(id);
+//        Validators.assertNotNull(record, Messages.INVALID_TIMESHEET);
+//        copy(req, record);
+//        timesheetDao.update(id, record, principal().getUserLoginId());
+//        return req.getTimesheetId();
+//    }
 
-        it.mapsgroup.gzoom.querydsl.dto.Timesheet record = timesheetDao.getTimesheet(id);
-        Validators.assertNotNull(record, Messages.INVALID_TIMESHEET);
-        copy(req, record);
-        timesheetDao.update(id, record, principal().getUserLoginId());
-        return req.getTimesheetId();
-    }
-
-    public String deleteTimesheet(String id) {
-        Validators.assertNotBlank(id, Messages.TIMESHEET_ID_REQUIRED);
-        it.mapsgroup.gzoom.querydsl.dto.Timesheet record = timesheetDao.getTimesheet(id);
-        Validators.assertNotNull(record, Messages.INVALID_TIMESHEET);
-        timesheetDao.delete(id);
-        return id;
+    public Boolean deleteTimesheet(String[] data) {
+        for(String id : data ){
+            Validators.assertNotBlank(id, Messages.TIMESHEET_ID_REQUIRED);
+            it.mapsgroup.gzoom.querydsl.dto.Timesheet record = timesheetDao.getTimesheet(id);
+            Validators.assertNotNull(record, Messages.INVALID_TIMESHEET);
+            timesheetDao.delete(id);
+        }
+        return true;
     }
 
     public void copy( Timesheet from, it.mapsgroup.gzoom.querydsl.dto.Timesheet to) {

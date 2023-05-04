@@ -30,6 +30,8 @@ public class QEnumeration extends com.querydsl.sql.RelationalPathBase<Enumeratio
 
     public final StringPath description = createString("description");
 
+    public final StringPath descriptionLang = createString("descriptionLang");
+
     public final StringPath enumCode = createString("enumCode");
 
     public final StringPath enumId = createString("enumId");
@@ -52,9 +54,13 @@ public class QEnumeration extends com.querydsl.sql.RelationalPathBase<Enumeratio
 
     public final com.querydsl.sql.ForeignKey<CommunicationEvent> _comEvntResenum = createInvForeignKey(enumId, "REASON_ENUM_ID");
 
+    public final com.querydsl.sql.ForeignKey<WorkEffortPartyAssignment> _wepaEnumc = createInvForeignKey(enumId, "END_CAUSE_ENUM_ID");
+
     public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetTotsonsenum = createInvForeignKey(enumId, "TOTAL_ENUM_ID_SONS");
 
     public final com.querydsl.sql.ForeignKey<WorkEffortAnalysis> _weaEnvFk = createInvForeignKey(enumId, "DATA_VISIBILITY");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortPartyAssignment> _wepaEnumr = createInvForeignKey(enumId, "END_REPLACEMENT_ENUM_ID");
 
     public final com.querydsl.sql.ForeignKey<WorkEffort> _weTotkpienum = createInvForeignKey(enumId, "TOTAL_ENUM_ID_KPI");
 
@@ -62,7 +68,11 @@ public class QEnumeration extends com.querydsl.sql.RelationalPathBase<Enumeratio
 
     public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetFrameenumid = createInvForeignKey(enumId, "FRAME_ENUM_ID");
 
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetScperenum = createInvForeignKey(enumId, "SCORE_PERIOD_ENUM_ID");
+
     public final com.querydsl.sql.ForeignKey<WorkEffortAnalysis> _weaEnaFk = createInvForeignKey(enumId, "AVAILABILITY_ID");
+
+    public final com.querydsl.sql.ForeignKey<RoleType> _roleTypePe = createInvForeignKey(enumId, "WORK_EFFORT_PERIOD_ID");
 
     public final com.querydsl.sql.ForeignKey<WorkEffort> _weTotsonsenum = createInvForeignKey(enumId, "TOTAL_ENUM_ID_SONS");
 
@@ -75,6 +85,8 @@ public class QEnumeration extends com.querydsl.sql.RelationalPathBase<Enumeratio
     public final com.querydsl.sql.ForeignKey<WorkEffort> _weTotassenum = createInvForeignKey(enumId, "TOTAL_ENUM_ID_ASSOC");
 
     public final com.querydsl.sql.ForeignKey<Person> _personEmpsEnum = createInvForeignKey(enumId, "EMPLOYMENT_STATUS_ENUM_ID");
+
+    public final com.querydsl.sql.ForeignKey<WorkEffortType> _wetGpMenu = createInvForeignKey(enumId, "GP_MENU_ENUM_ID");
 
     public final com.querydsl.sql.ForeignKey<Person> _personRessEnum = createInvForeignKey(enumId, "RESIDENCE_STATUS_ENUM_ID");
 
@@ -123,6 +135,7 @@ public class QEnumeration extends com.querydsl.sql.RelationalPathBase<Enumeratio
         addMetadata(createdStamp, ColumnMetadata.named("CREATED_STAMP").withIndex(8).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(createdTxStamp, ColumnMetadata.named("CREATED_TX_STAMP").withIndex(9).ofType(Types.TIMESTAMP).withSize(26));
         addMetadata(description, ColumnMetadata.named("DESCRIPTION").withIndex(5).ofType(Types.VARCHAR).withSize(255));
+        addMetadata(descriptionLang, ColumnMetadata.named("DESCRIPTION_LANG").withIndex(10).ofType(Types.VARCHAR).withSize(255));
         addMetadata(enumCode, ColumnMetadata.named("ENUM_CODE").withIndex(3).ofType(Types.VARCHAR).withSize(60));
         addMetadata(enumId, ColumnMetadata.named("ENUM_ID").withIndex(1).ofType(Types.VARCHAR).withSize(20).notNull());
         addMetadata(enumTypeId, ColumnMetadata.named("ENUM_TYPE_ID").withIndex(2).ofType(Types.VARCHAR).withSize(20));

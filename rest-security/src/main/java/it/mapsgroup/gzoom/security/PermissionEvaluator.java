@@ -10,6 +10,9 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class PermissionEvaluator {
     private static final Logger LOG = getLogger(PermissionEvaluator.class);
 
+
+
+
   /*  public static boolean hasPermission(UserLogin principal, String targetDomainObject, String permission) {
         SecurityDomainObject object = SecurityDomainObject.fromString(targetDomainObject);
         if (object != null)

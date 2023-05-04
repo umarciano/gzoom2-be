@@ -63,4 +63,10 @@ public interface Configuration {
      * @return
      */
     String getLanguageType();
+
+    /**
+     *  Organization multi type
+     * @return
+     */
+    String getOrganizationMultiType();
 }

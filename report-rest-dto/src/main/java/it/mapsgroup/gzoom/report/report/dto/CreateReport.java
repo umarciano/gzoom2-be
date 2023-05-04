@@ -29,6 +29,16 @@ public class CreateReport {
     //Nome dell'rptdesign e della cartella
     private String resourceName;
 
+    public String getContentTypeId() {
+        return contentTypeId;
+    }
+
+    public void setContentTypeId(String contentTypeId) {
+        this.contentTypeId = contentTypeId;
+    }
+
+    private String contentTypeId;
+
     public CreateReport() {
         this.params = new HashMap<>();
     }

@@ -3,6 +3,8 @@ package it.mapsgroup.gzoom.querydsl.service;
 
 import java.util.List;
 
+import it.mapsgroup.gzoom.querydsl.dao.UserPreferenceDao;
+import it.mapsgroup.gzoom.querydsl.dto.UserPreference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,12 +28,14 @@ public class PermissionService {
 		
 	private UserLoginSecurityGroupDao userLoginSecurityGroupDao;
 	private SecurityGroupPermissionDao securityGroupPermissionDao;
+	private UserPreferenceDao userPreferenceDao;
 	
 		
 	@Autowired
-	public PermissionService(UserLoginSecurityGroupDao userLoginSecurityGroupDao, SecurityGroupPermissionDao securityGroupPermissionDao) {
+	public PermissionService(UserLoginSecurityGroupDao userLoginSecurityGroupDao, SecurityGroupPermissionDao securityGroupPermissionDao, UserPreferenceDao userPreferenceDao) {
 		this.userLoginSecurityGroupDao = userLoginSecurityGroupDao;
 		this.securityGroupPermissionDao = securityGroupPermissionDao;
+		this.userPreferenceDao = userPreferenceDao;
 	}
 	/**
 	 * Data il localDispatcherName, ritorno il nome del gruppo di sicurezza
@@ -46,7 +50,18 @@ public class PermissionService {
 	    
 	    return permission;
 	}
-	
+
+	/**
+	 * Get default ORGANIZATION_PARTY by Username
+	 * @param user
+	 * @return company
+	 */
+	public String userPrefereceOrganizationUnitId(String user) {
+		String company = "Company";
+		UserPreference userPreference = this.userPreferenceDao.getUserPreference(user, "ORGANIZATION_PARTY");
+		if(userPreference!=null) company = userPreference.getUserPrefValue();
+		return company;
+	}
 	
 	public boolean hasSecurityGroup(String userLoginId, String gruopId) {
         List<UserLoginSecurityGroup> list = userLoginSecurityGroupDao.getUserLoginSecurityGroups(userLoginId, gruopId);        

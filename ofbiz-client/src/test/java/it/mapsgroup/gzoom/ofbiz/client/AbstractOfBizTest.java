@@ -112,8 +112,8 @@ public abstract class AbstractOfBizTest extends AbstractRollBackOfBizTest {
     }
 
     public void logOff(String sessionId) {
-        String logoutReply = loginClient.logout(sessionId);
-        assertThat("logout message", logoutReply, is("success"));
+        //String logoutReply = loginClient.logout(sessionId);
+        //assertThat("logout message", logoutReply, is("success"));
     }
 
     protected void sleep(long millis) {

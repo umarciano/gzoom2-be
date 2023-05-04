@@ -13,12 +13,11 @@ public class TimeEntry extends Identifiable {
     private String comments;
     private String timeEntryId;
     private String rateTypeId;
+    private BigDecimal hours;
+    private BigDecimal planHours;
     private BigDecimal percentage;
     private String effortUomId;
     private WorkEffort workEffort;
-    private String attivitaLiv1;
-    private String attivitaLiv2;
-    private String attivitaLiv3;
     private String description;
 
     public LocalDateTime getFromDate() {
@@ -27,6 +26,18 @@ public class TimeEntry extends Identifiable {
 
     public void setFromDate(LocalDateTime fromDate) {
         this.fromDate = fromDate;
+    }
+
+    public BigDecimal getHours() { return hours; }
+
+    public void setHours(BigDecimal hours) {
+        this.hours = hours;
+    }
+
+    public BigDecimal getPlanHours() { return planHours; }
+
+    public void setPlanHours(BigDecimal planHours) {
+        this.planHours = planHours;
     }
 
     public LocalDateTime getThruDate() {
@@ -107,30 +118,6 @@ public class TimeEntry extends Identifiable {
 
     public void setWorkEffort(WorkEffort workEffort) {
         this.workEffort = workEffort;
-    }
-
-    public String getAttivitaLiv1() {
-        return attivitaLiv1;
-    }
-
-    public void setAttivitaLiv1(String attivitaLiv1) {
-        this.attivitaLiv1 = attivitaLiv1;
-    }
-
-    public String getAttivitaLiv2() {
-        return attivitaLiv2;
-    }
-
-    public void setAttivitaLiv2(String attivitaLiv2) {
-        this.attivitaLiv2 = attivitaLiv2;
-    }
-
-    public String getAttivitaLiv3() {
-        return attivitaLiv3;
-    }
-
-    public void setAttivitaLiv3(String attivitaLiv3) {
-        this.attivitaLiv3 = attivitaLiv3;
     }
 
     @Override

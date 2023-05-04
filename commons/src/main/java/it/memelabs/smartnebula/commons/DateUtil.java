@@ -1,6 +1,6 @@
 package it.memelabs.smartnebula.commons;
 
-import it.mapsgroup.commons.collect.Tuple2;
+import it.mapsgroup.gzoom.commons.collect.Tuple2;
 
 import java.text.DateFormat;
 import java.text.ParseException;

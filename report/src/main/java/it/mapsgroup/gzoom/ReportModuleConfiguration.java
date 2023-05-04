@@ -1,9 +1,11 @@
 package it.mapsgroup.gzoom;
 
 import it.mapsgroup.gzoom.birt.BirtService;
+import it.mapsgroup.gzoom.jasper.JasperService;
 import it.mapsgroup.gzoom.persistence.common.CommonPersistenceConfiguration;
 import it.mapsgroup.gzoom.querydsl.persistence.service.QueryDslPersistenceConfiguration;
 import it.mapsgroup.gzoom.report.querydsl.dao.ReportActivityDao;
+import it.mapsgroup.gzoom.service.JasperReportTaskService;
 import it.mapsgroup.gzoom.service.ReportTaskService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -19,9 +21,17 @@ import org.springframework.context.annotation.ImportResource;
         QueryDslPersistenceConfiguration.class,//gzoom query dsl module configuration
         CommonPersistenceConfiguration.class
 })
+/*
 @ComponentScan(basePackageClasses = {
         ReportTaskService.class,
         BirtService.class,
         ReportActivityDao.class})
+*/
+
+@ComponentScan(basePackageClasses = {
+        ReportTaskService.class, JasperReportTaskService.class,
+        BirtService.class, JasperService.class,
+        ReportActivityDao.class})
+
 public class ReportModuleConfiguration {
 }

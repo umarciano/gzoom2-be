@@ -6,15 +6,12 @@ import it.mapsgroup.gzoom.querydsl.dto.Party;
 import it.mapsgroup.gzoom.querydsl.dto.PartyEx;
 import it.mapsgroup.gzoom.querydsl.dto.Person;
 import it.mapsgroup.gzoom.service.PartyService;
-
 import static it.mapsgroup.gzoom.security.Principals.principal;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Map;
-import java.util.Optional;
+
 
 /**
  */
@@ -54,7 +51,8 @@ public class PartyController {
 
         String roleTypeId = requestParams.get("roleTypeId");
         String workEffortTypeId = requestParams.get("workEffortTypeId");
-        return Exec.exec("orgUnit get", () -> partyService.getOrgUnits(principal().getUserLoginId(), parentTypeId, roleTypeId, workEffortTypeId));
+        String company = requestParams.get("company");
+        return Exec.exec("orgUnit get", () -> partyService.getOrgUnits(principal().getUserLoginId(), parentTypeId, roleTypeId, workEffortTypeId, company));
     }
     
     @RequestMapping(value = "party/roleType/{roleTypeId}", method = RequestMethod.GET)

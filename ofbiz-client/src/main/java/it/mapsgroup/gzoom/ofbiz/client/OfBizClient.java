@@ -201,7 +201,7 @@ public class OfBizClient {
             return result;
         } catch (XmlRpcException e) {
             log.error("OfBiz client failed when calling method '{}' due to: {} code {}", pMethodName, e.getMessage(), e.code);
-            throw new OfBizClientException(e.code, e);
+            throw new OfBizClientException(e.code, e.getMessage(), e);
         }
     }
 

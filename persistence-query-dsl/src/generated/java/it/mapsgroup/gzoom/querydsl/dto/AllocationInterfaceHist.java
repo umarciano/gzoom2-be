@@ -33,6 +33,9 @@ public class AllocationInterfaceHist {
     @Column("DATA_SOURCE")
     private String dataSource;
 
+    @Column("HIST_JOB_LOG_ID")
+    private String histJobLogId;
+
     @Column("ID")
     private String id;
 
@@ -44,6 +47,9 @@ public class AllocationInterfaceHist {
 
     @Column("REF_DATE")
     private java.time.LocalDateTime refDate;
+
+    @Column("SEQ")
+    private java.math.BigInteger seq;
 
     @Column("STATO")
     private String stato;
@@ -112,6 +118,14 @@ public class AllocationInterfaceHist {
         this.dataSource = dataSource;
     }
 
+    public String getHistJobLogId() {
+        return histJobLogId;
+    }
+
+    public void setHistJobLogId(String histJobLogId) {
+        this.histJobLogId = histJobLogId;
+    }
+
     public String getId() {
         return id;
     }
@@ -142,6 +156,14 @@ public class AllocationInterfaceHist {
 
     public void setRefDate(java.time.LocalDateTime refDate) {
         this.refDate = refDate;
+    }
+
+    public java.math.BigInteger getSeq() {
+        return seq;
+    }
+
+    public void setSeq(java.math.BigInteger seq) {
+        this.seq = seq;
     }
 
     public String getStato() {

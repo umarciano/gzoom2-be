@@ -64,6 +64,11 @@ public class GZoomReportRun {
 
         //resume suspended
         ctx.getBean(ReportTaskService.class).resume();
+
+        Runtime rt = Runtime.getRuntime();
+        LOG.info("total memory : " + rt.totalMemory());
+        LOG.info("max memory : " + rt.maxMemory());
+        LOG.info("free memory : " + rt.freeMemory());
     }
 
 

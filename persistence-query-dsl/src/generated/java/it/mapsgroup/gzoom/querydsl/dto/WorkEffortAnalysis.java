@@ -40,8 +40,11 @@ public class WorkEffortAnalysis implements AbstractIdentity {
     @Column("DESCRIPTION5")
     private String description5;
 
+    @Column("DESCRIPTION_LANG")
+    private String descriptionLang;
+
     @Column("EXCLUDE_VALIDITY")
-    private Boolean excludeValidity;
+    private String excludeValidity;
 
     @Column("IS_MONITOR")
     private Boolean isMonitor;
@@ -288,11 +291,19 @@ public class WorkEffortAnalysis implements AbstractIdentity {
         this.description5 = description5;
     }
 
-    public Boolean getExcludeValidity() {
+    public String getDescriptionLang() {
+        return descriptionLang;
+    }
+
+    public void setDescriptionLang(String descriptionLang) {
+        this.descriptionLang = descriptionLang;
+    }
+
+    public String getExcludeValidity() {
         return excludeValidity;
     }
 
-    public void setExcludeValidity(Boolean excludeValidity) {
+    public void setExcludeValidity(String excludeValidity) {
         this.excludeValidity = excludeValidity;
     }
 

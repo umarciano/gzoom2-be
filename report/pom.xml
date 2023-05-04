@@ -5,7 +5,7 @@
     <parent>
         <groupId>it.mapsgroup.gzoom</groupId>
         <artifactId>gzoom2</artifactId>
-        <version>2.7.1</version>
+        <version>2.9.5</version>
     </parent>
 
 
@@ -35,12 +35,6 @@
             <version>${project.parent.version}</version>
         </dependency>
 
-        <!-- Maps commons -->
-        <dependency>
-            <groupId>it.mapsgroup.commons</groupId>
-            <artifactId>commons</artifactId>
-        </dependency>
-
 
         <!-- Spring -->
 
@@ -66,10 +60,10 @@
             <version>1.7.10</version>
         </dependency>-->
 
-       <!-- <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-        </dependency>-->
+        <!-- <dependency>
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-starter-tomcat</artifactId>
+         </dependency>-->
 
 
         <!--db poller-->
@@ -142,6 +136,13 @@
             <artifactId>commons-io</artifactId>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.xmlbeans/xmlbeans -->
+        <dependency>
+            <groupId>org.apache.xmlbeans</groupId>
+            <artifactId>xmlbeans</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
 
         <!--Birt-->
         <!-- https://mvnrepository.com/artifact/org.eclipse.birt.runtime/org.eclipse.birt.runtime -->
@@ -162,16 +163,36 @@
         <dependency>
             <groupId>org.eclipse.birt.runtime</groupId>
             <artifactId>org.eclipse.equinox.registry</artifactId>
-            <version>4.8.0-20180626</version>
+            <version>3.8.0.v20180426-1327</version>
             <scope>system</scope>
             <systemPath>${pom.basedir}/lib/org.eclipse.equinox.registry_3.8.0.v20180426-1327.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.eclipse.birt.runtime</groupId>
             <artifactId>com.ibm.icu</artifactId>
-            <version>4.8.0-20180626</version>
+            <version>58.2.0.v20170418-1837</version>
             <scope>system</scope>
             <systemPath>${pom.basedir}/lib/com.ibm.icu_58.2.0.v20170418-1837.jar</systemPath>
+        </dependency>
+
+        <!-- JASPER -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <!--version>6.17.0</version-->
+            <version>6.18.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports-functions</artifactId>
+            <version>6.18.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports-fonts</artifactId>
+            <version>6.18.1</version>
         </dependency>
 
         <dependency>
@@ -204,6 +225,7 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
+
 
 
     </dependencies>

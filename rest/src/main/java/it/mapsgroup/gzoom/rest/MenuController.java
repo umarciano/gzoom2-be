@@ -2,10 +2,7 @@ package it.mapsgroup.gzoom.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import it.mapsgroup.gzoom.common.Exec;
 import it.mapsgroup.gzoom.model.FolderMenu;
@@ -29,5 +26,18 @@ public class MenuController {
     @ResponseBody
     public FolderMenu getUserPermission() {
         return Exec.exec("menu", () -> menuService.getMenu());
+    }
+
+    @RequestMapping(value = "/help/{contentIdTo}", method = RequestMethod.GET)
+    @ResponseBody
+    public String getHelpId(@PathVariable(value = "contentIdTo") String contentIdTo) {
+        return Exec.exec("help", () -> menuService.getHelpId(contentIdTo));
+    }
+
+    @GetMapping("/menu/getpath/{contentIdTo}")
+    @ResponseBody
+    public String getMenuPath(@PathVariable(value = "contentIdTo") String contentIdTo)
+    {
+        return Exec.exec("menuPath", () -> menuService.getMenuPath(contentIdTo));
     }
 }

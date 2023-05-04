@@ -1,16 +1,13 @@
 package it.mapsgroup.gzoom.service;
 
 import it.mapsgroup.gzoom.model.Messages;
-
+import it.mapsgroup.gzoom.querydsl.dao.UserLoginSecurityGroupDao;
 import it.mapsgroup.gzoom.querydsl.dao.UserPreferenceDao;
 import it.mapsgroup.gzoom.querydsl.dto.UserPreference;
 import it.mapsgroup.gzoom.security.Principals;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
-import java.security.Principal;
 
 import static it.mapsgroup.gzoom.security.Principals.principal;
 import static org.slf4j.LoggerFactory.getLogger;
@@ -21,10 +18,12 @@ public class UserPreferenceService {
     private static final Logger LOG = getLogger(TimesheetService.class);
 
     private final UserPreferenceDao userPreferenceDao;
+    private final UserLoginSecurityGroupDao userLoginSecurityGroupDao;
 
     @Autowired
-    public UserPreferenceService(UserPreferenceDao userPreferenceDao) {
+    public UserPreferenceService(UserPreferenceDao userPreferenceDao, UserLoginSecurityGroupDao userLoginSecurityGroupDao) {
         this.userPreferenceDao = userPreferenceDao;
+        this.userLoginSecurityGroupDao = userLoginSecurityGroupDao;
     }
 
     public String updateUserPreference(UserPreference req) {
@@ -64,4 +63,7 @@ public class UserPreferenceService {
         return NArecord;
     }
 
+    public String getDefaultPortalPage() {
+        return userLoginSecurityGroupDao.getDefaultPortalPage(principal().getUserLoginId());
+    }
 }

@@ -44,6 +44,15 @@ public class ReportService {
         
     }
 
+    public Result<Report> getReportsByWorkEffortTypeId(String workEffortTypeId) {
+
+        List<it.mapsgroup.gzoom.querydsl.dto.Report> list = reportDao.getReportsByWorkEffortTypeId(workEffortTypeId);
+        List<Report> ret = list.stream().map(p -> dtoMapper.copy(p, new Report())).collect(Collectors.toList());
+
+        LOG.info("getReportsByWorkEffortTypeId size="+ ret.size());
+        return new Result<>(ret, ret.size());
+    }
+
     public Result<Report> getReports(String parentTypeId) {
     	
     	List<it.mapsgroup.gzoom.querydsl.dto.Report> list = reportDao.getReports(parentTypeId);

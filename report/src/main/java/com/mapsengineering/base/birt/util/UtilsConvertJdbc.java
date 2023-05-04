@@ -28,24 +28,20 @@ public class UtilsConvertJdbc {
 
 		if (isOracle(dialect)) {
 			dateString = getConvertDateToDateOracle(date);
-		}
-//      /*TODO non funzionano cosi le date controllare anche la parte sotto 
-//      * if (isMsSql(fieldTypeName)) {
-//         dateString = getConvertDateToDateMsSql(dateString);
-//     } else 
-//     }         
-//     */
+		} else if (isMsSql(dialect)) {
+            dateString = getConvertDateToDateMsSql(dateString);
+        }
 		return dateString;
 	}
-    
-    
-//    private static String getConvertDateToDateMsSql(String dateString) {
-//        return "{ts " + dateString + "}";
-//    }
-//    
+
     private static String getConvertDateToDateOracle(Date date) {        
-        String dateString = "'" + UtilDateTime.toDateString(date, DATE_FORMAT_ORACLE) + "'";        
+        //String dateString = "'" + UtilDateTime.toDateString(date, DATE_FORMAT_ORACLE) + "'";
+        String dateString = UtilDateTime.toDateString(date, DATE_FORMAT_ORACLE) ;
         return "TO_DATE('" + dateString + "','" + DATE_FORMAT_ORACLE_DB +"')";
+    }
+
+    private static String getConvertDateToDateMsSql(String dateString) {
+        return "CONVERT(DATETIME, " + dateString + ", 121)";
     }
   
 	private static boolean isMsSql(String type) {

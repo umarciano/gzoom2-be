@@ -2,6 +2,7 @@ package com.mapsengineering.base.birt.util;
 
 
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -21,7 +22,27 @@ public class UtilDateTime {
 	public static String toDateString(Date date) {
         return toDateString(date, DEFAULT_FORMAT_DATE);
     }
-	
+
+
+    public static Date toDate(String date, Locale locale,String timeZone)  {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", locale);
+		TimeZone currentTimeZone = null;
+		if (timeZone != null) {
+			currentTimeZone = TimeZone.getTimeZone(timeZone);
+		} else {
+			currentTimeZone = TimeZone.getDefault();
+		}
+		formatter.setTimeZone(currentTimeZone);
+		Date ret = null;
+		try {
+			ret =  formatter.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return ret;
+	}
+
+
         
 	public static String toDateString(Date date, String format) {
         if (date == null) return "";

@@ -9,7 +9,6 @@ import it.mapsgroup.gzoom.querydsl.dto.Person;
 import it.mapsgroup.gzoom.querydsl.dto.PersonEx;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,12 +23,14 @@ public class PartyService {
     private final PartyDao partyDao;
     private final PersonDao personDao;
     private final DtoMapper dtoMapper;
+    private final Configuration config;
 
     @Autowired
-    public PartyService(PartyDao partyDao, PersonDao personDao, DtoMapper dtoMapper) {
+    public PartyService(PartyDao partyDao, PersonDao personDao, DtoMapper dtoMapper, Configuration config) {
         this.partyDao = partyDao;
         this.personDao = personDao;
         this.dtoMapper = dtoMapper;
+        this.config = config;
     }
 
     public Result<Person> getPersons() {
@@ -42,8 +43,8 @@ public class PartyService {
         return new Result<>(list, list.size());
     }
     
-    public Result<PartyEx> getOrgUnits(String userLoginId, String parentTypeId, String roleTypeId, String workEffortTypeId) {
-        List<PartyEx> list = partyDao.getOrgUnits(userLoginId, parentTypeId, roleTypeId, workEffortTypeId);
+    public Result<PartyEx> getOrgUnits(String userLoginId, String parentTypeId, String roleTypeId, String workEffortTypeId, String company) {
+        List<PartyEx> list = partyDao.getOrgUnits(userLoginId, parentTypeId, roleTypeId, workEffortTypeId, company, config.getLanguages());
         return new Result<>(list, list.size());
     }
     
@@ -61,5 +62,10 @@ public class PartyService {
         List<PersonEx> list = partyDao.getPartiesExposed();
         List<it.mapsgroup.gzoom.model.Person> ret = list.stream().map(p -> dtoMapper.copy(p, new it.mapsgroup.gzoom.model.Person())).collect(Collectors.toList());
         return new Result<>(ret, ret.size());
+    }
+
+    public Party findByPartyId(String id) {
+        Party party = partyDao.findByPartyId(id);
+        return party;
     }
 }

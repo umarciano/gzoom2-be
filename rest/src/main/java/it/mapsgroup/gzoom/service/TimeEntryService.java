@@ -3,18 +3,21 @@ package it.mapsgroup.gzoom.service;
 import it.mapsgroup.gzoom.model.Messages;
 import it.mapsgroup.gzoom.model.Result;
 import it.mapsgroup.gzoom.model.TimeEntry;
-import it.mapsgroup.gzoom.model.Activity;
 import it.mapsgroup.gzoom.querydsl.dao.TimeEntryDao;
 import it.mapsgroup.gzoom.querydsl.dao.TimesheetDao;
 import it.mapsgroup.gzoom.querydsl.dto.TimeEntryEx;
+import it.mapsgroup.gzoom.querydsl.dto.TimesheetEx;
+import it.mapsgroup.gzoom.querydsl.dto.WorkEffort;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static it.mapsgroup.gzoom.security.Principals.principal;
+import static it.mapsgroup.gzoom.security.Principals.username;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
@@ -37,55 +40,84 @@ public class TimeEntryService {
         this.dtoMapper = dtoMapper;
     }
 
-    public Result<TimeEntry> getTimeEntries(String id) {
+    public Result<TimesheetEx> getTimesheet(String id, String userLoginId) throws SQLException {
+        List<TimesheetEx> list = timeEntryDao.getTimesheet(id,userLoginId );
+        return new Result<>(list, list.size());
+    }
+
+    public Result<TimeEntryEx> getTimeEntries(String id) {
         List<TimeEntryEx> list = timeEntryDao.getTimeEntries(id);
-        List<TimeEntry> ret = list.stream().map(p -> dtoMapper.copy(p, new TimeEntry())).collect(Collectors.toList());
-        return new Result<>(ret, ret.size());
+        return new Result<>(list, list.size());
     }
 
-    public Result<Activity> getWorkEfforts(String id) {
-        List<it.mapsgroup.gzoom.querydsl.dto.Activity> list = timeEntryDao.getWorkEfforts(id);
-        List<Activity> ret = list.stream().map(p -> dtoMapper.copy(p, new Activity())).collect(Collectors.toList());
-        return new Result<>(ret, ret.size());
+    public Result<WorkEffort> getWorkEfforts(String id) {
+        List<WorkEffort> list = timeEntryDao.getWorkEfforts(id);
+        return new Result<>(list, list.size());
     }
 
-    public String createOrUpdateTimeEntry(List<TimeEntry> reqList) {
-        Validators.assertFalse(reqList.isEmpty(), Messages.INVALID_TIME_ENTRY);
-        for (TimeEntry req : reqList) {
-            Validators.assertNotNull(req.getTimesheetId(), Messages.INVALID_TIMESHEET);
-            it.mapsgroup.gzoom.querydsl.dto.TimeEntry timeEntry = new it.mapsgroup.gzoom.querydsl.dto.TimeEntry();
-            timeEntry.setWorkEffortId(req.getWorkEffortId());
-            timeEntry.setPercentage(req.getPercentage());
-            timeEntry.setFromDate(req.getFromDate());
-            timeEntry.setThruDate(req.getThruDate());
+    public Boolean updateTimeEntry(List<TimeEntry> array) {
 
-            if (req.getTimeEntryId() != null) {
-                updateTimeEntry(req.getTimeEntryId(), req);
-            } else {
-                timeEntry.setTimeEntryId(req.getTimeEntryId());
-                timeEntry.setTimesheetId(req.getTimesheetId());
+        final BigDecimal[] sumActualHours = {new BigDecimal(0)};
+        final BigDecimal[] sumPlanHours = {new BigDecimal(0)};
+        array.forEach((item) -> {
+            BigDecimal sumActualHourstemp = sumActualHours[0];
+            BigDecimal sumPlanHourstemp = sumPlanHours[0];
+            sumActualHours[0] = sumActualHourstemp.add(item.getHours());
+            sumPlanHours[0] = sumPlanHourstemp.add(item.getPlanHours());
+
+            if (item.getTimeEntryId() != null && !item.getTimeEntryId().substring(0,3).equals("new") ) {
+                Validators.assertNotNull(item.getTimeEntryId(), Messages.TIME_ENTRY_ID_REQUIRED);
+                it.mapsgroup.gzoom.querydsl.dto.TimeEntry record = timeEntryDao.getTimeEntry(item.getTimeEntryId());
+                Validators.assertNotNull(record, Messages.INVALID_TIME_ENTRY);
+                copy(item, record);
+                timeEntryDao.update(item.getTimeEntryId(), record, principal().getUserLoginId());
+            } else if(item.getTimeEntryId().substring(0,3).equals("new")) {
+                it.mapsgroup.gzoom.querydsl.dto.TimeEntry timeEntry = new it.mapsgroup.gzoom.querydsl.dto.TimeEntry();
+                timeEntry.setWorkEffortId(item.getWorkEffortId());
+                timeEntry.setPercentage(item.getPercentage());
+                timeEntry.setFromDate(item.getFromDate());
+                timeEntry.setThruDate(item.getThruDate());
+                timeEntry.setTimeEntryId(item.getTimeEntryId());
+                timeEntry.setTimesheetId(item.getTimesheetId());
+                timeEntry.setPlanHours(item.getPlanHours());
+                timeEntry.setHours(item.getHours());
+                timeEntry.setComments(item.getComments());
+                timeEntry.setEffortUomId(item.getEffortUomId());
+                timeEntry.setRateTypeId(item.getRateTypeId());
+                timeEntry.setPartyId(item.getPartyId());
                 timeEntryDao.create(timeEntry, principal().getUserLoginId());
             }
 
+
+        });
+        String id = array.get(0).getTimesheetId();
+
+        List<TimesheetEx>  timesheetex = null;
+        try {
+            timesheetex = timeEntryDao.getTimesheet(id,username());
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return reqList.get(0).getTimesheetId();
+
+        it.mapsgroup.gzoom.querydsl.dto.Timesheet timesheet = timesheetex.get(0);
+
+        timesheet.setActualHours(sumActualHours[0]);
+        timesheet.setContractHours(sumPlanHours[0]);
+
+        timesheetDao.update(id,timesheet);
+        return true;
     }
 
-    public String updateTimeEntry(String id, TimeEntry req) {
-        Validators.assertNotNull(req.getTimeEntryId(), Messages.TIME_ENTRY_ID_REQUIRED);
-        it.mapsgroup.gzoom.querydsl.dto.TimeEntry record = timeEntryDao.getTimeEntry(id);
-        Validators.assertNotNull(record, Messages.INVALID_TIME_ENTRY);
-        copy(req, record);
-        timeEntryDao.update(id, record, principal().getUserLoginId());
-        return req.getTimeEntryId();
-    }
-
-    public String deleteTimeEntry(String id) {
-        Validators.assertNotBlank(id, Messages.TIMESHEET_ID_REQUIRED);
-        it.mapsgroup.gzoom.querydsl.dto.TimeEntry record = timeEntryDao.getTimeEntry(id);
-        Validators.assertNotNull(record, Messages.INVALID_TIMESHEET);
-        timeEntryDao.delete(id);
-        return id;
+    public Boolean deleteTimeEntry(String[] data) {
+            for(String id : data ) {
+                if (id != null && !id.substring(0,3).equals("new")) {
+                    Validators.assertNotBlank(id, Messages.TIME_ENTRY_ID_REQUIRED);
+                    it.mapsgroup.gzoom.querydsl.dto.TimeEntry record = timeEntryDao.getTimeEntry(id);
+                    Validators.assertNotNull(record, Messages.INVALID_TIME_ENTRY);
+                    timeEntryDao.delete(id);
+                }
+            }
+        return true;
     }
 
     public void copy( TimeEntry from, it.mapsgroup.gzoom.querydsl.dto.TimeEntry to) {
@@ -93,6 +125,8 @@ public class TimeEntryService {
         to.setThruDate(from.getThruDate());
         to.setPercentage(from.getPercentage());
         to.setWorkEffortId(from.getWorkEffortId());
+        to.setComments(from.getComments());
+        to.setHours(from.getHours());
+        to.setPlanHours(from.getPlanHours());
     }
-
 }

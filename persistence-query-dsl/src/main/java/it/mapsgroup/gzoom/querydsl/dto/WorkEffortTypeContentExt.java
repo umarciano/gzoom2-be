@@ -3,6 +3,7 @@ package it.mapsgroup.gzoom.querydsl.dto;
 public class WorkEffortTypeContentExt extends WorkEffortTypeContent {
 	private Content content;
 	private WorkEffortType workEffortType;
+	private WorkEffortTypePeriod workEffortTypePeriod;
 
 	/**
 	 * @return the content
@@ -30,6 +31,14 @@ public class WorkEffortTypeContentExt extends WorkEffortTypeContent {
 	 */
 	public void setWorkEffortType(WorkEffortType workEffortType) {
 		this.workEffortType = workEffortType;
+	}
+
+	public WorkEffortTypePeriod getWorkEffortTypePeriod() {
+		return workEffortTypePeriod;
+	}
+
+	public void setWorkEffortTypePeriod(WorkEffortTypePeriod workEffortTypePeriod) {
+		this.workEffortTypePeriod = workEffortTypePeriod;
 	}
 	
 	

@@ -22,6 +22,9 @@ public class PartyRelationship implements AbstractIdentity {
     @Column("CREATED_TX_STAMP")
     private java.time.LocalDateTime createdTxStamp;
 
+    @Column("CTX_ENABLED")
+    private String ctxEnabled;
+
     @Column("FROM_DATE")
     private java.time.LocalDateTime fromDate;
 
@@ -106,6 +109,14 @@ public class PartyRelationship implements AbstractIdentity {
 
     public void setCreatedTxStamp(java.time.LocalDateTime createdTxStamp) {
         this.createdTxStamp = createdTxStamp;
+    }
+
+    public String getCtxEnabled() {
+        return ctxEnabled;
+    }
+
+    public void setCtxEnabled(String ctxEnabled) {
+        this.ctxEnabled = ctxEnabled;
     }
 
     public java.time.LocalDateTime getFromDate() {

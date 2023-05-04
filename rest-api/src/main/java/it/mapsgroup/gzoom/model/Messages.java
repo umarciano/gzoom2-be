@@ -280,6 +280,38 @@ public class Messages {
     public static final String TIME_ENTRY_ID_REQUIRED = "TimeEntry id is required";
     public static final String INVALID_TIME_ENTRY = "Invalid time entry";
 
+    public static final String PERIOD_TYPE_REQUIRED = "PeriodType is required";
+    public static final String PERIOD_TYPE_DESCRIPTION_REQUIRED = "PeriodType description is required";
+    public static final String PERIOD_TYPE_ID_REQUIRED = "PeriodType id is required";
+    public static final String INVALID_PERIOD_TYPE = "Invalid period type";
+
     public static final String CANNOT_SCHEDULE_PROBE = "Cannot schedule probe";
     public static final String CANNOT_UNSCHEDULE_PROBE ="Cannot unschedule probe" ;
+
+    public static final String WORK_EFFORT_ASSOC_TYPE_ID_REQUIRED = "Work effort assoc type id is required";
+    public static final String INVALID_WORK_EFFORT_ASSOC_TYPE = "Invalid work effort assoc type";
+    public static final String WORK_EFFORT_ASSOC_TYPE_REQUIRED = "Work effort assoc type is required";
+    public static final String WORK_EFFORT_ASSOC_TYPE_DESCRIPTION_REQUIRED = "Work effort assoc type description is required";
+
+    public static final String WORK_EFFORT_SEQUENCE_REQUIRED = "Work effort sequence is required";
+    public static final String WORK_EFFORT_SEQUENCE_NAME_REQUIRED = "Work effort sequence name is required";
+    public static final String WORK_EFFORT_SEQUENCE_ID_REQUIRED = "Work effort sequence id is required";
+    public static final String INVALID_WORK_EFFORT_SEQUENCE = "Invalid work effort sequence";
+
+    public static final String DATA_SOURCE_TYPE_REQUIRED = "Data source type is required";
+    public static final String DATA_SOURCE_TYPE_ID_REQUIRED = "Data source type id is required";
+    public static final String DATA_SOURCE_TYPE_DESCRIPTION_REQUIRED = "Data source type description is required";
+    public static final String INVALID_DATA_SOURCE_TYPE = "Invalid data resource type";
+
+    public static final String DATA_RESOURCE_TYPE_REQUIRED = "Data resource type is required";
+    public static final String DATA_RESOURCE_TYPE_ID_REQUIRED = "Data resource type id is required";
+    public static final String DATA_RESOURCE_TYPE_DESCRIPTION_REQUIRED = "Data resource type description is required";
+    public static final String INVALID_DATA_RESOURCE_TYPE = "Invalid data resource type";
+
+    public static final String GL_FISCAL_TYPE_REQUIRED = "Gl fiscal type is required";
+    public static final String GL_FISCAL_TYPE_ID_REQUIRED = "Gl fiscal type id is required";
+    public static final String GL_FISCAL_TYPE_ENUM_ID_REQUIRED = "Gl fiscal type enum id is required";
+    public static final String INVALID_GL_FISCAL_TYPE = "Invalid gl fiscal type";
+
+    public static final String NOT_NULL = "Object cannot be null";
 }

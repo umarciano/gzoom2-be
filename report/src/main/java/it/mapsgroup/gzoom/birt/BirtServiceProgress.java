@@ -1,12 +1,11 @@
 package it.mapsgroup.gzoom.birt;
 
-import it.mapsgroup.commons.collect.Tuple2;
+import it.mapsgroup.gzoom.commons.collect.Tuple2;
 import it.mapsgroup.gzoom.dto.ReportStatus;
 import org.eclipse.birt.report.engine.api.IEngineTask;
 import org.eclipse.birt.report.engine.api.IProgressMonitor;
 import org.slf4j.Logger;
 
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 

@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-
-
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.io.File;
@@ -21,7 +19,6 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.Map;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -30,15 +27,10 @@ import static org.slf4j.LoggerFactory.getLogger;
 @Qualifier("birt")
 public class BIRTReportRunner implements ReportRunner {
 	public static final String BIRT_PARAMETERS = "birtParameters";
-
 	private Logger logger = getLogger(BIRTReportRunner.class);
-
 	private String reportTempDirectory;
-
 	private IReportEngine birtReportEngine = null;
-
 	private final BirtConfig config;
-
 	private String developerBirtPath;
 
 	@Autowired
@@ -65,17 +57,13 @@ public class BIRTReportRunner implements ReportRunner {
 			EngineConfig engineConfig = new EngineConfig();
 			logger.info("BIRT LOG DIRECTORY SET TO : {}", config.getBirtLoggingDirectory());
 			logger.info("BIRT LOGGING LEVEL SET TO {}", config.getBirtLoggingLevel());
-
 			engineConfig.setLogConfig(config.getBirtLoggingDirectory(), config.getBirtLoggingLevel());
 			engineConfig.setLogger(java.util.logging.Logger.getLogger(BIRTReportRunner.class.getName()));
-
 			engineConfig.setResourcePath(config.getBirtReportInputDir());
-
 			// Required due to a bug in BIRT that occurs in calling Startup
 			// after the Platform has already been started up
 			RegistryProviderFactory.releaseDefault();
 			Platform.startup(engineConfig);
-
 			// data source
 			if (!StringUtils.isEmpty(config.getOdaUrl())) {
 				logger.info("Setting data source url: {}", config.getOdaUrl());
@@ -87,9 +75,7 @@ public class BIRTReportRunner implements ReportRunner {
 				engineConfig.getAppContext().put("odaIsolationMode",config.getOdaIsolationMode());
 				engineConfig.getAppContext().put("odaDialect", config.getOdaDialect());
 			}
-
-			IReportEngineFactory reportEngineFactory = (IReportEngineFactory) Platform
-					.createFactoryObject(IReportEngineFactory.EXTENSION_REPORT_ENGINE_FACTORY);
+			IReportEngineFactory reportEngineFactory = (IReportEngineFactory) Platform.createFactoryObject(IReportEngineFactory.EXTENSION_REPORT_ENGINE_FACTORY);
 			birtReportEngine = reportEngineFactory.createReportEngine(engineConfig);
 
 		} catch (BirtException e) {
@@ -99,7 +85,6 @@ public class BIRTReportRunner implements ReportRunner {
 			// Possibly rethrow the exception here and catch it in the aspect.
 			logger.error("Birt Startup Error: {}", e.getMessage());
 		}
-
 		reportTempDirectory = config.getBirtTempFileOutputDir();
 		developerBirtPath = config.getDeveloperBirtPath();
 	}
@@ -126,13 +111,11 @@ public class BIRTReportRunner implements ReportRunner {
 	 */
 	public File getReportFromFilesystem(String parentTypeId, String resourceName) throws RuntimeException {
 		String reportDirectory = config.getBirtReportInputDir();
-
 		Path birtReport;
 		if (developerBirtPath!=null && !developerBirtPath.equals(""))
 			birtReport = Paths.get( reportDirectory + File.separator + "project" + File.separator + developerBirtPath + File.separator + resourceName + File.separator + resourceName + ".rptdesign");
 		else
 			birtReport = Paths.get( reportDirectory + File.separator + "custom" + File.separator + resourceName + File.separator + resourceName + ".rptdesign");
-
 		if (!Files.isReadable(birtReport)) {
 			logger.info("Cannot loading rptdesign project/custom: "+birtReport);
 			birtReport = Paths.get(reportDirectory + File.separator + parentTypeId + File.separator + resourceName + File.separator + resourceName + ".rptdesign");
@@ -145,7 +128,6 @@ public class BIRTReportRunner implements ReportRunner {
 				}
 			}
 		}
-
 		return birtReport.toFile();
 	}
 
@@ -170,7 +152,6 @@ public class BIRTReportRunner implements ReportRunner {
 		OutputStream byteArrayOutputStream;
 		File rptDesignFile;
 		File reportContentTempFile;
-
 		// get the path to the report design file
 		try {
 			rptDesignFile = getReportFromFilesystem(birtReport.getType(), birtReport.getName());
@@ -178,21 +159,12 @@ public class BIRTReportRunner implements ReportRunner {
 			logger.error("Error while loading rptdesign: {}.", e.getMessage());
 			throw new RuntimeException("Could not find report");
 		}
-
-		// process any additional parameters
-		// Map<String, String> parsedParameters =
-		// parseParametersAsMap(birtReport.getParameters());
 		Map<String, Object> reportParameters = birtReport.getParameters();
-
-		// byteArrayOutputStream = new ByteArrayOutputStream();
 		try {
-			reportContentTempFile = new File(
-					reportTempDirectory + File.separator + "birt_report_temp_file_" + birtReport.getTaskId() + ".tmp");
+			reportContentTempFile = new File(reportTempDirectory + File.separator + "birt_report_temp_file_" + birtReport.getTaskId() + ".tmp");
 			reportContentTempFile.deleteOnExit();
 			byteArrayOutputStream = new FileOutputStream(reportContentTempFile);
-
 			IReportRunnable reportDesign = birtReportEngine.openReportDesign(rptDesignFile.getPath());
-			
 			// setting locale
 			// see
 			// https://stackoverflow.com/questions/25281571/birt-is-not-finding-properties-file-containing-localization-at-runtime-servlet
@@ -203,30 +175,22 @@ public class BIRTReportRunner implements ReportRunner {
 				throw new RuntimeException(e);
 			}
 			IRunTask runTask = birtReportEngine.createRunTask(reportDesign);
-
 			runTask.setLocale(birtReport.reportLocale);
-
 			logger.info("ResourcePath: {}", birtReportEngine.getConfig().getResourcePath());
-
 			runTask.getAppContext().put(BIRT_PARAMETERS, reportParameters);
 			if (reportParameters.size() > 0) {
 				for (Map.Entry<String, Object> entry : reportParameters.entrySet()) {
 					runTask.setParameterValue(entry.getKey(), entry.getValue());
 				}
 			}
-
 			runTask.validateParameters();
-
 			String rptdocument = reportTempDirectory + File.separator + "generated_" + birtReport.getTaskId()+ ".rptdocument";
 			runTask.run(rptdocument);
-
 			IReportDocument reportDocument = birtReportEngine.openReportDocument(rptdocument);
 			IRenderTask renderTask = birtReportEngine.createRenderTask(reportDocument);
 			renderTask.setLogger(java.util.logging.Logger.getLogger(IRenderTask.class.getSimpleName()));
 			renderTask.setProgressMonitor(birtReport.getBirtServiceProgress());
 			birtReport.getBirtServiceProgress().setTask(renderTask);
-
-							
 			RenderOption options = new RenderOption();
 			String outputFormat = (String) reportParameters.get("outputFormat");
 			if ("xlsx".equals(outputFormat)) {
@@ -239,11 +203,9 @@ public class BIRTReportRunner implements ReportRunner {
 				pdfRenderOption.setOption(IPDFRenderOption.REPAGINATE_FOR_PDF, new Boolean(true));
 				pdfRenderOption.closeOutputStreamOnExit(true);
 			}
-			
 			options.setOutputFormat(outputFormat);			
 			options.setOutputStream(byteArrayOutputStream);
 			renderTask.setRenderOption(options);
-
 			renderTask.render();
 			renderTask.close();
 		} catch (EngineException e) {
@@ -255,7 +217,6 @@ public class BIRTReportRunner implements ReportRunner {
 			// TODO add custom message to thrown exception
 			throw new RuntimeException(e);
 		}
-
 		return new ReportHandler(reportContentTempFile);
 	}
 

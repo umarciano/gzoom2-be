@@ -5,6 +5,8 @@ import static org.slf4j.LoggerFactory.getLogger;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.PredicateOperation;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -77,7 +79,11 @@ public class FilterPermissionDao {
 			
 			.leftJoin(qPartyRelationshipE).on(qPartyRelationshipE.roleTypeIdFrom.eq(qPartyRelationshipUO.roleTypeIdFrom)
 					.and(qPartyRelationshipE.partyIdFrom.eq(qPartyRelationshipUO.partyIdFrom))
-					.and(qPartyRelationshipE.partyRelationshipTypeId.in("ORG_RESPONSIBLE", "ORG_DELEGATE"))
+					.and(qPartyRelationshipE.partyRelationshipTypeId.eq("ORG_RESPONSIBLE")
+							.or((qPartyRelationshipE.partyRelationshipTypeId.eq("ORG_DELEGATE").and(
+									qPartyRelationshipE.ctxEnabled.isNull().or(qPartyRelationshipE.ctxEnabled.like('%' + parentTypeId + '%'))
+							)))
+					)
 					.and(qPartyRelationshipE.thruDate.isNull())
 					.and(qPartyRelationshipE.partyIdTo.eq(qUserLogin.partyId))) 
 			
@@ -88,7 +94,11 @@ public class FilterPermissionDao {
 			
 			.leftJoin(qPartyRelationshipY).on(qPartyRelationshipY.roleTypeIdFrom.eq(qPartyRelationshipZ.roleTypeIdFrom)
 					.and(qPartyRelationshipY.partyIdFrom.eq(qPartyRelationshipZ.partyIdFrom))
-					.and(qPartyRelationshipY.partyRelationshipTypeId.in("ORG_RESPONSIBLE", "ORG_DELEGATE"))
+					.and(qPartyRelationshipY.partyRelationshipTypeId.eq("ORG_RESPONSIBLE")
+							.or((qPartyRelationshipY.partyRelationshipTypeId.eq("ORG_DELEGATE").and(
+									qPartyRelationshipY.ctxEnabled.isNull().or(qPartyRelationshipY.ctxEnabled.like('%' + parentTypeId + '%'))
+							)))
+					)
 					.and(qPartyRelationshipY.thruDate.isNull())
 					.and(qPartyRelationshipY.partyIdTo.eq(qUserLogin.partyId)))
 			
@@ -99,7 +109,11 @@ public class FilterPermissionDao {
 			
 			.leftJoin(qPartyRelationshipY2).on(qPartyRelationshipY2.roleTypeIdFrom.eq(qPartyRelationshipZ2.roleTypeIdFrom)
 					.and(qPartyRelationshipY2.partyIdFrom.eq(qPartyRelationshipZ2.partyIdFrom))
-					.and(qPartyRelationshipY2.partyRelationshipTypeId.in("ORG_RESPONSIBLE", "ORG_DELEGATE"))
+					.and(qPartyRelationshipY2.partyRelationshipTypeId.eq("ORG_RESPONSIBLE")
+							.or((qPartyRelationshipY2.partyRelationshipTypeId.eq("ORG_DELEGATE").and(
+									qPartyRelationshipY2.ctxEnabled.isNull().or(qPartyRelationshipY2.ctxEnabled.like('%' + parentTypeId + '%'))
+							)))
+					)
 					.and(qPartyRelationshipY2.thruDate.isNull())
 					.and(qPartyRelationshipY2.partyIdTo.eq(qUserLogin.partyId)))
 			
@@ -135,8 +149,11 @@ public class FilterPermissionDao {
             
             .leftJoin(qPartyRelationshipE).on(qPartyRelationshipE.roleTypeIdFrom.eq(qPartyRole.roleTypeId)
 						.and(qPartyRelationshipE.partyIdFrom.eq(qPartyRole.partyId))
-						.and(qPartyRelationshipE.partyRelationshipTypeId.in("ORG_RESPONSIBLE", "ORG_DELEGATE"))
-						.and(qPartyRelationshipE.thruDate.isNull())
+						.and(qPartyRelationshipE.partyRelationshipTypeId.eq("ORG_RESPONSIBLE")
+								.or((qPartyRelationshipE.partyRelationshipTypeId.eq("ORG_DELEGATE").and(
+										qPartyRelationshipE.ctxEnabled.isNull().or(qPartyRelationshipE.ctxEnabled.like('%' + parentTypeId + '%'))
+								)))
+						).and(qPartyRelationshipE.thruDate.isNull())
 						.and(qPartyRelationshipE.partyIdTo.eq(qUserLogin.partyId)))   
             
             .leftJoin(qPartyRelationshipZ).on(qPartyRelationshipZ.roleTypeIdTo.eq(qPartyRole.roleTypeId)
@@ -145,7 +162,11 @@ public class FilterPermissionDao {
 						.and(qPartyRelationshipZ.thruDate.isNull()))             
             .leftJoin(qPartyRelationshipY).on(qPartyRelationshipY.roleTypeIdFrom.eq(qPartyRelationshipZ.roleTypeIdFrom)
 						.and(qPartyRelationshipY.partyIdFrom.eq(qPartyRelationshipZ.partyIdFrom))
-						.and(qPartyRelationshipY.partyRelationshipTypeId.in("ORG_RESPONSIBLE", "ORG_DELEGATE"))
+						.and(qPartyRelationshipY.partyRelationshipTypeId.eq("ORG_RESPONSIBLE")
+							.or((qPartyRelationshipY.partyRelationshipTypeId.eq("ORG_DELEGATE").and(
+									qPartyRelationshipY.ctxEnabled.isNull().or(qPartyRelationshipY.ctxEnabled.like('%' + parentTypeId + '%'))
+							)))
+						)
 						.and(qPartyRelationshipY.thruDate.isNull())
 						.and(qPartyRelationshipY.partyIdTo.eq(qUserLogin.partyId)))
             .leftJoin(qPartyRelationshipZ2).on(qPartyRelationshipZ2.roleTypeIdTo.eq(qPartyRelationshipZ.roleTypeIdFrom)
@@ -153,25 +174,32 @@ public class FilterPermissionDao {
 						.and(qPartyRelationshipZ2.partyRelationshipTypeId.eq("GROUP_ROLLUP"))
 						.and(qPartyRelationshipZ2.thruDate.isNull()))
 			.leftJoin(qPartyRelationshipY2).on(qPartyRelationshipY2.roleTypeIdFrom.eq(qPartyRelationshipZ2.roleTypeIdFrom)
-						.and(qPartyRelationshipY2.partyIdFrom.eq(qPartyRelationshipZ2.partyIdFrom))
-						.and(qPartyRelationshipY2.partyRelationshipTypeId.in("ORG_RESPONSIBLE", "ORG_DELEGATE"))
-						.and(qPartyRelationshipY2.thruDate.isNull())
-						.and(qPartyRelationshipY2.partyIdTo.eq(qUserLogin.partyId)));           
-            
-            List<Predicate> predicates = new ArrayList<>();
-            
+					.and(qPartyRelationshipY2.partyIdFrom.eq(qPartyRelationshipZ2.partyIdFrom))
+					.and(qPartyRelationshipY2.partyRelationshipTypeId.eq("ORG_RESPONSIBLE")
+							.or((qPartyRelationshipY2.partyRelationshipTypeId.eq("ORG_DELEGATE").and(
+									qPartyRelationshipY2.ctxEnabled.isNull().or(qPartyRelationshipY2.ctxEnabled.like('%' + parentTypeId + '%'))
+							)))
+					)
+					.and(qPartyRelationshipY2.thruDate.isNull())
+					.and(qPartyRelationshipY2.partyIdTo.eq(qUserLogin.partyId)));
+            //GN-4828
+            //List<Predicate> predicates = new ArrayList<>();
+			BooleanBuilder builder = new BooleanBuilder();
             if (isOrgMgr) {
-           	 predicates.add(qPartyRelationshipE.partyIdTo.isNotNull());
+           	 //predicates.add(qPartyRelationshipE.partyIdTo.isNotNull());
+           	 builder.or(qPartyRelationshipE.partyIdTo.isNotNull());
             }
             if (isSup) {
-           	 predicates.add(qPartyRelationshipY.partyIdTo.isNotNull());
+           	 //predicates.add(qPartyRelationshipY.partyIdTo.isNotNull());
+           	 builder.or(qPartyRelationshipY.partyIdTo.isNotNull());
             }
             if (isTop) {
-           	 predicates.add(qPartyRelationshipY2.partyIdTo.isNotNull());
+           	 //predicates.add(qPartyRelationshipY2.partyIdTo.isNotNull());
+           	 builder.or(qPartyRelationshipY2.partyIdTo.isNotNull());
             }
-            tupleSQLQuery.where(predicates.toArray(new Predicate[0]));
+			tupleSQLQuery.where(builder);
+            //tupleSQLQuery.where(predicates.toArray(new Predicate[0]));
         }
-        
         return tupleSQLQuery;
     }
 }

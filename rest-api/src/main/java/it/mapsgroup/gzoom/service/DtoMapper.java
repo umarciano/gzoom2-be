@@ -2,9 +2,7 @@ package it.mapsgroup.gzoom.service;
 
 import it.mapsgroup.gzoom.model.TimeEntry;
 import it.mapsgroup.gzoom.model.Timesheet;
-import it.mapsgroup.gzoom.model.User;
 import it.mapsgroup.gzoom.querydsl.dto.Activity;
-
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,6 +14,7 @@ public class DtoMapper {
     private static final String SEP = " ";
     private static final String DOT = ".";
     private static final String RPTDESIGN = ".rptdesign";
+    private static final String JASPER = ".jasper";
 
     public Timesheet copy(it.mapsgroup.gzoom.querydsl.dto.TimesheetEx from, Timesheet to) {
 
@@ -40,9 +39,6 @@ public class DtoMapper {
         to.setWorkEffortId(from.getWorkEffortId());
         to.setPercentage(from.getPercentage());
         to.setTimeEntryId(from.getTimeEntryId());
-        to.setDescription(from.getWorkEffort1().getWorkEffortName()+" - "+
-                            from.getWorkEffort2().getWorkEffortName()+" - "+
-                            from.getWorkEffort3().getWorkEffortName());
         return to;
     }
 
@@ -69,6 +65,7 @@ public class DtoMapper {
         to.setDescriptionLang(from.getDescriptionLang());
         to.setServiceName(from.getServiceName());
         to.setReportContentId(from.getContentId());
+        to.setReportContentTypeId(from.getContentTypeId());
         to.setContentName(from.getContentName());
 
         
@@ -94,7 +91,15 @@ public class DtoMapper {
 
         //dataResource campi provenienti dal dataresource
         if(from.getDataResource()!= null) {
-            to.setResourceName(from.getDataResource().getDataResourceName().substring(0, from.getDataResource().getDataResourceName().indexOf(RPTDESIGN)));
+            if(from.getDataResource().getDataResourceName().indexOf(RPTDESIGN) > 0){
+                to.setResourceName(from.getDataResource().getDataResourceName().substring(0, from.getDataResource().getDataResourceName().indexOf(RPTDESIGN)));
+            }
+            else if(from.getDataResource().getDataResourceName().indexOf(JASPER) > 0){
+                to.setResourceName(from.getDataResource().getDataResourceName().substring(0, from.getDataResource().getDataResourceName().indexOf(JASPER)));
+            }
+            else{
+                to.setResourceName(from.getDataResource().getDataResourceName());
+            }
         }
         
         //TODO gestire il LANG

@@ -31,6 +31,9 @@ public class Timesheet implements AbstractIdentity {
     @Column("CREATED_TX_STAMP")
     private java.time.LocalDateTime createdTxStamp;
 
+    @Column("EFFORT_UOM_ID")
+    private String effortUomId;
+
     @Column("FROM_DATE")
     private java.time.LocalDateTime fromDate;
 
@@ -54,6 +57,9 @@ public class Timesheet implements AbstractIdentity {
 
     @Column("TRANSFER_FLAG")
     private Boolean transferFlag;
+
+    @Column("WORK_EFFORT_TYPE_PERIOD_ID")
+    private String workEffortTypePeriodId;
 
     public java.math.BigDecimal getActualHours() {
         return actualHours;
@@ -109,6 +115,14 @@ public class Timesheet implements AbstractIdentity {
 
     public void setCreatedTxStamp(java.time.LocalDateTime createdTxStamp) {
         this.createdTxStamp = createdTxStamp;
+    }
+
+    public String getEffortUomId() {
+        return effortUomId;
+    }
+
+    public void setEffortUomId(String effortUomId) {
+        this.effortUomId = effortUomId;
     }
 
     public java.time.LocalDateTime getFromDate() {
@@ -173,6 +187,14 @@ public class Timesheet implements AbstractIdentity {
 
     public void setTransferFlag(Boolean transferFlag) {
         this.transferFlag = transferFlag;
+    }
+
+    public String getWorkEffortTypePeriodId() {
+        return workEffortTypePeriodId;
+    }
+
+    public void setWorkEffortTypePeriodId(String workEffortTypePeriodId) {
+        this.workEffortTypePeriodId = workEffortTypePeriodId;
     }
 
 }
