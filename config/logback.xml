@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- For assistance related to logback-translator or configuration  -->
+<!-- files in general, please contact the logback user mailing list -->
+<!-- at http://www.qos.ch/mailman/listinfo/logback-user             -->
+<!--                                                                -->
+<!-- For professional support please see                            -->
+<!--    http://www.qos.ch/shop/products/professionalSupport         -->
+<!--                                                                -->
+
+
+<configuration>
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--See http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
+        <!--and http://logback.qos.ch/manual/appenders.html#TimeBasedRollingPolicy-->
+        <!--for further documentation-->
+        <File>/Users/user/Desktop/workspace/gzoom2temp/logs/gzoom2-be.log</File>
+        <encoder>
+            <pattern>%-5p %d{yyyy-MM-dd HH:mm:ss.SSS,Europe/Rome} %C{1}:%M [%t] - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>/Users/user/Desktop/workspace/gzoom2temp/logs/gzoom2-be.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="ACCESS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>/Users/user/Desktop/workspace/gzoom2temp/logs/gzoom2-be-access.log</File>
+        <encoder>
+            <pattern>%-5p %d{yyyy-MM-dd HH:mm:ss.SSS,Europe/Rome} %C{1} [%t] - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/Users/user/Desktop/workspace/gzoom2temp/logs/gzoom2-be-access.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d %p [%t] %C{1} - %m%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <logger name="it.mapsgroup.gzoom.security.JwtTokenFilter" level="DEBUG">
+        <appender-ref ref="ACCESS"/>
+    </logger>
+    <logger name="it.mapsgroup.gzoom.security.JwtLoginFilter" level="INFO">
+        <appender-ref ref="ACCESS"/>
+    </logger>
+    <logger name="it.mapsgroup.gzoom.security.JwtLogoutFilter" level="INFO">
+        <appender-ref ref="ACCESS"/>
+    </logger>
+
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+    <!-- <logger name="org.springframework" level="INFO" additivity="false">
+         <appender-ref ref="FILE"/>
+     </logger>-->
+    <logger name="httpclient.wire" level="ERROR" additivity="false">
+        <appender-ref ref="FILE"/>
+    </logger>
+    <logger name="it.mapsgroup" level="INFO" additivity="false">
+        <appender-ref ref="FILE"/>
+    </logger>
+    <logger name="org.apache.commons" level="WARN" additivity="false">
+        <appender-ref ref="FILE"/>
+    </logger>
+    <logger name="net.sf.jasperreports.engine.query.JRJdbcQueryExecuter" level="DEBUG" additivity="false">
+        <appender-ref ref="FILE"/>
+    </logger>
+
+</configuration>

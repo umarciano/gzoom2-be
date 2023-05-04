@@ -24,5 +24,4 @@
 /file-manager/src/test/java/META-INF/MANIFEST.MF
 /json-diff/src/test/java/META-INF/MANIFEST.MF
 /persistence/src/test/java/META-INF/MANIFEST.MF
-config
 /logs/*
