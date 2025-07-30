@@ -28,18 +28,18 @@ public class BirtConfig {
 
 
     public BirtConfig(Environment env) {
-        birtLoggingDirectory = env.getProperty("birt.logging.directory", DEFAULT_LOGGING_DIRECTORY);
-        birtLoggingLevel = Level.parse(env.getProperty("birt.logging.level", Level.SEVERE.getName()));
-        birtTempFileOutputDir = env.getProperty("birt.temp.file.output.dir");
-        birtReportInputDir = env.getProperty("birt.report.input.dir");
-        birtReportOutputDir = env.getProperty("birt.report.output.dir");
-        odaUrl = env.getProperty("oda.url");
-        odaDriverClass = env.getProperty("oda.driver.class");
-        odaPassword = env.getProperty("oda.password");
-        odaUser = env.getProperty("oda.user");
-        odaDialect = env.getProperty("oda_dialect");
-        odaIsolationMode = env.getProperty("oda.IsolationMode");
-        developerBirtPath = env.getProperty("birt.developerBirtPath");
+        birtLoggingDirectory = "C:/GZOOM/workspace/gzoom2temp/birt/logs";
+        birtLoggingLevel = Level.parse("FINE");
+        birtTempFileOutputDir = "C:/GZOOM/workspace/gzoom2temp/birt/tmp";
+        birtReportInputDir = "C:/GZOOM/workspace/gzoom2-report";
+        birtReportOutputDir = "C:/GZOOM/workspace/gzoom2temp/birt/report";
+        odaUrl = "jdbc:postgresql://localhost:5432/cardarelli";
+        odaDriverClass = "org.postgresql.Driver";
+        odaPassword = "postgres";
+        odaUser = "postgres";
+        odaDialect = "postgresql";
+        odaIsolationMode = null;
+        developerBirtPath = null;
     }
 
     public String getBirtLoggingDirectory() {

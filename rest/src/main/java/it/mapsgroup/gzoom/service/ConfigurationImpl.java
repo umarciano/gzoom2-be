@@ -54,7 +54,7 @@ public class ConfigurationImpl implements Configuration, SecurityConfiguration, 
         // localization
         this.localeDirPath = Paths.get(env.getProperty("gzoom.conf.dir") + "/locales");
         this.languageType = env.getProperty("language.multi.type",String.class, "NONE");
-        this.languages = Arrays.asList(env.getProperty("language.locales.available").split(","));
+        this.languages = Arrays.asList("it_IT");
         this.translationResources.add("/lmm/locales/it.json");
         //Add locals json if exists multiple lang
         for(String l :languages) {
@@ -74,12 +74,12 @@ public class ConfigurationImpl implements Configuration, SecurityConfiguration, 
 
         this.configurationPath = env.getProperty("gzoom.conf.dir");
 
-        this.ofbizServerXmlrpcUrl = env.getProperty("ofbiz.server.xmlrpc.url");
+        this.ofbizServerXmlrpcUrl = "http://localhost:8080/gzoom/control/xmlrpc";
 
-        this.gzoomServerReportUrl = env.getProperty("gzoom.server.report.url");
+        this.gzoomServerReportUrl = "http://localhost:8081/rest/report-job";
 
-        this.reportProbeDelay = env.getProperty("gzoom.quartz.report.probe.delay", Integer.class, 60);//60 sec default
-        this.reportProbeRetries = env.getProperty("gzoom.quartz.report.probe.retries", Integer.class, 20);//number of retires
+        this.reportProbeDelay = 60;//60 sec default
+        this.reportProbeRetries = 30;//number of retires
     }
 
 

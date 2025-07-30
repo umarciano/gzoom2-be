@@ -18,23 +18,23 @@
         <!--See http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
         <!--and http://logback.qos.ch/manual/appenders.html#TimeBasedRollingPolicy-->
         <!--for further documentation-->
-        <File>/Users/user/Desktop/workspace/gzoom2temp/logs/gzoom2-be.log</File>
+        <File>C:/GZOOM/workspace/gzoom2temp/logs/gzoom2-be.log</File>
         <encoder>
             <pattern>%-5p %d{yyyy-MM-dd HH:mm:ss.SSS,Europe/Rome} %C{1}:%M [%t] - %m%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover -->
-            <fileNamePattern>/Users/user/Desktop/workspace/gzoom2temp/logs/gzoom2-be.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <fileNamePattern>C:/GZOOM/workspace/gzoom2temp/logs/gzoom2-be.log.%d{yyyy-MM-dd}</fileNamePattern>
         </rollingPolicy>
     </appender>
 
     <appender name="ACCESS" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>/Users/user/Desktop/workspace/gzoom2temp/logs/gzoom2-be-access.log</File>
+        <File>C:/GZOOM/workspace/gzoom2temp/logs/gzoom2-be-access.log</File>
         <encoder>
             <pattern>%-5p %d{yyyy-MM-dd HH:mm:ss.SSS,Europe/Rome} %C{1} [%t] - %m%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/Users/user/Desktop/workspace/gzoom2temp/logs/gzoom2-be-access.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <fileNamePattern>C:/GZOOM/workspace/gzoom2temp/logs/gzoom2-be-access.log.%d{yyyy-MM-dd}</fileNamePattern>
         </rollingPolicy>
     </appender>
 

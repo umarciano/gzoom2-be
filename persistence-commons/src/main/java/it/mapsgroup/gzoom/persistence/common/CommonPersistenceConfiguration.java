@@ -40,11 +40,11 @@ public class CommonPersistenceConfiguration implements TransactionManagementConf
         if (environment != null) {
             LOG.info("environment " + environment.toString());
         }
-        dataSource.setDriverClassName(getNotNullProperty(environment, "persistence.main.driver"));
+        dataSource.setDriverClassName("org.postgresql.Driver");
         LOG.info("dataSource.setDriverClassName " + dataSource.getDriverClassName());
-        dataSource.setJdbcUrl(getNotNullProperty(environment, "persistence.main.url"));
-        dataSource.setUsername(getNotNullProperty(environment, "persistence.main.user"));
-        dataSource.setPassword(environment.getProperty("persistence.main.password"));
+        dataSource.setJdbcUrl("jdbc:postgresql://localhost:5433/cardarelli");
+        dataSource.setUsername("postgres");
+        dataSource.setPassword("postgres");
         //dataSource.setConnectionTestQuery("SELECT 1");
         dataSource.setMinimumIdle(10);
         dataSource.setMaximumPoolSize(50);

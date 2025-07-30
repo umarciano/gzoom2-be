@@ -156,16 +156,16 @@
         <dependency>
             <groupId>org.eclipse.birt.runtime</groupId>
             <artifactId>org.eclipse.birt.runtime</artifactId>
-            <version>4.8.0-20180626</version>
+            <version>4.8.0</version>
             <scope>system</scope>
-            <systemPath>${pom.basedir}/lib/org.eclipse.birt.runtime_4.8.0-20180626_gzoom.jar</systemPath>
+            <systemPath>${pom.basedir}/lib/org.eclipse.birt.runtime_4.8.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.eclipse.birt.runtime</groupId>
             <artifactId>org.eclipse.equinox.registry</artifactId>
-            <version>3.8.0.v20180426-1327</version>
+            <version>3.8.0</version>
             <scope>system</scope>
-            <systemPath>${pom.basedir}/lib/org.eclipse.equinox.registry_3.8.0.v20180426-1327.jar</systemPath>
+            <systemPath>${pom.basedir}/lib/org.eclipse.equinox.registry_3.8.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.eclipse.birt.runtime</groupId>
@@ -173,6 +173,14 @@
             <version>58.2.0.v20170418-1837</version>
             <scope>system</scope>
             <systemPath>${pom.basedir}/lib/com.ibm.icu_58.2.0.v20170418-1837.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.birt</groupId>
+            <artifactId>org.eclipse.birt.report.engine</artifactId>
+            <version>4.9.0</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/lib/org.eclipse.equinox.registry_3.8.0.jar</systemPath>
         </dependency>
 
         <!-- JASPER -->
