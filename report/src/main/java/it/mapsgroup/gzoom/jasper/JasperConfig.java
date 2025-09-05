@@ -26,11 +26,11 @@ public class JasperConfig {
 
 
     public JasperConfig(Environment env) {
-        jasperLoggingDirectory = env.getProperty("C:/data/Gzoom_2/birt/logs", DEFAULT_LOGGING_DIRECTORY);
-        jasperLoggingLevel = Level.parse("FINE");
-        jasperTempFileOutputDir = env.getProperty("C:/data/Gzoom_2/birt/tmp");
-        jasperReportInputDir = "C:/Users/asma/workspaceNeon/ProvaBirt";
-        jasperReportOutputDir = env.getProperty("C:/data/Gzoom_2/birt/logs/report");
+        jasperLoggingDirectory = env.getProperty("birt.logging.directory", DEFAULT_LOGGING_DIRECTORY);
+        jasperLoggingLevel = Level.parse(env.getProperty("birt.logging.level", Level.SEVERE.getName()));
+        jasperTempFileOutputDir = env.getProperty("birt.temp.file.output.dir");
+        jasperReportInputDir = env.getProperty("birt.report.input.dir");
+        jasperReportOutputDir = env.getProperty("birt.report.output.dir");
         odaUrl = env.getProperty("oda.url");
         odaDriverClass = env.getProperty("oda.driver.class");
         odaPassword = env.getProperty("oda.password");

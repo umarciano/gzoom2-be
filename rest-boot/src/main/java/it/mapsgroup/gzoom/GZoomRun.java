@@ -1,11 +1,13 @@
 package it.mapsgroup.gzoom;
 
 
+import it.memelabs.smartnebula.spring.boot.config.PropertyApplicationContextInitializer;
 import org.slf4j.Logger;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.*;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -39,10 +41,10 @@ public class GZoomRun {
 //            System.setProperty("logging.config", System.getProperty("gzoom.conf.dir") + "/logback.xml");
 //        LOG.info("logging.config [{}])", System.getProperty("logging.config"));
 //        //SpringApplication.run(LmmRun.class, args);
-//        new SpringApplicationBuilder(GZoomRun.class)
-//                .initializers(new PropertyApplicationContextInitializer("file:" + System.getProperty("gzoom.conf.dir") + "/gzoom.properties"))
-//                .run(args);
-        run(GZoomRun.class, args);
+        new SpringApplicationBuilder(GZoomRun.class)
+               .initializers(new PropertyApplicationContextInitializer("file:" + System.getProperty("gzoom.conf.dir") + "/gzoom.properties"))
+                .run(args);
+        //run(GZoomRun.class, args);
     }
 
 }

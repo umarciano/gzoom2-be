@@ -11,12 +11,14 @@ import it.mapsgroup.gzoom.service.ReportJobService;
 import it.mapsgroup.gzoom.service.ReportTaskService;
 import it.memelabs.smartnebula.spring.boot.config.ApplicationContextProvider;
 
+import it.memelabs.smartnebula.spring.boot.config.PropertyApplicationContextInitializer;
 import org.slf4j.Logger;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -53,7 +55,9 @@ public class GZoomReportRun {
 
     public static void main(String[] args) throws Exception {
         LOG.info("logging.config [{}])", System.getProperty("logging.config"));
-        ConfigurableApplicationContext ctx = run(GZoomReportRun.class, args);
+        ConfigurableApplicationContext ctx = new SpringApplicationBuilder(GZoomReportRun.class)
+                .initializers(new PropertyApplicationContextInitializer("file:" + System.getProperty("gzoom.conf.dir") + "/gzoom-report.properties"))
+                .run(args);
 
         //fixme remove workaround
         Configuration configuration = ctx.getBean(SQLQueryFactory.class).getConfiguration();
