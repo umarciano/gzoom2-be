@@ -1287,6 +1287,7 @@
     "NOPORTAL_PART" : "Portal",
     "NOPORTAL_PROC" : "Portal",
     "NOPORTAL_REND" : "Portal",
+    "NOPORTAL_MY" : "Meine Leistung",
     "NOPORTAL_TRAS" : "Transparenz",
     "NOT_EXISTS_FILE" : "Datei existiert nicht: ${filePath}",
     "NO_APP_R_FOUND" : "${person} hat nicht die rolle für ${typeDescription}",
