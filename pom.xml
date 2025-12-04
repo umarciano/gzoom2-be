@@ -617,7 +617,8 @@
         <module>report-persistence-query-dsl</module>
         <module>report-rest</module>
         <module>report-rest-dto</module>
-        <module>report-rest-boot</module>
+        <!-- REMOVED 2025-12-03: report-rest-boot non utilizzato, contiene 54 CRITICAL vulnerabilities -->
+        <!-- <module>report-rest-boot</module> -->
     </modules>
 
 </project>
