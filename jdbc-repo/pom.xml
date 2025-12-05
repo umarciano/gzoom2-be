@@ -30,19 +30,19 @@
         </dependency>
 
 
-        <!-- ORACLE database driver -->
-        <!--   <dependency>
+        <!-- ORACLE database driver - REMOVED: CVE-2016-3506 (HIGH) -->
+        <!-- <dependency>
                <groupId>com.oracle</groupId>
                <artifactId>ojdbc7</artifactId>
                <version>12.1.0.2</version>
-           </dependency>-->
+           </dependency> -->
 
-        <!-- ORACLE database driver -->
-        <!-->
+        <!-- ORACLE database driver - REMOVED: CVE-2016-3506 (HIGH) -->
+        <!-- <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc6</artifactId>
             <version>11.2.0.4</version>
-        </dependency-->
+        </dependency> -->
 
 
         <dependency>
