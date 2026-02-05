@@ -102,7 +102,9 @@ public class ImportSchedeService {
                     if (c != null) {
                         switch (c.getCellType()) {
                             case STRING:
-                                value = c.getStringCellValue().trim();
+                                String s = c.getStringCellValue();
+                                if (s != null) s = s.trim();
+                                value = (s == null || s.isEmpty()) ? null : s;
                                 break;
                             case NUMERIC:
                                 if (org.apache.poi.ss.usermodel.DateUtil.isCellDateFormatted(c)) {
@@ -116,7 +118,9 @@ public class ImportSchedeService {
                                 break;
                             case FORMULA:
                                 try {
-                                    value = c.getStringCellValue();
+                                    String fv = c.getStringCellValue();
+                                    if (fv != null) fv = fv.trim();
+                                    value = (fv == null || fv.isEmpty()) ? null : fv;
                                 } catch (Exception ex) {
                                     value = null;
                                 }
@@ -125,6 +129,12 @@ public class ImportSchedeService {
                             default:
                                 value = null;
                         }
+                    }
+                    // Normalizza eventuali stringhe residue: converti stringhe vuote in null
+                    if (value instanceof String) {
+                        String vs = ((String) value).trim();
+                        if (vs.isEmpty()) value = null;
+                        else value = vs;
                     }
                     map.put(headers.get(i), value);
                 }
