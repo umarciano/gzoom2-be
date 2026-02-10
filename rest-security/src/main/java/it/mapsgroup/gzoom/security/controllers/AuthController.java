@@ -195,5 +195,142 @@ public class AuthController {
             return null;
         }
     }
+
+    /**
+     * SSO Login: scambia un externalLoginKey di OFBiz con un JWT di Spring Boot.
+     * Questo endpoint viene chiamato da Angular dopo il redirect SSO da OFBiz.
+     *
+     * @param externalLoginKey L'external login key generato da OFBiz durante il login SSO
+     * @return TokenDto contenente il JWT per Angular
+     */
+    @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
+    @RequestMapping(value = "/sso-login", method = RequestMethod.POST)
+    public TokenDto ssoLogin(@RequestParam("externalLoginKey") String externalLoginKey) {
+        LOG.info("=== SSO Login START ===");
+        LOG.info("SSO Login - externalLoginKey received: " + externalLoginKey);
+        
+        if (externalLoginKey == null || externalLoginKey.isEmpty()) {
+            LOG.error("SSO Login - externalLoginKey is null or empty");
+            return null;
+        }
+        
+        try {
+            // Valida l'externalLoginKey chiamando OFBiz
+            String userLoginId = validateExternalLoginKeyWithOfbiz(externalLoginKey);
+            
+            if (userLoginId == null) {
+                LOG.error("SSO Login - Invalid or expired externalLoginKey: " + externalLoginKey);
+                return null;
+            }
+            
+            LOG.info("SSO Login - userLoginId resolved from OFBiz: " + userLoginId);
+            
+            // Recupera il profilo utente dal database
+            UserLogin profile = userLoginDao.getUserLogin(userLoginId);
+            if (profile == null) {
+                LOG.error("SSO Login - User not found in database: " + userLoginId);
+                return null;
+            }
+            
+            // Usa l'externalLoginKey ricevuto da OFBiz (già validato dal SSO)
+            profile.setExternalLoginKey(externalLoginKey);
+            
+            // Recupera i dati persona (firstName, lastName) dal database
+            Person person = profile.getPerson();
+            if (person == null) {
+                LOG.warn("SSO Login - Person data not found for user: " + userLoginId);
+                person = new Person();
+                person.setFirstName(userLoginId);
+                person.setLastName("");
+            }
+            profile.setPerson(person);
+            
+            // Genera il JWT
+            String token = jwtService.generate(profile);
+            permitsStorage.save(token, profile.getUsername());
+            
+            LOG.info("SSO Login - JWT generated successfully for user: " + profile.getUsername());
+            LOG.info("=== SSO Login END - SUCCESS ===");
+            return new TokenDto(token);
+            
+        } catch (Exception e) {
+            LOG.error("SSO Login - Error during authentication: " + e.getMessage(), e);
+            LOG.info("=== SSO Login END - ERROR ===");
+            return null;
+        }
+    }
+    
+    /**
+     * Valida un externalLoginKey chiamando l'endpoint OFBiz.
+     * 
+     * @param externalLoginKey La chiave da validare
+     * @return userLoginId se la chiave è valida, null altrimenti
+     */
+    private String validateExternalLoginKeyWithOfbiz(String externalLoginKey) {
+        LOG.info("=== Validating externalLoginKey with OFBiz ===");
+        LOG.info("ExternalLoginKey: " + externalLoginKey);
+        
+        try {
+            // URL dell'endpoint OFBiz (TODO: spostare in configurazione)
+            String ofbizUrl = "http://localhost:8080/gzoom/control/validateExternalLoginKey";
+            String urlWithParams = ofbizUrl + "?externalLoginKey=" + java.net.URLEncoder.encode(externalLoginKey, "UTF-8");
+            
+            LOG.info("Calling OFBiz endpoint: " + urlWithParams);
+            
+            // Effettua la chiamata HTTP GET
+            java.net.URL url = new java.net.URL(urlWithParams);
+            java.net.HttpURLConnection conn = (java.net.HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setConnectTimeout(5000);
+            conn.setReadTimeout(5000);
+            
+            int responseCode = conn.getResponseCode();
+            LOG.info("OFBiz response code: " + responseCode);
+            
+            if (responseCode == 200) {
+                // Leggi la risposta JSON
+                java.io.BufferedReader in = new java.io.BufferedReader(
+                    new java.io.InputStreamReader(conn.getInputStream())
+                );
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+                
+                String jsonResponse = response.toString();
+                LOG.info("OFBiz response: " + jsonResponse);
+                
+                // Parse JSON manualmente (semplice parsing per evitare dipendenze)
+                // Formato atteso: {"valid":true,"userLoginId":"primario.cardiologiautic","partyId":"10420","enabled":"Y"}
+                if (jsonResponse.contains("\"valid\":true")) {
+                    // Estrai userLoginId dal JSON
+                    int start = jsonResponse.indexOf("\"userLoginId\":\"") + 15;
+                    int end = jsonResponse.indexOf("\"", start);
+                    if (start > 14 && end > start) {
+                        String userLoginId = jsonResponse.substring(start, end);
+                        LOG.info("ExternalLoginKey validated successfully! UserLoginId: " + userLoginId);
+                        return userLoginId;
+                    }
+                }
+                
+                LOG.warn("Invalid JSON response from OFBiz: " + jsonResponse);
+                return null;
+                
+            } else if (responseCode == 401) {
+                LOG.warn("OFBiz returned 401: Invalid or expired externalLoginKey");
+                return null;
+            } else {
+                LOG.error("OFBiz returned unexpected status code: " + responseCode);
+                return null;
+            }
+            
+        } catch (Exception e) {
+            LOG.error("Error calling OFBiz validateExternalLoginKey endpoint: " + e.getMessage(), e);
+            return null;
+        }
+    }
 }
+
 
