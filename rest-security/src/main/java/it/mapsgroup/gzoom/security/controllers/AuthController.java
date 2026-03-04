@@ -203,7 +203,7 @@ public class AuthController {
      * @param externalLoginKey L'external login key generato da OFBiz durante il login SSO
      * @return TokenDto contenente il JWT per Angular
      */
-    @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/sso-login", method = RequestMethod.POST)
     public TokenDto ssoLogin(@RequestParam("externalLoginKey") String externalLoginKey) {
         LOG.info("=== SSO Login START ===");
