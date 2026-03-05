@@ -20,14 +20,14 @@ import java.nio.file.Files;
  */
 @RestController
 @RequestMapping(value = "/procedura-ricorso")
-@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
+@CrossOrigin(origins = "*")
 public class ProceduraRicorsoController {
 
     private static final Logger LOG = LoggerFactory.getLogger(ProceduraRicorsoController.class);
     private static final String PDF_FILENAME = "documentazione_procedura_ricorso.pdf";
     
-    // Path assoluto - file ora è sotto gzoom2-be
-    private static final String PDF_PATH_ABSOLUTE = "C:\\GZOOM\\workspace\\gzoom2-be\\static_content\\" + PDF_FILENAME;
+    // Path assoluto per Linux (collaudo)
+    private static final String PDF_PATH_ABSOLUTE = "/opt/gzoom-app/GZOOM_CARDARELLI/workspace/gzoom2-be/static_content/" + PDF_FILENAME;
     
     // Path relativi da provare (dal modulo rest-boot)
     private static final String[] PDF_PATHS_RELATIVE = {
