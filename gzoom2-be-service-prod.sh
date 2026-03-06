@@ -1,5 +1,9 @@
 ﻿#!/bin/bash
-# chkconfig: 345 80 20
+# Nome del JAR senza estensione (deve corrispondere al file .jar in SERVICE_DIR)
+APP_NAME=rest-boot-2.9.5
+APP_PORT=8081
+
+SERVICE_DIR=/opt/gzoom-app/GZOOM_CARDARELLI/workspace/gzoom2-beonfig: 345 80 20
 # description: Pleiade gzoom2-be-service
 ### BEGIN INIT INFO
 # Provides: {{instance_name}}
@@ -58,14 +62,14 @@ start_service() {
   log_success_msg "Starting gzoom2-be-service with GZOOM_ENV=${GZOOM_ENV_VALUE}"
   if [ "${CUR_USER}" == "root" ]; then
     # Nota: -DGZOOM_ENV passato come valore literal perche' 'su -' resetta l'environment
-    nohup /bin/su - root -c "LOG_DIR=/opt/gzoom-app/GZOOM_PROD/workspace/gzoom2-be java \
-      -Dgzoom.conf.dir='/opt/gzoom-app/GZOOM_PROD/workspace/gzoom2-be/config' \
+    nohup /bin/su - root -c "LOG_DIR=/opt/gzoom-app/GZOOM_CARDARELLI/workspace/gzoom2-be java \
+      -Dgzoom.conf.dir='/opt/gzoom-app/GZOOM_CARDARELLI/workspace/gzoom2-be/config' \
       -DGZOOM_ENV='${GZOOM_ENV_VALUE}' \
       -jar $SERVICE_DIR/$APP_NAME.jar" < /dev/null >> $LOGS 2>&1 &
   else
-    LOG_DIR=/opt/gzoom-app/GZOOM_PROD/workspace/gzoom2-be \
+    LOG_DIR=/opt/gzoom-app/GZOOM_CARDARELLI/workspace/gzoom2-be \
     nohup java \
-      -Dgzoom.conf.dir="/opt/gzoom-app/GZOOM_PROD/workspace/gzoom2-be/config" \
+      -Dgzoom.conf.dir="/opt/gzoom-app/GZOOM_CARDARELLI/workspace/gzoom2-be/config" \
       -DGZOOM_ENV="${GZOOM_ENV_VALUE}" \
       -jar $SERVICE_DIR/$APP_NAME.jar < /dev/null >> $LOGS 2>&1 &
   fi
