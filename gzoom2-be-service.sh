@@ -1,4 +1,4 @@
-#!/bin/bash
+﻿#!/bin/bash
 # chkconfig: 345 80 20
 # description: Pleiade gzoom2-be-service
 ### BEGIN INIT INFO
@@ -24,7 +24,7 @@ LOGS=$SERVICE_DIR/gzoom2-be-service.log
 
 # GZOOM multi-environment: hardcoded per questo server.
 # Cambiare in "prod" sul server di produzione, lasciare vuoto per sviluppo locale.
-# Non affidarsi a GZOOM_ENV da ~/.bashrc perché 'sudo service' non eredita l'environment utente.
+# Non affidarsi a GZOOM_ENV da ~/.bashrc perchÃ© 'sudo service' non eredita l'environment utente.
 GZOOM_ENV_VALUE="collaudo"
 
 log_success_msg() {
@@ -56,7 +56,7 @@ start_service() {
   fi
 
         log_success_msg "Starting gzoom2-be-service with GZOOM_ENV=${GZOOM_ENV_VALUE:-<not set>}"  if [ "${CUR_USER}" == "root" ]; then
-    # Nota: -DGZOOM_ENV passato come valore literal perché 'su -' resetta l'environment
+    # Nota: -DGZOOM_ENV passato come valore literal perchÃ© 'su -' resetta l'environment
     nohup /bin/su - root -c "LOG_DIR=/opt/gzoom-app/GZOOM_CARDARELLI/workspace/gzoom2-be java \
       -Dgzoom.conf.dir='/opt/gzoom-app/GZOOM_CARDARELLI/workspace/gzoom2-be/config' \
       -DGZOOM_ENV='${GZOOM_ENV_VALUE}' \
