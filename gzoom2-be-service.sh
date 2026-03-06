@@ -10,7 +10,8 @@
 # Description: Starts the Pleiade gzoom2-be-service
 ### END INIT INFO
 
-APP_NAME=gzoom2-be-service
+# Nome del JAR senza estensione (deve corrispondere al file .jar in SERVICE_DIR)
+APP_NAME=rest-boot-2.9.5
 APP_PORT=8081
 
 SERVICE_DIR=/opt/gzoom-app/GZOOM_CARDARELLI/workspace/gzoom2-be
@@ -21,10 +22,10 @@ SERVICE_SHUTDOWN_URL=$SERVICE_BASE_URL/shutdown
 CUR_USER=`whoami`
 LOGS=$SERVICE_DIR/gzoom2-be-service.log
 
-# GZOOM multi-environment: legge GZOOM_ENV dall'ambiente di sistema.
-# Sul server collaudo: export GZOOM_ENV=collaudo in /etc/environment o ~/.bashrc
-# Se non impostato, GZoomRun usa gzoom.properties base (dev/localhost).
-GZOOM_ENV_VALUE=${GZOOM_ENV:-}
+# GZOOM multi-environment: hardcoded per questo server.
+# Cambiare in "prod" sul server di produzione, lasciare vuoto per sviluppo locale.
+# Non affidarsi a GZOOM_ENV da ~/.bashrc perché 'sudo service' non eredita l'environment utente.
+GZOOM_ENV_VALUE="collaudo"
 
 log_success_msg() {
   echo "$*"
@@ -54,9 +55,7 @@ start_service() {
     exit 0
   fi
 
-  log_success_msg "Starting gzoom2-be-service with GZOOM_ENV=${GZOOM_ENV_VALUE:-<not set, using base config>}"
-
-  if [ "${CUR_USER}" == "root" ]; then
+        log_success_msg "Starting gzoom2-be-service with GZOOM_ENV=${GZOOM_ENV_VALUE:-<not set>}"  if [ "${CUR_USER}" == "root" ]; then
     # Nota: -DGZOOM_ENV passato come valore literal perché 'su -' resetta l'environment
     nohup /bin/su - root -c "LOG_DIR=/opt/gzoom-app/GZOOM_CARDARELLI/workspace/gzoom2-be java \
       -Dgzoom.conf.dir='/opt/gzoom-app/GZOOM_CARDARELLI/workspace/gzoom2-be/config' \
