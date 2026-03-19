@@ -24,7 +24,7 @@ import java.nio.file.Files;
 public class ProceduraRicorsoController {
 
     private static final Logger LOG = LoggerFactory.getLogger(ProceduraRicorsoController.class);
-    private static final String PDF_FILENAME = "documentazione_procedura_ricorso.pdf";
+    private static final String PDF_FILENAME = "documentazione_procedura_conciliazione.pdf";
     
     // Path assoluto per Linux (collaudo)
     private static final String PDF_PATH_ABSOLUTE = "/opt/gzoom-app/GZOOM_CARDARELLI/workspace/gzoom2-be/static_content/" + PDF_FILENAME;
