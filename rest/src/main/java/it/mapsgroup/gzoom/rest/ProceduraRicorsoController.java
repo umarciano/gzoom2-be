@@ -25,6 +25,7 @@ public class ProceduraRicorsoController {
 
     private static final Logger LOG = LoggerFactory.getLogger(ProceduraRicorsoController.class);
     private static final String PDF_FILENAME = "documentazione_procedura_conciliazione.pdf";
+    private static final String PDF_DOWNLOAD_NAME = "procedura_di_conciliazione.pdf";
     
     // Path assoluto per Linux (collaudo)
     private static final String PDF_PATH_ABSOLUTE = "/opt/gzoom-app/GZOOM_CARDARELLI/workspace/gzoom2-be/static_content/" + PDF_FILENAME;
@@ -94,7 +95,7 @@ public class ProceduraRicorsoController {
             // Imposta gli headers per forzare il download
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", PDF_FILENAME);
+            headers.setContentDispositionFormData("attachment", PDF_DOWNLOAD_NAME);
             headers.setContentLength(pdfBytes.length);
             headers.set("Access-Control-Expose-Headers", "Content-Disposition");
             
