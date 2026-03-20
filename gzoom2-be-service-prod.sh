@@ -31,6 +31,9 @@ LOGS=$SERVICE_DIR/gzoom2-be-service.log
 # Attiva il caricamento di gzoom-prod.properties dalla cartella config.
 GZOOM_ENV_VALUE="prod"
 
+# Java 11 richiesto da Spring Boot 2.1 + spring-ldap (incompatibile con Java 17)
+JAVA_HOME=/usr/lib/jvm/java-11-amazon-corretto
+
 log_success_msg() {
   echo "$*"
 }
@@ -62,13 +65,13 @@ start_service() {
   log_success_msg "Starting gzoom2-be-service with GZOOM_ENV=${GZOOM_ENV_VALUE}"
   if [ "${CUR_USER}" == "root" ]; then
     # Nota: -DGZOOM_ENV passato come valore literal perche' 'su -' resetta l'environment
-    nohup /bin/su - root -c "LOG_DIR=/opt/gzoom-app/GZOOM_CARDARELLI/workspace/gzoom2-be java \
+    nohup /bin/su - root -c "LOG_DIR=/opt/gzoom-app/GZOOM_CARDARELLI/workspace/gzoom2-be $JAVA_HOME/bin/java \
       -Dgzoom.conf.dir='/opt/gzoom-app/GZOOM_CARDARELLI/workspace/gzoom2-be/config' \
       -DGZOOM_ENV='${GZOOM_ENV_VALUE}' \
       -jar $SERVICE_DIR/$APP_NAME.jar" < /dev/null >> $LOGS 2>&1 &
   else
     LOG_DIR=/opt/gzoom-app/GZOOM_CARDARELLI/workspace/gzoom2-be \
-    nohup java \
+    nohup $JAVA_HOME/bin/java \
       -Dgzoom.conf.dir="/opt/gzoom-app/GZOOM_CARDARELLI/workspace/gzoom2-be/config" \
       -DGZOOM_ENV="${GZOOM_ENV_VALUE}" \
       -jar $SERVICE_DIR/$APP_NAME.jar < /dev/null >> $LOGS 2>&1 &
