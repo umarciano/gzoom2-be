@@ -72,6 +72,13 @@ public class JwtTokenFilter extends GenericFilterBean {
             chain.doFilter(request, response);
             return;
         }
+        else if(path.contains("/api/premiali/export")){
+            ((HttpServletResponse) response).addHeader("Access-Control-Allow-Origin", "*");
+            ((HttpServletResponse) response).addHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+            ((HttpServletResponse) response).addHeader("Access-Control-Allow-Headers", "*");
+            chain.doFilter(request, response);
+            return;
+        }
 
 
         try {

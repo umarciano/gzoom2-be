@@ -140,7 +140,7 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint);
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/logout", "/login","/api/getToken","/api/doLogout","/api/sso-login").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/profile/i18n/*", "/reminder-period", "/reminder-expiry", "/user-preference-na/VISUAL_THEME", "/node/configuration/*", "/node/version/*", "/node/logo/*/*", "/party/partiesExposed","/api/getLoginMethod","/api/getOneLogin-LoginUrl","/api/getOneLogin-LogoutUrl").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/profile/i18n/*", "/reminder-period", "/reminder-expiry", "/user-preference-na/VISUAL_THEME", "/node/configuration/*", "/node/version/*", "/node/logo/*/*", "/party/partiesExposed","/api/getLoginMethod","/api/getOneLogin-LoginUrl","/api/getOneLogin-LogoutUrl","/api/premiali/export").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/api/getToken", "/api/sso-login").permitAll();
         http.authorizeRequests().antMatchers("/**").authenticated();
         JwtLoginFilter jwtLoginFilter = new JwtLoginFilter(authenticationManager, objectMapper);
