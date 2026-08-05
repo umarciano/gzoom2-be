@@ -8,7 +8,10 @@ import it.mapsgroup.gzoom.querydsl.dto.UserLogin;
 import it.mapsgroup.gzoom.security.JwtOfBizLoginAuthenticationProvider;
 import it.mapsgroup.gzoom.security.JwtService;
 import it.mapsgroup.gzoom.security.PermitsStorage;
+import it.mapsgroup.gzoom.security.UnigateOttClient;
 import it.mapsgroup.gzoom.security.dto.models.AuthRequest;
+import it.mapsgroup.gzoom.security.dto.models.OttLoginRequest;
+import it.mapsgroup.gzoom.security.dto.models.OttValidationResponse;
 import it.mapsgroup.gzoom.security.dto.models.TokenDto;
 import it.mapsgroup.gzoom.security.model.JwtAuthentication;
 import org.jose4j.lang.JoseException;
@@ -16,8 +19,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -40,16 +46,18 @@ public class AuthController {
     private final String logoutUsernameHeaderName = "ofbiz.server.sso.sirac.logout.username.header.name";
     private final String enableChangePassword = "security.enableChangePassword";
     private Environment env;
+    private UnigateOttClient unigateOttClient;
 
     @Autowired
-    public AuthController(JwtOfBizLoginAuthenticationProvider jwtOfBizLoginAuthenticationProvider, JwtService jwtService, LoginServiceOfBiz loginService, UserLoginDao userLoginDao, PermitsStorage permitsStorage, Environment env){
+    public AuthController(JwtOfBizLoginAuthenticationProvider jwtOfBizLoginAuthenticationProvider, JwtService jwtService, LoginServiceOfBiz loginService, UserLoginDao userLoginDao, PermitsStorage permitsStorage, Environment env, UnigateOttClient unigateOttClient){
         super();
         this.jwtService = jwtService;
         this.jwtOfBizLoginAuthenticationProvider = jwtOfBizLoginAuthenticationProvider;
         this.loginService = loginService;
         this.userLoginDao = userLoginDao;
         this.permitsStorage = permitsStorage;
-        this.env =env;
+        this.env = env;
+        this.unigateOttClient = unigateOttClient;
     }
 
 
@@ -261,8 +269,82 @@ public class AuthController {
     }
     
     /**
+     * OTT Login: valida un One-Time Token emesso da UNIGATE e restituisce un JWT Gzoom2.
+     * Il token viene verificato chiamando UNIGATE GET /api/portal/ott/validate.
+     * Se valido, autentica l'utente su OFBiz via loginWithOnlyUserLoginId e genera il JWT.
+     *
+     * @param request body con il campo "token"
+     * @return TokenDto con il JWT Gzoom2, oppure 403 se il token non è valido o l'utente non esiste
+     */
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/ott-login", method = RequestMethod.POST)
+    public ResponseEntity<TokenDto> ottLogin(@RequestBody OttLoginRequest request) {
+        LOG.info("=== OTT Login START ===");
+
+        if (request == null || request.token == null || request.token.isEmpty()) {
+            LOG.error("OTT Login - token is null or empty");
+            return ResponseEntity.badRequest().build();
+        }
+
+        LOG.info("OTT Login - token received (troncato): " + request.token.substring(0, Math.min(8, request.token.length())) + "...");
+
+        try {
+            // 1. Valida il token contro UNIGATE
+            OttValidationResponse validation = unigateOttClient.validate(request.token);
+
+            if (!validation.isValid() || validation.getAppUsername() == null || validation.getAppUsername().isEmpty()) {
+                LOG.error("OTT Login - token non valido o appUsername assente");
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            }
+
+            String username = validation.getAppUsername();
+            LOG.info("OTT Login - appUsername da UNIGATE: " + username);
+
+            // 2. Recupera il profilo utente dal DB
+            UserLogin profile = userLoginDao.getUserLogin(username);
+            if (profile == null) {
+                LOG.error("OTT Login - utente non trovato nel DB: " + username);
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            }
+
+            // 3. Autentica su OFBiz senza password (stesso pattern di getToken)
+            LoginResponseOfBiz response = loginService.loginWithOnlyUserLoginId(username);
+            if (StringUtils.isEmpty(response.getExternalLoginKey())) {
+                LOG.error("OTT Login - OFBiz loginWithOnlyUserLoginId fallito per: " + username);
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            }
+
+            profile.setExternalLoginKey(response.getExternalLoginKey());
+
+            Person person = profile.getPerson();
+            if (person == null) {
+                person = new Person();
+                person.setFirstName(username);
+                person.setLastName("");
+            } else {
+                person.setFirstName(response.getFirstName());
+                person.setLastName(response.getLastName());
+            }
+            profile.setPerson(person);
+
+            // 4. Genera JWT Gzoom2
+            String token = jwtService.generate(profile);
+            permitsStorage.save(token, profile.getUsername());
+
+            LOG.info("OTT Login - JWT generato per utente: " + profile.getUsername());
+            LOG.info("=== OTT Login END - SUCCESS ===");
+            return ResponseEntity.ok(new TokenDto(token));
+
+        } catch (Exception e) {
+            LOG.error("OTT Login - Errore: " + e.getMessage(), e);
+            LOG.info("=== OTT Login END - ERROR ===");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+    }
+
+    /**
      * Valida un externalLoginKey chiamando l'endpoint OFBiz.
-     * 
+     *
      * @param externalLoginKey La chiave da validare
      * @return userLoginId se la chiave è valida, null altrimenti
      */
