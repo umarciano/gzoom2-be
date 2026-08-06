@@ -72,6 +72,17 @@ public class GZoomWebConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     @Autowired
+    public it.mapsgroup.gzoom.ofbiz.service.ConsuntivoServiceOfBiz consuntivoServiceOfBiz(OfBizClientConfig ofBizClientConfig) {
+        return new it.mapsgroup.gzoom.ofbiz.service.ConsuntivoServiceOfBiz(new AuthenticationOfBizClientImpl(new OfBizClientConfig() {
+            @Override
+            public URL getServerXmlRpcUrl() {
+                return ofBizClientConfig.getServerXmlRpcUrl();
+            }
+        }));
+    }
+
+    @Bean
+    @Autowired
     public VersionServiceOfBiz versionServiceOfBiz(OfBizClientConfig ofBizClientConfig) {
         return new VersionServiceOfBiz(new VersionOfBizClientImpl(new OfBizClientConfig() {
             @Override
