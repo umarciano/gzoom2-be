@@ -40,6 +40,16 @@ public class ConsuntivazioneAlberoDao extends AbstractDao {
     // Le S* senza work_effort_measure (non assegnate) sono escluse dal JOIN.
     private static final String SQL =
             "WITH me AS (SELECT party_id FROM user_login WHERE user_login_id = :userLoginId), "
+          // ADMIN (AORNADMIN) bypassa lo scoping per UOC: vede TUTTI gli indicatori con referente
+          // (WEM_IND_IN_CHARGE). I 72 senza referente restano fuori (traccia dati separata, doc 11 §6).
+          + "is_admin AS ( "
+          + "  SELECT EXISTS ( "
+          + "    SELECT 1 FROM user_login_security_group ulsg "
+          + "    WHERE ulsg.user_login_id = :userLoginId "
+          + "      AND ulsg.group_id = 'AORNADMIN' "
+          + "      AND (ulsg.thru_date IS NULL OR ulsg.thru_date > now()) "
+          + "  ) AS admin "
+          + "), "
           + "myuoc AS ( "
           + "  SELECT DISTINCT pr.party_id_from AS uoc "
           + "  FROM party_relationship pr JOIN me ON true "
@@ -49,9 +59,11 @@ public class ConsuntivazioneAlberoDao extends AbstractDao {
           + "), "
           + "myind AS ( "
           + "  SELECT DISTINCT gar.gl_account_id "
-          + "  FROM gl_account_role gar JOIN myuoc ON myuoc.uoc = gar.party_id "
+          + "  FROM gl_account_role gar "
           + "  WHERE gar.role_type_id = 'WEM_IND_IN_CHARGE' "
           + "    AND (gar.thru_date IS NULL OR gar.thru_date > now()) "
+          + "    AND ( (SELECT admin FROM is_admin) "
+          + "          OR gar.party_id IN (SELECT uoc FROM myuoc) ) "
           + ") "
           + "SELECT "
           + "  ga.gl_account_id, ga.account_code, ga.account_name, "
@@ -121,7 +133,8 @@ public class ConsuntivazioneAlberoDao extends AbstractDao {
     /**
      * Righe piatte (indicatore x UO x parametro) di cui l'utente e' referente.
      *
-     * @param userLoginId login dell'utente referente (scoping server-side).
+     * @param userLoginId login dell'utente (scoping server-side: referente = proprie UOC;
+     *                    admin AORNADMIN = tutti gli indicatori con referente).
      * @return righe piatte, gia' ordinate per account_code, uo, seq.
      */
     @Transactional(readOnly = true)

@@ -28,7 +28,8 @@ import static org.slf4j.LoggerFactory.getLogger;
  * Assembla le righe piatte (indicatore x UO x parametro) restituite dal DAO in
  * un albero Indicatore &gt; UO &gt; parametri, pronto per il frontend.
  * Lo scoping e' sull'utente loggato ({@link it.mapsgroup.gzoom.security.Principals}):
- * un referente vede solo i propri indicatori, nessun ulteriore controllo permessi.
+ * un referente vede solo i propri indicatori (UOC di cui e' ORG_RESPONSIBLE); l'admin
+ * (gruppo AORNADMIN) vede TUTTI gli indicatori con referente. Nessun ulteriore controllo permessi.
  */
 @Service
 public class ConsuntivazioneService {
@@ -61,6 +62,9 @@ public class ConsuntivazioneService {
                 salvati++;
             }
         }
+        // Lo scoring (valore ACTUAL -> fascia RNG_* -> % -> x peso = punti -> SCOREKPI) e' calcolato
+        // in modo SILENTE dentro il servizio legacy saveIndicatorConsuntivo, sul movimento ACTUAL.
+        // Nessuna orchestrazione qui: vedi doc 11/13 (scoring diretto, non scoreCardCalc).
         LOG.info("consuntivazione/valori [userLoginId={}] movimenti salvati = {}", userLoginId, salvati);
         Map<String, Object> res = new HashMap<>();
         res.put("salvati", salvati);

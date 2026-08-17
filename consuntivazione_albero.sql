@@ -3,7 +3,20 @@
 -- Restituisce righe piatte (indicatore x UO x parametro); il service le assembla in
 -- albero Indicatore > UO > parametri. I parametri esistono solo per tipo A/B*100
 -- (LEFT JOIN -> null per SI_NO / DIRETTO). S* senza work_effort_measure = non assegnati -> esclusi.
+--
+-- ADMIN (AORNADMIN): vede TUTTI gli indicatori da consuntivare (tutti quelli con un referente
+-- WEM_IND_IN_CHARGE), non solo quelli delle proprie UOC. I 72 indicatori SENZA referente restano
+-- fuori dal portale (traccia dati separata, doc 11 §6). Il referente "normale" resta scopato alle
+-- proprie UOC (ORG_RESPONSIBLE).
 WITH me AS (SELECT party_id FROM user_login WHERE user_login_id = :userLoginId),
+is_admin AS (
+  SELECT EXISTS (
+    SELECT 1 FROM user_login_security_group ulsg
+    WHERE ulsg.user_login_id = :userLoginId
+      AND ulsg.group_id = 'AORNADMIN'
+      AND (ulsg.thru_date IS NULL OR ulsg.thru_date > now())
+  ) AS admin
+),
 myuoc AS (
   SELECT DISTINCT pr.party_id_from AS uoc
   FROM party_relationship pr JOIN me ON true
@@ -13,9 +26,11 @@ myuoc AS (
 ),
 myind AS (
   SELECT DISTINCT gar.gl_account_id
-  FROM gl_account_role gar JOIN myuoc ON myuoc.uoc = gar.party_id
+  FROM gl_account_role gar
   WHERE gar.role_type_id = 'WEM_IND_IN_CHARGE'
     AND (gar.thru_date IS NULL OR gar.thru_date > now())
+    AND ( (SELECT admin FROM is_admin)
+          OR gar.party_id IN (SELECT uoc FROM myuoc) )
 )
 SELECT
   ga.gl_account_id, ga.account_code, ga.account_name,
