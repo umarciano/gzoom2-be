@@ -53,6 +53,8 @@ LEFT JOIN gl_resource_type grt ON grt.gl_resource_type_id = ga.gl_resource_type_
 JOIN work_effort_measure wem ON wem.gl_account_id = myind.gl_account_id
    AND (wem.thru_date IS NULL OR wem.thru_date > now())
 JOIN work_effort we ON we.work_effort_id = wem.work_effort_id AND we.work_effort_type_id = 'CTX_BS'
+   -- Il referente vede/consuntiva solo le schede in TOACCOUNT (finestra aperta dall'admin); l'admin no.
+   AND ((SELECT admin FROM is_admin) OR we.current_status_id = 'WEORCARD_TOACCOUNT')
 LEFT JOIN party_group pg ON pg.party_id = we.org_unit_id
 LEFT JOIN gl_account_input_calc gaic ON gaic.gl_account_id = ga.gl_account_id
 LEFT JOIN gl_fiscal_type gft ON gft.gl_fiscal_type_id = gaic.gl_fiscal_type_id
