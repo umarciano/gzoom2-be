@@ -4,10 +4,9 @@
 -- albero Indicatore > UO > parametri. I parametri esistono solo per tipo A/B*100
 -- (LEFT JOIN -> null per SI_NO / DIRETTO). S* senza work_effort_measure = non assegnati -> esclusi.
 --
--- ADMIN (AORNADMIN): vede TUTTI gli indicatori da consuntivare (tutti quelli con un referente
--- WEM_IND_IN_CHARGE), non solo quelli delle proprie UOC. I 72 indicatori SENZA referente restano
--- fuori dal portale (traccia dati separata, doc 11 §6). Il referente "normale" resta scopato alle
--- proprie UOC (ORG_RESPONSIBLE).
+-- ADMIN (AORNADMIN): vede e puo' consuntivare TUTTI gli indicatori agganciati a schede CTX_BS,
+-- ANCHE quelli SENZA referente WEM_IND_IN_CHARGE (es. gli indicatori condivisi come ST13). Il
+-- referente "normale" resta scopato alle proprie UOC (ORG_RESPONSIBLE). Vedi doc 11 (condivisi).
 WITH me AS (SELECT party_id FROM user_login WHERE user_login_id = :userLoginId),
 is_admin AS (
   SELECT EXISTS (
@@ -25,12 +24,19 @@ myuoc AS (
     AND (pr.thru_date IS NULL OR pr.thru_date > now())
 ),
 myind AS (
+  -- ADMIN: TUTTI gli indicatori agganciati a schede CTX_BS, anche SENZA referente.
+  SELECT DISTINCT wem2.gl_account_id
+  FROM work_effort_measure wem2
+  JOIN work_effort we2 ON we2.work_effort_id = wem2.work_effort_id AND we2.work_effort_type_id = 'CTX_BS'
+  WHERE (SELECT admin FROM is_admin)
+    AND (wem2.thru_date IS NULL OR wem2.thru_date > now())
+  UNION
+  -- REFERENTE: solo gli indicatori di cui e' responsabile la sua UOC.
   SELECT DISTINCT gar.gl_account_id
   FROM gl_account_role gar
   WHERE gar.role_type_id = 'WEM_IND_IN_CHARGE'
     AND (gar.thru_date IS NULL OR gar.thru_date > now())
-    AND ( (SELECT admin FROM is_admin)
-          OR gar.party_id IN (SELECT uoc FROM myuoc) )
+    AND gar.party_id IN (SELECT uoc FROM myuoc)
 )
 SELECT
   ga.gl_account_id, ga.account_code, ga.account_name,

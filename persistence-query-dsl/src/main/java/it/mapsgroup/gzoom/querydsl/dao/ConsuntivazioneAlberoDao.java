@@ -40,8 +40,9 @@ public class ConsuntivazioneAlberoDao extends AbstractDao {
     // Le S* senza work_effort_measure (non assegnate) sono escluse dal JOIN.
     private static final String SQL =
             "WITH me AS (SELECT party_id FROM user_login WHERE user_login_id = :userLoginId), "
-          // ADMIN (AORNADMIN) bypassa lo scoping per UOC: vede TUTTI gli indicatori con referente
-          // (WEM_IND_IN_CHARGE). I 72 senza referente restano fuori (traccia dati separata, doc 11 §6).
+          // ADMIN (AORNADMIN) bypassa lo scoping per UOC: vede e puo' consuntivare TUTTI gli indicatori
+          // agganciati a schede CTX_BS, ANCHE quelli SENZA referente (WEM_IND_IN_CHARGE) - es. gli
+          // indicatori condivisi come ST13. Vedi myind sotto e doc 11 (indicatori condivisi/senza referente).
           + "is_admin AS ( "
           + "  SELECT EXISTS ( "
           + "    SELECT 1 FROM user_login_security_group ulsg "
@@ -58,12 +59,20 @@ public class ConsuntivazioneAlberoDao extends AbstractDao {
           + "    AND (pr.thru_date IS NULL OR pr.thru_date > now()) "
           + "), "
           + "myind AS ( "
+          // ADMIN: TUTTI gli indicatori agganciati a schede CTX_BS, ANCHE senza referente
+          // (WEM_IND_IN_CHARGE): l'admin deve poterli vedere e consuntivare comunque.
+          + "  SELECT DISTINCT wem2.gl_account_id "
+          + "  FROM work_effort_measure wem2 "
+          + "  JOIN work_effort we2 ON we2.work_effort_id = wem2.work_effort_id AND we2.work_effort_type_id = 'CTX_BS' "
+          + "  WHERE (SELECT admin FROM is_admin) "
+          + "    AND (wem2.thru_date IS NULL OR wem2.thru_date > now()) "
+          + "  UNION "
+          // REFERENTE: solo gli indicatori di cui e' responsabile la sua UOC.
           + "  SELECT DISTINCT gar.gl_account_id "
           + "  FROM gl_account_role gar "
           + "  WHERE gar.role_type_id = 'WEM_IND_IN_CHARGE' "
           + "    AND (gar.thru_date IS NULL OR gar.thru_date > now()) "
-          + "    AND ( (SELECT admin FROM is_admin) "
-          + "          OR gar.party_id IN (SELECT uoc FROM myuoc) ) "
+          + "    AND gar.party_id IN (SELECT uoc FROM myuoc) "
           + ") "
           + "SELECT "
           + "  ga.gl_account_id, ga.account_code, ga.account_name, "
