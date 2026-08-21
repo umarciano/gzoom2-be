@@ -15,9 +15,11 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static it.mapsgroup.gzoom.security.Principals.principal;
 import static org.slf4j.LoggerFactory.getLogger;
@@ -55,7 +57,52 @@ public class ConsuntivazioneService {
     public Map<String, Object> salvaValori(List<MovimentoConsuntivoReq> movimenti) {
         String userLoginId = principal().getUserLoginId();
         int salvati = 0;
-        if (movimenti != null) {
+        if (movimenti != null && !movimenti.isEmpty()) {
+            // (B2) Guardia server-side: l'utente puo' consuntivare SOLO le coppie (workEffortId, glAccountId)
+            // presenti nel proprio albero, che il DAO gia' scopa per stato TOACCOUNT + proprieta' (ORG_RESPONSIBLE
+            // della UOC referente; admin = tutte). Riusare lo stesso scoping evita bypass via payload manomesso.
+            List<ConsuntivazioneAlberoRow> ammessi = consuntivazioneAlberoDao.getAlbero(userLoginId);
+            Set<String> coppieAmmesse = new HashSet<>();
+            Map<String, String> tipoByGlAccount = new HashMap<>();
+            for (ConsuntivazioneAlberoRow r : ammessi) {
+                if (r.getWorkEffortId() != null && r.getGlAccountId() != null) {
+                    coppieAmmesse.add(r.getWorkEffortId() + "|" + r.getGlAccountId());
+                }
+                if (r.getGlAccountId() != null && r.getTipo() != null) {
+                    tipoByGlAccount.putIfAbsent(r.getGlAccountId(), r.getTipo());
+                }
+            }
+
+            // Validazione ALL-OR-NOTHING: valida tutti i movimenti prima di salvarne uno (il salvataggio
+            // legacy non e' transazionale sui movimenti, quindi si evitano salvataggi parziali).
+            for (MovimentoConsuntivoReq m : movimenti) {
+                if (m.getWorkEffortId() == null || m.getGlAccountId() == null || m.getGlFiscalTypeId() == null) {
+                    throw new IllegalArgumentException(
+                            "Movimento incompleto: workEffortId, glAccountId e glFiscalTypeId sono obbligatori.");
+                }
+                // (B2) autorizzazione stato+proprieta'
+                if (!coppieAmmesse.contains(m.getWorkEffortId() + "|" + m.getGlAccountId())) {
+                    throw new SecurityException("Non autorizzato a consuntivare l'indicatore " + m.getGlAccountId()
+                            + " sulla scheda " + m.getWorkEffortId()
+                            + " (scheda non in stato 'Da consuntivare' o indicatore non di tua competenza).");
+                }
+                // (B6) dominio
+                if (m.getTransValue() != null) {
+                    double val = m.getTransValue().doubleValue();
+                    if (val < 0) {
+                        throw new IllegalArgumentException(
+                                "Valore negativo non ammesso (indicatore " + m.getGlAccountId() + ").");
+                    }
+                    // SI/NO: sull'ACTUAL sono ammessi solo 0 (No) o 100 (Si) — v. Raccolta Requisiti (SI -> 100%).
+                    String tipo = tipoByGlAccount.get(m.getGlAccountId());
+                    if ("ACTUAL".equals(m.getGlFiscalTypeId()) && tipo != null && "SI_NO".equalsIgnoreCase(tipo.trim())
+                            && val != 0.0d && val != 100.0d) {
+                        throw new IllegalArgumentException(
+                                "Indicatore SI/NO: valore ammesso 0 o 100 (indicatore " + m.getGlAccountId() + ").");
+                    }
+                }
+            }
+
             for (MovimentoConsuntivoReq m : movimenti) {
                 consuntivoServiceOfBiz.saveMovimento(userLoginId, m.getWorkEffortId(), m.getGlAccountId(),
                         m.getGlFiscalTypeId(), m.getTransValue() == null ? null : m.getTransValue().doubleValue());
