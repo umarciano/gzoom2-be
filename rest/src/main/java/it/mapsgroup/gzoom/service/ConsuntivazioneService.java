@@ -64,12 +64,16 @@ public class ConsuntivazioneService {
             List<ConsuntivazioneAlberoRow> ammessi = consuntivazioneAlberoDao.getAlbero(userLoginId);
             Set<String> coppieAmmesse = new HashSet<>();
             Map<String, String> tipoByGlAccount = new HashMap<>();
+            Map<String, String> statoByWe = new HashMap<>();
             for (ConsuntivazioneAlberoRow r : ammessi) {
                 if (r.getWorkEffortId() != null && r.getGlAccountId() != null) {
                     coppieAmmesse.add(r.getWorkEffortId() + "|" + r.getGlAccountId());
                 }
                 if (r.getGlAccountId() != null && r.getTipo() != null) {
                     tipoByGlAccount.putIfAbsent(r.getGlAccountId(), r.getTipo());
+                }
+                if (r.getWorkEffortId() != null && r.getStatoScheda() != null) {
+                    statoByWe.putIfAbsent(r.getWorkEffortId(), r.getStatoScheda());
                 }
             }
 
@@ -85,6 +89,12 @@ public class ConsuntivazioneService {
                     throw new SecurityException("Non autorizzato a consuntivare l'indicatore " + m.getGlAccountId()
                             + " sulla scheda " + m.getWorkEffortId()
                             + " (scheda non in stato 'Da consuntivare' o indicatore non di tua competenza).");
+                }
+                // (FREEZE CLOSED) scheda chiusa: punteggi CONGELATI. Il referente non la vede (albero solo TOACCOUNT),
+                // ma l'admin non e' ristretto per stato e potrebbe alterare uno SCOREKPI gia' ufficiale: qui lo blocchiamo.
+                if ("WEORCARD_CLOSED".equals(statoByWe.get(m.getWorkEffortId()))) {
+                    throw new IllegalStateException("Scheda " + m.getWorkEffortId()
+                            + " CHIUSA (CLOSED): i punteggi sono congelati, la consuntivazione non e' ammessa.");
                 }
                 // (B6) dominio
                 if (m.getTransValue() != null) {
