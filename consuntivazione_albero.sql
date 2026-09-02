@@ -16,13 +16,6 @@ is_admin AS (
       AND (ulsg.thru_date IS NULL OR ulsg.thru_date > now())
   ) AS admin
 ),
-myuoc AS (
-  SELECT DISTINCT pr.party_id_from AS uoc
-  FROM party_relationship pr JOIN me ON true
-  WHERE pr.party_id_to = me.party_id
-    AND pr.party_relationship_type_id = 'ORG_RESPONSIBLE'
-    AND (pr.thru_date IS NULL OR pr.thru_date > now())
-),
 myind AS (
   -- ADMIN: TUTTI gli indicatori agganciati a schede CTX_BS, anche SENZA referente.
   SELECT DISTINCT wem2.gl_account_id
@@ -31,12 +24,14 @@ myind AS (
   WHERE (SELECT admin FROM is_admin)
     AND (wem2.thru_date IS NULL OR wem2.thru_date > now())
   UNION
-  -- REFERENTE: solo gli indicatori di cui e' responsabile la sua UOC.
+  -- REFERENTE (persona): gli indicatori di cui la PERSONA loggata e' referente diretto
+  -- (WEM_IND_IN_CHARGE con party_id = persona). Modello persona (2026-09-02): il referente NON
+  -- e' piu' una UOC risolta via ORG_RESPONSIBLE, ma la persona stessa impostata da import.
   SELECT DISTINCT gar.gl_account_id
   FROM gl_account_role gar
   WHERE gar.role_type_id = 'WEM_IND_IN_CHARGE'
     AND (gar.thru_date IS NULL OR gar.thru_date > now())
-    AND gar.party_id IN (SELECT uoc FROM myuoc)
+    AND gar.party_id = (SELECT party_id FROM me)
 )
 SELECT
   ga.gl_account_id, ga.account_code, ga.account_name,
