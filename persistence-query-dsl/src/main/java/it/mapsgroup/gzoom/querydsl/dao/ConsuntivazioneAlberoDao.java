@@ -70,7 +70,7 @@ public class ConsuntivazioneAlberoDao extends AbstractDao {
           + ") "
           + "SELECT "
           + "  ga.gl_account_id, ga.account_code, ga.account_name, "
-          + "  ga.calc_custom_method_id AS tipo, ga.source AS fonte, "
+          + "  ga.calc_custom_method_id AS tipo, ga.source AS fonte, ga.consuntivabile_parzialmente, "
           + "  grt.description AS area, ga.description AS descrizione, "
           + "  EXTRACT(YEAR FROM we.estimated_completion_date)::int AS anno, "
           + "  we.work_effort_id, we.org_unit_id, pg.group_name AS uo, "
@@ -93,7 +93,7 @@ public class ConsuntivazioneAlberoDao extends AbstractDao {
           + "JOIN work_effort we ON we.work_effort_id = wem.work_effort_id AND we.work_effort_type_id = 'CTX_BS' "
           // Il REFERENTE vede/consuntiva solo le schede in TOACCOUNT (finestra di consuntivazione aperta
           // dall'admin); prima non e' ancora aperta, dopo (ACCOUNTED+) e' chiusa. L'admin non e' ristretto.
-          + "   AND ((SELECT admin FROM is_admin) OR we.current_status_id = 'WEORCARD_TOACCOUNT') "
+          + "   AND ((SELECT admin FROM is_admin) OR we.current_status_id IN ('WEORCARD_TOACC_INT','WEORCARD_TOACCOUNT')) "
           + "LEFT JOIN party_group pg ON pg.party_id = we.org_unit_id "
           + "LEFT JOIN gl_account_input_calc gaic ON gaic.gl_account_id = ga.gl_account_id "
           + "LEFT JOIN gl_fiscal_type gft ON gft.gl_fiscal_type_id = gaic.gl_fiscal_type_id "
@@ -110,6 +110,7 @@ public class ConsuntivazioneAlberoDao extends AbstractDao {
             row.setFonte(rs.getString("fonte"));
             row.setArea(rs.getString("area"));
             row.setDescrizione(rs.getString("descrizione"));
+            row.setConsuntivabileParzialmente("Y".equals(rs.getString("consuntivabile_parzialmente")));
             int anno = rs.getInt("anno");
             row.setAnno(rs.wasNull() ? null : anno);
             row.setWorkEffortId(rs.getString("work_effort_id"));

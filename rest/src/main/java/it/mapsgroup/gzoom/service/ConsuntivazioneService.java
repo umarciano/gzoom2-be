@@ -64,6 +64,7 @@ public class ConsuntivazioneService {
             List<ConsuntivazioneAlberoRow> ammessi = consuntivazioneAlberoDao.getAlbero(userLoginId);
             Set<String> coppieAmmesse = new HashSet<>();
             Map<String, String> tipoByGlAccount = new HashMap<>();
+            Map<String, Boolean> parzialeByGlAccount = new HashMap<>();
             Map<String, String> statoByWe = new HashMap<>();
             for (ConsuntivazioneAlberoRow r : ammessi) {
                 if (r.getWorkEffortId() != null && r.getGlAccountId() != null) {
@@ -71,6 +72,9 @@ public class ConsuntivazioneService {
                 }
                 if (r.getGlAccountId() != null && r.getTipo() != null) {
                     tipoByGlAccount.putIfAbsent(r.getGlAccountId(), r.getTipo());
+                }
+                if (r.getGlAccountId() != null) {
+                    parzialeByGlAccount.putIfAbsent(r.getGlAccountId(), r.isConsuntivabileParzialmente());
                 }
                 if (r.getWorkEffortId() != null && r.getStatoScheda() != null) {
                     statoByWe.putIfAbsent(r.getWorkEffortId(), r.getStatoScheda());
@@ -89,6 +93,12 @@ public class ConsuntivazioneService {
                     throw new SecurityException("Non autorizzato a consuntivare l'indicatore " + m.getGlAccountId()
                             + " sulla scheda " + m.getWorkEffortId()
                             + " (scheda non in stato 'Da consuntivare' o indicatore non di tua competenza).");
+                }
+                if ("ACTUAL_INT".equals(m.getGlFiscalTypeId())) {
+                    if (!Boolean.TRUE.equals(parzialeByGlAccount.get(m.getGlAccountId()))
+                            || !"WEORCARD_TOACC_INT".equals(statoByWe.get(m.getWorkEffortId()))) {
+                        throw new SecurityException("Il valore intermedio e' disponibile solo per indicatori consuntivabili parzialmente nella fase intermedia.");
+                    }
                 }
                 // (FREEZE CLOSED) scheda chiusa: punteggi CONGELATI. Il referente non la vede (albero solo TOACCOUNT),
                 // ma l'admin non e' ristretto per stato e potrebbe alterare uno SCOREKPI gia' ufficiale: qui lo blocchiamo.
@@ -165,6 +175,7 @@ public class ConsuntivazioneService {
                 ind.setFonte(row.getFonte());
                 ind.setArea(row.getArea());
                 ind.setDescrizione(row.getDescrizione());
+                ind.setConsuntivabileParzialmente(row.isConsuntivabileParzialmente());
                 indByGlAccount.put(glAccountId, ind);
                 paramByGlAccount.put(glAccountId, new LinkedHashMap<>());
                 uoByGlAccount.put(glAccountId, new LinkedHashMap<>());
