@@ -129,6 +129,61 @@ public class ConsuntivazioneService {
     }
 
     /**
+     * Appende una nota del referente al commento dell'indicatore-su-scheda (stesso campo
+     * {@code work_effort_measure.comments} della card legacy). Non sovrascrive testi esistenti
+     * (admin/Direttori): la nota va IN CODA, attribuita (referente + data), lato DAO.
+     * <p>
+     * Riusa la stessa guardia B2 di {@link #salvaValori}: la coppia (workEffortId, glAccountId)
+     * deve essere nell'albero dell'utente (stato TOACCOUNT + proprieta'; admin = tutte le CTX_BS).
+     *
+     * @return {@code { "salvato": true|false }}
+     */
+    public Map<String, Object> salvaCommento(String workEffortId, String glAccountId, String testo) {
+        if (workEffortId == null || glAccountId == null) {
+            throw new IllegalArgumentException("workEffortId e glAccountId sono obbligatori.");
+        }
+        if (testo == null || testo.trim().isEmpty()) {
+            throw new IllegalArgumentException("Il testo della nota e' obbligatorio.");
+        }
+        String userLoginId = principal().getUserLoginId();
+        List<ConsuntivazioneAlberoRow> ammessi = consuntivazioneAlberoDao.getAlbero(userLoginId);
+        boolean autorizzato = false;
+        String stato = null;
+        for (ConsuntivazioneAlberoRow r : ammessi) {
+            if (workEffortId.equals(r.getWorkEffortId()) && glAccountId.equals(r.getGlAccountId())) {
+                autorizzato = true;
+                stato = r.getStatoScheda();
+                break;
+            }
+        }
+        if (!autorizzato) {
+            throw new SecurityException("Non autorizzato a commentare l'indicatore " + glAccountId
+                    + " sulla scheda " + workEffortId + " (scheda non di tua competenza o non consuntivabile).");
+        }
+        if ("WEORCARD_CLOSED".equals(stato)) {
+            throw new IllegalStateException("Scheda " + workEffortId
+                    + " CHIUSA (CLOSED): la nota non e' modificabile.");
+        }
+        String nuovoTesto = consuntivazioneAlberoDao.appendCommento(userLoginId, workEffortId, glAccountId, testo);
+        Map<String, Object> res = new HashMap<>();
+        res.put("salvato", nuovoTesto != null);
+        res.put("commento", nuovoTesto); // testo completo aggiornato, per il read-back immediato lato FE
+        return res;
+    }
+
+    /**
+     * Configurazione lato client del portale referente (es. URL SharePoint del bottone "Carica file",
+     * letto da {@code content_attribute} del menu consuntivazione).
+     *
+     * @return {@code { "sharepointUploadUrl": "..." | null }}
+     */
+    public Map<String, Object> config() {
+        Map<String, Object> res = new HashMap<>();
+        res.put("sharepointUploadUrl", consuntivazioneAlberoDao.getSharepointUploadUrl());
+        return res;
+    }
+
+    /**
      * Albero degli indicatori da consuntivare per l'utente loggato (referente).
      *
      * @return oggetto con proprieta' {@code results} = array di {@link IndicatoreConsuntivo}.
@@ -192,6 +247,7 @@ public class ConsuntivazioneService {
                     uo.setStatoScheda(row.getStatoScheda());
                     uo.setPeriodo(row.getPeriodTypeId());
                     uo.setAnno(row.getAnno());
+                    uo.setCommento(row.getCommento());
                     uos.put(row.getWorkEffortId(), uo);
                 }
                 // read-back: valore ACTUAL (per UO) + valori PAR_* (per parametro).
