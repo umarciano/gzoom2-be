@@ -21,6 +21,7 @@ public class UoConsuntivo {
     private Integer anno;          // anno del ciclo (EXTRACT YEAR da work_effort.estimated_completion_date)
     private BigDecimal valoreActual; // valore ACTUAL gia' salvato (read-back)
     private BigDecimal punteggio;    // v1: sempre null (nessun calcolo scoring)
+    private String commento;         // work_effort_measure.comments (nota indicatore-su-scheda, read-back)
     private Map<String, BigDecimal> valoriParametri = new LinkedHashMap<>(); // parId -> valore PAR_* gia' salvato
 
     public UoConsuntivo() {
@@ -96,6 +97,14 @@ public class UoConsuntivo {
 
     public void setPunteggio(BigDecimal punteggio) {
         this.punteggio = punteggio;
+    }
+
+    public String getCommento() {
+        return commento;
+    }
+
+    public void setCommento(String commento) {
+        this.commento = commento;
     }
 
     public Map<String, BigDecimal> getValoriParametri() {

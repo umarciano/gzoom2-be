@@ -2,6 +2,7 @@ package it.mapsgroup.gzoom.rest;
 
 import it.mapsgroup.gzoom.common.Exec;
 import it.mapsgroup.gzoom.model.Result;
+import it.mapsgroup.gzoom.rest.dto.CommentoConsuntivoReq;
 import it.mapsgroup.gzoom.rest.dto.IndicatoreConsuntivo;
 import it.mapsgroup.gzoom.rest.dto.MovimentoConsuntivoReq;
 import it.mapsgroup.gzoom.service.ConsuntivazioneService;
@@ -57,5 +58,29 @@ public class ConsuntivazioneController {
     @ResponseBody
     public Map<String, Object> salvaValori(@RequestBody List<MovimentoConsuntivoReq> movimenti) {
         return Exec.exec("consuntivazione/valori", () -> consuntivazioneService.salvaValori(movimenti));
+    }
+
+    /**
+     * Salva (append) la nota del referente su un indicatore-su-scheda.
+     * Body: {@code { workEffortId, glAccountId, testo }}.
+     *
+     * @return {@code { "salvato": true|false }}
+     */
+    @RequestMapping(value = "consuntivazione/commento", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> salvaCommento(@RequestBody CommentoConsuntivoReq req) {
+        return Exec.exec("consuntivazione/commento",
+                () -> consuntivazioneService.salvaCommento(req.getWorkEffortId(), req.getGlAccountId(), req.getTesto()));
+    }
+
+    /**
+     * Configurazione lato client (es. URL SharePoint del bottone "Carica file").
+     *
+     * @return {@code { "sharepointUploadUrl": "..." | null }}
+     */
+    @RequestMapping(value = "consuntivazione/config", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> config() {
+        return Exec.exec("consuntivazione/config", () -> consuntivazioneService.config());
     }
 }

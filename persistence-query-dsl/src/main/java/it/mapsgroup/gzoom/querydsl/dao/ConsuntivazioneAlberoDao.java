@@ -84,7 +84,9 @@ public class ConsuntivazioneAlberoDao extends AbstractDao {
           + "  (SELECT ate.amount FROM acctg_trans att JOIN acctg_trans_entry ate ON ate.acctg_trans_id=att.acctg_trans_id "
           + "     WHERE att.acctg_trans_type_id='CTX_BS' AND att.gl_fiscal_type_id=gaic.gl_fiscal_type_id AND att.party_id=we.org_unit_id "
           + "       AND ate.gl_account_id=ga.gl_account_id AND ate.organization_party_id=we.organization_id "
-          + "       AND att.transaction_date>=wem.from_date AND att.transaction_date<=wem.thru_date LIMIT 1) AS valore_par "
+          + "       AND att.transaction_date>=wem.from_date AND att.transaction_date<=wem.thru_date LIMIT 1) AS valore_par, "
+          // Nota testuale dell'indicatore-su-scheda (stesso campo della card legacy di Mirko). Read-back per il FE.
+          + "  wem.comments AS commento "
           + "FROM myind "
           + "JOIN gl_account ga ON ga.gl_account_id = myind.gl_account_id "
           + "LEFT JOIN gl_resource_type grt ON grt.gl_resource_type_id = ga.gl_resource_type_id "
@@ -127,6 +129,7 @@ public class ConsuntivazioneAlberoDao extends AbstractDao {
             row.setEtichetta(rs.getString("etichetta"));
             row.setValoreActual(rs.getBigDecimal("valore_actual"));
             row.setValorePar(rs.getBigDecimal("valore_par"));
+            row.setCommento(rs.getString("commento"));
             return row;
         }
     };
@@ -151,5 +154,79 @@ public class ConsuntivazioneAlberoDao extends AbstractDao {
         List<ConsuntivazioneAlberoRow> rows = namedJdbc.query(SQL, params, ROW_MAPPER);
         LOG.info("consuntivazione/albero [userLoginId={}] righe piatte = {}", userLoginId, rows.size());
         return rows;
+    }
+
+    // Nome "parlante" del referente (persona) per l'attribuzione della nota; fallback allo userLoginId.
+    private static final String NAME_SQL =
+            "SELECT COALESCE(NULLIF(TRIM(CONCAT_WS(' ', p.first_name, p.last_name)), ''), ul.user_login_id) AS nome "
+          + "FROM user_login ul LEFT JOIN person p ON p.party_id = ul.party_id WHERE ul.user_login_id = :userLoginId";
+
+    // Append ATOMICO della nota al campo work_effort_measure.comments (stesso campo della card legacy di Mirko,
+    // letta via entity-one NON cachato -> l'append e' subito visibile). Non sovrascrive il testo esistente.
+    // Difesa in profondita': la WEM deve appartenere a una scheda CTX_BS (lo scoping stato+proprieta' e'
+    // gia' applicato a monte dal ConsuntivazioneService, come per salvaValori).
+    private static final String APPEND_SQL =
+            "UPDATE work_effort_measure SET "
+          + "  comments = CASE WHEN comments IS NULL OR btrim(comments) = '' THEN :entry "
+          + "                  ELSE comments || E'\\n' || :entry END, "
+          + "  last_updated_stamp = now(), last_updated_tx_stamp = now() "
+          + "WHERE work_effort_id = :workEffortId AND gl_account_id = :glAccountId "
+          + "  AND (thru_date IS NULL OR thru_date > now()) "
+          + "  AND EXISTS (SELECT 1 FROM work_effort we WHERE we.work_effort_id = work_effort_measure.work_effort_id "
+          + "              AND we.work_effort_type_id = 'CTX_BS')";
+
+    private static final String READ_COMMENTO_SQL =
+            "SELECT comments FROM work_effort_measure WHERE work_effort_id = :workEffortId "
+          + "AND gl_account_id = :glAccountId AND (thru_date IS NULL OR thru_date > now())";
+
+    /**
+     * Appende una nota attribuita del referente al commento dell'indicatore-su-scheda.
+     *
+     * @return il testo COMPLETO del commento dopo l'append (per il read-back immediato lato FE),
+     *         oppure {@code null} se la coppia non esiste / non e' CTX_BS (nessuna riga aggiornata).
+     */
+    @Transactional
+    public String appendCommento(String userLoginId, String workEffortId, String glAccountId, String testo) {
+        String nome;
+        try {
+            nome = namedJdbc.queryForObject(NAME_SQL,
+                    new MapSqlParameterSource("userLoginId", userLoginId), String.class);
+        } catch (Exception e) {
+            nome = userLoginId;
+        }
+        String data = java.time.LocalDate.now().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String entry = "[Referente " + nome + " - " + data + "] " + (testo == null ? "" : testo.trim());
+        MapSqlParameterSource p = new MapSqlParameterSource();
+        p.addValue("entry", entry);
+        p.addValue("workEffortId", workEffortId);
+        p.addValue("glAccountId", glAccountId);
+        int n = namedJdbc.update(APPEND_SQL, p);
+        LOG.info("consuntivazione/commento [userLoginId={}] we={} gl={} righe aggiornate={}",
+                userLoginId, workEffortId, glAccountId, n);
+        if (n == 0) {
+            return null;
+        }
+        try {
+            return namedJdbc.queryForObject(READ_COMMENTO_SQL,
+                    new MapSqlParameterSource().addValue("workEffortId", workEffortId).addValue("glAccountId", glAccountId),
+                    String.class);
+        } catch (Exception e) {
+            return entry; // fallback: almeno la voce appena inserita
+        }
+    }
+
+    // URL SharePoint per il bottone "Carica file", configurato a DB come content_attribute del menu
+    // consuntivazione (GP_MENU_00571, dove stanno gia' title/link). Modificabile senza redeploy.
+    private static final String SHAREPOINT_URL_SQL =
+            "SELECT attr_value FROM content_attribute WHERE content_id = 'GP_MENU_00571' AND attr_name = 'sharepointUploadUrl'";
+
+    /** URL SharePoint configurato a DB, o {@code null} se non impostato. */
+    @Transactional(readOnly = true)
+    public String getSharepointUploadUrl() {
+        try {
+            return namedJdbc.getJdbcTemplate().queryForObject(SHAREPOINT_URL_SQL, String.class);
+        } catch (Exception e) {
+            return null; // non configurato
+        }
     }
 }

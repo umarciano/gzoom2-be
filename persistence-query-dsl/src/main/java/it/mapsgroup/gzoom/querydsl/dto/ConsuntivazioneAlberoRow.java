@@ -34,6 +34,7 @@ public class ConsuntivazioneAlberoRow {
     private String etichetta;     // gl_fiscal_type.description
     private BigDecimal valoreActual; // valore ACTUAL gia' salvato per (UO)
     private BigDecimal valorePar;    // valore PAR_* gia' salvato per (UO, parametro)
+    private String commento;         // work_effort_measure.comments (nota indicatore-su-scheda, read-back)
 
     public String getGlAccountId() {
         return glAccountId;
@@ -198,5 +199,13 @@ public class ConsuntivazioneAlberoRow {
 
     public void setValorePar(BigDecimal valorePar) {
         this.valorePar = valorePar;
+    }
+
+    public String getCommento() {
+        return commento;
+    }
+
+    public void setCommento(String commento) {
+        this.commento = commento;
     }
 }

@@ -41,7 +41,8 @@ SELECT
   we.work_effort_id, we.org_unit_id, pg.group_name AS uo,
   wem.kpi_score_weight AS peso, wem.period_type_id, we.current_status_id AS stato_scheda,
   gaic.input_sequence_num AS seq, gaic.factor_calculator AS ruolo,
-  gft.gl_fiscal_type_id AS par_id, gft.description AS etichetta
+  gft.gl_fiscal_type_id AS par_id, gft.description AS etichetta,
+  wem.comments AS commento
 FROM myind
 JOIN gl_account ga ON ga.gl_account_id = myind.gl_account_id
 LEFT JOIN gl_resource_type grt ON grt.gl_resource_type_id = ga.gl_resource_type_id
