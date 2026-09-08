@@ -94,10 +94,12 @@ public class ConsuntivazioneService {
                             + " sulla scheda " + m.getWorkEffortId()
                             + " (scheda non in stato 'Da consuntivare' o indicatore non di tua competenza).");
                 }
-                if ("ACTUAL_INT".equals(m.getGlFiscalTypeId())) {
+                // Qualunque movimento INTERMEDIO (ACTUAL_INT o PAR_*_INT) e' ammesso solo per indicatori
+                // "consuntivabile parzialmente" e solo con scheda nella fase intermedia (TOACC_INT).
+                if (m.getGlFiscalTypeId() != null && m.getGlFiscalTypeId().endsWith("_INT")) {
                     if (!Boolean.TRUE.equals(parzialeByGlAccount.get(m.getGlAccountId()))
                             || !"WEORCARD_TOACC_INT".equals(statoByWe.get(m.getWorkEffortId()))) {
-                        throw new SecurityException("Il valore intermedio e' disponibile solo per indicatori consuntivabili parzialmente nella fase intermedia.");
+                        throw new SecurityException("I valori intermedi (risultato e parametri) sono disponibili solo per indicatori consuntivabili parzialmente nella fase intermedia.");
                     }
                 }
                 // (FREEZE CLOSED) scheda chiusa: punteggi CONGELATI. Il referente non la vede (albero solo TOACCOUNT),

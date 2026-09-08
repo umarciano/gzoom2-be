@@ -77,12 +77,21 @@ public class ConsuntivazioneAlberoDao extends AbstractDao {
           + "  wem.kpi_score_weight AS peso, wem.period_type_id, we.current_status_id AS stato_scheda, "
           + "  gaic.input_sequence_num AS seq, gaic.factor_calculator AS ruolo, "
           + "  gft.gl_fiscal_type_id AS par_id, gft.description AS etichetta, "
+          // Read-back del valore consuntivato: nel ciclo INTERMEDIO (scheda in TOACC_INT) il valore e' stato
+          // salvato come ACTUAL_INT, nel ciclo FINALE (TOACCOUNT) come ACTUAL. Leggo il fiscal type coerente
+          // con lo stato della scheda, altrimenti nel ciclo intermedio il valore appena salvato non si rivede.
           + "  (SELECT ate.amount FROM acctg_trans att JOIN acctg_trans_entry ate ON ate.acctg_trans_id=att.acctg_trans_id "
-          + "     WHERE att.acctg_trans_type_id='CTX_BS' AND att.gl_fiscal_type_id='ACTUAL' AND att.party_id=we.org_unit_id "
+          + "     WHERE att.acctg_trans_type_id='CTX_BS' "
+          + "       AND att.gl_fiscal_type_id = (CASE WHEN we.current_status_id='WEORCARD_TOACC_INT' THEN 'ACTUAL_INT' ELSE 'ACTUAL' END) "
+          + "       AND att.party_id=we.org_unit_id "
           + "       AND ate.gl_account_id=ga.gl_account_id AND ate.organization_party_id=we.organization_id "
           + "       AND att.transaction_date>=wem.from_date AND att.transaction_date<=wem.thru_date LIMIT 1) AS valore_actual, "
+          // Read-back parametri: nel ciclo INTERMEDIO (TOACC_INT) i parametri sono su PAR_*_INT, nel finale su
+          // PAR_*. La chiave di riga (par_id) resta il PAR_* base, cosi' il FE mappa il valore sul parametro.
           + "  (SELECT ate.amount FROM acctg_trans att JOIN acctg_trans_entry ate ON ate.acctg_trans_id=att.acctg_trans_id "
-          + "     WHERE att.acctg_trans_type_id='CTX_BS' AND att.gl_fiscal_type_id=gaic.gl_fiscal_type_id AND att.party_id=we.org_unit_id "
+          + "     WHERE att.acctg_trans_type_id='CTX_BS' "
+          + "       AND att.gl_fiscal_type_id = (CASE WHEN we.current_status_id='WEORCARD_TOACC_INT' THEN gaic.gl_fiscal_type_id || '_INT' ELSE gaic.gl_fiscal_type_id END) "
+          + "       AND att.party_id=we.org_unit_id "
           + "       AND ate.gl_account_id=ga.gl_account_id AND ate.organization_party_id=we.organization_id "
           + "       AND att.transaction_date>=wem.from_date AND att.transaction_date<=wem.thru_date LIMIT 1) AS valore_par, "
           // Nota testuale dell'indicatore-su-scheda (stesso campo della card legacy di Mirko). Read-back per il FE.
