@@ -18,6 +18,7 @@ public class IndicatoreConsuntivo {
     private String fonte;           // gl_account.source
     private String area;            // gl_resource_type.description
     private String descrizione;     // gl_account.description (estesa)
+    private boolean consuntivabileParzialmente;
     private List<ParametroDef> parametri = new ArrayList<>();
     private List<UoConsuntivo> uo = new ArrayList<>();
 
@@ -78,6 +79,11 @@ public class IndicatoreConsuntivo {
 
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
+    }
+
+    public boolean isConsuntivabileParzialmente() { return consuntivabileParzialmente; }
+    public void setConsuntivabileParzialmente(boolean consuntivabileParzialmente) {
+        this.consuntivabileParzialmente = consuntivabileParzialmente;
     }
 
     public List<ParametroDef> getParametri() {

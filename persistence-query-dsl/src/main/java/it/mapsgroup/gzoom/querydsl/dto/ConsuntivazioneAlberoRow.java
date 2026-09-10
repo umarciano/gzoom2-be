@@ -20,6 +20,7 @@ public class ConsuntivazioneAlberoRow {
     private String fonte;         // gl_account.source
     private String area;          // gl_resource_type.description
     private String descrizione;   // gl_account.description (estesa)
+    private boolean consuntivabileParzialmente;
     private Integer anno;         // EXTRACT(YEAR FROM work_effort.estimated_completion_date)
     private String workEffortId;
     private String orgUnitId;
@@ -89,6 +90,11 @@ public class ConsuntivazioneAlberoRow {
 
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
+    }
+
+    public boolean isConsuntivabileParzialmente() { return consuntivabileParzialmente; }
+    public void setConsuntivabileParzialmente(boolean consuntivabileParzialmente) {
+        this.consuntivabileParzialmente = consuntivabileParzialmente;
     }
 
     public Integer getAnno() {

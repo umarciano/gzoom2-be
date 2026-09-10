@@ -70,19 +70,28 @@ public class ConsuntivazioneAlberoDao extends AbstractDao {
           + ") "
           + "SELECT "
           + "  ga.gl_account_id, ga.account_code, ga.account_name, "
-          + "  ga.calc_custom_method_id AS tipo, ga.source AS fonte, "
+          + "  ga.calc_custom_method_id AS tipo, ga.source AS fonte, ga.consuntivabile_parzialmente, "
           + "  grt.description AS area, ga.description AS descrizione, "
           + "  EXTRACT(YEAR FROM we.estimated_completion_date)::int AS anno, "
           + "  we.work_effort_id, we.org_unit_id, pg.group_name AS uo, "
           + "  wem.kpi_score_weight AS peso, wem.period_type_id, we.current_status_id AS stato_scheda, "
           + "  gaic.input_sequence_num AS seq, gaic.factor_calculator AS ruolo, "
           + "  gft.gl_fiscal_type_id AS par_id, gft.description AS etichetta, "
+          // Read-back del valore consuntivato: nel ciclo INTERMEDIO (scheda in TOACC_INT) il valore e' stato
+          // salvato come ACTUAL_INT, nel ciclo FINALE (TOACCOUNT) come ACTUAL. Leggo il fiscal type coerente
+          // con lo stato della scheda, altrimenti nel ciclo intermedio il valore appena salvato non si rivede.
           + "  (SELECT ate.amount FROM acctg_trans att JOIN acctg_trans_entry ate ON ate.acctg_trans_id=att.acctg_trans_id "
-          + "     WHERE att.acctg_trans_type_id='CTX_BS' AND att.gl_fiscal_type_id='ACTUAL' AND att.party_id=we.org_unit_id "
+          + "     WHERE att.acctg_trans_type_id='CTX_BS' "
+          + "       AND att.gl_fiscal_type_id = (CASE WHEN we.current_status_id='WEORCARD_TOACC_INT' THEN 'ACTUAL_INT' ELSE 'ACTUAL' END) "
+          + "       AND att.party_id=we.org_unit_id "
           + "       AND ate.gl_account_id=ga.gl_account_id AND ate.organization_party_id=we.organization_id "
           + "       AND att.transaction_date>=wem.from_date AND att.transaction_date<=wem.thru_date LIMIT 1) AS valore_actual, "
+          // Read-back parametri: nel ciclo INTERMEDIO (TOACC_INT) i parametri sono su PAR_*_INT, nel finale su
+          // PAR_*. La chiave di riga (par_id) resta il PAR_* base, cosi' il FE mappa il valore sul parametro.
           + "  (SELECT ate.amount FROM acctg_trans att JOIN acctg_trans_entry ate ON ate.acctg_trans_id=att.acctg_trans_id "
-          + "     WHERE att.acctg_trans_type_id='CTX_BS' AND att.gl_fiscal_type_id=gaic.gl_fiscal_type_id AND att.party_id=we.org_unit_id "
+          + "     WHERE att.acctg_trans_type_id='CTX_BS' "
+          + "       AND att.gl_fiscal_type_id = (CASE WHEN we.current_status_id='WEORCARD_TOACC_INT' THEN gaic.gl_fiscal_type_id || '_INT' ELSE gaic.gl_fiscal_type_id END) "
+          + "       AND att.party_id=we.org_unit_id "
           + "       AND ate.gl_account_id=ga.gl_account_id AND ate.organization_party_id=we.organization_id "
           + "       AND att.transaction_date>=wem.from_date AND att.transaction_date<=wem.thru_date LIMIT 1) AS valore_par, "
           // Nota testuale dell'indicatore-su-scheda (stesso campo della card legacy di Mirko). Read-back per il FE.
@@ -95,7 +104,7 @@ public class ConsuntivazioneAlberoDao extends AbstractDao {
           + "JOIN work_effort we ON we.work_effort_id = wem.work_effort_id AND we.work_effort_type_id = 'CTX_BS' "
           // Il REFERENTE vede/consuntiva solo le schede in TOACCOUNT (finestra di consuntivazione aperta
           // dall'admin); prima non e' ancora aperta, dopo (ACCOUNTED+) e' chiusa. L'admin non e' ristretto.
-          + "   AND ((SELECT admin FROM is_admin) OR we.current_status_id = 'WEORCARD_TOACCOUNT') "
+          + "   AND ((SELECT admin FROM is_admin) OR we.current_status_id IN ('WEORCARD_TOACC_INT','WEORCARD_TOACCOUNT')) "
           + "LEFT JOIN party_group pg ON pg.party_id = we.org_unit_id "
           + "LEFT JOIN gl_account_input_calc gaic ON gaic.gl_account_id = ga.gl_account_id "
           + "LEFT JOIN gl_fiscal_type gft ON gft.gl_fiscal_type_id = gaic.gl_fiscal_type_id "
@@ -112,6 +121,7 @@ public class ConsuntivazioneAlberoDao extends AbstractDao {
             row.setFonte(rs.getString("fonte"));
             row.setArea(rs.getString("area"));
             row.setDescrizione(rs.getString("descrizione"));
+            row.setConsuntivabileParzialmente("Y".equals(rs.getString("consuntivabile_parzialmente")));
             int anno = rs.getInt("anno");
             row.setAnno(rs.wasNull() ? null : anno);
             row.setWorkEffortId(rs.getString("work_effort_id"));
