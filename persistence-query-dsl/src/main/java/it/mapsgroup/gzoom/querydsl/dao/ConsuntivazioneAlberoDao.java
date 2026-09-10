@@ -50,24 +50,10 @@ public class ConsuntivazioneAlberoDao extends AbstractDao {
           + "      AND ulsg.group_id = 'AORNADMIN' "
           + "      AND (ulsg.thru_date IS NULL OR ulsg.thru_date > now()) "
           + "  ) AS admin "
-          + "), "
-          + "myind AS ( "
-          // ADMIN: TUTTI gli indicatori agganciati a schede CTX_BS, ANCHE senza referente
-          // (WEM_IND_IN_CHARGE): l'admin deve poterli vedere e consuntivare comunque.
-          + "  SELECT DISTINCT wem2.gl_account_id "
-          + "  FROM work_effort_measure wem2 "
-          + "  JOIN work_effort we2 ON we2.work_effort_id = wem2.work_effort_id AND we2.work_effort_type_id = 'CTX_BS' "
-          + "  WHERE (SELECT admin FROM is_admin) "
-          + "    AND (wem2.thru_date IS NULL OR wem2.thru_date > now()) "
-          + "  UNION "
-          // REFERENTE (persona): gli indicatori di cui la PERSONA loggata e' referente diretto
-          // (WEM_IND_IN_CHARGE con party_id = persona). Modello persona 2026-09-02: niente piu' salto UOC/ORG_RESPONSIBLE.
-          + "  SELECT DISTINCT gar.gl_account_id "
-          + "  FROM gl_account_role gar "
-          + "  WHERE gar.role_type_id = 'WEM_IND_IN_CHARGE' "
-          + "    AND (gar.thru_date IS NULL OR gar.thru_date > now()) "
-          + "    AND gar.party_id = (SELECT party_id FROM me) "
           + ") "
+          // Model B (doc 10): il referente e' per (scheda, indicatore) su work_effort_measure.party_id,
+          // non piu' sul catalogo gl_account_role. Lo scoping e' quindi nella WHERE finale (su wem.party_id),
+          // non serve piu' la CTE myind per gl_account_id.
           + "SELECT "
           + "  ga.gl_account_id, ga.account_code, ga.account_name, "
           + "  ga.calc_custom_method_id AS tipo, ga.source AS fonte, ga.consuntivabile_parzialmente, "
@@ -96,11 +82,9 @@ public class ConsuntivazioneAlberoDao extends AbstractDao {
           + "       AND att.transaction_date>=wem.from_date AND att.transaction_date<=wem.thru_date LIMIT 1) AS valore_par, "
           // Nota testuale dell'indicatore-su-scheda (stesso campo della card legacy di Mirko). Read-back per il FE.
           + "  wem.comments AS commento "
-          + "FROM myind "
-          + "JOIN gl_account ga ON ga.gl_account_id = myind.gl_account_id "
+          + "FROM work_effort_measure wem "
+          + "JOIN gl_account ga ON ga.gl_account_id = wem.gl_account_id "
           + "LEFT JOIN gl_resource_type grt ON grt.gl_resource_type_id = ga.gl_resource_type_id "
-          + "JOIN work_effort_measure wem ON wem.gl_account_id = myind.gl_account_id "
-          + "   AND (wem.thru_date IS NULL OR wem.thru_date > now()) "
           + "JOIN work_effort we ON we.work_effort_id = wem.work_effort_id AND we.work_effort_type_id = 'CTX_BS' "
           // Il REFERENTE vede/consuntiva solo le schede in TOACCOUNT (finestra di consuntivazione aperta
           // dall'admin); prima non e' ancora aperta, dopo (ACCOUNTED+) e' chiusa. L'admin non e' ristretto.
@@ -108,6 +92,11 @@ public class ConsuntivazioneAlberoDao extends AbstractDao {
           + "LEFT JOIN party_group pg ON pg.party_id = we.org_unit_id "
           + "LEFT JOIN gl_account_input_calc gaic ON gaic.gl_account_id = ga.gl_account_id "
           + "LEFT JOIN gl_fiscal_type gft ON gft.gl_fiscal_type_id = gaic.gl_fiscal_type_id "
+          // Model B: admin vede tutto; il referente vede SOLO le misure (scheda,indicatore) assegnate
+          // a lui su wem.party_id. Richiede la migrazione che popola wem.party_id (SETUP / doc 10).
+          + "WHERE (wem.thru_date IS NULL OR wem.thru_date > now()) "
+          + "  AND ((SELECT admin FROM is_admin) "
+          + "       OR (wem.party_id = (SELECT party_id FROM me) AND wem.role_type_id = 'WEM_IND_IN_CHARGE')) "
           + "ORDER BY ga.account_code, uo, seq";
 
     private static final RowMapper<ConsuntivazioneAlberoRow> ROW_MAPPER = new RowMapper<ConsuntivazioneAlberoRow>() {
